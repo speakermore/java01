@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.company.dao.companyInformation.ArticleMapper">
+	<insert id="addArticle" parameterType="int">
+		insert into article(usersId,articleTitle,articleTime,articleKey,articleContent,articleStatus,articleUsersType) 
+			values(#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent},#{articleStatus},#{articleUsersType})
+	</insert>
+	<update id="updateArtContent" parameterType="int">
+		update article set articleContent=#{articleContent} where id=#{id}
+	</update>
+	<update id="updateStatus" parameterType="int">
+		update article set articleStatus=#{articleStatus} where id=#{id}
+	</update>
+	<update id="updateReadNum" parameterType="int">
+		update article set articleReadNum=1+articleReadNum where id=#{id}
+	</update>
+	<update id="updateLikeNum" parameterType="int">
+		update article set articleLikeNum=1+articleLikeNum where id=#{id}
+	</update>
+	<select id="findAll" parameterType="int" resultType="Article">
+		select * from article where articleStatus!=4
+		<!--语法： limit 开始记录号（从0开始）,每页记录条数 -->
+		<if test="page!=null">
+			limit #{page},5
+		</if>
+	</select>
+	<select id="findById" parameterType="int" resultType="Article">
+		select * from article where id=#{id}
+	</select>
+</mapper>
