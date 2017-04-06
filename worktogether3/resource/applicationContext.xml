@@ -17,7 +17,7 @@
 	<!--  数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://127.0.0.1:/worktogether?useUnicode=true&amp;characterEncoding=utf-8"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/worktogether?useUnicode=true&amp;characterEncoding=utf-8"></property>
 		<property name="username" value="java01"></property>
 		<property name="password" value="123456"></property>
 	</bean>
@@ -69,7 +69,7 @@
     </tx:advice>
     <!-- 配置切面（告诉事务能手，在哪个位置应用规则） -->
     <aop:config>
-    		<aop:advisor pointcut="execution(* ynjh.personal.service.impl.*.*(..)" advice-ref="txAdvice" />
-    		<aop:advisor pointcut="execution(* ynjh.admin.service.impl.*.*(..)" advice-ref="txAdvice" />
-    		<aop:advisor pointcut="execution(* ynjh.company.service.impl.*.*(..)" advice-ref="txAdvice" />
+    		<aop:advisor pointcut="execution(* ynjh.personal.service.impl.*.*(..))" advice-ref="txAdvice" />
+    		<aop:advisor pointcut="execution(* ynjh.admin.service.impl.*.*(..))" advice-ref="txAdvice" />
+    		<aop:advisor pointcut="execution(* ynjh.company.service.impl.*.*(..))" advice-ref="txAdvice" />
     </aop:config></beans>
