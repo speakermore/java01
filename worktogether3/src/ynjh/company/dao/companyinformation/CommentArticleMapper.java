@@ -1,4 +1,4 @@
-package ynjh.company.dao.companyInformation;
+package ynjh.company.dao.companyinformation;
 
 import java.util.List;
 
@@ -7,14 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.company.enity.CommentArticle;
 
 public interface CommentArticleMapper {
-	//Ìí¼ÓÆÀÂÛ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public Integer addCommentArticle(CommentArticle comArticle);
-	//ĞŞ¸ÄµãÔŞÊı
+	//ï¿½Ş¸Äµï¿½ï¿½ï¿½ï¿½ï¿½
 	public Integer updateCommentLikeNum(Integer id);
-	//ĞŞ¸Ä×´Ì¬
+	//ï¿½Ş¸ï¿½×´Ì¬
 	public Integer updateCommentStatus(@Param("id")Integer id,@Param("commentArticleStatus")Integer commentArticleStatus);
-	//¸ù¾İidÕÒµ½ÎÄÕÂÆÀÂÛ
+	//ï¿½ï¿½ï¿½ï¿½idï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public CommentArticle findById(Integer id);
-	//²éÑ¯ËùÓĞÎÄÕÂÆÀÂÛ
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List<CommentArticle> findAll(@Param("page")Integer page);
 }

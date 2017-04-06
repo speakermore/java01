@@ -1,4 +1,4 @@
-package ynjh.company.service.impl.companyInformation;
+package ynjh.company.service.impl.companyinformation;
 
 import java.util.List;
 

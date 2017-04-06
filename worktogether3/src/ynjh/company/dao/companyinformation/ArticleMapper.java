@@ -1,4 +1,4 @@
-package ynjh.company.dao.companyInformation;
+package ynjh.company.dao.companyinformation;
 
 import java.util.List;
 
