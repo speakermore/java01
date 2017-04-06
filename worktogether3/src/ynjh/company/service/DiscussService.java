@@ -2,7 +2,7 @@ package ynjh.company.service;
 
 import java.util.List;
 
-import ynjh.company.enity.Discuss;
+import ynjh.personal.entity.Discuss;
 
 public interface DiscussService {
 	public int addDiscuss(Discuss discuss);

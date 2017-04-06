@@ -7,6 +7,9 @@ import java.util.List;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.CompanyVisitCount;
+import ynjh.company.enity.Company;
+import ynjh.personal.entity.Article;
+import ynjh.personal.entity.User;
 
 
 
@@ -38,12 +41,12 @@ public interface AdminService {
 	public List<AdminLog> findAdminLog(String begIntegerime,String endTime,Integer adminDo);//访问管理员日志,操作类型&时间段查询
 	public List<AdminLog> findAdminLog(Integer adminDo,Integer userLoginId,String begIntegerime,String endTime);//访问管理员日志,全部类型查询
 	
-	public List<company> findBestCompany();//最佳企业查询
-	public List<article> findBestArticle();//热门文章
+	public List<Company> findBestCompany();//最佳企业查询
+	public List<Article> findBestArticle();//热门文章
 	
 	//用户管理
-	public List<user> findUser();//查询所有个人用户，用于禁用
-	public List<company> findCompany();//查询所有企业用户，用于禁用
+	public List<User> findUser();//查询所有个人用户，用于禁用
+	public List<Company> findCompany();//查询所有企业用户，用于禁用
 	public Integer disableUser(Integer userId,Integer userStatus);//禁用个人用户
 	public Integer disableCompany(Integer companyId,Integer companyStatus);//禁用企业用户
 	

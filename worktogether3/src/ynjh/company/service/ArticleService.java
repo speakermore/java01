@@ -2,7 +2,9 @@ package ynjh.company.service;
 
 import java.util.List;
 
-import ynjh.company.enity.Article;
+import ynjh.personal.entity.Article;
+
+
 
 public interface ArticleService {
 	public int addArticle(Article article);

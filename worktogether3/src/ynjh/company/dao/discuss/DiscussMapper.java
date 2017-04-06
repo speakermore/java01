@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import ynjh.company.enity.Discuss;
+import ynjh.personal.entity.Discuss;
 
 public interface DiscussMapper {
-	//Ìí¼ÓÆÀÂÛ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public Integer addDiscuss(Discuss discuss);
-	//ĞŞ¸Ä×´Ì¬
+	//ï¿½Ş¸ï¿½×´Ì¬
 	public Integer updateDiscussStatus(@Param("id")Integer id,@Param("discussStatus")Integer discussStatus);
-	//¸ù¾İidÕÒµ½ÆÀÂÛ
+	//ï¿½ï¿½ï¿½ï¿½idï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½
 	public Discuss findById(Integer id);
-	//²éÑ¯ËùÓĞÆÀÂÛ
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List<Discuss> findAll(@Param("page")Integer page);
 }
