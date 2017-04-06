@@ -1,1 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.personal.dao.article.articleMapper">
+	<!-- 写文章 -->
+	<insert id="addUserArticle" parameterType="Article">
+		insert into article(articleId,usersId,articleTitle,articleTime,articleKey,articleContent)
+			value(#{articleId},#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent})
+	</insert>
+	<!-- 删文章 -->
+	 <delete id="deleteUserArticle" parameterType="int">
+	delete from article where id=#{id}
+	</delete>
+	<!-- 查看文章 -->
+	<select id="selectUserArticle" parameterType="int">
+	select * from article where id=#{id} and userId=#{userId}
+	</select>
+</mapper>

@@ -6,11 +6,14 @@ import org.apache.ibatis.annotations.Param;
 
 import ynjh.personal.entity.User;
 
+
+
+
 public interface UserMapper {
 	/**
 	 * 登录
 	 */
-	public User loginByUserIdAndUserPassword(@Param("userId")String userId,String userPassword); 
+	public User loginByUserIdAndUserPassword(@Param("userLoginId")String userLoginId,@Param("userPassword")String userPassword); 
 	/**
 	 * 添加用户（注册）
 	 */
@@ -26,11 +29,11 @@ public interface UserMapper {
 	/**
 	 * 修改用户信息
 	 */
-	public Integer updateUser(User user);
+	public Integer updateUser(Integer userId);
 	/**
 	 * 修改用户密码
 	 */
-	public Integer updateUserById(Integer userId,String status);
+	public Integer updateUserById(Integer userId);
 	/**
 	 * 根据id查询用户（显示用户信息）
 	 */
@@ -38,7 +41,7 @@ public interface UserMapper {
 	/**
 	 * 充值
 	 */
-	public Integer updateMoney(Integer money,Integer id); 
+	public Integer updateMoney(@Param("userMoney")Integer money,@Param("userId")Integer id); 
 	/**
 	 * 搜索
 	 */
