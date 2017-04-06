@@ -35,11 +35,11 @@ public interface AdminService {
 	
 	//管理员操作日志
 	public List<AdminLog> findAdminLog();//访问管理员日志,无参查询全部
-	public List<AdminLog> findAdminLog(String begIntegerime,String endTime);//访问管理员日志,时间段查询
-	public List<AdminLog> findAdminLog(Integer userLoginId,String begIntegerime,String endTime);//访问管理员日志,操作人ID&时间段查询
+	public List<AdminLog> findAdminLog(String beginTime,String endTime);//访问管理员日志,时间段查询
+	public List<AdminLog> findAdminLog(Integer userLoginId,String beginTime,String endTime);//访问管理员日志,操作人ID&时间段查询
 	public List<AdminLog> findAdminLog(Integer userLoginId,Integer adminDo);//访问管理员日志,操作人ID&操作类型查询
-	public List<AdminLog> findAdminLog(String begIntegerime,String endTime,Integer adminDo);//访问管理员日志,操作类型&时间段查询
-	public List<AdminLog> findAdminLog(Integer adminDo,Integer userLoginId,String begIntegerime,String endTime);//访问管理员日志,全部类型查询
+	public List<AdminLog> findAdminLog(String beginTime,String endTime,Integer adminDo);//访问管理员日志,操作类型&时间段查询
+	public List<AdminLog> findAdminLog(Integer adminDo,Integer userLoginId,String beginTime,String endTime);//访问管理员日志,全部类型查询
 	
 	public List<Company> findBestCompany();//最佳企业查询
 	public List<Article> findBestArticle();//热门文章
@@ -51,7 +51,7 @@ public interface AdminService {
 	public Integer disableCompany(Integer companyId,Integer companyStatus);//禁用企业用户
 	
 	//信息维护--修改正在登录的管理员信息
-	public Integer maIntegerainAdmin(String adminName,String admIntegerel,String adminEmail);//改
+	public Integer maIntegerainAdmin(String adminName,String adminTel,String adminEmail);//改
 	public List<Admin> findByAdminId(String adminId);//查
 	
 	public Integer trafficStatisticalPersonal(Integer year,Integer month,Integer day,String userId);//个人访问量统计判断是否有空值
