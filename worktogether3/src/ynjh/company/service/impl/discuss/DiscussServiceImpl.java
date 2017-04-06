@@ -1,9 +1,8 @@
 package ynjh.company.service.impl.discuss;
 
 import java.util.List;
-
-import ynjh.company.enity.Discuss;
 import ynjh.company.service.DiscussService;
+import ynjh.personal.entity.Discuss;
 
 public class DiscussServiceImpl implements DiscussService{
 
