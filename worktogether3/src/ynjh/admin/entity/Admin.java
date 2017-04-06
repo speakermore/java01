@@ -1,6 +1,8 @@
 package ynjh.admin.entity;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable{
 	private Integer id;
 	private Integer adminLoginId;
 	private Integer adminPassword;

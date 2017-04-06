@@ -1,9 +1,10 @@
 package ynjh.admin.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class UserLog {
+public class UserLog implements Serializable{
 	private Integer id;
 	private Integer userId;
 	private Integer userDo;

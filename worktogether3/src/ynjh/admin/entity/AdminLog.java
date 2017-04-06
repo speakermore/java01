@@ -1,9 +1,10 @@
 package ynjh.admin.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class AdminLog {
+public class AdminLog implements Serializable{
 	private Integer id;
 	private Integer adminLoginId;
 	private Integer adminDo;//操作类型

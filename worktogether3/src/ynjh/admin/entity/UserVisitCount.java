@@ -1,6 +1,8 @@
 package ynjh.admin.entity;
 
-public class UserVisitCount {
+import java.io.Serializable;
+
+public class UserVisitCount implements Serializable {
 	private Integer id;
 	private Integer userYear;
 	private Integer userMonth;
