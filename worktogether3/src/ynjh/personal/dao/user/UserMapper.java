@@ -2,13 +2,15 @@ package ynjh.personal.dao.user;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.personal.entity.User;
 
 public interface UserMapper {
 	/**
 	 * 登录
 	 */
-	public User loginByUserIdAndUserPassword(User user); 
+	public User loginByUserIdAndUserPassword(@Param("userId")String userId,String userPassword); 
 	/**
 	 * 添加用户（注册）
 	 */
@@ -16,11 +18,11 @@ public interface UserMapper {
 	/**
 	 * 完善用户信息
 	 */
-	public Integer addUserOther(User user);
+	public Integer updateUserOther(Integer userId);
 	/**
 	 * 实名认证
 	 */
-	public Integer addUserIDCord(User user);
+	public Integer updateUserIDCord(Integer userId);
 	/**
 	 * 修改用户信息
 	 */
