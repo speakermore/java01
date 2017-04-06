@@ -1,24 +1,25 @@
-package ynjh.company.dao.companyInformation;
+package ynjh.company.dao.companyinformation;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import ynjh.company.enity.Article;
+import ynjh.personal.entity.Article;
+
 
 public interface ArticleMapper {
-	//тЖ╪сндуб
+	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 	public Integer addArticle(Article article);
-	//пч╦дндубдзхщ
+	//О©╫ч╦О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 	public Integer updateArtContent(@Param("articleId")Integer articleId,@Param("articleContent")String articleContent);
-	//пч╦дв╢л╛
+	//О©╫ч╦О©╫в╢л╛
 	public Integer updateStatus(@Param("articleId")Integer articleId,@Param("articleStatus")Integer articleStatus);
-	//пч╦дтд╤аа©
+	//О©╫ч╦О©╫О©╫д╤О©╫О©╫О©╫
 	public Integer updateReadNum(Integer articleId);
-	//пч╦д╣ЦтчйЩ
+	//О©╫ч╦д╣О©╫О©╫О©╫О©╫О©╫
 	public Integer updateLikeNum(Integer articleId);
-	//╡Ия╞кЫспндуб
+	//О©╫О©╫я╞О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 	public List<Article> findAll(@Param("page")Integer page);
-	//╦Ы╬щid╡Ия╞ндуб
+	//О©╫О©╫О©╫О©╫idО©╫О©╫я╞О©╫О©╫О©╫О©╫
 	public Article findById(Integer articleId);
 }

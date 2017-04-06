@@ -1,21 +1,19 @@
-package ynjh.company.service.impl.companyInformation;
+package ynjh.company.service.impl.companyinformation;
 
 import java.util.List;
 
-import ynjh.company.enity.Article;
 import ynjh.company.service.ArticleService;
+import ynjh.personal.entity.Article;
 
 public class ArticleServiceImpl implements ArticleService{
 
 	@Override
 	public int addArticle(Article article) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public List<Article> findAll(Integer page) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
