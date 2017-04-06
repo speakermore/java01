@@ -1,4 +1,4 @@
-package ynjh.personal.dao.commentArticle;
+package ynjh.personal.dao.commentarticle;
 
 import java.util.List;
 
