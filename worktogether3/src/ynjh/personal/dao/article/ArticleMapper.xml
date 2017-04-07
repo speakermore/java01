@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ynjh.personal.dao.article.articleMapper">
+<mapper namespace="ynjh.personal.dao.article.ArticleMapper">
 	<!-- 写文章 -->
 	<insert id="addUserArticle" parameterType="Article">
 		insert into article(articleId,usersId,articleTitle,articleTime,articleKey,articleContent)

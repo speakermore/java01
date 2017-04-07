@@ -1,8 +1,4 @@
-.gitignore
 .classpath
-
 .project
-
 /.settings
-
 /build
