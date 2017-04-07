@@ -7,7 +7,7 @@ import java.util.List;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.CompanyVisitCount;
-import ynjh.company.enity.Company;
+import ynjh.company.entity.Company;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.User;
 

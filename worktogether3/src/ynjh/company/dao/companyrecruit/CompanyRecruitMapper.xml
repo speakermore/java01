@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ynjh/company/dao/companyRecruit/CompanyRecruitMapper">
-<insert id="addCompanyRecruit" parameterType="CompanyRecruit">
+<mapper namespace="ynjh.company.dao.companyrecruit.CompanyRecruitMapper">
+<!-- <insert id="addCompanyRecruit" parameterType="CompanyRecruit">
 		insert into companyRecruit (cpmRecTitle,cpmRecWage,cpmRecEducation,cmpRecExperience,cmpRecPeople,cmpRecTime,cmpRecStatus) values(#{cpmRecTitle},#{cpmRecWage},#{cpmRecEducation},#{cmpRecExperience},#{cmpRecPeople},#{cmpRecTime},#{cmpRecStatus})
 </insert>
 <update id="updateCpmRecTitle" parameterType="CompanyRecruit">
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </update>
 <select id="findAll" resultType="CompanyRecruit">
 		select * from article where artStatus != 4
-	<!-- 语法   limit开始记录号(从0开始),每页记录条数 -->
+	语法   limit开始记录号(从0开始),每页记录条数
 	<if test="page!=null">
 		limit #{page},5
 	</if>
@@ -34,6 +34,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <select id="findById" parameterType="int" resultType="CompanyRecruit">
 	select * from article where id=#{id}
-</select>
+</select> -->
 
 </mapper>

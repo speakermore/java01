@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-
-import ynjh.company.enity.CompanyRecruit;
+import ynjh.company.entity.CompanyRecruit;
 
 
 public interface CompanyRecruitMapper {
