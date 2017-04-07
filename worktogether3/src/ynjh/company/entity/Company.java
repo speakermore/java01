@@ -1,4 +1,4 @@
-package ynjh.personal.dao.discuss;
+package ynjh.company.entity;
 
 public class Company {
 	
