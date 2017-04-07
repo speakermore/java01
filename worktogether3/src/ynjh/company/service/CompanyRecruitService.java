@@ -3,7 +3,8 @@ package ynjh.company.service;
 
 
 import java.util.List;
-import ynjh.company.enity.CompanyRecruit;
+
+import ynjh.company.entity.CompanyRecruit;
 
 
 

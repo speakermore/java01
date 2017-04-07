@@ -1,36 +1,68 @@
-package ynjh.company.enity;
+package ynjh.company.entity;
 
 public class Company {
 	
-	private Integer companyId;//公司id
-	private String companyLoginId;//企业登录名
-	private String companyPassword;//密码
-	private String companyName;//公司全名
-	private String companySimpleName;//公司简称
-	private String companyLogo;//公司logo
-	private String companyLicenseImg;//公司营业执照
-	private String companyLicenseNo;//公司营业执照码
-	private String companyCorporator;//公司法人代表
-	private String companyTel;//公司实体类
-	private String companyEmail;//公司邮件
-	private String companyAddress;//公司地址
-	private String companyDetailImg;//公司细节环境图
-	private Integer companyStatus;//账户状态
+	private Integer companyId;
+	private String companyLoginId;
+	private String companyPassword;
+	private String companyName;
+	private String companySimpleName;
+	private String companyLogo;
+	private String companyLicenseImg;
+	private String companyLicenseNo;
+	private String companyCorporator;
+	private String companyTel;
+	private String companyEmail;
+	private String companyAddress;
+	private String companyDetailImg;
+	private Integer companyStatus;	
+	private String CompanyJob;
+	private String companyConnection;
 	
-	private String CompanyJob;//职业种类
-	private String companyConnection;//联系人
-	
-	private String CompanyIntrodution;//企业简介
-	private Integer CompanyFollow;//关注
-	private Integer CompanyCharge;//充值
-	
-	private Integer followId;//关注者
-	private Integer ByFollowId;//被关注者
+	private String CompanyIntrodution;
+	private Integer CompanyFollow;
+	private Integer CompanyCharge;	
+	private Integer followId;
+	private Integer ByFollowId;
 	
 	
 	public Company(){
 		
 	}
+	
+	
+	
+	public Company(Integer companyId, String companyLoginId, String companyPassword, String companyName,
+			String companySimpleName, String companyLogo, String companyLicenseImg, String companyLicenseNo,
+			String companyCorporator, String companyTel, String companyEmail, String companyAddress,
+			String companyDetailImg, Integer companyStatus, String companyJob, String companyConnection,
+			String companyIntrodution, Integer companyFollow, Integer companyCharge, Integer followId,
+			Integer byFollowId) {
+		super();
+		this.companyId = companyId;
+		this.companyLoginId = companyLoginId;
+		this.companyPassword = companyPassword;
+		this.companyName = companyName;
+		this.companySimpleName = companySimpleName;
+		this.companyLogo = companyLogo;
+		this.companyLicenseImg = companyLicenseImg;
+		this.companyLicenseNo = companyLicenseNo;
+		this.companyCorporator = companyCorporator;
+		this.companyTel = companyTel;
+		this.companyEmail = companyEmail;
+		this.companyAddress = companyAddress;
+		this.companyDetailImg = companyDetailImg;
+		this.companyStatus = companyStatus;
+		CompanyJob = companyJob;
+		this.companyConnection = companyConnection;
+		CompanyIntrodution = companyIntrodution;
+		CompanyFollow = companyFollow;
+		CompanyCharge = companyCharge;
+		this.followId = followId;
+		ByFollowId = byFollowId;
+	}
+
+
 
 	public Integer getCompanyId() {
 		return companyId;
@@ -195,6 +227,21 @@ public class Company {
 
 	public void setByFollowId(Integer byFollowId) {
 		ByFollowId = byFollowId;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", companyLoginId=" + companyLoginId + ", companyPassword="
+				+ companyPassword + ", companyName=" + companyName + ", companySimpleName=" + companySimpleName
+				+ ", companyLogo=" + companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo="
+				+ companyLicenseNo + ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel
+				+ ", companyEmail=" + companyEmail + ", companyAddress=" + companyAddress + ", companyDetailImg="
+				+ companyDetailImg + ", companyStatus=" + companyStatus + ", CompanyJob=" + CompanyJob
+				+ ", companyConnection=" + companyConnection + ", CompanyIntrodution=" + CompanyIntrodution
+				+ ", CompanyFollow=" + CompanyFollow + ", CompanyCharge=" + CompanyCharge + ", followId=" + followId
+				+ ", ByFollowId=" + ByFollowId + "]";
 	}
 
 	
