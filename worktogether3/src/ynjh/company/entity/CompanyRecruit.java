@@ -1,17 +1,17 @@
-package ynjh.company.enity;
+package ynjh.company.entity;
 
 import java.sql.Timestamp;
 
 public class CompanyRecruit {
-	private Integer id;//Ö÷¼ü
-	private Integer companyId;//¹«Ë¾±àºÅ
-	private String cpmRecTitle;//¹«Ë¾±êÌâ
-	private String cpmRecWage;//¹«Ë¾Ð½×Ê
-	private String cpmRecEducation;//¹«Ë¾Ñ§ÀúÐèÇó
-	private String cmpRecExperience;//¹¤×÷ËùÐè¼¼ÄÜ¼°Ë®Æ½ÃèÊö
-	private Integer cmpRecPeople;//ÐèÇóÈËÊý
-	private Timestamp cmpRecTime;//·¢²¼Ê±¼ä
-	private Integer cmpRecStatus;//·¢±íÕÐÆ¸ÐÅÏ¢×´Ì¬1:´ýÉó 2£ºÉóºËÍ¨¹ý 3£ºÉóºË²»Í¨¹ý
+	private Integer id;//ï¿½ï¿½ï¿½ï¿½
+	private Integer companyId;//ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½
+	private String cpmRecTitle;//ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½ï¿½
+	private String cpmRecWage;//ï¿½ï¿½Ë¾Ð½ï¿½ï¿½
+	private String cpmRecEducation;//ï¿½ï¿½Ë¾Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String cmpRecExperience;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¼¼ï¿½Ü¼ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½
+	private Integer cmpRecPeople;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Timestamp cmpRecTime;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private Integer cmpRecStatus;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¸ï¿½ï¿½Ï¢×´Ì¬1:ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½Ë²ï¿½Í¨ï¿½ï¿½
 	public CompanyRecruit(){
 		
 	}

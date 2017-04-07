@@ -1,31 +1,31 @@
-package ynjh.company.enity;
+package ynjh.company.entity;
 
 public class Company {
 	
-	private Integer companyId;//¹«Ë¾id
-	private String companyLoginId;//ÆóÒµµÇÂ¼Ãû
-	private String companyPassword;//ÃÜÂë
-	private String companyName;//¹«Ë¾È«Ãû
-	private String companySimpleName;//¹«Ë¾¼ò³Æ
-	private String companyLogo;//¹«Ë¾logo
-	private String companyLicenseImg;//¹«Ë¾ÓªÒµÖ´ÕÕ
-	private String companyLicenseNo;//¹«Ë¾ÓªÒµÖ´ÕÕÂë
-	private String companyCorporator;//¹«Ë¾·¨ÈË´ú±í
-	private String companyTel;//¹«Ë¾ÊµÌåÀà
-	private String companyEmail;//¹«Ë¾ÓÊ¼þ
-	private String companyAddress;//¹«Ë¾µØÖ·
-	private String companyDetailImg;//¹«Ë¾Ï¸½Ú»·¾³Í¼
-	private Integer companyStatus;//ÕË»§×´Ì¬
+	private Integer companyId;//ï¿½ï¿½Ë¾id
+	private String companyLoginId;//ï¿½ï¿½Òµï¿½ï¿½Â¼ï¿½ï¿½
+	private String companyPassword;//ï¿½ï¿½ï¿½ï¿½
+	private String companyName;//ï¿½ï¿½Ë¾È«ï¿½ï¿½
+	private String companySimpleName;//ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½
+	private String companyLogo;//ï¿½ï¿½Ë¾logo
+	private String companyLicenseImg;//ï¿½ï¿½Ë¾ÓªÒµÖ´ï¿½ï¿½
+	private String companyLicenseNo;//ï¿½ï¿½Ë¾ÓªÒµÖ´ï¿½ï¿½ï¿½ï¿½
+	private String companyCorporator;//ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½
+	private String companyTel;//ï¿½ï¿½Ë¾Êµï¿½ï¿½ï¿½ï¿½
+	private String companyEmail;//ï¿½ï¿½Ë¾ï¿½Ê¼ï¿½
+	private String companyAddress;//ï¿½ï¿½Ë¾ï¿½ï¿½Ö·
+	private String companyDetailImg;//ï¿½ï¿½Ë¾Ï¸ï¿½Ú»ï¿½ï¿½ï¿½Í¼
+	private Integer companyStatus;//ï¿½Ë»ï¿½×´Ì¬
 	
-	private String CompanyJob;//Ö°ÒµÖÖÀà
-	private String companyConnection;//ÁªÏµÈË
+	private String CompanyJob;//Ö°Òµï¿½ï¿½ï¿½ï¿½
+	private String companyConnection;//ï¿½ï¿½Ïµï¿½ï¿½
 	
-	private String CompanyIntrodution;//ÆóÒµ¼ò½é
-	private Integer CompanyFollow;//¹Ø×¢
-	private Integer CompanyCharge;//³äÖµ
+	private String CompanyIntrodution;//ï¿½ï¿½Òµï¿½ï¿½ï¿½
+	private Integer CompanyFollow;//ï¿½ï¿½×¢
+	private Integer CompanyCharge;//ï¿½ï¿½Öµ
 	
-	private Integer followId;//¹Ø×¢Õß
-	private Integer ByFollowId;//±»¹Ø×¢Õß
+	private Integer followId;//ï¿½ï¿½×¢ï¿½ï¿½
+	private Integer ByFollowId;//ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
 	
 	
 	public Company(){

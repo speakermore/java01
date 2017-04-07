@@ -8,12 +8,12 @@ import ynjh.admin.entity.AdminLog;
 
 public interface AdminLogMapper {
 	public Integer addAdminLog(AdminLog adl);//增添管理员访问日志
-	public Integer findAdminLog();
-	public Integer findAdminLog(@Param("beginTime")Date beginTime,@Param("endTime")Date endTime);
-	public Integer findAdminLog(@Param("userLoginId")Integer userLoginId,@Param("beginTime")Date beginTime,@Param("endTime")Date endTime);
-	public Integer findAdminLog(@Param("userLoginId")Integer userLoginId,@Param("adminDo")Integer adminDo);
-	public Integer findAdminLog(@Param("beginTime")Date beginTime,@Param("endTime")Date endTime,@Param("adminDo")Integer adminDo);
-	public Integer findAdminLog(@Param("adminDo")Integer adminDo,@Param("userLoginId")Integer userLoginId,@Param("beginTime")Date beginTime,@Param("endTime")Date endTime);
+	public Integer findAdminLogAll();
+	public Integer findAdminLogByTime(@Param("beginTime")Date beginTime,@Param("endTime")Date endTime);
+	public Integer findAdminLogByTimeAndId(@Param("userLoginId")Integer userLoginId,@Param("beginTime")Date beginTime,@Param("endTime")Date endTime);
+	public Integer findAdminLogByIdAndDo(@Param("userLoginId")Integer userLoginId,@Param("adminDo")Integer adminDo);
+	public Integer findAdminLogByTimeAndDo(@Param("beginTime")Date beginTime,@Param("endTime")Date endTime,@Param("adminDo")Integer adminDo);
+	public Integer findAdminLogByTimeAndDoAndId(@Param("adminDo")Integer adminDo,@Param("userLoginId")Integer userLoginId,@Param("beginTime")Date beginTime,@Param("endTime")Date endTime);
 
 	
 	
