@@ -69,7 +69,7 @@
     </tx:advice>
     <!-- 配置切面（告诉事务能手，在哪个位置应用规则） -->
     <aop:config>
-    		<aop:advisor pointcut="execution(* ynjh.personal.service.impl.*.*(..)" advice-ref="txAdvice" />
-    		<aop:advisor pointcut="execution(* ynjh.admin.service.impl.*.*(..)" advice-ref="txAdvice" />
-    		<aop:advisor pointcut="execution(* ynjh.company.service.impl.*.*(..)" advice-ref="txAdvice" />
+    		<aop:advisor pointcut="execution(* ynjh.personal.service.impl.*.*(..))" advice-ref="txAdvice" />
+    		<aop:advisor pointcut="execution(* ynjh.admin.service.impl.*.*(..))" advice-ref="txAdvice" />
+    		<aop:advisor pointcut="execution(* ynjh.company.service.impl.*.*(..))" advice-ref="txAdvice" />
     </aop:config></beans>

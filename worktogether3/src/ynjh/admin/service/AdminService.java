@@ -4,6 +4,8 @@ package ynjh.admin.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.CompanyVisitCount;
@@ -45,8 +47,8 @@ public interface AdminService {
 	public List<Article> findBestArticle();//热门文章
 	
 	//用户管理
-	public List<User> findUser();//查询所有个人用户，用于禁用
-	public List<Company> findCompany();//查询所有企业用户，用于禁用
+	public List<User> findUser(@Param("page")Integer page);//查询所有个人用户，用于禁用
+	public List<Company> findCompany(@Param("page")Integer page);//查询所有企业用户，用于禁用
 	public Integer disableUser(Integer userId,Integer userStatus);//禁用个人用户
 	public Integer disableCompany(Integer companyId,Integer companyStatus);//禁用企业用户
 	

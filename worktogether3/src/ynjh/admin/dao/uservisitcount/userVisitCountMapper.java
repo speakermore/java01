@@ -1,4 +1,4 @@
-package ynjh.admin.dao.userVisitCount;
+package ynjh.admin.dao.uservisitcount;
 
 import java.util.List;
 

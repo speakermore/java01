@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.admin.dao.userVisitCount.userVistiCountMapper">
 	<insert id="addUserVisitCount" parameterType="UserVisitCount">
-		insert into userVisitCount(userYear,userMonth,userDay,userCommentCount,userArticleCount,userId) values(#{userYear},#{userMonth},#{userDay},#{userCommentCount},#{userArticleCount},#{userId})
+		insert into uservisitcount(userYear,userMonth,userDay,userCommentCount,userArticleCount,userId) values(#{userYear},#{userMonth},#{userDay},#{userCommentCount},#{userArticleCount},#{userId})
 	</insert>
 	<update id="updateUserVisitCount" parameterType="UserVisitCount">
 		update userVisitCount set userCommentCount=#{userCommentCount},userArticleCount=#{userArticleCount} where userYear=#{userYear} and userMonth=#{userMonth} and userDay=#{userDay}

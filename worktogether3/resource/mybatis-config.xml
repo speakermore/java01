@@ -43,16 +43,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- 将mapper文件加入到配置文件中 -->
 	<mappers>
-		<mapper resource="ynjh/personal/dao/user/UserMapper.xml"/>
+		<!-- <mapper resource="ynjh/personal/dao/user/UserMapper.xml"/>
 		<mapper resource="ynjh/personal/dao/article/ArticleMapper.xml"/>
-		<mapper resource="ynjh/personal/dao/commentArticle/CommentArticle.xml"/>
-		<mapper resource="ynjh/admin/dao/admin/adminMapper.xml"/>
-		<mapper resource="ynjh/admin/dao/adminLog/adminLogMapper.xml"/>
-		<mapper resource="ynjh/admin/dao/companyVisitCount/companyVisitCountMapper.xml"/>
-		<mapper resource="ynjh/admin/dao/userVisitCount/userVisitCountMapper.xml"/>
-		<mapper resource="ynjh/company/dao/companyInformation/ArticleMapper.xml"/>
+		<mapper resource="ynjh/personal/dao/commentArticle/CommentArticle.xml"/> -->
+		<mapper resource="ynjh/admin/dao/admin/AdminMapper.xml"/>
+		<mapper resource="ynjh/admin/dao/adminLog/AdminLogMapper.xml"/>
+		<mapper resource="ynjh/admin/dao/companyVisitCount/CompanyVisitCountMapper.xml"/>
+		<mapper resource="ynjh/admin/dao/userVisitCount/UserVisitCountMapper.xml"/>
+		<!-- <mapper resource="ynjh/company/dao/companyInformation/ArticleMapper.xml"/>
 		<mapper resource="ynjh/company/dao/companyInformation/CommentArticleMapper.xml"/>
-		<mapper resource="ynjh/company/dao/discuss/Discuss.xml"/>
+		<mapper resource="ynjh/company/dao/discuss/Discuss.xml"/> -->
 	</mappers>
 
 </configuration>
