@@ -1,0 +1,54 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.personal.dao.user。UserMapper">
+    <!-- <insert id="addUser" parameterType="User" >
+        insert into user() values()
+    </insert>
+    <select id="loginByUserIdAndUserPassword" parameterType="User" resultType="User"></select>
+	 -->
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.personal.dao.user.UserMapper">
+    <!-- 注册 只有userId和userPassword，其余为一个默认值 -->
+    <insert id="addUser" parameterType="User" >
+        insert into `user` (userId,userPassword,userName,userGender,userEmail,userRealName,userIDCard,userIDImgFace,userIDImgCon,userCreateDate,userHeadImgPath,userBirthday) 
+        values(#{userId},#{userPassword},#{userName},#{userGender},#{userEmail},#{userRealName},#{userIDCard},#{userIDImgFace},#{userIDImgCon},#{userCreateDate},#{userHeadImgPath},#{userBirthday})
+    </insert>
+    <!-- 完善用户信息（修改user表）：头像、性别、email、出生日期、昵称 -->
+    <update id="updateUserOther" parameterType="Integer">
+        update `user` set userHeadImgPath=#{userHeadImgPath},userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where userId=#{userId}
+    </update>
+    <!-- 实名认证（修改user表）：真实姓名、身份证号码、身份证图片(正反面) -->
+    <update id="updateUserIDCord" parameterType="Integer">
+        update `user` set userRealName=#{userRealName},userIDCard=#{userIDCard},userIDImgFace=#{userIDImgFace},userIDImgCon=#{userIDImgCon} where userId=#{userId}
+    </update>
+    <!-- 登录 -->
+    <select id="loginByUserIdAndUserPassword"  resultType="User">
+        select * from  `user` where userId=#{userId} and userPassword=#{userPassword}
+    </select>
+    <!-- 修改用户信息：头像、密码、性别、email、出生日期、昵称 -->
+	<update id="updateUser" parameterType="Integer">
+	    update `user` set userHeadImgPath=#{userHeadImgPath},userPassword=#{userPassword},userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where userId=#{userId}
+	</update>
+	<!-- 修改用户密码 -->
+	<update id="updateUserById" parameterType="Integer">
+	    update `user` set userPassword=#{userPassword} where userId=#{userId}
+	</update>
+	<!-- 根据id查询用户（显示用户信息） -->
+	<select id="selectUserById" resultType="User" parameterType="Integer">
+	    select * from `user` where userId=#{userId}
+	</select>
+	<!-- 充值 -->
+	<update id="updateMoney" >
+	    update `user` set userMoney=#{userMoney} where userId=#{userId}
+	</update>
+	<select id="Search" resultType="String">	    
+	</select>
+>>>>>>> 99a5c58da8c824a38015ac051c458fa3f7f485e0
+</mapper>

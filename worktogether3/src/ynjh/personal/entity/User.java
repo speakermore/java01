@@ -7,17 +7,61 @@ public class User implements Serializable{
 	private Integer userId;// 用户名
 	private String userPassword;// 密码
 	private String userName;// 昵称
-	private Integer uesrGender;// 性别
+	private Integer userGender;// 性别
 	private String userEmail;// 邮箱
 	private Integer userStatus;// 状态
 	private String userRealName;// 真实姓名
 	private String userIDCard;// 身份证号码
-	private String userIDImg;// 身份证图片
-	private Timestamp userCreateTimestamp;// 注册时间
+	private String userIDImgFace;// 身份证正面图片
+	private String userIDImgCon;// 身份证反面图片
+	private Timestamp userCreateDate;// 注册时间
 	private String userHeadImgPath;// 用户头像
 	private Double userMoney;// 余额
 	private Timestamp userBirthday;// 用户生日
 	private Integer userLevel;// 用户等级
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(Integer userId, String userPassword, String userName,
+			Integer userGender, String userEmail, Integer userStatus,
+			String userRealName, String userIDCard, String userIDImgFace,
+			String userIDImgCon, Timestamp userCreateDate,
+			String userHeadImgPath, Double userMoney, Timestamp userBirthday,
+			Integer userLevel) {
+		super();
+		this.userId = userId;
+		this.userPassword = userPassword;
+		this.userName = userName;
+		this.userGender = userGender;
+		this.userEmail = userEmail;
+		this.userStatus = userStatus;
+		this.userRealName = userRealName;
+		this.userIDCard = userIDCard;
+		this.userIDImgFace = userIDImgFace;
+		this.userIDImgCon = userIDImgCon;
+		this.userCreateDate = userCreateDate;
+		this.userHeadImgPath = userHeadImgPath;
+		this.userMoney = userMoney;
+		this.userBirthday = userBirthday;
+		this.userLevel = userLevel;
+	}
+
+	public String getUserIDImgFace() {
+		return userIDImgFace;
+	}
+
+	public void setUserIDImgFace(String userIDImgFace) {
+		this.userIDImgFace = userIDImgFace;
+	}
+
+	public String getUserIDImgCon() {
+		return userIDImgCon;
+	}
+
+	public void setUserIDImgCon(String userIDImgCon) {
+		this.userIDImgCon = userIDImgCon;
+	}
 
 	public Integer getUserId() {
 		return userId;
@@ -43,12 +87,12 @@ public class User implements Serializable{
 		this.userName = userName;
 	}
 
-	public Integer getUesrGender() {
-		return uesrGender;
+	public Integer getUserGender() {
+		return userGender;
 	}
 
-	public void setUesrGender(Integer uesrGender) {
-		this.uesrGender = uesrGender;
+	public void setUserGender(Integer userGender) {
+		this.userGender = userGender;
 	}
 
 	public String getUserEmail() {
@@ -83,20 +127,12 @@ public class User implements Serializable{
 		this.userIDCard = userIDCard;
 	}
 
-	public String getUserIDImg() {
-		return userIDImg;
+	public Timestamp getuserCreateDate() {
+		return userCreateDate;
 	}
 
-	public void setUserIDImg(String userIDImg) {
-		this.userIDImg = userIDImg;
-	}
-
-	public Timestamp getUserCreateTimestamp() {
-		return userCreateTimestamp;
-	}
-
-	public void setUserCreateTimestamp(Timestamp userCreateTimestamp) {
-		this.userCreateTimestamp = userCreateTimestamp;
+	public void setUserCreateDate(Timestamp userCreateDate) {
+		this.userCreateDate = userCreateDate;
 	}
 
 	public String getUserHeadImgPath() {

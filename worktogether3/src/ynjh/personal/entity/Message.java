@@ -6,9 +6,9 @@ import java.sql.Timestamp;
 public class Message implements Serializable {
 	// id
 	private Integer id;
-	// 发送者id
+	// 接收者id
 	private Integer userId;
-	// 被发送者id
+	// 发送者id
 	private Integer resendId;
 	// 消息内容
 	private String messageContent;
