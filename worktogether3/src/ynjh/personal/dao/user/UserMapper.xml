@@ -3,9 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.personal.dao.user。UserMapper">
-    <insert id="addUser" parameterType="User" >
+    <!-- <insert id="addUser" parameterType="User" >
         insert into user() values()
     </insert>
     <select id="loginByUserIdAndUserPassword" parameterType="User" resultType="User"></select>
-	
+	 -->
 </mapper>
