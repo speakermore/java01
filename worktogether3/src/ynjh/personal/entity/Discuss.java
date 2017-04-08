@@ -22,16 +22,14 @@ public class Discuss implements Serializable {
 	public Discuss() {
 	}
 
-	public Discuss(Integer id, Integer discussUsersId, String discussContent,
-			Integer discussLevel, Timestamp discussTime, Integer discussStatus,
+	public Discuss(Integer discussUsersId, String discussContent,
+			Integer discussLevel, Timestamp discussTime,
 			Integer discusUsersType) {
 		super();
-		this.id = id;
 		this.discussUsersId = discussUsersId;
 		this.discussContent = discussContent;
 		this.discussLevel = discussLevel;
 		this.discussTime = discussTime;
-		this.discussStatus = discussStatus;
 		this.discusUsersType = discusUsersType;
 	}
 
