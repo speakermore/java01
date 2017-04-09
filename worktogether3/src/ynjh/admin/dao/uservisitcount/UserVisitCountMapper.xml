@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ynjh.admin.dao.userVisitCount.userVistiCountMapper">
+<mapper namespace="ynjh.admin.dao.userVisitCount.UserVistiCountMapper">
 	<insert id="addUserVisitCount" parameterType="UserVisitCount">
 		insert into uservisitcount(userYear,userMonth,userDay,userCommentCount,userArticleCount,userId) values(#{userYear},#{userMonth},#{userDay},#{userCommentCount},#{userArticleCount},#{userId})
 	</insert>

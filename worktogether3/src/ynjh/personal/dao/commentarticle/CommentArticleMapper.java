@@ -2,11 +2,13 @@ package ynjh.personal.dao.commentarticle;
 
 import java.util.List;
 
+import ynjh.personal.entity.CommentArticle;
+
 public interface CommentArticleMapper {
 	/**
 	 * 写文章评论
 	 */
-	public Integer addUserCommentArticle(CommentArticleMapper commentArticle); 
+	public Integer addUserCommentArticle(CommentArticle commentArticle); 
 	/**
 	 * 删除评价
 	 */
@@ -14,5 +16,5 @@ public interface CommentArticleMapper {
 	/**
 	 * 查看评价
 	 */
-	public List<CommentArticleMapper>	selectUserCommentArticle(Integer id);		
+	public List<CommentArticle>	selectUserCommentArticle(Integer id);		
 }

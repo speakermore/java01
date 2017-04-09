@@ -18,21 +18,21 @@ public class Message implements Serializable {
 	private Integer messageResendStatus;
 	// 1.等待审核 2.审核通过 3.审核部通过
 	private Integer messageSendStatus;
+	//识别用户和企业：1.用户 2 企业
+	private Integer messageStatus;
 
 	public Message() {
 	}
 
-	public Message(Integer id, Integer userId, Integer resendId,
-			String messageContent, Timestamp messageSendTime,
-			Integer messageResendStatus, Integer messageSendStatus) {
+	public Message(Integer userId, Integer resendId,
+			String messageContent, Timestamp messageSendTime,Integer messageStatus) {
 		super();
-		this.id = id;
 		this.userId = userId;
 		this.resendId = resendId;
 		this.messageContent = messageContent;
 		this.messageSendTime = messageSendTime;
-		this.messageResendStatus = messageResendStatus;
-		this.messageSendStatus = messageSendStatus;
+		this.messageStatus=messageStatus;
+		
 	}
 
 	public Integer getId() {

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.UserVisitCount;
 
-public interface userVisitCountMapper {
+public interface UserVisitCountMapper {
 	public Integer addUserVisitCount(UserVisitCount userVisitCount);
 	public Integer updateUserVisitCount(UserVisitCount userVisitCount);
 	public List<UserVisitCount> findAll(@Param("page")Integer page,@Param("pageSize")Integer pageSize);

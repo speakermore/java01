@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.personal.dao.article.ArticleMapper">
 	<!-- 写文章 -->
 	<insert id="addUserArticle" parameterType="Article">
-		insert into article(articleId,usersId,articleTitle,articleTime,articleKey,articleContent)
-			value(#{articleId},#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent})
+		insert into article(usersId,articleTitle,articleTime,articleKey,articleContent,articleUsersType)
+			value(#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent},#{articleUsersType})
 	</insert>
 	<!-- 删文章 -->
 	 <delete id="deleteUserArticle" parameterType="int">

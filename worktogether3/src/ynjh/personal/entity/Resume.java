@@ -30,6 +30,57 @@ public class Resume implements Serializable{
 	private Integer resumeStatusOne;// 状态(用户的操作)\n1.完全公开(默认)\n2.只限企业浏览\n3.只对应聘企业公开\n4.保密
 	private Integer resumeHeight;// 身高
 	private Integer resumeWeight;// 体重
+	private Integer resumeStatusThree;//状态（管理员）1.待审核 2.正常	 3. 审核不通过
+	
+	public Resume() {
+	}
+	
+	
+	/*userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
+    resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
+    resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
+    resumeSelfEvaluation,resumeHeight,resumeWeight*/
+	public Resume(Integer userId, String resumeTitle,
+			Timestamp resumeCreateDate, String resumeName,
+			Integer resumeGender, String resumeNation, String resumePlace,
+			Timestamp resumeBirthday, Integer resumeMarriage,
+			String resumeGraduationSchool, Timestamp resumeGraduationTime,
+			String resumeEducation, String resumeMajor, Integer resumeWages,
+			Integer resumePhone, Integer resumeQQ, String resumePersonality,
+			String resumeSelfEvaluation,
+			Integer resumeHeight, Integer resumeWeight) {
+		super();
+
+		this.userId = userId;
+		this.resumeTitle = resumeTitle;
+		this.resumeCreateDate = resumeCreateDate;
+		this.resumeName = resumeName;
+		this.resumeGender = resumeGender;
+		this.resumeNation = resumeNation;
+		this.resumePlace = resumePlace;
+		this.resumeBirthday = resumeBirthday;
+		this.resumeMarriage = resumeMarriage;
+		this.resumeGraduationSchool = resumeGraduationSchool;
+		this.resumeGraduationTime = resumeGraduationTime;
+		this.resumeEducation = resumeEducation;
+		this.resumeMajor = resumeMajor;
+		this.resumeWages = resumeWages;
+		this.resumePhone = resumePhone;
+		this.resumeQQ = resumeQQ;
+		this.resumePersonality = resumePersonality;
+		this.resumeSelfEvaluation = resumeSelfEvaluation;
+		this.resumeHeight = resumeHeight;
+		this.resumeWeight = resumeWeight;
+
+	}
+
+	public Integer getResumeStatusThree() {
+		return resumeStatusThree;
+	}
+	public void setResumeStatusThree(Integer resumeStatusThree) {
+		this.resumeStatusThree = resumeStatusThree;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -238,5 +289,32 @@ public class Resume implements Serializable{
 	public void setResumeWeight(Integer resumeWeight) {
 		this.resumeWeight = resumeWeight;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Resume [id=" + id + ", userId=" + userId + ", resumeTitle="
+				+ resumeTitle + ", resumeCreateDate=" + resumeCreateDate
+				+ ", resumeName=" + resumeName + ", resumeGender="
+				+ resumeGender + ", resumeNation=" + resumeNation
+				+ ", resumePlace=" + resumePlace + ", resumeBirthday="
+				+ resumeBirthday + ", resumeMarriage=" + resumeMarriage
+				+ ", resumeGraduationSchool=" + resumeGraduationSchool
+				+ ", resumeGraduationTime=" + resumeGraduationTime
+				+ ", resumeEducation=" + resumeEducation + ", resumeMajor="
+				+ resumeMajor + ", resumeWages=" + resumeWages
+				+ ", resumePhone=" + resumePhone + ", resumeQQ=" + resumeQQ
+				+ ", resumeFLAbility=" + resumeFLAbility + ", resumeFLType="
+				+ resumeFLType + ", resumeEnglishGrade=" + resumeEnglishGrade
+				+ ", resumeComputerAbility=" + resumeComputerAbility
+				+ ", resumePersonality=" + resumePersonality
+				+ ", resumeSelfEvaluation=" + resumeSelfEvaluation
+				+ ", resumeStatusOne=" + resumeStatusOne + ", resumeHeight="
+				+ resumeHeight + ", resumeWeight=" + resumeWeight
+				+ ", resumeStatusThree=" + resumeStatusThree + "]";
+	}
+
+	
+	
 
 }
