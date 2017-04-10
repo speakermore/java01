@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="auditResume" parameterType="Resume"><!-- 简历审核 -->
-		update resume set <!-- 状态字段待定 --> where id=#{id}
+		update resume set resumeStatusThree=#{resumeStatusThree}  where id=#{id}
 	</update>
 	
 	<update id="auditArticle" parameterType="Article"><!-- 文章审核 -->
@@ -36,104 +36,86 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update discuss set discussStatus=#{discussStatus} where id=#{id}
 	</update>
 	
-	<update id="auditInfo" parameterType="Article"><!-- 新闻审核 -->
+	<update id="auditInfo" ><!-- 新闻审核 -->
 		update article set articleStatus=#{articleStatus} where id=#{articleId}
 	</update>
 	
-	<update id="auditOffer" parameterType="Message"><!-- offer审核 -->
+	<update id="auditOffer" ><!-- offer审核 -->
 		update message set messageSendStatus=#{messageSendStatus} where id=#{id}
 	</update>
 	
-	<update id="auditRecruitment" parameterType="CompanyRecruit"><!-- 招聘信息审核 -->
-		update message set cmpRecStatus=#{cmpRecStatus} where id=#{id}
+	<update id="auditRecruitment"><!-- 招聘信息审核 -->
+		update companyrecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
 	</update>
 	
 	<update id="maIntegerainAdmin" parameterType="Admin"><!-- 信息维护改 -->
-		update admin set adminName=#{adminEmail}，adminTel=#{adminTel}，adminEmail=#{adminEmail} where id=#{id}
+		update admin set adminName=#{adminEmail},adminTel=#{adminTel},adminEmail=#{adminEmail} where id=#{id}
 	</update>
 	
 	<!--查询普通用户状态  -->
 	<select id="findUser">
-		select * from user  #{pageOffSet},10 order by
+		select * from user  #{pageOffSet},10
 	</select>
 	<!-- 查询企业用户状态 -->
 	<select id="findCompany">
-		select * from  company #{pageOffSet},10 order by
+		select * from  company #{pageOffSet},10
 	</select>
 	
 	<select id="findAuditResume" resultType="Resume"><!-- 查询简历审核 -->
-		select * from resume where<!-- 状态字段待定 -->  order by
+		select * from resume where resumeStatusThree=1  order by resumeCreateDate
 	</select>
 	
 	<select id="findAuditArticle" resultType="Article"><!-- 查询文章审核 -->
-		select * from article where articleStatus=1 
-		<if test="page!=null">
-			limit #{page},10
-		</if>
-		order by articleTime
+		select * from article where articleStatus=1 limit #{page},10 order by articleTime
 	</select>
 	
 	<select id="findAuditCommentsArticle" resultType="CommentArticle"><!-- 查询文章评论审核 -->
-		select * from commentArticle where commentArticleStatus=1 
-		<if test="page!=null">
-			limit #{page},10
-		</if>
-		order by commentArticleTime
+		select * from commentArticle where commentArticleStatus=1 limit #{page},10 order by commentArticleTime
 	</select>
 	
-	<select id="auditCompany" resultType="Company"><!-- 查询企业资质审核 -->
-		select * from companyIntroduvtion where cmpIntStatus=1 
-		<if test="page!=null">
-			limit #{page},10
-		</if>
-		order by companyId
+	<select id="findAuditCompany" resultType="Company"><!-- 查询企业资质审核 -->
+		select * from companyIntroduvtion where cmpIntStatus=1 limit #{page},10 order by companyId
 	</select>
 	
 	<select id="findAuditCommentsCompanyAndPeople" resultType="Discuss"><!-- 查询个人企业互评论审核 -->
-		select * from discuss where discussStatus=1 order by discussTime
-		<if test="page!=null">
-			limit #{page},10
-		</if>
+		select * from discuss where discussStatus=1 order by discussTime limit #{page},10
 	</select>
 	
 	<select id="findAuditInfo" resultType="Article"><!-- 查询新闻审核 -->
-		select * from article where articleStatus=1 order by articleTime
-		<if test="page!=null">
-			limit #{page},10
-		</if>
+		select * from article where articleStatus=1 order by articleTime limit #{page},10
 	</select>
 	
-	<select id="findAuditOffer" resultType="Message"><!-- 查询offer审核 -->
-		select * from message where messageSendStatus=1 order by messageSendTime
-		<if test="page!=null">
-			limit #{page},10
-		</if>
+	<select id="findAuditOffer" resultType="Message" parameterType="Integer"><!-- 查询offer审核 -->
+		select * from message where messageSendStatus=1  limit #{page},10
 	</select>
 	
 	<select id="findAuditRecruitment" resultType="CompanyRecruit"><!-- 查询招聘信息审核 -->
-		select * from message where cmpRecStatus=1 order by cmpRecTime
-		<if test="page!=null">
-			limit #{page},10
-		</if>
+		select * from message where cmpRecStatus=1 order by cmpRecTime limit #{page},10
 	</select>
 	
-	<select id="findByAdminId" resultType="Admin" parameterType="Admin"><!-- 信息维护查询 -->
-		select * from admin where id=#{id}
-		<if test="page!=null">
-			limit #{page},10
-		</if>
+	<select id="findByAdminId" resultType="Admin" parameterType="String"><!-- 信息维护查询 -->
+		select * from admin where adminLoginId=#{adminId} limit #{page},10
 	</select>
 	
 	<!--热门文章 -->
 	<select id="findBestArticle" resultType="Article">
-		select top 10 * from article order by articleReadNum desc  
+		select * from article limit 10 order by articleReadNum desc  
 	</select>
 	<!--最佳企业id -->
 	<select id="findCompanyId" resultType="Integer">
-		select top 10 discusUsersType from discuss group by(discusUsersType); 
+		select discusUsersType from discuss group by(discusUsersType) limit 10; 
 	</select>
 	<!-- 找到企业 -->
 	<select id="findCompanyById" parameterType="Integer" resultType="Company">
 		select * from company where companyLoginId=#{companyLoginId}
+	</select>
+	<!-- 获得最大信息数 -->
+	<select id="findMaxPage" resultType="Integer">
+		select count(*) from admin
+	</select>
+	<!-- 登录退出 -->
+	<select id="findLogin" parameterType="Admin"><!-- 登录 -->
+		select * from admin where adminLoginId=#{adminLoginId} and
+			adminPassword=#{adminPassword} 
 	</select>
 </mapper>

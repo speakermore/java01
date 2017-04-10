@@ -1,5 +1,6 @@
 package ynjh.admin.dao.admin;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -28,14 +29,13 @@ public interface AdminMapper {
 	// 禁用企业用户
 	public Integer disableCompany(@Param("companyId") Integer companyId, @Param("companyStatus") Integer companyStatus);
 
-	// public Integer auditResume(Integer id,Integer status);//审核简历
-	// public List<Resume> findAuditResume(Integer page);//查询审核简历
+	public Integer auditResume(@Param("id")Integer id,@Param("resumeStatusThree")Integer resumeStatusThree);//审核简历
+	public List<Resume> findAuditResume(Integer page);//查询审核简历
 	public Integer auditArticle(@Param("articleId") Integer articleId, @Param("articleStatus") Integer articleStatus);// 审核文章
 
 	public List<Article> findAuditArticle(Integer page);// 查询审核文章
 
-	public Integer auditCommentsArticle(@Param("CAId") Integer CAId,
-			@Param("commentsArticleStatus") Integer commentsArticleStatus);// 审核文章评论
+	public Integer auditCommentsArticle(@Param("id")Integer id,@Param("commentArticleStatus")Integer commentArticleStatus);//审核文章评论
 
 	public List<CommentArticle> findAuditCommentsArticle(Integer page);// 查询审核文章评论
 
@@ -44,8 +44,7 @@ public interface AdminMapper {
 
 	public List<Company> findAuditCompany(Integer page);// 查询审核企业资质
 
-	public Integer auditCommentsCompanyAndPeople(@Param("CCPId") Integer CCPId,
-			@Param("discussStatus") Integer discussStatus);// 审核个人企业互评论
+	public Integer auditCommentsCompanyAndPeople(@Param("id")Integer id,@Param("discussStatus")Integer discussStatus);//审核个人企业互评论
 
 	public List<Discuss> findAuditCommentsCompanyAndPeople(Integer page);// 查询审核个人企业互评论
 
@@ -53,27 +52,31 @@ public interface AdminMapper {
 
 	public List<Article> findAuditInfo(Integer page);// 查询审核新闻
 
-	public Integer auditOffer(@Param("offerId") Integer offerId, @Param("offerStatus") Integer offerStatus);// 审核offer
+	public Integer auditOffer(@Param("id") Integer id, @Param("messageSendStatus") Integer messageSendStatus);// 审核offer
 
 	public List<Message> findAuditOffer(Integer page);// 查询审核offer
 
-	public Integer auditRecruitment(@Param("recruitmentId") Integer recruitmentId,
+	public Integer auditRecruitment(@Param("id") Integer id,
 			@Param("cmpRecStatus") Integer cmpRecStatus);// 审核招聘信息
 
 	public List<CompanyRecruit> findAuditRecruitment(Integer page);// 查询审核招聘信息
 
 	// 信息维护--修改正在登录的管理员信息
-	public Integer maIntegerainAdmin(@Param("adminName") String adminName, @Param("adminTel") String adminTel,
-			@Param("adminEmail") String adminEmail);// 改
+	public Integer findMaxPage();//查找admin表中信息条数
+	
+	public Integer maIntegerainAdmin(Admin admin);// 改
 
-	public List<Admin> findByAdminId(String adminId);// 查
+	public List<Admin> findByAdminId(Integer adminId);// 查
 
-	// public Integer messagePush(String message,Integer status);//消息推送
+	public Integer messagePushArticle(@Param("userId")Integer userId,@Param("articleContent")String articleContent,@Param("messageSendTime")Timestamp messageSendTime,@Param("messageStatus")Integer messageStatus);//消息推送
 
 	public List<Article> findBestArticle();// 热门文章
 
 	public List<Integer> findCompanyId();// 最佳企业id
 
 	public Company findCompanyById(Integer companyLoginId);// 找到企业
+	
+	//登录&退出
+	public Admin findLogin(@Param("adminLoginId")String adminLoginId,@Param("adminPassword")String adminPassword);
 
 }
