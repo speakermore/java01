@@ -29,9 +29,9 @@ public class CompanyArticleController {
 	@RequestMapping(value="/add_article",method=RequestMethod.POST)
 	public ModelAndView addArticle(Article article,HttpSession session){
 		Company company=(Company)session.getAttribute("company");
-		article.setArticleId(company.getCompanyId());
+		article.setUsersId (company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
-		
+		article.setArticleUsersType(1);
 		int result=companyArticleService.addArticle(article);
 		ModelAndView mView=new ModelAndView();
 		if (result>0) {
