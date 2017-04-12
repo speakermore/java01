@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Article implements Serializable{
-	private Integer articleId;//文章id
+	private Integer id;
 	private Integer usersId;//用户名
 	private String articleTitle;//文章标题
 	private Integer articleLikeNum;//点赞数
@@ -19,10 +19,10 @@ public class Article implements Serializable{
 		
 	}
 
-	public Article(Integer articleId, Integer usersId, String articleTitle, Integer articleLikeNum, Integer articleReadNum,
+	public Article(Integer usersId, String articleTitle, Integer articleLikeNum, Integer articleReadNum,
 			Timestamp articleTime, Integer articleStatus, String articleKey, String articleContent, Integer articleUsersType) {
 		super();
-		this.articleId = articleId;
+
 		this.usersId = usersId;
 		this.articleTitle = articleTitle;
 		this.articleLikeNum = articleLikeNum;
@@ -34,12 +34,13 @@ public class Article implements Serializable{
 		this.articleUsersType = articleUsersType;
 	}
 
-	public Integer getArticleId() {
-		return articleId;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setArticleId(Integer articleId) {
-		this.articleId = articleId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getUsersId() {
@@ -116,7 +117,7 @@ public class Article implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Article [articleId=" + articleId + ", usersId=" + usersId + ", articleTitle=" + articleTitle
+		return "Article [usersId=" + usersId + ", articleTitle=" + articleTitle
 				+ ", articleLikeNum=" + articleLikeNum + ", articleReadNum=" + articleReadNum + ", articleTime="
 				+ articleTime + ", articleStatus=" + articleStatus + ", articleKey=" + articleKey + ", articleContent="
 				+ articleContent + ", articleUsersType=" + articleUsersType + "]";

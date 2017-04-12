@@ -21,27 +21,27 @@ public interface UserMapper {
 	/**
 	 * 完善用户信息
 	 */
-	public Integer updateUserOther(Integer userId);
+	public Integer updateUserOther(User user);
 	/**
 	 * 实名认证
 	 */
-	public Integer updateUserIDCord(Integer userId);
+	public Integer updateUserIDCord(User user);
 	/**
 	 * 修改用户信息
 	 */
-	public Integer updateUser(Integer userId);
+	public Integer updateUser(User user);
 	/**
 	 * 修改用户密码
 	 */
-	public Integer updateUserById(Integer userId);
+	public Integer updateUserById(Integer userLoginId);
 	/**
 	 * 根据id查询用户（显示用户信息）
 	 */
-	public List<User> selectUserById(Integer id);
+	public User selectUserById(Integer id);
 	/**
 	 * 充值
 	 */
-	public Integer updateMoney(@Param("userMoney")Integer money,@Param("userId")Integer id); 
+	public Integer updateMoney(@Param("userMoney")Double money,@Param("id")Integer id); 
 	/**
 	 * 搜索
 	 */
