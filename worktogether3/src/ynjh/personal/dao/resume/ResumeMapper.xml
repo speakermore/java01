@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.personal.dao.resume.ResumeMapper">
+    <!-- 添加简历
+    	userId,resumeTitle,resumeCreateDate,resumeName,resumeGender
+   	 	,resumeNation,resumePlace,resumeBirthday,resumeMarriage
+    	,resumeGraduationSchool,resumeGraduationTime,resumeEducation
+    	,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality
+    	,resumeSelfEvaluation,resumeHeight,resumeWeight -->
+    <insert id="addResume" parameterType="Resume">
+        insert into resume(userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
+        resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
+        resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
+        resumeSelfEvaluation,resumeHeight,resumeWeight) 
+        values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
+        #{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
+        #{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
+        #{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight})
+    </insert>
+    <!-- 修改简历 -->
+    <update id="updateResume" parameterType="Integer">
+        update resume set resumeTitle=#{resumeTitle},resumeName=#{resumeName},resumeGender=#{resumeGender},resumeNation=#{resumeNation},
+        resumePlace=#{resumePlace},resumeBirthday=#{resumeBirthday},resumeMarriage=#{resumeMarriage},resumeGraduationSchool=#{resumeGraduationSchool},resumeGraduationTime=#{resumeGraduationTime},
+        resumeEducation=#{resumeEducation},resumeMajor=#{resumeMajor},resumeWages=#{resumeWages},resumePhone=#{resumePhone},resumeQQ=#{resumeQQ},resumePersonality=#{resumePersonality},
+        resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight}
+        where id=#{id}
+    </update>
+    <!-- 查询简历(所有) -->
+    <select id="selectResumeByUserId" resultType="Resume" parameterType="Integer">
+        select * from resume where userId=#{userId}
+    </select>
+    <select id="selectResumeById" resultType="Resume" parameterType="Integer">
+        select * from resume where id=#{id}
+    </select>
+    <delete id="deleteResumeById" parameterType="Integer">
+    	delete from resume where id=#{id}
+    </delete>
+</mapper>
