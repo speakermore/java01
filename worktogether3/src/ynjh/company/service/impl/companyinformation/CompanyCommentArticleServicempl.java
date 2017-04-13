@@ -21,18 +21,9 @@ public class CompanyCommentArticleServicempl implements CompanyCommentArticleSer
 	}
 
 	@Override
-	public List<CommentArticle> findAll(Integer page) {
-		if(page==null){
-			page=1;
-		}
-		if(page!=null&&page<1){
-			page=1;
-		}
-		int maxpage=getMaxpage();
-		if(page!=null&&page>maxpage){
-			page=maxpage;
-		}
-		return ccArticleMapper.findAll(page);
+	public List<CommentArticle> findAll(Integer articleId) {
+		
+		return ccArticleMapper.findAll(articleId);
 	}
 
 	@Override
@@ -42,9 +33,9 @@ public class CompanyCommentArticleServicempl implements CompanyCommentArticleSer
 	}
 
 	@Override
-	public int updateStatus(Integer id) {
+	public int updateStatus(Integer id,Integer commentArticleStatus) {
 		
-		return ccArticleMapper.updateCommentStatus(id, 4);
+		return ccArticleMapper.updateCommentStatus(id, commentArticleStatus);
 	}
 
 	@Override

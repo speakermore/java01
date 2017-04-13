@@ -3,27 +3,27 @@ package ynjh.company.entity;
 import java.sql.Timestamp;
 
 public class CompanyRecruit {
-	private Integer id;//����
-	private Integer companyId;//��˾���
-	private String cpmRecTitle;//��˾����
-	private String cpmRecWage;//��˾н��
-	private String cpmRecEducation;//��˾ѧ������
-	private String cmpRecExperience;//�������輼�ܼ�ˮƽ����
-	private Integer cmpRecPeople;//��������
-	private Timestamp cmpRecTime;//����ʱ��
-	private Integer cmpRecStatus;//������Ƹ��Ϣ״̬1:���� 2�����ͨ�� 3����˲�ͨ��
+	private Integer id;//主键
+	private Integer companyId;//公司编号
+	private String cmpRecTitle;//公司标题
+	private String cmpRecWage;//公司薪资
+	private String cpmRecEducation;//公司学历需求
+	private String cmpRecExperience;//工作所需技能及水平描述
+	private Integer cmpRecPeople;//需求人数
+	private Timestamp cmpRecTime;//发布时间
+	private Integer cmpRecStatus;//发表招聘信息状态1:待审 2：审核通过 3：审核不通过
 	public CompanyRecruit(){
 		
 	}
 	
-	public CompanyRecruit(Integer id, Integer companyId, String cpmRecTitle,
-			String cpmRecWage, String cpmRecEducation, String cmpRecExperience,
+	public CompanyRecruit(Integer id, Integer companyId, String cmpRecTitle,
+			String cmpRecWage, String cpmRecEducation, String cmpRecExperience,
 			Integer cmpRecPeople, Timestamp cmpRecTime, Integer cmpRecStatus) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
-		this.cpmRecTitle = cpmRecTitle;
-		this.cpmRecWage = cpmRecWage;
+		this.cmpRecTitle = cmpRecTitle;
+		this.cmpRecWage = cmpRecWage;
 		this.cpmRecEducation = cpmRecEducation;
 		this.cmpRecExperience = cmpRecExperience;
 		this.cmpRecPeople = cmpRecPeople;
@@ -43,17 +43,17 @@ public class CompanyRecruit {
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
 	}
-	public String getCpmRecTitle() {
-		return cpmRecTitle;
+	public String getCmpRecTitle() {
+		return cmpRecTitle;
 	}
-	public void setCpmRecTitle(String cpmRecTitle) {
-		this.cpmRecTitle = cpmRecTitle;
+	public void setCmpRecTitle(String cmpRecTitle) {
+		this.cmpRecTitle = cmpRecTitle;
 	}
-	public String getCpmRecWage() {
-		return cpmRecWage;
+	public String getCmpRecWage() {
+		return cmpRecWage;
 	}
-	public void setCpmRecWage(String cpmRecWage) {
-		this.cpmRecWage = cpmRecWage;
+	public void setCmpRecWage(String cmpRecWage) {
+		this.cmpRecWage = cmpRecWage;
 	}
 	public String getCpmRecEducation() {
 		return cpmRecEducation;
@@ -88,7 +88,7 @@ public class CompanyRecruit {
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", companyId=" + companyId
-				+ ", cpmRecTitle=" + cpmRecTitle + ", cpmRecWage=" + cpmRecWage
+				+ ", cmpRecTitle=" + cmpRecTitle + ", cmpRecWage=" + cmpRecWage
 				+ ", cpmRecEducation=" + cpmRecEducation
 				+ ", cmpRecExperience=" + cmpRecExperience + ", cmpRecPeople="
 				+ cmpRecPeople + ", cmpRecTime=" + cmpRecTime

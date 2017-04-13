@@ -1,10 +1,16 @@
 package ynjh.company.dao.company;
 
-import java.sql.Timestamp;
 
-import org.apache.ibatis.annotations.Param;
+import ynjh.company.entity.CompanyCharge;
 
 public interface CompanyChargeMapper {
-	public Integer updateCompanyrMoney(@Param("CmpChargeMoney")Integer cmpChargeMoney,@Param("id")Integer id,Timestamp cmpChargeConsume);
+	//充值
+	public Integer addMoney(CompanyCharge companyCharge);
+	//查询余额
+	public Double findById(Integer CompanyId);
+	//查询账单
+	public Double findAllById(Integer CompanyId);
+	//消费
+	public Double updateMoney(CompanyCharge companyCharge);
 	
 }

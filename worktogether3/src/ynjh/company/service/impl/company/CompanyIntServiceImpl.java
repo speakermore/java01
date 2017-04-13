@@ -3,28 +3,30 @@ package ynjh.company.service.impl.company;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
-import ynjh.company.dao.company.CompanyIntrodutionMapper;
-import ynjh.company.entity.CompanyIntrodution;
+import ynjh.company.dao.company.CompanyIntroductionMapper;
+import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
 
-@Controller
+@Service
 public class CompanyIntServiceImpl implements CompanyIntService {
 @Resource
-CompanyIntrodutionMapper companyIntMapper;
+CompanyIntroductionMapper companyIntMapper;
 	@Override
-	public Integer updateCompanyInt(CompanyIntrodution companyInt) {
-		Integer temp=null;
-		if(companyIntMapper.findById(companyInt.getCompanyId())==null){
-			temp=companyIntMapper.addCompanInt(companyInt);
-		}else{
-			temp=companyIntMapper.updateCompanyInt(companyInt.getCompanyId());
-		}
-		return temp;
+	public Integer updateCompanyInt(CompanyIntroduction companyInt) {
+		return companyIntMapper.updateCompanyInt(companyInt);
 	}
 	@Override
-	public CompanyIntrodution findById(Integer id) {
-		
+	public CompanyIntroduction findById(Integer id) {
+//		if(companyIntMapper.findById(id)=null){
+//			return ;
+//		}
 		return companyIntMapper.findById(id);		
 }
+	@Override
+	public Integer addCompanyInt(CompanyIntroduction companyInt) {
+		return companyIntMapper.addCompanyInt(companyInt);
+	}
+	
 }

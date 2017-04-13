@@ -3,5 +3,23 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.company.dao.companyinformation.CompanyCommentArticleMapper">
-
+	<insert id="addCommentArticle" parameterType="int">
+		insert into commentArticle(articleId,usersId,commentArticleContent,commentArticleTime,commentArticleStatus,commentArticleUsersType)
+		value(#{articleId},#{usersId},#{commentArticleContent},#{commentArticleTime},#{commentArticleStatus},#{commentArticleUsersType})
+	</insert>
+	<update id="updateCommentLikeNum" parameterType="int">
+		update commentArticle set commentArticleLikeNum=1+commentArticleLikeNum where id=#{id}
+	</update>
+	<update id="updateCommentStatus">
+		update commentArticle set commentArticleStatus=#{commentArticleStatus} where id=#{id}
+	</update>
+	<select id="findById" parameterType="int" resultType="CommentArticle">
+		select * from commentArticle where id=#{id}
+	</select>
+	<select id="findAll" parameterType="int" resultType="CommentArticle">
+		select * from commentArticle where commentArticleStatus!=4 and articleId=#{articledId}
+	</select>
+	<select id="getMaxCommentCount" resultType="int">
+		select count(*) from commentArticle where commentArticleStatus!=4
+	</select>
 </mapper>

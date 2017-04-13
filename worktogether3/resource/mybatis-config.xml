@@ -54,9 +54,20 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="ynjh/admin/dao/adminlog/AdminLogMapper.xml"/>
 		<mapper resource="ynjh/admin/dao/companyvisitcount/CompanyVisitCountMapper.xml"/>
 		<mapper resource="ynjh/admin/dao/uservisitcount/UserVisitCountMapper.xml"/> -->
-		<!-- <mapper resource="ynjh/company/dao/companyInformation/ArticleMapper.xml"/>
-		<mapper resource="ynjh/company/dao/companyInformation/CommentArticleMapper.xml"/>
-		<mapper resource="ynjh/company/dao/discuss/Discuss.xml"/> -->
+		
+		
+		<mapper resource="ynjh/company/dao/companyinformation/CompanyArticleMapper.xml" />
+		<mapper resource="ynjh/company/dao/companyinformation/CompanyCommentArticleMapper.xml" />
+		<mapper resource="ynjh/company/dao/discuss/CompanyDiscussMapper.xml" />
+		<mapper resource="ynjh/company/dao/companyrecruit/CompanyRecruitMapper.xml"/>
+		<mapper resource="ynjh/company/dao/company/CompanyMapper.xml"/>
+		<mapper resource="ynjh/company/dao/company/CompanyIntroductionMapper.xml"/>
+		<mapper resource="ynjh/company/dao/company/CompanyChargeMapper.xml"/>
+		
+		
+		
+		
+		
 	</mappers>
 
 </configuration>

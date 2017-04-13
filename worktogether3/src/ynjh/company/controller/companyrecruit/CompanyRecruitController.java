@@ -14,64 +14,67 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
+
 @Controller
-@RequestMapping("/company")
+@RequestMapping("/company/cmprs")
 public class CompanyRecruitController {
 	@Resource
 	private CompanyRecruitService companyRecruitService;
-	@RequestMapping(value="/addCompanyRecruit", method=RequestMethod.GET)
-	public String addCompanyRecuit(){
-		return "addCompanyRecruit";
-	}
-	@RequestMapping(value={"/index","/"},method=RequestMethod.GET)
+	@RequestMapping(value={"/companyRecruit","/"}, method=RequestMethod.GET)
 	public String index(){
-		return "/company/index";
+		return "company/cmprs/companyRecruit_index";
 	}
-	@RequestMapping(value="/addCompanyRecruit", method=RequestMethod.POST)
+	@RequestMapping(value="/companyRecruit/add_companyRecruit", method=RequestMethod.GET)
+	public String addCompanyRecuit(){
+		return "company/cmprs/add_companyRecruit";
+	}
+	@RequestMapping(value="/companyRecruit/add_companyRecruit", method=RequestMethod.POST)
 	public ModelAndView addCompanyRecruit(CompanyRecruit companyRecruit,HttpSession session){
 		Company company=(Company)session.getAttribute("company");
 		companyRecruit.setCompanyId(company.getId());
 		companyRecruit.setCmpRecTime(new Timestamp(System.currentTimeMillis()));
 		int result=companyRecruitService.addCompanyRecruit(companyRecruit);
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView("company/info");
 		if(result>0){
-			mv.addObject("operatorInfo","文章添加成功");
-			mv.addObject("toPage","companyRecruit/findAll");
-			mv.setViewName("/company/info");
+			mv.addObject("operatorInfo","招聘信息添加成功");
+			mv.addObject("toPage","company/cmprs/companyRecruit/findAll");
 		}else{
-			mv.addObject("operatorInfo", "文章添加失败");
-			mv.setViewName("redirect:/company/addCompanyRecruit");
+			mv.addObject("operatorInfo", "招聘信息添加失败");
+			mv.setViewName("company/cmprs/add_companyRecruit");
 		}
 		return mv;
 	}
 	
-	 @RequestMapping(value="/findAll")
-	 public ModelAndView findAll(){
-		 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(null);
-		 ModelAndView mv=new ModelAndView("index");
+	 @RequestMapping(value="/companyRecruit/findAll")
+	 public ModelAndView findAll(Integer page){
+		 int maxPage=companyRecruitService.findMaxPage();
+		 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page);
+		 ModelAndView mv=new ModelAndView("company/cmprs/companyRecruit_index");
 		 mv.addObject("companyRecruits", companyRecruits);
+		 mv.addObject("page", page);
+		 mv.addObject("maxPage", maxPage);
 		 return mv;
 	 }
-	 @RequestMapping(value="findById")
+	 @RequestMapping(value="/companyRecruit/findById")
 	 public ModelAndView findById(Integer id,String topage){
 		 CompanyRecruit companyRecruit=companyRecruitService.findById(id);
 		 ModelAndView mv=new ModelAndView();
-		 mv.addObject("companyRecruit",companyRecruit );
+		 mv.addObject("cmpr",companyRecruit );
 		 mv.setViewName(topage);
 		 return mv;
 	 }
-	 @RequestMapping("/hidden")
+	 @RequestMapping("/companyRecruit/hidden")
 	 public ModelAndView hidden(Integer id){
 			int result=companyRecruitService.hidden(id);
 			ModelAndView mv=new ModelAndView();
 			if(result>0){
 				mv.addObject("operatorInfo","修改成功");
 				mv.addObject("toPage","findAll");
-				mv.setViewName("/company/info");
+				mv.setViewName("/company/cmprs/companyRecruit_info");
 			}else{
 				mv.addObject("operatorInfo","修改失败");
-				mv.addObject("toPage","addCompanyRecruit");
-				mv.setViewName("/company/info");
+				mv.addObject("toPage","company/cmprs/add_companyRecruit");
+				mv.setViewName("/company/cmprs/companyRecruit_info");
 			}
 			return mv;
 }

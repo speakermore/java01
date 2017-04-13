@@ -3,4 +3,23 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.company.dao.discuss.CompanyDiscussMapper">
+	<insert id="addDiscuss" parameterType="Discuss">
+		insert into discuss(discussUsersId,discussContent,discussLevel,discussTime,discusUsersType)
+		value(#{discussUsersId},#{discussContent},#{discussLevel},#{discussTime},#{discusUsersType})
+	</insert>
+	<update id="updateDiscussStatus">
+		update discuss set discussStatus=#{discussStatus} where id=#{id}
+	</update>
+	<select id="findById" parameterType="int" resultType="Discuss">
+		select * from discuss where id=#{id}
+	</select>
+	<select id="findAll" resultType="Discuss">
+		select * from discuss where discussStatus!=4 and discussUsersId=#{discussUsersId}
+		<if test="page!=null">
+			limit #{page},5
+		</if>
+	</select>
+	<select id="getMaxRecordCount" resultType="int">
+		select count(*) from discuss where discussStatus!=4
+	</select>
 </mapper>

@@ -7,11 +7,10 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-
-
 import ynjh.company.dao.companyrecruit.CompanyRecruitMapper;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
+
 @Service
 public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	private Logger logger=Logger.getLogger(this.getClass());
@@ -28,10 +27,24 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		}
 		return result;
 	}
-
+	@Override
+	public int findMaxPage() {
+		
+		return (companyRecruitMapper.getMaxRecordCount()+(5-1))/5;
+	}
 	@Override
 	public List<CompanyRecruit> findAll(Integer page) {
-		return companyRecruitMapper.findAll(page);
+		if (page==null) {
+			page=1;
+		}
+		if (page!=null&&page<1) {
+			page=1;
+		}
+		int maxPage=findMaxPage();
+		if (page!=null&&page>maxPage) {
+			page=maxPage;
+		}
+		return companyRecruitMapper.findAll((page-1)*5);
 	}
 
 	@Override

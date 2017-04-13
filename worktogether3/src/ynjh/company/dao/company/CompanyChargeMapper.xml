@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- namespace指定我们后面需要使用的接口的完全限定名 -->
 <mapper namespace="ynjh.company.dao.company.CompanyChargeMapper">
-	<update id="updateCompanyrMoney">
-		update companyCharge set cmpChargeMoney=#{cmpChargeMoney},
-		cmpChargeTime=#{cmpChargeTime},cmpChargeStatus=1 where id=#{id}
-	</update>
+	<insert id="addMoney" parameterType="CompanyCharge">
+		insert into companycharge (companyId,cmpChargeMoney,cmpChargeMoney,cmpChargeTime,cmpChargeStatus)
+		values (#{companyId},#{cmpChargeMoney},#{cmpChargeMoney},#{cmpChargeTime},#{cmpChargeStatus})
+	</insert>
 </mapper>

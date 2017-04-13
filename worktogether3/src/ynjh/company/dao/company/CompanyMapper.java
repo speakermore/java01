@@ -1,7 +1,6 @@
 package ynjh.company.dao.company;
 
 import org.apache.ibatis.annotations.Param;
-
 import ynjh.company.entity.Company;
 
 public interface CompanyMapper {

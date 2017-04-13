@@ -2,23 +2,22 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ynjh.company.dao.company.CompanyIntroduvtionMapper">
-<insert id="addCompanInt" parameterType="CompanyInt">
-	insert companyintroduction into 
-	(id,cmpIntroduction,cmpIntQuality,cmpPeopleNum,cmpIntComforts,cmpIntRest,
-	cmpIntInsurance,cmpIntWage,cmpIntStatus)
-	value(
-	#{id},#{CompanyIntrodution},#{cmpIntQuality},#{cmpPeopleNum},
-	#{cmpIntComforts},#{cmpIntRest},#{cmpIntInsurance},#{cmpIntWage},
-	#{cmpIntStatus},#{id}
+<mapper namespace="ynjh.company.dao.company.CompanyIntroductionMapper">
+
+<insert id="addCompanInt" parameterType="CompanyIntroduction">
+ 	insert into companyintroduction (companyId,cmpIntroduction,cmpIntQuality,cmpPeopleNum,cmpIntComforts,
+	cmpIntRest,cmpIntInsurance,cmpIntWage,cmpIntStatus)
+	values (#{id},#{cmpIntroduction},#{cmpIntQuality},#{cmpPeopleNum},#{cmpIntComforts},#{cmpIntRest},#{cmpIntInsurance},#{cmpIntWage},#{cmpIntStatus})
 </insert>
 
-<update id="updateCompanyInt" parameterType="CompanyInt">
-	update companyintroduction set cmpIntroduction=#{CompanyIntrodution},cmpIntQuality=#{cmpIntQuality} 
+<update id="updateCompanyInt" parameterType="CompanyIntroduction">
+	update companyintroduction set cmpIntroduction=#{CompanyIntroduction},cmpIntQuality=#{cmpIntQuality} 
 	cmpPeopleNum=#{cmpPeopleNum},cmpIntComforts=#{cmpIntComforts},cmpIntRest=#{cmpIntRest},
 	cmpIntInsurance=#{cmpIntInsurance},cmpIntWage=#{cmpIntWage},cmpIntStatus=#{cmpIntStatus}
 	id=#{id} where id=#{id}
 </update>
 
-<select id="findById" parameterType=""></select>
+<select id="findById" parameterType="Integer" resultType="CompanyIntroduction">
+	select * from companyintroduction where id=#{id}
+</select>
 </mapper>

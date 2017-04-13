@@ -17,11 +17,7 @@ public class Company {
 	private String companyDetailImg;
 	private Integer companyStatus;	
 	private String CompanyJob;
-	private String companyConnection;
 	
-	private Integer CompanyFollow;
-	private Integer followId;
-	private Integer ByFollowId;
 	
 	
 	public Company(){
@@ -50,7 +46,6 @@ public class Company {
 		this.companyDetailImg = companyDetailImg;
 		this.companyStatus = companyStatus;
 		CompanyJob = companyJob;
-		this.companyConnection = companyConnection;
 	}
 
 
@@ -205,16 +200,6 @@ public class Company {
 	}
 
 
-	public String getCompanyConnection() {
-		return companyConnection;
-	}
-
-
-	public void setCompanyConnection(String companyConnection) {
-		this.companyConnection = companyConnection;
-	}
-
-
 
 	@Override
 	public String toString() {
@@ -223,8 +208,7 @@ public class Company {
 				+ companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
 				+ ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel + ", companyEmail="
 				+ companyEmail + ", companyAddress=" + companyAddress + ", companyDetailImg=" + companyDetailImg
-				+ ", companyStatus=" + companyStatus + ", CompanyJob=" + CompanyJob + ", companyConnection="
-				+ companyConnection + "]";
+				+ ", companyStatus=" + companyStatus + ", CompanyJob=" + CompanyJob + ", companyConnection="+"]";
 	}
 	
 }

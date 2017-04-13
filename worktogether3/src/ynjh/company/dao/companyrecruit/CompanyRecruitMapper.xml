@@ -3,37 +3,37 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.company.dao.companyrecruit.CompanyRecruitMapper">
-<!-- <insert id="addCompanyRecruit" parameterType="CompanyRecruit">
+<insert id="addCompanyRecruit" parameterType="CompanyRecruit">
 		insert into companyRecruit (cpmRecTitle,cpmRecWage,cpmRecEducation,cmpRecExperience,cmpRecPeople,cmpRecTime,cmpRecStatus) values(#{cpmRecTitle},#{cpmRecWage},#{cpmRecEducation},#{cmpRecExperience},#{cmpRecPeople},#{cmpRecTime},#{cmpRecStatus})
 </insert>
 <update id="updateCpmRecTitle" parameterType="CompanyRecruit">
-		update companyRecruit set cpmRecTitle=#{cpmRecTitle} where companyId=#{companyId}
+		update companyRecruit set cpmRecTitle=#{cpmRecTitle} where id=#{id}
 </update>
 <update id="updateCpmRecWage" parameterType="CompanyRecruit">
-		update companyRecruit set cpmRecWage=#{cpmRecWage} where companyId=#{companyId}
+		update companyRecruit set cpmRecWage=#{cpmRecWage} where id=#{id}
 </update>
 <update id="updateCpmRecEducation" parameterType="CompanyRecruit">
-		update companyRecruit set cpmRecEducation=#{cpmRecEducation} where companyId=#{companyId}
+		update companyRecruit set cpmRecEducation=#{cpmRecEducation} where id=#{id}
 </update>
 <update id="updateCmpRecExperience" parameterType="CompanyRecruit">
-		update companyRecruit set cmpRecExperience=#{cmpRecExperience} where companyId=#{companyId}
+		update companyRecruit set cmpRecExperience=#{cmpRecExperience} where id=#{id}
 </update>
 <update id="updateCmpRecPeople" parameterType="int">
-		update companyRecruit set cmpRecPeople=#{cmpRecPeople} where companyId=#{companyId}
+		update companyRecruit set cmpRecPeople=#{cmpRecPeople} where id=#{id}
 </update>
 <update id="updateCmpRecStatus" parameterType="int">
-		update companyRecruit set cmpRecStatus=#{cmpRecStatus} where companyId=#{companyId}
+		update companyRecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
 </update>
 <select id="findAll" resultType="CompanyRecruit">
-		select * from article where artStatus != 4
-	语法   limit开始记录号(从0开始),每页记录条数
+		select * from companyRecruit where CmpRecStatus != 3
 	<if test="page!=null">
 		limit #{page},5
 	</if>
-  
 </select>
 <select id="findById" parameterType="int" resultType="CompanyRecruit">
-	select * from article where id=#{id}
-</select> -->
-
+	select * from companyRecruit where id=#{id}
+</select>
+<select id="getMaxRecordCount" resultType="int">
+	select count(*) from companyRecruit where CmpRecStatus != 3
+</select>
 </mapper>
