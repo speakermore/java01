@@ -9,11 +9,19 @@ public interface ArticleService {
 	public Integer deleteUserArticle(Integer id);//删除文章
 	public List<Article> findUserArticle(Integer id);//查看文章
 	public Article findArticleById(Integer id);//查看文章
-	public Integer updateArticleContent(String  articleContent,Integer id);//修改文章内容
+	public Integer updateArticleContent(Article article);//修改文章内容
 	public Integer updateReadNum(Integer id);//文章阅读数
 	public Integer updateLikeNum(Integer id);//文章点赞数
 	public Integer getMaxRecord();
 	public int getMaxRecordCount();
+	/**
+	 * 查看文章(删除)
+	 */
+	public List<Article> selectArticleByDelete(Integer usersId);
+	/**
+	 * 恢复文章
+	 */
+	public Integer renewArticle(Integer id);
 	
 	
 }

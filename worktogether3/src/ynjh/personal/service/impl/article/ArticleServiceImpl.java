@@ -35,8 +35,8 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.selectUserArticle(id);
 	}
 	@Override
-	public Integer updateArticleContent(String articleContent, Integer id) {
-		return articleMapper.updateArticleContent(articleContent, id);
+	public Integer updateArticleContent(Article article) {
+		return articleMapper.updateArticleContent(article);
 	}
 	@Override
 	public Integer updateReadNum(Integer id) {
@@ -57,6 +57,14 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article findArticleById(Integer id) {
 		return articleMapper.selectArticleById(id);
+	}
+	@Override
+	public List<Article> selectArticleByDelete(Integer usersId) {
+		return articleMapper.selectArticleByDelete(usersId);
+	}
+	@Override
+	public Integer renewArticle(Integer id) {
+		return articleMapper.renewArticle(id);
 	}
 	
 }

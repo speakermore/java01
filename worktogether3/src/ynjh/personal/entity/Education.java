@@ -9,19 +9,25 @@ public class Education implements Serializable{
 	private Timestamp educationBegIntegerime;//培训开始时间
 	private Timestamp educationEndTime;//培训结束时间
 	private String educationSchool;//培训地点
+	private Integer resumeId;
+	private Integer resumeType;
+
 	
-	public Education(){
-		
+
+	public Integer getResumeType() {
+		return resumeType;
 	}
 
-	public Education(Integer id, Integer userId, Timestamp educationBegIntegerime, Timestamp educationEndTime,
-			String educationSchool) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.educationBegIntegerime = educationBegIntegerime;
-		this.educationEndTime = educationEndTime;
-		this.educationSchool = educationSchool;
+	public void setResumeType(Integer resumeType) {
+		this.resumeType = resumeType;
+	}
+
+	public Integer getResumeId() {
+		return resumeId;
+	}
+
+	public void setResumeId(Integer resumeId) {
+		this.resumeId = resumeId;
 	}
 
 	public Integer getId() {

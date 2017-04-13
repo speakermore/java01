@@ -24,8 +24,9 @@ public class CommentArticleServiceImpl implements CommentArticleService {
 	}
 
 	@Override
-	public List<CommentArticle> findUserCommentArticle(Integer id) {
-		return commentArticleMapper.selectUserCommentArticle(id);
+	public List<CommentArticle> findUserCommentArticle(Integer articleId) {
+		return commentArticleMapper.selectUserCommentArticle(articleId);
 	}
+
 
 }

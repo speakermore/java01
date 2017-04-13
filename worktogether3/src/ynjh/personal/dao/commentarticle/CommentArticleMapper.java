@@ -2,6 +2,8 @@ package ynjh.personal.dao.commentarticle;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.personal.entity.CommentArticle;
 
 
@@ -17,6 +19,6 @@ public interface CommentArticleMapper {
 	/**
 	 * 查看评价
 	 */
-	public List<CommentArticle> selectUserCommentArticle(Integer id);
+	public List<CommentArticle> selectUserCommentArticle(Integer articleId);
 	
 }

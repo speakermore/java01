@@ -92,12 +92,41 @@ public class ResumeController {
 	//删除
 	@RequestMapping(value="/deleteResume",method=RequestMethod.GET)
 	public ModelAndView deleteResume(Integer id){
-		ModelAndView mv=new ModelAndView("personal/user/personal_index");
+		ModelAndView mv=new ModelAndView();
 		int result=rService.deleteResumeById(id);
 		if (result>0) {
 			mv.addObject("operatorInfo","删除简历成功！");
+			//mv.addObject("toPage","personal/user/personal_index");
+			mv.setViewName("personal/user/personal_index");
 		}else {
 			mv.addObject("operatorInfo","删除简历失败！");
+			mv.setViewName("personal/user/personal_index");
+			//mv.addObject("toPage","personal/user/personal_index");
+		}
+		return mv;
+	}
+	
+	//查询被删除的简历
+	@RequestMapping("/findResumeByDelete")
+	public ModelAndView findResumeByDelete(Integer userId){
+		ModelAndView mv=new ModelAndView("personal/user/personal_index");
+		List<Resume> resumes = rService.selectResumeByDelete(userId);
+		mv.addObject("resumeBD", resumes);
+		return mv;
+	}
+	//恢复被删除的简历
+	@RequestMapping(value="/renewResume",method=RequestMethod.GET)
+	public ModelAndView renewResume(Integer id){
+		ModelAndView mv=new ModelAndView();
+		int result=rService.renewResumeById(id);
+		if (result>0) {
+			mv.addObject("operatorInfo","恢复简历成功！");
+			//mv.addObject("toPage","personal/user/personal_index");
+			mv.setViewName("personal/user/personal_index");
+		}else {
+			mv.addObject("operatorInfo","恢复简历失败，请联系管理员！");
+			mv.setViewName("personal/user/personal_index");
+			//mv.addObject("toPage","personal/user/personal_index");
 		}
 		return mv;
 	}

@@ -16,6 +16,6 @@ public interface CommentArticleService {
 		/**
 		 * 查看评价
 		 */
-		public List<CommentArticle> findUserCommentArticle(Integer id);
+		public List<CommentArticle> findUserCommentArticle(Integer articleId);
 
 }

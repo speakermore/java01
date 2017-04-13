@@ -28,7 +28,7 @@ public interface ArticleMapper {
 	/**
 	 * 修改文章内容
 	 */
-	public Integer updateArticleContent(String articleContent,Integer id);
+	public Integer updateArticleContent(Article article);
 	/**
 	 * 文章阅读数
 	 */
@@ -40,6 +40,17 @@ public interface ArticleMapper {
 	/**
 	 * 文章分页
 	 */
+	
+	/**
+	 * 查看文章(删除)
+	 */
+	public List<Article> selectArticleByDelete(Integer usersId);
+	/**
+	 * 恢复文章
+	 */
+	public Integer renewArticle(Integer id);
+
+	
 	public Integer getMaxRecord();
 	public int getMaxRecordCount();
 }

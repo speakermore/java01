@@ -11,6 +11,26 @@ public class Work implements Serializable{
 	private String workFirmName;// 企业名字
 	private String workUnit;// 工作岗位
 	private String workDescription;// 工作描述
+	private Integer resumeId;
+	private Integer resumeType;
+	
+	
+	
+	public Integer getResumeType() {
+		return resumeType;
+	}
+
+	public void setResumeType(Integer resumeType) {
+		this.resumeType = resumeType;
+	}
+
+	public Integer getResumeId() {
+		return resumeId;
+	}
+
+	public void setResumeId(Integer resumeId) {
+		this.resumeId = resumeId;
+	}
 
 	public Integer getId() {
 		return id;
