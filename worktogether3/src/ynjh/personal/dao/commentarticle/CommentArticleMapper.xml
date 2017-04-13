@@ -5,15 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.personal.dao.commentarticle.CommentArticleMapper">
 	<!-- 写评论 -->
 	<insert id="addUserCommentArticle" parameterType="CommentArticle">
-		insert into commentarticle(articleId,usersId,commentArticleTime,commentArticleContent)
-			value(#{articleId},#{usersId},#{commentArticleTime},#{commentArticleContent})
+		insert into commentarticle(articleId,usersId,commentArticleTime,commentArticleContent,commentArticleUsersType)
+			value(#{articleId},#{usersId},#{commentArticleTime},#{commentArticleContent},#{commentArticleUsersType})
 	</insert>
 	<!-- 删评论 -->
-	 <delete id="deleteUserCommentArticle" parameterType="int">
+	 <delete id="deleteUserCommentArticle" parameterType="Integer">
 	delete from commentarticle where id=#{id}
 	</delete>
-	<!-- 查看评论 -->
-	<select id="selectUserCommentArticle" parameterType="int">
-	select * from commentarticle where id=#{id},articleId=#{articleId},userId=#{userId}
+	<!-- 查看评论(文章) -->
+	<select id="selectUserCommentArticle" resultType="CommentArticle" parameterType="Integer">
+	select * from commentarticle where articleId=#{articleId} 
 	</select>
 </mapper>

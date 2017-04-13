@@ -56,7 +56,11 @@ public class Admin implements Serializable{
 	public Integer getId() {
 		return id;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getId().toString()+"--"+this.getAdminLoginId().toString()+"--"+this.getAdminName().toString()+"--"+this.getAdminEmail()+"--"+this.getAdminPassword();
+	}
 	
 	
 	

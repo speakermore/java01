@@ -11,7 +11,7 @@ public class CommentArticle implements Serializable{
 	private String commentArticleContent;//评论内容
 	private Integer commentArticleLikeNum;//点赞数
 	private Integer commentArticleStatus;//评论文章状态1：等待审核  2：审核通过3：审核不通过 4：删除
-	
+	private Integer commentArticleUsersType;
 	public CommentArticle(){
 		
 	}
@@ -26,6 +26,16 @@ public class CommentArticle implements Serializable{
 		this.commentArticleContent = commentArticleContent;
 		this.commentArticleLikeNum = commentArticleLikeNum;
 		this.commentArticleStatus = commentArticleStatus;
+	}
+
+	
+	
+	public Integer getCommentArticleUsersType() {
+		return commentArticleUsersType;
+	}
+
+	public void setCommentArticleUsersType(Integer commentArticleUsersType) {
+		this.commentArticleUsersType = commentArticleUsersType;
 	}
 
 	public Integer getId() {

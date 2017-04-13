@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!-- 删评论 -->
 	 <delete id="deleteUserCommentFirm" >
-	delete from discuss where id=#{id} and discussUsersId=#{discussUsersId}
+	delete from discuss where id=#{id}
 	</delete>
 	<!-- 查看评论 -->
 	<select id="selectUserCommentFirm" resultType="Discuss">

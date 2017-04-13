@@ -8,12 +8,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into article(usersId,articleTitle,articleTime,articleKey,articleContent,articleUsersType)
 			value(#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent},#{articleUsersType})
 	</insert>
+	
+	<!-- 查看文章(详细) -->
+	<select id="selectArticleById" parameterType="int" resultType="Article">
+	select * from article where id=#{id}
+	</select>
+	<!-- 修改文章内容 -->
+	<update id="updateArticleContent" parameterType="Article">
+	update article set articleContent=#{articleContent},articleTitle=#{articleTitle},articleKey=#{articleKey} where id=#{id}
+	</update>
+	<!--阅读数  -->
+	<update id="updateReadNum" >
+	update article set articleReadNum=articleReadNum+1 where id=#{id}
+	</update>
+	<!-- 点赞数 -->
+	<update id="updateLikeNum" >
+	update article set articleLikeNum=articleLikeNum+1 where id=#{id}
+	</update>
+	<!-- 分页 -->
+	<select id="getMaxRecord" resultType="Integer">
+	select count(*) from article
+	</select>
+	<select id="getMaxRecordCount" resultType="Integer">
+	select count(*) from article where articleStatus !=4
+	</select>
+	
 	<!-- 删文章 -->
-	 <delete id="deleteUserArticle" parameterType="int">
-	delete from article where id=#{id}
-	</delete>
-	<!-- 查看文章 -->
-	<select id="selectUserArticle" parameterType="int">
-	select * from article where id=#{id} and userId=#{userId}
+	<update id="deleteUserArticle" parameterType="Integer">
+	update article set articleStatus=4 where id=#{id} 
+	</update>
+	<!-- 查看文章(所有) -->
+	<select id="selectUserArticle" parameterType="Integer" resultType="Article">
+	select * from article where usersId=#{usersId} and not articleStatus=4
+	</select>
+	<!-- 恢复被删除文章 -->
+	<update id="renewArticle" parameterType="Integer">
+	update article set articleStatus=2 where id=#{id} 
+	</update>
+	<!-- 查看被删除的文章 -->
+	<select id="selectArticleByDelete" parameterType="Integer" resultType="Article">
+	select * from article where usersId=#{usersId} and articleStatus=4
 	</select>
 </mapper>

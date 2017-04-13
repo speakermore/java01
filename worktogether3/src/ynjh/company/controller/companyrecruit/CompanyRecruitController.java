@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
+import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
-
+import ynjh.company.service.CompanyRecruitService;
+import ynjh.company.entity.CompanyRecruit;
+import ynjh.company.service.CompanyRecruitService;
 
 @Controller
 @RequestMapping("/companyRecruit")

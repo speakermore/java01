@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ynjh.admin.dao.userVisitCount.UserVistiCountMapper">
+<mapper namespace="ynjh.admin.dao.uservisitcount.UserVisitCountMapper">
 	<insert id="addUserVisitCount" parameterType="UserVisitCount">
 		insert into uservisitcount(userYear,userMonth,userDay,userCommentCount,userArticleCount,userId) values(#{userYear},#{userMonth},#{userDay},#{userCommentCount},#{userArticleCount},#{userId})
 	</insert>
@@ -13,6 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select userYear,userMonth,userDay,userCommentCount,userArticleCount,userId from userVisitCount
 	</select>
 	<select id="findCount" resultType="UserVisitCount">
-		select userYear,userMonth,userDay,userCommentCount,userArticleCount,userId from userVistCount where userYear=#{userYear}<if test="userMonth!=null and userMonth!=''"> and userMonth=#{userMonth}</if><if test="userDay!=null and userDay!=''">and userDay=#{userDay}</if>
+		select userYear,userMonth,userDay,userCommentCount,userArticleCount,userId 
+		from userVisitCount 
+		where userYear=#{userYear}
+		<if test="userMonth!=null"> and userMonth=#{userMonth}</if>
+		<if test="userDay!=null"> and userDay=#{userDay}</if>
+		limit #{page},10
+	</select>
+	<select id="findMaxPage" resultType="int">
+		select count(*) from uservisitcount
 	</select>
 </mapper>

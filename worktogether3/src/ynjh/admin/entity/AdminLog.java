@@ -44,6 +44,11 @@ public class AdminLog implements Serializable{
 	public int getId() {
 		return id;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getAdminLoginId()+"--"+this.getAdminDo();
+	}
 	
 	
 	

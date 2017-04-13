@@ -7,7 +7,7 @@ public class UserVisitCount implements Serializable {
 	private Integer userYear;
 	private Integer userMonth;
 	private Integer userDay;
-	private Integer userConmmentCount;//发表评论数
+	private Integer userCommentCount;//发表评论数
 	private Integer userArticleCount;//发表文章数
 	private Integer userId;
 	public Integer getUserYear() {
@@ -28,11 +28,11 @@ public class UserVisitCount implements Serializable {
 	public void setUserDay(Integer userDay) {
 		this.userDay = userDay;
 	}
-	public Integer getUserConmmentCount() {
-		return userConmmentCount;
+	public Integer getUserCommentCount() {
+		return userCommentCount;
 	}
-	public void setUserConmmentCount(Integer userConmmentCount) {
-		this.userConmmentCount = userConmmentCount;
+	public void setUserCommentCount(Integer userConmmentCount) {
+		this.userCommentCount = userConmmentCount;
 	}
 	public Integer getUserArticleCount() {
 		return userArticleCount;

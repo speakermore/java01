@@ -10,7 +10,7 @@ public interface DiscussMapper {
 	//写评论 
 	public Integer addUserCommentFirm(Discuss discuss);
 	//删评论
-	public Integer deleteUserCommentFirm(@Param("id")Integer id,@Param("discussUsersId")Integer discussUsersId);
+	public Integer deleteUserCommentFirm(Integer id);
 	//查看评论
 	public List<Discuss> selectUserCommentFirm(@Param("id")Integer id,@Param("discussUsersId")Integer discussUsersId );
 }

@@ -49,6 +49,12 @@ public class CompanyVisitCount implements Serializable{
 	public Integer getId() {
 		return id;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getId()+"--"+this.getCompanyId().toString()+"--"+this.getCompanyYear()+"--"+this.getCompanyMonth()+"--"+this.getCompanyDay();
+	}
+	
 	
 	
 }

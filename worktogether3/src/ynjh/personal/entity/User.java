@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class User implements Serializable{
-	private Integer userId;// 用户名
+	private Integer id;
+	private String userLoginId;// 用户名
 	private String userPassword;// 密码
 	private String userName;// 昵称
 	private Integer userGender;// 性别
 	private String userEmail;// 邮箱
-	private Integer userStatus;// 状态
+	private Integer userStatus;// 状态 1.未认证 2.已认证 3.禁用
 	private String userRealName;// 真实姓名
 	private String userIDCard;// 身份证号码
 	private String userIDImgFace;// 身份证正面图片
@@ -19,18 +20,19 @@ public class User implements Serializable{
 	private Double userMoney;// 余额
 	private Timestamp userBirthday;// 用户生日
 	private Integer userLevel;// 用户等级
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer userId, String userPassword, String userName,
+	public User(String userLoginId, String userPassword, String userName,
 			Integer userGender, String userEmail, Integer userStatus,
 			String userRealName, String userIDCard, String userIDImgFace,
 			String userIDImgCon, Timestamp userCreateDate,
 			String userHeadImgPath, Double userMoney, Timestamp userBirthday,
 			Integer userLevel) {
 		super();
-		this.userId = userId;
+		this.userLoginId = userLoginId;
 		this.userPassword = userPassword;
 		this.userName = userName;
 		this.userGender = userGender;
@@ -47,28 +49,20 @@ public class User implements Serializable{
 		this.userLevel = userLevel;
 	}
 
-	public String getUserIDImgFace() {
-		return userIDImgFace;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserIDImgFace(String userIDImgFace) {
-		this.userIDImgFace = userIDImgFace;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getUserIDImgCon() {
-		return userIDImgCon;
+	public String getUserLoginId() {
+		return userLoginId;
 	}
 
-	public void setUserIDImgCon(String userIDImgCon) {
-		this.userIDImgCon = userIDImgCon;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
 	}
 
 	public String getUserPassword() {
@@ -127,7 +121,23 @@ public class User implements Serializable{
 		this.userIDCard = userIDCard;
 	}
 
-	public Timestamp getuserCreateDate() {
+	public String getUserIDImgFace() {
+		return userIDImgFace;
+	}
+
+	public void setUserIDImgFace(String userIDImgFace) {
+		this.userIDImgFace = userIDImgFace;
+	}
+
+	public String getUserIDImgCon() {
+		return userIDImgCon;
+	}
+
+	public void setUserIDImgCon(String userIDImgCon) {
+		this.userIDImgCon = userIDImgCon;
+	}
+
+	public Timestamp getUserCreateDate() {
 		return userCreateDate;
 	}
 
@@ -166,5 +176,4 @@ public class User implements Serializable{
 	public void setUserLevel(Integer userLevel) {
 		this.userLevel = userLevel;
 	}
-
 }

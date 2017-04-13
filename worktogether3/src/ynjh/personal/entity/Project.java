@@ -21,25 +21,24 @@ public class Project implements Serializable{
 	//责任描述与感受
 	private String projectMakeDescription;
 	
-	public Project() {
-	}
+	private Integer resumeId;
+	
+	private Integer resumeType;
 	
 	
-	public Project(Integer id, Integer userId, Timestamp projectBeginTime,
-			Timestamp projectEndTime, String projectName, String projectJob,
-			String projectDescription, String projectMakeDescription) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.projectBeginTime = projectBeginTime;
-		this.projectEndTime = projectEndTime;
-		this.projectName = projectName;
-		this.projectJob = projectJob;
-		this.projectDescription = projectDescription;
-		this.projectMakeDescription = projectMakeDescription;
+
+	public Integer getResumeType() {
+		return resumeType;
 	}
-
-
+	public void setResumeType(Integer resumeType) {
+		this.resumeType = resumeType;
+	}
+	public Integer getResumeId() {
+		return resumeId;
+	}
+	public void setResumeId(Integer resumeId) {
+		this.resumeId = resumeId;
+	}
 	public Integer getId() {
 		return id;
 	}
