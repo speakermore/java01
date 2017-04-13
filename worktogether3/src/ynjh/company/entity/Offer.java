@@ -12,7 +12,7 @@ public class Offer implements Serializable{
 	private String offerContent;	
 	private Timestamp offerInvitationTime;
 	private Timestamp offerSendTime;
-	private Integer offerStatus;
+	private Integer offerStatus=1;
 	
 	public Offer() {
 		
@@ -91,7 +91,6 @@ public class Offer implements Serializable{
 				", offerInvitationTime=" + offerInvitationTime +
 				", offerSendTime=" + offerSendTime + 
 				", offerStatus=" + offerStatus +
-				"]";
-				
+				"]";				
 	}
 }
