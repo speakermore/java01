@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import ynjh.company.entity.CompanyRecruit;
-import ynjh.company.service.CompanyRecruitService;
 
 
 @Controller

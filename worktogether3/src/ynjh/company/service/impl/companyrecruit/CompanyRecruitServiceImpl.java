@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 
 
 
-import ynjh.company.dao.companyrecruit.CompanyRecruitMapper;
+
 import ynjh.company.entity.CompanyRecruit;
-import ynjh.company.service.CompanyRecruitService;
 @Service
 public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	private Logger logger=Logger.getLogger(this.getClass());

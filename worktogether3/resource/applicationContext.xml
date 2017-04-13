@@ -72,4 +72,5 @@
     		<aop:advisor pointcut="execution(* ynjh.personal.service.impl.*.*(..))" advice-ref="txAdvice" />
     		<aop:advisor pointcut="execution(* ynjh.admin.service.impl.*.*(..))" advice-ref="txAdvice" />
     		<aop:advisor pointcut="execution(* ynjh.company.service.impl.*.*(..))" advice-ref="txAdvice" />
-    </aop:config></beans>
+    </aop:config>
+</beans>
