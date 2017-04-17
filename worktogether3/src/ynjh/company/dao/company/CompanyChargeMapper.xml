@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace指定我们后面需要使用的接口的完全限定名 -->
+<mapper namespace="ynjh.company.dao.company.CompanyChargeMapper">
+	<insert id="addMoney" parameterType="CompanyCharge">
+		insert into companycharge (companyId,cmpChargeMoney,cmpChargeConsume,cmpChargeBalance,cmpChargeTime,cmpChargeStatus)
+		values(#{companyId},#{cmpChargeMoney},#{cmpChargeConsume},#{cmpChargeBalance},#{cmpChargeTime},1)
+	</insert>
+	<insert id="consumeMoney" parameterType="CompanyCharge">
+		insert into companycharge (companyId,cmpChargeMoney,cmpChargeConsume,cmpChargeBalance,cmpChargeTime,cmpChargeStatus)
+		values(#{companyId},#{cmpChargeMoney},#{cmpChargeConsume},#{cmpChargeBalance},#{cmpChargeTime},2)
+	
+	</insert>
+	
+	<select id="findById" parameterType="Integer" resultType="CompanyCharge">
+		select * from companycharge where companyId=#{companyId} order by cmpChargeTime desc limit 1
+	</select>
+	<select id="findAllById" resultType="CompanyCharge">
+	select * from companycharge where companyId=#{companyId}
+		<if test="page!=null">
+			limit #{page},5
+		</if>
+	
+	</select>
+	<select id="getMaxRecordCount" parameterType="Integer" resultType="Integer">
+		select count(*) from comapnycharge where companyId=#{companyId}
+	</select>
+	
+	
+</mapper>

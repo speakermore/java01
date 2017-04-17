@@ -7,7 +7,7 @@ public class CompanyRecruit {
 	private Integer companyId;//公司编号
 	private String cmpRecTitle;//公司标题
 	private String cmpRecWage;//公司薪资
-	private String cpmRecEducation;//公司学历需求
+	private String cmpRecEducation;//公司学历需求
 	private String cmpRecExperience;//工作所需技能及水平描述
 	private Integer cmpRecPeople;//需求人数
 	private Timestamp cmpRecTime;//发布时间
@@ -17,14 +17,14 @@ public class CompanyRecruit {
 	}
 	
 	public CompanyRecruit(Integer id, Integer companyId, String cmpRecTitle,
-			String cmpRecWage, String cpmRecEducation, String cmpRecExperience,
+			String cmpRecWage, String cmpRecEducation, String cmpRecExperience,
 			Integer cmpRecPeople, Timestamp cmpRecTime, Integer cmpRecStatus) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
 		this.cmpRecTitle = cmpRecTitle;
 		this.cmpRecWage = cmpRecWage;
-		this.cpmRecEducation = cpmRecEducation;
+		this.cmpRecEducation=cmpRecEducation;
 		this.cmpRecExperience = cmpRecExperience;
 		this.cmpRecPeople = cmpRecPeople;
 		this.cmpRecTime = cmpRecTime;
@@ -55,11 +55,11 @@ public class CompanyRecruit {
 	public void setCmpRecWage(String cmpRecWage) {
 		this.cmpRecWage = cmpRecWage;
 	}
-	public String getCpmRecEducation() {
-		return cpmRecEducation;
+	public String getCmpRecEducation() {
+		return cmpRecEducation;
 	}
-	public void setCpmRecEducation(String cpmRecEducation) {
-		this.cpmRecEducation = cpmRecEducation;
+	public void setCmpRecEducation(String cmpRecEducation) {
+		this.cmpRecEducation = cmpRecEducation;
 	}
 	public String getCmpRecExperience() {
 		return cmpRecExperience;
@@ -89,7 +89,7 @@ public class CompanyRecruit {
 	public String toString() {
 		return "Company [id=" + id + ", companyId=" + companyId
 				+ ", cmpRecTitle=" + cmpRecTitle + ", cmpRecWage=" + cmpRecWage
-				+ ", cpmRecEducation=" + cpmRecEducation
+				+ ", cmpRecEducation=" + cmpRecEducation
 				+ ", cmpRecExperience=" + cmpRecExperience + ", cmpRecPeople="
 				+ cmpRecPeople + ", cmpRecTime=" + cmpRecTime
 				+ ", cmpRecStatus=" + cmpRecStatus + "]";
