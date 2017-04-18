@@ -38,4 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<select id="Search" resultType="String">	    
 	</select>
+	<!-- 充值记录 -->
+	<insert id="addUserCharge" parameterType="UserCharge">
+		insert into usercharge(userId,userChargeTime,userChargeMoney,userChargeType,userChargeContent) value(#{userId},#{userChargeTime},#{userChargeMoney},#{userChargeType},#{userChargeContent})
+	</insert>
 </mapper>

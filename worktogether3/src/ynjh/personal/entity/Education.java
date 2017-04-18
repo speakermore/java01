@@ -6,13 +6,22 @@ import java.sql.Timestamp;
 public class Education implements Serializable{
 	private Integer id;//ID
 	private Integer userId;//用户ID
-	private Timestamp educationBegIntegerime;//培训开始时间
+	private Timestamp educationBeginTime;//培训开始时间
 	private Timestamp educationEndTime;//培训结束时间
 	private String educationSchool;//培训地点
 	private Integer resumeId;
 	private Integer resumeType;
-
+	private String educationContent;
 	
+
+
+	public String getEducationContent() {
+		return educationContent;
+	}
+
+	public void setEducationContent(String educationContent) {
+		this.educationContent = educationContent;
+	}
 
 	public Integer getResumeType() {
 		return resumeType;
@@ -46,13 +55,6 @@ public class Education implements Serializable{
 		this.userId = userId;
 	}
 
-	public Timestamp getEducationBegIntegerime() {
-		return educationBegIntegerime;
-	}
-
-	public void setEducationBegIntegerime(Timestamp educationBegIntegerime) {
-		this.educationBegIntegerime = educationBegIntegerime;
-	}
 
 	public Timestamp getEducationEndTime() {
 		return educationEndTime;
@@ -70,10 +72,13 @@ public class Education implements Serializable{
 		this.educationSchool = educationSchool;
 	}
 
-	@Override
-	public String toString() {
-		return "Education [id=" + id + ", userId=" + userId + ", educationBegIntegerime=" + educationBegIntegerime
-				+ ", educationEndTime=" + educationEndTime + ", educationSchool=" + educationSchool + "]";
+	public Timestamp getEducationBeginTime() {
+		return educationBeginTime;
 	}
+
+	public void setEducationBeginTime(Timestamp educationBeginTime) {
+		this.educationBeginTime = educationBeginTime;
+	}
+
 	
 }

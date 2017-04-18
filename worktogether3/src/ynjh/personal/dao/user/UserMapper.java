@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserCharge;
 
 
 
@@ -42,6 +43,11 @@ public interface UserMapper {
 	 * 充值
 	 */
 	public Integer updateMoney(@Param("userMoney")Double money,@Param("id")Integer id); 
+	/**
+	 * 充值记录
+	 */
+	public Integer addUserCharge(UserCharge userCharge);
+	
 	/**
 	 * 搜索
 	 */

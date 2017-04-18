@@ -55,7 +55,7 @@ public class Work implements Serializable{
 	public void setWorkBeginTime(Timestamp workBeginTime) {
 		this.workBeginTime = workBeginTime;
 	}
-
+	
 	public Timestamp getWorkEndTime() {
 		return workEndTime;
 	}

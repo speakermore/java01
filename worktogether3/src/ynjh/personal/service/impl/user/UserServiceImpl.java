@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ynjh.personal.dao.user.UserMapper;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserCharge;
 import ynjh.personal.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
@@ -56,6 +57,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<String> Search(String str) {
 		return userMapper.Search(str);
+	}
+
+	@Override
+	public Integer addUserCharge(UserCharge userCharge) {
+		return userMapper.addUserCharge(userCharge);
 	}
 
 }

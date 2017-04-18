@@ -2,6 +2,7 @@ package ynjh.personal.service;
 
 import java.util.List;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserCharge;
 
 public interface UserService {
 	/**
@@ -35,7 +36,11 @@ public interface UserService {
 	/**
 	 * 充值
 	 */
-	public Integer chargeMoney(Double money,Integer id); 
+	public Integer chargeMoney(Double money,Integer id);
+	/**
+	 * 充值记录
+	 */
+	public Integer addUserCharge(UserCharge userCharge);
 	/**
 	 * 搜索
 	 */
