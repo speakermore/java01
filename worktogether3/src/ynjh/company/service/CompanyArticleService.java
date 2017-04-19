@@ -7,9 +7,10 @@ import ynjh.personal.entity.Article;
 public interface CompanyArticleService {
 	public int addArticle(Article article);
 	public List<Article> findAll(Integer page);
-	public Article findById(Integer articleId);
-	public int updateStatus(Integer articleId);
-	public int updateArtContent(Integer articleId,String articleContent);
-	public int updateLike(Integer articleId);
-	public int updateRead(Integer articleId);
+	public Article findById(Integer id);
+	public int updateStatus(Integer id,Integer articleContent);
+	public int updateArtContent(Integer id,String articleContent);
+	public int updateLike(Integer id);
+	public int updateRead(Integer id);
+	public int findMaxPage();
 }

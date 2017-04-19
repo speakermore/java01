@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class Discuss implements Serializable {
 	// id
 	private Integer id;
-	// 1：企业id 2：个人用户id
+	//发送者 1：企业id 2：个人用户id
 	private Integer discussUsersId;
 	// 评论内容
 	private String discussContent;
@@ -18,7 +18,9 @@ public class Discuss implements Serializable {
 	private Integer discussStatus;
 	// 1：企业id 2：个人用户id
 	private Integer discusUsersType;
-
+	//被发送者id
+	private Integer discussBySendId;
+	
 	public Discuss() {
 	}
 

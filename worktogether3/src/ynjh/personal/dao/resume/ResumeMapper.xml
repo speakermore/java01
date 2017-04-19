@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resume(userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
 		resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
 		resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
-		resumeSelfEvaluation,resumeHeight,resumeWeight)
+		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor)
 		values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
 		#{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
 		#{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
-		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight})
+		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor})
 	</insert>
 	<!-- 修改简历 -->
 	<update id="updateResume" parameterType="Integer">
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		value(#{userId},#{resumeId},#{educationBeginTime},#{educationEndTime},#{educationSchool},#{educationContent})
 	</insert>
 	<!-- 工作记录 -->
-	<insert id="addWord" parameterType="Work">
+	<insert id="addWork" parameterType="Work" >
 		insert into
 		work(userId,resumeId,workBeginTime,workEndTime,workFirmName,workUnit,workDescription)
 		value(#{userId},#{resumeId},#{workBeginTime},#{workEndTime},#{workFirmName},#{workUnit},#{workDescription})
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addProject" parameterType="Project">
 		insert into
 		project(userId,resumeId,projectBeginTime,projectEndTime,projectName,projectJob,projectDescription,projectMakeDescription)
-		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription},#{projectMakeDescription)
+		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription},#{projectMakeDescription})
 	</insert>
 
 	<update id="updateEducation" parameterType="Education">
@@ -85,23 +85,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="findEducation" parameterType="Integer" resultType="Education">
-		select * from education where resumeId=#{resumeId}
+		select * from education where resumeId=#{resumeId} and not resumeType=4
 	</select>
 	<select id="findWork" parameterType="Integer" resultType="Work">
-		select * from work where resumeId=#{resumeId}
+		select * from work where resumeId=#{resumeId} and not resumeType=4
 	</select>
 	<select id="findProject" parameterType="Integer" resultType="Project">
-		select * from project where resumeId=#{resumeId}
+		select * from project where resumeId=#{resumeId} and not resumeType=4
 	</select>
 
 	<!-- 删除 -->
-	<update id="DeleteEducation" parameterType="Integer">
+	<update id="deleteEducation" parameterType="Integer">
 		update education set resumeType=4 where id=#{id}
 	</update>
-	<update id="DeleteWork" parameterType="Integer">
+	<update id="deleteWork" parameterType="Integer">
 		update work set resumeType=4 where id=#{id}
 	</update>
-	<update id="DeleteProject" parameterType="Integer">
+	<update id="deleteProject" parameterType="Integer">
 		update project set resumeType=4 where id=#{id}
 	</update>
 

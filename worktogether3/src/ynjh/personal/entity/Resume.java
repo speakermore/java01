@@ -31,49 +31,17 @@ public class Resume implements Serializable{
 	private Integer resumeHeight;// 身高
 	private Integer resumeWeight;// 体重
 	private Integer resumeStatusThree;//状态（管理员）1.待审核 2.正常	 3. 审核不通过
+	private String resumeJor;//岗位意向
 	
-	public Resume() {
+	
+	
+	
+	public String getResumeJor() {
+		return resumeJor;
 	}
-	
-	
-	/*userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
-    resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
-    resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
-    resumeSelfEvaluation,resumeHeight,resumeWeight*/
-	public Resume(Integer userId, String resumeTitle,
-			Timestamp resumeCreateDate, String resumeName,
-			Integer resumeGender, String resumeNation, String resumePlace,
-			Timestamp resumeBirthday, Integer resumeMarriage,
-			String resumeGraduationSchool, Timestamp resumeGraduationTime,
-			String resumeEducation, String resumeMajor, Integer resumeWages,
-			Integer resumePhone, Integer resumeQQ, String resumePersonality,
-			String resumeSelfEvaluation,
-			Integer resumeHeight, Integer resumeWeight) {
-		super();
-
-		this.userId = userId;
-		this.resumeTitle = resumeTitle;
-		this.resumeCreateDate = resumeCreateDate;
-		this.resumeName = resumeName;
-		this.resumeGender = resumeGender;
-		this.resumeNation = resumeNation;
-		this.resumePlace = resumePlace;
-		this.resumeBirthday = resumeBirthday;
-		this.resumeMarriage = resumeMarriage;
-		this.resumeGraduationSchool = resumeGraduationSchool;
-		this.resumeGraduationTime = resumeGraduationTime;
-		this.resumeEducation = resumeEducation;
-		this.resumeMajor = resumeMajor;
-		this.resumeWages = resumeWages;
-		this.resumePhone = resumePhone;
-		this.resumeQQ = resumeQQ;
-		this.resumePersonality = resumePersonality;
-		this.resumeSelfEvaluation = resumeSelfEvaluation;
-		this.resumeHeight = resumeHeight;
-		this.resumeWeight = resumeWeight;
-
+	public void setResumeJor(String resumeJor) {
+		this.resumeJor = resumeJor;
 	}
-
 	public Integer getResumeStatusThree() {
 		return resumeStatusThree;
 	}

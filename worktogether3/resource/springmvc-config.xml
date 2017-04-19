@@ -12,11 +12,19 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-        
+        <bean id="stringToDateConverter" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        	<property name="converters">
+        		<list>
+        			<bean class="ynjh.common.convertor.StringToDateConvertor">
+        				<constructor-arg type="java.lang.String" value="yyyy-MM-dd"></constructor-arg>
+        			</bean>
+        		</list>
+        	</property>
+        </bean>
         <!-- name属性为访问Controller的路径，不进行拼接 
         <bean name="/index" class="controller.IndexController"></bean>-->
         <!-- 启动了控制器(controller)的注解功能 -->
-        <mvc:annotation-driven >
+        <mvc:annotation-driven conversion-service="stringToDateConverter" >
         		<mvc:message-converters>
         			<!-- 解决ajax中文乱码问题 -->
         			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -70,7 +78,7 @@
 	            </list>
 	        </property>
 		</bean>
-        <context:component-scan base-package="ynjh">
+        <context:component-scan base-package="ynjh" use-default-filters="false">
         		<!-- 由于Spring与Spring MVC均使用同一种方法扫描Bean，将Bean实例化到IoC容器中
         		所以，在写扫描时，注意不要重复扫描！可使用过滤的方式，指定扫描的注解来解决重复扫描问题 -->
         		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

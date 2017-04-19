@@ -8,14 +8,17 @@ import ynjh.personal.entity.CommentArticle;
 
 
 public interface CompanyCommentArticleMapper {
-	//�������
-	public Integer addCommentArticle(CommentArticle comArticle);
-	//�޸ĵ�����
+	//添加文章评论
+	public Integer addCommentArticle(CommentArticle commentArticle);
+	//更新文章评论点赞数
 	public Integer updateCommentLikeNum(Integer id);
-	//�޸�״̬
+	//更新文章评论状态״̬
 	public Integer updateCommentStatus(@Param("id")Integer id,@Param("commentArticleStatus")Integer commentArticleStatus);
-	//����id�ҵ���������
+	//根据id查询文章评论
 	public CommentArticle findById(Integer id);
-	//��ѯ������������
-	public List<CommentArticle> findAll(@Param("page")Integer page);
+	//查询所有文章评论
+	public List<CommentArticle> findAll(Integer articleId);
+	//获取最大页数
+	public int getMaxCommentCount();
+	
 }

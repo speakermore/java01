@@ -11,13 +11,9 @@ import ynjh.company.entity.CompanyRecruit;
 
 public interface CompanyRecruitMapper {
 	public int addCompanyRecruit(CompanyRecruit companyRecruit);
-	public List<CompanyRecruit> findAll(Integer page);
-	public Integer updateCpmRecTitle(@Param("id")Integer id,@Param("cpmRecTitle")String cpmRecTitle );
-	public Integer updateCpmRecWage(@Param("id")Integer id,@Param("cpmRecWage")String CpmRecWage);
-	public Integer updateCpmRecEducation(@Param("id")Integer id,@Param("cpmRecEducation")String cpmRecEducation);
-	public Integer updateCmpRecExperience(@Param("id")Integer id,@Param("cmpRecExperience")String CmpRecExperience);
-	public Integer updateCmpRecPeople(Integer companyId);
-	public Integer updateCmpRecStatus(Integer companyId);
+	public List<CompanyRecruit> findAll(@Param("page")Integer page);
+	public Integer updateCmpRecStatus(@Param("id")Integer id,@Param("cmpRecStatus")Integer cmpRecStatus);
+	public Integer updateCmpRecruit(CompanyRecruit companyRecruit );
 	public CompanyRecruit findById(Integer id);
-	public int hidden(Integer id);
+	public int getMaxRecordCount();
 }
