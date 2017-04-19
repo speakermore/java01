@@ -25,9 +25,9 @@ import ynjh.personal.entity.User;
 public interface AdminService {
 	//审核
 	public Integer auditResume(Integer id,Integer status);//审核简历
-	public List<Resume> findAuditResume(Integer page);//查询审核简历
+	public List<Resume> findAuditResume(@Param("page") Integer page);//查询审核简历
 	public Integer auditArticle(Integer articleId,Integer articleStatus);//审核文章
-	public List<Article> findAuditArticle(Integer page);//查询审核文章
+	public List<Article> findAuditArticle(@Param("page") Integer page);//查询审核文章
 	public Integer auditCommentsArticle(Integer id,Integer commentsArticleStatus);//审核文章评论
 	public List<CommentArticle> findAuditCommentsArticle(Integer page);//查询审核文章评论
 	public Integer auditCompany(Integer companyId,Integer cmpIntegerStatus);//审核企业资质
@@ -41,11 +41,11 @@ public interface AdminService {
 	public Integer auditRecruitment(Integer recruitmentId,Integer cmpRecStatus);//审核招聘信息
 	public List<CompanyRecruit> findAuditRecruitment(Integer page);//查询审核招聘信息
 	public List<Resume> findAuditResumeById(Integer id);//查询审核简历ById
-	public List<Article> findAuditArticleById(Integer id);//查询审核文章ById
+	public Article findAuditArticleById(Integer id);//查询审核文章ById
 	public List<CommentArticle> findAuditCommentsArticleById(Integer id);//查询审核文章评论ById
 	public List<Company> findAuditCompanyById(Integer id);//查询审核企业资质ById
 	public List<Discuss> findAuditCommentsCompanyAndPeopleById(Integer id);//查询审核个人企业互评论ById
-	public List<Article> findAuditInfoById(Integer id);//查询审核新闻ById
+	public Article findAuditInfoById(Integer id);//查询审核新闻ById
 	public List<Message> findAuditOfferById(Integer id);//查询审核offerById
 	public List<CompanyRecruit> findAuditRecruitmentById(Integer id);//查询审核招聘信息ById
 	

@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Article> findAuditArticle(Integer page) {
 		// TODO Auto-generated method stub
-		return adminMapper.findAuditArticle(page);
+		return adminMapper.findAuditArticle((page-1)*10);
 	}
 
 	@Override
@@ -243,7 +243,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<Company> findBestCompany() {
 		// TODO Auto-generated method stub
 		List<Integer> list=adminMapper.findCompanyId();
-		List<Company> listCompany=null;
+		List<Company> listCompany=new ArrayList();
 		for(int i=0;i<list.size();i++){
 			Company company=adminMapper.findCompanyById(list.get(i));
 			listCompany.add(company);
@@ -404,7 +404,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Article> findAuditArticleById(Integer id) {
+	public Article findAuditArticleById(Integer id) {
 		// TODO Auto-generated method stub
 		return adminMapper.findAuditArticleById(id);
 	}
@@ -428,7 +428,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Article> findAuditInfoById(Integer id) {
+	public Article findAuditInfoById(Integer id) {
 		// TODO Auto-generated method stub
 		return adminMapper.findAuditArticleById(id);
 	}
