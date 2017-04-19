@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
+
 @Controller
 @RequestMapping("/company/cmprs")
 public class CompanyRecruitController {
@@ -102,3 +103,4 @@ public class CompanyRecruitController {
 		 return mv;
 	 }
 }
+

@@ -1,11 +1,8 @@
 package ynjh.personal.service.impl.resume;
 
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
 import ynjh.personal.dao.resume.ResumeMapper;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Project;

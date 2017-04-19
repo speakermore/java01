@@ -1,16 +1,14 @@
 package ynjh.personal.controller.user;
 
 import java.sql.Timestamp;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserCharge;
 import ynjh.personal.service.UserService;
 
 @Controller
@@ -34,6 +32,13 @@ public class UserController {
 			mv.setViewName("personal/user/personal_index");
 		}
 		return mv;
+	}
+
+	// 退出
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "personal/user/personal_login";
 	}
 
 	// 跳转
@@ -86,7 +91,6 @@ public class UserController {
 	public ModelAndView addUserOther(User user) {
 		ModelAndView mv = new ModelAndView();
 		int result = uService.updateUserOther(user);
-		user.setUserBirthday(new Timestamp(System.currentTimeMillis()));
 		if (result > 0) {
 			mv.addObject("user", user);
 			mv.addObject("operatorInfo", "完善资料成功！");
@@ -156,15 +160,42 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		int result = uService.chargeMoney(userMoney, id);
 		User user = uService.selectUserById(id);
+		UserCharge userCharge = new UserCharge();
+		userCharge.setUserChargeType(1);
+		userCharge.setUserId(id);
+		userCharge.setUserChargeContent("无");
+		userCharge.setUserChargeTime(new Timestamp(System.currentTimeMillis()));
+		userCharge.setUserChargeMoney(userMoney);
+		int remmeber = uService.addUserCharge(userCharge);
 		if (result > 0) {
-			mv.addObject("user", user);
-			mv.addObject("operatorInfo", "充值成功！");
-			mv.setViewName("personal/user/personal_index");
+			if (remmeber>0) {
+				mv.addObject("user", user);
+				mv.addObject("operatorInfo", "充值成功！");
+				mv.setViewName("personal/user/personal_index");
+			}
 		} else {
 			mv.addObject("operatorInfo", "充值失败！");
 			mv.setViewName("personal/user/personal_chargemoney");
 		}
 		return mv;
 	}
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		return "personal/user/test";
+	}
+
+//	// 转换时间
+//	public Timestamp comment(String time) {
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		Timestamp timestamp = null;
+//		try {
+//			Date dateTime = sdf.parse(time);
+//			timestamp = new Timestamp(dateTime.getTime());
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return timestamp;
+//	}
 
 }
