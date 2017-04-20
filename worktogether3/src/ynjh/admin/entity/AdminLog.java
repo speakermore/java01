@@ -7,7 +7,8 @@ import java.util.Date;
 public class AdminLog implements Serializable{
 	private Integer id;
 	private Integer adminLoginId;
-	private Integer adminDo;//操作类型
+	//操作类型
+	private Integer adminDo;
 	private Integer adminTargetType;//对象类型
 	private Integer adminAid;//操作对象ID
 	private Timestamp adminTime;//操作时间
