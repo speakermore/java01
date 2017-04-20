@@ -66,5 +66,4 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	public int updateCmpRecStatus(Integer id, Integer cmpRecStatus) {
 		return companyRecruitMapper.updateCmpRecStatus(id, cmpRecStatus);
 	}
-
 }
