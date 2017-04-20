@@ -31,8 +31,7 @@
 	</thead>
 	<tbody>
 		<%
-    List<AdminLog> newsList=(List)request.getAttribute("adminLogs");
-                	
+    List<AdminLog> newsList=(List)request.getAttribute("adminLogs");               	
                 	int i=0;
                 	for(AdminLog adm:newsList){
                 		i++;
