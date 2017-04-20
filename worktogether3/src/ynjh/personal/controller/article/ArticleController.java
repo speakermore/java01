@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.personal.entity.Article;
@@ -49,14 +50,42 @@ public class ArticleController {
 	}
 
 	// 查看文章(所有)
+	@RequestMapping("/ajaxLookArticleList")
+	@ResponseBody
+	public Object ajaxFindAllArticle(Integer toPage,Integer userId) {
+		List<Article> articles = articleService.findUserArticle(toPage,userId);
+		int maxPage=articleService.getMaxRecord(userId);
+		
+		StringBuffer sb=new StringBuffer();
+		for(Article article:articles){
+			sb.append("<tr>");
+			sb.append("<td><a href=\"personal/article/lookArticleById?id="+article.getId()+"\">"+article.getArticleTitle()+"</a></td>");
+			sb.append("<td>${art.articleTime}</td>");
+			if(article.getArticleStatus()==1){
+				sb.append("<th>待审核</th>");
+			}else if(article.getArticleStatus()==2){
+				sb.append("<th>正常</th>");
+			}else if(article.getArticleStatus()==3){
+				sb.append("<th>审核未通过</th>");
+			}else if(article.getArticleStatus()==4){
+				sb.append("<th>已被删除</th>");
+			}
+			sb.append("<td><a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a></td>");
+				sb.append("</tr>");
+		}
+		return sb.toString();
+	}
 	@RequestMapping("/lookArticleList")
-	public ModelAndView findAllArticle(Integer usersId) {
-		List<Article> articles = articleService.findUserArticle(usersId);
+	public ModelAndView findAllArticle(Integer toPage,Integer userId,HttpSession session) {
+		List<Article> articles = articleService.findUserArticle(toPage,userId);
+		int maxPage=articleService.getMaxRecord(userId);
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
+		mv.addObject("curPage", toPage);
+		mv.addObject("maxPage", maxPage);
 		mv.addObject("articles", articles);
+		session.setAttribute("articles", articles);
 		return mv;
 	}
-
 	// 查看文章（详细）
 	@RequestMapping(value = "/lookArticleById", method = RequestMethod.GET)
 	public ModelAndView findArticleById(Integer id) {
@@ -113,8 +142,8 @@ public class ArticleController {
 	@RequestMapping("/updateLike")
 	public ModelAndView updateLike(Integer id) {
 		articleService.updateLikeNum(id);
-		Article article = (Article) articleService.findUserArticle(id);
-		ModelAndView mv = new ModelAndView("personal_articledetail");
+		Article article = (Article) articleService.findArticleById(id);
+		ModelAndView mv = new ModelAndView("personal/article/personal_articledetail");
 		mv.addObject("article", article);
 		return mv;
 	}
@@ -136,10 +165,13 @@ public class ArticleController {
 
 	// 查询被删文章
 	@RequestMapping("/findArticleByDelete")
-	public ModelAndView findByDelete(Integer usersId) {
+	public ModelAndView findByDelete(Integer toPage,Integer usersId) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		List<Article> articleBD = articleService.selectArticleByDelete(usersId);
+		List<Article> articleBD = articleService.selectArticleByDelete(toPage,usersId);
+		int maxPage=articleService.getMaxRecordDelete(usersId);
 		mv.addObject("articleBD", articleBD);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("curPage", toPage);
 		return mv;
 	}
 

@@ -28,8 +28,7 @@ public class UserController {
 		} else {
 			session.setAttribute("user", user);
 			mv.addObject("user", user);
-			mv.addObject("loginInfo", "登录成功");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../article/lookArticleList?toPage=1&userId="+user.getId());
 		}
 		return mv;
 	}

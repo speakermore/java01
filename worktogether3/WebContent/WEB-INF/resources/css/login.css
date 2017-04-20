@@ -1,0 +1,37 @@
+#wt-hby-header-left{
+	padding-left: 50px;
+}
+#wt-hby-header-right{
+	padding-right: 50px;
+}
+.wt-hby-login-center{
+	background-image: url(../img/1-1-1.jpg);
+	height: 580px;
+	background-repeat:no-repeat;
+}
+
+	.form-signin{
+		border-radius: 10px;
+		margin-top: 100px;
+		padding: 40px 30px 40px 30px;
+		height: 400px;
+		width: 361px;
+		background-color: whitesmoke;
+		position: absolute;
+		top:20px;
+		left:750px;
+	}
+	#userLoginId,#userPassword,#inputagree{
+		margin:15px 0px ;
+	}
+
+.wt-hby-login-bottom .back-to-top{
+	float: right;
+	text-decoration: none;
+	margin-right: 80px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.wt-hby-login-bottom .container{
+		background-image: url(../img/1-1-2.jpg);
+	}

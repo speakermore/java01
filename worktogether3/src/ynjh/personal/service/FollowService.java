@@ -17,6 +17,8 @@ public interface FollowService {
 
 	/**
 	 * 查看关注
-	 */
+	 */	
+	
 	public List<Follow> selectUserFollow(Integer id);
+
 }
