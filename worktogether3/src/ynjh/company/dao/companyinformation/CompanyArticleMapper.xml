@@ -20,15 +20,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update article set articleLikeNum=1+articleLikeNum where id=#{id}
 	</update>
 	<select id="findAll" parameterType="int" resultType="Article">
-		select * from article where articleStatus!=4
+		select * from article where articleStatus!=4 and articleStatus!=3 and articleStatus!=1
 		<if test="page!=null">
-			limit #{page},5
+			limit #{page},10
 		</if>
 	</select>
 	<select id="findById" parameterType="int" resultType="Article">
 		select * from article where id=#{id}
 	</select>
 	<select id="getMaxRecordCount" resultType="int">
-		select count(*) from article where articleStatus!=4
+		select count(*) from article where articleStatus!=4 and articleStatus!=3 and articleStatus!=1
 	</select>
 </mapper>
