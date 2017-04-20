@@ -65,7 +65,7 @@ public class CompanyArticleController {
 		return mView;
 	}
 	
-	@RequestMapping("/article/find/{page}")
+	@RequestMapping(value="/article/find/{page}",method=RequestMethod.POST)
 	public ModelAndView find(@PathVariable Integer page){
 		List<Article> articles=companyArticleService.findAll(page);
 		int maxPage=companyArticleService.findMaxPage();
