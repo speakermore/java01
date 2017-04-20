@@ -54,7 +54,7 @@
 					<form class="form-signin" action="company/company/login" method="post">
       		  <h2 class="form-signin-heading">登录</h2>
        			<label for="inputEmail" class="sr-only">邮箱/手机号</label>
-        		<input type="text" id="inputEmail" class="form-control" placeholder="邮箱/手机号" required autofocus name="companyLoginId">
+        		<input type="email" id="inputEmail" class="form-control" placeholder="邮箱/手机号" required autofocus name="companyLoginId">
        			<label for="inputPassword" class="sr-only">密码</label>
         		<input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="companyPassword">
         		<div class="checkbox">

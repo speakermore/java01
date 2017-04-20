@@ -35,7 +35,7 @@ public class CompanyArticleServiceImpl implements CompanyArticleService{
 		if (page!=null&&page>maxPage) {
 			page=maxPage;
 		}
-		return companyArticleMapper.findAll((page-1)*5);
+		return companyArticleMapper.findAll((page-1)*10);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class CompanyArticleServiceImpl implements CompanyArticleService{
 	@Override
 	public int findMaxPage() {
 		
-		return (companyArticleMapper.getMaxRecordCount()+(5-1))/5;
+		return (companyArticleMapper.getMaxRecordCount()+(10-1))/10;
 	}
 
 }
