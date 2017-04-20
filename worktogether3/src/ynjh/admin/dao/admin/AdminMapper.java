@@ -30,10 +30,10 @@ public interface AdminMapper {
 	public Integer disableCompany(@Param("companyId") Integer companyId, @Param("companyStatus") Integer companyStatus);
 
 	public Integer auditResume(@Param("id")Integer id,@Param("resumeStatusThree")Integer resumeStatusThree);//审核简历
-	public List<Resume> findAuditResume(Integer page);//查询审核简历
+	public List<Resume> findAuditResume(@Param("page") Integer page);//查询审核简历
 	public Integer auditArticle(@Param("articleId") Integer articleId, @Param("articleStatus") Integer articleStatus);// 审核文章
 
-	public List<Article> findAuditArticle(Integer page);// 查询审核文章
+	public List<Article> findAuditArticle(@Param("page") Integer page);// 查询审核文章
 
 	public Integer auditCommentsArticle(@Param("id")Integer id,@Param("commentArticleStatus")Integer commentArticleStatus);//审核文章评论
 
@@ -73,7 +73,7 @@ public interface AdminMapper {
 
 	public List<CommentArticle> findAuditCommentsArticleById(Integer id);// 查询审核文章评论依据id
 
-	public List<Article> findAuditArticleById(Integer id);// 查询审核文章依据id
+	public Article findAuditArticleById(Integer id);// 查询审核文章依据id
 
 	public List<Resume> findAuditResumeById(Integer id);//查询审核简历依据id
 

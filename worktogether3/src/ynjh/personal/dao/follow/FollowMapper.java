@@ -14,9 +14,10 @@ public interface FollowMapper {
 	 * 删除关注
 	 */
 	public Integer deleteUserFollow(Integer id);
-
+	
 	/**
 	 * 查看关注
 	 */
-	public List<Follow> selectUserFollow(Integer id);
+	public List<Follow> selectUserFollow(Integer followId);
+	
 }

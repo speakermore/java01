@@ -22,7 +22,7 @@ public class ArticleServiceImpl implements ArticleService {
 			result=articleMapper.addUserArticle(article);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.warn("gggggg");
+			logger.warn("gggggggggggg");
 		}
 		return result;
 	}
@@ -31,8 +31,18 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.deleteUserArticle(id);
 	}
 	@Override
-	public List<Article> findUserArticle(Integer id) {
-		return articleMapper.selectUserArticle(id);
+	public List<Article> findUserArticle(Integer page,Integer id) {
+		if (page==null) {
+			page=1;
+		}
+		if(page<1){
+			page=1;
+		}
+		int maxPage=getMaxRecord(id);
+		if(page>maxPage){
+			page=maxPage;
+		}
+		return articleMapper.selectUserArticle((page-1)*5,id);
 	}
 	@Override
 	public Integer updateArticleContent(Article article) {
@@ -47,24 +57,35 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.updateLikeNum(id);
 	}
 	@Override
-	public Integer getMaxRecord() {
-		return articleMapper.getMaxRecord();
+	public Integer getMaxRecord(Integer usersId) {
+		return (articleMapper.getMaxRecord(usersId)+5-1)/5;
 	}
-	@Override
-	public int getMaxRecordCount() {
-		return articleMapper.getMaxRecordCount();
-	}
+	
 	@Override
 	public Article findArticleById(Integer id) {
 		return articleMapper.selectArticleById(id);
 	}
 	@Override
-	public List<Article> selectArticleByDelete(Integer usersId) {
-		return articleMapper.selectArticleByDelete(usersId);
+	public List<Article> selectArticleByDelete(Integer page,Integer usersId) {
+		if (page==null) {
+			page=1;
+		}
+		if(page<1){
+			page=1;
+		}
+		int maxPage=getMaxRecordDelete(usersId);
+		if(page>maxPage){
+			page=maxPage;
+		}
+		return articleMapper.selectArticleByDelete((page-1)*5,usersId);
 	}
 	@Override
 	public Integer renewArticle(Integer id) {
 		return articleMapper.renewArticle(id);
+	}
+	@Override
+	public Integer getMaxRecordDelete(Integer usersId) {
+		return (articleMapper.getMaxRecordDelete(usersId)+5-1)/5;
 	}
 	
 }

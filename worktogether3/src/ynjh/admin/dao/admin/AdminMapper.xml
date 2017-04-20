@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update company set company=#{companyStatus} where companyId=#{companyId}
 	</update>
 	
-	<update id="auditResume" parameterType="Resume"><!-- 简历审核 -->
+	<update id="auditResume" ><!-- 简历审核 -->
 		update resume set resumeStatusThree=#{resumeStatusThree}  where id=#{id}
 	</update>
 	
@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findAuditArticle" resultType="Article"><!-- 查询文章审核 -->
-		select * from article where articleStatus=1 limit #{page},10 order by articleTime
+		select * from article where articleStatus=1 order by articleTime limit #{page},10 
 	</select>
 	
 	<select id="findAuditCommentsArticle" resultType="CommentArticle"><!-- 查询文章评论审核 -->
@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!--最佳企业id -->
 	<select id="findCompanyId" resultType="Integer">
-		select discusUsersType from discuss group by(discusUsersType) limit 10; 
+		select discusUsersType from discuss group by(discusUsersType) order by sum(discussLevel) desc limit 10 
 	</select>
 	<!-- 找到企业 -->
 	<select id="findCompanyById" parameterType="Integer" resultType="Company">

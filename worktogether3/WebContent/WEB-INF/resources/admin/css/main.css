@@ -1,0 +1,82 @@
+/*
+ * 导航栏背景色：linear-gradient(to bottom,#fa941b,#fe6000)
+ */
+hr{
+	border-top:1px dotted #afafaf;
+}
+.work-together-background{
+    	background-image: linear-gradient(to bottom,#fa941b,#fe6000);
+}
+.work-together-shadow{
+    		box-shadow: 3px 3px 6px 3px #e7e9e8;
+}
+.work-together-font-small{
+    	font-size: 10px;
+}
+.work-together-red{
+	color:#fa941b;
+}
+.work-together-deep{
+    	background-color: #f98905;
+}
+/*文字右对齐*/
+.work-together-right{
+    	text-align: right;
+}
+/*文字的浅色灰度*/
+.work-together-text-shallow{
+	color:#b2b0af;
+}
+/*背景的浅红色*/
+.work-together-shallow{
+    	background-color: #fe6000;
+}
+.navbar-default .navbar-text{
+    		color:#fff;
+}
+.navbar-default	.navbar-nav li a{
+		color:#fff;
+}
+a:focus, a:hover{
+	color:#be5515;
+}
+.navbar-default	.navbar-nav .active a{
+		color:#000;
+		background-color:#fcdab1;
+}
+body{
+	padding-top:170px ;
+}
+/*
+ * 指定导航栏上的字体颜色为白色
+ */
+.navbar-inverse .navbar-brand,.navbar-inverse .navbar-nav>li>a{
+	color:#fff;
+}
+/*
+ * 选中，激活之后的背景及字体颜色
+ */
+   .nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus{
+   	color:#000;
+   	background-color: #fcdab1;
+   }
+   a{
+   	color:#fd9555;
+   }
+   .sidebar{
+   	background-color: #eef8fd;
+   }
+   .table-striped>tbody>tr:nth-of-type(odd) {
+    		background-color: #feeee4;
+	}
+.btn-success{
+	background-color: #fa941b;
+	border-color: #fd6001;
+}
+	.btn-success:hover{
+		background-color:#be5515;
+		border-color: #e56618;
+	}
+	.panel-body{
+		padding: 30px;
+	}

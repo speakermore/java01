@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+header {
+	height: 300px;
+}
+
+.work-together-margin-left-30 {
+	margin-left: 30px;
+}
+
+.work-together-margin-top-150 {
+	margin-top: -150px;
+}
+
+.work-together-dev-height-2000 {
+	height: 2000px;
+}
+
+.work-together-sample-1 {
+	background-color: #;
+}
+
+.panel-footer {
+	color: #ababab;
+}
+
+span.emotion {
+	width: 42px;
+	height: 20px;
+	padding-left: 20px;
+	cursor: pointer
+}
+
+span.emotion:hover {
+	background-position: 2px -28px
+}
+label {
+	margin-top: 100px;
+}

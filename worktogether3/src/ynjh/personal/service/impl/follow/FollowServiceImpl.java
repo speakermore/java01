@@ -22,10 +22,14 @@ public class FollowServiceImpl implements FollowService {
 	public Integer deleteUserFollow(Integer id) {
 		return followMapper.deleteUserFollow(id);
 	}
-
+	
 	@Override
 	public List<Follow> selectUserFollow(Integer id) {
 		return followMapper.selectUserFollow(id);
 	}
+
+	
+
+	
 
 }
