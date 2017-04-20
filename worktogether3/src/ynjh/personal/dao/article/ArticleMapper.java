@@ -20,7 +20,7 @@ public interface ArticleMapper {
 	/**
 	 * 查看文章(所有)
 	 */
-	public List<Article> selectUserArticle(Integer usersId);
+	public List<Article> selectUserArticle(@Param("page")Integer page,@Param("usersId")Integer usersId);
 	/**
 	 * 查看文章(详细)
 	 */
@@ -44,13 +44,19 @@ public interface ArticleMapper {
 	/**
 	 * 查看文章(删除)
 	 */
-	public List<Article> selectArticleByDelete(Integer usersId);
+	public List<Article> selectArticleByDelete(@Param("page")Integer page,Integer usersId);
 	/**
 	 * 恢复文章
 	 */
 	public Integer renewArticle(Integer id);
 
-	
-	public Integer getMaxRecord();
-	public int getMaxRecordCount();
+	/**
+	 * 获取未删除的
+	 * @return
+	 */
+	public Integer getMaxRecord(Integer usersId);
+	/**
+	 * 获取删除的
+	 */
+	public Integer getMaxRecordDelete(Integer usersId);
 }

@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+.work-together-background {
+	background-image: linear-gradient(to bottom, #fa941b, #fe6000);
+}
+
+.work-together-height-50 {
+	height: 50px;
+}
+
+.navbar-default .navbar-text {
+	color: #fff;
+}
+
+.navbar-default	.navbar-nav li a {
+	color: #fff;
+}
+
+.navbar-default	.navbar-nav .active a {
+	color: #000;
+	background-color: #fcdab1;
+}
+
+body {
+	padding-top: 70px;
+}
