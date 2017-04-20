@@ -14,12 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from discuss where id=#{id}
 	</select>
 	<select id="findAll" resultType="Discuss">
-		select * from discuss where discussStatus!=4 and discussUsersId=#{discussUsersId}
+		select * from discuss where discussStatus!=4 and discussStatus!=3 and discussStatus!=1 and discussUsersId=#{discussUsersId}
 		<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
 	<select id="getMaxRecordCount" resultType="int">
-		select count(*) from discuss where discussStatus!=4
+		select count(*) from discuss where discussStatus!=4 and discussStatus!=3 and discussStatus!=1 
 	</select>
 </mapper>

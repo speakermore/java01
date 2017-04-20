@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="ynjh/company/dao/company/CompanyMapper.xml"/>
 		<mapper resource="ynjh/company/dao/company/CompanyIntroductionMapper.xml"/>
 		<mapper resource="ynjh/company/dao/company/CompanyChargeMapper.xml"/>
-		<mapper resource="ynjh/company/dao/offer/CompanyOfferMapper.xml"/>
+		<mapper resource="ynjh/company/dao/company/CompanyOfferMapper.xml"/>
 		
 		
 		

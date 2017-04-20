@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<%@include file="/WEB-INF/pages/header.jsp" %>
+  	<%@include file="/WEB-INF/pages/nav.jsp" %>
 	<div class="container">
 		<div class="col-sm-8 column">
 			<form action="company/artanddis/article/add_companyarticle" method="post" role="form" class="form-horizontal">

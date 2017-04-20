@@ -5,12 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.springframework.core.convert.converter.Converter;
-/**
- * 字符串转Timestamp的转换器
- * 可以进行构造方法传参
- * @author mouyong
- *
- */
+
 public class StringToDateConvertor implements Converter<String, Timestamp> {
 	private String datePattner;
 	

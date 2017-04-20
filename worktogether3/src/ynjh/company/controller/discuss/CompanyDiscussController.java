@@ -16,9 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.company.entity.Company;
 import ynjh.company.service.CompanyDiscussService;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.User;
 
 @Controller
-@RequestMapping("/company")
+@RequestMapping("/company/artanddis")
 public class CompanyDiscussController {
 
 	@Resource
@@ -26,19 +27,25 @@ public class CompanyDiscussController {
 	
 	@RequestMapping(value="/discuss/add_companydiscuss",method=RequestMethod.POST)
 	public ModelAndView addCompanyDiscuss(Discuss discuss,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
-		discuss.setDiscussLevel(5);
-		discuss.setDiscussUsersId(7);
-		discuss.setDiscussTime(new Timestamp(System.currentTimeMillis()));
-		discuss.setDiscusUsersType(2);
-		int result=companyDiscussService.addDiscuss(discuss);
+		User user=(User)session.getAttribute("user");
 		ModelAndView mView=new ModelAndView("company/info");
-		if (result>0) {
-			mView.addObject("operatorInfo", "成功添加企业对个人用户的评论！");
-			mView.addObject("toPage", "../../company/article/find/1");
+		if(discuss.getDiscussUsersId()==user.getId()){
+			discuss.setDiscussUsersId(user.getId());
+			discuss.setDiscussTime(new Timestamp(System.currentTimeMillis()));
+			discuss.setDiscusUsersType(2);
 		}else {
 			mView.addObject("operatorInfo", "评论失败，请联系管理员或重新操作！");
-			mView.addObject("toPage", "company/company_index");
+			mView.addObject("toPage", "company/artanddis/");
+			return mView;
+		}
+		int result=companyDiscussService.addDiscuss(discuss);
+		
+		if (result>0) {
+			mView.addObject("operatorInfo", "成功添加企业对个人用户的评论！");
+			mView.addObject("toPage", "company/artanddis/article/find/1");
+		}else {
+			mView.addObject("operatorInfo", "评论失败，请联系管理员或重新操作！");
+			mView.addObject("toPage", "company/artanddis/company_index");
 		}
 		return mView;
 	}
@@ -49,27 +56,35 @@ public class CompanyDiscussController {
 		ModelAndView mView=new ModelAndView("company/info");
 		if(result>0){
 			mView.addObject("operatorInfo", "成功删除评论！");
-			mView.addObject("toPage", "../../../company/article/find/1");
+			mView.addObject("toPage", "../../../../company/artanddis/article/find/1");
 		} else {
 			mView.addObject("operatorInfo", "删除失败，请联系管理员或重新操作！");
-			mView.addObject("toPage", "company/company_index");
+			mView.addObject("toPage", "company/artanddis/company_index");
 		}
 		return mView;
 	}
 	
 	@RequestMapping("/discuss/finddiscuss/{page}")
 	public ModelAndView finddiscuss(@PathVariable Integer page,Integer discussUsersId,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
-		List<Discuss> discuss=companyDiscussService.findAll(page,7);
+		Company company=new Company();
+		User user=new User();
+		session.setAttribute("user", user);
+		session.setAttribute("company", company);
+		company.setId(1);
+		user.setId(2);
+		discussUsersId=company.getId();
+		List<Discuss> discuss=companyDiscussService.findAll(page,discussUsersId);
+		session.setAttribute("disUserId", discussUsersId);
 		int maxPage=companyDiscussService.getMax();
 		List<Integer> pageNo=new ArrayList<Integer>();
 		for(int i=1;i<=maxPage;i++){
 			pageNo.add(i);
 		}
-		ModelAndView mView=new ModelAndView("company/company_index");
+		ModelAndView mView=new ModelAndView("company/artanddis/company_index");
 		mView.addObject("discuss", discuss);
 		mView.addObject("curPage", page);
 		mView.addObject("pageNo", pageNo);
+		mView.addObject("maxPage", maxPage);
 		return mView;
 	}
 }

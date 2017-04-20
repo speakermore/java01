@@ -17,9 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from commentArticle where id=#{id}
 	</select>
 	<select id="findAll" parameterType="int" resultType="CommentArticle">
-		select * from commentArticle where commentArticleStatus!=4 and articleId=#{articledId}
+		select * from commentArticle where commentArticleStatus!=4 and commentArticleStatus!=3 and commentArticleStatus!=1 and articleId=#{articledId}
 	</select>
 	<select id="getMaxCommentCount" resultType="int">
-		select count(*) from commentArticle where commentArticleStatus!=4
+		select count(*) from commentArticle where commentArticleStatus!=4 and commentArticleStatus!=3 and commentArticleStatus!=1 
 	</select>
 </mapper>
