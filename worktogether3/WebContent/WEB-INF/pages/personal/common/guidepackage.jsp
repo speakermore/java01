@@ -22,28 +22,29 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <link rel="stylesheet" type="text/css"
-	href="personal/css/bootstrap-datetimepicker.min.css" />
-<link rel="styleheet" href="personal/css/register.css" type="text/css">
+	href="css/personal/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="styleheet" href="css/personal/register.css" type="text/css">
 <link href="css/login.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="personal/css/personal_common.css" />
-<link href="personal/icheck/skins/line/orange.css"
+<link rel="stylesheet" type="text/css" href="css/personal/personal_common.css" />
+<link href="thirdpart/personal/icheck/skins/line/orange.css"
 	rel="stylesheet">
-<link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
+<link href="css/personal/personal_detail.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 	<script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js" ></script>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script type="text/javascript " src="personal/js/jquery-3.1.1.min.js "></script>
+	<script type="text/javascript " src="js/personal/jquery-3.1.1.min.js "></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script type="text/javascript" src="js/bootstrap.min.js "></script>
 	<script type="text/javascript"
-		src="personal/js/bootstrap-datetimepicker.min.js"></script>
+		src="js/personal/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"
-		src="personal/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+		src="js/personal/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-	<script src="personal/icheck/icheck.js"></script>
+	<script src="thirdpart/personal/icheck/icheck.js"></script>
 	<script type="text/javascript" src="thirdpart/qqFace/js/jquery.qqFace.js"></script>
 </body>
 </html>

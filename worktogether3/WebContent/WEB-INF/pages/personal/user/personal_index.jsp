@@ -49,7 +49,7 @@
 										简历写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
 											class="alert-link">点我返回首页</a>|<a href="personal/resume/createResume">点我创建新的简历</a>
 									</div>
-									<%@include file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%>
+									<%-- <%@include file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%> --%>
 									</p>
 
 								</div>

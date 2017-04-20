@@ -2,6 +2,8 @@ package ynjh.personal.service.impl.resume;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import ynjh.personal.dao.resume.ResumeMapper;
 import ynjh.personal.entity.Education;
@@ -24,8 +26,18 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 
 	@Override
-	public List<Resume> selectResumeUserId(Integer userId) {
-		return resumeMapper.selectResumeByUserId(userId);
+	public List<Resume> selectResumeUserId(Integer page,Integer userId) {
+		if (page==null) {
+			page=1;
+		}
+		if(page<1){
+			page=1;
+		}
+		int maxPage=getMaxResumeById(userId);
+		if(page>maxPage){
+			page=maxPage;
+		}
+		return resumeMapper.selectResumeByUserId((page-1)*5,userId);
 	}
 
 	@Override
@@ -106,6 +118,11 @@ public class ResumeServiceImpl implements ResumeService {
 	@Override
 	public Integer deleteProject(Integer id) {
 		return resumeMapper.deleteProject(id);
+	}
+
+	@Override
+	public Integer getMaxResumeById(Integer userId) {
+		return (resumeMapper.getMaxResumeById(userId)+5-1)/5;
 	}
 
 	

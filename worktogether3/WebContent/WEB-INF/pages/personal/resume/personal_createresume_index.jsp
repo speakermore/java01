@@ -3,7 +3,6 @@
 <!--左侧状态栏位-->
 <article
 	class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
-	<div class="row">
 		<!--发表状态小节-->
 		<section class="panel">
 			<form role="form" class="form-horizontal"
@@ -203,5 +202,4 @@
 				</div>
 			</form>
 		</section>
-	</div>
 </article>

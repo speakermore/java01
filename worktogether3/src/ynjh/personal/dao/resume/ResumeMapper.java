@@ -2,6 +2,8 @@ package ynjh.personal.dao.resume;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
@@ -20,7 +22,7 @@ public interface ResumeMapper {
 	/**
 	 * 根据Userid查询简历(多个)
 	 */
-	public List<Resume> selectResumeByUserId(Integer userId);
+	public List<Resume> selectResumeByUserId(@Param("page")Integer page,@Param("userId")Integer userId);
 	/**
 	 * 根据id查询简历（单个）
 	 */
@@ -93,5 +95,13 @@ public interface ResumeMapper {
 	/**
 	 * 结束
 	 */
-	
+	/**
+	 * 分页
+	 * @param userId
+	 * @return
+	 */
+	/**
+	 * 查询此ID的未删除的简历列表
+	 */
+	public Integer getMaxResumeById(Integer userId);
 }

@@ -1,22 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"  src="ckeditor/ckeditor.js"></script>
-<title>修改文章内容</title>
-		<link rel="stylesheet" type="text/css" href="css/personal/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="css/personal/main.css"/>
+<title>个人用户-首页</title>
 </head>
 <body>
-<%@include file="/WEB-INF/pages/personal/common/header.jsp" %>
-	<form action="personal/article/updateArticle" method="post">
-	标题：<b>${article.articleTitle}</b><br />
-	<input type="hidden" name="id" value="${article.id}" />
-	<textarea class="ckeditor" name="articleContent" >${article.articleContent}</textarea><br />
-	<input class="btn btn-success" type="submit" value="提交修改" />
-	</form>
+	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="row clearfix">
+					<div class="col-md-1 column"></div>
+					<div class="col-md-6 column ">
+						<div class="alert alert-success alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">×</button>
+							<h4>注意!</h4>
+							文章写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
+								class="alert-link">返回首页</a>
+						</div>
+						<%@include
+							file="/WEB-INF/pages/personal/article/personal_articleedit_index.jsp"%>
+					</div>
+					<div class="col-md-4 column ">
+						<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
+					</div>
+					<div class="col-md-1 column"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

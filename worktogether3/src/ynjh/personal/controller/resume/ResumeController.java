@@ -49,10 +49,13 @@ public class ResumeController {
 	}
 
 	/* 主页 */
-	@RequestMapping("/findAllResume")
-	public ModelAndView findAllResume(Integer userId) {
+	@RequestMapping("/ajaxFindAllResume")
+	public ModelAndView findAllResume(Integer toPage,Integer userId) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		List<Resume> resumes = rService.selectResumeUserId(userId);
+		List<Resume> resumes = rService.selectResumeUserId(toPage,userId);
+		int maxPage=rService.getMaxResumeById(userId);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("curPage", toPage);
 		mv.addObject("resumes", resumes);
 		return mv;
 	}
@@ -87,7 +90,6 @@ public class ResumeController {
 	public ModelAndView updateResume(Resume resume) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.updateResume(resume);
-		
 		mv.addObject("operatorInfo", "修改简历成功！");
 		mv.addObject("resume", resume);
 		mv.setViewName("personal/user/personal_index");
@@ -144,12 +146,12 @@ public class ResumeController {
 	}
 
 	/* 教育、工作、项目记录增加 */
-	/* 跳转 */
+	/* 跳转 
 	@RequestMapping(value = "/gotoCreateEducation", method = RequestMethod.GET)
 	public String gotoCreateEducation(Integer resumeId, HttpSession session) {
 		session.setAttribute("resumeId", resumeId);
 		return "personal/resume/personal_resume_education";
-	}
+	}*/
 
 	/* 跳转 */
 	@RequestMapping(value = "/gotoCreateWork", method = RequestMethod.GET)
@@ -171,12 +173,10 @@ public class ResumeController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
-		Integer resumeId = (Integer) session.getAttribute("resumeId");
 		education.setUserId(user.getId());
-		education.setResumeId(resumeId);
 		education.setResumeType(1);
 		int result = rService.addEducation(education);
-		Resume resume = rService.selectResumeById(resumeId);
+		Resume resume = rService.selectResumeById(education.getResumeId());
 		mv.addObject("resume", resume);
 		mv.setViewName("personal/resume/personal_lookresume");
 		if (result > 0) {

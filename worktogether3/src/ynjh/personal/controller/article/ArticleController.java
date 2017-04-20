@@ -1,6 +1,7 @@
 package ynjh.personal.controller.article;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,15 +53,17 @@ public class ArticleController {
 	// 查看文章(所有)
 	@RequestMapping("/ajaxLookArticleList")
 	@ResponseBody
-	public Object ajaxFindAllArticle(Integer toPage,Integer userId) {
+	public Object ajaxFindAllArticle(Integer toPage,Integer userId,HttpSession session) {
 		List<Article> articles = articleService.findUserArticle(toPage,userId);
 		int maxPage=articleService.getMaxRecord(userId);
-		
+		session.setAttribute("curPage", toPage);
+		session.setAttribute("maxPage", maxPage);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
 		StringBuffer sb=new StringBuffer();
 		for(Article article:articles){
 			sb.append("<tr>");
 			sb.append("<td><a href=\"personal/article/lookArticleById?id="+article.getId()+"\">"+article.getArticleTitle()+"</a></td>");
-			sb.append("<td>${art.articleTime}</td>");
+			sb.append("<td>"+sdf.format(article.getArticleTime())+"</td>");
 			if(article.getArticleStatus()==1){
 				sb.append("<th>待审核</th>");
 			}else if(article.getArticleStatus()==2){
@@ -73,6 +76,7 @@ public class ArticleController {
 			sb.append("<td><a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a></td>");
 				sb.append("</tr>");
 		}
+		sb.append("---"+toPage+"---"+maxPage);
 		return sb.toString();
 	}
 	@RequestMapping("/lookArticleList")
@@ -84,6 +88,8 @@ public class ArticleController {
 		mv.addObject("maxPage", maxPage);
 		mv.addObject("articles", articles);
 		session.setAttribute("articles", articles);
+//		session.setAttribute("curPage", toPage);
+//		session.setAttribute("maxPage", maxPage);
 		return mv;
 	}
 	// 查看文章（详细）
@@ -175,4 +181,8 @@ public class ArticleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		return "personal/article/test";
+	}
 }

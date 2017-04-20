@@ -1,32 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<title>查看文章</title>
+<title>个人用户-首页</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
-	<div class="main">
-		<div class="col-md-12 column">
-			<h3 align=center>${article.articleTitle}</h3>
-			<div align=center>${article.articleTime}</div>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="row clearfix">
+					<div class="col-md-1 column"></div>
+					<div class="col-md-6 column ">
+						<div class="alert alert-success alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">×</button>
+							<h4>注意!</h4>
+							文章写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
+								class="alert-link">返回首页</a>
+						</div>
+						<%@include
+							file="/WEB-INF/pages/personal/article/personal_articledetail_index.jsp"%>
+					</div>
+					<div class="col-md-4 column ">
+						<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
+					</div>
+					<div class="col-md-1 column"></div>
+				</div>
+			</div>
 		</div>
-		<p align=center>${article.articleContent}</p>
-		<div>
-			<hr />
-		</div>
-		<div class="hrr">
-			<a href="personal/article/updateLike/${article.id }">赞:${article.articleLikeNum}</a>
-			<div class="ppp">点击数：${article.articleReadNum}</div>
-		</div>
-	</div>
-
-	<div class="comm-add clearfix">
-		<div class="ava"></div>
-		<textarea class="_textarea" name="Write your text..."
-			placeholder="Write your text..."></textarea>
-		<button class="_button">发表评论</button>
 	</div>
 </body>
 </html>

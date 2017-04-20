@@ -5,6 +5,8 @@
 <article
 	class="col-md-12 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
 	<div class="row">
+	<section class="panel">
+	<div class="row">
 		<table class="table">
 			<thead>
 				<tr>
@@ -32,6 +34,49 @@
 					</tr>
 				</c:forEach>
 			</tbody>
+			<%-- <tfoot>
+				<tr>
+					<td colspan="4">
+						<c:if test="${curPage==null }">
+							<c:set var="curPage" value="1"></c:set>
+						</c:if>
+						<ul class="pagination">
+							<li><a href="javascript:ajaxPagination(1,${user.id })">首页</a></li>
+
+							<li><c:if test="${curPage>1}">
+									<a href="javascript:ajaxPagination(${curPage-1},${user.id})">上一页</a>
+								</c:if></li>
+
+							<li><c:forEach begin="1" end="${maxPage }" var="i">
+									<a href="javascript:ajaxPagination(${i},${user.id })">${i}</a>
+								</c:forEach></li>
+							<li><c:if test="${curPage<maxPage }">
+									<a href="javascript:ajaxPagination(${curPage+1 },${user.id })">下一页</a>
+								</c:if></li>
+							<li><a href="javascript:ajaxPagination(${maxPage },${user.id })">尾页</a></li>
+							<li><div class="col-lg-6">
+									<div class="input-group">
+										<span class="input-group-btn"><input type="text"
+											class="form-control" id="pageGosk" /> <a href="#"
+											id="pageBtn" class="btn btn-default">Go!</a> </span>
+									</div>
+									<!-- /input-group -->
+								</div> <!-- /.col-lg-6 --></li>
+						</ul>
+					</td>
+				</tr>
+			</tfoot> --%>
 		</table>
 	</div>
+	</section>
+	</div>
 </article>
+<script type="text/javascript">
+/* 	var ajaxPagination=function(toPage,userId){
+		$.ajax({
+			url:"ajaFindAllResume",
+			
+		});
+	} */
+
+</script>

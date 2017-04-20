@@ -27,9 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->
-	<select id="selectResumeByUserId" resultType="Resume"
-		parameterType="Integer">
+	<select id="selectResumeByUserId" resultType="Resume">
 		select * from resume where userId=#{userId} and not resumeStatusThree=4
+		<if test="page!=null">
+			limit #{page},5
+		</if>
 	</select>
 	<select id="selectResumeById" resultType="Resume" parameterType="Integer">
 		select * from resume where id=#{id}
@@ -105,5 +107,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update project set resumeType=4 where id=#{id}
 	</update>
 
+	<!-- 结束 -->
+	<!-- 分页 -->
+	<!-- 查询此ID的未删除的简历列表 -->
+	<select id="getMaxResumeById" parameterType="Integer">
+		select count(*) from resume where userId=#{userId} and not resumeStatusThree=4
+	</select>
 	<!-- 结束 -->
 </mapper>

@@ -27,20 +27,11 @@
 		</div>
 		<c:if test="${user==null }">
 			${loginInfo }<br />
-			<button type="button"
-				class="hidden-xs btn btn-default navbar-btn navbar-right">
-				<a href="personal/user/login">登录</a>
-			</button>
+				<a class="hidden-xs btn btn-default navbar-btn navbar-right" href="personal/user/login">登录</a>
 		</c:if>
 		<c:if test="${user!=null }">
-			<button type="button"
-				class="hidden-xs btn btn-default navbar-btn navbar-right">
-				<a href="personal/user/logout">退出</a>
-			</button>
-			<button type="button"
-				class="hidden-xs btn btn-default navbar-btn navbar-right">
-				<a href="personal/user/chargeById?id=${user.id }">充值</a>
-			</button>
+				<a class="hidden-xs btn btn-default navbar-btn navbar-right" href="personal/user/logout">退出</a>
+				<a class="hidden-xs btn btn-default navbar-btn navbar-right" href="personal/user/chargeById?id=${user.id }">充值</a>
 		</c:if>
 		<form class="navbar-form navbar-right hidden-xs" role="search">
 			<div class="form-group hidden-xs">

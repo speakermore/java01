@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <article
 	class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
-	<div class="row">
 		<!--发表状态小节-->
 		<section class="panel">
 			<table class="table">
@@ -76,7 +77,8 @@
 								</tr>
 								<tr>
 									<td>毕业时间：</td>
-									<td>${resume.resumeGraduationTime }</td>
+									<td><fmt:formatDate value="${resume.resumeGraduationTime }"
+											pattern="yyyy-MM-dd" /></td>
 								</tr>
 								<tr>
 									<td>学历：</td>
@@ -173,8 +175,7 @@
 					<div id="panel-element-two" class="panel-collapse collapse">
 						<div class="panel-body">
 							<h6>
-								<a
-									href="personal/resume/gotoCreateEducation?resumeId=${resume.id }">添加教育记录</a>
+									<%@include file="/WEB-INF/pages/personal/resume/personal_resume_education.jsp" %>
 							</h6>
 							<c:if test="${edus==null }">
 								<jsp:forward
@@ -198,7 +199,9 @@
 									</tr>
 									<tr>
 										<td>教育时间：</td>
-										<td>${edu.educationBeginTime}到${edu.educationEndTime}</td>
+										<td><fmt:formatDate value="${edu.educationBeginTime}"
+											pattern="yyyy-MM-dd" />到<fmt:formatDate value="${edu.educationEndTime}"
+											pattern="yyyy-MM-dd" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -219,7 +222,7 @@
 					<div id="panel-element-three" class="panel-collapse collapse">
 						<div class="panel-body">
 							<h6>
-								<a href="personal/resume/gotoCreateWork?resumeId=${resume.id }">添加工作记录</a>
+								<%@include file="/WEB-INF/pages/personal/resume/personal_resume_work.jsp" %>
 							</h6>
 							<c:if test="${works==null }">
 								<jsp:forward
@@ -245,7 +248,9 @@
 									</tr>
 									<tr>
 										<td>工作时间：</td>
-										<td>${work.workBeginTime }到${work.workEndTime }</td>
+										<td><fmt:formatDate value="${work.workBeginTime }"
+											pattern="yyyy-MM-dd" />到<fmt:formatDate value="${work.workEndTime }"
+											pattern="yyyy-MM-dd" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -266,8 +271,8 @@
 					<div id="panel-element-four" class="panel-collapse collapse">
 						<div class="panel-body">
 							<h6>
-								<a
-									href="personal/resume/gotoCreateProject?resumeId=${resume.id }">添加项目记录</a>
+								<%-- <a href="personal/resume/gotoCreateProject?resumeId=${resume.id }">添加项目记录</a> --%>
+							<%@include file="/WEB-INF/pages/personal/resume/personal_resume_project.jsp" %>
 							</h6>
 							<c:if test="${projs==null }">
 								<jsp:forward
@@ -297,7 +302,9 @@
 									</tr>
 									<tr>
 										<td>项目时间：</td>
-										<td>${pro.projectBeginTime }到${pro.projectEndTime }</td>
+										<td><fmt:formatDate value="${pro.projectBeginTime }"
+											pattern="yyyy-MM-dd" />到<fmt:formatDate value="${pro.projectEndTime }"
+											pattern="yyyy-MM-dd" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -332,7 +339,7 @@
 								</tr>
 								<tr>
 									<td></td>
-									<td class="text-right"><a href="#">编辑</a>|<a href="#">删除</a>
+									<td class="text-right"><a href="#">删除</a>
 									</td>
 								</tr>
 							</table>
@@ -341,5 +348,4 @@
 				</div>
 			</div>
 		</section>
-	</div>
 </article>

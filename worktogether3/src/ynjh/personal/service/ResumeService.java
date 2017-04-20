@@ -2,6 +2,8 @@ package ynjh.personal.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
@@ -19,7 +21,7 @@ public interface ResumeService {
 	/**
 	 * 根据id查询简历（审查接口）(所有)
 	 */
-	public List<Resume> selectResumeUserId(Integer userId);	
+	public List<Resume> selectResumeUserId(Integer page,Integer userId);	
 	/**
 	 * 根据id查询简历（审查接口）详细
 	 */
@@ -93,4 +95,9 @@ public interface ResumeService {
 	/**
 	 * 结束
 	 */
+	
+	/**
+	 * 查询此ID的未删除的简历列表
+	 */
+	public Integer getMaxResumeById(Integer userId);
 }
