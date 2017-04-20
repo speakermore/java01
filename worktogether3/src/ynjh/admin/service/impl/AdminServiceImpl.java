@@ -42,55 +42,55 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Integer auditResume(Integer id, Integer status) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.auditResume(id, status);
 	}
 
 	@Override
 	public List<Resume> findAuditResume(Integer page) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.findAuditResume(page);
 	}
 
 	@Override
 	public Integer auditArticle(Integer articleId, Integer articleStatus) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.auditArticle(articleId, articleStatus);
 	}
 
 	@Override
 	public List<Article> findAuditArticle(Integer page) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.findAuditArticle((page-1)*10);
 	}
 
 	@Override
 	public Integer auditCommentsArticle(Integer id, Integer commentsArticleStatus) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.auditCommentsArticle(id, commentsArticleStatus);
 	}
 
 	@Override
 	public List<CommentArticle> findAuditCommentsArticle(Integer page) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.findAuditCommentsArticle(page);
 	}
 
 	@Override
 	public Integer auditCompany(Integer companyId, Integer cmpIntegerStatus) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.auditCompany(companyId, cmpIntegerStatus);
 	}
 
 	@Override
 	public List<Company> findAuditCompany(Integer page) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.findAuditCompany(page);
 	}
 
 	@Override
 	public Integer auditCommentsCompanyAndPeople(Integer id, Integer discussStatus) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.auditCommentsCompanyAndPeople(id, discussStatus);
 	}
 

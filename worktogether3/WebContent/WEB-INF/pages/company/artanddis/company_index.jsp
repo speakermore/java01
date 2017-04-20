@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<%@include file="/WEB-INF/pages/header.jsp" %>
+  	<%@include file="/WEB-INF/pages/nav.jsp" %>
 	<div class="container">
 		<div class="col-sm-9 column wt-hby-left">
 			<div class="row clearfix"  style="border-right: 2px solid #f8f8f8;">

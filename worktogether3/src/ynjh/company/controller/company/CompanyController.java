@@ -17,6 +17,10 @@ public class CompanyController {
 	@Resource
 	private CompanyService companyService;
 	
+	@RequestMapping("/add_companyarticle")
+	public String addcompany(){
+		return "company/artanddis/add_companyarticle";
+	}
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView companyLogin(String companyLoginId,String companyPassword,HttpSession session){
 		Company company=companyService.login(companyLoginId, companyPassword);
@@ -30,7 +34,7 @@ public class CompanyController {
 				mv.addObject("operatorInfo","登录成功");
 				mv.addObject("company",company);
 				session.setAttribute("company",company);
-				mv.setViewName("company/main");
+				mv.setViewName("company/artanddis/company_index");
 		}
 		return mv;
 	}
@@ -43,7 +47,7 @@ public class CompanyController {
 	
 	@RequestMapping(value={"/index","/"})
 	public String index(){
-		return "company/company/company_index";
+		return "company/company/company_login";
 	}
 	
 	@RequestMapping(value="/add",method=RequestMethod.GET)
