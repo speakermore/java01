@@ -70,14 +70,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		$("#boy").click(function() {
-			$("#userGender").val(1);
-		});
-		$("#girl").click(function() {
-			$("#userGender").val(2);
-		});
-	</script>
+	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </body>
 
 </html>

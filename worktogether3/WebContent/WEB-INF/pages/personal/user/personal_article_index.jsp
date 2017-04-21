@@ -81,13 +81,13 @@
 	</div>
 </article>
 <script type="text/javascript">
-	var id = $("#getuserid").val();
+/* 	var id = $("#getuserid").val();
 	var value = $("#pageGosk").val();
 	$("#pageBtn").click(
 			function() {
 				$(this).attr("href",
 						"javascript:ajaxPagination(" + value + "," + id + ")");
-			});
+			}); */
 	var ajaxPagination = function(page, id) {
 		$.ajax({
 			url : "personal/article/ajaxLookArticleList?toPage=" + page
