@@ -1,45 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/pages/personal/common/guidepackage.jsp"%>
-<nav class="navbar navbar-default navbar-fixed-top work-together-background"
-	role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#work_together_nav">
-				<span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"><img
-				src="img/2fb750d9ad54ad751d401a7a33ac465.jpg" width="28" height="30" /></a>
-		</div>
-		<div class="collapse navbar-collapse navbar-left"
-			id="work_together_nav">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="personal/user/gotoIndex">首页</a></li>
-				<li><a href="#">软件人才</a></li>
-				<li><a href="#">名企招聘</a></li>
-				<li><a href="#">技术众筹</a></li>
-				<li><a href="#">认证培训</a></li>
-				<li><a href="#">自主创业</a></li>
-				<li><a href="#">关于我们</a></li>
-			</ul>
-		</div>
-		<c:if test="${user==null }">
-			${loginInfo }<br />
-				<a class="hidden-xs btn btn-default navbar-btn navbar-right" href="personal/user/login">登录</a>
-		</c:if>
-		<c:if test="${user!=null }">
-				<a class="hidden-xs btn btn-default navbar-btn navbar-right" href="personal/user/logout">退出</a>
-				<a class="hidden-xs btn btn-default navbar-btn navbar-right" href="personal/user/chargeById?id=${user.id }">充值</a>
-		</c:if>
-		<form class="navbar-form navbar-right hidden-xs" role="search">
-			<div class="form-group hidden-xs">
-				<input class="form-control" name="search" placeholder="软件工程师"
-					type="search" />
-			</div>
-			<button class="btn btn-default">搜索</button>
-		</form>
-	</div>
-</nav>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page autoFlush="true" buffer="1024kb"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>包</title>
+<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" href="thirdpart/qqFace/css/reset.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<link rel="stylesheet" href="thirdpart/qqFace/css/reset.css">
+<link href="css/login.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" />
+<link rel="styleheet" href="personal/css/register.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="personal/css/personal_common.css" />
+<link href="thirdpart/icheck/skins/line/orange.css" rel="stylesheet">
+<link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+</body>
+</html>

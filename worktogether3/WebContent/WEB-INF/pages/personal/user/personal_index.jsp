@@ -4,9 +4,10 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -75,6 +76,6 @@
 			</div>
 		</div>
 	</div>
-	
+	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </body>
 </html>
