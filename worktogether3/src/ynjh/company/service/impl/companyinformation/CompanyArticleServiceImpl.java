@@ -72,8 +72,11 @@ public class CompanyArticleServiceImpl implements CompanyArticleService{
 
 	@Override
 	public int findMaxPage() {
-		
-		return (companyArticleMapper.getMaxRecordCount()+(10-1))/10;
+		if(companyArticleMapper.getMaxRecordCount()<=0){
+			return 1;
+		}else{
+			return (companyArticleMapper.getMaxRecordCount()+(10-1))/10;
+		}
 	}
 
 }

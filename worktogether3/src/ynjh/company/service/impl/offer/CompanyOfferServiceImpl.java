@@ -25,34 +25,43 @@ public class CompanyOfferServiceImpl implements CompanyOfferService {
 			return companyOfferMapper.addOffer(offer);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.warn("新增面试邀请失败");
+			logger.warn("发送面试邀请失败");
 		}
 		return result;
+	}
+	
+	@Override
+	public int updateOfferAction(Integer id,Integer offerAction) {
+		return companyOfferMapper.updateOfferAction(id, offerAction);
+	}
+
+	@Override
+	public List<Offer> findCompanyOffers(Integer id) {
+		return companyOfferMapper.findCompanyOffers(id);
+	}
+	
+	@Override
+	public List<Offer> findUserOffers(Integer id) {
+		return companyOfferMapper.findUserOffers(id);
+	}
+	
+	@Override
+	public Offer findCompanyOffer(Integer id) {
+		return companyOfferMapper.findCompanyOffer(id);
+	}
+	
+	@Override
+	public Offer findUserOffer(Integer id) {
+		return companyOfferMapper.findUserOffer(id);
 	}
 
 	@Override
 	public List<Offer> findAll(Integer page) {
-		return companyOfferMapper.findAll(page);
+		return companyOfferMapper.findAll((page-1)*5);
 	}
-
+	
 	@Override
-	public Offer findById(Integer id) {
-		return companyOfferMapper.findById(id);
+	public int findMaxPage() {		
+		return (companyOfferMapper.getMaxRecord()+5-1)/5;
 	}
-
-	@Override
-	public int updateOfferJob(Integer id,String offerJob) {
-		return companyOfferMapper.updateOfferJob(id, offerJob);
-	}
-
-	@Override
-	public int updateOfferContent(Integer id,String offerContent) {
-		return companyOfferMapper.updateOfferContent(id, offerContent);
-	}
-
-	@Override
-	public int updateOfferStatus(Integer id,Integer offerStatus) {
-		return companyOfferMapper.updateOfferStatus(id, offerStatus);
-	}
-
 }

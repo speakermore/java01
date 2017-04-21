@@ -46,8 +46,12 @@ public class CompanyCommentArticleServicempl implements CompanyCommentArticleSer
 
 	@Override
 	public int getMaxpage() {
+		if(ccArticleMapper.getMaxCommentCount()<=0){
+			return 1;
+		}else{
+			return (ccArticleMapper.getMaxCommentCount()+(5-1))/5;
+		}
 		
-		return (ccArticleMapper.getMaxCommentCount()+(5-1))/5;
 	}
 
 }

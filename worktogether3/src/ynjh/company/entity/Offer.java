@@ -6,91 +6,140 @@ import java.sql.Timestamp;
 public class Offer implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private Integer companyId;
 	private Integer userId;
-	private Integer companyId;	
 	private String offerJob;
-	private String offerContent;	
+	private String offerContent;
 	private Timestamp offerInvitationTime;
 	private Timestamp offerSendTime;
 	private Integer offerStatus=1;
+	private Integer offerAction=1;
+	private String companySimpleName;
+	private String userName;
 	
 	public Offer() {
 		
 	}
 
-	public Offer(Integer id, Integer userId, Integer companyId, 
-			String offerJob, String offerContent, 
-			Timestamp offerInvitationTime, Timestamp offerSendTime, Integer offerStatus) {
+	public Offer(Integer id, Integer companyId, Integer userId,
+			String offerJob, String offerContent,
+			Timestamp offerInvitationTime, Timestamp offerSendTime,
+			Integer offerStatus, Integer offerAction,
+			String companySimpleName, String userName) {
 		super();
-		this.id = id;
-		this.userId = userId;
+		this.id = id;		
 		this.companyId = companyId;
+		this.userId = userId;
 		this.offerJob = offerJob;
 		this.offerContent = offerContent;
 		this.offerInvitationTime = offerInvitationTime;
 		this.offerSendTime = offerSendTime;
 		this.offerStatus= offerStatus;
+		this.offerAction= offerAction;
+		this.companySimpleName= companySimpleName;
+		this.userName= userName;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+	}	
+
 	public Integer getCompanyId() {
 		return companyId;
 	}
+
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
 	}
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	
 	public String getOfferJob() {
 		return offerJob;
 	}
+
 	public void setOfferJob(String offerJob) {
 		this.offerJob = offerJob;
 	}
+
 	public String getOfferContent() {
 		return offerContent;
 	}
+
 	public void setOfferContent(String offerContent) {
 		this.offerContent = offerContent;
 	}
+
 	public Timestamp getOfferInvitationTime() {
 		return offerInvitationTime;
 	}
+
 	public void setOfferInvitationTime(Timestamp offerInvitationTime) {
 		this.offerInvitationTime = offerInvitationTime;
 	}
+
 	public Timestamp getOfferSendTime() {
 		return offerSendTime;
 	}
+
 	public void setOfferSendTime(Timestamp offerSendTime) {
 		this.offerSendTime = offerSendTime;
 	}
+
 	public Integer getOfferStatus() {
 		return offerStatus;
 	}
+
 	public void setOfferStatus(Integer offerStatus) {
 		this.offerStatus = offerStatus;
 	}
+
+	public Integer getOfferAction() {
+		return offerAction;
+	}
+
+	public void setOfferAction(Integer offerAction) {
+		this.offerAction = offerAction;
+	}
+
+	public String getCompanySimpleName() {
+		return companySimpleName;
+	}
+
+	public void setCompanySimpleName(String companySimpleName) {
+		this.companySimpleName = companySimpleName;
+	}
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	@Override
 	public String toString() {
 		return "Offer [id=" + id + 
-				", userId=" + userId + 
 				", companyId=" + companyId + 
-				", offerJob="	+ offerJob + 
+				", userId=" + userId + 
+				", offerJob=" + offerJob + 
 				", offerContent=" + offerContent + 
-				", offerInvitationTime=" + offerInvitationTime +
+				", offerInvitationTime=" + offerInvitationTime + 
 				", offerSendTime=" + offerSendTime + 
-				", offerStatus=" + offerStatus +
+				", offerStatus=" + offerStatus + 
+				", offerAction=" + offerAction + 
+				", companySimpleName=" + companySimpleName + 
+				", userName=" + userName + 
 				"]";				
 	}
 }

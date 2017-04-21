@@ -28,10 +28,12 @@ public class CompanyChargeController {
 	
 	
 	//充值成功跳转
-	@RequestMapping("/company_charge")
-	public ModelAndView toCompanycharge(Integer companyId){
-		ModelAndView mv=new ModelAndView();
-		companyChargeService.findById(companyId);
+	@RequestMapping("/company_charge/{id}")
+	public ModelAndView toCompanycharge(@PathVariable Integer id){
+		ModelAndView mv=new ModelAndView("company/charge/company_charge");
+//		Integer companyId=id;
+		CompanyCharge companyCharge= companyChargeService.findById(id);
+		mv.addObject("companyCharge", companyCharge);
 //		return "company/charge/company_charge";
 		return mv;
 	}
@@ -65,7 +67,7 @@ public class CompanyChargeController {
 			mv.setViewName("company/charge/company_charge");
 		}else{
 			mv.addObject("operatorInfo", "充值失败");
-			mv.addObject("toPage", "company/company_charge");
+			mv.addObject("toPage", "company/charge/company_charge");
 		}
 		
 		return mv;
@@ -101,7 +103,7 @@ public class CompanyChargeController {
 	//跳转消费页面
 	@RequestMapping("/chargeTest")
 	public String test(){
-		return "/company/charge/consume_charge";
+		return "company/charge/consume_charge";
 		
 	}
 	

@@ -10,25 +10,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{userId},#{companyId},#{offerJob},#{offerContent},#{offerInvitationTime},#{offerSendTime})
 	</insert>
 	
-	<select id="findAll" parameterType="int" resultType="Offer">
-		select * from offer where offerStatus!=4
-		<!--语法： limit 开始记录号（从0开始）,每页记录条数 -->
-		<if test="page!=null">
-			limit #{page},5
-		</if>
+	<update id="updateOfferAction" parameterType="int">
+		update offer set offerAction=#{offerAction} where id=#{id}
+	</update>	
+	
+	<select id="findCompanyOffers" resultType="Offer" parameterType="int">
+		select * from offer
+		<!-- select o.*,userName from offer o,user -->
+		<!-- where companyId=#{companyId} and o.userId=user.id and offerStatus=2 -->
 	</select>
-	<select id="findById" parameterType="int" resultType="Offer">
-		select * from offer where id=#{id}
+	<select id="findUserOffers" resultType="Offer" parameterType="int">
+		select o.*,companySimpleName from offer o,company
+		where userId=#{userId} and o.companyId=company.id and offerStatus=2
+	</select>
+	<select id="findCompanyOffer" resultType="Offer" parameterType="int">
+		select * from offer 
+		where id=#{id}
+	</select>
+	<select id="findUserOffer" resultType="Offer" parameterType="int">
+		select * from offer
+		where id=#{id}
 	</select>
 	
-	<update id="updateOfferJob" >
-		update offer set offerJob=#{offerJob} where id=#{id}
-	</update>
-	<update id="updateOfferContent" >
-		update offer set offerContent=#{offerContent} where id=#{id}
-	</update>
-	<update id="updateOfferStatus" parameterType="int">
-		update offer set offerStatus=#{offerStatus} where id=#{id}
-	</update>
+	<select id="findAll" resultType="Offer" parameterType="int">
+		select * from offer 
+		<!-- <if test="page!=null">
+			limit #{page},5
+		</if>		 -->
+	</select>
+	
+	<select id="getMaxRecord" resultType="int">
+		select count(*) from offer
+	</select>
 	
 </mapper>

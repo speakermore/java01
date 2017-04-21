@@ -5,16 +5,12 @@ import java.util.List;
 import ynjh.company.entity.Offer;
 
 public interface CompanyOfferService {
-	//添加新的面试邀请
 	public int addOffer(Offer offer);
-	//查询所有
+	public int updateOfferAction(Integer id,Integer offerAction);
+	public List<Offer> findCompanyOffers(Integer id);
+	public List<Offer> findUserOffers(Integer id);
+	public Offer findCompanyOffer(Integer id);
+	public Offer findUserOffer(Integer id);
 	public List<Offer> findAll(Integer page);
-	//根据id查询
-	public Offer findById(Integer id);	
-	//修改岗位
-	public int updateOfferJob(Integer id,String offerJob);
-	//修改详细信息
-	public int updateOfferContent(Integer id,String offerContent);
-	//修改状态
-	public int updateOfferStatus(Integer id,Integer offerStatus);
+	public int findMaxPage();
 }

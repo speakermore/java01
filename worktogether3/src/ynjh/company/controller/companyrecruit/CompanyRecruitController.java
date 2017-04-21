@@ -33,7 +33,7 @@ public class CompanyRecruitController {
 		Company company=(Company)session.getAttribute("company");
 		companyRecruit.setCmpRecStatus(1);
 		companyRecruit.setCmpRecTime(new Timestamp(System.currentTimeMillis()));
-		companyRecruit.setCompanyId(3);
+		companyRecruit.setCompanyId(company.getId());
 		int result=companyRecruitService.addCompanyRecruit(companyRecruit);
 		ModelAndView mv=new ModelAndView("company/cmprs/companyRecruit_info");
 		if(result>0){

@@ -30,7 +30,7 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 		if (page!=null&&page<1) {
 			page=1;
 		}
-		int maxpage=cDiscussMapper.getMaxRecordCount();
+		int maxpage=getMax();
 		if (page!=null&&page>maxpage) {
 			page=maxpage;
 		}
@@ -51,8 +51,12 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 
 	@Override
 	public int getMax() {
+		if(cDiscussMapper.getMaxRecordCount()<=0){
+			return 1;
+		}else{
+			return (cDiscussMapper.getMaxRecordCount()+(5-1))/5;
+		}
 		
-		return (cDiscussMapper.getMaxRecordCount()+(5-1))/5;
 	}
 
 }

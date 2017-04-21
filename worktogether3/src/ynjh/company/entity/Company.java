@@ -16,7 +16,6 @@ public class Company {
 	private String companyAddress;
 	private String companyDetailImg;
 	private Integer companyStatus;	
-	private String companyJob;
 	
 	
 	
@@ -29,7 +28,7 @@ public class Company {
 	public Company(Integer id, String companyLoginId, String companyPassword, String companyName,
 			String companySimpleName, String companyLogo, String companyLicenseImg, String companyLicenseNo,
 			String companyCorporator, String companyTel, String companyEmail, String companyAddress,
-			String companyDetailImg, Integer companyStatus, String companyJob, String companyConnection) {
+			String companyDetailImg, Integer companyStatus, String companyConnection) {
 		super();
 		this.id = id;
 		this.companyLoginId = companyLoginId;
@@ -45,7 +44,6 @@ public class Company {
 		this.companyAddress = companyAddress;
 		this.companyDetailImg = companyDetailImg;
 		this.companyStatus = companyStatus;
-		this.companyJob = companyJob;
 	}
 
 
@@ -53,8 +51,8 @@ public class Company {
 	public Integer getId() {
 		return id;
 	}
-
-
+	
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -190,15 +188,6 @@ public class Company {
 	}
 
 
-	public String getCompanyJob() {
-		return companyJob;
-	}
-
-
-	public void setCompanyJob(String companyJob) {
-		this.companyJob = companyJob;
-	}
-
 
 
 	@Override
@@ -208,7 +197,7 @@ public class Company {
 				+ companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
 				+ ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel + ", companyEmail="
 				+ companyEmail + ", companyAddress=" + companyAddress + ", companyDetailImg=" + companyDetailImg
-				+ ", companyStatus=" + companyStatus + ", CompanyJob=" + companyJob + ", companyConnection="+"]";
+				+ ", companyStatus=" + companyStatus +"]";
 	}
 	
 }

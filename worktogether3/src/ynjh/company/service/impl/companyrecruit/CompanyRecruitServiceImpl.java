@@ -39,7 +39,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		if(page>maxPage){
 			page=maxPage;
 		}
-		return companyRecruitMapper.findAll(page);
+		return companyRecruitMapper.findAll((page-1)*5);
 	}
 
 	@Override

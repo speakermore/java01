@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page autoFlush="true" buffer="1024kb"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -33,6 +34,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    	textarea {
+			resize:none;
+			padding:5px; 
+			border-radius:3px;
+			box-shadow: inset 0 2px 3px rgba(0,0,0,0.2);
+			border: solid 1px #ccc;
+			box-sizing: border-box; 
+		}
+    </style>
   </head>
   
   <body>
@@ -47,7 +58,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="wt-hby-companyInt">
 								这里是相关的企业简单的简介,2017年2月23日上午，习近平总书记从中南海出发，驱车100多公里，专程到河北省安新县实地察看规划新区核心区概貌。在大王镇小王营村，总书记走进一片开阔地，极目远眺。这里就是规划中的雄安新区起步区的核心地块。 在展开的一张规划图前，习近平仔细察看区位、规划状况，详细了解人口搬迁安置、区域内的地质水文条件等情况......
 							</p>
-							<a class="btn" href="company/findById">查看公司简介 »</a>
+							<a class="btn" href="company/company/findById/${company.id }">查看公司详细资料 »</a>
+							<a class="btn" href="offer/offer">发送offer »</a>
+							
 						</div>
 					</div>
 					<br />
@@ -59,11 +72,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void()">其它操作<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="companyarge">充值</a>
+									<a href="company/charge/charge">充值</a>
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="company/artanddis/article/add_companyarticle">发表文章</a>
+									<a href="company/artanddis/article/charge">发表文章</a>
 								</li>
 							</ul>
 						</li>	
@@ -144,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<div class="col-sm-12" style="border-bottom: 1px solid #f5f5f5">
 													<div class="col-sm-10">${dis.discussContent}</div>
 													<div class="col-sm-2">
-														<c:if test="${dis.discussUsersId==user.id }">
+														<c:if test="${dis.discussUsersId==userid }">
 						   									<a href="company/artanddis/discuss/deletecompanydiscuss/${dis.id }"><em class="glyphicon glyphicon-trash"></em></a>
 						   								</c:if>
 													</div>
@@ -176,27 +189,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<br />
 			<div>
-				<c:if test="${disUserId==user.id }">
-					<form action="company/artanddis/discuss/add_companydiscuss" method="post">
-						<div class="form-group col-sm-12">
-							<input type="hidden" name="discussLevel" id="discussLevel" />
-					   		<label class="col-sm-2">评价星级</label>
-					   		<div class="col-sm-10 raty" id="star" value="3.5" name="discussLevel"></div>
-				   		</div>
-				    	<div class="form-group col-sm-12">
-				    		<label class="col-sm-2">评论内容</label>
-				    		<div class=col-sm-10">
-				    			<textarea name="discussContent" rows="7" cols="90" 
-				    				maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea>
-				    		</div>
+				<form action="company/artanddis/discuss/add_companydiscuss" method="post">
+					<c:if test="${disUserId!=user.id }">
+							<div class="alert alert-danger">非常抱歉，您不是个人用户，无法对企业用户进行评论</div>
+					</c:if>
+					<div class="form-group col-sm-12">
+						<input type="hidden" name="discussLevel" id="discussLevel" />
+					   	<label class="col-sm-2">评价星级</label>
+					   	<div class="col-sm-10 raty" id="star" value="3.5" name="discussLevel"></div>
+				   	</div>
+				    <div class="form-group col-sm-12">
+				    	<label class="col-sm-2">评论内容</label>
+				    	<div class=col-sm-10">
+				    		<textarea name="discussContent" rows="7" cols="90" 
+				    			maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea>
 				    	</div>
-				    	<div class="col-sm-12">
-				    		<input type="submit" value="评论企业" class="btn btn-warning" />
-				    		<div class="col-sm-2"></div>
-				    		<div id="wordstip" class="col-sm-8 column"></div>
-				    	</div>
-	   				</form>
-				</c:if>
+				    </div>
+				    <div class="col-sm-12">
+				    	<input type="submit" value="评论企业" class="btn btn-warning" />
+				    	<div class="col-sm-2"></div>
+				    	<div id="wordstip" class="col-sm-8 column"></div>
+				    </div>
+	   			</form>
 			</div>
    			<div>
    				<div class=" col-sm-5 column"></div>

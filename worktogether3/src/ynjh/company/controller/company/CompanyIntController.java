@@ -17,15 +17,18 @@ public class CompanyIntController {
 	@Resource
 	CompanyIntService companyIntService;
 	
-	@RequestMapping(value="updateCompany",method=RequestMethod.GET)
-	public String updateCompanyInt(){
-		
-		return "company/company/update_company";
+	//跳转更改信息界面
+	@RequestMapping(value="/updateCompanyInt",method=RequestMethod.GET)
+	public ModelAndView updateCompanyInt(HttpSession session){
+		ModelAndView mv=new ModelAndView("company/company/update_companyInt");
+		CompanyIntroduction companyInt=(CompanyIntroduction)session.getAttribute("conpanyInt");
+		mv.addObject("companyInt",companyInt);
+		return mv;
 	}
 	
 	
 	//通过id更新用户简介
-	@RequestMapping(value="updateCompanyInt",method=RequestMethod.POST)
+	@RequestMapping(value="/updateInt",method=RequestMethod.POST)
 	public ModelAndView updateById(CompanyIntroduction companyInt,HttpSession session){
 		ModelAndView mv=new ModelAndView();
 		int result=-1;
@@ -54,11 +57,15 @@ public class CompanyIntController {
 	}
 	
 	//跳转用户资料页面
-	@RequestMapping(value="findById/{companyId}",method=RequestMethod.GET)
-	public ModelAndView companyIntShow(@PathVariable Integer companyId){
+	@RequestMapping(value="/findById/{companyId}",method=RequestMethod.GET)
+	public ModelAndView companyIntShow(@PathVariable Integer companyId,HttpSession session){
 		ModelAndView mv=new ModelAndView("company/company/company_data");
 		CompanyIntroduction companyInt=companyIntService.findById(companyId);
+		Company company=(Company)session.getAttribute("company1");
+		session.setAttribute("companyInt", companyInt);
 		mv.addObject("companyInt", companyInt);
+		mv.addObject("company", company);
+		mv.setViewName("company/company/company_data");
 		return mv;
 	}
 }
