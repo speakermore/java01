@@ -2,7 +2,10 @@ package ynjh.personal.service;
 
 import java.util.List;
 import ynjh.personal.entity.Discuss;
-
+/**
+ * @author 胡林飞
+ * 
+ */
 public interface DiscussService {
 		//写评论 
 		public Integer addDiscuss(Discuss discuss);

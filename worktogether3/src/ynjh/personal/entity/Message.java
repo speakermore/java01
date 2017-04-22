@@ -2,7 +2,10 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * @author 胡林飞
+ * 信息表，与message表对应
+ */
 public class Message implements Serializable {
 	// id
 	private Integer id;

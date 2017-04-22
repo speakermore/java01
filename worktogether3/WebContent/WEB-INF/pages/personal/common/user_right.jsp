@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 header {
 	height: 300px;
@@ -39,29 +40,68 @@ span.emotion:hover {
 	<section class="panel">
 		<div class="panel-title">我的信息</div>
 		<div class="panel-body">
-			<div class="col-sm-5">
-				<img src="#" width="80" height="80" title="我的头像" alt="我的头像" />
+			<div class="col-sm-5 ">
+				<a href="#"><img src="personal/img/head.gif" width="80" height="80" title="我的头像" alt="我的头像"/></a>
 			</div>
 			<div class="col-sm-7">
 				<!--我的信息左边文字-->
-				<div class="row">
-					<p class="col-sm-12">
-						<em>姓名：</em>xxx
-					</p>
-				</div>
-				<div class="row">
-					<p class="col-sm-12">
-						<em>昵称：</em>xxx
-					</p>
-				</div>
-				<div class="row">
-					<p class="col-sm-12">
-						<em>职位：</em>xxx
-					</p>
-				</div>
+				<c:if test="${user!=null }">
+					<c:if test="${user.userRealName!='无' }">
+						<div class="row">
+							<p class="col-md-12">
+								<em>姓名：</em>${user.userRealName }
+							</p>
+						</div>
+					</c:if>
+					<c:if test="${user.userRealName=='无' }">
+						<div class="row">
+							<p class="col-md-12">
+								请<a href="personal/user/addUserOther">实名认证</a>
+							</p>
+						</div>
+					</c:if>
+					<c:if test="${user.userName!='无' }">
+						<div class="row">
+							<p class="col-md-12">
+								<em>昵称：</em>${user.userName }
+							</p>
+						</div>
+					</c:if>
+					<c:if test="${user.userName=='无' }">
+						<div class="row">
+							<p class="col-md-12">
+								请<a href="personal/user/addUserReal">完善信息</a>
+							</p>
+						</div>
+					</c:if>
+					<c:if test="${resume!=null }">
+						<div class="row">
+							<p class="col-md-12">
+								<em>职位：</em>${resume.resumeJor }
+							</p>
+						</div>
+					</c:if>
+					<c:if test="${resume==null }">
+						<div class="row">
+							<p class="col-md-12">
+								请<a href="personal/resume/createResume">创建简历</a>
+							</p>
+						</div>
+					</c:if>
+				</c:if>
+				<c:if test="${user==null }">
+					<div class="row">
+						<p class="col-md-12">
+							请<a class="hidden-xs btn btn-default navbar-btn navbar-right"
+								href="/personal/user/login">登录</a>
+						</p>
+					</div>
+				</c:if>
 			</div>
 			<!--我的信息左边文字结束-->
-			<div class="col-sm-12">系统定期替换鸡汤文</div>
+			<br/>
+			<div class="col-sm-12">
+			系统定期替换鸡汤文</div>
 		</div>
 	</section>
 	<!--我的信息结束-->

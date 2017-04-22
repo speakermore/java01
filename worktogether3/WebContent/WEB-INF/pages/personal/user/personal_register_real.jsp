@@ -70,7 +70,7 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </body>
 
 </html>

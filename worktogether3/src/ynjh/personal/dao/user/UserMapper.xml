@@ -16,9 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateUserIDCord" parameterType="User">
         update `user` set userRealName=#{userRealName},userIDCard=#{userIDCard},userIDImgFace=#{userIDImgFace},userIDImgCon=#{userIDImgCon} where userLoginId=#{userLoginId}
     </update>
-    <!-- 登录 -->
-    <select id="loginByUserIdAndUserPassword"  resultType="User">
-        select * from  `user` where userLoginId=#{userLoginId} and userPassword=#{userPassword}
+    <!-- 登录 :邮箱或手机号 -->
+    <select id="findByUserIdAndUserPassword"  resultType="User">
+        select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword}
     </select>
     <!-- 修改用户信息：头像、密码、性别、email、出生日期、昵称 -->
 	<update id="updateUser" parameterType="User">

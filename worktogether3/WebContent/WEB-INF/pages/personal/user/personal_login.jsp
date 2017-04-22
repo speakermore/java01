@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,30 +27,27 @@
 	<div id="wt-hby-login">
 		<header class="navbar navbar-static-top bs-docs-nav wt-hby-login-top"
 			id="top">
-			<div class="container">
-				<nav class="navbar navbar-default navbar-fixed-top"
-					role="navigation">
-					<div class="container-fluid">
-						<div class="navbar-header" id="wt-hby-header-left">
-							<a class="navbar-brand" href="#">昆明</a>
-							<ul class="nav navbar-nav">
-								<li><a href="#">切换城市</a></li>
-							</ul>
-						</div>
-						<div class="collapse navbar-collapse navbar-left"
-							id="wt-hby-header-middle">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="#">首页</a></li>
-							</ul>
-						</div>
-						<div class="navbar-collapse collapse" id="wt-hby-header-right">
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="personal/user/addUser">没有账号？注册账号</a></li>
-							</ul>
-						</div>
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header" id="wt-hby-header-left">
+						<a class="navbar-brand" href="#">昆明</a>
+						<ul class="nav navbar-nav">
+							<li><a href="#">切换城市</a></li>
+						</ul>
 					</div>
-				</nav>
-			</div>
+					<div class="collapse navbar-collapse navbar-left"
+						id="wt-hby-header-middle">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="navbar-collapse collapse" id="wt-hby-header-right">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="personal/user/addUser">没有账号？注册账号</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 		</header>
 		<div class="bs-docs-header wt-hby-login-center" id="content"
 			tabindex="-1">
@@ -62,6 +60,14 @@
 					<label for="userPassword" class="sr-only">密码</label> <input
 						type="password" id="userPassword" class="form-control"
 						name="userPassword" placeholder="密码" required>
+					<!--请求验证码---->
+					<input
+						type="text" id="validateCode" class="form-control"
+						name="validateCode" placeholder="请输入验证码" required /><br/>
+					<img id="validateCode" alt="validateCode "
+						src="personal/user/codeValidate?time=<%=new Date().getTime()%>" />
+					<a class="btn btn-default" href="javascript:void(0)" role="button"
+						class="btn btn-primary btn-sm">看不清，换一张</a>
 					<div class="checkbox">
 						<label> <input type="checkbox" value="remember-me">
 							记住密码
@@ -79,9 +85,17 @@
 		</div>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/personal/jquery-3.1.1.min.js" type="text/javascript"
+	<script src="personal/js/jquery-3.1.1.min.js" type="text/javascript"
 		charset="utf-8"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">	
+		$(function(){
+			$("#validateCode+a").click(function(){
+				var path="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/";
+				$("img").attr("src",path+"personal/user/codeValidate?time="+new Date().getTime());
+			}); 
+		})
+	</script>
 </body>
 </html>

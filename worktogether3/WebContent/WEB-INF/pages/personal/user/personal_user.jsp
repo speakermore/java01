@@ -3,6 +3,26 @@
 <!--左侧状态栏位-->
 <article
 	class="col-md-12 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
+		<!--发表状态小节-->
+    					<section class="panel">
+    						<div class="panel-heading">发表状态</div>
+    						<div class="panel-body">
+    							<form >
+    								<div class="form-group">
+    									<textarea id="saytext" name="saytext" class="form-control" rows="5" placeholder="说点什么呗"></textarea>
+    								</div>
+    								<div class="form-group">
+    									<div class="col-sm-5">
+    										<span class="emotion">表情</span></p>
+    									</div>
+    									<div class="col-sm-offset-10">
+    										<input  type="submit" class="btn btn-success" value="发表" />
+    									</div>
+    								</div>
+    							</form>
+    						</div>
+    					</section><!--//发表状态 -->
+		
 		<!--修改-->
 		<section class="panel">
 			<div class="row">

@@ -40,8 +40,6 @@ public interface ResumeMapper {
 	 * 恢复简历
 	 */
 	public Integer renewResumeById(Integer id);
-	
-	
 	/**
 	 * 开始
 	 * 教育记录添加

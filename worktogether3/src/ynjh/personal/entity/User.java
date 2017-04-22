@@ -3,23 +3,45 @@ package ynjh.personal.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import ynjh.common.util.MD5Util;
+/**
+ * 
+ * @author 刘志浩
+ * 用户表，对应user表
+ */
 public class User implements Serializable{
+	//用户id
 	private Integer id;
-	private String userLoginId;// 用户名
-	private String userPassword;// 密码
-	private String userName;// 昵称
-	private Integer userGender;// 性别
-	private String userEmail;// 邮箱
-	private Integer userStatus;// 状态 1.未认证 2.已认证 3.禁用
-	private String userRealName;// 真实姓名
-	private String userIDCard;// 身份证号码
-	private String userIDImgFace;// 身份证正面图片
-	private String userIDImgCon;// 身份证反面图片
-	private Timestamp userCreateDate;// 注册时间
-	private String userHeadImgPath;// 用户头像
-	private Double userMoney;// 余额
-	private Timestamp userBirthday;// 用户生日
-	private Integer userLevel;// 用户等级
+	// 用户名
+	private String userLoginId;
+	// 密码
+	private String userPassword;
+	// 昵称
+	private String userName;
+	// 性别
+	private Integer userGender;
+	// 邮箱
+	private String userEmail;
+	// 状态 1.待审核 2.正常 3.审核未通过 4.禁用
+	private Integer userStatus;
+	// 真实姓名
+	private String userRealName;
+	// 身份证号码
+	private String userIDCard;
+	// 身份证正面图片
+	private String userIDImgFace;
+	// 身份证反面图片
+	private String userIDImgCon;
+	// 注册时间
+	private Timestamp userCreateDate;
+	// 用户头像
+	private String userHeadImgPath;
+	// 余额
+	private Double userMoney;
+	// 用户生日
+	private Timestamp userBirthday;
+	// 用户等级
+	private Integer userLevel;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -70,7 +92,14 @@ public class User implements Serializable{
 	}
 
 	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+		MD5Util md5=new MD5Util();
+		String pass=null;
+		try {
+			pass=md5.md5Encode(userPassword);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.userPassword = pass;
 	}
 
 	public String getUserName() {

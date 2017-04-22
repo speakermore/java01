@@ -2,16 +2,30 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * 
+ * @author 刘志浩
+ * 工作记录表，与work表相对应，是resume的子表
+ *
+ */
 public class Work implements Serializable{
-	private Integer id;// 工作经历ID
-	private Integer userId;// 用户ID
-	private Timestamp workBeginTime;// 工作开始时间
-	private Timestamp workEndTime;// 工作结束时间
-	private String workFirmName;// 企业名字
-	private String workUnit;// 工作岗位
-	private String workDescription;// 工作描述
+	// 工作经历ID
+	private Integer id;
+	// 用户ID
+	private Integer userId;
+	// 工作开始时间
+	private Timestamp workBeginTime;
+	// 工作结束时间
+	private Timestamp workEndTime;
+	// 企业名字
+	private String workFirmName;
+	// 工作岗位
+	private String workUnit;
+	// 工作描述
+	private String workDescription;
+	//简历id
 	private Integer resumeId;
+	//状态 1.待审核 2.正常 3.审核未通过 4.删除
 	private Integer resumeType;
 	
 	

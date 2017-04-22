@@ -2,14 +2,25 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * 
+ * @author 刘志浩
+ * 充值记录表，对应于userCharge，是user的子表
+ *
+ */
 public class UserCharge implements Serializable {
-	private Integer id;// id
-	private Integer userId;// 用户id
-	private Timestamp userChargeTime;// 充值时间
-	private Double userChargeMoney;// 充值金额
-	private Integer userChargeType;// 消费类型1.收入2.支出
-	private String userChargeContent;// 充值说明
+	// id
+	private Integer id;
+	// 用户id
+	private Integer userId;
+	// 充值时间
+	private Timestamp userChargeTime;
+	// 充值金额
+	private Double userChargeMoney;
+	// 消费类型1.收入2.支出
+	private Integer userChargeType;
+	// 充值说明
+	private String userChargeContent;
 
 	public UserCharge() {
 

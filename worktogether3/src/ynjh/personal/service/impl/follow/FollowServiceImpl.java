@@ -1,6 +1,10 @@
 package ynjh.personal.service.impl.follow;
 
 import java.util.List;
+/**
+ * @author 胡林飞
+ *操作关注
+ */
 
 import javax.annotation.Resource;
 
@@ -13,16 +17,29 @@ import ynjh.personal.service.FollowService;
 public class FollowServiceImpl implements FollowService {
 	@Resource
 	private FollowMapper followMapper;
+	/**
+	 * 添加关注
+	 * @return Integer 成功1 失败2
+	 * @param follow 关注对象
+	 */
 	@Override
 	public Integer addUserFollow(Follow follow) {
 		return followMapper.addUserFollow(follow);
 	}
-
+	/**
+	 * 取消关注
+	 * @return Integer 成功1 失败2
+	 * @param id 关注ID
+	 */
 	@Override
 	public Integer deleteUserFollow(Integer id) {
 		return followMapper.deleteUserFollow(id);
 	}
-	
+	/**
+	 * 查看关注
+	 * @return List<Follow> 关注 列表
+	 * @param id 关注者ID
+	 */
 	@Override
 	public List<Follow> selectUserFollow(Integer id) {
 		return followMapper.selectUserFollow(id);

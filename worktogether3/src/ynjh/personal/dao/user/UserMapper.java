@@ -14,7 +14,7 @@ public interface UserMapper {
 	/**
 	 * 登录
 	 */
-	public User loginByUserIdAndUserPassword(@Param("userLoginId")String userLoginId,@Param("userPassword")String userPassword); 
+	public User findByUserIdAndUserPassword(@Param("userLoginId")String userLoginId,@Param("userPassword")String userPassword); 
 	/**
 	 * 添加用户（注册）
 	 */

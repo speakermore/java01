@@ -4,6 +4,7 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
+<%@include file="/WEB-INF/pages/nav.jsp"%>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
@@ -29,6 +30,7 @@
 			</div>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 	<script type="text/javascript">
 		$("#resumeBirthday").datetimepicker({
 			format : 'yyyy-mm-dd',
@@ -59,7 +61,6 @@
 			});
 		});
 	</script>
-
+	
 </body>
-
 </html>

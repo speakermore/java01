@@ -2,14 +2,23 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * @author 胡林飞
+ * 关注表，与follow表对应
+ */
 public class Follow implements Serializable{
+	//id
 	private Integer id;
-	private Integer followId;//关注者id(用户或企业id)
-	private Integer byFollowId;//被关注者id(企业或用户的id)
-	private Timestamp followDate;//关注日期
-	private Integer followType;//1.企业用户 2.个人用户
-	private Integer followStartType;//1.企业用户 2.个人用户
+	//关注者id(用户或企业id)
+	private Integer followId;
+	//被关注者id(企业或用户的id)
+	private Integer byFollowId;
+	//关注日期
+	private Timestamp followDate;
+	//关注者类型：1.企业用户 2.个人用户
+	private Integer followType;
+	//被关注者类型：1.企业用户 2.个人用户
+	private Integer followStartType;
 	
 	public Follow(){
 		
