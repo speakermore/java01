@@ -26,7 +26,7 @@
 		<!--wt-姓名首字母-相关文字-->
 		<div id="wt-hby-login">
 			<header class="navbar navbar-static-top bs-docs-nav wt-hby-login-top" id="top">
-				<div class="container">
+				
 					<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     				<div class="container-fluid">
           		<div class="navbar-header" id="wt-hby-header-left">
@@ -47,14 +47,14 @@
           		</div>
        	 		</div>
       		</nav>
-				</div>
+				
 			</header>
 			<div class="bs-docs-header wt-hby-login-center"  id="content" tabindex="-1">
-				<div class="container bs-docs-container">
+				<div class="container">
 					<form class="form-signin" action="company/company/login" method="post">
       		  <h2 class="form-signin-heading">登录</h2>
        			<label for="inputEmail" class="sr-only">邮箱/手机号</label>
-        		<input type="email" id="inputEmail" class="form-control" placeholder="邮箱/手机号" required autofocus name="companyLoginId">
+        		<input type="text" id="inputEmail" class="form-control" placeholder="邮箱/手机号" required autofocus name="companyLoginId">
        			<label for="inputPassword" class="sr-only">密码</label>
         		<input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="companyPassword">
         		<div class="checkbox">
@@ -62,10 +62,8 @@
 	            	<input type="checkbox" value="remember-me"> 记住密码
 	          	</label>
         		</div>
-        		<button class="btn btn-lg btn-primary btn-block" type="submit">立即登录</button>
-        		<div id="inputagree">
-        			<a href="#">我已阅读并同意服务条款</a>
-        		</div>
+        		<button class="btn btn-lg btn-success btn-block" type="submit">立即登录</button>
+        		
       		</form>
     		</div>
 			</div>

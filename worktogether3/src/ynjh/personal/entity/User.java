@@ -22,7 +22,7 @@ public class User implements Serializable{
 	private Integer userLevel;// 用户等级
 	
 	public User() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public User(String userLoginId, String userPassword, String userName,

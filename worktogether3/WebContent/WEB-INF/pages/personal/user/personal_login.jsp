@@ -26,8 +26,7 @@
 	<div id="wt-hby-login">
 		<header class="navbar navbar-static-top bs-docs-nav wt-hby-login-top"
 			id="top">
-			<div class="container">
-				<nav class="navbar navbar-default navbar-fixed-top"
+			<nav class="navbar navbar-default navbar-fixed-top"
 					role="navigation">
 					<div class="container-fluid">
 						<div class="navbar-header" id="wt-hby-header-left">
@@ -49,7 +48,6 @@
 						</div>
 					</div>
 				</nav>
-			</div>
 		</header>
 		<div class="bs-docs-header wt-hby-login-center" id="content"
 			tabindex="-1">
@@ -67,7 +65,7 @@
 							记住密码
 						</label>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+					<button class="btn btn-lg btn-success btn-block" type="submit">登录</button>
 					<div id="inputagree">
 						<a href="#">我已阅读并同意服务条款</a>
 					</div>
