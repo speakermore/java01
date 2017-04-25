@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="ynjh.common.util.*"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -14,14 +14,16 @@
 <%@include file="header.jsp"%>
 </head>
 <body>
+	<div class="container-fluid">
 	<div><%@include file="menu.jsp"%></div>
 	<div class="col-md-offset-2">
 		<div class="row">
-			<div class="col-sm-10" style="border: 1px solid black">
+			<div class="col-sm-10">
 				<div class="row" style="background-color:#FCFCFC ;">
 					<div class="col-sm-12">						
-						  <h3>待审核简历:</h3>
+						  
 							<section class="panel">
+							<blockquote>待审核简历:</blockquote>
 							<c:if test="${resumeList5==null}">
 								<jsp:forward page="/indexResume"/>
 							</c:if>
@@ -36,13 +38,14 @@
 									</tr>
 								</thead>
 								<tbody>
+									<c:set var="genders" value="${CommonStatus.SEX }"></c:set>
 									<c:forEach items="${resumeList5}" var="res" varStatus="status">
 										
 											<tr>
 												<td><a href="admin/findAuditResumeById?id=${res.id}">${res.resumeTitle} </a></td>
 												<td>${res.userId}</td>
 												<td>${res.resumeName}</td>
-												<td>${res.resumeGender}</td>
+												<td>${genders[res.resumeGender]}</td>
 												<td><fmt:formatDate value="${res.resumeCreateDate}" pattern="yyyy年MM月dd日"/></td>
 											</tr>
 										
@@ -53,8 +56,9 @@
 						</section>
 					</div>
 					<div class="col-sm-12">						
-						  <h3>待审核文章:</h3>
+						  
 							<section class="panel">
+							<blockquote>待审核文章:</blockquote>
 							<c:if test="${articleList5==null}">
 								<jsp:forward page="/indexArticle"/>
 							</c:if>
@@ -82,11 +86,10 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							</table>
 							<div class="col-md-offset-11"><a href="admin/findAuditResume/0">更多...</a></div>
 						</section>
 					<div class="col-sm-12">						
-						  <h3>待审核评论:</h3>
+						  <blockquote>待审核评论:</blockquote>
 							<section class="panel">
 							<c:if test="${discussList5==null}">
 								<jsp:forward page="/indexDiscuss"/>
@@ -115,7 +118,6 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							</table>
 							<div class="col-md-offset-11"><a href="admin/findAuditResume/0">更多...</a></div>
 						</section>
 					</div>
@@ -123,7 +125,8 @@
 			</div>
 		</div>
 	</div>
-
+	</div>
 	<div><%@include file="footer.jsp"%></div>
+	</div><!-- end of container-fluid -->
 </body>
 </html>

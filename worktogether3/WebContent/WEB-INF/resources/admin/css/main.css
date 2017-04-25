@@ -4,6 +4,10 @@
 hr{
 	border-top:1px dotted #afafaf;
 }
+
+blockquote{
+	border-left-color:fa941b;
+}
 .work-together-background{
     	background-image: linear-gradient(to bottom,#fa941b,#fe6000);
 }
@@ -45,7 +49,7 @@ a:focus, a:hover{
 		background-color:#fcdab1;
 }
 body{
-	padding-top:170px ;
+	padding-top:60px ;
 }
 /*
  * 指定导航栏上的字体颜色为白色
@@ -66,9 +70,7 @@ body{
    .sidebar{
    	background-color: #eef8fd;
    }
-   .table-striped>tbody>tr:nth-of-type(odd) {
-    		background-color: #feeee4;
-	}
+   
 .btn-success{
 	background-color: #fa941b;
 	border-color: #fd6001;
