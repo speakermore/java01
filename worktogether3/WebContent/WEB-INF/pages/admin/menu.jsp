@@ -3,16 +3,17 @@
 <div class="nav-main">
 <nav class="navbar navbar-inverse navbar-fixed-top work-together-background">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">管理员系统</a>
+          <a class="navbar-brand" href="#">管理员系统,欢迎!${admin.adminLoginId}</a>
         </div>
 </nav>
 <div class="nav-box">
 <div class="nav">
   <ul class="nav-ul">
-  	<li><a href="admin/exit" class="home"><span>退出</span></a></li>
-  	<li><a href="admin/findAuditResume/${1}" class="develop"><span>待审核</span></a></li>
-  	<li><a href="" class="wechat"><span>功能</span></a></li>
+  	<li><a href="index" class="home"><span>首页</span></a></li>
+  	<li><a href="admin/findAuditResume/${1}" class="develop"><span>审核管理</span></a></li>
+  	<li><a href="" class="wechat"><span>信息管理</span></a></li>
   	<li><a href="admin/findUser/${1}" class="news"><span>热门信息</span></a></li>
+  	<li><a href="admin/exit" class="home"><span>退出</span></a></li>
   	
   </ul>
 </div>
@@ -37,7 +38,7 @@
     		<li><a href=""><span>功能类别</span></a></li>
     		<li><a href="admin/update_user"><span>信息维护</span></a></li>
     		<li><a href="admin/findUser/${page}" class="contact"><span>禁用用户</span></a></li>
-    		<li><a href="#" class="news"><span>管理员日志</span></a></li>
+    		<li><a href="admin/adminLog" class="news"><span>管理员日志</span></a></li>
   			<li><a href="#" class="contact"><span>访问量统计</span></a></li>
     	</ul>
     </div>

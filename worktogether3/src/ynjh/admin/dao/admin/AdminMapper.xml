@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.admin.dao.admin.AdminMapper">
+
+	<insert id="messagePushArticle" >	<!-- 消息推送 -->
+		insert into message(userId,resendId,messageContent,messageSendTime,messageResendStatus,messageSendStatus,messageStatus) values(#{userId},#{resendId},#{messageContent},#{messageSendTime},#{messageResendStatus},2,3) 
+	</insert>
+	<!--禁用普通用户  -->
+	<update id="disableUser">
+		update user set userStatus=#{userStatus} where userId=#{userId}
+	</update>
+	<!--禁用企业用户  -->
+	<update id="disableCompany">
+		update company set company=#{companyStatus} where companyId=#{companyId}
+	</update>
+	
+	<update id="auditResume" ><!-- 简历审核 -->
+		update resume set resumeStatusThree=#{resumeStatusThree}  where id=#{id}
+	</update>
+	
+	<update id="auditArticle" parameterType="Article"><!-- 文章审核 -->
+		update article set articleStatus=#{articleStatus} where id=#{articleId}
+	</update>
+	
+	<update id="auditCommentsArticle" parameterType="CommentArticle"><!-- 文章评论审核 -->
+		update commentArticle set commentArticleStatus=#{commentArticleStatus} where id=#{id}
+	</update>
+	
+	<update id="auditCompany" parameterType="Company"><!-- 企业资质审核 -->
+		update company set cmpIntStatus=#{companyIntStatus} where id=#{id}
+	</update>
+	
+	<update id="auditCommentsCompanyAndPeople" parameterType="Discuss"><!-- 个人企业互评论审核 -->
+		update discuss set discussStatus=#{discussStatus} where id=#{id}
+	</update>
+	
+	<update id="auditInfo" parameterType="Message"><!-- 新闻审核 -->
+		update message set messageSendStatus=#{messageSendStatus} where id=#{id}
+	</update>
+	
+	<update id="auditOffer" parameterType="Offer"><!-- offer审核 -->
+		update offer set offerType=#{offerType} where id=#{id}
+	</update>
+	
+	<update id="auditRecruitment"><!-- 招聘信息审核 -->
+		update companyrecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
+	</update>
+	
+	<!-- <select id="findAuditCompany" resultType="Company">查询企业资质审核
+		select * from company where cmpIntStatus=1 
+		<if test="page!=null">
+			limit #{page},10
+		</if>
+		order by companyId
+	</select> -->
+	
+	<update id="maIntegerainAdmin" parameterType="Admin"><!-- 信息维护改 -->
+		update admin set adminName=#{adminEmail},adminTel=#{adminTel},adminEmail=#{adminEmail} where id=#{id}
+	</update>
+	
+	<!--查询普通用户状态  -->
+	<select id="findUser" resultType="User">
+		select * from user limit #{page},10
+	</select>
+	<!-- 查询企业用户状态 -->
+	<select id="findCompany" resultType="Company">
+		select * from  company limit #{page},10
+	</select>
+	
+	<select id="findAuditResume" resultType="Resume"><!-- 查询简历审核 -->
+		select * from resume where resumeStatusThree=1  order by resumeCreateDate
+	</select>
+	
+	<select id="findAuditArticle" resultType="Article"><!-- 查询文章审核 -->
+		select * from article where articleStatus=1 order by articleTime limit #{page},10 
+	</select>
+	
+	<select id="findAuditCommentsArticle" resultType="CommentArticle"><!-- 查询文章评论审核 -->
+		select * from commentArticle where commentArticleStatus=1 limit #{page},10 order by commentArticleTime
+	</select>
+	
+	<select id="findAuditCompany" resultType="Company"><!-- 查询企业资质审核 -->
+		select * from companyIntroduvtion where cmpIntStatus=1 limit #{page},10 order by companyId
+	</select>
+	
+	<select id="findAuditCommentsCompanyAndPeople" resultType="Discuss"><!-- 查询个人企业互评论审核 -->
+		select * from discuss where discussStatus=1 
+		<!-- <if test="page!=null">
+			limit #{page},10
+		</if> -->
+		order by discussTime
+	</select>
+	
+	<select id="findAuditInfo" resultType="Message"><!-- 查询新闻审核 -->
+		select * from message where messageSendStatus=1 order by messageSendTime
+		<!-- <if test="page!=null">
+			limit #{page},10
+		</if> -->
+	</select>
+	
+	<select id="findAuditOffer" resultType="Offer"><!-- 查询offer审核 -->
+		select * from offer where offerStatus=1 order by offerSendTime
+		<!-- <if test="page!=null">
+			limit #{page},10
+		</if> -->
+	</select>
+	
+	<select id="findAuditRecruitment" resultType="CompanyRecruit"><!-- 查询招聘信息审核 -->
+		select * from message where cmpRecStatus=1 order by cmpRecTime limit #{page},10
+	</select>
+	
+	<select id="findByAdminId" resultType="Admin" parameterType="String"><!-- 信息维护查询 -->
+		select * from admin where adminLoginId=#{adminId} limit #{page},10
+	</select>
+	
+	<!--个人热门文章 -->
+	<select id="findPersonBestArticle" resultType="Article">
+		select * from article  where  articleUsersType=2 order by articleReadNum desc limit 10
+	</select>
+	<!--企业热门文章 -->
+	<select id="findCompanyBestArticle" resultType="Article">
+		select * from article where articleUsersType=1 order by articleReadNum desc limit 10
+	</select>
+	<!--最佳企业id -->
+	<select id="findCompanyId" resultType="Integer">
+		select discusUsersType from discuss group by(discusUsersType) order by sum(discussLevel) desc limit 10 
+	</select>
+	<!-- 找到企业 -->
+	<select id="findCompanyById" parameterType="Integer" resultType="Company">
+		select * from company where companyLoginId=#{companyLoginId}
+	</select>
+	<!-- 获得最大信息数 -->
+	<select id="findMaxPage" resultType="Integer">
+		select count(*) from admin
+	</select>
+	<!-- 登录退出 -->
+	<select id="findLogin" resultType="Admin"><!-- 登录 -->
+		select * from admin where adminLoginId=#{adminLoginId} and
+			adminPassword=#{adminPassword} 
+	</select>
+	
+	<select id="findAuditResumeById" resultType="Resume" parameterType="int"><!-- 查询简历审核ById -->
+		select * from resume where resumeStatusThree=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditArticleById" resultType="Article" parameterType="int"><!-- 查询文章审核ById -->
+		select * from article where articleStatus=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditCommentsArticleById" resultType="CommentArticle" parameterType="int"><!-- 查询文章评论审核ById -->
+		select * from commentArticle where commentArticleStatus=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditCompanyById" resultType="Company" parameterType="Integer"><!-- 查询企业资质审核ById -->
+		select * from company where cmpIntStatus=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditCommentsCompanyAndPeopleById" resultType="Discuss" ><!-- 查询个人企业互评论审核ById -->
+		select * from discuss where discussStatus=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditInfoById" resultType="Message"><!-- 查询新闻审核ById -->
+		select * from message where messageSendStatus=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditOfferById" resultType="Offer" ><!-- 查询offer审核ById -->
+		select * from offer where offerType=1 and id=#{id}
+	</select>
+	
+	<select id="findAuditRecruitmentById" resultType="CompanyRecruit" parameterType="int"><!-- 查询招聘信息审核ById -->
+		select * from companyrecruit where cmpRecStatus=1 and id=#{id}
+	</select>
+	
+	<!-- 根据管理员登录名查找管理员 -->
+	<select id="findAdminByAdminLoginId" resultType="Admin" parameterType="String">
+		select * from admin where adminLoginId=#{adminLoginId}
+	</select>
+	<!-- 5条简历显示 -->
+	<select id="find5Resumes" resultType="Resume">
+		select * from resume where resumeStatusThree=1 order by resumeCreateDate asc limit 5
+	</select>
+	<!-- 5条文章显示 -->
+	<select id="find5Articles" resultType="Article">
+		select * from article where articleStatus=1 order by articleTime asc limit 5
+	</select>
+	<!-- 5条文章显示 -->
+	<select id="find5Discuss" resultType="Discuss">
+		select * from discuss where discussStatus=1 order by discussTime asc limit 5
+	</select>
+</mapper>

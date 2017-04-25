@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,39 +14,55 @@
 <div><%@include file="header.jsp"%></div>
 </head>
 <body>
+	<div class="container-fluid">
 	<div><%@include file="menu.jsp"%></div>
-	<div class="col-md-offset-4">
+	<div class="col-md-offset-2">
 		<div class="row">
-			<div class="col-sm-10" style="border: 1px solid black">
-				<div class="row" style="background-color: #CCCCCC;">
+			<div class="col-sm-10">
+				<div class="row" style="background-color: #FFFFF0;">
 					<div class="col-sm-12">
-						
 						  <h1>待审核简历:</h1>
-						<section class="panel">
-							<heading class="panel-heading"> 
-							<c:if test="${resume==null}">
-								<jsp:forward page="/admin/findAuditResume/1"/>
-							</c:if>
-							<c:forEach items="${resume}" var="res">
-								<ul class="clean">
+							<section class="panel">
+							<div class="panel-body">
+							<table  class="table table-hover table-striped">
+								<c:if test="${resume==null}">
+									<jsp:forward page="/admin/findAuditResume/1"/>
+								</c:if>
+								<thead>
 									<tr>
-										<li><a href="admin/findAuditResumeById?id=${res.id}">
-												${res.resumeTitle} </a></li>
+										<th>简历标题</th>
+										<th>用户id</th>
+										<th>姓名</th>
+										<th>性别</th>
+										<th>创建时间</th>
 									</tr>
-								</ul>
+								</thead>
+								<c:forEach items="${resume}" var="res">
+								
+									<tr>
+										<td><a href="admin/findAuditResumeById?id=${res.id}">${res.resumeTitle} </a></td>
+										<td>${res.userId}</td>
+										<td>${res.resumeName}</td>
+										<td>${res.resumeGender}</td>
+										<td><fmt:formatDate value="${res.resumeCreateDate}" pattern="yyyy年MM月dd日"/>  </td>
+									</tr>
+								
 							</c:forEach>
-							<tr>
-								<td colspan="5"><c:if test="${curPage==null }">
+							
+							</table>
+							</div>
+							<p>
+							<c:if test="${curPage==null }">
 										<c:set var="curPage" value="1"></c:set>
-									</c:if><a href="admin/findAuditResume/1">首页</a> <c:if test="${curPage>1 }">
+									</c:if>
+									<a href="admin/findAuditResume/1">首页</a> <c:if test="${curPage>1 }">
 
 										<a href="admin/findAuditResume/${curPage-1 }">上一页</a>
 									</c:if> <c:if test="${curPage<maxPage}">
 										<a href="admin/findAuditResume${curPage+1 }">下一页</a>
 
-									</c:if><a href="admin/findAuditResume/${maxPage }">尾页</a></td>
-							</tr>
-							</heading>
+									</c:if><a href="admin/findAuditResume/${maxPage }">尾页</a>
+							</p>
 						</section>
 					</div>
 
@@ -53,7 +70,7 @@
 			</div>
 		</div>
 	</div>
-
+	</div><!-- end of container-fluid -->
 
 
 

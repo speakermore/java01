@@ -12,6 +12,5 @@
 
 <!-- SliderLock -->
 <link href="admin/css/style.css" rel="stylesheet" media="screen">
-<script type="text/javascript" src="admin/js/sliderlock.js"></script>
 
  

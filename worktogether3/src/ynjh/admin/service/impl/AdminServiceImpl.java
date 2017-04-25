@@ -1,0 +1,872 @@
+package ynjh.admin.service.impl;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import ynjh.admin.dao.admin.AdminMapper;
+import ynjh.admin.dao.adminlog.AdminLogMapper;
+import ynjh.admin.dao.companyvisitcount.CompanyVisitCountMapper;
+import ynjh.admin.dao.uservisitcount.UserVisitCountMapper;
+import ynjh.admin.entity.Admin;
+import ynjh.admin.entity.AdminLog;
+import ynjh.admin.entity.CompanyVisitCount;
+import ynjh.admin.entity.UserVisitCount;
+import ynjh.admin.service.AdminService;
+import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyRecruit;
+import ynjh.company.entity.Offer;
+import ynjh.personal.entity.Article;
+import ynjh.personal.entity.CommentArticle;
+import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Resume;
+import ynjh.personal.entity.User;
+
+@Service
+public class AdminServiceImpl implements AdminService {
+	@Resource
+	private AdminMapper adminMapper;
+	@Resource
+	private AdminLogMapper adminLogMapper;
+	@Resource
+	private CompanyVisitCountMapper companyVisitCountMapper;
+	@Resource
+	private UserVisitCountMapper userVisitCountMapper;
+	
+	/**
+	 * 
+	   * @Name: auditResume //审核简历
+	   * @Description: @param id 简历ID
+	   * @Description: @param status 简历待审核状态
+	   * @Description: @return
+	   * @Author: 曾瑞（作者）
+	   * @Version: V1.00 （版本号）
+	   * @Create Date: 2017年4月21日上午11:34:54
+	 */
+	@Override
+	public Integer auditResume(Integer id, Integer status) {
+		 
+		return adminMapper.auditResume(id, status);
+	}
+
+	/**
+	 * 查询审核简历
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<Resume> findAuditResume(Integer page) {
+		 
+		return adminMapper.findAuditResume(page);
+	}
+
+	/**
+	 * 审核文章
+	 * @author 周富强
+	 * @param articleId 文章id
+	 * @param articleStatus 信息状态
+	 * @return
+	 */
+	@Override
+	public Integer auditArticle(Integer articleId, Integer articleStatus) {
+		 
+		return adminMapper.auditArticle(articleId, articleStatus);
+	}
+
+	/**
+	 * 
+	   * @Name: findAuditArticle // 查询审核文章
+	   * @Description: @param page 偏移量
+	   * @Description: @return
+	   * @Author:曾瑞（作者）
+	   * @Version: V1.00 （版本号）
+	   * @Create Date: 2017年4月21日上午10:48:30
+	 */
+	@Override
+	public List<Article> findAuditArticle(Integer page) {
+		 
+		return adminMapper.findAuditArticle((page-1)*10);
+	}
+
+	/**
+	 * 
+	 * 审核文章评论
+	 * @author 周富强
+	 * @param id 文章评论id
+	 * @param commentArticleStatus 文章评论审核状态
+	 * @return
+	 */
+	@Override
+	public Integer auditCommentsArticle(Integer id, Integer commentsArticleStatus) {
+		 
+		return adminMapper.auditCommentsArticle(id, commentsArticleStatus);
+	}
+
+	/**
+	 * 
+	   * @Name: findAuditCommentsArticle // 查询审核文章评论
+	   * @Description: @param page 偏移量
+	   * @Description: @return
+	   * @Author: 曾瑞（作者）
+	   * @Version: V1.00 （版本号）
+	   * @Create Date: 2017年4月21日上午10:49:12
+	 */
+	@Override
+	public List<CommentArticle> findAuditCommentsArticle(Integer page) {
+		 
+		return adminMapper.findAuditCommentsArticle(page);
+	}
+
+	/**
+	 * 审核企业资质
+	 * @author 周富强
+	 * @param companyId 企业id
+	 * @param cmpIntegerStatus  企业发表待审核状态
+	 * @return
+	 */
+	@Override
+	public Integer auditCompany(Integer companyId, Integer cmpIntegerStatus) {
+		 
+		return adminMapper.auditCompany(companyId, cmpIntegerStatus);
+	}
+
+	/**
+	 * 查询审核企业资质
+	 * @author 周富强
+	 * @return
+	 */
+	@Override
+	public List<Company> findAuditCompany(Integer page) {
+		 
+		return adminMapper.findAuditCompany(page);
+	}
+
+	/**
+	 * 审核个人企业互评
+	 * @author 周富强
+	 * @param id 个人企业互评id
+	 * @param discussStatus 待审核状态
+	 * @return
+	 */
+	@Override
+	public Integer auditCommentsCompanyAndPeople(Integer id, Integer discussStatus) {
+		 
+		return adminMapper.auditCommentsCompanyAndPeople(id, discussStatus);
+	}
+
+	/**
+	 * 查询审核个人企业互评论
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<Discuss> findAuditCommentsCompanyAndPeople(Integer page) {
+		 
+		return adminMapper.findAuditCommentsCompanyAndPeople(page);
+	}
+
+	/**
+	 * 审核新闻
+	 * @author 周富强
+	 * @param InfoId 新闻id
+	 * @param cmpInfStatus 待审核状态
+	 * @return
+	 */
+	@Override
+	public Integer auditInfo(Integer InfoId, Integer cmpInfStatus) {
+		 
+		return adminMapper.auditInfo(InfoId, cmpInfStatus);
+	}
+
+	/**
+	 * 查询审核新闻
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<Message> findAuditInfo(Integer page) {
+		 
+		return adminMapper.findAuditInfo(page);
+	}
+
+	/**
+	 * 审核offer
+	 * @author 周富强
+	 * @param id offer的id
+	 * @param offerType  
+	 * @return
+	 */
+	@Override
+	public Integer auditOffer(Integer offerId, Integer offerType) {
+		 
+		return adminMapper.auditOffer(offerId, offerType);
+	}
+
+	/**
+	 * 查询审核offer
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<Offer> findAuditOffer(Integer page) {
+		 
+		return adminMapper.findAuditOffer(page);
+	}
+
+	/**
+	 * 审核招聘信息
+	 * @author 周富强
+	 * @param recruitmentId 招聘信息id
+	 * @param cmpRecStatus 
+	 * @return
+	 */
+	@Override
+	public Integer auditRecruitment(Integer recruitmentId, Integer cmpRecStatus) {
+		 
+		return adminMapper.auditRecruitment(recruitmentId, cmpRecStatus);
+	}
+
+	/**
+	 * 查询审核招聘信息
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<CompanyRecruit> findAuditRecruitment(Integer page) {
+		 
+		return adminMapper.findAuditRecruitment(page);
+	}
+	
+	/**
+	 * 
+	 * 访问管理员日志,无参查询全部
+	 * @author 张宇
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@Override
+	public List<AdminLog> findAdminLogAll(Integer page) {
+		 
+		return adminLogMapper.findAdminLogAll(page);
+	}
+	
+	/**
+	 * 访问管理员日志,时间段查询
+	 * 
+	 * @author 张宇
+	 * @param beginTime
+	 *            起始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@Override
+	public List<AdminLog> findAdminLogByTime(String beginTime, String endTime,Integer page) {
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date beginDate=null;
+		try {
+			beginDate = sdf.parse(beginTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date endDate=null;
+		try {
+			endDate = sdf.parse(endTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 
+		return adminLogMapper.findAdminLogByTime(beginDate, endDate,page);
+	}
+
+	/**
+	 * 访问管理员日志,操作人ID&时间段查询
+	 * 
+	 * @author 张宇
+	 * @param userLoginId
+	 *            操作人id
+	 * @param beginTime
+	 *            起始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@Override
+	public List<AdminLog> findAdminLogByTimeAndId(Integer userLoginId, String beginTime, String endTime,Integer page) {
+		
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date beginDate=null;
+		try {
+			beginDate = sdf.parse(beginTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date endDate=null;
+		try {
+			endDate = sdf.parse(endTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		return adminLogMapper.findAdminLogByTimeAndId(userLoginId, beginDate, endDate,page);
+	}
+
+	/**
+	 * 访问管理员日志,操作人ID&操作类型查询
+	 * 
+	 * @author 张宇
+	 * @param userLoginId
+	 *            操作管理员id
+	 * @param adminDo
+	 *            操作类型
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@Override
+	public List<AdminLog> findAdminLogByIdAndDo(Integer userLoginId, Integer adminDo,Integer page) {
+		 
+		return adminLogMapper.findAdminLogByIdAndDo(userLoginId, adminDo,page);
+	}
+
+	/**
+	 * 访问管理员日志,操作类型&时间段查询
+	 * 
+	 * @author 张宇
+	 * @param beginTime
+	 *            起始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param adminDo
+	 *            操作类型
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@Override
+	public List<AdminLog> findAdminLogByTimeAndDo(String beginTime, String endTime, Integer adminDo,Integer page) {
+		 
+		
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date beginDate=null;
+		try {
+			beginDate = sdf.parse(beginTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date endDate=null;
+		try {
+			endDate = sdf.parse(endTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return adminLogMapper.findAdminLogByTimeAndDo(beginDate, endDate, adminDo,page);
+	}
+
+	/**
+	 * 访问管理员日志,全部类型查询
+	 * @author 张宇
+	 * @param beginTime
+	 *            起始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param adminDo
+	 *            操作类型
+	 * @param userLoginId
+	 *            操作管理员id
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@Override
+	public List<AdminLog> findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime,
+			String endTime,Integer page) {	
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date beginDate=null;
+		try {
+			beginDate = sdf.parse(beginTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date endDate=null;
+		try {
+			endDate = sdf.parse(endTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return adminLogMapper.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginDate, endDate,page);
+	}
+
+	/** 
+	 * 最佳企业查询
+	 * @author 朱吉
+	 * @return
+	 */
+	@Override
+	public List<Company> findBestCompany() { 
+		List<Integer> list=adminMapper.findCompanyId();
+		List<Company> listCompany=new ArrayList();
+		for(int i=0;i<list.size();i++){
+			Company company=adminMapper.findCompanyById(list.get(i));
+			listCompany.add(company);
+		}
+		return listCompany;
+	}
+
+	/**
+	 * 禁用个人用户后的（查询）显示效果
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<User> findUser(Integer page) {
+		 
+		return adminMapper.findUser(page);
+	}
+
+	/**
+	 * 禁用企业用户后的（查询）显示效果
+	 * @author 周富强
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<Company> findCompany(Integer page) {
+		 
+		return adminMapper.findCompany(page);
+	}
+
+	/**
+	 * 禁用个人用户
+	 * @author 周富强
+	 * @param userId 个人用户id
+	 * @param userStatus 个人用户状态
+	 * @return
+	 */
+	@Override
+	public Integer disableUser(Integer userId, Integer userStatus) {
+		 
+		return adminMapper.disableUser(userId, userStatus);
+	}
+
+	/**
+	 * 禁用企业用户
+	 * @author 
+	 * @param companyId 企业id
+	 * @param companyStatus 企业用户状态
+	 * @return
+	 */
+	@Override
+	public Integer disableCompany(Integer companyId, Integer companyStatus) {
+		 
+		return adminMapper.disableCompany(companyId, companyStatus);
+	}
+
+	/**
+	 * 登录的管理员，自我信息修改
+	 * @author 
+	 * @param admin 管理员对象
+	 * @param session
+	 * @return
+	 */
+	@Override
+	public Integer maIntegerainAdmin(Admin admin) {
+		 
+		return adminMapper.maIntegerainAdmin(admin);
+	}
+
+	/**
+	 * 通过用户id查看修改后的内容
+	 * @author 朱吉
+	 * @param id 用户id
+	 * @return
+	 */
+	@Override
+	public List<Admin> findByAdminId(Integer id) {
+		 
+		return adminMapper.findByAdminId(id);
+	}
+
+	/**
+	 * 查找最大条数
+	 * @author 
+	 */
+	@Override
+	public int findMaxPage() {
+		 
+		return adminMapper.findMaxPage();
+	}
+
+	@Override
+	public Integer trafficStatisticalPersonal(Integer year, Integer month, Integer day, String userId) {
+		 
+		return null;
+	}
+
+	@Override
+	public Integer trafficStatisticalCompany(Integer year, Integer month, Integer day, String companyId) {
+		 
+		return null;
+	}
+
+	
+
+	/**
+	 * 管理员登录验证-查找管理员
+	 * @author 曾瑞
+	 * @param adminLoginId 管理员登录
+	 * @param adminPassword 管理员密码
+	 * @return
+	 */
+	@Override
+	public Admin findLogin(String adminLoginId, String adminPassword) {
+		 
+		return adminMapper.findLogin(adminLoginId, adminPassword);
+	}
+
+
+	@Override
+	/**
+	 * 消息推送
+	 * @author 周富强
+	 * @param userid
+	 * @param resendId
+	 * @param articleContent
+	 * @param messageSendTime
+	 * @param messageResendStatus
+	 */
+	public Integer messagePushArticle(Integer userId, Integer resendId,String articleContent, Timestamp messageSendTime,
+			Integer messageResendStatus) {
+		 
+		return adminMapper.messagePushArticle(userId, resendId, articleContent, messageSendTime, messageResendStatus);
+	}
+
+	/**
+	 * 企业访问量统计--添加记录
+	 * @author 
+	 * @param id id
+	 * @param companyYear 年
+	 * @param companyMoth 月
+	 * @param companyDay 日
+	 * @param companyResumeCount 发表招聘信息数统计
+	 * @param companyInfoCount 发表文章数统计
+	 * @param companyId 企业id
+	 * @return
+	 */
+	@Override
+	public Integer addCompanyVisitCount(Integer id, Integer companyYear, Integer companyMoth, Integer companyDay,
+			Integer companyResumeCount,Integer companyInfoCount, Integer companyId) {
+		 
+		return companyVisitCountMapper.addcompanyVisitCount(id, companyYear, companyMoth, companyDay, companyResumeCount, companyId,companyInfoCount);
+	}
+
+	/**
+	 * 企业访问量统计--修改访问数
+	 * @author 朱吉
+	 * @param companyVisitCount 企业访问量统计
+	 * @return
+	 */
+	@Override
+	public Integer updatecompanyVisitCount(CompanyVisitCount companyVisitCount) {
+		 
+		return companyVisitCountMapper.updatecompanyVisitCount(companyVisitCount);
+	}
+
+	/**
+	 *企业访问量统计--显示所有访问数
+	 *@author 朱吉 
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<CompanyVisitCount> findAll(Integer page) {
+		 
+		return companyVisitCountMapper.findAll(page);
+	}
+
+	/**
+	 * 企业访问量统计--通过企业id查询企业访问量
+	 * @author 
+	 * @param companyId 企业id
+	 * @param page
+	 * @return
+	 */
+	@Override
+	public List<CompanyVisitCount> findCompanyId(Integer companyId, Integer page) {
+		 
+		return companyVisitCountMapper.findCompanyId(companyId, page);
+	}
+	/**
+	 * 企业访问量统计--查找发表信息的数量和发表简历的数量
+	 * @author 
+	 * @param companyYear 年
+	 * @param companyMonth 月
+	 * @param companyDay 日
+	 * @param companyId 企业id
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<CompanyVisitCount> findcompanyInfoCountAndcompanyResumeCount(Integer companyYear, Integer companyMonth,
+			Integer companyDay, Integer companyId, Integer page) {
+		 
+		return companyVisitCountMapper.findcompanyInfoCountAndcompanyResumeCount(companyYear, companyMonth, companyDay, companyId, page);
+	}
+
+	/**
+	 * 企业访问量统计--获得信息量的最大值
+	 * @author 
+	 * @return
+	 */
+	@Override
+	public Integer getMaxRecord() {
+		 
+		return companyVisitCountMapper.getMaxRecord();
+	}
+
+	/**
+	 * 增加个人用户访问统计数
+	 * @author 朱吉
+	 * @param userYear 年
+	 * @param userMonth 月
+	 * @param UserDay 日
+	 * @param userCommentCount 评论条数
+	 * @param userArticleCount 发表文章条数
+	 * @param userId 个人用户id
+	 * @return
+	 */
+	@Override
+	public Integer addUserVisitCount(Integer userYear, Integer userMonth, Integer userDay, Integer userCommentCount,
+			Integer userArticleCount, Integer userId) {
+		 
+		UserVisitCount userVisitCount=new UserVisitCount();
+		userVisitCount.setUserYear(userYear);
+		userVisitCount.setUserMonth(userMonth);
+		userVisitCount.setUserDay(userDay);
+		userVisitCount.setUserCommentCount(userCommentCount);
+		userVisitCount.setUserArticleCount(userArticleCount);
+		userVisitCount.setUserId(userId);
+		return userVisitCountMapper.addUserVisitCount(userVisitCount);
+	}
+
+	/**
+	 * 个人访问量统计--获得信息量的最大值
+	 * @author 朱吉 
+	 * @return
+	 */
+	@Override
+	public Integer findMaxPage(Integer page) {
+		 
+		return userVisitCountMapper.findMaxPage(page);
+	}
+
+	/**
+	 * 查找所有个人用户访问量统计记录
+	 * @author 朱吉
+	 * @param page 偏移量
+	 * @return
+	 */
+	@Override
+	public List<UserVisitCount> findUserVisitAll(Integer page) {
+		 
+		return userVisitCountMapper.findAll(page);
+	}
+
+	/**
+	 * 按条件查找个人用户访问量统计记录
+	 * @author 朱吉
+	 * @param page 偏移量
+	 * @param userYear 年
+	 * @param userMonth 月
+	 * @param userDay 日
+	 * @param userId 个人用户id
+	 * @return
+	 */
+	@Override
+	public List<UserVisitCount> findCount(Integer page, Integer userYear, Integer userMonth, Integer userDay,
+			Integer userId) {
+		 
+		return userVisitCountMapper.findCount(page, userYear, userMonth, userDay, userId);
+	}
+
+	/**
+	 * 审核--查询审核简历ById
+	 * @author 周富强
+	 * @param id 简历id
+	 * @return
+	 */
+	@Override
+	public Resume findAuditResumeById(Integer id) {
+		 
+		return adminMapper.findAuditResumeById(id);
+	}
+
+	/**
+	 * 查询审核文章ById
+	 * @author 周富强
+	 * @param id 文章id
+	 * @return
+	 */
+	@Override
+	public Article findAuditArticleById(Integer id) {
+		 
+		return adminMapper.findAuditArticleById(id);
+	}
+
+	@Override
+	public CommentArticle findAuditCommentsArticleById(Integer id) {
+		 
+		return adminMapper.findAuditCommentsArticleById(id);
+	}
+
+	/**
+	 * 查询审核企业资质ById
+	 * @author 周富强
+	 * @param id 企业简介id
+	 * @return 
+	 */
+	@Override
+	public Company findAuditCompanyById(Integer id) {
+		 
+		return adminMapper.findAuditCompanyById(id);
+	}
+
+	/**
+	 * 查询审核个人企业互评论ById
+	 * @author 周富强
+	 * @param id 个人企业互评id
+	 * @return
+	 */
+	@Override
+	public Discuss findAuditCommentsCompanyAndPeopleById(Integer id) {
+		 
+		return adminMapper.findAuditCommentsCompanyAndPeopleById(id);
+	}
+	/**
+	 * 查询新闻审核
+	 */
+	@Override
+	public Message findAuditInfoById(Integer id) {
+		 
+		return adminMapper.findAuditInfoById(id);
+	}
+
+	/**
+	 * 查询审核offer的id
+	 * @author 周富强
+	 * @param id offer的id
+	 * @return
+	 */
+	@Override
+	public Offer findAuditOfferById(Integer id) {
+		 
+		return adminMapper.findAuditOfferById(id);
+	}
+
+	/**
+	 * 查询审核招聘信息ById
+	 * @author 周富强
+	 * @param id 招聘信息的id
+	 * @return
+	 */
+	@Override
+	public List<CompanyRecruit> findAuditRecruitmentById(Integer id) {
+		 
+		return adminMapper.findAuditRecruitmentById(id);
+	}
+
+	/**
+	 * 按管理员登录名查找管理员
+	 * @author 朱吉
+	 * @param adminLoginId 登录名
+	 */
+	@Override
+	public Admin findLoginByAdminLoginId(String adminLoginId) {
+		 
+		return adminMapper.findLoginByAdminLoginId(adminLoginId);
+	}
+
+	/**
+	 * 个人热门文章查询
+	 * @author 张宇
+	 */
+	@Override
+	public List<Article> findPersonBestArticle() {
+		 
+		return adminMapper.findPersonBestArticle();
+	}
+
+	/**
+	 * 企业热门文章查询
+	 * @author 张宇
+	 */
+	@Override
+	public List<Article> findCompanyBestArticle() {
+		 
+		return adminMapper.findCompanyBestArticle();
+	}
+
+	/**
+	 * 首页显示5条简历
+	 * @author 朱吉
+	 */
+	@Override
+	public List<Resume> find5Resumes() {
+		
+		return adminMapper.find5Resumes();
+	}
+
+	/**
+	 * 首页显示5条文章信息
+	 * @author 朱吉
+	 */
+	@Override
+	public List<Article> find5Articles() {
+		
+		return adminMapper.find5Articles();
+	}
+	/**
+	 * 首页显示5条个人企业互评信息
+	 * @author 朱吉
+	 */
+	@Override
+	public List<Discuss> find5Discuss() {
+		
+		return adminMapper.find5Discuss();
+	}
+
+	
+	
+
+
+}

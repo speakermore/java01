@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ynjh.admin.dao.companyvisitcount.CompanyVisitMapper">
+	<!--每日自增加记录-->
+	<insert id="addcompanyVisitCount" >
+		insert into companyvisitcount (id,companyYear,companyMonth,companyDay,companyResumeCount,companyId,companyInfoCount) values(#{id},#{companyYear},#{companyMoth},#{companyDay},#{companyResumeCount},#{companyId},#{companyInfoCount})
+	</insert>
+	<!--访问数修改-->
+	<update id="updatecompanyVisitCount" parameterType="CompanyVisitCount">
+		update companyvisitcount set companyInfoCount=#{companyInfoCount},companyResumeCount=#{companyResumeCount},companyId=#{companyId} where id=#{id};
+	</update>
+	<!-- 显示访问量 -->
+	<select id="findAll" resultType="CompanyVisitCount">
+		select * from companyvisitcount
+				limit #{page},5
+	</select>
+	
+    <select id="findById" parameterType="int" resultType="CompanyVisitCount">
+        select * from companyvisitcount where companyId=#{companyId}
+        limit #{page},5
+    </select>
+    <select id="findcompanyInfoCountAndcompanyResumeCount" resultType="CompanyVisitCount">
+        select * from companyvisitcount where companyId=#{companyId} and companyYear=#{companyYear}
+        <if test="companyMonth!=null and companyMonth!=''"> 
+        and companyMonth=#{companyMonth}
+        </if>
+        <if test="companyDay!=null and companyDay!=''">
+        and companyDay=#{companyDay}
+        </if>
+        limit #{page},5
+    </select>
+    <select id="getMaxRecord" resultType="int">
+        select count(*) from companyvisitcount
+    </select>	
+</mapper>

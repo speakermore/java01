@@ -7,18 +7,23 @@
  
 <html>
 <head>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>管理员访问操作记录-按不同方式查询</title>
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<%@include file="header.jsp"%>
 </head>
 <body>
+	<div><%@include file="menu.jsp"%></div>
+<div class="col-md-offset-2">
+<a style="font-weight:bold; font-size:25px ;">管理员访问操作记录表:</a>
 <table class="table table-striped">
-	<a style="font-weight:bold; font-size:25px ;">管理员访问操作记录表:</a><br/><br/>
+	
 	<thead>
 		<tr>
 			<th>操作对象id</th>
@@ -30,7 +35,8 @@
 	</thead>
 	<tbody>
 		<%
-    List<AdminLog> newsList=(List)request.getAttribute("adminLogs");               	
+    List<AdminLog> newsList=(List<AdminLog>)request.getAttribute("adminLogs");
+                	
                 	int i=0;
                 	for(AdminLog adm:newsList){
                 		i++;
@@ -47,8 +53,8 @@
               <%} %>
 	</tbody>
 </table>
-
-              
+</div>
+<%@include file="footer.jsp"%>        
               
 </body>
 </html>

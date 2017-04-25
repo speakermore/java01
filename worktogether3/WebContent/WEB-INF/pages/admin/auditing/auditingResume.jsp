@@ -45,10 +45,10 @@
 					<li>特点描述：${resume.resumePersonality}</li>
 					<li>自我评价：${resume.resumeSelfEvaluation}</li>
 					<div class="">
-						<a class="col-sm-offset-2" href="admin/auditResume?resumeStatusThree=2&id=${resume.id}&toPage=../auditingResume"></a>
-						<input  class="btn btn-warning"  type="submit" value="通过审核" />
-						<a  class="col-sm-offset-4" href="admin/auditResume?resumeStatusThree=3&id=${resume.id}&toPage=../auditingResume" ></a>
-						<input  class="btn btn-warning"  type="submit" value="拒绝审核" />
+						<a class="col-sm-offset-2" href="admin/auditResume?resumeStatusThree=2&id=${resume.id}&toPage=../auditingResume"><input  class="btn btn-warning"  type="submit" value="通过审核" /></a>
+						
+						<a  class="col-sm-offset-4" href="admin/auditResume?resumeStatusThree=3&id=${resume.id}&toPage=../auditingResume" ><input  class="btn btn-warning"  type="submit" value="拒绝审核" /></a>
+						
 					</div>
 				</ul>
             </table>

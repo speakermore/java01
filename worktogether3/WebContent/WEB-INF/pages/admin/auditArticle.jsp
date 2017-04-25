@@ -10,7 +10,7 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>管理员后台-简历审核</title>
 
-<%@include file="header.jsp"%>
+<div><%@include file="header.jsp"%></div>
 </head>
 <body>
 	<div><%@include file="menu.jsp"%></div>
@@ -23,7 +23,7 @@
 						<section class="panel">
 							<heading class="panel-heading">
 							<c:if test="${article==null}">
-								<jsp:forward page="/admin/findAuditArticle/page"/>
+								<jsp:forward page="/admin/findAuditArticle/0"/>
 							</c:if>
 							 <c:forEach items="${article}" var="art">
 								<ul class="clean">

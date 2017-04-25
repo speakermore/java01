@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.admin.dao.superadmin.SuperAdminMapper">
+
+	<!-- 添加管理员 -->
+	<insert id="addAdmin" parameterType="Admin">
+		INSERT INTO admin (adminLoginId,adminPassword,adminTel,adminEmail,adminName) 
+			VALUES(#{adminLoginId},#{adminPassword},#{adminTel},#{adminEmail},#{adminName})
+	</insert>
+	
+	<!-- 禁用管理员/解除管理员禁用 -->
+	<update id="disableAdmin" parameterType="Admin">
+		update admin set adminStatus=#{adminStatus} where id=#{id}
+	</update>
+	
+	<!-- 查询所有管理员 -->
+	<select id="findAllAdmin" resultType="Admin">
+		select * from admin where adminStatus=1 or adminStatus=0
+	</select>
+	
+</mapper>
