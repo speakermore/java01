@@ -32,10 +32,7 @@ public interface ResumeMapper {
 	 */
 	public Integer deleteResumeById(Integer id);
 	
-	/***
-	 * 查新被删除的简历
-	 */
-	public List<Resume> selectResumeByDelete(Integer userId);
+	
 	/***
 	 * 恢复简历
 	 */
@@ -91,15 +88,55 @@ public interface ResumeMapper {
 	 */
 	public Integer deleteProject(Integer id);
 	/**
-	 * 结束
+	 * 查看教育记录已删除记录
 	 */
+	public List<Education> findEducationByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
+	/**
+	 * 查看工作记录已删除记录
+	 */
+	public List<Work> findWorkByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
+	/**
+	 * 查看项目记录已删除记录
+	 */
+	public List<Project> findProjectByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
+	/**
+	 * 恢复教育被删记录
+	 */
+	public Integer renewEducationByDelete(Integer id);
+	/**
+	 * 恢复工作被删记录
+	 */
+	public Integer renewWorkByDelete(Integer id);
+	/**
+	 * 恢复项目被删记录
+	 */
+	public Integer renewProjectByDelete(Integer id);
+	
 	/**
 	 * 分页
 	 * @param userId
 	 * @return
 	 */
 	/**
-	 * 查询此ID的未删除的简历列表
+	 * 查询此ID的简历数量
 	 */
 	public Integer getMaxResumeById(Integer userId);
+	
+	
+	/**
+	 * 查询此ID的删除的简历数量
+	 */
+	public Integer getMaxEducationDeleteById(Integer userId);
+	/**
+	 * 查询此ID的删除的简历数量
+	 */
+	public Integer getMaxWorkDeleteById(Integer userId);
+	/**
+	 * 查询此ID的删除的简历数量
+	 */
+	public Integer getMaxProjectDeleteById(Integer userId);
+	
+	/**
+	 * 结束
+	 */
 }

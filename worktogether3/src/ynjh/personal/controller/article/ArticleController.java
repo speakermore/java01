@@ -13,27 +13,32 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
+
 /**
- * @author 胡林飞
- *文章功能
+ * @author 胡林飞 文章功能
  */
 @Controller
 @RequestMapping("/personal/article")
 public class ArticleController {
 	@Resource
 	private ArticleService articleService;
+
 	/**
 	 * 跳转页面
+	 * 
 	 * @return 跳转到personal_addarticle页面
 	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.GET)
 	public String addArticle() {
 		return "personal/article/personal_addarticle";
 	}
+
 	/**
-	 *  添加文章
-	 * @param article 文章对象
-	 * @param session 
+	 * 添加文章
+	 * 
+	 * @param article
+	 *            文章对象
+	 * @param session
 	 * @return 成功跳转index 失败跳转addarticle
 	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.POST)
@@ -46,7 +51,7 @@ public class ArticleController {
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			mv.addObject("operatorInfo", "文章添加成功！");
-			mv.setViewName("redirect:../article/lookArticleList?toPage=1&userId="+user.getId());
+			mv.setViewName("redirect:../article/lookArticleList?toPage=1&userId=" + user.getId());
 
 		} else {
 			mv.addObject("operatorInfo", "文章添加失败!");
@@ -55,58 +60,91 @@ public class ArticleController {
 		return mv;
 	}
 
-
 	/**
 	 * 查看文章(所有)ajax
-	 * @param toPage 跳转页面
-	 * @param userId 用户ID
+	 * 
+	 * @param toPage
+	 *            跳转页面
+	 * @param userId
+	 *            用户ID
 	 * @param session
 	 * @return 页面信息
 	 */
 	@RequestMapping("/ajaxLookArticleList")
 	@ResponseBody
-	public Object ajaxFindAllArticle(Integer toPage,Integer userId,HttpSession session) {
-		List<Article> articles = articleService.findUserArticle(toPage,userId);
-		int maxPage=articleService.getMaxRecord(userId);
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
-		StringBuffer sb=new StringBuffer();
-		for(Article article:articles){
+	public Object ajaxFindAllArticle(Integer toPage, Integer userId) {
+		List<Article> articles = articleService.findUserArticle(toPage, userId);
+		int maxPage = articleService.getMaxArticleById(userId);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		StringBuffer sb = new StringBuffer();
+		
+		for (Article article : articles) {
 			sb.append("<tr>");
-			sb.append("<td><a href=\"personal/article/lookArticleById?id="+article.getId()+"\">"+article.getArticleTitle()+"</a></td>");
-			sb.append("<td>"+sdf.format(article.getArticleTime())+"</td>");
-			if(article.getArticleStatus()==1){
+			sb.append("<td><a href=\"personal/article/lookArticleById?id=" + article.getId() + "\">"
+					+ article.getArticleTitle() + "</a></td>");
+			sb.append("<td>" + sdf.format(article.getArticleTime()) + "</td>");
+			if (article.getArticleStatus() == 1) {
 				sb.append("<th>待审核</th>");
-			}else if(article.getArticleStatus()==2){
+			} else if (article.getArticleStatus() == 2) {
 				sb.append("<th>正常</th>");
-			}else if(article.getArticleStatus()==3){
+			} else if (article.getArticleStatus() == 3) {
 				sb.append("<th>审核未通过</th>");
-			}else if(article.getArticleStatus()==4){
+			} else if (article.getArticleStatus() == 4) {
 				sb.append("<th>已被删除</th>");
 			}
-			sb.append("<td><a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a></td>");
+			sb.append("<td>");
+			if (article.getArticleStatus() == 4) {
+					sb.append("<a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='personal/article/renewArticle?id=${art.id }'}\">恢复</a>");
+			}else {
+				sb.append("<a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要删除这篇文章吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a>");
+			}
+				sb.append("</td>");
 				sb.append("</tr>");
+		
 		}
-		sb.append("---"+toPage+"---"+maxPage);
+		/*for (Article article : articles) {
+			sb.append("<tr>");
+			sb.append("<td><a href=\"personal/article/lookArticleById?id=" + article.getId() + "\">"
+					+ article.getArticleTitle() + "</a></td>");
+			sb.append("<td>" + sdf.format(article.getArticleTime()) + "</td>");
+			if (article.getArticleStatus() == 1) {
+				sb.append("<th>待审核</th>");
+			} else if (article.getArticleStatus() == 2) {
+				sb.append("<th>正常</th>");
+			} else if (article.getArticleStatus() == 3) {
+				sb.append("<th>审核未通过</th>");
+			} else if (article.getArticleStatus() == 4) {
+				sb.append("<th>已被删除</th>");
+			}
+			sb.append(
+					"<td><a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a></td>");
+			sb.append("</tr>");
+		}*/
+		sb.append("---" + toPage + "---" + maxPage);
 		return sb.toString();
 	}
-	@RequestMapping("/lookArticleList")
-	public ModelAndView findAllArticle(Integer toPage,Integer userId,HttpSession session) {
-		List<Article> articles = articleService.findUserArticle(toPage,userId);
-		int maxPage=articleService.getMaxRecord(userId);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("curPage", toPage);
-		mv.addObject("maxPage", maxPage);
+
+	/*@RequestMapping("/lookArticleList")
+	public ModelAndView findAllArticle(Integer toPage, Integer userId, HttpSession session) {
+		List<Article> articles = articleService.findUserArticle(toPage, userId);
+		int maxPage = articleService.getMaxArticleById(userId);
+		ModelAndView mv = new ModelAndView("personal/user/personal_index");
+		mv.addObject("curArticlePage", toPage);
+		mv.addObject("maxArticlePage", maxPage);
 		mv.addObject("articles", articles);
 		session.setAttribute("articles", articles);
-//		session.setAttribute("curPage", toPage);
-//		session.setAttribute("maxPage", maxPage);
-mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
+		// session.setAttribute("curPage", toPage);
+		// session.setAttribute("maxPage", maxPage);
+		// mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
+
 		return mv;
-	}
-	
-	/**(
-	 *查看文章（详细）
-	 * @param id 文章ID
+	}*/
+
+	/**
+	 * ( 查看文章（详细）
+	 * 
+	 * @param id
+	 *            文章ID
 	 * @return 返回文章详情查看页
 	 */
 	@RequestMapping(value = "/lookArticleById", method = RequestMethod.GET)
@@ -117,27 +155,34 @@ mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
 		mv.setViewName("personal/article/personal_articledetail");
 		return mv;
 	}
+
 	/**
 	 * 删除文章
-	 * @param id 文章ID
+	 * 
+	 * @param id
+	 *            文章ID
 	 * @return 删除成功，跳转当前页，删除失败，也是跳转当前页
 	 */
 	@RequestMapping("/deleteUserAricle")
-	public ModelAndView deleteUserCommentArticle(Integer id) {
+	public ModelAndView deleteUserCommentArticle(Integer id,HttpSession session) {
 		int result = articleService.deleteUserArticle(id);
 		ModelAndView mv = new ModelAndView();
+		User user =(User) session.getAttribute("user");
 		if (result > 0) {
 			mv.addObject("operatorInfo", "删除文章成功！");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
 		} else {
 			mv.addObject("operatorInfo", "删除文章失败！");
 			mv.setViewName("personal/user/personal_index");
 		}
 		return mv;
 	}
+
 	/**
 	 * 跳转修改页
-	 * @param id 文章ID
+	 * 
+	 * @param id
+	 *            文章ID
 	 * @return 如果不为空，跳转修改页面
 	 */
 	@RequestMapping(value = "/gotoUpdateArticle", method = RequestMethod.GET)
@@ -150,9 +195,12 @@ mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
 		}
 		return mv;
 	}
+
 	/**
 	 * 修改文章内容
-	 * @param article w文章对象
+	 * 
+	 * @param article
+	 *            w文章对象
 	 * @return 修改文章内容成功，跳转index，失败也是index
 	 */
 	@RequestMapping("/updateArticle")
@@ -168,9 +216,12 @@ mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
 		}
 		return mv;
 	}
+
 	/**
 	 * 点赞数
-	 * @param id 文章ID
+	 * 
+	 * @param id
+	 *            文章ID
 	 * @return 点赞成功，跳转当前页
 	 */
 	@RequestMapping("/updateLike")
@@ -181,44 +232,35 @@ mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
 		mv.addObject("article", article);
 		return mv;
 	}
+
 	/**
 	 * 恢复被删文章
-	 * @param id 文章ID
+	 * 
+	 * @param id
+	 *            文章ID
 	 * @return 恢复成功失败都跳转index
 	 */
 	@RequestMapping("/renewArticle")
-	public ModelAndView renewArticle(Integer id) {
+	public ModelAndView renewArticle(Integer id,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = articleService.renewArticle(id);
+		User user=(User) session.getAttribute("user");
 		if (result > 0) {
 			mv.addObject("operatorInfo", "恢复文章成功！");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
 		} else {
 			mv.addObject("operatorInfo", "恢复文章失败！");
 			mv.setViewName("personal/user/personal_index");
 		}
 		return mv;
 	}
+
+	
 	/**
-	 * 查询被删文章
-	 * @param toPage  跳转页面
-	 * @param usersId 用户ID
-	 * @return 跳转被删除文章列表页
+	 * 测试用
+	 * 
+	 * @return
 	 */
-	@RequestMapping("/findArticleByDelete")
-	public ModelAndView findByDelete(Integer toPage,Integer usersId) {
-		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		List<Article> articleBD = articleService.selectArticleByDelete(toPage,usersId);
-		int maxPage=articleService.getMaxRecordDelete(usersId);
-		mv.addObject("articleBD", articleBD);
-		mv.addObject("maxPage", maxPage);
-		mv.addObject("curPage", toPage);
-		return mv;
-	}
-/**
- * 测试用
- * @return
- */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "personal/article/test";

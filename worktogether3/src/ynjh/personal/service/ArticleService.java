@@ -23,13 +23,11 @@ public interface ArticleService {
 	public Integer updateReadNum(Integer id);
 	//文章点赞数
 	public Integer updateLikeNum(Integer id);
-	// 查看文章(删除)
-	public List<Article> selectArticleByDelete(Integer page,Integer usersId);
+	
 	// 恢复文章
 	public Integer renewArticle(Integer id);
 	// 获取未删除的
-	public Integer getMaxRecord(Integer usersId);
-	// 获取删除的
-	public Integer getMaxRecordDelete(Integer usersId);
+	public Integer getMaxArticleById(Integer usersId);
+	
 	
 }

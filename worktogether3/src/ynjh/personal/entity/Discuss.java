@@ -22,7 +22,7 @@ public class Discuss implements Serializable {
 	// 评论状态1:待审 2：正常 3：审核不通过 4：隐藏
 	private Integer discussStatus;
 	// 1：企业id 2：个人用户id
-	private Integer discusUsersType;
+	private Integer discussUsersType;
 	//被发送者id
 	private Integer discussBySendId;
 	
@@ -31,13 +31,13 @@ public class Discuss implements Serializable {
 
 	public Discuss(Integer discussUsersId, String discussContent,
 			Integer discussLevel, Timestamp discussTime,
-			Integer discusUsersType) {
+			Integer discussUsersType) {
 		super();
 		this.discussUsersId = discussUsersId;
 		this.discussContent = discussContent;
 		this.discussLevel = discussLevel;
 		this.discussTime = discussTime;
-		this.discusUsersType = discusUsersType;
+		this.discussUsersType = discussUsersType;
 	}
 
 	public Integer getId() {
@@ -88,12 +88,12 @@ public class Discuss implements Serializable {
 		this.discussStatus = discussStatus;
 	}
 
-	public Integer getDiscusUsersType() {
-		return discusUsersType;
+	public Integer getDiscussUsersType() {
+		return discussUsersType;
 	}
 
-	public void setDiscusUsersType(Integer discusUsersType) {
-		this.discusUsersType = discusUsersType;
+	public void setDiscussUsersType(Integer discussUsersType) {
+		this.discussUsersType = discussUsersType;
 	}
 
 	@Override
@@ -101,8 +101,8 @@ public class Discuss implements Serializable {
 		return "Discuss [id=" + id + ", discussUsersId=" + discussUsersId
 				+ ", discussContent=" + discussContent + ", discussLevel="
 				+ discussLevel + ", discussTime=" + discussTime
-				+ ", discussStatus=" + discussStatus + ", discusUsersType="
-				+ discusUsersType + "]";
+				+ ", discussStatus=" + discussStatus + ", discussUsersType="
+				+ discussUsersType + "]";
 	}
 
 }

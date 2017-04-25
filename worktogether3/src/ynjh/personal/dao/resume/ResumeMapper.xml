@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 查询简历(所有) -->
 	<select id="selectResumeByUserId" resultType="Resume">
-		select * from resume where userId=#{userId} and not resumeStatusThree=4
+		select * from resume where userId=#{userId}
 		<if test="page!=null">
 			limit #{page},5
 		</if>
@@ -40,11 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="deleteResumeById" parameterType="Integer">
 		update resume set resumeStatusThree=4 where id=#{id}
 	</update>
-	<!-- 查询简历(已经被删除) -->
-	<select id="selectResumeByDelete" resultType="Resume"
-		parameterType="Integer">
-		select * from resume where userId=#{userId} and resumeStatusThree=4
-	</select>
+	
+	
 	<!-- 恢复简历 -->
 	<update id="renewResumeById" parameterType="Integer">
 		update resume set resumeStatusThree=2 where id=#{id}
@@ -106,12 +103,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="deleteProject" parameterType="Integer">
 		update project set resumeType=4 where id=#{id}
 	</update>
-
-	<!-- 结束 -->
-	<!-- 分页 -->
-	<!-- 查询此ID的未删除的简历列表 -->
-	<select id="getMaxResumeById" resultType="Integer">
-		select count(*) from resume where userId=#{userId} and not resumeStatusThree=4
+	<!-- 删除结束 -->
+	<!-- 已删除记录 -->
+	<select id="findEducationByDelete" resultType="Education">
+	select * from education where userId=#{userId} and  resumeType=4
+	<if test="page!=null">
+			limit #{page},5
+		</if>
 	</select>
-	<!-- 结束 -->
+	<select id="findWorkByDelete" resultType="Work">
+	select * from work where userId=#{userId} and  resumeType=4
+	<if test="page!=null">
+			limit #{page},5
+		</if>
+	</select>
+	<select id="findProjectByDelete" resultType="Project">
+	select * from project where userId=#{userId} and  resumeType=4
+	<if test="page!=null">
+			limit #{page},5
+		</if>
+	</select>
+	<!-- 已删除记录结束 -->
+	<!-- 恢复被删记录 -->
+	<update id="renewEducationByDelete" parameterType="Integer">
+		update education set resumeType=2 where id=#{id}
+	</update>
+	<update id="renewWorkByDelete" parameterType="Integer">
+		update work set resumeType=2 where id=#{id}
+	</update>
+	<update id="renewProjectByDelete" parameterType="Integer">
+		update project set resumeType=2 where id=#{id}
+	</update>
+	<!-- 恢复被删记录结束 -->
+
+	<!-- 分页 -->
+	<!-- 查询此ID的简历数量 -->
+	<select id="getMaxResumeById" resultType="Integer">
+		select count(*) from resume where userId=#{userId}
+	</select>
+
+	<select id="getMaxEducationDeleteById" resultType="Integer">
+		select count(*) from education where userId=#{userId} and resumeType=4
+	</select>
+	<select id="getMaxWorkDeleteById" resultType="Integer">
+		select count(*) from work where userId=#{userId} and resumeType=4
+	</select>
+	<select id="getMaxProjectDeleteById" resultType="Integer">
+		select count(*) from project where userId=#{userId} and resumeType=4
+	</select>
+	<!-- 分页结束 -->
 </mapper>

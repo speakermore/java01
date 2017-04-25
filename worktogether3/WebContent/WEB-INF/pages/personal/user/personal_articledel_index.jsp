@@ -10,46 +10,24 @@
 		<section class="panel">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>最近保存文章</h1>
+				<c:forEach items="${articles }" var="art">
 					<div class="thumbnail">
 						<div class="caption">
-							<h3>文章标题</h3>
-							<p>文章内容 Cras justo odio, dapibus ac facilisis in, egestas
-								eget quam. Donec id elit non mi porta gravida at eget metus.
-								Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-								justo odio, dapibus ac facilisis in, egestas eget quam. Donec id
-								elit non mi porta gravida at eget metus. Nullam id dolor id nibh
-								ultricies vehicula ut id elit. Cras justo odio, dapibus ac
-								facilisis in, egestas eget quam. Donec id elit non mi porta
-								gravida at eget metus. Nullam id dolor id nibh ultricies
-								vehicula ut id elit.</p>
+							<h3>${art.articleTitle }</h3>
+							<p>${art.articleContent }</p>
 							<p>
-								<a class="btn btn-success "
-									href="personal/article/gotoUpdateArticle?id=${article.id }">修改</a>
-								<a class="btn"
+								<a class="btn btn-primary " href="personal/article/gotoUpdateArticle?id=${article.id }">修改</a> <a class="btn"
 									href="javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${article.id }'}">删除</a>
 							</p>
 						</div>
 					</div>
+					</c:forEach>
 				</div>
 
 
 
 				<table class="table">
-					<colgroup>
-						<col style="width: 25%">
-						<col style="width: 25%">
-						<col style="width: 25%">
-						<col style="width: 25%">
-					</colgroup>
-					<thead>
-						<tr>
-							<th>文章标题</th>
-							<th>创建日期</th>
-							<th>状态</th>
-							<th>操作</th>
-						</tr>
-					</thead>
+					
 					<!-- ajax分页开始 -->
 					<tbody id="ajaxArticlesList">
 						<c:forEach items="${articles }" var="art">
@@ -70,20 +48,18 @@
 								<c:if test="${art.articleStatus==4}">
 									<th>已被删除</th>
 								</c:if>
-								<td><c:if test="${art.articleStatus==4}">
-										<a href="personal/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
-											href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='personal/article/renewArticle?id=${art.id }'}">恢复</a>
-									</c:if> <c:if
-										test="${art.articleStatus==1||art.articleStatus==2||art.articleStatus==3}">
-										<a href="personal/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
-											href="javascript:if(confirm('你确定真的要删除这篇文章吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}">删除</a>
-									</c:if></td>
+								<td><a
+									href="personal/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
+									href="javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}">删除</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="4"><c:if test="${curPage==0||curPage==null}">
+							<td colspan="4"></td>
+						</tr>
+					</tfoot>
+					<c:if test="${curPage==0||curPage==null}">
 									<c:set var="curPage" value="1"></c:set>
 								</c:if>
 								<ul class="pagination">
@@ -97,9 +73,7 @@
 										href="javascript:ajaxPagination(${curPage+1 },${user.id })">下一页</a></li>
 									<li><a
 										href="javascript:ajaxPagination(${maxArticlePage },${user.id })">尾页</a></li>
-								</ul></td>
-						</tr>
-					</tfoot>
+								</ul>
 					<!-- ajax分页结束 -->
 				</table>
 			</div>

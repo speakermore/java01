@@ -38,25 +38,13 @@ public interface ArticleMapper {
 	 */
 	public Integer updateLikeNum(Integer id);
 	/**
-	 * 文章分页
-	 */
-	
-	/**
-	 * 查看文章(删除)
-	 */
-	public List<Article> selectArticleByDelete(@Param("page")Integer page,Integer usersId);
-	/**
 	 * 恢复文章
 	 */
 	public Integer renewArticle(Integer id);
 
 	/**
-	 * 获取未删除的
+	 * 获取文章的总数
 	 * @return
 	 */
 	public int getMaxRecord(Integer usersId);
-	/**
-	 * 获取删除的
-	 */
-	public int getMaxRecordDelete(Integer usersId);
 }

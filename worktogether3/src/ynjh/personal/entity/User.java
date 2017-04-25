@@ -44,7 +44,7 @@ public class User implements Serializable{
 	private Integer userLevel;
 	
 	public User() {
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	public User(String userLoginId, String userPassword, String userName,
