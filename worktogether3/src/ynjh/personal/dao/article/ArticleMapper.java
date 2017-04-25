@@ -54,9 +54,9 @@ public interface ArticleMapper {
 	 * 获取未删除的
 	 * @return
 	 */
-	public Integer getMaxRecord(Integer usersId);
+	public int getMaxRecord(Integer usersId);
 	/**
 	 * 获取删除的
 	 */
-	public Integer getMaxRecordDelete(Integer usersId);
+	public int getMaxRecordDelete(Integer usersId);
 }

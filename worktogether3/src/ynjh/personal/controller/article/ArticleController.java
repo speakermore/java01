@@ -1,36 +1,41 @@
-package ynjh.personal.controller.article;
+﻿package ynjh.personal.controller.article;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
-
+/**
+ * @author 胡林飞
+ *文章功能
+ */
 @Controller
 @RequestMapping("/personal/article")
 public class ArticleController {
 	@Resource
 	private ArticleService articleService;
-
-	// 跳转
+	/**
+	 * 跳转页面
+	 * @return 跳转到personal_addarticle页面
+	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.GET)
 	public String addArticle() {
 		return "personal/article/personal_addarticle";
 	}
-
-	// 添加文章
+	/**
+	 *  添加文章
+	 * @param article 文章对象
+	 * @param session 
+	 * @return 成功跳转index 失败跳转addarticle
+	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.POST)
 	public ModelAndView addArticle(Article article, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -41,7 +46,7 @@ public class ArticleController {
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			mv.addObject("operatorInfo", "文章添加成功！");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../article/lookArticleList?toPage=1&userId="+user.getId());
 
 		} else {
 			mv.addObject("operatorInfo", "文章添加失败!");
@@ -50,14 +55,19 @@ public class ArticleController {
 		return mv;
 	}
 
-	// 查看文章(所有)
+
+	/**
+	 * 查看文章(所有)ajax
+	 * @param toPage 跳转页面
+	 * @param userId 用户ID
+	 * @param session
+	 * @return 页面信息
+	 */
 	@RequestMapping("/ajaxLookArticleList")
 	@ResponseBody
 	public Object ajaxFindAllArticle(Integer toPage,Integer userId,HttpSession session) {
 		List<Article> articles = articleService.findUserArticle(toPage,userId);
 		int maxPage=articleService.getMaxRecord(userId);
-		session.setAttribute("curPage", toPage);
-		session.setAttribute("maxPage", maxPage);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
 		StringBuffer sb=new StringBuffer();
 		for(Article article:articles){
@@ -83,16 +93,22 @@ public class ArticleController {
 	public ModelAndView findAllArticle(Integer toPage,Integer userId,HttpSession session) {
 		List<Article> articles = articleService.findUserArticle(toPage,userId);
 		int maxPage=articleService.getMaxRecord(userId);
-		ModelAndView mv = new ModelAndView("personal/user/personal_index");
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("curPage", toPage);
 		mv.addObject("maxPage", maxPage);
 		mv.addObject("articles", articles);
 		session.setAttribute("articles", articles);
 //		session.setAttribute("curPage", toPage);
 //		session.setAttribute("maxPage", maxPage);
+mv.setViewName("redirect:../resume/findAllResume?toPage=1&userId="+userId);
 		return mv;
 	}
-	// 查看文章（详细）
+	
+	/**(
+	 *查看文章（详细）
+	 * @param id 文章ID
+	 * @return 返回文章详情查看页
+	 */
 	@RequestMapping(value = "/lookArticleById", method = RequestMethod.GET)
 	public ModelAndView findArticleById(Integer id) {
 		ModelAndView mv = new ModelAndView();
@@ -101,23 +117,29 @@ public class ArticleController {
 		mv.setViewName("personal/article/personal_articledetail");
 		return mv;
 	}
-
-	// 删除文章
+	/**
+	 * 删除文章
+	 * @param id 文章ID
+	 * @return 删除成功，跳转当前页，删除失败，也是跳转当前页
+	 */
 	@RequestMapping("/deleteUserAricle")
 	public ModelAndView deleteUserCommentArticle(Integer id) {
 		int result = articleService.deleteUserArticle(id);
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
-			mv.addObject("operatorInfo", "恢复文章成功！");
+			mv.addObject("operatorInfo", "删除文章成功！");
 			mv.setViewName("personal/user/personal_index");
 		} else {
-			mv.addObject("operatorInfo", "恢复文章失败！");
+			mv.addObject("operatorInfo", "删除文章失败！");
 			mv.setViewName("personal/user/personal_index");
 		}
 		return mv;
 	}
-
-	// 跳转修改页
+	/**
+	 * 跳转修改页
+	 * @param id 文章ID
+	 * @return 如果不为空，跳转修改页面
+	 */
 	@RequestMapping(value = "/gotoUpdateArticle", method = RequestMethod.GET)
 	public ModelAndView gotoUpdateArticle(Integer id) {
 		ModelAndView mv = new ModelAndView();
@@ -128,8 +150,11 @@ public class ArticleController {
 		}
 		return mv;
 	}
-
-	// 修改文章内容
+	/**
+	 * 修改文章内容
+	 * @param article w文章对象
+	 * @return 修改文章内容成功，跳转index，失败也是index
+	 */
 	@RequestMapping("/updateArticle")
 	public ModelAndView uptateArticleContent(Article article) {
 		int result = articleService.updateArticleContent(article);
@@ -143,8 +168,11 @@ public class ArticleController {
 		}
 		return mv;
 	}
-
-	// 点赞数
+	/**
+	 * 点赞数
+	 * @param id 文章ID
+	 * @return 点赞成功，跳转当前页
+	 */
 	@RequestMapping("/updateLike")
 	public ModelAndView updateLike(Integer id) {
 		articleService.updateLikeNum(id);
@@ -153,8 +181,11 @@ public class ArticleController {
 		mv.addObject("article", article);
 		return mv;
 	}
-
-	// 恢复被删文章
+	/**
+	 * 恢复被删文章
+	 * @param id 文章ID
+	 * @return 恢复成功失败都跳转index
+	 */
 	@RequestMapping("/renewArticle")
 	public ModelAndView renewArticle(Integer id) {
 		ModelAndView mv = new ModelAndView();
@@ -168,8 +199,12 @@ public class ArticleController {
 		}
 		return mv;
 	}
-
-	// 查询被删文章
+	/**
+	 * 查询被删文章
+	 * @param toPage  跳转页面
+	 * @param usersId 用户ID
+	 * @return 跳转被删除文章列表页
+	 */
 	@RequestMapping("/findArticleByDelete")
 	public ModelAndView findByDelete(Integer toPage,Integer usersId) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
@@ -180,7 +215,10 @@ public class ArticleController {
 		mv.addObject("curPage", toPage);
 		return mv;
 	}
-
+/**
+ * 测试用
+ * @return
+ */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "personal/article/test";

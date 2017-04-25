@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 结束 -->
 	<!-- 分页 -->
 	<!-- 查询此ID的未删除的简历列表 -->
-	<select id="getMaxResumeById" parameterType="Integer">
+	<select id="getMaxResumeById" resultType="Integer">
 		select count(*) from resume where userId=#{userId} and not resumeStatusThree=4
 	</select>
 	<!-- 结束 -->

@@ -1,16 +1,28 @@
 package ynjh.personal.entity;
 
 import java.io.Serializable;
+/**
+ * @author 胡林飞
+ * 评论文章表，与commentArticle表对应
+ */
 import java.sql.Timestamp;
 
 public class CommentArticle implements Serializable{
-	private Integer id;//id
-	private Integer articleId;//文章ID
-	private Integer usersId;//用户id
-	private Timestamp commentArticleTime;//评论时间
-	private String commentArticleContent;//评论内容
-	private Integer commentArticleLikeNum;//点赞数
-	private Integer commentArticleStatus;//评论文章状态1：等待审核  2：审核通过3：审核不通过 4：删除
+	//id
+	private Integer id;
+	//文章ID
+	private Integer articleId;
+	//用户id
+	private Integer usersId;
+	//评论时间
+	private Timestamp commentArticleTime;
+	//评论内容
+	private String commentArticleContent;
+	//点赞数
+	private Integer commentArticleLikeNum;
+	//评论文章状态1：等待审核  2：正常3：审核不通过 4：隐藏
+	private Integer commentArticleStatus;
+	//用户类型
 	private Integer commentArticleUsersType;
 	public CommentArticle(){
 		

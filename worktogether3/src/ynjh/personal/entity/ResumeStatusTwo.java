@@ -2,15 +2,21 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author 刘志浩
+ * 简历操作表 与resumeStatusTwo表对应 、是resume的子表
+ */
 public class ResumeStatusTwo implements Serializable {
-
+	//状态id
 	private Integer id;
-	private Integer resumeId; // 简历Id
-	private Integer userId; // 发送者Id
-	private Integer companyId; // 接收者Id
-	/**
-	 * 1表示企业尚未阅读（默认） 2表示企业已接受申请 3表示企业需要考虑 4表示企业拒绝了您的申请 5表示企业已删除你的申请 6表示已阅读
-	 */
+	// 简历Id
+	private Integer resumeId; 
+	// 发送者Id
+	private Integer userId; 
+	// 接收者Id
+	private Integer companyId; 
+	//1表示企业尚未阅读（默认） 2表示企业已接受申请 3表示企业需要考虑 4表示企业拒绝了您的申请 5表示企业已删除你的申请 6表示已阅读
 	private Integer resumeStatusTwo;
 	public Integer getId() {
 		return id;

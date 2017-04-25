@@ -58,13 +58,14 @@
 					<h2 class="form-signin-heading">还没有账号吗？</h2>
 					<label for="userLoginId" class="sr-only">邮箱/手机号</label> 
 					<input type="text" id="userLoginId" class="form-control" name="userLoginId"
-						placeholder="邮箱/手机号" required autofocus> <label
-						for="userPassword" class="sr-only">密码</label> <input
-						type="password" id="userPassword" class="form-control" name="userPassword"
+						placeholder="邮箱/手机号" required autofocus> 
+					<label for="userPassword" class="sr-only">密码</label> 
+					<input type="password" id="userPassword" class="form-control" name="userPassword"
 						placeholder="密码" required>
-					<label for="userPassword" class="sr-only">确认密码：</label> <input
-						type="password" id="userPassword" class="form-control" name="userPassword"
+					<label for="userPassword2" class="sr-only">确认密码：</label> 
+					<input type="password" id="userPassword2" class="form-control" name="userPassword2"
 						placeholder="确认密码" required>
+					<br/>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">立即注册</button>
 					<div id="inputagree">
 						<a href="#">我已阅读并同意服务条款</a>

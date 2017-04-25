@@ -81,7 +81,7 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 	<script type="text/javascript">
 		$("#time").datetimepicker({
 			format : 'yyyy-mm-dd',

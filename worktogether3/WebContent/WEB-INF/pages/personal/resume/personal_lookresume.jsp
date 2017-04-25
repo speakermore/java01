@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>个人用户-首页</title>
+<title>个人用户-查看简历</title>
+<%@include file="/WEB-INF/pages/nav.jsp"%>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
@@ -32,6 +33,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 		/* 	$("#time").blur(function() {
 		alert(typeof ("#time"))
 		}); */

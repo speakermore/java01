@@ -1,19 +1,33 @@
 package ynjh.personal.entity;
 
 import java.io.Serializable;
+/**
+ * @author 胡林飞
+ * 文章表与article表对应
+ */
 import java.sql.Timestamp;
 
 public class Article implements Serializable{
+	//id
 	private Integer id;
-	private Integer usersId;//用户名
-	private String articleTitle;//文章标题
-	private Integer articleLikeNum;//点赞数
-	private Integer articleReadNum;//阅读数
-	private Timestamp articleTime;//发表日期
-	private Integer articleStatus;//状态
-	private String articleKey;//关键字
-	private String articleContent;//文章内容
-	private Integer articleUsersType;//用户状态1：企业 2：个人
+	//用户名
+	private Integer usersId;
+	//文章标题
+	private String articleTitle;
+	//点赞数
+	private Integer articleLikeNum;
+	//阅读数
+	private Integer articleReadNum;
+	//发表日期
+	private Timestamp articleTime;
+	//状态
+	private Integer articleStatus;
+	//关键字
+	private String articleKey;
+	//文章内容
+	private String articleContent;
+	//用户状态1：企业 2：个人
+	private Integer articleUsersType;
 	
 	public Article(){
 		

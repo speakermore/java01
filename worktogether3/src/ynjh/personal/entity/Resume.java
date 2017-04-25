@@ -2,36 +2,68 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * 
+ * @author 刘志浩
+ * 简历表，对应resume表
+ */
 public class Resume implements Serializable{
-	private Integer id;// 简历ID
-	private Integer userId;// 用户ID
-	private String resumeTitle;// 简历标题
-	private Timestamp resumeCreateDate;// 创建时间
-	private String resumeName;// 姓名
-	private Integer resumeGender;// 性别
-	private String resumeNation;// 民族
-	private String resumePlace;// 籍贯
-	private Timestamp resumeBirthday;// 生日
-	private Integer resumeMarriage;// 婚姻
-	private String resumeGraduationSchool;// 毕业院校
-	private Timestamp resumeGraduationTime;// 毕业时间
-	private String resumeEducation;// 学历
-	private String resumeMajor;// 专业
-	private Integer resumeWages;// 期望待遇
-	private Integer resumePhone;// 电话
-	private Integer resumeQQ;// QQ
-	private Integer resumeFLAbility;// 外语水平
-	private Integer resumeFLType;// 外语类型
-	private Integer resumeEnglishGrade;// 英语等级
-	private Integer resumeComputerAbility;// 计算机水平
-	private String resumePersonality;// 特点描述
-	private String resumeSelfEvaluation;// 自我评价
-	private Integer resumeStatusOne;// 状态(用户的操作)\n1.完全公开(默认)\n2.只限企业浏览\n3.只对应聘企业公开\n4.保密
-	private Integer resumeHeight;// 身高
-	private Integer resumeWeight;// 体重
-	private Integer resumeStatusThree;//状态（管理员）1.待审核 2.正常	 3. 审核不通过
-	private String resumeJor;//岗位意向
+	// 简历ID
+	private Integer id;
+	// 用户ID
+	private Integer userId;
+	// 简历标题
+	private String resumeTitle;
+	// 创建时间
+	private Timestamp resumeCreateDate;
+	// 姓名
+	private String resumeName;
+	// 性别
+	private Integer resumeGender;
+	// 民族
+	private String resumeNation;
+	// 籍贯
+	private String resumePlace;
+	// 生日
+	private Timestamp resumeBirthday;
+	// 婚姻
+	private Integer resumeMarriage;
+	// 毕业院校
+	private String resumeGraduationSchool;
+	// 毕业时间
+	private Timestamp resumeGraduationTime;
+	// 学历
+	private String resumeEducation;
+	// 专业
+	private String resumeMajor;
+	// 期望待遇
+	private Integer resumeWages;
+	// 电话
+	private Integer resumePhone;
+	// QQ
+	private Integer resumeQQ;
+	// 外语水平
+	private Integer resumeFLAbility;
+	// 外语类型
+	private Integer resumeFLType;
+	// 英语等级
+	private Integer resumeEnglishGrade;
+	// 计算机水平
+	private Integer resumeComputerAbility;
+	// 特点描述
+	private String resumePersonality;
+	// 自我评价
+	private String resumeSelfEvaluation;
+	// 状态(用户的操作)\n1.完全公开(默认)\n2.只限企业浏览\n3.只对应聘企业公开\n4.保密
+	private Integer resumeStatusOne;
+	// 身高
+	private Integer resumeHeight;
+	// 体重
+	private Integer resumeWeight;
+	//状态（管理员）1.待审核 2.正常	 3. 审核不通过  4.隐藏
+	private Integer resumeStatusThree;
+	//岗位意向
+	private String resumeJor;
 	
 	
 	

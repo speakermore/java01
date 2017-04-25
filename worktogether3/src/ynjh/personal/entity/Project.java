@@ -2,7 +2,12 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * 
+ * @author 刘志浩
+ * 项目记录表，与project相对应，是resume的子表
+ *
+ */
 public class Project implements Serializable{
 	//id
 	private Integer id;
@@ -20,9 +25,9 @@ public class Project implements Serializable{
 	private String projectDescription;
 	//责任描述与感受
 	private String projectMakeDescription;
-	
+	//简历id
 	private Integer resumeId;
-	
+	//状态 1.待审核 2.正常 3.审核未通过 4.删除
 	private Integer resumeType;
 	
 	

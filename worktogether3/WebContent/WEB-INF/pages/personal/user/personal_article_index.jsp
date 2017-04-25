@@ -6,6 +6,7 @@
 <article
 	class="col-md-12 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
 	<div class="row">
+		<!-- 文章内容开始 -->
 		<section class="panel">
 			<div class="row">
 				<input type="hidden" id="getuserid" value="${user.id }" />
@@ -24,7 +25,10 @@
 							<th>操作</th>
 						</tr>
 					</thead>
-
+					<%-- <c:if test="${articles==null }">
+						<jsp:forward page="personal/article/lookArticleList?toPage=1&userId=${user.id }"></jsp:forward>
+					</c:if> --%>
+					<!-- ajax分页开始 -->
 					<tbody id="ajaxArticlesList">
 						<c:forEach items="${articles }" var="art">
 							<tr>
@@ -52,36 +56,40 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="4"><c:if test="${curPage==null }">
-									<c:set var="curPage" value="1"></c:set>
+							<td colspan="4"><c:if test="${curArticlePage==null }">
+									<c:set var="curArticlePage" value="1"></c:set>
 								</c:if>
 								<ul class="pagination">
 									<li><a href="javascript:ajaxPagination(1,${user.id })">首页</a></li>
-									<li><a id="prePage" href="javascript:ajaxPagination(${curPage-1 },${user.id })">上一页</a></li>
-									<li><c:forEach begin="1" end="${maxPage }" var="i">
-											<a href="javascript:ajaxPagination(${i},${user.id })">${i}</a>
+									<li><a id="preArticlePage"
+										href="javascript:ajaxPagination(${curArticlePage-1 },${user.id })">上一页</a></li>
+									<li><c:forEach begin="1" end="${maxArticlePage }" var="a">
+											<a href="javascript:ajaxPagination(${a},${user.id })">${a}</a>
 										</c:forEach></li>
-									<li><a id="nextPage" href="javascript:ajaxPagination(${curPage+1 },${user.id })">下一页</a></li>
+									<li><a id="nextArticlePage"
+										href="javascript:ajaxPagination(${curArticlePage+1 },${user.id })">下一页</a></li>
 									<li><a
-										href="javascript:ajaxPagination(${maxPage },${user.id })">尾页</a></li>
-									<li><div class="col-lg-6">
+										href="javascript:ajaxPagination(${maxArticlePage },${user.id })">尾页</a></li>
+									<!-- <li><div class="col-lg-6">
 											<div class="input-group">
 												<span class="input-group-btn"><input type="text"
 													class="form-control" id="pageGosk" /> <a href="#"
 													id="pageBtn" class="btn btn-default">Go!</a> </span>
 											</div>
-											<!-- /input-group -->
-										</div> <!-- /.col-lg-6 --></li>
+											/input-group
+										</div> /.col-lg-6</li> -->
 								</ul></td>
 						</tr>
 					</tfoot>
+					<!-- ajax分页结束 -->
 				</table>
 			</div>
 		</section>
+		<!-- 文章内容结束 -->
 	</div>
 </article>
 <script type="text/javascript">
-/* 	var id = $("#getuserid").val();
+	/* var id = $("#getuserid").val();
 	var value = $("#pageGosk").val();
 	$("#pageBtn").click(
 			function() {
@@ -90,14 +98,21 @@
 			}); */
 	var ajaxPagination = function(page, id) {
 		$.ajax({
+			//请求地址
 			url : "personal/article/ajaxLookArticleList?toPage=" + page
 					+ "&userId=" + id,
+			//返回类型
 			dataType : "html",
+			//请求成功后调的方法
 			success : function(data) {
+				//截断---之前的数据
 				var artList = data.substring(0, data.indexOf("---"));
-				var toPage = parseInt(data.substring(data.indexOf("---") + 3, data
-						.lastIndexOf("---")));
-				var maxPage = parseInt(data.substring(data.lastIndexOf("---") + 3));
+				//获取当前页和最大页码
+				var toPage = parseInt(data.substring(data.indexOf("---") + 3,
+						data.lastIndexOf("---")));
+				var maxPage = parseInt(data
+						.substring(data.lastIndexOf("---") + 3));
+				//判断一下
 				if (toPage == null) {
 					toPage = 1;
 				}
@@ -108,11 +123,11 @@
 					toPage = maxPage;
 				}
 				$("#ajaxArticlesList").html(artList);
-				$("#prePage").attr(
+				$("#preArticlePage").attr(
 						"href",
 						"javascript:ajaxPagination(" + (toPage - 1)
 								+ ",${user.id})");
-				$("#nextPage").attr(
+				$("#nextArticlePage").attr(
 						"href",
 						"javascript:ajaxPagination(" + (toPage + 1)
 								+ ",${user.id})");

@@ -1,6 +1,11 @@
 package ynjh.personal.entity;
 
 import java.io.Serializable;
+/**
+ * @author 胡林飞
+ * 评论企业星级表，与dicuss表对应
+ */
+
 import java.sql.Timestamp;
 
 public class Discuss implements Serializable {
@@ -14,7 +19,7 @@ public class Discuss implements Serializable {
 	private Integer discussLevel;
 	// 评论时间
 	private Timestamp discussTime;
-	// 评论状态1:待审 2：审核通过 3：审核不通过 4：删除
+	// 评论状态1:待审 2：正常 3：审核不通过 4：隐藏
 	private Integer discussStatus;
 	// 1：企业id 2：个人用户id
 	private Integer discusUsersType;

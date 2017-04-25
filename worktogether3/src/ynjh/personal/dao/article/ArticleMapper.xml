@@ -49,10 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 	</select>
 	<!-- 分页 -->
-	 <select id="getMaxRecord" resultType="Integer" parameterType="Integer">
+	 <select id="getMaxRecord" resultType="int" parameterType="Integer">
         select count(*) from article where usersId=#{usersId} and not articleStatus=4
     </select>
-     <select id="getMaxRecordDelete" resultType="Integer" parameterType="Integer">
+     <select id="getMaxRecordDelete" resultType="int" parameterType="Integer">
         select count(*) from article where usersId=#{usersId} and articleStatus=4
     </select>	
 </mapper>

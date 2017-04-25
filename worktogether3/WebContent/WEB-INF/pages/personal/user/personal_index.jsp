@@ -5,6 +5,12 @@
 <head>
 <title>个人用户-首页</title>
 <%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+<style type="text/css">
+table {
+	margin: 20px;
+}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
@@ -15,6 +21,7 @@
 					<div class="col-md-1 column"></div>
 					<div class="col-md-6 column ">
 						<div class="tabbable" id="tabs">
+							<!-- 下拉列表开始 -->
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#panel-one" data-toggle="tab">个人中心</a></li>
 								<li><a href="#panel-two" data-toggle="tab">简历中心</a></li>
@@ -34,38 +41,36 @@
 										<li><a href="#panel-element-four ">项目经历</a></li>
 									</ul></li>
 							</ul>
+							<!-- 下拉列表结束 -->
+							<!-- 主要内容开始 -->
 							<div class="tab-content">
 								<div class="tab-pane active" id="panel-one">
-									<p>
-										<%@include
-											file="/WEB-INF/pages/personal/user/personal_user.jsp"%>
-									</p>
+									<%@include file="/WEB-INF/pages/personal/user/personal_user.jsp"%>
 								</div>
 								<div class="tab-pane" id="panel-two">
-									<p>
 									<div class="alert alert-success alert-dismissable">
 										<button type="button" class="close" data-dismiss="alert"
 											aria-hidden="true">×</button>
 										<h4>注意!</h4>
 										简历写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
-											class="alert-link">点我返回首页</a>|<a href="personal/resume/createResume">点我创建新的简历</a>
+											class="alert-link">点我返回首页</a>|<a
+											href="personal/resume/createResume">点我创建新的简历</a>
 									</div>
-									<%-- <%@include file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%> --%>
-									</p>
-
+									<%@include file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%>
 								</div>
 								<div class="tab-pane" id="panel-three">
-									<p><div class="alert alert-success alert-dismissable">
+									<div class="alert alert-success alert-dismissable">
 										<button type="button" class="close" data-dismiss="alert"
 											aria-hidden="true">×</button>
 										<h4>注意!</h4>
 										文章写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
-											class="alert-link">点我返回首页</a>|<a href="personal/article/add_article">点我创建新的文章</a>
+											class="alert-link">点我返回首页</a>|<a
+											href="personal/article/add_article">点我创建新的文章</a>
 									</div>
 									<%@include file="/WEB-INF/pages/personal/user/personal_article_index.jsp"%>
-									</p>
 								</div>
 							</div>
+							<!-- 主要内容结束 -->
 						</div>
 					</div>
 					<div class="col-md-4 column ">
@@ -76,6 +81,6 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+	
 </body>
 </html>
