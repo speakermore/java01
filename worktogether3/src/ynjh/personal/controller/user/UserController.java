@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ynjh.common.util.MD5Util;
-import ynjh.common.util.ValidateCode;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserCharge;
+import ynjh.personal.entity.Validate;
 import ynjh.personal.service.UserService;
 /**
  * 
@@ -55,7 +55,7 @@ public class UserController {
 		User user = uService.login(userLoginId, pass);
 		
 		//判断
-		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
+		Validate validate = (Validate) session.getAttribute("codeValidate");
 		String value = validate.getvCodeString().toString();
 		Date date=new Date();
 		Date generateDate=validate.getGenerateTime();
@@ -376,7 +376,7 @@ public class UserController {
 		response.setContentType("image/png");
 
 		//验证码生成时间设置
-		ValidateCode validate=new ValidateCode();
+		Validate validate=new Validate();
 		Date date=new Date();
 		try{
 			long l=Long.parseLong(time);
