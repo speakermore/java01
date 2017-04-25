@@ -10,8 +10,9 @@ import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.Work;
 /**
  * 
- * @author 刘志浩
+ *  @author 刘志浩
  * 操作简历接口
+ *
  */
 public interface ResumeService {
 	//添加简历
@@ -24,11 +25,10 @@ public interface ResumeService {
 	public Resume selectResumeById(Integer id);
 	 // 删除简历
 	public Integer deleteResumeById(Integer id);
-	// 查新被删除的简历
-	public List<Resume> selectResumeByDelete(Integer id);
+	
 	// 恢复简历
 	public Integer renewResumeById(Integer id);
-	//****************
+	//////////////////////////////////
 	//教育记录添加
 	public Integer addEducation(Education education);
 	//教育记录修改
@@ -53,7 +53,26 @@ public interface ResumeService {
 	public List<Project> findProject(Integer resumeId);
 	// 项目记录删除
 	public Integer deleteProject(Integer id);
-	//********************
-	//查询此ID的未删除的简历列表
+	//////////////////////////////////////////
+	//查询此ID的未删除的简历数量
 	public Integer getMaxResumeById(Integer userId);
+
+	 // 查询此ID的删除的简历数量
+	public Integer getMaxEducationDeleteById(Integer userId);
+	 // 查询此ID的删除的简历数量
+	public Integer getMaxWorkDeleteById(Integer userId);
+	 // 查询此ID的删除的简历数量
+	public Integer getMaxProjectDeleteById(Integer userId);
+	 // 查看教育记录已删除记录
+	public List<Education> findEducationByDelete(Integer page,Integer userId);
+	 // 查看工作记录已删除记录
+	public List<Work> findWorkByDelete(Integer page,Integer userId);
+	 // 查看项目记录已删除记录
+	public List<Project> findProjectByDelete(Integer page,Integer userId);
+	 // 恢复教育被删记录
+	public Integer renewEducationByDelete(Integer id);
+	 // 恢复工作被删记录
+	public Integer renewWorkByDelete(Integer id);
+	 // 恢复项目被删记录
+	public Integer renewProjectByDelete(Integer id);
 }

@@ -9,6 +9,12 @@
 		<section class="panel">
 			<div class="row">
 				<table class="table">
+				<colgroup>
+						<col style="width: 25%">
+						<col style="width: 25%">
+						<col style="width: 25%">
+						<col style="width: 25%">
+					</colgroup>
 					<thead>
 						<tr>
 							<th>简历标题</th>
@@ -19,55 +25,49 @@
 					</thead>
 					<!-- ajax分页开始 -->
 					<tbody id="ajaxResumesList">
-						<c:forEach items="${resumes }" var="resume">
+						<c:forEach items="${resumes }" var="res">
 							<tr>
-								<td><a href="personal/resume/lookResume?id=${resume.id }">${resume.resumeTitle }</a></td>
-								<td><fmt:formatDate value="${resume.resumeCreateDate}" pattern="yyyy-MM-dd" /></td>
-								<c:if test="${resume.resumeStatusThree==1}">
+								<td><a href="personal/resume/lookResume?id=${res.id }">${res.resumeTitle }</a></td>
+								<td><fmt:formatDate value="${res.resumeCreateDate}"
+										pattern="yyyy-MM-dd" /></td>
+								<c:if test="${res.resumeStatusThree==1}">
 									<th>待审核</th>
 								</c:if>
-								<c:if test="${resume.resumeStatusThree==2}">
+								<c:if test="${res.resumeStatusThree==2}">
 									<th>正常</th>
 								</c:if>
-								<c:if test="${resume.resumeStatusThree==3}">
+								<c:if test="${res.resumeStatusThree==3}">
 									<th>审核未通过</th>
 								</c:if>
-								<c:if test="${resume.resumeStatusThree==3}">
+								<c:if test="${res.resumeStatusThree==4}">
 									<th>已被删除</th>
 								</c:if>
-								<td><a href="personal/resume/updateResume?id=${resume.id }">修改</a>|<a
-									href="javascript:if(confirm('你确定真的要删除吗？')){location.href='personal/resume/deleteResume?id=${resume.id }'}">删除</a></td>
+								<td><c:if test="${res.resumeStatusThree==4 }">
+										<a href="personal/resume/updateResume?id=${resume.id }">修改</a>|<a href="javascript:if(confirm('你确定真的要恢复这篇简历吗？')){location.href='personal/resume/renewResume?id=${art.id }'}">恢复</a>
+									</c:if> 
+									<c:if
+										test="${res.resumeStatusThree==1||res.resumeStatusThree==2||res.resumeStatusThree==3 }">
+									<a href="personal/resume/updateResume?id=${resume.id }">修改</a>|<a href="javascript:if(confirm('你确定真的要删除这篇简历吗？')){location.href='personal/resume/deleteResume?id=${resume.id }'}">删除</a>
+									</c:if></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="4"><c:if test="${curResumePage==null }">
+							<td colspan="4"><c:if test="${curPage==0||curPage==null }">
 									<c:set var="curResumePage" value="1"></c:set>
 								</c:if>
 								<ul class="pagination">
 									<li><a href="javascript:ajaxPagination1(1,${user.id })">首页</a></li>
-
 									<li><a id="preResuemPage"
-										href="javascript:ajaxPagination1(${curResumePage-1},${user.id})">上一页</a>
-									</li>
-
+										href="javascript:ajaxPagination1(${curPage-1},${user.id})">上一页</a></li>
 									<li><c:forEach begin="1" end="${maxResumePage }" var="i">
 											<a href="javascript:ajaxPagination1(${i},${user.id })">${i}</a>
 										</c:forEach></li>
 									<li><a id="nextResuemPage"
-										href="javascript:ajaxPagination1(${curResumePage+1 },${user.id })">下一页</a>
-									</li>
+										href="javascript:ajaxPagination1(${curPage+1 },${user.id })">下一页</a></li>
 									<li><a
 										href="javascript:ajaxPagination1(${maxResumePage },${user.id })">尾页</a></li>
-									<%-- <li><div class="col-lg-6">
-									<div class="input-group">
-										<span class="input-group-btn"><input type="text"
-											class="form-control" id="pageGosk" /> <a href="#"
-											id="pageBtn" class="btn btn-default">Go!</a> </span>
-									</div>
-									<!-- /input-group -->
-								</div> <!-- /.col-lg-6 --></li> --%>
 								</ul></td>
 						</tr>
 					</tfoot>
@@ -78,11 +78,17 @@
 	</div>
 </article>
 <script type="text/javascript">
-	var ajaxPagination1 = function(page, userId) {
+	var resumeurl = "personal/resume/ajaxFindAllResume?toPage=";
+	var resumechargeId = "#ajaxResumesList";
+	var resumeperId = "#preResuemPage";
+	var resumenextId = "#nextResuemPage";
+	var ajaxPagination1 = function(page, id) {
 		$.ajax({
-			url : "personal/resume/ajaxFindAllResume?toPage=" + page
-					+ "&userId=" + userId,
+			//请求地址
+			url : resumeurl + page + "&userId=" + id,
+			//返回类型
 			dataType : "html",
+			//请求成功后调的方法
 			success : function(data) {
 				//截断---之前的数据
 				var artList = data.substring(0, data.indexOf("---"));
@@ -101,14 +107,14 @@
 				if (toPage >= maxPage) {
 					toPage = maxPage;
 				}
-				$("#ajaxResumesList").html(artList);
-				$("#preResuemPage").attr(
+				$(resumechargeId).html(artList);
+				$(resumeperId).attr(
 						"href",
-						"javascript:ajaxPagination1(" + (toPage - 1)
+						"javascript:ajaxPagination(" + (toPage - 1)
 								+ ",${user.id})");
-				$("#nextResuemPage").attr(
+				$(resumenextId).attr(
 						"href",
-						"javascript:ajaxPagination1(" + (toPage + 1)
+						"javascript:ajaxPagination(" + (toPage + 1)
 								+ ",${user.id})");
 			}
 		});

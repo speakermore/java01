@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 查看文章(所有) -->
 	<select id="selectUserArticle" resultType="Article">
-	select * from article where usersId=#{usersId} and not articleStatus=4
+	select * from article where usersId=#{usersId}
 	<if test="page!=null">
 		limit #{page},5
 	</if>
@@ -41,18 +41,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="renewArticle" parameterType="Integer">
 	update article set articleStatus=2 where id=#{id} 
 	</update>
-	<!-- 查看被删除的文章 -->
-	<select id="selectArticleByDelete" resultType="Article">
-	select * from article where usersId=#{usersId} and articleStatus=4
-	<if test="page!=null">
-		limit #{page},5
-	</if>
-	</select>
+
 	<!-- 分页 -->
+	<!-- 未被删除文章总数 -->
 	 <select id="getMaxRecord" resultType="int" parameterType="Integer">
-        select count(*) from article where usersId=#{usersId} and not articleStatus=4
+        select count(*) from article where usersId=#{usersId}
     </select>
-     <select id="getMaxRecordDelete" resultType="int" parameterType="Integer">
-        select count(*) from article where usersId=#{usersId} and articleStatus=4
-    </select>	
+  	
 </mapper>

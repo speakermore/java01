@@ -94,8 +94,14 @@ public class ResumeController {
 			}else if (resume.getResumeStatusThree()==4) {
 				sb.append("<th>已被删除</th>");
 			}
-			sb.append("<td><a href=\"personal/resume/updateResume?id=${resume.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要删除吗？')){location.href='personal/resume/deleteResume?id=${resume.id }'}\">删除</a></td>");
-			sb.append("</tr>");
+			sb.append("<td>");
+			if (resume.getResumeStatusThree() == 4) {
+					sb.append("<a href=\"personal/resume/updateResume?id=${resume.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复这篇简历吗？')){location.href='personal/resume/renewResume?id=${art.id }'}\">恢复</a>");
+			}else {
+				sb.append("<a href=\"personal/resume/updateResume?id=${resume.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要删除这篇简历吗？')){location.href='personal/resume/deleteResume?id=${resume.id }'}\">删除</a>");
+			}
+				sb.append("</td>");
+				sb.append("</tr>");
 		}sb.append("---"+toPage+"---"+maxPage);
 		return sb.toString();
 	}
@@ -108,7 +114,7 @@ public class ResumeController {
 	 * 
 	 * ModelAndView
 	 */
-	@RequestMapping("/findAllResume")
+/*	@RequestMapping("/findAllResume")
 	public ModelAndView findAllResume(Integer toPage,Integer userId,HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
 		List<Resume> resumes = rService.selectResumeUserId(toPage,userId);
@@ -118,7 +124,7 @@ public class ResumeController {
 		mv.addObject("resumes", resumes);
 		session.setAttribute("resumes", resumes);
 		return mv;
-	}
+	}*/
 
 	/**
 	 * 查看简历详细信息 跳转预览简历
@@ -189,13 +195,14 @@ public class ResumeController {
 	 * ModelAndView
 	 */
 	@RequestMapping(value = "/deleteResume", method = RequestMethod.GET)
-	public ModelAndView deleteResume(Integer id) {
+	public ModelAndView deleteResume(Integer id,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.deleteResumeById(id);
+		User user =(User) session.getAttribute("user");
 		if (result > 0) {
 			mv.addObject("operatorInfo", "删除简历成功！");
 			// mv.addObject("toPage","personal/user/personal_index");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
 		} else {
 			mv.addObject("operatorInfo", "删除简历失败！");
 			mv.setViewName("personal/user/personal_index");
@@ -204,20 +211,7 @@ public class ResumeController {
 		return mv;
 	}
 
-	/**
-	 * 查看被删除的简历 跳转主页
-	 * @param userId 用户id
-	 * @return
-	 * 
-	 * ModelAndView
-	 */
-	@RequestMapping("/findResumeByDelete")
-	public ModelAndView findResumeByDelete(Integer userId) {
-		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		List<Resume> resumes = rService.selectResumeByDelete(userId);
-		mv.addObject("resumeBD", resumes);
-		return mv;
-	}
+	
 
 	/**
 	 * 恢复被删除的简历 跳转主页
@@ -227,13 +221,14 @@ public class ResumeController {
 	 * ModelAndView
 	 */
 	@RequestMapping(value = "/renewResume", method = RequestMethod.GET)
-	public ModelAndView renewResume(Integer id) {
+	public ModelAndView renewResume(Integer id,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.renewResumeById(id);
+		User user=(User) session.getAttribute("user");
 		if (result > 0) {
 			mv.addObject("operatorInfo", "恢复简历成功！");
 			// mv.addObject("toPage","personal/user/personal_index");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
 		} else {
 			mv.addObject("operatorInfo", "恢复简历失败，请联系管理员！");
 			mv.setViewName("personal/user/personal_index");

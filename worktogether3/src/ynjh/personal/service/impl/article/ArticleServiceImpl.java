@@ -52,18 +52,18 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @param id 用户ID 
 	 */
 	@Override
-	public List<Article> findUserArticle(Integer page,Integer id) {
+	public List<Article> findUserArticle(Integer page,Integer userId) {
 		if (page==null) {
 			page=1;
 		}
 		if(page<1){
 			page=1;
 		}
-		int maxPage=getMaxRecord(id);
+		int maxPage=getMaxArticleById(userId);
 		if(page>maxPage){
 			page=maxPage;
 		}
-		return articleMapper.selectUserArticle((page-1)*5,id);
+		return articleMapper.selectUserArticle((page-1)*5,userId);
 	}
 	/**
 	 * 修改文章内容
@@ -98,7 +98,7 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @param usersId  用户ID
 	 */
 	@Override
-	public Integer getMaxRecord(Integer usersId) {
+	public Integer getMaxArticleById(Integer usersId) {
 		if (articleMapper.getMaxRecord(usersId)<=0) {
 			return 1;
 		}else {
@@ -114,26 +114,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public Article findArticleById(Integer id) {
 		return articleMapper.selectArticleById(id);
 	}
-	/**
-	 * 查看已删除的文章
-	 * @return List<Article> 文章列表
-	 * @param page 页面
-	 * @param usersId 用户id
-	 */
-	@Override
-	public List<Article> selectArticleByDelete(Integer page,Integer usersId) {
-		if (page==null) {
-			page=1;
-		}
-		if(page<1){
-			page=1;
-		}
-		int maxPage=getMaxRecordDelete(usersId);
-		if(page>maxPage){
-			page=maxPage;
-		}
-		return articleMapper.selectArticleByDelete((page-1)*5,usersId);
-	}
+	
 	/**
 	 * 恢复已删除文章
 	 * @return Integer 成功1 失败2
@@ -143,17 +124,5 @@ public class ArticleServiceImpl implements ArticleService {
 	public Integer renewArticle(Integer id) {
 		return articleMapper.renewArticle(id);
 	}
-	/**
-	 * 已删除文章列表页最大记录数
-	 * @return Integer 成功1 失败2
-	 * @param usersId 用户ID
-	 */
-	@Override
-	public Integer getMaxRecordDelete(Integer usersId) {
-		if (articleMapper.getMaxRecordDelete(usersId)<=0) {
-			return 1;
-		}else {
-			return (articleMapper.getMaxRecordDelete(usersId)+5-1)/5;
-		}
-	}
+	
 }
