@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	 	<package name="ynjh.personal.entity"/>
 	 	<package name="ynjh.admin.entity"/>
 	 	<package name="ynjh.company.entity"/>
+	 	<!-- <package name="ynjh.common.entity"/> -->
 	</typeAliases>
 	
 	<!-- <environments default="development">

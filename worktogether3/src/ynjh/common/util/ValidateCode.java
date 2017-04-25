@@ -1,4 +1,4 @@
-package ynjh.admin.entity;
+package ynjh.common.util;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
  * @author 35607
  *
  */
-public class Validate {
+public class ValidateCode {
 	
 	private Date generateTime;
 	private StringBuilder vCodeString;
