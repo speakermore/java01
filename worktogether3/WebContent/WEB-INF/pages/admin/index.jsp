@@ -21,7 +21,6 @@
 			<div class="col-sm-10">
 				<div class="row" style="background-color:#FCFCFC ;">
 					<div class="col-sm-12">						
-						  
 							<section class="panel">
 							<blockquote>待审核简历:</blockquote>
 							<c:if test="${resumeList5==null}">
@@ -30,25 +29,28 @@
 							<table class="table table-hover table-striped">
 								<thead>
 									<tr>
-										<th>简历标题</th>
+										
 										<th>用户id</th>
-										<th>姓名</th>
-										<th>性别</th>
+										<th>简历标题</th>
+										<th>用户姓名</th>
+										<th>用户性别</th>
 										<th>创建时间</th>
+										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
+									<!-- 加入显示数组 -->
 									<c:set var="genders" value="${CommonStatus.SEX }"></c:set>
 									<c:forEach items="${resumeList5}" var="res" varStatus="status">
 										
 											<tr>
-												<td><a href="admin/findAuditResumeById?id=${res.id}">${res.resumeTitle} </a></td>
 												<td>${res.userId}</td>
+												<td><a title="点击查看详情" href="admin/findAuditResumeById?id=${res.id}">${res.resumeTitle} </a></td>
 												<td>${res.resumeName}</td>
 												<td>${genders[res.resumeGender]}</td>
 												<td><fmt:formatDate value="${res.resumeCreateDate}" pattern="yyyy年MM月dd日"/></td>
+												<td><a title="点击查看详情" href="admin/findAuditResumeById?id=${res.id}">详情</a></td>
 											</tr>
-										
 									</c:forEach>
 								</tbody>
 							</table>
