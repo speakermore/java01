@@ -94,7 +94,7 @@ CREATE TABLE `article` (
   `articleContent` text NOT NULL COMMENT '文章内容',
   `articleUsersType` int(11) NOT NULL COMMENT '用户状态1：企业 2：个人',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `article` (
 
 LOCK TABLES `article` WRITE;
 /*!40000 ALTER TABLE `article` DISABLE KEYS */;
-INSERT INTO `article` VALUES (1,7,'hello',0,0,'2017-04-08 16:15:33',1,'view','The view is very pretty',2);
+INSERT INTO `article` VALUES (1,7,'hello',0,0,'2017-04-08 16:15:33',1,'view','The view is very pretty',2),(2,10,'nice',0,0,'2017-04-08 16:15:33',1,'2','2',2),(3,1234567891,'hello',0,0,'2017-04-08 16:15:33',1,'view','The view is very pretty',2),(4,1,'大公司招聘大量人员',0,0,'2017-04-26 13:22:22',2,'招聘','1、依据公司年度经营目标，提交市场营销计划执行方案，监督实施市场营销全过程，完成任务；2、独立搭建公司市场营销与品牌推广体系，结合公司业务独立完成市场营销、品牌推广策划方案，并协调各种资源推动实施；3、全面把握公司产品的市场状况，了解同业竞争策略与消费有效需求，为公司产品的市场定位提供科学的决策依据；4、收集相关行业的市场宣传活动、展会等信息，积累传播公司品牌的机会和资源，结合公司业务和发展开辟各种推广渠道和手段，扩大公司及产品品牌知名度；5、建立和维护合作伙伴资源，开展联合营销活动，提高产品与品牌曝光度；6、对销售人员进行产品培训、市场指导，协助销售部门开展销售活动，以达成销售目标；任职要求：1、市场营销、广告、管理类或相关专业本科以上学历。2、5年以上市场营销、品牌推广相关工作经验，对产品市场化运作极为熟悉；3、具有敏感的商业和市场意识，分析问题及解决问题能力强，善于挖掘和整合资源；4、思路开阔、思维活跃，具有创新意识，追求卓越；5、熟悉各种宣传途径，具备较好的文案能力；6、较强的承压能力和推动执行力；7、具备良好的沟通合作技巧及丰富的团队建设经验。',1);
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,10 +156,9 @@ CREATE TABLE `company` (
   `companyTel` varchar(30) NOT NULL COMMENT '公司电话',
   `companyEmail` varchar(30) NOT NULL COMMENT '公司邮件',
   `companyAddress` varchar(100) NOT NULL COMMENT '公司地址',
-  `companyDetailImg` varchar(50) NOT NULL COMMENT '公司细节环境图片',
   `companyStatus` int(11) NOT NULL COMMENT '账户状态：1.正常 2.禁用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +167,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'123','321','1','1','1','1','1','1','1','1','1','1',1),(2,'12','12','12','12','12','12','12','12','12','12','12','12',12),(3,'12','12','12','12','12','12','12','12','12','12','12','12',12),(4,'465','465','465','456','46','465','465','456','465','456','456','465',456),(5,'465','456','465','456','46','465','465','456','465','456','456','465',456),(6,'465','111','465','456','46','465','465','456','465','456','456','465',456),(7,'1','1','1','1','1','1','1','1','1','1','1','1',1),(8,'1','2','1','1','1','1','1','1','1','1','1','1',1),(9,'2','2','2','2','2','2','2','2','2','2','2','2',2);
+INSERT INTO `company` VALUES (1,'123','321','1','1','1','1','1','1','1','1','1',1),(2,'12','12','12','12','12','12','12','12','12','12','12',12),(3,'12','12','12','12','12','12','12','12','12','12','12',12),(4,'465','465','465','456','46','465','465','456','465','456','456',456),(5,'465','456','465','456','46','465','465','456','465','456','456',456),(6,'465','111','465','456','46','465','465','456','465','456','456',456),(7,'1','1','1','1','1','1','1','1','1','1','1',1),(8,'1','2','1','1','1','1','1','1','1','1','1',1),(9,'2','2','2','2','2','2','2','2','2','2','2',2),(10,'419660212@qq.com','0','1','0','0','0','0','1','0','419660212@qq.com','0',1),(110,'1','1','1','1','1','1','1','1','1','1','1',1),(111,'123','123','123','123','123','123','123','123','123','123','123',123),(112,'123','321','123','123','123','123','123','123','123','123','123',123);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +187,7 @@ CREATE TABLE `companycharge` (
   `cmpChargeTime` datetime DEFAULT NULL COMMENT '充值时间',
   `cmpChargeStatus` int(11) NOT NULL COMMENT '充值状态 1：充值 2：消费',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='公司充值';
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='公司充值';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +196,7 @@ CREATE TABLE `companycharge` (
 
 LOCK TABLES `companycharge` WRITE;
 /*!40000 ALTER TABLE `companycharge` DISABLE KEYS */;
-INSERT INTO `companycharge` VALUES (1,1,0,0,544,'2017-04-14 17:10:00',2),(2,1,0,0,544,'2017-04-14 17:10:00',2),(3,1,0,0,544,'2017-04-14 17:10:00',2),(4,1,0,10,534,'2017-04-14 17:23:25',2),(5,1,1,0,535,'2017-04-15 13:51:22',1),(6,1,0,1,534,'2017-04-15 13:52:24',2),(7,1,1,0,535,'2017-04-15 15:35:53',1),(8,1,1,0,536,'2017-04-15 15:37:49',1),(9,1,1,0,537,'2017-04-15 15:44:19',1),(10,1,1,0,538,'2017-04-15 15:45:12',1),(11,1,1,0,539,'2017-04-15 15:46:05',1),(12,1,1,0,540,'2017-04-15 15:57:38',1),(13,1,1,0,541,'2017-04-15 16:01:38',1),(14,1,1,0,542,'2017-04-15 16:16:12',1),(15,1,1,0,543,'2017-04-15 16:20:47',1),(16,1,1,0,544,'2017-04-15 16:21:13',1),(17,1,1,0,545,'2017-04-15 16:23:13',1),(18,1,1,0,546,'2017-04-17 10:54:37',1),(19,1,1,0,547,'2017-04-17 13:36:50',1),(20,1,1,0,548,'2017-04-17 13:37:42',1),(21,1,1,0,549,'2017-04-17 13:39:17',1),(22,1,1,0,550,'2017-04-17 13:42:37',1),(23,1,1,0,551,'2017-04-17 13:43:47',1),(24,1,1,0,552,'2017-04-17 14:05:52',1),(25,1,1,0,553,'2017-04-17 14:07:13',1);
+INSERT INTO `companycharge` VALUES (1,1,0,0,544,'2017-04-14 17:10:00',2),(2,1,0,0,544,'2017-04-14 17:10:00',2),(3,1,0,0,544,'2017-04-14 17:10:00',2),(4,1,0,10,534,'2017-04-14 17:23:25',2),(5,1,1,0,535,'2017-04-15 13:51:22',1),(6,1,0,1,534,'2017-04-15 13:52:24',2),(7,1,1,0,535,'2017-04-15 15:35:53',1),(8,1,1,0,536,'2017-04-15 15:37:49',1),(9,1,1,0,537,'2017-04-15 15:44:19',1),(10,1,1,0,538,'2017-04-15 15:45:12',1),(11,1,1,0,539,'2017-04-15 15:46:05',1),(12,1,1,0,540,'2017-04-15 15:57:38',1),(13,1,1,0,541,'2017-04-15 16:01:38',1),(14,1,1,0,542,'2017-04-15 16:16:12',1),(15,1,1,0,543,'2017-04-15 16:20:47',1),(16,1,1,0,544,'2017-04-15 16:21:13',1),(17,1,1,0,545,'2017-04-15 16:23:13',1),(18,1,1,0,546,'2017-04-17 10:54:37',1),(19,1,1,0,547,'2017-04-17 13:36:50',1),(20,1,1,0,548,'2017-04-17 13:37:42',1),(21,1,1,0,549,'2017-04-17 13:39:17',1),(22,1,1,0,550,'2017-04-17 13:42:37',1),(23,1,1,0,551,'2017-04-17 13:43:47',1),(24,1,1,0,552,'2017-04-17 14:05:52',1),(25,1,1,0,553,'2017-04-17 14:07:13',1),(26,10,1,0,1,'2017-04-21 10:00:06',1),(27,10,1,0,2,'2017-04-21 10:00:25',1),(28,10,1,0,3,'2017-04-21 10:01:41',1),(29,10,1,0,4,'2017-04-21 10:10:20',1),(30,10,1,0,5,'2017-04-21 10:11:14',1),(31,10,2,0,7,'2017-04-21 10:31:44',1),(32,10,1,0,8,'2017-04-21 10:32:41',1),(33,10,1,0,9,'2017-04-21 10:33:12',1),(34,10,1,0,10,'2017-04-21 10:35:27',1),(35,10,1,0,11,'2017-04-21 10:36:10',1),(36,10,1,0,12,'2017-04-21 10:37:04',1),(37,1,1,0,554,'2017-04-21 11:25:18',1),(38,1,23,0,577,'2017-04-21 14:01:40',1),(39,1,1,0,578,'2017-04-21 14:07:22',1),(40,1,1,0,579,'2017-04-21 14:12:57',1),(41,1,1,0,580,'2017-04-21 14:13:09',1),(42,10,1,0,13,'2017-04-22 16:06:35',1),(43,10,1,0,14,'2017-04-22 16:16:08',1),(44,10,1,0,15,'2017-04-22 16:17:02',1),(45,10,12,0,27,'2017-04-22 16:20:33',1),(46,10,12,0,39,'2017-04-22 16:21:19',1),(47,10,12,0,51,'2017-04-22 16:22:04',1);
 /*!40000 ALTER TABLE `companycharge` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,6 +226,30 @@ LOCK TABLES `companyconnection` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `companydetailimg`
+--
+
+DROP TABLE IF EXISTS `companydetailimg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `companydetailimg` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyId` int(11) NOT NULL COMMENT '公司ID，外键',
+  `companyDetailImg` varchar(50) NOT NULL COMMENT '环境图片',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `companydetailimg`
+--
+
+LOCK TABLES `companydetailimg` WRITE;
+/*!40000 ALTER TABLE `companydetailimg` DISABLE KEYS */;
+/*!40000 ALTER TABLE `companydetailimg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `companyintroduction`
 --
 
@@ -246,7 +269,7 @@ CREATE TABLE `companyintroduction` (
   `cmpIntStatus` int(11) NOT NULL COMMENT '企业简介发表状态：1.待审核 2.审核通过 3.审核通过',
   PRIMARY KEY (`id`),
   UNIQUE KEY `companyId_UNIQUE` (`companyId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='企业简介';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='企业简介';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,8 +278,40 @@ CREATE TABLE `companyintroduction` (
 
 LOCK TABLES `companyintroduction` WRITE;
 /*!40000 ALTER TABLE `companyintroduction` DISABLE KEYS */;
-INSERT INTO `companyintroduction` VALUES (3,11,'11',11,11,'11','21','21','21',2),(4,1,'231',6786,786,'678','68','6786','86',6);
+INSERT INTO `companyintroduction` VALUES (3,11,'11',11,11,'11','21','21','21',2),(4,1,'231',6786,786,'678','68','6786','86',6),(5,10,'2',2,1,'1','1','1','1',1);
 /*!40000 ALTER TABLE `companyintroduction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `companyintroduvtion`
+--
+
+DROP TABLE IF EXISTS `companyintroduvtion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `companyintroduvtion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyId` int(11) NOT NULL COMMENT '公司编号',
+  `cmpIntroduction` text NOT NULL COMMENT '公司简介',
+  `cmpIntQuality` int(11) NOT NULL COMMENT '公司性质:1.政府 2.国企 3.民企 4.其他',
+  `cmpPeopleNum` int(11) NOT NULL COMMENT '公司规模：1.20人 2.50人 3.80人\n4.100人 5.150人 6.200人 7.200人以上',
+  `cmpIntComforts` varchar(500) DEFAULT NULL COMMENT '公司福利',
+  `cmpIntRest` varchar(20) DEFAULT NULL COMMENT '公司休息制度',
+  `cmpIntInsurance` varchar(100) NOT NULL COMMENT '公司保险制度',
+  `cmpIntWage` varchar(10) NOT NULL,
+  `cmpIntStatus` int(11) NOT NULL COMMENT '企业简介发表状态：1.待审核 2.审核通过 3.审核通过',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='企业简介';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `companyintroduvtion`
+--
+
+LOCK TABLES `companyintroduvtion` WRITE;
+/*!40000 ALTER TABLE `companyintroduvtion` DISABLE KEYS */;
+INSERT INTO `companyintroduvtion` VALUES (1,110110,'我是妖妖灵你不知道么',1,7,NULL,NULL,'没有','没有',2),(2,120120,'妖儿灵',1,7,NULL,NULL,'没有','没有',2);
+/*!40000 ALTER TABLE `companyintroduvtion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -301,7 +356,7 @@ CREATE TABLE `companyrecruit` (
   `cmpRecTime` datetime NOT NULL COMMENT '发布时间',
   `cmpRecStatus` int(11) NOT NULL COMMENT '发表招聘信息状态：1.待审 2.审核通过 3.审核不通过',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='招聘信息';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='招聘信息';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,6 +365,7 @@ CREATE TABLE `companyrecruit` (
 
 LOCK TABLES `companyrecruit` WRITE;
 /*!40000 ALTER TABLE `companyrecruit` DISABLE KEYS */;
+INSERT INTO `companyrecruit` VALUES (1,3,'ncie',' 5k','123','<p>3213</p>\r\n',231,'2017-04-21 11:07:27',4),(2,3,' 321',' 321','321','<p>3131</p>\r\n',31,'2017-04-21 11:08:59',1),(3,1,' nice',' 4k','大学','<p>hello</p>\r\n',50,'2017-04-21 13:47:15',1);
 /*!40000 ALTER TABLE `companyrecruit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,7 +414,7 @@ CREATE TABLE `discuss` (
   `discussUsersType` int(11) NOT NULL COMMENT '1：企业id\n2：个人用户id',
   `discussBySendId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -367,7 +423,7 @@ CREATE TABLE `discuss` (
 
 LOCK TABLES `discuss` WRITE;
 /*!40000 ALTER TABLE `discuss` DISABLE KEYS */;
-INSERT INTO `discuss` VALUES (1,123456789,'内容',1,'2017-04-07 11:22:10',1,2,0);
+INSERT INTO `discuss` VALUES (1,1234567891,'内容',1,'2017-04-07 11:22:10',1,2,0),(2,1234567894,'这是一个好企业',4,'2017-04-26 14:00:00',1,1,1),(3,1234567895,'好人呀就是好人',4,'2017-04-26 14:00:00',1,2,1234567892);
 /*!40000 ALTER TABLE `discuss` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,7 +531,7 @@ CREATE TABLE `offer` (
   `offerStatus` int(11) NOT NULL DEFAULT '1' COMMENT '审核状态：\n1.等待审核\n2.审核通过\n3.审核未过',
   `offerAction` int(11) NOT NULL DEFAULT '1' COMMENT '接收状态：\n1.尚未阅读\n2.接受邀请\n3.拒绝邀请\n4.尚未回复	',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='面试邀请';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +540,7 @@ CREATE TABLE `offer` (
 
 LOCK TABLES `offer` WRITE;
 /*!40000 ALTER TABLE `offer` DISABLE KEYS */;
-INSERT INTO `offer` VALUES (1,222,111,'门卫','谢谢','2017-04-12 09:32:47','2017-04-12 09:32:47',3,2),(3,222,111,'程序员','欢迎','2017-04-12 09:36:33','2017-04-12 09:36:33',1,1),(4,222,111,'程序员','欢迎','2017-04-12 11:59:02','2017-04-12 11:59:02',1,1),(5,998,233,'123','321','2017-04-13 11:28:13','2017-04-13 11:28:13',1,1),(6,998,233,'444','555','2017-04-13 11:30:13','2017-04-13 11:30:13',1,1),(7,998,233,'222','333','2017-04-13 11:31:17','2017-04-13 11:31:17',1,1),(8,222,111,'程序员','欢迎','2017-04-14 09:15:40','2017-04-14 09:15:40',1,1),(9,110,911,'清洁工','保洁','2017-04-14 09:17:04','2017-04-14 09:17:04',1,1);
+INSERT INTO `offer` VALUES (1,911,222,'门卫','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','2017-04-12 09:32:47','2017-04-12 09:32:47',2,1),(3,110,222,'程序员','欢迎','2017-04-12 09:36:33','2017-04-12 09:36:33',2,1),(4,911,222,'程序员','欢迎','2017-04-12 11:59:02','2017-04-12 11:59:02',2,2),(5,110,222,'123','321','2017-04-13 11:28:13','2017-04-13 11:28:13',2,2),(6,911,333,'444','555','2017-04-13 11:30:13','2017-04-13 11:30:13',2,3),(7,110,333,'666','777','2017-04-13 11:31:17','2017-04-13 11:31:17',2,3),(8,911,333,'程序员','欢迎','2017-04-14 09:15:40','2017-04-14 09:15:40',2,4),(9,110,333,'清洁工','保洁','2017-04-14 09:17:04','2017-04-14 09:17:04',2,4),(10,911,333,'测试','测试员','2017-04-18 12:13:01','2017-04-18 12:13:01',2,1);
 /*!40000 ALTER TABLE `offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -596,6 +652,33 @@ LOCK TABLES `resumestatustwo` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `systemmessage`
+--
+
+DROP TABLE IF EXISTS `systemmessage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `systemmessage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sysmContent` varchar(500) NOT NULL COMMENT '消息内容',
+  `sysmCreateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
+  `systmScope` int(11) NOT NULL COMMENT '范围：1：所有人2：个人3：企业',
+  `adminId` varchar(10) NOT NULL COMMENT '管理员ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `systemmessage`
+--
+
+LOCK TABLES `systemmessage` WRITE;
+/*!40000 ALTER TABLE `systemmessage` DISABLE KEYS */;
+INSERT INTO `systemmessage` VALUES (1,'大王叫我来巡山，我把人间转呀转！','2017-04-26 02:45:59',1,'0'),(2,'321321				','2017-04-26 07:52:05',1,'admin');
+/*!40000 ALTER TABLE `systemmessage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -620,7 +703,7 @@ CREATE TABLE `user` (
   `userBirthday` datetime NOT NULL COMMENT '出生日期',
   `userLevel` int(11) NOT NULL DEFAULT '0' COMMENT '用户等级',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1234567894 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1234567896 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -629,7 +712,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1234567891,'','123456','测试',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-06 17:03:41','123444',0,'2017-04-06 17:03:41',0),(1234567892,'','123456','测试',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-07 11:16:04','123444',0,'2017-04-07 11:16:04',0),(1234567893,'','123456','测试',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-07 11:16:32','123444',0,'2017-04-07 11:16:32',0);
+INSERT INTO `user` VALUES (1234567891,'','123456','测试',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-06 17:03:41','123444',0,'2017-04-06 17:03:41',0),(1234567892,'','123456','测试',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-07 11:16:04','123444',0,'2017-04-07 11:16:04',0),(1234567893,'','123456','测试',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-07 11:16:32','123444',0,'2017-04-07 11:16:32',0),(1234567894,'18213026337','123456','刘致浩',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-06 17:03:41','123444',0,'2017-04-06 17:03:41',0),(1234567895,'15198714192','123456','曾瑞',1,'123456@163.com',1,'测试1','532165854669649','123','123','2017-04-07 11:16:04','123444',0,'2017-04-07 11:16:04',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -755,4 +838,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-18 14:24:38
+-- Dump completed on 2017-04-26 17:33:43
