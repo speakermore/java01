@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findAuditResume" resultType="Resume"><!-- 查询简历审核 -->
-		select * from resume where resumeStatusThree=1  order by resumeCreateDate
+		select * from resume order by resumeStatusThree,resumeCreateDate desc
 	</select>
 	
 	<select id="findAuditArticle" resultType="Article"><!-- 查询文章审核 -->
@@ -142,11 +142,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findAuditResumeById" resultType="Resume" parameterType="int"><!-- 查询简历审核ById -->
-		select * from resume where resumeStatusThree=1 and id=#{id}
+		select * from resume where id=#{id}
 	</select>
 	
 	<select id="findAuditArticleById" resultType="Article" parameterType="int"><!-- 查询文章审核ById -->
-		select * from article where articleStatus=1 and id=#{id}
+		select * from article where id=#{id}
 	</select>
 	
 	<select id="findAuditCommentsArticleById" resultType="CommentArticle" parameterType="int"><!-- 查询文章评论审核ById -->
@@ -179,14 +179,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 5条简历显示 -->
 	<select id="find5Resumes" resultType="Resume">
-		select * from resume where resumeStatusThree=1 order by resumeCreateDate asc limit 5
+		select * from resume where resumeStatusThree=1 order by resumeCreateDate  limit 5
 	</select>
 	<!-- 5条文章显示 -->
-	<select id="find5Articles" resultType="Article">
-		select * from article where articleStatus=1 order by articleTime asc limit 5
+	<select id="find5Articles" resultType="AuditArticle">
+		select a.*,u.userName,c.companyName 
+		from article a,`user` u,company c 
+		where a.articleStatus=1 and ((case when  a.articleUsersType=2 then a.usersId=u.id end) or (case when a.articleUsersType=1 then c.id=a.usersId end)) 
+		group by a.id
+		order by a.articleStatus,articleTime desc limit 5
 	</select>
-	<!-- 5条文章显示 -->
-	<select id="find5Discuss" resultType="Discuss">
-		select * from discuss where discussStatus=1 order by discussTime asc limit 5
+	<!-- 5条评论显示 -->
+	<select id="find5Discuss" resultType="AuditDiscuss">
+		select d.*,u.userName,c.companyName,d.discussUsersId,discussUserName
+		from discuss d,`user` u,company c,(select u.id,u.userName discussUserName from discuss d,`user` u where d.discussUsersId=u.id) cd
+		where d.discussStatus=1 and d.discussUsersId=cd.id and ((case when  d.discussUsersType=2 then d.discussBySendId=u.id end) or (case when d.discussUsersType=1 then c.id=d.discussBySendId end))
+		group by d.id
+        order by d.discussStatus,discussTime desc limit 5
 	</select>
 </mapper>

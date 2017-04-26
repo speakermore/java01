@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" import="ynjh.common.util.*"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -11,21 +11,21 @@
 <title>管理员简历审核</title>
 
 <!-- Bootstrap -->
-<%@include file="../header.jsp"%>
+<div><%@include file="../header.jsp"%></div>
 </head>
 <body>
 	<div><%@include file="../menu.jsp"%></div>
-	<div class="container-fluid">
 	
+	<from action="findAuditResume">
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-3 main">
           <h2 class="sub-header">用户信息</h2>
           <div class="table-responsive">
-            		<c:set var="genders" value="CommonStatus.SEX"></c:set>
+            <table class="table table-striped">
                 <ul>
 					<li>简历标题：${resume.resumeTitle}</li>
 					<li>创建时间：${resume.resumeCreateDate}</li>
 					<li>姓名：${resume.resumeName}</li>
-					<li>性别：${genders[resume.resumeGender]}</li>
+					<li>性别：${resume.resumeGender}</li>
 					<li>民族：${resume.resumeNation}</li>
 					<li>籍贯：${resume.resumePlace}</li>
 					<li>生日：${resume.resumeBirthday}</li>
@@ -44,14 +44,14 @@
 					<li>计算机水平：${resume.resumeComputerAbility}</li>
 					<li>特点描述：${resume.resumePersonality}</li>
 					<li>自我评价：${resume.resumeSelfEvaluation}</li>
-				</ul>
-				<div class="">
-					<form role="form" action="findAuditResume" method="post">
+					<div class="">
 						<a class="col-sm-offset-2" href="admin/auditResume?resumeStatusThree=2&id=${resume.id}&toPage=../auditingResume"><input  class="btn btn-warning"  type="submit" value="通过审核" /></a>
+						
 						<a  class="col-sm-offset-4" href="admin/auditResume?resumeStatusThree=3&id=${resume.id}&toPage=../auditingResume" ><input  class="btn btn-warning"  type="submit" value="拒绝审核" /></a>
-					</form>	
-				</div>
-            
+						
+					</div>
+				</ul>
+            </table>
           </div>
         </div>
 		<!--左侧边栏结束-->
@@ -61,10 +61,9 @@
 		<!--<div class="col-sm-4" style="border: 1px solid black;">1列</div><!--右侧边栏结束-->
 
 	</div>
-	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> <script
 		src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/admin/bootstrap.min.js"></script> 
+	<script src="js/admin/bootstrap.min.js"></script> </from>
 	<div><%@include file="../footer.jsp" %></div>
 </body>
 </html>					
