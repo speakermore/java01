@@ -14,111 +14,116 @@
 <%@include file="header.jsp"%>
 </head>
 <body>
-	
-		<div><%@include file="menu.jsp"%></div>
-		<div class="container">
+
+	<div><%@include file="menu.jsp"%></div>
+	<div class="container">
 		<!-- 首页主体内容 -->
 		<div class="row">
 			<div class="col-sm-offset-1">
-				<div class="row"><!-- 待审核简历 -->
-				<div class="col-sm-12">
-					<section class="panel">
-						<blockquote>最新待审核简历:</blockquote>
-						<c:if test="${resumeList5==null}">
-							<jsp:forward page="/indexResume" />
-						</c:if>
-						<table class="table table-hover table-striped">
-							<thead>
-								<tr>
-
-									<th>用户id</th>
-									<th>简历标题</th>
-									<th>用户姓名</th>
-									<th>用户性别</th>
-									<th>创建时间</th>
-									<th>状态</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- 加入显示数组 -->
-								<c:set var="genders" value="${CommonStatus.SEX }"></c:set>
-								<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
-								<c:set var="USER_TYPE" value="${CommonStatus.USER_TYPE }"></c:set>
-								<c:forEach items="${resumeList5}" var="res" varStatus="status">
-
+				<div class="row">
+					<!-- 待审核简历 -->
+					<div class="col-sm-12">
+						<section class="panel">
+							<blockquote>最新待审核简历:</blockquote>
+							<c:if test="${resumeList5==null}">
+								<jsp:forward page="/indexResume" />
+							</c:if>
+							<table class="table table-hover table-striped">
+								<thead>
 									<tr>
-										<td>${res.userId}</td>
-										<td><a title="点击查看详情"
-											href="admin/findAuditResumeById?id=${res.id}">${res.resumeTitle}
-										</a></td>
-										<td>${res.resumeName}</td>
-										<td>${genders[res.resumeGender]}</td>
-										<td><fmt:formatDate value="${res.resumeCreateDate}"
-												pattern="yyyy年MM月dd日" /></td>
-										<td>${AUDIT_STATUS[res.resumeStatusThree] }</td>
-										<td><a title="点击查看详情"
-											href="admin/findAuditResumeById?id=${res.id}">详情</a></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<div class="col-md-offset-11">
-							<a href="admin/findAuditResume/0">更多...</a>
-						</div>
-					</section>
-				</div>
-				</div><!-- 待审核简历结束 -->
-				<div class="row"><!-- 待审核文章 -->
-				<div class="col-sm-12">
-					<section class="panel">
-						<blockquote>最新待审核文章:</blockquote>
-						<c:if test="${articleList5==null}">
-							<jsp:forward page="/indexArticle" />
-						</c:if>
-						<table class="table table-hover table-striped">
-							<thead>
-								<tr>
-									<th>文章标题</th>
-									<th>作者id</th>
-									<th>作者姓名</th>
-									<th>作者类型</th>
-									<th>创建时间</th>
-									<th>状态</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${articleList5}" var="arti">
 
-									<tr>
-										<td><a title="点击查看详情"
-											href="admin/findAuditArticleById?id=${arti.id}">${arti.articleTitle}
-										</a></td>
-										<td>${arti.usersId}</td>
-										<c:if test="${arti.articleUsersType==2 }">
-											<td>${arti.userName}</td>
-										</c:if>
-										<c:if test="${arti.articleUsersType==1 }">
-											<td>${arti.companyName}</td>
-										</c:if>
-										<td>${USER_TYPE[arti.articleUsersType]}</td>
-										<td><fmt:formatDate value="${arti.articleTime}"
-												pattern="yyyy年MM月dd日" /></td>
-										<td>${AUDIT_STATUS[arti.articleStatus] }</td>
-										<td><a title="点击查看详情"
-											href="admin/findAuditResumeById?id=${arti.id}">详情</a></td>
+										<th>用户id</th>
+										<th>简历标题</th>
+										<th>用户姓名</th>
+										<th>用户性别</th>
+										<th>创建时间</th>
+										<th>状态</th>
+										<th>操作</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<div class="col-md-offset-11">
-							<a href="admin/findAuditResume/0">更多...</a>
-						</div>
-					</section>
+								</thead>
+								<tbody>
+									<!-- 加入显示数组 -->
+									<c:set var="genders" value="${CommonStatus.SEX }"></c:set>
+									<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
+									<c:set var="USER_TYPE" value="${CommonStatus.USER_TYPE }"></c:set>
+									<c:forEach items="${resumeList5}" var="res" varStatus="status">
+
+										<tr>
+											<td>${res.userId}</td>
+											<td><a title="点击查看详情"
+												href="admin/findAuditResumeById?id=${res.id}">${res.resumeTitle}
+											</a></td>
+											<td>${res.resumeName}</td>
+											<td>${genders[res.resumeGender]}</td>
+											<td><fmt:formatDate value="${res.resumeCreateDate}"
+													pattern="yyyy年MM月dd日" /></td>
+											<td>${AUDIT_STATUS[res.resumeStatusThree] }</td>
+											<td><a title="点击查看详情"
+												href="admin/findAuditResumeById?id=${res.id}">详情</a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<div class="col-md-offset-11">
+								<a href="admin/findAuditResume/0">更多...</a>
+							</div>
+						</section>
 					</div>
-					</div><!-- 待审核文章结束 -->
-					<div class="row"><!-- 待审核用户评价 -->
+				</div>
+				<!-- 待审核简历结束 -->
+				<div class="row">
+					<!-- 待审核文章 -->
+					<div class="col-sm-12">
+						<section class="panel">
+							<blockquote>最新待审核文章:</blockquote>
+							<c:if test="${articleList5==null}">
+								<jsp:forward page="/indexArticle" />
+							</c:if>
+							<table class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th>文章标题</th>
+										<th>作者id</th>
+										<th>作者姓名</th>
+										<th>作者类型</th>
+										<th>创建时间</th>
+										<th>状态</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${articleList5}" var="arti">
+
+										<tr>
+											<td><a title="点击查看详情"
+												href="admin/findAuditArticleById?id=${arti.id}">${arti.articleTitle}
+											</a></td>
+											<td>${arti.usersId}</td>
+											<c:if test="${arti.articleUsersType==2 }">
+												<td>${arti.userName}</td>
+											</c:if>
+											<c:if test="${arti.articleUsersType==1 }">
+												<td>${arti.companyName}</td>
+											</c:if>
+											<td>${USER_TYPE[arti.articleUsersType]}</td>
+											<td><fmt:formatDate value="${arti.articleTime}"
+													pattern="yyyy年MM月dd日" /></td>
+											<td>${AUDIT_STATUS[arti.articleStatus] }</td>
+											<td><a title="点击查看详情"
+												href="admin/findAuditResumeById?id=${arti.id}">详情</a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<div class="col-md-offset-11">
+								<a href="admin/findAuditResume/0">更多...</a>
+							</div>
+						</section>
+					</div>
+				</div>
+				<!-- 待审核文章结束 -->
+				<div class="row">
+					<!-- 待审核用户评价 -->
 					<div class="col-sm-12">
 						<blockquote>最新待审核用户评价:</blockquote>
 						<section class="panel">
@@ -163,7 +168,8 @@
 							</div>
 						</section>
 					</div>
-					</div><!-- 待审核用户评价 -->
+				</div>
+				<!-- 待审核用户评价 -->
 			</div>
 			<!-- 首页主体内容结束 -->
 		</div>

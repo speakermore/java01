@@ -13,8 +13,7 @@ package ynjh.admin.service;
 		 * 功能：添加管理员
 		 * 需要参数：登录ID，登录密码，电话，邮箱，管理员姓名。
 		 * */
-		public Integer addAdmin(String adminLoginId,String adminPassword,String adminTel
-				,String adminEmail,String adminName);
+		public Integer addAdmin(String adminLoginId,String adminPassword,String adminTel,String adminEmail,String adminName);
 		
 		/*
 		 * 作者：zfq

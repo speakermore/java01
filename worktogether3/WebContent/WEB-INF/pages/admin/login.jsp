@@ -44,7 +44,8 @@
 					<div class="col-xs-offset-2 col-xs-4">
 						<button type="submit" class="btn btn-primary">登 录</button>
 					</div>
-					<div class="col-xs-offset-">
+					<div class="col-xs-offset-4 col-xs-8">
+						${operatorInfo}
 					</div>
 				</div>
 			</form>
@@ -59,7 +60,7 @@
 <script type="text/javascript">				
 $(function(){
 	$("#validateCode+a").click(function(){
-		$("img").attr("src","http://localhost:8080/worktogether3test/admin/codeValidate?time="+new Date().getTime());
+		$("img").attr("src","http://localhost:8080/worktogether3/admin/codeValidate?time="+new Date().getTime());
 	}); 
 })
 </script>

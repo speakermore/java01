@@ -8,13 +8,15 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.admin.entity.Admin;
 import ynjh.admin.service.SuperAdminService;
+import ynjh.common.util.MD5Util;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/superAdmin")
 public class SuperAdminController {
 	@Resource
 	private SuperAdminService superAdminService;
@@ -26,11 +28,11 @@ public class SuperAdminController {
 	 * */
 	@RequestMapping("/findAllAdmin/{page}")
 	public ModelAndView findAllAdmin(@PathVariable Integer page){
-		List<Admin> admin=superAdminService.findAllAdmin(page);
+		List<Admin> list=superAdminService.findAllAdmin(page);
 		ModelAndView mv=new ModelAndView();
-		mv.addObject("admin",admin);
+		mv.addObject("list",list);
 		mv.addObject("page", page);
-		mv.setViewName("admin/");//页面未写
+		mv.setViewName("superadmin/findAll");//页面未写
 		return mv;
 	}
 	
@@ -66,16 +68,39 @@ public class SuperAdminController {
 	@RequestMapping("/addAdmin")//添加管理员
 	public ModelAndView addAdmin(String adminLoginId,String adminPassword,String adminTel
 			,String adminEmail,String adminName){
-		int result=superAdminService.addAdmin(adminLoginId, adminPassword,adminTel,adminEmail,adminName);
+		String pass=null;
+		try {
+			pass=MD5Util.md5Encode(adminPassword);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int result=superAdminService.addAdmin(adminLoginId, pass, adminTel, adminEmail, adminName);
 		ModelAndView mv=new ModelAndView();
 		if(result>0){
-			mv.addObject("","操作成功");
-			mv.setViewName("");//页面未写
+			mv.addObject("resultInfo","添加管理员成功!");
+			mv.setViewName("superadmin/findAll");
 		}else{
-			mv.addObject("","操作失败");
-			mv.setViewName("");//页面未写
+			mv.addObject("resultInfo","操作失败");
+			mv.setViewName("superadmin/findAll");//页面未写
 		}
 		return mv;
 	}
 
+	
+	/**
+	 * 
+	   * @Name: superAdminAddUser
+	   * @Description: @return 页面跳转
+	   * @Author: 曾瑞（作者）
+	   * @Version: V1.00 （版本号）
+	   * @Create Date: 2017年4月25日下午5:02:51
+	   * @Parameters: SuperAdminController
+	   * @Return: String
+	 */
+	@RequestMapping(value="superAdminAddUser",method=RequestMethod.GET)
+	public String superAdminAddUser(){
+		return "superadmin/superAdminAddUser";
+	}
 }
