@@ -41,31 +41,23 @@ public class CompanyArticleController {
 		return "company/artanddis/company_index";
 	}
 	
-	@RequestMapping(value="/article/add_companyarticle",method=RequestMethod.GET)
+	@RequestMapping(value="/add_companyarticle",method=RequestMethod.GET)
 	public String addArticle(){
 		return "company/artanddis/add_companyarticle";
 	}
 	
-	@RequestMapping(value="/article/add_companyarticle",method=RequestMethod.POST)
+	@RequestMapping(value="/add_companyarticle",method=RequestMethod.POST)
 	public ModelAndView addArticle(Article article,HttpSession session){
 		Company company=(Company)session.getAttribute("company");
 		article.setUsersId(company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
 		article.setArticleUsersType(2);
-		int result=companyArticleService.addArticle(article);
-		ModelAndView mView=new ModelAndView();
-		if (result>0) {
-			mView.setViewName("company/info");
-			mView.addObject("operatorInfo", "文章添加成功！");
-			mView.addObject("toPage","company/artanddis/article/find/1");
-		}else {
-			mView.addObject("operatorInfo", "文章添加失败！");
-			mView.setViewName("redirect:company/artanddis/add_companyarticle");
-		}
+		companyArticleService.addArticle(article);
+		ModelAndView mView=new ModelAndView("redirect:../../../company/artanddis/");
 		return mView;
 	}
 	
-	@RequestMapping(value="/article/find/{page}",method=RequestMethod.POST)
+	@RequestMapping("/article/find/{page}")
 	public ModelAndView find(@PathVariable Integer page){
 		List<Article> articles=companyArticleService.findAll(page);
 		int maxPage=companyArticleService.findMaxPage();
@@ -138,60 +130,70 @@ public class CompanyArticleController {
 		return mView;
 	}
 	
-	@RequestMapping("/article/upload")	
-	public static void upload(MultipartFile upload,HttpSession session,HttpServletRequest request,HttpServletResponse response){
-		try {
-		//重命名文件名
-		String path=session.getServletContext().getRealPath("WEB-INF/resources/company/img");
-		String oldFileName=upload.getOriginalFilename();
-		String suffix="."+FilenameUtils.getExtension(oldFileName);
-		String newFileName=System.currentTimeMillis()+RandomUtils.nextInt(1000)+suffix;
-		String uploadContentType=upload.getContentType(); // 文件类型
-		String callback = request.getParameter("CKEditorFuncNum");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out=response.getWriter();
-		
-		if (uploadContentType.equals("image/pjpeg")
-				|| uploadContentType.equals("image/jpeg")) {
-			// IE6上传jpg图片的headimageContentType是image/pjpeg，而IE9以及火狐上传的jpg图片是image/jpeg
-			oldFileName = ".jpg";
-		} else if (uploadContentType.equals("image/png")
-				|| uploadContentType.equals("image/x-png")) {
-			// IE6上传的png图片的headimageContentType是"image/x-png"
-			oldFileName = ".png";
-		} else if (uploadContentType.equals("image/gif")) {
-			oldFileName = ".gif";
-		} else if (uploadContentType.equals("image/bmp")) {
-			oldFileName = ".bmp";
-		} else {
-			out.println("<script type=\"text/javascript\">");  
-			out.println("window.parent.CKEDITOR.tools.callFunction("  
-			+ oldFileName + ",'',"  
-			+ "'文件格式不正确（必须为.jpg/.gif/.bmp/.png文件）');");  
-			out.println("</script>"); 
-			
-		}
-		if (upload.getSize() > 1024 * 1024 * 2) {  
-			out.println("<script type=\"text/javascript\">");  
-			out.println("window.parent.CKEDITOR.tools.callFunction("  
-			+ callback + ",''," + "'文件大小不得大于2M');");  
-			out.println("</script>");  
-			
-		}
-		//创建File,并且服务器上创建实际存在的文件
-		File newupload=new File(path+"/"+newFileName);
-		if(!newupload.exists()){
-			System.out.println(newupload.mkdirs());
-		}
-		
-		//将imgpath写到磁盘上
-		upload.transferTo(newupload);
-		out.println("<script type=\"text/javascript\">");
-		out.println("window.parent.CKEDITOR.tools.callFunction(" + callback
-				+ ",'"+request.getContextPath()+"/company/img/" + newFileName + "','')");
-		out.println("</script>");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+//	@RequestMapping("/article/upload")	
+//	public static void upload(MultipartFile upload,HttpSession session,HttpServletRequest request,HttpServletResponse response){
+//		try {
+//		//重命名文件名
+//		Company company=(Company)session.getAttribute("company");
+//		String path=session.getServletContext().getRealPath("WEB-INF/resources/company/img"+company.getId());
+//		String oldFileName=upload.getOriginalFilename();
+//		String suffix="."+FilenameUtils.getExtension(oldFileName);
+//		String newFileName=System.currentTimeMillis()+RandomUtils.nextInt(1000)+suffix;
+//		String uploadContentType=upload.getContentType(); // 文件类型
+//		String callback = request.getParameter("CKEditorFuncNum");
+//		response.setCharacterEncoding("UTF-8");
+//		PrintWriter out=response.getWriter();
+//		
+//		if (uploadContentType.equals("image/pjpeg")
+//				|| uploadContentType.equals("image/jpeg")) {
+//			// IE6上传jpg图片的headimageContentType是image/pjpeg，而IE9以及火狐上传的jpg图片是image/jpeg
+//			oldFileName = ".jpg";
+//		} else if (uploadContentType.equals("image/png")
+//				|| uploadContentType.equals("image/x-png")) {
+//			// IE6上传的png图片的headimageContentType是"image/x-png"
+//			oldFileName = ".png";
+//		} else if (uploadContentType.equals("image/gif")) {
+//			oldFileName = ".gif";
+//		} else if (uploadContentType.equals("image/bmp")) {
+//			oldFileName = ".bmp";
+//		} else {
+//			out.println("<script type=\"text/javascript\">");  
+//			out.println("window.parent.CKEDITOR.tools.callFunction("  
+//			+ oldFileName + ",'',"  
+//			+ "'文件格式不正确（必须为.jpg/.gif/.bmp/.png文件）');");  
+//			out.println("</script>"); 
+//			
+//		}
+//		if (upload.getSize() > 1024 * 1024 * 2) {  
+//			out.println("<script type=\"text/javascript\">");  
+//			out.println("window.parent.CKEDITOR.tools.callFunction("  
+//			+ callback + ",''," + "'文件大小不得大于2M');");  
+//			out.println("</script>");  
+//			
+//		}
+//		//创建File,并且服务器上创建实际存在的文件
+//		File newupload=new File(path+"/"+newFileName);
+//		if(!newupload.exists()){
+//			System.out.println(newupload.mkdirs());
+//		}
+//		
+//		//将imgpath写到磁盘上
+//		upload.transferTo(newupload);
+//		out.println("<script type=\"text/javascript\">");
+//		out.println("window.parent.CKEDITOR.tools.callFunction(" + callback
+//				+ ",'"+request.getContextPath()+"/company/img/" + newFileName + "','')");
+//		out.println("</script>");
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	}
+//	}
+	
+	/**
+	 * 牟勇：跳转到公司首页
+	 * @return
+	 */
+	@RequestMapping("/company_index")
+	public String companyIndex(){
+		return "company/artanddis/company_index";
 	}
 }

@@ -28,31 +28,24 @@ public class CompanyChargeController {
 	
 	
 	//充值成功跳转
-	@RequestMapping("/company_charge/{id}")
-	public ModelAndView toCompanycharge(@PathVariable Integer id){
-		ModelAndView mv=new ModelAndView("company/charge/company_charge");
-//		Integer companyId=id;
-		CompanyCharge companyCharge= companyChargeService.findById(id);
-		mv.addObject("companyCharge", companyCharge);
-//		return "company/charge/company_charge";
+	@RequestMapping("/company_charge/{companyId}")
+	public ModelAndView toCompanycharge(@PathVariable Integer companyId){
+		ModelAndView mv=new ModelAndView();
+		companyChargeService.findById(companyId);
 		return mv;
 	}
 	
 	
 	//充值
 	@RequestMapping(value="/addMoney",method=RequestMethod.POST)
-	public ModelAndView addmoney(Double cmpChargeMoney
-//			CompanyCharge companyCharge
-			,HttpSession session){
+	public ModelAndView addmoney(Double cmpChargeMoney,HttpSession session){
 		ModelAndView mv=new ModelAndView();
 		Integer companyId=((Company)session.getAttribute("company")).getId();
 		CompanyCharge companyCharge=new CompanyCharge();
 		companyCharge.setCompanyId(companyId);
 		companyCharge.setCmpChargeTime(new Timestamp(System.currentTimeMillis()));
-//		companyCharge.setCmpChargeStatus(1);
 		companyCharge.setCmpChargeConsume(0.0);
 		companyCharge.setCmpChargeMoney(cmpChargeMoney);
-//		CompanyCharge temp=companyChargeService.findById(companyId);
 		if(companyChargeService.findById(companyId)==null){
 			companyCharge.setCmpChargeBalance(cmpChargeMoney);
 		}else{
@@ -63,8 +56,9 @@ public class CompanyChargeController {
 		if(result>0){
 //			mv.addObject("operatorInfo", "充值成功");
 //			mv.addObject("toPage", "company/charge/company_charge");
-			mv.addObject("companyCharge", companyCharge);
-			mv.setViewName("company/charge/company_charge");
+//			mv.addObject("companyCharge", companyCharge);
+		
+			mv.setViewName("rediect:../company/charge/company_charge/"+companyId);
 		}else{
 			mv.addObject("operatorInfo", "充值失败");
 			mv.addObject("toPage", "company/charge/company_charge");
@@ -101,7 +95,7 @@ public class CompanyChargeController {
 	}
 	
 	//跳转消费页面
-	@RequestMapping("/chargeTest")
+	@RequestMapping("")
 	public String test(){
 		return "company/charge/consume_charge";
 		
@@ -124,6 +118,14 @@ public class CompanyChargeController {
 		
 		return mv;
 		
+	}
+	/**
+	 * 牟勇：跳转到公司余额页面
+	 * @return
+	 */
+	@RequestMapping(value="company_charge")
+	public String companyCharge(){
+		return "company/charge/company_charge";
 	}
 
 }

@@ -28,9 +28,10 @@ public class CompanyRecruitController {
 	public String addCompanyRecuit(){
 		return "company/cmprs/add_companyRecruit";
 	}
+	//添加招聘信息并默认信息状态为待审
 	@RequestMapping(value="/companyRecruit/add_companyRecruit", method=RequestMethod.POST)
 	public ModelAndView addCompanyRecruit(CompanyRecruit companyRecruit,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
+		Company company=(Company)session.getAttribute("user");
 		companyRecruit.setCmpRecStatus(1);
 		companyRecruit.setCmpRecTime(new Timestamp(System.currentTimeMillis()));
 		companyRecruit.setCompanyId(company.getId());
@@ -45,17 +46,22 @@ public class CompanyRecruitController {
 		}
 		return mv;
 	}
-	
+	//查询所有招聘信息
 	 @RequestMapping(value="/companyRecruit/findAll")
 	 public ModelAndView findAll(Integer page){
 		 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page);
 		 int maxPage=companyRecruitService.findMaxPage();
 		 ModelAndView mv=new ModelAndView("company/cmprs/companyRecruit_index");
 		 mv.addObject("companyRecruits", companyRecruits);
-		 mv.addObject("curPage", page);
+		 mv.addObject("page", page);
 		 mv.addObject("maxPage", maxPage);
 		 return mv;
 	 }
+		@RequestMapping(value="/companyRecruit/companyRecruit_index",method=RequestMethod.GET)
+		public String addUser(){
+			return "company/cmprs/companyRecruit_index";
+		}
+	 //根据id查询所属招聘信息
 	 @RequestMapping(value="/companyRecruit/findById")
 	 public ModelAndView findById(Integer id,String toPage){
 			CompanyRecruit companyRecruit=companyRecruitService.findById(id);
@@ -64,6 +70,7 @@ public class CompanyRecruitController {
 			mv.setViewName(toPage);
 			return mv;
 	 }
+	 //根据id隐藏招聘信息
 	 @RequestMapping("/companyRecruit/hidden")
 	 public ModelAndView hidden(Integer id){
 			int result=companyRecruitService.hidden(id);
@@ -79,14 +86,16 @@ public class CompanyRecruitController {
 			}
 			return mv;
 	 }
-		@RequestMapping(value={"/companyRecruit/updateCmpRecruit","/"}, method=RequestMethod.GET)
+	 //修改
+/*		@RequestMapping(value={"/companyRecruit/updateCmpRecruit","/"}, method=RequestMethod.POST)
 		public ModelAndView updateCmpRecruit(Integer id){
 			CompanyRecruit companyRecruit=companyRecruitService.findById(id);
 			ModelAndView mv=new ModelAndView();
 			mv.addObject("companyRecruit", companyRecruit);
 			mv.setViewName("company/cmprs/companyRecruit/companyRecruit_edit");
 			return mv;
-		}
+		}*/
+	 //修改招聘信息
 	 @RequestMapping(value="/companyRecruit/updateCmpRecruit",method=RequestMethod.POST)
 	 public ModelAndView updateCompanyRecruit(CompanyRecruit companyRecruit){
 		 int result=companyRecruitService.updateCompanyRecruit(companyRecruit);

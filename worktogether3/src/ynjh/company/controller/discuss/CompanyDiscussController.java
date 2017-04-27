@@ -45,7 +45,7 @@ public class CompanyDiscussController {
 			mView.addObject("toPage", "company/artanddis/article/find/1");
 		}else {
 			mView.addObject("operatorInfo", "评论失败，请联系管理员或重新操作！");
-			mView.addObject("toPage", "company/artanddis/company_index");
+			mView.addObject("toPage", "company/artanddis/");
 		}
 		return mView;
 	}
@@ -56,24 +56,18 @@ public class CompanyDiscussController {
 		ModelAndView mView=new ModelAndView("company/info");
 		if(result>0){
 			mView.addObject("operatorInfo", "成功删除评论！");
-			mView.addObject("toPage", "../../../../company/artanddis/article/find/1");
+			mView.addObject("toPage", "company/artanddis/article/find/1");
 		} else {
 			mView.addObject("operatorInfo", "删除失败，请联系管理员或重新操作！");
-			mView.addObject("toPage", "company/artanddis/company_index");
+			mView.addObject("toPage", "company/artanddis/");
 		}
 		return mView;
 	}
 	
 	@RequestMapping("/discuss/finddiscuss/{page}")
 	public ModelAndView finddiscuss(@PathVariable Integer page,Integer discussUsersId,HttpSession session){
-		Company company=new Company();
-		User user=new User();
-		session.setAttribute("user", user);
-		session.setAttribute("company", company);
-		company.setId(1);
-		user.setId(2);
-		discussUsersId=company.getId();
-		List<Discuss> discuss=companyDiscussService.findAll(page,discussUsersId);
+		
+		List<Discuss> discuss=companyDiscussService.findAll(page);
 		session.setAttribute("disUserId", discussUsersId);
 		int maxPage=companyDiscussService.getMax();
 		List<Integer> pageNo=new ArrayList<Integer>();
@@ -81,7 +75,7 @@ public class CompanyDiscussController {
 			pageNo.add(i);
 		}
 		ModelAndView mView=new ModelAndView("company/artanddis/company_index");
-		mView.addObject("discuss", discuss);
+		mView.addObject("discusses", discuss);
 		mView.addObject("curPage", page);
 		mView.addObject("pageNo", pageNo);
 		mView.addObject("maxPage", maxPage);

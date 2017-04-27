@@ -23,7 +23,7 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 	}
 
 	@Override
-	public List<Discuss> findAll(Integer page,Integer discussUsersId) {
+	public List<Discuss> findAll(Integer page) {
 		if (page==null) {
 			page=1;
 		}
@@ -34,7 +34,7 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 		if (page!=null&&page>maxpage) {
 			page=maxpage;
 		}
-		return cDiscussMapper.findAll((page-1)*5,discussUsersId);
+		return cDiscussMapper.findAll((page-1)*5);
 	}
 
 	@Override

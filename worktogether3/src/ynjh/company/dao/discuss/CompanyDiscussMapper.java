@@ -14,7 +14,7 @@ public interface CompanyDiscussMapper {
 	//根据id查询评论
 	public Discuss findById(Integer id);
 	//查询所有评论
-	public List<Discuss> findAll(@Param("page")Integer page,@Param("discussUsersId")Integer discussUsersId);
+	public List<Discuss> findAll(@Param("page")Integer page);
 	//最大页数
 	public Integer getMaxRecordCount();
 }

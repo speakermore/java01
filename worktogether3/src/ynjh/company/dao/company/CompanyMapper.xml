@@ -15,16 +15,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addCompany" parameterType="Company">
 		insert into company(
 		companyLoginId,companyPassword,companyName,companySimpleName,companyLogo,companyLicenseImg,companyLicenseNo,companyCorporator,
-		companyTel,companyEmail,companyAddress,companyDetailImg,companyStatus) values (#{companyLoginId},#{companyPassword},#{companyName},#{companySimpleName},#{companyLogo},
+		companyTel,companyEmail,companyAddress,companyStatus) values (#{companyLoginId},#{companyPassword},#{companyName},#{companySimpleName},#{companyLogo},
 		#{companyLicenseImg},#{companyLicenseNo},#{companyCorporator},#{companyTel},#{companyEmail},
-		#{companyAddress},#{companyDetailImg},#{companyStatus})
+		#{companyAddress},#{companyStatus})
 	</insert> 
+	<insert id="addCompanyDetailImg">
+		insert into companydetailimg(companyId,companyDetailImg)values(#{companyId},#{companyDetailImg})
+	</insert>
 	<!-- 更改用户信息 -->
 	<update id="updateCompanyById" parameterType="Company">
 		update company set companyName=#{companyName},companyLogo=#{companyLogo},companyLicenseImg=#{companyLicenseImg},
 		companyLicenseNo=#{companyLicenseNo},companyCorporator=#{companyCorporator},companyTel=#{companyTel},
-		companyEmail=#{companyEmail},companyAddress=#{companyAddress},companyDetailImg=#{companyDetailImg},
-		companyStatus=#{companyStatus} where id=#{id}
+		companyEmail=#{companyEmail},companyAddress=#{companyAddress},companyStatus=#{companyStatus} where id=#{id}
 	</update>
 	<select id="findByloginIdAndPassword" resultType="Company">
 		select * from company where companyLoginId=#{companyLoginId} and companyPassword=#{companyPassword}

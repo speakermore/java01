@@ -12,12 +12,12 @@ public class CompanyServiceImpl implements CompanyService{
 	private CompanyMapper companyMapper;
 	
 	@Override
-	public int addCompany(Company company) {
+	public Integer addCompany(Company company) {
 		return companyMapper.addCompany(company);
 	}
 
 	@Override
-	public int updateCompany(Company company) {
+	public Integer updateCompany(Company company) {
 		return companyMapper.updateCompanyById(company);
 	}
 
@@ -29,6 +29,11 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public Company findCompany(Integer id) {
 		return companyMapper.findById(id);
+	}
+
+	@Override
+	public Integer addCompanyDetailId(Integer companyId, String companyDetailImg) {
+		return companyMapper.addCompanyDetailImg(companyId, companyDetailImg);
 	}
 	
 }
