@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resume(userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
 		resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
 		resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
-		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor)
+		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg)
 		values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
 		#{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
 		#{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
-		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor})
+		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg})
 	</insert>
 	<!-- 修改简历 -->
 	<update id="updateResume" parameterType="Integer">
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumeTitle=#{resumeTitle},resumeName=#{resumeName},resumeGender=#{resumeGender},resumeNation=#{resumeNation},
 		resumePlace=#{resumePlace},resumeBirthday=#{resumeBirthday},resumeMarriage=#{resumeMarriage},resumeGraduationSchool=#{resumeGraduationSchool},resumeGraduationTime=#{resumeGraduationTime},
 		resumeEducation=#{resumeEducation},resumeMajor=#{resumeMajor},resumeWages=#{resumeWages},resumePhone=#{resumePhone},resumeQQ=#{resumeQQ},resumePersonality=#{resumePersonality},
-		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight}
+		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeHeadImg=#{resumeHeadImg}
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 恢复简历 -->
 	<update id="renewResumeById" parameterType="Integer">
-		update resume set resumeStatusThree=2 where id=#{id}
+		update resume set resumeStatusThree=1 where id=#{id}
 	</update>
 
 	<!-- 开始 -->
@@ -105,20 +105,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 删除结束 -->
 	<!-- 已删除记录 -->
-	<select id="findEducationByDelete" resultType="Education">
-	select * from education where userId=#{userId} and  resumeType=4
+	<select id="findEducationByDelete" resultType="ForeignKeyEducation">
+	select r.resumeTitle,e.* from resume r,education e where e.resumeId=r.id  and resumeType=4 and e.userId=#{userId}
 	<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
-	<select id="findWorkByDelete" resultType="Work">
-	select * from work where userId=#{userId} and  resumeType=4
+	<select id="findWorkByDelete" resultType="ForeignKeyWork">
+	select r.resumeTitle,w.* from resume r,work w where w.resumeId=r.id  and resumeType=4 and w.userId=#{userId}
 	<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
-	<select id="findProjectByDelete" resultType="Project">
-	select * from project where userId=#{userId} and  resumeType=4
+	<select id="findProjectByDelete" resultType="ForeignKeyProject">
+	select r.resumeTitle,p.* from resume r,project p where p.resumeId=r.id  and resumeType=4 and p.userId=#{userId}
 	<if test="page!=null">
 			limit #{page},5
 		</if>
@@ -126,13 +126,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 已删除记录结束 -->
 	<!-- 恢复被删记录 -->
 	<update id="renewEducationByDelete" parameterType="Integer">
-		update education set resumeType=2 where id=#{id}
+		update education set resumeType=1 where id=#{id}
 	</update>
 	<update id="renewWorkByDelete" parameterType="Integer">
-		update work set resumeType=2 where id=#{id}
+		update work set resumeType=1 where id=#{id}
 	</update>
 	<update id="renewProjectByDelete" parameterType="Integer">
-		update project set resumeType=2 where id=#{id}
+		update project set resumeType=1 where id=#{id}
 	</update>
 	<!-- 恢复被删记录结束 -->
 

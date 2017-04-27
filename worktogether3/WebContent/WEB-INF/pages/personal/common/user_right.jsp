@@ -41,7 +41,7 @@ span.emotion:hover {
 		<div class="panel-title">我的信息</div>
 		<div class="panel-body">
 			<div class="col-sm-5 ">
-				<a href="#"><img src="personal/img/head.gif" width="80" height="80" title="我的头像" alt="我的头像"/></a>
+				<img src="personal/img/head.gif" width="80" height="80" title="我的头像" alt="我的头像"/>
 			</div>
 			<div class="col-sm-7">
 				<!--我的信息左边文字-->
@@ -56,7 +56,7 @@ span.emotion:hover {
 					<c:if test="${user.userRealName=='无' }">
 						<div class="row">
 							<p class="col-md-12">
-								请<a href="personal/user/addUserOther">实名认证</a>
+								请<a href="personal/user/addUserReal">实名认证</a>
 							</p>
 						</div>
 					</c:if>
@@ -70,7 +70,7 @@ span.emotion:hover {
 					<c:if test="${user.userName=='无' }">
 						<div class="row">
 							<p class="col-md-12">
-								请<a href="personal/user/addUserReal">完善信息</a>
+								请<a href="personal/user/addUserOther">完善信息</a>
 							</p>
 						</div>
 					</c:if>

@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <article
 	class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
-		<!--发表状态小节-->
+		<!--简历基本内容开始-->
 		<section class="panel">
 			<table class="table">
 				<tr>
@@ -13,14 +13,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td rowspan="4" class="col-md-1"><a href="#"><img
-							src="img/personal/head.gif" width="180" height="180" /></a></td>
+					<td rowspan="4" class="col-md-1"><img
+							src="img/personal/head.gif" width="180" height="180" /></td>
 				</tr>
 				<tr>
 					<td class="col-md-4">${resume.resumeName }</td>
 					<td><c:if test="${resume.resumeGender==1 }">
 								男
-								</c:if> <c:if test="${resume.resumeGender==2 }">
+								</c:if> <c:if test="${resume.resumeGender==0 }">
 								女
 								</c:if></td>
 				</tr>
@@ -29,7 +29,9 @@
 					<td>${resume.resumeWages }</td>
 				</tr>
 			</table>
+			</section>
 			<div class="panel-group" id="panel">
+				<section class="panel">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a class="panel-title" data-toggle="collapse" data-parent="#panel"
@@ -167,6 +169,8 @@
 						</div>
 					</div>
 				</div>
+				</section>
+				<section class="panel">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a class="panel-title" data-toggle="collapse" data-parent="#panel"
@@ -214,6 +218,8 @@
 						</div>
 					</div>
 				</div>
+				</section>
+				<section class="panel">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a class="panel-title" data-toggle="collapse" data-parent="#panel"
@@ -263,6 +269,8 @@
 						</div>
 					</div>
 				</div>
+				</section>
+				<section class="panel">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a class="panel-title" data-toggle="collapse" data-parent="#panel"
@@ -317,6 +325,8 @@
 						</div>
 					</div>
 				</div>
+				</section>
+				<section class="panel">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a class="panel-title" data-toggle="collapse" data-parent="#panel"
@@ -346,6 +356,6 @@
 						</div>
 					</div>
 				</div>
+				</section>
 			</div>
-		</section>
 </article>

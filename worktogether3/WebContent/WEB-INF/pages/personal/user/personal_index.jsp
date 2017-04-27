@@ -29,26 +29,21 @@ table {
 								<li><a href="#panel-three" data-toggle="tab">文章中心</a></li>
 								<li class="dropdown pull-right"><a href="#"
 									data-toggle="dropdown" class="dropdown-toggle">管理<strong
-										class="caret"></strong></a>
-									<ul class="dropdown-menu">
-										<li><a href="#">修改个人密码</a></li>
-										<li><a href="personal/user/findById?id=${user.id }">修改个人资料</a></li>
-										<li><a href="personal/user/addUserReal">完善资料</a></li>
-										<li><a href="personal/user/addUserOther">实名认证</a></li>
-										<li><a href="#">查看个人信息</a></li>
-										<li><a href="personal/resume/createResume">新建简历</a></li>
-										<li><a href="personal/common/deleteRecord?userId=${user.id }">查看删除记录</a></li>
-									</ul></li>
+										class="caret"></strong></a> <%@include
+										file="/WEB-INF/pages/personal/common/selectformanage.jsp"%></li>
 							</ul>
+
 							<!-- 下拉列表结束 -->
 							<!-- 主要内容开始 -->
 							<div class="tab-content">
 								<div class="tab-pane active" id="panel-one">
 									<div class="col-md-7 column ">
-									<%@include file="/WEB-INF/pages/personal/user/personal_user.jsp"%>
+										<%@include
+											file="/WEB-INF/pages/personal/user/personal_user.jsp"%>
 									</div>
 									<div class="col-md-5 column ">
-									<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
+										<%@include
+											file="/WEB-INF/pages/personal/common/user_right.jsp"%>
 									</div>
 								</div>
 								<div class="tab-pane" id="panel-two">
@@ -60,7 +55,8 @@ table {
 											class="alert-link">点我返回首页</a>|<a
 											href="personal/resume/createResume">点我创建新的简历</a>
 									</div>
-									<%@include file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%>
+									<%@include
+										file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%>
 								</div>
 								<div class="tab-pane" id="panel-three">
 									<div class="alert alert-success alert-dismissable">
@@ -71,13 +67,14 @@ table {
 											class="alert-link">点我返回首页</a>|<a
 											href="personal/article/add_article">点我创建新的文章</a>
 									</div>
-									<%@include file="/WEB-INF/pages/personal/user/personal_article_index.jsp"%>
+									<%@include
+										file="/WEB-INF/pages/personal/user/personal_article_index.jsp"%>
 								</div>
 							</div>
 							<!-- 主要内容结束 -->
 						</div>
 					</div>
-				<!-- 	<div class="col-md-4 column ">
+					<!-- 	<div class="col-md-4 column ">
 						
 					</div> -->
 					<div class="col-md-1 column"></div>
@@ -85,6 +82,6 @@ table {
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>

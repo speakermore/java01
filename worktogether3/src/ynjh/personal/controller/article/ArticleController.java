@@ -80,7 +80,7 @@ public class ArticleController {
 		
 		for (Article article : articles) {
 			sb.append("<tr>");
-			sb.append("<td><a href=\"personal/article/lookArticleById?id=" + article.getId() + "\">"
+			sb.append("<td><a href='personal/article/lookArticleById?id=" + article.getId() + "' >"
 					+ article.getArticleTitle() + "</a></td>");
 			sb.append("<td>" + sdf.format(article.getArticleTime()) + "</td>");
 			if (article.getArticleStatus() == 1) {

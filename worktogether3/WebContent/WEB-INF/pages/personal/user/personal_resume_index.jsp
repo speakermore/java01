@@ -25,7 +25,7 @@
 					</thead>
 					<!-- ajax分页开始 -->
 					<tbody id="ajaxResumesList">
-						<c:forEach items="${resumes }" var="res">
+						<c:forEach items="${resumess }" var="res">
 							<tr>
 								<td><a href="personal/resume/lookResume?id=${res.id }">${res.resumeTitle }</a></td>
 								<td><fmt:formatDate value="${res.resumeCreateDate}"
@@ -43,11 +43,11 @@
 									<th>已被删除</th>
 								</c:if>
 								<td><c:if test="${res.resumeStatusThree==4 }">
-										<a href="personal/resume/updateResume?id=${resume.id }">修改</a>|<a href="javascript:if(confirm('你确定真的要恢复这篇简历吗？')){location.href='personal/resume/renewResume?id=${art.id }'}">恢复</a>
+										<a href="personal/resume/updateResume?id=${res.id }">修改</a>|<a href="javascript:if(confirm('你确定真的要恢复这篇简历吗？')){location.href='personal/resume/renewResume?id=${res.id }'}">恢复</a>
 									</c:if> 
 									<c:if
 										test="${res.resumeStatusThree==1||res.resumeStatusThree==2||res.resumeStatusThree==3 }">
-									<a href="personal/resume/updateResume?id=${resume.id }">修改</a>|<a href="javascript:if(confirm('你确定真的要删除这篇简历吗？')){location.href='personal/resume/deleteResume?id=${resume.id }'}">删除</a>
+									<a href="personal/resume/updateResume?id=${res.id }">修改</a>|<a href="javascript:if(confirm('你确定真的要删除这篇简历吗？')){location.href='personal/resume/deleteResume?id=${res.id }'}">删除</a>
 									</c:if></td>
 							</tr>
 						</c:forEach>

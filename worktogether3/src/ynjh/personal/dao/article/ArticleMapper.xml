@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 恢复被删除文章 -->
 	<update id="renewArticle" parameterType="Integer">
-	update article set articleStatus=2 where id=#{id} 
+	update article set articleStatus=1 where id=#{id} 
 	</update>
 
 	<!-- 分页 -->

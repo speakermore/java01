@@ -20,52 +20,31 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<link rel="stylesheet"
+	href="thirdpart/dist/css/bootstrapValidator.min.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 	<!--wt-姓名首字母-相关文字-->
 	<div id="wt-hby-login">
-		<header class="navbar navbar-static-top bs-docs-nav wt-hby-login-top"
-			id="top">
-			<div class="container">
-				<nav class="navbar navbar-default navbar-fixed-top"
-					role="navigation">
-					<div class="container-fluid">
-						<div class="navbar-header" id="wt-hby-header-left">
-							<a class="navbar-brand" href="#">昆明</a>
-							<ul class="nav navbar-nav">
-								<li><a href="#">切换城市</a></li>
-							</ul>
-						</div>
-						<div class="collapse navbar-collapse navbar-left"
-							id="wt-hby-header-middle">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="#">首页</a></li>
-							</ul>
-						</div>
-						<div class="navbar-collapse collapse" id="wt-hby-header-right">
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="personal/user/login">已有账号？登录账号</a></li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</header>
+		<%@include file="/WEB-INF/pages/nav.jsp"%>
 		<div class="bs-docs-header wt-hby-login-center" id="content"
 			tabindex="-1">
 			<div class="container bs-docs-container">
-				<form class="form-signin" method="post" action="personal/user/addUser">
+				<form class="form-signin" method="post"
+					action="personal/user/addUser" id="registerForm">
 					<h2 class="form-signin-heading">还没有账号吗？</h2>
-					<label for="userLoginId" class="sr-only">邮箱/手机号</label> 
-					<input type="text" id="userLoginId" class="form-control" name="userLoginId"
-						placeholder="邮箱/手机号" required autofocus> 
-					<label for="userPassword" class="sr-only">密码</label> 
-					<input type="password" id="userPassword" class="form-control" name="userPassword"
-						placeholder="密码" required>
-					<label for="userPassword2" class="sr-only">确认密码：</label> 
-					<input type="password" id="userPassword2" class="form-control" name="userPassword2"
-						placeholder="确认密码" required>
-					<br/>
+					<div class="form-group">
+					<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
+						type="text" id="userLoginId" class="form-control"
+						name="userLoginId" placeholder="手机号" required autofocus>
+						</div><div class="form-group"> <label
+						for="userPassword" class="sr-only">密码</label> <input
+						type="password" id="userPassword" class="form-control"
+						name="userPassword" placeholder="密码" required></div><div class="form-group"> <label
+						for="confirmPassword" class="sr-only">确认密码：</label> <input
+						type="password" id="confirmPassword" class="form-control"
+						name="confirmPassword" placeholder="确认密码" required></div> 
 					<button class="btn btn-lg btn-primary btn-block" type="submit">立即注册</button>
 					<div id="inputagree">
 						<a href="#">我已阅读并同意服务条款</a>
@@ -78,9 +57,87 @@
 		</div>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/personal/jquery-3.1.1.min.js" type="text/javascript"
+	<script src="personal/js/jquery-3.1.1.min.js" type="text/javascript"
 		charset="utf-8"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="thirdpart/dist/js/bootstrapValidator.min.js"></script>
+	<script type="text/javascript"
+		src="thirdpart/dist/js/language/zh_CN.js"></script>
+	<script type="text/javascript">
+	$(function () {
+        $("#registerForm").bootstrapValidator({
+            message: '这个值不能通过验证！',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields : {
+            	userLoginId:{
+            		validators:{
+            			notEmpty : {
+							message : '用户名不能为空'
+						},
+						stringLength : {
+							min : 6,
+							max : 50,
+							message : '用户名长度必须在6到50位之间'
+						}
+            		}
+            	},
+            	userPassword:{
+            		validators:{
+            			notEmpty : {
+							message : '密码不能为空'
+						},
+						stringLength : {
+							min : 6,
+							max : 50,
+							message : '密码长度必须在6到50位之间'
+						},
+						regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '密码只能包含大写、小写、数字和下划线'
+                        },
+                        identical: {
+                            field: 'confirmPassword',
+                            message: '两次密码不一致'
+                        },
+                        different: {
+                            field: 'userLoginId',
+                            message: '密码不能和用户名相同'
+                        }
+            		}
+            	},
+            	confirmPassword:{
+            		validators:{
+            			notEmpty : {
+							message : '确认密码不能为空'
+						},
+						stringLength : {
+							min : 6,
+							max : 50,
+							message : '密码长度必须在6到50位之间'
+						},
+						regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: '密码只能包含大写、小写、数字和下划线'
+                        },
+                        identical: {
+                            field: 'userPassword',
+                            message: '两次密码不一致'
+                        },
+                        different: {
+                            field: 'userLoginId',
+                            message: '密码不能和用户名相同'
+                        }
+            		}
+            	}	
+            }
+        });
+	});
+	</script>
 </body>
 </html>

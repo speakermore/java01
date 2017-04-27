@@ -7,7 +7,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form action="personal/resume/CreateEducation"
-				class="form-horizontal" method="post">
+				class="form-horizontal" method="post" id="educationForm">
 				<input type="hidden" name="resumeId" value="${resume.id }" /><br/>
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -15,7 +15,6 @@
 					<h4 class="modal-title" id="myModalLabel">添加教育记录</h4>
 				</div>
 				<div class="modal-body">
-
 					<div class="form-group">
 						<label for="educationSchool" class="col-md-3 control-label">学校名称：</label>
 						<div class="col-md-8">

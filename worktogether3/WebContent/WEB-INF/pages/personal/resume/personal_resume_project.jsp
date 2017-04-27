@@ -7,7 +7,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form action="personal/resume/CreateProject"
-				class="form-horizontal" method="post">
+				class="form-horizontal" method="post" id="projectForm">
 				<input type="hidden" name="resumeId" value="${resume.id }" /><br/>
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"

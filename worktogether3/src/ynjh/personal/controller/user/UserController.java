@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,93 +15,106 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ynjh.common.util.MD5Util;
-import ynjh.common.util.ValidateCode;
+import ynjh.common.util.UploadFile;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserCharge;
-
+import ynjh.personal.entity.Validate;
 import ynjh.personal.service.UserService;
+
 /**
  * 
- * @author dage
- * 用户信息的控制器
+ * @author dage 用户信息的控制器
  */
 @Controller
 @RequestMapping("/personal/user")
 public class UserController {
 	@Resource
 	private UserService uService;
+
 	/**
-	 * 登录（检测验证码、加密密码） 跳转主页 
-	 * @param userLoginId 用户名
-	 * @param userPassword 用户密码
-	 * @param validateCode 验证码
-	 * @param session 会话
-	 * @return 
-	 * ModelAndView
+	 * 登录（检测验证码、加密密码） 跳转主页
+	 * 
+	 * @param userLoginId
+	 *            用户名
+	 * @param userPassword
+	 *            用户密码
+	 * @param validateCode
+	 *            验证码
+	 * @param session
+	 *            会话
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String userLoginId, String userPassword,@RequestParam String validateCode, HttpSession session) {
+	public ModelAndView login(String userLoginId, String userPassword, @RequestParam String validateCode,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		String pass=null;
+		String pass = null;
 		try {
-			pass=MD5Util.md5Encode(userPassword);
+			pass = MD5Util.md5Encode(userPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		User user = uService.login(userLoginId, pass);
-		
-		//判断
-		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
+
+		// 判断
+		Validate validate = (Validate) session.getAttribute("codeValidate");
 		String value = validate.getvCodeString().toString();
-		Date date=new Date();
-		Date generateDate=validate.getGenerateTime();
-		if((date.getTime()-generateDate.getTime())>450000){
-			mv.setViewName("personal/user/personal_login");//450000毫秒超时
+		Date date = new Date();
+		Date generateDate = validate.getGenerateTime();
+		if ((date.getTime() - generateDate.getTime()) > 450000) {
+			mv.setViewName("personal/user/personal_login");// 450000毫秒超时
 			mv.addObject("operatorInfo", "验证码超时！");
 			return mv;
 		}
 		if (!(validateCode.equalsIgnoreCase(value))) {
 			mv.setViewName("personal/user/personal_login");
 			mv.addObject("operatorInfo", "请输入正确的验证码或者密码！");
-		}else{
-			//验证成功
+		} else {
+			// 验证成功
 		}
-		
+
 		if (user == null) {
 			mv.addObject("errorInfo", "用户名或密码不正确");
 			mv.setViewName("personal/user/personal_login");
 		} else {
 			session.setAttribute("user", user);
 			mv.addObject("user", user);
-			/*mv.setViewName("personal/user/personal_index");*/
-			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
+			/* mv.setViewName("personal/user/personal_index"); */
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 		}
 		return mv;
 	}
 
 	/**
 	 * 退出 跳转登录 取消会话信息
-	 * @param session 
-	 * @return 
 	 * 
-	 * String
+	 * @param session
+	 * @return
+	 * 
+	 * 		String
 	 */
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "personal/user/personal_login";
 	}
+
 	/**
 	 * 跳转登录
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping("/login")
 	public String login() {
@@ -109,9 +123,10 @@ public class UserController {
 
 	/**
 	 * 跳转主页
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping(value = "/gotoIndex", method = RequestMethod.GET)
 	public String gotoIndex() {
@@ -120,10 +135,12 @@ public class UserController {
 
 	/**
 	 * 创建注册用户 跳转登录
-	 * @param user 用户信息对象
+	 * 
+	 * @param user
+	 *            用户信息对象
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ModelAndView addUser(User user) {
@@ -138,6 +155,7 @@ public class UserController {
 		user.setUserIDImgFace("无");
 		user.setUserName("无");
 		user.setUserRealName("无");
+
 		Integer result = uService.addUser(user);
 		if (result > 0) {
 			mv.addObject("user", user);
@@ -152,45 +170,53 @@ public class UserController {
 
 	/**
 	 * 跳转注册
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser() {
 		return "personal/user/personal_register";
 	}
+
 	/**
 	 * 跳转完善信息页面
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.GET)
-	public String gotoAddUserOther(){
+	public String gotoAddUserOther() {
 		return "personal/user/personal_register_other";
 	}
+
 	/**
 	 * 跳转实名认证信息页面
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.GET)
-	public String gotoAddUserReal(){
+	public String gotoAddUserReal() {
 		return "personal/user/personal_register_real";
 	}
 
 	/**
 	 * 处理完善用户信息 跳转主页
-	 * @param user 用户信息对象
+	 * 
+	 * @param user
+	 *            用户信息对象
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
-	public ModelAndView addUserOther(User user) {
+	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		user.setUserHeadImgPath(UploadFile.uploadFile(files, session));
 		int result = uService.updateUserOther(user);
 		if (result > 0) {
 			mv.addObject("user", user);
@@ -203,16 +229,22 @@ public class UserController {
 		return mv;
 	}
 
+	
+
 	/**
 	 * 处理实名用户信息 跳转主页
-	 * @param user 用户信息对象
+	 * 
+	 * @param user
+	 *            用户信息对象
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.POST)
-	public ModelAndView addUserReal(User user) {
+	public ModelAndView addUserReal(User user, MultipartFile fileface,MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		user.setUserIDImgFace(UploadFile.uploadFile(fileface, session));
+		user.setUserIDImgCon(UploadFile.uploadFile(filecon, session));
 		int result = uService.updateUserIDCord(user);
 		if (result > 0) {
 			mv.addObject("user", user);
@@ -227,10 +259,12 @@ public class UserController {
 
 	/**
 	 * 根据用户id跳转用户修改页面
-	 * @param id 用户id
+	 * 
+	 * @param id
+	 *            用户id
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/findById", method = RequestMethod.GET)
 	public ModelAndView findById(Integer id) {
@@ -243,10 +277,12 @@ public class UserController {
 
 	/**
 	 * 修改用户信息 跳转主页
-	 * @param user 用户修改对象
+	 * 
+	 * @param user
+	 *            用户修改对象
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateUser(User user) {
@@ -265,10 +301,12 @@ public class UserController {
 
 	/**
 	 * 跳转到充值界面
-	 * @param id 用户id
+	 * 
+	 * @param id
+	 *            用户id
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/chargeById", method = RequestMethod.GET)
 	public ModelAndView chargeById(Integer id) {
@@ -281,11 +319,14 @@ public class UserController {
 
 	/**
 	 * 充值+充值记录 跳蛛主页
-	 * @param userMoney 充值的金额
-	 * @param id 用户id 
+	 * 
+	 * @param userMoney
+	 *            充值的金额
+	 * @param id
+	 *            用户id
 	 * @return
 	 * 
-	 * ModelAndView
+	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/chargeMoney", method = RequestMethod.POST)
 	public ModelAndView chargeMonety(Double userMoney, Integer id) {
@@ -300,7 +341,7 @@ public class UserController {
 		userCharge.setUserChargeMoney(userMoney);
 		int remmeber = uService.addUserCharge(userCharge);
 		if (result > 0) {
-			if (remmeber>0) {
+			if (remmeber > 0) {
 				mv.addObject("user", user);
 				mv.addObject("operatorInfo", "充值成功！");
 				mv.setViewName("personal/user/personal_index");
@@ -314,31 +355,35 @@ public class UserController {
 
 	/**
 	 * 跳转测试页面
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "personal/user/test";
 	}
-	
-	
+
 	/**
 	 * 获取验证码
+	 * 
 	 * @author 朱吉
-	 * @param time 验证码生成时间
-	 * @param request 验证码请求
-	 * @param response 验证码响应
+	 * @param time
+	 *            验证码生成时间
+	 * @param request
+	 *            验证码请求
+	 * @param response
+	 *            验证码响应
 	 */
-	 //验证码字典
+	// 验证码字典
 	public static final String CHARs = "qqqq";
 	private static Random random = new Random();
 	private int width = 90;
 	private int height = 40;
 	private int codeCount = 4;
 	private int lineCount = 7;
-	
+
 	@RequestMapping("/codeValidate")
 	public void getCode(String time, HttpServletRequest request, HttpServletResponse response) {
 		// 储存验证码的类
@@ -376,23 +421,23 @@ public class UserController {
 		response.setDateHeader("Expires", 0);
 		response.setContentType("image/png");
 
-		//验证码生成时间设置
-		ValidateCode validate=new ValidateCode();
-		Date date=new Date();
-		try{
-			long l=Long.parseLong(time);
+		// 验证码生成时间设置
+		Validate validate = new Validate();
+		Date date = new Date();
+		try {
+			long l = Long.parseLong(time);
 			date.setTime(l);
 			validate.setvCodeString(buiderCode);
 			validate.setGenerateTime(date);
-		}catch(Exception e){
+		} catch (Exception e) {
 			validate.setvCodeString(buiderCode);
 			validate.setGenerateTime(date);
 		}
-		
-		//将validate保存到session中
+
+		// 将validate保存到session中
 		HttpSession session = request.getSession();
 		session.setAttribute("codeValidate", validate);
-										
+
 		// 输出到屏幕
 		ServletOutputStream sos = null;
 		try {
@@ -407,26 +452,20 @@ public class UserController {
 			sos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
-	
-	
-	
-	
-	
-	
 
-//	// 转换时间
-//	public Timestamp comment(String time) {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Timestamp timestamp = null;
-//		try {
-//			Date dateTime = sdf.parse(time);
-//			timestamp = new Timestamp(dateTime.getTime());
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		return timestamp;
-//	}
-	
+	// // 转换时间
+	// public Timestamp comment(String time) {
+	// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	// Timestamp timestamp = null;
+	// try {
+	// Date dateTime = sdf.parse(time);
+	// timestamp = new Timestamp(dateTime.getTime());
+	// } catch (ParseException e) {
+	// e.printStackTrace();
+	// }
+	// return timestamp;
+	// }
+
 }

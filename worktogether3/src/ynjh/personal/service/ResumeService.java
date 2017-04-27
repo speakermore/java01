@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.personal.entity.Education;
+import ynjh.personal.entity.ForeignKeyEducation;
+import ynjh.personal.entity.ForeignKeyProject;
+import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.Work;
@@ -64,11 +67,11 @@ public interface ResumeService {
 	 // 查询此ID的删除的简历数量
 	public Integer getMaxProjectDeleteById(Integer userId);
 	 // 查看教育记录已删除记录
-	public List<Education> findEducationByDelete(Integer page,Integer userId);
+	public List<ForeignKeyEducation> findEducationByDelete(Integer page,Integer userId);
 	 // 查看工作记录已删除记录
-	public List<Work> findWorkByDelete(Integer page,Integer userId);
+	public List<ForeignKeyWork> findWorkByDelete(Integer page,Integer userId);
 	 // 查看项目记录已删除记录
-	public List<Project> findProjectByDelete(Integer page,Integer userId);
+	public List<ForeignKeyProject> findProjectByDelete(Integer page,Integer userId);
 	 // 恢复教育被删记录
 	public Integer renewEducationByDelete(Integer id);
 	 // 恢复工作被删记录

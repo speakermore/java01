@@ -4,15 +4,24 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-				<div class="row clearfix work-together-margin-top-150">
+				<div class="row clearfix">
 					<div class="col-md-1 column"></div>
 					<div class="col-md-6 column ">
+					<div class="alert alert-success alert-dismissable">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">×</button>
+										<h4>注意!</h4>
+										完善信息的后拥有更多权限. <a href="personal/user/gotoIndex"
+											class="alert-link">点我返回首页</a>
+									</div>
 						<!--左侧状态栏位-->
 						<article
 							class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
@@ -20,7 +29,7 @@
 								<!--发表状态小节-->
 								<section class="panel">
 									<form role="form" class="form-horizontal"
-										action="personal/user/addUserOther" method="post">
+										action="personal/user/addUserOther" method="post" enctype="multipart/form-data" id="otherForm">
 										<input type="hidden" name="userLoginId"
 											value="${user.userLoginId }" /><br />
 										<div class="form-group">
@@ -38,14 +47,14 @@
 													</div>
 													<div class="col-md-6">
 														<input type="radio" name="userGender" id="userGender"
-															value="2"> <label>女</label>
+															value="0"> <label>女</label>
 													</div>
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="time" class="col-md-3 control-label">出生日期：</label>
 											<div class="col-md-8">
-												<input class="form_datetime" placeholder="请选择日期"
+												<input class="form_datetime form-control" placeholder="请选择日期"
 													name="userBirthday" id="time" readonly type="text" />
 											</div>
 										</div>
@@ -57,9 +66,10 @@
 										</div>
 										<div class="form-group">
 											<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
+											<!-- userHeadImgPath -->
 											<div class="col-md-8">
-												<input class="form-control" name="userHeadImgPath"
-													id="userHeadImgPath" />
+												<input class="form-control file" name="files" type="file"
+													id="userHeadImgPath"  multiple data-min-file-count="1" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -81,7 +91,6 @@
 			</div>
 		</div>
 	</div>
-<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 	<script type="text/javascript">
 		$("#time").datetimepicker({
 			format : 'yyyy-mm-dd',
@@ -91,19 +100,64 @@
 			todayHighlight : true,
 			minView : "month"
 		});
-	/* 	$("#time").blur(function() {
-			alert(typeof ("#time"))
-		}); */
-		$('input').each(function() {
-			var self = $(this), label = self.next(), label_text = label.text();
-			label.remove();
-			self.iCheck({
-				checkboxClass : 'icheckbox_line-orange',
-				radioClass : 'iradio_line-orange',
-				insert : '<div class="icheck_line-icon"></div>' + label_text
-			});
-		});
-	</script>
+		
+		$("#userHeadImgPath").fileinput({'language': 'zh','showUpload':false, 'previewFileType':'any'});      
+	
+		$("#otherForm").bootstrapValidator({
+			message : '这个值不能通过验证！！',
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				userName:{
+					validators : {
+						notEmpty : {
+							message : '昵称不能为空'
+						},
+						stringLength: {
+                            min: 2,
+                            max: 10,
+                            message: '昵称长度必须在2到10位之间'
+                        }
+					}
+				},
+				userGender:{
+					validators : {
+						notEmpty : {
+							message : '请选择性别'
+						}
+					}
+				},
+				/* 有问题 
+				userBirthday:{
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				}, */
+				userEmail:{
+					validators : {
+						notEmpty : {
+							message : '邮箱地址不能为空'
+						},
+						emailAddress:{
+							message: '邮箱地址格式有误'
+						}
+					}
+				},
+				userHeadImgPath:{
+					validators : {
+						notEmpty : {
+							message : '头像不能为空'
+						}
+					}
+				}
+			}
+		});	
+		</script>
 
 </body>
 

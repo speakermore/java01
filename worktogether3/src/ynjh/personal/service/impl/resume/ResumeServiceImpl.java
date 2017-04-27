@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import ynjh.personal.dao.resume.ResumeMapper;
 import ynjh.personal.entity.Education;
+import ynjh.personal.entity.ForeignKeyEducation;
+import ynjh.personal.entity.ForeignKeyProject;
+import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.Work;
@@ -325,7 +328,7 @@ public class ResumeServiceImpl implements ResumeService {
 	 *           
 	 */
 	@Override
-	public List<Education> findEducationByDelete(Integer page, Integer userId) {
+	public List<ForeignKeyEducation> findEducationByDelete(Integer page, Integer userId) {
 		if (page == null) {
 			page = 1;
 		}
@@ -348,7 +351,7 @@ public class ResumeServiceImpl implements ResumeService {
 	 *           
 	 */
 	@Override
-	public List<Work> findWorkByDelete(Integer page, Integer userId) {
+	public List<ForeignKeyWork> findWorkByDelete(Integer page, Integer userId) {
 		if (page == null) {
 			page = 1;
 		}
@@ -371,7 +374,7 @@ public class ResumeServiceImpl implements ResumeService {
 	 *           
 	 */
 	@Override
-	public List<Project> findProjectByDelete(Integer page, Integer userId) {
+	public List<ForeignKeyProject> findProjectByDelete(Integer page, Integer userId) {
 		if (page == null) {
 			page = 1;
 		}

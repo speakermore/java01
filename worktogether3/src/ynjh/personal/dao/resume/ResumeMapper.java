@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.personal.entity.Education;
+import ynjh.personal.entity.ForeignKeyEducation;
+import ynjh.personal.entity.ForeignKeyProject;
+import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.Work;
@@ -90,15 +93,15 @@ public interface ResumeMapper {
 	/**
 	 * 查看教育记录已删除记录
 	 */
-	public List<Education> findEducationByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
+	public List<ForeignKeyEducation> findEducationByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
 	/**
 	 * 查看工作记录已删除记录
 	 */
-	public List<Work> findWorkByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
+	public List<ForeignKeyWork> findWorkByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
 	/**
 	 * 查看项目记录已删除记录
 	 */
-	public List<Project> findProjectByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
+	public List<ForeignKeyProject> findProjectByDelete(@Param("page")Integer page,@Param("userId")Integer userId);
 	/**
 	 * 恢复教育被删记录
 	 */

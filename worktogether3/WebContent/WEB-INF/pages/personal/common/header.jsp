@@ -28,6 +28,8 @@
 <link rel="stylesheet" type="text/css" href="personal/css/personal_common.css" />
 <link href="thirdpart/icheck/skins/line/orange.css" rel="stylesheet">
 <link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="thirdpart/dist/css/bootstrapValidator.min.css">
+<link rel="stylesheet" type="text/css" href="thirdpart/fileupload/css/fileinput.min.css">
 </head>
 <body>
 </body>

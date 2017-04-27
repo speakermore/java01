@@ -39,9 +39,9 @@ public class Resume implements Serializable{
 	// 期望待遇
 	private Integer resumeWages;
 	// 电话
-	private Integer resumePhone;
+	private String resumePhone;
 	// QQ
-	private Integer resumeQQ;
+	private String resumeQQ;
 	// 外语水平
 	private Integer resumeFLAbility;
 	// 外语类型
@@ -64,10 +64,17 @@ public class Resume implements Serializable{
 	private Integer resumeStatusThree;
 	//岗位意向
 	private String resumeJor;
+	//头像
+	private String resumeHeadImg;
 	
 	
 	
-	
+	public String getResumeHeadImg() {
+		return resumeHeadImg;
+	}
+	public void setResumeHeadImg(String resumeHeadImg) {
+		this.resumeHeadImg = resumeHeadImg;
+	}
 	public String getResumeJor() {
 		return resumeJor;
 	}
@@ -202,19 +209,19 @@ public class Resume implements Serializable{
 		this.resumeWages = resumeWages;
 	}
 
-	public Integer getResumePhone() {
+	public String getResumePhone() {
 		return resumePhone;
 	}
 
-	public void setResumePhone(Integer resumePhone) {
+	public void setResumePhone(String resumePhone) {
 		this.resumePhone = resumePhone;
 	}
 
-	public Integer getResumeQQ() {
+	public String getResumeQQ() {
 		return resumeQQ;
 	}
 
-	public void setResumeQQ(Integer resumeQQ) {
+	public void setResumeQQ(String resumeQQ) {
 		this.resumeQQ = resumeQQ;
 	}
 

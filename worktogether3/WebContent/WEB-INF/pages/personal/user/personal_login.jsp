@@ -21,53 +21,42 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<link rel="stylesheet"
+	href="thirdpart/dist/css/bootstrapValidator.min.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 	<!--wt-姓名首字母-相关文字-->
 	<div id="wt-hby-login">
-		<header class="navbar navbar-static-top bs-docs-nav wt-hby-login-top"
-			id="top">
-			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-				<div class="container-fluid">
-					<div class="navbar-header" id="wt-hby-header-left">
-						<a class="navbar-brand" href="#">昆明</a>
-						<ul class="nav navbar-nav">
-							<li><a href="#">切换城市</a></li>
-						</ul>
-					</div>
-					<div class="collapse navbar-collapse navbar-left"
-						id="wt-hby-header-middle">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">首页</a></li>
-						</ul>
-					</div>
-					<div class="navbar-collapse collapse" id="wt-hby-header-right">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="personal/user/addUser">没有账号？注册账号</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
+		<%@include file="/WEB-INF/pages/nav.jsp"%>
+
 		<div class="bs-docs-header wt-hby-login-center" id="content"
 			tabindex="-1">
 			<div class="container bs-docs-container">
-				<form class="form-signin" method="post" action="personal/user/login">
+				<form class="form-signin" method="post" action="personal/user/login"
+					id="loginForm">
 					<h2 class="form-signin-heading">欢迎登录</h2>
-					<label for="userLoginId" class="sr-only">邮箱/手机号</label><input
-						type="text" id="userLoginId" class="form-control"
-						name="userLoginId" placeholder="邮箱/手机号" required autofocus>
-					<label for="userPassword" class="sr-only">密码</label> <input
-						type="password" id="userPassword" class="form-control"
-						name="userPassword" placeholder="密码" required>
-					<!--请求验证码---->
-					<input
-						type="text" id="validateCode" class="form-control"
-						name="validateCode" placeholder="请输入验证码" required /><br/>
+					<div class="form-group">
+						<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
+							type="text" id="userLoginId" class="form-control"
+							name="userLoginId" required placeholder="邮箱/手机号">
+					</div>
+					<div class="form-group">
+						<label for="userPassword" class="sr-only">密码</label> <input
+							type="password" id="userPassword" class="form-control"
+							name="userPassword" placeholder="密码" required>
+					</div>
+					<div class="form-group">
+						<!--请求验证码---->
+						<input type="text" id="validateCode" class="form-control"
+							name="validateCode" placeholder="请输入验证码" required />
+					</div>
 					<img id="validateCode" alt="validateCode "
 						src="personal/user/codeValidate?time=<%=new Date().getTime()%>" />
+
 					<a class="btn btn-default" href="javascript:void(0)" role="button"
 						class="btn btn-primary btn-sm">看不清，换一张</a>
+
 					<div class="checkbox">
 						<label> <input type="checkbox" value="remember-me">
 							记住密码
@@ -89,13 +78,64 @@
 		charset="utf-8"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript">	
-		$(function(){
-			$("#validateCode+a").click(function(){
-				var path="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/";
-				$("img").attr("src",path+"personal/user/codeValidate?time="+new Date().getTime());
-			}); 
-		})
+	<script type="text/javascript"
+		src="thirdpart/dist/js/bootstrapValidator.min.js"></script>
+	<script type="text/javascript"
+		src="thirdpart/dist/js/language/zh_CN.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#validateCode+a")
+					.click(
+							function() {
+								var path = "${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/";
+								$("img")
+										.attr(
+												"src",
+												path
+														+ "personal/user/codeValidate?time="
+														+ new Date().getTime());
+							});
+
+			$("#loginForm").bootstrapValidator({
+				message : '这个值不能通过验证！！',
+				feedbackIcons : {
+					valid : 'glyphicon glyphicon-ok',
+					invalid : 'glyphicon glyphicon-remove',
+					validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					userLoginId : {
+						validators : {
+							notEmpty : {
+								message : '用户名不能为空'
+							},
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '用户名长度必须在6到50位之间'
+							},
+							emailAddress : {
+								message : '邮箱地址格式有误'
+							}
+						}
+					},
+					userPassword : {
+						validators : {
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '密码长度必须在6到50位之间'
+							},
+							regexp : {
+								regexp : /^[a-zA-Z0-9_]+$/,
+								message : '密码只能包含大写、小写、数字和下划线'
+							}
+						}
+					}
+				}
+
+			});
+		});
 	</script>
 </body>
 </html>

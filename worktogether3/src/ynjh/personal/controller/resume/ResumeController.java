@@ -12,8 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.util.UploadFile;
 import ynjh.personal.entity.Education;
+import ynjh.personal.entity.ForeignKeyEducation;
+import ynjh.personal.entity.ForeignKeyProject;
+import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
@@ -49,11 +55,12 @@ public class ResumeController {
 	 * ModelAndView
 	 */
 	@RequestMapping(value = "/createResume", method = RequestMethod.POST)
-	public ModelAndView createResume(Resume resume, HttpSession session) {
+	public ModelAndView createResume(Resume resume,MultipartFile resumeFile, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
+		resume.setResumeHeadImg(UploadFile.uploadFile(resumeFile, session));
 		int result = rService.addResume(resume);
 		if (result > 0) {
 			mv.addObject("resume", resume);
@@ -83,7 +90,7 @@ public class ResumeController {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
 		for(Resume resume:resumes){
 			sb.append("<tr>");
-			sb.append("<td><a href=\"personal/resume/lookResume?id="+resume.getId()+"\">"+resume.getResumeTitle()+"</a></td>");
+			sb.append("<td><a href='personal/resume/lookResume?id="+resume.getId()+"'>"+resume.getResumeTitle()+"</a></td>");
 			sb.append("<td>"+sdf.format(resume.getResumeCreateDate())+"</td>");
 			if (resume.getResumeStatusThree()==1) {
 				sb.append("<th>待审核</th>");
@@ -96,9 +103,9 @@ public class ResumeController {
 			}
 			sb.append("<td>");
 			if (resume.getResumeStatusThree() == 4) {
-					sb.append("<a href=\"personal/resume/updateResume?id=${resume.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复这篇简历吗？')){location.href='personal/resume/renewResume?id=${art.id }'}\">恢复</a>");
+					sb.append("<a href='personal/resume/updateResume?id=${res.id } '>修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复这篇简历吗？')){location.href='personal/resume/renewResume?id=${res.id }'} \">恢复</a>");
 			}else {
-				sb.append("<a href=\"personal/resume/updateResume?id=${resume.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要删除这篇简历吗？')){location.href='personal/resume/deleteResume?id=${resume.id }'}\">删除</a>");
+				sb.append("<a href='personal/resume/updateResume?id=${res.id }'>修改</a>|<a href=\"javascript:if(confirm('你确定真的要删除这篇简历吗？')){location.href='personal/resume/deleteResume?id=${res.id }'} \">删除</a>");
 			}
 				sb.append("</td>");
 				sb.append("</tr>");
@@ -245,21 +252,42 @@ public class ResumeController {
 		return "personal/resume/personal_resume_education";
 	}*/
 
-	/* 跳转 */
+	/**
+	 * 跳转新建工作记录
+	 * @param resumeId
+	 * @param session
+	 * @return
+	 * 
+	 * String
+	 */
 	@RequestMapping(value = "/gotoCreateWork", method = RequestMethod.GET)
 	public String gotoCreateWork(Integer resumeId, HttpSession session) {
 		session.setAttribute("resumeId", resumeId);
 		return "personal/resume/personal_resume_work";
 	}
 
-	/* 跳转 */
+	/**
+	 * 跳转新建项目记录
+	 * @param resumeId
+	 * @param session
+	 * @return
+	 * 
+	 * String
+	 */
 	@RequestMapping(value = "/gotoCreateProject", method = RequestMethod.GET)
 	public String gotoCreateProject(Integer resumeId, HttpSession session) {
 		session.setAttribute("resumeId", resumeId);
 		return "personal/resume/personal_resume_project";
 	}
 
-	/* 添加Education */
+	/**
+	 * 新建教育经历
+	 * @param education
+	 * @param session
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping(value = "/CreateEducation", method = RequestMethod.POST)
 	public ModelAndView CreateEducation(Education education,
 			HttpSession session) {
@@ -281,7 +309,14 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 添加Work */
+	/**
+	 * 新建工作经历
+	 * @param work
+	 * @param session
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping(value = "/CreateWork", method = RequestMethod.POST)
 	public ModelAndView CreateWork( Work work,
 			HttpSession session) {
@@ -304,7 +339,14 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 添加Project */
+	/**
+	 * 新建项目记录
+	 * @param session
+	 * @param project
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping(value = "/CreateProject", method = RequestMethod.POST)
 	public ModelAndView CreateProject(HttpSession session,
 			Project project) {
@@ -327,7 +369,13 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 查看Education */
+	/**
+	 * 查看教育经历列表
+	 * @param resumeId
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping("/lookResumeEdus")
 	public ModelAndView lookResumeEducation(Integer resumeId) {
 		ModelAndView mv = new ModelAndView();
@@ -337,7 +385,13 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 查看Work */
+	/**
+	 * 查看工作记录列表
+	 * @param resumeId
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping("/lookResumeWork")
 	public ModelAndView lookResumeWork(Integer resumeId) {
 		ModelAndView mv = new ModelAndView();
@@ -347,7 +401,13 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 查看Project */
+	/**
+	 * 查看项目记录列表
+	 * @param resumeId
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping("/lookResumeProjs")
 	public ModelAndView lookResumeProject(Integer resumeId) {
 		ModelAndView mv = new ModelAndView();
@@ -357,7 +417,14 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 删除Education */
+	/**
+	 * 删除教育记录
+	 * @param id
+	 * @param session
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping(value = "/deleteResumeEducation", method = RequestMethod.GET)
 	public ModelAndView deleteResumeEducation(Integer id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -371,7 +438,14 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 删除Work */
+	/**
+	 * 删除工作记录
+	 * @param id
+	 * @param session
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping(value = "/deleteResumeWork", method = RequestMethod.GET)
 	public ModelAndView deleteResumeWork(Integer id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -385,7 +459,14 @@ public class ResumeController {
 		return mv;
 	}
 
-	/* 删除Project */
+	/**
+	 * 删除项目记录
+	 * @param id
+	 * @param session
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping(value = "/deleteResumeProject", method = RequestMethod.GET)
 	public ModelAndView deleteResumeProject(Integer id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -397,6 +478,148 @@ public class ResumeController {
 			mv.setViewName("personal/resume/personal_lookresume");
 		}
 		return mv;
+	}
+	
+	/**
+	 * 恢复被删除的教育经历 跳转当前页
+	 * @param id 简历
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
+	@RequestMapping(value = "/renewEducation", method = RequestMethod.GET)
+	public ModelAndView renewEducation(Integer id,HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		int result = rService.renewEducationByDelete(id);
+		User user=(User) session.getAttribute("user");
+		if (result > 0) {
+			mv.addObject("operatorInfo", "恢复成功！");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
+		} else {
+			mv.addObject("operatorInfo", "恢复失败，请联系管理员！");
+			mv.setViewName("personal/user/personal_index");
+		}
+		return mv;
+	}
+	/**
+	 * 恢复被删除的工作历 跳转当前页
+	 * @param id 简历
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
+	@RequestMapping(value = "/renewWork", method = RequestMethod.GET)
+	public ModelAndView renewWork(Integer id,HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		int result = rService.renewWorkByDelete(id);
+		User user=(User) session.getAttribute("user");
+		if (result > 0) {
+			mv.addObject("operatorInfo", "恢复成功！");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
+		} else {
+			mv.addObject("operatorInfo", "恢复失败，请联系管理员！");
+			mv.setViewName("personal/user/personal_index");
+		}
+		return mv;
+	}
+	/**
+	 * 恢复被删除的项目经历 跳转当前页
+	 * @param id 简历
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
+	@RequestMapping(value = "/renewProject", method = RequestMethod.GET)
+	public ModelAndView renewProject(Integer id,HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		int result = rService.renewProjectByDelete(id);
+		User user=(User) session.getAttribute("user");
+		if (result > 0) {
+			mv.addObject("operatorInfo", "恢复成功！");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
+		} else {
+			mv.addObject("operatorInfo", "恢复失败，请联系管理员！");
+			mv.setViewName("personal/user/personal_index");
+		}
+		return mv;
+	}
+	/**
+	 * 查看被删除的教育记录
+	 * @param page
+	 * @param userId
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
+	@RequestMapping("/findEducationByDelete")
+	@ResponseBody
+	public Object findEducationByDelete(Integer toPage,Integer userId){
+		List<ForeignKeyEducation> educationDels= rService.findEducationByDelete(toPage, userId);
+		int maxPage=rService.getMaxEducationDeleteById(userId);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
+		StringBuffer sb=new StringBuffer();
+		for(ForeignKeyEducation eDels:educationDels){
+		sb.append("<tr>");
+		sb.append("<td>"+eDels.getResumeTitle()+"</td>");
+		sb.append("<td>"+sdf.format(eDels.getEducationBeginTime())+"</td>");
+		sb.append("<td>"+sdf.format(eDels.getEducationEndTime())+"</td>");
+		sb.append("<td>"+eDels.getEducationSchool()+"</td>");
+		sb.append("<td><a href=\"javascript:if(confirm('你确定真的要恢复教育记录吗？')){location.href='personal/resume/renewEducation?id=${eDels.id }'}\">恢复</a></td>");
+		sb.append("</tr>");
+		}sb.append("---"+toPage+"---"+maxPage);
+		return sb.toString();
+	}
+	/**
+	 * 查看被删除的工作记录
+	 * @param page
+	 * @param userId
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
+	@RequestMapping("/findWorkByDelete")
+	@ResponseBody
+	public Object findWorkByDelete(Integer toPage,Integer userId){
+		List<ForeignKeyWork> workDels= rService.findWorkByDelete(toPage, userId);
+		int maxPage=rService.getMaxEducationDeleteById(userId);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
+		StringBuffer sb=new StringBuffer();
+		for(ForeignKeyWork wDels:workDels){
+		sb.append("<tr>");
+		sb.append("<td>"+wDels.getResumeTitle()+"</td>");
+		sb.append("<td>"+sdf.format(wDels.getWorkBeginTime())+"</td>");
+		sb.append("<td>"+sdf.format(wDels.getWorkEndTime())+"</td>");
+		sb.append("<td>"+wDels.getWorkFirmName()+"</td>");
+		sb.append("<td><a href=\"javascript:if(confirm('你确定真的要恢复工作记录吗？')){location.href='personal/resume/renewWork?id=${wDels.id }'}\">恢复</a></td>");
+		sb.append("</tr>");
+		}sb.append("---"+toPage+"---"+maxPage);
+		return sb.toString();
+	}
+	/**
+	 * 查看被删除的项目记录
+	 * @param page
+	 * @param userId
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
+	@RequestMapping("/findProjectByDelete")
+	@ResponseBody
+	public Object findProjectByDelete(Integer toPage,Integer userId){
+		List<ForeignKeyProject> projectDels= rService.findProjectByDelete(toPage, userId);
+		int maxPage=rService.getMaxEducationDeleteById(userId);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
+		StringBuffer sb=new StringBuffer();
+		for(ForeignKeyProject pDels:projectDels){
+		sb.append("<tr>");
+		sb.append("<td>"+pDels.getResumeTitle()+"</td>");
+		sb.append("<td>"+sdf.format(pDels.getProjectBeginTime())+"</td>");
+		sb.append("<td>"+sdf.format(pDels.getProjectEndTime())+"</td>");
+		sb.append("<td>"+pDels.getProjectName()+"</td>");
+		sb.append("<td><a href=\"javascript:if(confirm('你确定真的要恢复项目记录吗？')){location.href='personal/resume/renewProject?id=${pDels.id }'}\">恢复</a></td>");
+		sb.append("</tr>");
+		}sb.append("---"+toPage+"---"+maxPage);
+		return sb.toString();
 	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)

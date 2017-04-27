@@ -40,23 +40,23 @@ public class CommentArticleController {
 		mv.setViewName("personal/article/personal_articledetail");
 		return mv;
 	}
-	/**
-	 * 跳转评论页面
-	 * @return 跳转评论页面
-	 */
-	@RequestMapping(value = "/addcommentarticle", method = RequestMethod.GET)
-	public String gotoCreateCommentArticle(){
-		return "personal/commentarticle/personal_createcomment";
-	}
+//	/**
+//	 * 跳转评论页面
+//	 * @return 跳转评论页面
+//	 */
+//	@RequestMapping(value = "/addcommentarticle", method = RequestMethod.GET)
+//	public String gotoCreateCommentArticle(){
+//		return "personal/commentarticle/personal_createcomment";
+//	}
 	/**
 	 * 写文章评论
 	 * @param commentArticle 评论文章对象
 	 * @param session
 	 * @return 评论已提交，提示请等待审核，评论提交失败，跳转personal_articledetail页面
 	 */
-	@RequestMapping(value = "/addcommentarticle", method = RequestMethod.POST)
+	@RequestMapping("/addcommentarticle")
 	public ModelAndView writeUserCommentArticle(CommentArticle commentArticle, HttpSession session) {
-		ModelAndView mv = new ModelAndView("personal/commentarticle/info");
+		ModelAndView mv = new ModelAndView("personal/info");
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getId();
 		commentArticle.setCommentArticleTime(new Timestamp(System.currentTimeMillis()));

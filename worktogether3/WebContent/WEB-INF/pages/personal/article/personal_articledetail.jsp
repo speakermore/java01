@@ -24,9 +24,7 @@
 						<%@include
 							file="/WEB-INF/pages/personal/article/personal_articledetail_index.jsp"%>
 					</div>
-				<%-- 	<div class="col-md-4 column ">
-						<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
-					</div> --%>
+				
 					<div class="col-md-1 column"></div>
 				</div>
 			</div>
