@@ -10,6 +10,7 @@ import ynjh.personal.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
+import ynjh.admin.entity.SystemMessage;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
@@ -330,4 +331,10 @@ public interface AdminMapper {
      * @author 朱吉
      */
     public List<Discuss> find5Discuss();
+    
+    /**
+     * 系统消息
+     * @author 曾瑞
+     */
+    public Integer addMessage(SystemMessage systemMessage);
 }

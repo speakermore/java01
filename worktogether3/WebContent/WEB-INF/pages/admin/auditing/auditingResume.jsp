@@ -15,55 +15,64 @@
 </head>
 <body>
 	<div><%@include file="../menu.jsp"%></div>
-	
-	<from action="findAuditResume">
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-3 main">
-          <h2 class="sub-header">用户信息</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-                <ul>
-					<li>简历标题：${resume.resumeTitle}</li>
-					<li>创建时间：${resume.resumeCreateDate}</li>
-					<li>姓名：${resume.resumeName}</li>
-					<li>性别：${resume.resumeGender}</li>
-					<li>民族：${resume.resumeNation}</li>
-					<li>籍贯：${resume.resumePlace}</li>
-					<li>生日：${resume.resumeBirthday}</li>
-					<li>身高：${resume.resumeHeight}</li>
-					<li>体重：${resume.resumeWeight}</li>
-					<li>毕业院校：${resume.resumeGraduationSchool}</li>
-					<li>毕业时间：${resume.resumeGraduationTime}</li>
-					<li>学历：${resume.resumeEducation}</li>
-					<li>专业：${resume.resumeMajor}</li>
-					<li>期望待遇：${resume.resumeWages}</li>
-					<li>婚姻状况：${resume.resumeMarriage}</li>
-					<li>电话：${resume.resumePhone}</li>
-					<li>QQ：${resume.resumeQQ}</li>
-					<li>外语水平：${resume.resumeFLAbility}</li>
-					<li>外语类型：${resume.resumeFLType}</li>
-					<li>计算机水平：${resume.resumeComputerAbility}</li>
-					<li>特点描述：${resume.resumePersonality}</li>
-					<li>自我评价：${resume.resumeSelfEvaluation}</li>
-					<div class="">
-						<a class="col-sm-offset-2" href="admin/auditResume?resumeStatusThree=2&id=${resume.id}&toPage=../auditingResume"><input  class="btn btn-warning"  type="submit" value="通过审核" /></a>
-						
-						<a  class="col-sm-offset-4" href="admin/auditResume?resumeStatusThree=3&id=${resume.id}&toPage=../auditingResume" ><input  class="btn btn-warning"  type="submit" value="拒绝审核" /></a>
-						
-					</div>
-				</ul>
-            </table>
-          </div>
-        </div>
-		<!--左侧边栏结束-->
-
-
-		<!--右侧边栏-->
-		<!--<div class="col-sm-4" style="border: 1px solid black;">1列</div><!--右侧边栏结束-->
-
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-1 page-header">
+				 <h1>${resume.resumeTitle}<small>${resume.resumeCreateDate}</small></h1>
+			</div>
+			<div class="col-md-offset-1">
+				<div class="col-sm-2">
+					<img src="" width="90px" height="120px">
+				</div>
+				<div class="col-sm-10">
+					<div class="col-sm-4">姓名:${resume.resumeName}</div>
+					<div class="col-sm-4">性别：${resume.resumeGender}</div>
+					<div class="col-sm-4">民族：${resume.resumeNation}</div>
+					<div class="col-sm-4">籍贯：${resume.resumePlace}</div>
+					<div class="col-sm-4">生日：${resume.resumeBirthday}</div>
+					<div class="col-sm-4">婚姻状况：${resume.resumeMarriage}</div>
+					<div class="col-sm-4">身高：${resume.resumeHeight}</div>
+					<div class="col-sm-4">体重：${resume.resumeWeight}</div>
+					<div class="col-sm-4">毕业院校：${resume.resumeGraduationSchool}</div>
+					<div class="col-sm-4">毕业时间：${resume.resumeGraduationTime}</div>
+					<div class="col-sm-4">学历：${resume.resumeEducation}</div>
+					<div class="col-sm-4">专业：${resume.resumeMajor}</div>
+				</div>
+			</div><!-- end of simpleInfo -->
+			<div class="col-md-12">
+			&nbsp;
+			</div>
+			<div class="col-md-12">
+				<div class="label label-default col-md-1 col-md-offset-1">联系方式</div>
+				<div class=" col-md-12 col-md-offset-1">
+					<div class="col-md-6">电话：${resume.resumePhone}</div>
+					<div class="col-md-6">QQ：${resume.resumeQQ}</div>
+				</div>
+			</div><!-- end of communication Info -->
+			<div class="col-md-12">
+			&nbsp;
+			</div>
+			<div class="col-md-12">
+				<div class="label label-default col-md-1 col-md-offset-1">技能信息</div>
+				<div class=" col-md-12 col-md-offset-1">
+					<div class="col-md-6">外语类型：${resume.resumeFLType}</div>
+					<div class="col-md-6">外语水平：${resume.resumeFLAbility}</div>
+					<div class="col-md-6">计算机水平：${resume.resumeComputerAbility}</div>
+				</div>
+			</div><!-- end of communication Info -->
+			<div class="col-md-12">
+			&nbsp;
+			</div>
+			<div class="col-md-12">
+				<div class="label label-default col-md-1 col-md-offset-1">综合信息</div>
+				<div class=" col-md-12 col-md-offset-1">
+					<div class="col-md-12">特点描述：${resume.resumePersonality}</div>
+					<div class="col-md-12">自我评价：${resume.resumeSelfEvaluation}</div>
+				</div>
+			</div><!-- end of total Info -->
+		</div>
 	</div>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> <script
-		src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/admin/bootstrap.min.js"></script> </from>
-	<div><%@include file="../footer.jsp" %></div>
+
+	<div><%@include file="../footer.jsp"%></div>
 </body>
-</html>					
+</html>
