@@ -54,12 +54,13 @@
 			公司营业执照:<input type="text" name="companyLicenseImg"><br/>
 			公司营业执照码:<input type="text" name="companyLicenseNo"><br/>
 			公司法人:<input type="text" name="companyCorporator"><br/>
-			公司电话:<input type="text" name="companyTel"><br/>
+			公司电话:<input type="text" name=1"companyTel"><br/>
 			公司电子邮件:<input type="text" name="companyEmail"><br/>
 			公司地址:<input type="text" name="companyAddress"><br/>
 			公司环境照片:<input type="text" name="companyDetailImg"><br/>
 			公司状态:<input type="text" name="companyStatus">	<br/> -->
-			<input type="submit">
+			
+			<input class="btn btn-md btn-success" type="submit" value="注册">
 		</form>
 		</div>
 		<div class="col-sm-3">
