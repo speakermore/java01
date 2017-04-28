@@ -2,6 +2,9 @@ package ynjh.company.controller.company;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -10,12 +13,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.common.util.MD5Util;
+import ynjh.common.util.UploadFile;
 import ynjh.company.entity.Company;
 import ynjh.company.service.CompanyService;
 
@@ -69,20 +76,24 @@ public class CompanyController {
 	}
 	//注册用户
 	@RequestMapping(value="/addCompany",method=RequestMethod.POST)
-	public ModelAndView addCompany(Company company){
+	public ModelAndView addCompany(String companyLoginId,String companyPassword,String realCompanyPassword){
 		ModelAndView mv=new ModelAndView("company/info");
-		
-		
-		
-		int companyResult=companyService.addCompany(company);
-		if(companyResult>0){
-			mv.addObject("operatorInfo","用户添加成功");
-			mv.addObject("toPage", "company/company/"); 
-//			mv.setViewName("company/info");
+		if(realCompanyPassword.equals(realCompanyPassword)){
+			Company company=new Company();
+			company.setCompanyPassword(companyPassword);
+			company.setCompanyLoginId(companyLoginId);
+			int companyResult=companyService.addCompany(company);
+			if(companyResult>0){
+				mv.addObject("operatorInfo","用户注册成功");
+				mv.addObject("toPage", "company/company/"); 
+//				mv.setViewName("company/info");
+			}else{
+				mv.addObject("operatorInfo","用户注册失败");
+				mv.addObject("toPage", "company/company/add");
+			}	
 		}else{
-			mv.addObject("operatorInfo","用户添加失败");
+			mv.addObject("operatorInfo","用户密码不一致");
 			mv.addObject("toPage", "company/company/add");
-//			mv.setViewName("company/info");
 		}
 		return mv;
 	}
@@ -99,66 +110,23 @@ public class CompanyController {
 	
 	//修改用户资料
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public ModelAndView updateCompany(Company company,HttpSession session,HttpServletResponse response,MultipartFile upload){
+	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,@RequestParam MultipartFile[] companyDetails){
 		ModelAndView mv=new ModelAndView();
-		String newFileName="";
-		try {
-			//重命名文件名
-			String path=session.getServletContext().getRealPath("WEB-INF/resources/company/img");
-			String oldFileName=upload.getOriginalFilename();
-			String suffix="."+FilenameUtils.getExtension(oldFileName);
-			newFileName=System.currentTimeMillis()+RandomUtils.nextInt(1000)+suffix;
-			String uploadContentType=upload.getContentType(); // 文件类型
-//			String callback = request.getParameter("CKEditorFuncNum");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out=response.getWriter();
-			
-			if (uploadContentType.equals("image/pjpeg")
-					|| uploadContentType.equals("image/jpeg")) {
-				// IE6上传jpg图片的headimageContentType是image/pjpeg，而IE 9以及火狐上传的jpg图片是image/jpeg
-				oldFileName = ".jpg";
-			} else if (uploadContentType.equals("image/png")
-					|| uploadContentType.equals("image/x-png")) {
-				// IE6上传的png图片的headimageContentType是"image/x-png"
-				oldFileName = ".png";
-			} else if (uploadContentType.equals("image/gif")) {
-				oldFileName = ".gif";
-			} else if (uploadContentType.equals("image/bmp")) {
-				oldFileName = ".bmp";
-			} else {
-				out.println("<script type=\"text/javascript\">");  
-				out.println("window.parent.CKEDITOR.tools.callFunction("  
-				+ oldFileName + ",'',"  
-				+ "'文件格式不正确（必须为.jpg/.gif/.bmp/.png文件）');");  
-				out.println("</script>"); 
-				
-			}
-			if (upload.getSize() > 1024 * 1024 * 2) {  
-				out.println("<script type=\"text/javascript\">");  
-				out.println("window.parent.CKEDITOR.tools.callFunction("  
-				+ ",''," + "'文件大小不得大于2M');");  
-				out.println("</script>");  
-				
-			}
-			//创建File,并且服务器上创建实际存在的文件
-			File newupload=new File(path+"/"+newFileName);
-			if(!newupload.exists()){
-				System.out.println(newupload.mkdirs());
-			}
-			
-			//将imgpath写到磁盘上
-			upload.transferTo(newupload);
-//			out.println("<script type=\"text/javascript\">");
-//			out.println("window.parent.CKEDITOR.tools.callFunction(" + callback
-//					+ ",'"+request.getContextPath()+"/company/img/" + newFileName + "','')");
-//			out.println("</script>");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		int resultDetail=0;
 		
-		int resultDetail=companyService.addCompanyDetailId(company.getId(), newFileName);
+		Company user=(Company)session.getAttribute("user");
+		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img/",user.getCompanyLoginId());
+		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
+		
+			String[] fileNames=UploadFile.uploadFile(userPath,companyDetails, session);
+			for(String fileName:fileNames){
+				companyService.addCompanyDetailId(company.getId(), fileName);
+				resultDetail+=1;
+			}
+		
+		company.setCompanyLogo(companyLogo[0]);
 		int result=companyService.updateCompany(company);
-		if(result>0){
+		if(result>0&&resultDetail>=(companyDetails.length-1)){
 			mv.addObject("operatorInfo","用户修改成功");
 			session.setAttribute("company", company);
 			mv.addObject("toPage", "company/company/findById/"+company.getId());

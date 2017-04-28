@@ -23,7 +23,7 @@
 					 <a href="company/company/company_data">我的资料</a>
 				</li>
 				<li>
-					 <a href="company/charge/company_charge">我的钱包</a>
+					 <a href="company/charge/companyCharge/${user.id}">我的钱包</a>
 				</li>
 				<li>
 					 <a href="company/charge/charge">充值</a>

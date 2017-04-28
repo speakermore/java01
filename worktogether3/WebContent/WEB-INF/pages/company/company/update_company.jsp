@@ -9,7 +9,6 @@
 <title>编辑资料</title>
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-
 <link href="css/main.css" rel="stylesheet" />
 <link href="thirdpart/fileupload/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
@@ -54,7 +53,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3">公司Logo：</div>	
-					<div class="col-sm-9"><input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyLogo } name="companyLogo"/>
+					<div class="col-sm-9"><input id="companyLogo" name="logo" multiple type="file" class="form-control file">
 					</div>
 				</div>
 				<div class="form-group">
@@ -93,7 +92,7 @@
 				<div class="form-group">
 					<div class="col-sm-3">公司环境：</div>
 					<div class="col-sm-9"> 
-                    		<input id="file-zh" name="file-zh[]" multiple data-min-file-count="6" type="file" class="form-control file">
+                    		<input id="file-zh" name="companyDetails" multiple type="file" class="form-control">
 					</div>
 				</div>
                 
@@ -111,19 +110,20 @@
 	</div>
 </div>
 <script>
-/* $("#file-zh").fileinput({	
+	$("#companyLogo").fileinput({	
 	 'language': 'zh',
 	'showUpload':false,
-	'showRemove':false, 
-	'previewFileType':'any'}); */
+	'showRemove':false,
+	'previewFileType':'any'});
 	
 	$("#file-zh").fileinput({
-		
-		'language': 'zh',
-	    uploadUrl: "/file-upload-batch/2",
-	    allowedFileExtensions: ["jpg", "png", "gif"],
-	    minImageWidth: 50,
-	    minImageHeight: 50
+		multiple:true,
+		uploadAsync:false,
+		maxFileCount:6,
+		language:'zh',
+	    allowedFileExtensions:["jpg", "png", "gif"],
+	    minImageWidth:50,
+	    minImageHeight:50
 	});
 
 </script>

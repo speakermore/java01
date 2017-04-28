@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>企业充值</title>
+<title>我的钱包</title>
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,24 +14,41 @@
 </head>
 <body>
 <%@include file="/WEB-INF/pages/nav.jsp" %>
-
 <div class="container">
-		<div class="row clearfix">
-			<div class="col-md-3 column">
-				<%@include file="/WEB-INF/pages/company/menu.jsp" %>
+	<div class="row clearfix">
+		<div class="col-sm-12 column">
+			<div class="row clearfix">
+				<div class="col-sm-3 column">
+					<%@include file="/WEB-INF/pages/company/menu.jsp" %>
+				</div>
+				<div class="col-sm-6 column">
+					<h2>
+						你的余额：
+					</h2>
+					<p>
+						<h3>${companyCharge.cmpChargeBalance }</h3>
+					</p>
+					<div class="col-sm-8 column"></div>
+					<div class="col-sm-4 column">
+					<p>
+						 <a class="btn" href="company/charge/chargeRecord/${companyCharge.companyId }">消费记录</a>
+					</p>
+					</div>
+				</div>
+				<div class="col-sm-4 column">
+						
+				</div>
 			</div>
-			<div class="col-md-6 column">
-				<form action="company/charge/addMoney" method="post">
-				充值金额：<input type="text" name="cmpChargeMoney">
-				<input type="submit" value="充值">
-				</form>
-			</div>
-			<div class="col-md-3 column">
-			</div>
+		</div>
+	</div>
+	<div class="row clearfix">
+	
 		</div>
 	</div>
 
 
+
 	
+	<%-- <a href="company/charge/chargeRecord/${companyCharge.companyId }">nihao1</a> --%>
 </body>
 </html>

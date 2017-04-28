@@ -31,21 +31,9 @@ public class CompanyChargeServiceImpl implements CompanyChargeService {
 
 
 	@Override
-	public List<CompanyCharge> findAllById(Integer companyId,Integer page) {
-		if(page==null){
-			page=1;
-		}
-		
-		if(page<1){
-			page=1;
-		}
-		int maxPage=getMaxPage(companyId);
-		if(page>maxPage){
-			page=maxPage;
-		}
-		
-		
-		return companyChargeMapper.findAllById(companyId, page);
+	public List<CompanyCharge> findAllById(Integer companyId) {
+	
+		return companyChargeMapper.findAllById(companyId);
 	}
 
 	@Override

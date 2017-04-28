@@ -15,9 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update companyRecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
 </update>
 <select id="findAll" resultType="CompanyRecruit">
-		select * from companyRecruit where cmpRecStatus!= 1 and cmpRecStatus!=3 and cmpRecStatus!=4
+		select * from companyRecruit
 	<if test="page!=null">
-		limit #{page},5
+		limit #{page},20
 	</if>
 </select>
 <select id="findById" parameterType="int" resultType="CompanyRecruit">

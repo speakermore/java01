@@ -2,9 +2,6 @@ package ynjh.company.dao.company;
 
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import ynjh.company.entity.CompanyCharge;
 
 public interface CompanyChargeMapper {
@@ -13,7 +10,7 @@ public interface CompanyChargeMapper {
 	//查询余额
 	public CompanyCharge findById(Integer companyId);
 	//查询账单
-	public List<CompanyCharge> findAllById(@Param("companyId") Integer companyId,@Param("page") Integer page);
+	public List<CompanyCharge> findAllById(Integer companyId);
 	//消费
 	public Integer consumeMoney(CompanyCharge cmpChargeConsume);
 	//最大页码
