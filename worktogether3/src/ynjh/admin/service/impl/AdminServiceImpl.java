@@ -27,9 +27,12 @@ import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -54,8 +57,21 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public Integer auditResume(Integer id, Integer status) {
-		 
-		return adminMapper.auditResume(id, status);
+		String resumeId;
+		if(id!=null&&status!=null){
+			resumeId=id+"";
+			try{
+				adminMapper.auditingWork(resumeId, status);
+				adminMapper.auditingProject(resumeId, status);
+				adminMapper.auditingEducation(resumeId, status);
+				return adminMapper.auditResume(id, status);
+			}catch(Exception e){
+				e.printStackTrace();
+				return null; 
+			}
+		}
+		return null;
+		
 	}
 
 	/**
@@ -786,9 +802,49 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Integer addMessage(SystemMessage systemMessage) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.addMessage(systemMessage);
 	}
+	
+	/**
+	 * 查询简历的工作信息
+	 * @author 朱吉
+	 * @param resumeId 简历编号
+	 */
+	@Override
+	public List<Work> findResumeWork(String resumeId) {
+		if(resumeId!=null||!(resumeId.equals(""))){
+			return adminMapper.findResumeWork(resumeId);
+		}else{
+			return null;
+		}
+		
+	}
+
+	/**
+	 * 查找简历的项目经历
+	 * @author 朱吉
+	 * @param resumeId 简历id
+	 */
+	@Override
+	public List<Project> findResumeProject(String resumeId) {
+		if(resumeId!=null||!(resumeId.equals(""))){
+			return adminMapper.findResumeProject(resumeId);
+		}else{
+			return null;
+		}	
+	}
+
+	@Override
+	public List<Education> findResumeEducation(String resumeId) {
+		if(resumeId!=null||!(resumeId.equals(""))){
+			return adminMapper.findResumeEducation(resumeId);
+		}else{
+			return null;
+		}
+	}
+	
+	
 
 	
 

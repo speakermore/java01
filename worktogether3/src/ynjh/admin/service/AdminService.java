@@ -18,9 +18,12 @@ import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
 
 
 
@@ -73,6 +76,12 @@ public interface AdminService {
 	public Offer findAuditOfferById(Integer id);
 	//查询审核招聘信息ById
 	public List<CompanyRecruit> findAuditRecruitmentById(Integer id);
+	//查询工作经历
+	public List<Work> findResumeWork(String resumeId);
+	//查询项目经历
+	public List<Project> findResumeProject(String resumeId);
+	//查询培训经历
+	public List<Education> findResumeEducation(String resumeId);
 	
 
 	public List<AdminLog> findAdminLogAll(Integer page);//访问管理员日志,无参查询全部

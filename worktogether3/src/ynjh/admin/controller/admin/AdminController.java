@@ -38,9 +38,12 @@ import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
 
 /**
  * admin功能Controller
@@ -541,16 +544,15 @@ public class AdminController {
 	 * @Parameters: AdminController
 	 * @Return: ModelAndView
 	 */
-	@RequestMapping("/auditResume")
-	public ModelAndView auditResume(Integer id, Integer resumeStatusThree) {
+	@RequestMapping("/auditResume/{id}/{resumeStatusThree}")
+	public ModelAndView auditResume(@PathVariable Integer id,@PathVariable Integer resumeStatusThree) {
 		int result = adminService.auditResume(id, resumeStatusThree);
 		ModelAndView mv = new ModelAndView();
-		if (result > 0) {
-			mv.addObject("", "审核成功");
+		if (result >0) {
 			mv.addObject("result", result);
 			mv.setViewName("admin/auditResume");
 		} else {
-			mv.setViewName("admin/login");
+			mv.setViewName("admin/auditResume");
 		}
 		return mv;
 	}
@@ -1162,6 +1164,50 @@ public class AdminController {
 	@RequestMapping("/addMessage")
 	public String addMessage(){
 		return "admin/adminAddMessage";
+	}
+	/**
+	 * 审核简历查找工作经历
+	 * @author 朱吉
+	 * @param resumeId 简历表id
+	 * @return
+	 */
+	@RequestMapping("/work")
+	public ModelAndView showWork(String resumeId){
+		List<Work> works=adminService.findResumeWork(resumeId);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("works", works);
+		mv.setViewName("admin/auditing/auditingResume");
+		return mv;
+	}
+	
+	/**
+	 * 查找项目经历
+	 * @author 朱吉
+	 * @param resumeId 简历id
+	 * @return
+	 */
+	@RequestMapping("/project")
+	public ModelAndView showProject(String resumeId){
+		List<Project> projects=adminService.findResumeProject(resumeId);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("projects", projects);
+		mv.setViewName("admin/auditing/auditingResume");
+		return mv;	
+	}
+	
+	/**
+	 * 查找简历培训经历
+	 * @author 朱吉
+	 * @param resumeId
+	 * @return
+	 */
+	@RequestMapping("/edu")
+	public ModelAndView showEducation(String resumeId){
+		List<Education> edus=adminService.findResumeEducation(resumeId);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("edus",edus);
+		mv.setViewName("admin/auditing/auditingResume");
+		return mv;
 	}
 
 	/**

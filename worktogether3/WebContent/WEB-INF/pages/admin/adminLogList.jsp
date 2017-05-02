@@ -42,15 +42,16 @@
 			<label for="endTime">结束时间</label> <input size="16" type="text"
 			id="datetimeEnd" readonly class="form_datetime" name="endTime">
 		</div>
-		<div class="col-sm-2 dropdown">
+		
+		<div class="col-sm-2 form-group">
 			<label for="adminDo">操作类型</label> 
-			<select name="adminDo" size="6" multiple class="form-control">
-				<option value=null>全部操作类型</option>
-				<option value=1 selected="selected">审核操作</option>
-				<option value=2>禁用用户</option>
-				<option value=3>密码重置</option>
-				<option value=4>信息维护</option>
-				<option value=5>登录 退出</option> 
+			<select name="adminDo"  class="form-control">
+				<option value="0">全部操作类型</option>
+				<option value="1" selected="selected">审核操作</option>
+				<option value="2">禁用用户</option>
+				<option value="3">密码重置</option>
+				<option value="4">信息维护</option>
+				<option value="5">登录 退出</option> 
 			</select>
 		</div>
 		<div class="col-sm-2">
