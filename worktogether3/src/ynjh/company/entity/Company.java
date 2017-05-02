@@ -1,5 +1,7 @@
 package ynjh.company.entity;
 
+import ynjh.common.util.MD5Util;
+
 public class Company {
 	
 	private Integer id;
@@ -14,7 +16,6 @@ public class Company {
 	private String companyTel;
 	private String companyEmail;
 	private String companyAddress;
-	private String companyDetailImg;
 	private Integer companyStatus;	
 	
 	
@@ -28,7 +29,7 @@ public class Company {
 	public Company(Integer id, String companyLoginId, String companyPassword, String companyName,
 			String companySimpleName, String companyLogo, String companyLicenseImg, String companyLicenseNo,
 			String companyCorporator, String companyTel, String companyEmail, String companyAddress,
-			String companyDetailImg, Integer companyStatus, String companyConnection) {
+			Integer companyStatus, String companyConnection) {
 		super();
 		this.id = id;
 		this.companyLoginId = companyLoginId;
@@ -42,7 +43,6 @@ public class Company {
 		this.companyTel = companyTel;
 		this.companyEmail = companyEmail;
 		this.companyAddress = companyAddress;
-		this.companyDetailImg = companyDetailImg;
 		this.companyStatus = companyStatus;
 	}
 
@@ -74,7 +74,13 @@ public class Company {
 
 
 	public void setCompanyPassword(String companyPassword) {
-		this.companyPassword = companyPassword;
+		String superPassword=null;
+		try {
+			superPassword=MD5Util.md5Encode(companyPassword);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.companyPassword = superPassword;
 	}
 
 
@@ -168,16 +174,6 @@ public class Company {
 	}
 
 
-	public String getCompanyDetailImg() {
-		return companyDetailImg;
-	}
-
-
-	public void setCompanyDetailImg(String companyDetailImg) {
-		this.companyDetailImg = companyDetailImg;
-	}
-
-
 	public Integer getCompanyStatus() {
 		return companyStatus;
 	}
@@ -196,8 +192,7 @@ public class Company {
 				+ ", companyName=" + companyName + ", companySimpleName=" + companySimpleName + ", companyLogo="
 				+ companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
 				+ ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel + ", companyEmail="
-				+ companyEmail + ", companyAddress=" + companyAddress + ", companyDetailImg=" + companyDetailImg
-				+ ", companyStatus=" + companyStatus +"]";
+				+ companyEmail + ", companyAddress=" + companyAddress + ", companyStatus=" + companyStatus +"]";
 	}
 	
 }

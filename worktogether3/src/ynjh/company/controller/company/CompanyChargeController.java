@@ -28,10 +28,12 @@ public class CompanyChargeController {
 	
 	
 	//充值成功跳转
-	@RequestMapping("/company_charge/{companyId}")
-	public ModelAndView toCompanycharge(@PathVariable Integer companyId){
+	@RequestMapping("/companyCharge/{companyId}")
+	public ModelAndView toCompanycharge(@PathVariable Integer companyId,HttpSession session){
 		ModelAndView mv=new ModelAndView();
-		companyChargeService.findById(companyId);
+		CompanyCharge companyCharge=companyChargeService.findById(companyId);
+		session.setAttribute("companyCharge", companyCharge);
+		mv.setViewName("company/charge/company_charge");
 		return mv;
 	}
 	
@@ -40,7 +42,7 @@ public class CompanyChargeController {
 	@RequestMapping(value="/addMoney",method=RequestMethod.POST)
 	public ModelAndView addmoney(Double cmpChargeMoney,HttpSession session){
 		ModelAndView mv=new ModelAndView();
-		Integer companyId=((Company)session.getAttribute("company")).getId();
+		Integer companyId=((Company)session.getAttribute("user")).getId();
 		CompanyCharge companyCharge=new CompanyCharge();
 		companyCharge.setCompanyId(companyId);
 		companyCharge.setCmpChargeTime(new Timestamp(System.currentTimeMillis()));
@@ -54,14 +56,15 @@ public class CompanyChargeController {
 		
 		int result=companyChargeService.addMoney(companyCharge);
 		if(result>0){
-//			mv.addObject("operatorInfo", "充值成功");
-//			mv.addObject("toPage", "company/charge/company_charge");
-//			mv.addObject("companyCharge", companyCharge);
-		
-			mv.setViewName("rediect:../company/charge/company_charge/"+companyId);
+			mv.addObject("operatorInfo", "充值成功");
+			mv.addObject("toPage", "company/charge/companyCharge/"+companyId);
+			mv.addObject("companyCharge", companyCharge);
+			
+			mv.setViewName("company/info");
 		}else{
 			mv.addObject("operatorInfo", "充值失败");
-			mv.addObject("toPage", "company/charge/company_charge");
+			mv.addObject("toPage", "company/charge/companyCharge");
+			mv.setViewName("company/info");
 		}
 		
 		return mv;
@@ -103,17 +106,13 @@ public class CompanyChargeController {
 	
 	//显示充值记录
 	@RequestMapping(value="chargeRecord/{companyId}",method=RequestMethod.GET)
-	public ModelAndView chargeRecord(@PathVariable Integer companyId,Integer page){
+	public ModelAndView chargeRecord(@PathVariable Integer companyId){
 		ModelAndView mv=new ModelAndView("company/charge/charge_record");
-//		CompanyCharge companyRecord=new CompanyCharge();
-		Integer maxPage=companyChargeService.getMaxPage(companyId);
-		
-		List<CompanyCharge> companyRecords=companyChargeService.findAllById(companyId,page);
+//		CompanyCharge companyRecord=new CompanyCharge();	
+		List<CompanyCharge> companyRecords=companyChargeService.findAllById(companyId);
 //		companyRecord=companyChargeService.findAllById(companyId);
 		
 //		 companyRecord.getCmpChargeStatus(1);
-		mv.addObject("curPage", page);
-		mv.addObject("maxPage", maxPage);
 		mv.addObject("companyRecords",companyRecords);
 		
 		return mv;

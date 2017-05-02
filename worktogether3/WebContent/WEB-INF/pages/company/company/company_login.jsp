@@ -31,7 +31,9 @@
         		</div>
         		<button class="btn btn-lg btn-success btn-block" type="submit">立即登录</button>
         		<div id="inputagree">
-        			<a href="#">我已阅读并同意服务条款</a>
+        			<a href="#">我已阅读并同意服务条款</a><br/><br/><br/>
+        			
+        			<a href="company/company/add" class="text-rigeht">还没账号？注册</a>
         		</div>
       		</form>
     		</div>

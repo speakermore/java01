@@ -19,11 +19,8 @@ public class CompanyIntController {
 	
 	//跳转更改信息界面
 	@RequestMapping(value="/updateCompanyInt",method=RequestMethod.GET)
-	public ModelAndView updateCompanyInt(HttpSession session){
-		ModelAndView mv=new ModelAndView("company/company/update_companyInt");
-		CompanyIntroduction companyInt=(CompanyIntroduction)session.getAttribute("conpanyInt");
-		mv.addObject("companyInt",companyInt);
-		return mv;
+	public String updateCompanyInt(){
+		return "company/company/update_companyInt";
 	}
 	
 	
@@ -32,9 +29,7 @@ public class CompanyIntController {
 	public ModelAndView updateById(CompanyIntroduction companyInt,HttpSession session){
 		ModelAndView mv=new ModelAndView();
 		int result=-1;
-//		Company j=(Company) session.getAttribute("company");
-		
-		Integer companyId=((Company) session.getAttribute("company")).getId();
+		Integer companyId=((Company) session.getAttribute("user")).getId();
 
 		CompanyIntroduction a=companyIntService.findById(companyId);
 		companyInt.setCompanyId(companyId);
@@ -49,9 +44,9 @@ public class CompanyIntController {
 			mv.addObject("toPage", "company/company/findById/"+companyId);
 			mv.setViewName("company/info");
 		}else{
-			mv.addObject("operatorInfo", "修改用户资料成功");
+			mv.addObject("operatorInfo", "修改用户资料失败");
 			mv.addObject("toPage", "company/company/findById/"+companyId);
-			mv.setViewName("info");
+			mv.setViewName("company/info");
 		}
 		return mv;
 	}
@@ -61,10 +56,7 @@ public class CompanyIntController {
 	public ModelAndView companyIntShow(@PathVariable Integer companyId,HttpSession session){
 		ModelAndView mv=new ModelAndView("company/company/company_data");
 		CompanyIntroduction companyInt=companyIntService.findById(companyId);
-		Company company=(Company)session.getAttribute("company1");
 		session.setAttribute("companyInt", companyInt);
-		mv.addObject("companyInt", companyInt);
-		mv.addObject("company", company);
 		mv.setViewName("company/company/company_data");
 		return mv;
 	}

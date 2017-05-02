@@ -10,7 +10,7 @@ public interface CompanyChargeService {
 	//查询余额
 	public CompanyCharge findById(Integer CompanyId);
 	//查询账单
-	public List<CompanyCharge> findAllById(Integer CompanyId,Integer page);
+	public List<CompanyCharge> findAllById(Integer CompanyId);
 	//消费
 	public Integer consumeMoney(CompanyCharge chargeConsume);
 	//记录数

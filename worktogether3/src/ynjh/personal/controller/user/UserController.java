@@ -216,7 +216,7 @@ public class UserController {
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
 	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		user.setUserHeadImgPath(UploadFile.uploadFile(files, session));
+		user.setUserHeadImgPath(UploadFile.uploadFile("/WEB-INF/resources/img/upload/personal",new MultipartFile[]{files}, session)[0]);
 		int result = uService.updateUserOther(user);
 		if (result > 0) {
 			mv.addObject("user", user);
@@ -243,8 +243,8 @@ public class UserController {
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.POST)
 	public ModelAndView addUserReal(User user, MultipartFile fileface,MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		user.setUserIDImgFace(UploadFile.uploadFile(fileface, session));
-		user.setUserIDImgCon(UploadFile.uploadFile(filecon, session));
+		user.setUserIDImgFace(UploadFile.uploadFile("/WEB-INF/resources/img/upload/personal",new MultipartFile[]{fileface}, session)[0]);
+		user.setUserIDImgCon(UploadFile.uploadFile("/WEB-INF/resources/img/upload/personal",new MultipartFile[]{filecon}, session)[0]);
 		int result = uService.updateUserIDCord(user);
 		if (result > 0) {
 			mv.addObject("user", user);
@@ -377,7 +377,7 @@ public class UserController {
 	 *            验证码响应
 	 */
 	// 验证码字典
-	public static final String CHARs = "qqqq";
+	public static final String CHARs = "23456789qwertyupasdfghjkzxcvbnm";
 	private static Random random = new Random();
 	private int width = 90;
 	private int height = 40;

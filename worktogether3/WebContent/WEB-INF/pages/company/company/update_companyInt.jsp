@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/css/company/bootstrap.css"/>
 <title>修改资料</title>
@@ -19,7 +18,7 @@
 	<form action="company/company/updateInt" method="post">
 	公司简介：<input type="text" name="cmpIntroduction" value=${companyInt.cmpIntroduction } ><br/>
 	公司性质：<input type="text" name="cmpIntQuality" value=${companyInt.cmpIntQuality } ><br/>
-	公司规模：<select>
+	公司规模：<select  name="cmpIntPeopleNum">
 				<option value="1">20人以下</option>
 				<option value="2">50人</option>
 				<option value="3">80人</option>

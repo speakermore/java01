@@ -1,12 +1,9 @@
 package ynjh.personal.controller.resume;
 
-import java.util.Date;
 import java.util.List;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-
 import javax.annotation.Resource;
-import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.common.util.UploadFile;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -60,7 +56,8 @@ public class ResumeController {
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
-		resume.setResumeHeadImg(UploadFile.uploadFile(resumeFile, session));
+		
+		resume.setResumeHeadImg(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/peraonal", user.getUserLoginId()),new MultipartFile[]{resumeFile}, session)[0]);
 		int result = rService.addResume(resume);
 		if (result > 0) {
 			mv.addObject("resume", resume);
@@ -121,7 +118,7 @@ public class ResumeController {
 	 * 
 	 * ModelAndView
 	 */
-/*	@RequestMapping("/findAllResume")
+	@RequestMapping("/findAllResume")
 	public ModelAndView findAllResume(Integer toPage,Integer userId,HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
 		List<Resume> resumes = rService.selectResumeUserId(toPage,userId);
@@ -131,7 +128,7 @@ public class ResumeController {
 		mv.addObject("resumes", resumes);
 		session.setAttribute("resumes", resumes);
 		return mv;
-	}*/
+	}
 
 	/**
 	 * 查看简历详细信息 跳转预览简历
@@ -297,11 +294,11 @@ public class ResumeController {
 		education.setResumeType(1);
 		int result = rService.addEducation(education);
 		Resume resume = rService.selectResumeById(education.getResumeId());
-		mv.addObject("resume", resume);
-		mv.setViewName("personal/resume/personal_lookresume");
+		
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
-
+			mv.addObject("resume", resume);
+			mv.setViewName("personal/resume/personal_lookresume");
 		} else {
 			mv.addObject("operatorInfo", "添加失败");
 			mv.setViewName("personal/resume/personal_resume_education");
@@ -322,12 +319,10 @@ public class ResumeController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
-		Integer resumeId = (Integer) session.getAttribute("resumeId");
-		work.setResumeId(resumeId);
 		work.setUserId(user.getId());
 		work.setResumeType(1);
 		int result = rService.addWork(work);
-		Resume resume = rService.selectResumeById(resumeId);
+		Resume resume = rService.selectResumeById(work.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
 			mv.addObject("resume", resume);
@@ -352,12 +347,10 @@ public class ResumeController {
 			Project project) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
-		Integer resumeId = (Integer) session.getAttribute("resumeId");
 		project.setUserId(user.getId());
-		project.setResumeId(resumeId);
 		project.setResumeType(1);
 		int result = rService.addProject(project);
-		Resume resume = rService.selectResumeById(resumeId);
+		Resume resume = rService.selectResumeById(project.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
 			mv.addObject("resume", resume);

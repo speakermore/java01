@@ -18,12 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findById" parameterType="Integer" resultType="CompanyCharge">
 		select * from companycharge where companyId=#{companyId} order by cmpChargeTime desc limit 1
 	</select>
-	<select id="findAllById" resultType="CompanyCharge">
-	select * from companycharge where companyId=#{companyId}
-		<if test="page!=null">
-			limit #{page},5
-		</if>
-	
+	<select id="findAllById" parameterType="Integer" resultType="CompanyCharge">
+	select * from companycharge where companyId=#{companyId}	
 	</select>
 	<select id="getMaxRecordCount" parameterType="Integer" resultType="Integer">
 		select count(*) from comapnycharge where companyId=#{companyId}

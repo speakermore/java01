@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		companyLoginId,companyPassword,companyName,companySimpleName,companyLogo,companyLicenseImg,companyLicenseNo,companyCorporator,
 		companyTel,companyEmail,companyAddress,companyStatus) values (#{companyLoginId},#{companyPassword},#{companyName},#{companySimpleName},#{companyLogo},
 		#{companyLicenseImg},#{companyLicenseNo},#{companyCorporator},#{companyTel},#{companyEmail},
-		#{companyAddress},#{companyStatus})
+		#{companyAddress},1)
 	</insert> 
 	<insert id="addCompanyDetailImg">
 		insert into companydetailimg(companyId,companyDetailImg)values(#{companyId},#{companyDetailImg})
