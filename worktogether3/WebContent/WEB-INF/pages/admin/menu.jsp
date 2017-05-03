@@ -40,12 +40,13 @@
     		<li><a href="admin/findUser/${page}" class="contact"><span>禁用用户</span></a></li>
     		<li><a href="admin/adminLog" class="news"><span>管理员日志</span></a></li>
   			<li><a href="#" class="contact"><span>访问量统计</span></a></li>
+  			<li><a href="admin/addMessage" ><span>系统消息</span></a></li>
     	</ul>
     </div>
     <div class="nav-slide-o">
     	<ul>
     		<li><a href=""><span>热门类别</span></a></li>
-    		<li><a href="admin/"><span>热门文章</span></a></li>
+    		<li><a href="admin/findBestArticle"><span>热门文章</span></a></li>
     		<li><a href="admin/"><span>最佳企业</span></a></li>
     	</ul>
     </div>

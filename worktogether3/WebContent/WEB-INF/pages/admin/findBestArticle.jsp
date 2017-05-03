@@ -96,33 +96,29 @@ var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u752
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td><a href="findUserBestArticle.jsp">其实我懂你</a></td>
-			<td>1</td>
-			<td>1</td>
-			<td>哈哈</td>
-			<td>2017-04-11 14:52:05</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td><a>风原来是空气</a></td>
-			<td>2</td>
-			<td>2</td>
-			<td>哈哈</td>
-			<td>2017-04-12 14:52:05</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>3</td>
-			<td><a>你其实懂我</a></td>
-			<td>3</td>
-			<td>3</td>
-			<td>哈哈</td>
-			<td>2017-04-13 14:52:05</td>
-		</tr>
+		<%
+				List<Article> newsList = (List<Article>) request.getAttribute("article");
+				if (newsList != null) {
+					int i = 0;
+					for (Article art : newsList) {
+						i++;
+			%>
+			<tr <%if (i % 2 == 0) {%> class="admin-list-td-h2" <%}%>>
+				<td><%=art.getId()%></td>
+				<td><%=art.getArticleTitle()%></td>
+				<td><%=art.getArticleTime()%></td>
+				<td><%=art.getArticleContent()%></td>
+				<td><%=art.getArticleLikeNum()%></td>
+				<td><%=art.getArticleReadNum()%></td>
+				<td><%=art.getArticleLikeNum()%></td>
+				<td><%=art.getArticleReadNum()%></td>
+				<td><%=art.getArticleKey()%></td>
+				
+
+				<%
+					}
+					}
+				%>
 	</tbody>
 </table>    
       
@@ -130,7 +126,7 @@ var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u752
          <div class="clear"></div>
                 </div><div id="tab2" class="tab"><div class="floated-thumb">
 	<table class="table table-striped">
-	<tbody>
+	
 		
 		
 	
@@ -145,34 +141,30 @@ var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u752
 			<th>发表日期</th>
 		</tr>
 	</thead>
-	
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td><a href="findCompanyBestArticle.jsp">你好吗</a></td>
-			<td>1</td>
-			<td>1</td>
-			<td>哈哈</td>
-			<td>2017-04-11 14:52:05</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td><a>我是谁</a></td>
-			<td>2</td>
-			<td>2</td>
-			<td>哈哈</td>
-			<td>2017-04-12 14:52:05</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>3</td>
-			<td><a>他在哪</a></td>
-			<td>3</td>
-			<td>3</td>
-			<td>哈哈</td>
-			<td>2017-04-13 14:52:05</td>
-		</tr>
+	<tbody>
+		<%
+				List<Article> newsList1 = (List<Article>) request.getAttribute("article");
+				if (newsList != null) {
+					int i = 0;
+					for (Article art : newsList1) {
+						i++;
+			%>
+			<tr <%if (i % 2 == 0) {%> class="admin-list-td-h2" <%}%>>
+				<td><%=art.getId()%></td>
+				<td><%=art.getArticleTitle()%></td>
+				<td><%=art.getArticleTime()%></td>
+				<td><%=art.getArticleContent()%></td>
+				<td><%=art.getArticleLikeNum()%></td>
+				<td><%=art.getArticleReadNum()%></td>
+				<td><%=art.getArticleLikeNum()%></td>
+				<td><%=art.getArticleReadNum()%></td>
+				<td><%=art.getArticleKey()%></td>
+				
+
+				<%
+					}
+					}
+				%>
 	</tbody>	
 </table>  
 </div>

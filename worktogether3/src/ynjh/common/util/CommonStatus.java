@@ -11,4 +11,6 @@ public class CommonStatus {
 	public static final String[] AUDIT_STATUS={"","待审核","审核通过","审核不通过","删除"};
 	//用户类型
 	public static final String[] USER_TYPE={"","企业","个人"};
+	//婚姻状况
+	public static final String[] MARRIAGE={"未婚","已婚"};
 }

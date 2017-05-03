@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.CompanyVisitCount;
+import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
@@ -17,9 +18,12 @@ import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
 
 
 
@@ -72,22 +76,15 @@ public interface AdminService {
 	public Offer findAuditOfferById(Integer id);
 	//查询审核招聘信息ById
 	public List<CompanyRecruit> findAuditRecruitmentById(Integer id);
+	//查询工作经历
+	public List<Work> findResumeWork(String resumeId);
+	//查询项目经历
+	public List<Project> findResumeProject(String resumeId);
+	//查询培训经历
+	public List<Education> findResumeEducation(String resumeId);
 	
-	//访问管理员日志,无参查询全部
-	public List<AdminLog> findAdminLogAll(Integer page);
-	
-	//访问管理员日志,时间段查询
-	public List<AdminLog> findAdminLogByTime(String beginTime,String endTime,Integer page);
-	
-	//访问管理员日志,操作人ID&时间段查询
-	public List<AdminLog> findAdminLogByTimeAndId(Integer userLoginId,String beginTime,String endTime,Integer page);
-	
-	//访问管理员日志,操作人ID&操作类型查询
-	public List<AdminLog> findAdminLogByIdAndDo(Integer userLoginId,Integer adminDo,Integer page);
-	
-	//访问管理员日志,操作类型&时间段查询
-	public List<AdminLog> findAdminLogByTimeAndDo(String beginTime,String endTime,Integer adminDo,Integer page);
-	
+
+	public List<AdminLog> findAdminLogAll(Integer page);//访问管理员日志,无参查询全部
 	//访问管理员日志,全部类型查询
 	public List<AdminLog> findAdminLogByTimeAndDoAndId(Integer adminDo,Integer userLoginId,String beginTime,String endTime,Integer page);
 	
@@ -162,6 +159,10 @@ public interface AdminService {
     public List<Article> find5Articles();
     //5条个人企业互评审核
     public List<Discuss> find5Discuss();
+    
+    //系统消息推送
+    public Integer addMessage(SystemMessage systemMessage);
+
     
 }	
 

@@ -7,16 +7,21 @@ import org.apache.ibatis.annotations.Param;
 
 import ynjh.company.entity.Company;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
+
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
+import ynjh.admin.entity.SystemMessage;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 /**
  * Admin功能的数据访问层
@@ -330,4 +335,61 @@ public interface AdminMapper {
      * @author 朱吉
      */
     public List<Discuss> find5Discuss();
+    
+    /**
+     * 系统消息
+     * @author 曾瑞
+     */
+    public Integer addMessage(SystemMessage systemMessage);
+    
+    /**
+     * 查询简历工作经历
+     * @author 朱吉
+     * @param resumeId
+     * @return
+     */
+    public List<Work> findResumeWork(String resumeId);
+    
+    /**
+     * 查询简历项目经验
+     * @author 朱吉
+     * @param resumeId
+     * @return
+     */
+    public List<Project> findResumeProject(String resumeId);
+    
+    /**
+     * 查找培训经历
+     * @author 朱吉
+     * @param resumeId
+     * @return
+     */
+    public List<Education> findResumeEducation(String resumeId);
+    
+    /**
+     * 审核简历的工作经历
+     * @author 朱吉
+     * @param resumeId 简历编号
+     * @param resumeType 审核结果
+     * @return
+     */
+    public Integer auditingWork(@Param("resumeId")String resumeId,@Param("resumeType")Integer resumeType);
+    
+    /**
+     * 审核简历的项目经历
+     * @author 朱吉
+     * @param resumeId 简历编号
+     * @param resumeType 审核结果
+     * @return
+     */
+    public Integer auditingProject(@Param("resumeId")String resumeId,@Param("resumeType")Integer resumeType);
+    
+    /**
+     * 审核简历的培训经历
+     * @author 朱吉
+     * @param resumeId 简历编号
+     * @param resumeType 审核结果
+     * @return
+     */
+    public Integer auditingEducation(@Param("resumeId")String resumeId,@Param("resumeType")Integer resumeType);
 }

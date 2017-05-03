@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.CompanyVisitCount;
+import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
 import ynjh.common.util.MD5Util;
@@ -36,9 +38,12 @@ import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
 
 /**
  * admin功能Controller
@@ -205,208 +210,52 @@ public class AdminController {
 
 	/**
 	 * 查询管理员日志-查询类型选择页面
-	 * 
 	 * @author 张宇
 	 *
 	 * @return
 	 */
 	@RequestMapping("/adminLog")
-	public ModelAndView selectAdminLog() {
-		ModelAndView mv = new ModelAndView("admin/adminLog");
+	public ModelAndView selectAdminLog(){
+		ModelAndView mv=new ModelAndView("admin/adminLog");
 		return mv;
 	}
-
 	/**
-	 * 访问管理员日志,无参查询全部
-	 * 
+	 * 访问管理员日志
 	 * @author 张宇
 	 * @return
 	 */
-	@RequestMapping(value = "/adminLogAll", method = RequestMethod.GET) //
-	public ModelAndView findAdminLogAll() {
-		ModelAndView mv = new ModelAndView("admin/adminLogAll");
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,无参查询全部
-	 * 
-	 * @author 张宇
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogAll", method = RequestMethod.POST)
-	public ModelAndView findAdminLogAll(Integer page) {
-		List<AdminLog> adminLogs = adminService.findAdminLogAll(page);
-		ModelAndView mv = new ModelAndView("admin/adminLogList");
-		mv.addObject("adminLogs", adminLogs);
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,时间段查询
-	 * 
-	 * @author 张宇
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTime", method = RequestMethod.GET)
-	public ModelAndView findAdminLogByTime() {
-		ModelAndView mv = new ModelAndView("admin/adminLogByTime");
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,时间段查询
-	 * 
-	 * @author 张宇
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTime", method = RequestMethod.POST)
-	public ModelAndView findAdminLogByTime(String beginTime, String endTime, Integer page) {
-		List<AdminLog> adminLogs = adminService.findAdminLogByTime(beginTime, endTime, page);
-		ModelAndView mv = new ModelAndView("admin/adminLogList");
-		mv.addObject("adminLogs", adminLogs);
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,操作人ID&时间段查询
-	 * 
-	 * @author 张宇
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTimeAndId", method = RequestMethod.GET)
-	public ModelAndView findAdminLogByTimeAndId() {
-		ModelAndView mv = new ModelAndView("admin/adminLogByTimeAndId");
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,操作人ID&时间段查询
-	 * 
-	 * @author 张宇
-	 * @param userLoginId
-	 *            操作人id
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTimeAndId", method = RequestMethod.POST)
-	public ModelAndView findAdminLogByTimeAndId(Integer userLoginId, String beginTime, String endTime, Integer page) {
-		List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndId(userLoginId, beginTime, endTime, page);
-		ModelAndView mv = new ModelAndView("admin/adminLogList");
-		mv.addObject("adminLogs", adminLogs);
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,操作人ID&操作类型查询
-	 * 
-	 * @author 张宇
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByIdAndDo", method = RequestMethod.GET)
-	public ModelAndView findAdminLogByIdAndDo() {
-		ModelAndView mv = new ModelAndView("admin/adminLogByIdAndDo");
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,操作人ID&操作类型查询
-	 * 
-	 * @author 张宇
-	 * @param userLoginId
-	 *            操作管理员id
-	 * @param adminDo
-	 *            操作类型
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByIdAndDo", method = RequestMethod.POST)
-	public ModelAndView findAdminLogByIdAndDo(Integer userLoginId, Integer adminDo, Integer page) {
-		List<AdminLog> adminLogs = adminService.findAdminLogByIdAndDo(userLoginId, adminDo, page);
-		ModelAndView mv = new ModelAndView("admin/adminLogList");
-		mv.addObject("adminLogs", adminLogs);
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,操作类型&时间段查询
-	 * 
-	 * @author 张宇
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTimeAndDo", method = RequestMethod.GET)
-	public ModelAndView findAdminLogByTimeAndDo() {
-		ModelAndView mv = new ModelAndView("admin/adminLogByTimeAndDo");
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,操作类型&时间段查询
-	 * 
-	 * @author 张宇
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param adminDo
-	 *            操作类型
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTimeAndDo", method = RequestMethod.POST)
-	public ModelAndView findAdminLogByTimeAndDo(String beginTime, String endTime, Integer adminDo, Integer page) {
-		List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndDo(beginTime, endTime, adminDo, page);
-		ModelAndView mv = new ModelAndView("admin/adminLogList");
-		mv.addObject("adminLogs", adminLogs);
-		return mv;
-	}
-
-	/**
-	 * 访问管理员日志,全部类型查询
-	 * 
-	 * @author 张宇
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param adminDo
-	 *            操作类型
-	 * @param userLoginId
-	 *            操作管理员id
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@RequestMapping(value = "/adminLogByTimeAndDoAndId", method = RequestMethod.GET)
-	public ModelAndView findAdminLogByTimeAndDoAndId() {
-		ModelAndView mv = new ModelAndView("admin/adminLogByTimeAndDoAndId");
-		return mv;
-	}
-
-	@RequestMapping(value = "/adminLogByTimeAndDoAndId", method = RequestMethod.POST) // 访问管理员日志,全部类型查询
-	public ModelAndView findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime,
-			String endTime, Integer page) {
-		List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginTime, endTime,
-				page);
-		ModelAndView mv = new ModelAndView("admin/adminLogList");
-		mv.addObject("adminLogs", adminLogs);
-		return mv;
-	}
+			@RequestMapping(value="/adminLogAllList",method=RequestMethod.GET) // 
+			public ModelAndView findAdminLogAll() {					
+				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				return mv;
+			}
+			
+			/**
+			 * 访问管理员日志
+			 * @author 张宇
+			 * @param page 分页条数
+			 * @return
+			 */
+			@RequestMapping(value="/adminLogAllList",method=RequestMethod.POST) 
+			public ModelAndView findAdminLogAll(Integer page) {
+				List<AdminLog> adminLogs = adminService.findAdminLogAll(page);
+				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				mv.addObject("adminLogs", adminLogs);
+				return mv;
+			}
+			
+			@RequestMapping(value="/adminLog",method=RequestMethod.GET) // 访问管理员日志
+			public ModelAndView findAdminLogByTimeAndDoAndId() {
+				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				return mv;
+			}
+			@RequestMapping(value="/adminLog",method=RequestMethod.POST) // 访问管理员日志
+			public ModelAndView findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime, String endTime,Integer page) {
+				List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginTime, endTime,page);
+				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				mv.addObject("adminLogs", adminLogs);
+				return mv;
+			}
 
 	/**
 	 * 热门文章查询
@@ -695,16 +544,15 @@ public class AdminController {
 	 * @Parameters: AdminController
 	 * @Return: ModelAndView
 	 */
-	@RequestMapping("/auditResume")
-	public ModelAndView auditResume(Integer id, Integer resumeStatusThree) {
+	@RequestMapping("/auditResume/{id}/{resumeStatusThree}")
+	public ModelAndView auditResume(@PathVariable Integer id,@PathVariable Integer resumeStatusThree) {
 		int result = adminService.auditResume(id, resumeStatusThree);
 		ModelAndView mv = new ModelAndView();
-		if (result > 0) {
-			mv.addObject("", "审核成功");
+		if (result >0) {
 			mv.addObject("result", result);
 			mv.setViewName("admin/auditResume");
 		} else {
-			mv.setViewName("admin/login");
+			mv.setViewName("admin/auditResume");
 		}
 		return mv;
 	}
@@ -1270,6 +1118,96 @@ public class AdminController {
 		mv.addObject("bestCompanyList", bestCompanyList);
 		return mv;
 
+	}
+	/**
+	 * 
+	   * @Name: messagePush
+	   * @Description: @param id 消息ID
+	   * @Description: @param sysmContent 消息内容
+	   * @Description: @param sysmCreateTime 时间
+	   * @Description: @param systmScope 工作范围
+	   * @Description: @return
+	   * @Author: 曾瑞（作者）
+	   * @Version: V1.00 （版本号）
+	   * @Create Date: 2017年4月26日上午11:09:17
+	   * @Parameters: AdminController
+	   * @Return: ModelAndView
+	 */
+	@RequestMapping(value="/messagePush",method=RequestMethod.POST)
+	public ModelAndView messagePush(SystemMessage systemMessage,HttpSession session){
+		Admin admin=(Admin)session.getAttribute("admin");
+		systemMessage.setAdminId(admin.getId());
+		systemMessage.setSysmCreateTime(new Timestamp(System.currentTimeMillis()));
+		systemMessage.setSysmContent(systemMessage.getSysmContent().trim());
+		int result= adminService.addMessage(systemMessage);
+		ModelAndView mv=new ModelAndView();
+		if (result>0) {
+			mv.addObject("result", result);
+			mv.setViewName("admin/auditResume");
+		}else{
+			mv.addObject("result",result);
+			mv.setViewName("admin/auditResume");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 
+	   * @Name: addMessage
+	   * @Description: @return 消息页面跳转
+	   * @Author: 曾瑞（作者）
+	   * @Version: V1.00 （版本号）
+	   * @Create Date: 2017年4月26日下午2:01:08
+	   * @Parameters: AdminController
+	   * @Return: String
+	 */
+	@RequestMapping("/addMessage")
+	public String addMessage(){
+		return "admin/adminAddMessage";
+	}
+	/**
+	 * 审核简历查找工作经历
+	 * @author 朱吉
+	 * @param resumeId 简历表id
+	 * @return
+	 */
+	@RequestMapping("/work")
+	public ModelAndView showWork(String resumeId){
+		List<Work> works=adminService.findResumeWork(resumeId);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("works", works);
+		mv.setViewName("admin/auditing/auditingResume");
+		return mv;
+	}
+	
+	/**
+	 * 查找项目经历
+	 * @author 朱吉
+	 * @param resumeId 简历id
+	 * @return
+	 */
+	@RequestMapping("/project")
+	public ModelAndView showProject(String resumeId){
+		List<Project> projects=adminService.findResumeProject(resumeId);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("projects", projects);
+		mv.setViewName("admin/auditing/auditingResume");
+		return mv;	
+	}
+	
+	/**
+	 * 查找简历培训经历
+	 * @author 朱吉
+	 * @param resumeId
+	 * @return
+	 */
+	@RequestMapping("/edu")
+	public ModelAndView showEducation(String resumeId){
+		List<Education> edus=adminService.findResumeEducation(resumeId);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("edus",edus);
+		mv.setViewName("admin/auditing/auditingResume");
+		return mv;
 	}
 
 	/**

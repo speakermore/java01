@@ -18,6 +18,7 @@ import ynjh.admin.dao.uservisitcount.UserVisitCountMapper;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.CompanyVisitCount;
+import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
 import ynjh.company.entity.Company;
@@ -26,9 +27,12 @@ import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
+import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Message;
+import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.Work;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -53,8 +57,21 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public Integer auditResume(Integer id, Integer status) {
-		 
-		return adminMapper.auditResume(id, status);
+		String resumeId;
+		if(id!=null&&status!=null){
+			resumeId=id+"";
+			try{
+				adminMapper.auditingWork(resumeId, status);
+				adminMapper.auditingProject(resumeId, status);
+				adminMapper.auditingEducation(resumeId, status);
+				return adminMapper.auditResume(id, status);
+			}catch(Exception e){
+				e.printStackTrace();
+				return null; 
+			}
+		}
+		return null;
+		
 	}
 
 	/**
@@ -252,178 +269,96 @@ public class AdminServiceImpl implements AdminService {
 	
 	/**
 	 * 
-	 * 访问管理员日志,无参查询全部
+	 * 访问管理员日志
 	 * @author 张宇
 	 * @param page
 	 *            分页条数
 	 * @return
 	 */
+
 	@Override
 	public List<AdminLog> findAdminLogAll(Integer page) {
-		 
+		// TODO Auto-generated method stub
 		return adminLogMapper.findAdminLogAll(page);
 	}
 	
-	/**
-	 * 访问管理员日志,时间段查询
-	 * 
-	 * @author 张宇
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@Override
-	public List<AdminLog> findAdminLogByTime(String beginTime, String endTime,Integer page) {
-		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date beginDate=null;
-		try {
-			beginDate = sdf.parse(beginTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Date endDate=null;
-		try {
-			endDate = sdf.parse(endTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		 
-		return adminLogMapper.findAdminLogByTime(beginDate, endDate,page);
-	}
-
-	/**
-	 * 访问管理员日志,操作人ID&时间段查询
-	 * 
-	 * @author 张宇
-	 * @param userLoginId
-	 *            操作人id
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@Override
-	public List<AdminLog> findAdminLogByTimeAndId(Integer userLoginId, String beginTime, String endTime,Integer page) {
-		
-		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date beginDate=null;
-		try {
-			beginDate = sdf.parse(beginTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Date endDate=null;
-		try {
-			endDate = sdf.parse(endTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
-		return adminLogMapper.findAdminLogByTimeAndId(userLoginId, beginDate, endDate,page);
-	}
-
-	/**
-	 * 访问管理员日志,操作人ID&操作类型查询
-	 * 
-	 * @author 张宇
-	 * @param userLoginId
-	 *            操作管理员id
-	 * @param adminDo
-	 *            操作类型
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@Override
-	public List<AdminLog> findAdminLogByIdAndDo(Integer userLoginId, Integer adminDo,Integer page) {
-		 
-		return adminLogMapper.findAdminLogByIdAndDo(userLoginId, adminDo,page);
-	}
-
-	/**
-	 * 访问管理员日志,操作类型&时间段查询
-	 * 
-	 * @author 张宇
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param adminDo
-	 *            操作类型
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
-	@Override
-	public List<AdminLog> findAdminLogByTimeAndDo(String beginTime, String endTime, Integer adminDo,Integer page) {
-		 
-		
-		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date beginDate=null;
-		try {
-			beginDate = sdf.parse(beginTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Date endDate=null;
-		try {
-			endDate = sdf.parse(endTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return adminLogMapper.findAdminLogByTimeAndDo(beginDate, endDate, adminDo,page);
-	}
-
-	/**
-	 * 访问管理员日志,全部类型查询
-	 * @author 张宇
-	 * @param beginTime
-	 *            起始时间
-	 * @param endTime
-	 *            结束时间
-	 * @param adminDo
-	 *            操作类型
-	 * @param userLoginId
-	 *            操作管理员id
-	 * @param page
-	 *            分页条数
-	 * @return
-	 */
 	@Override
 	public List<AdminLog> findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime,
-			String endTime,Integer page) {	
-		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date beginDate=null;
-		try {
-			beginDate = sdf.parse(beginTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String endTime,Integer page) {
+		// TODO Auto-generated method stub
+		if((adminDo==null)&&userLoginId==null){
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date beginDate=null;
+			try {
+				beginDate = sdf.parse(beginTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Date endDate=null;
+			try {
+				endDate = sdf.parse(endTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return adminLogMapper.findAdminLogByTime(beginDate, endDate, page);
+		}else if((beginTime==null)&&endTime==null){
+			
+			return adminLogMapper.findAdminLogByIdAndDo(userLoginId, adminDo, page);
+		}else if(adminDo==null){
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date beginDate=null;
+			try {
+				beginDate = sdf.parse(beginTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Date endDate=null;
+			try {
+				endDate = sdf.parse(endTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return adminLogMapper.findAdminLogByTimeAndId(userLoginId, beginDate, endDate, page);
+		}else if(userLoginId==null){
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date beginDate=null;
+			try {
+				beginDate = sdf.parse(beginTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Date endDate=null;
+			try {
+				endDate = sdf.parse(endTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return adminLogMapper.findAdminLogByTimeAndDo(beginDate, endDate, adminDo, page);
+		}else{
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date beginDate=null;
+			try {
+				beginDate = sdf.parse(beginTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Date endDate=null;
+			try {
+				endDate = sdf.parse(endTime);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return adminLogMapper.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginDate, endDate, page);
 		}
-		Date endDate=null;
-		try {
-			endDate = sdf.parse(endTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return adminLogMapper.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginDate, endDate,page);
 	}
 
 	/** 
@@ -864,6 +799,54 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminMapper.find5Discuss();
 	}
+
+	@Override
+	public Integer addMessage(SystemMessage systemMessage) {
+		
+		return adminMapper.addMessage(systemMessage);
+	}
+	
+	/**
+	 * 查询简历的工作信息
+	 * @author 朱吉
+	 * @param resumeId 简历编号
+	 */
+	@Override
+	public List<Work> findResumeWork(String resumeId) {
+		if(resumeId!=null||!(resumeId.equals(""))){
+			return adminMapper.findResumeWork(resumeId);
+		}else{
+			return null;
+		}
+		
+	}
+
+	/**
+	 * 查找简历的项目经历
+	 * @author 朱吉
+	 * @param resumeId 简历id
+	 */
+	@Override
+	public List<Project> findResumeProject(String resumeId) {
+		if(resumeId!=null||!(resumeId.equals(""))){
+			return adminMapper.findResumeProject(resumeId);
+		}else{
+			return null;
+		}	
+	}
+
+	@Override
+	public List<Education> findResumeEducation(String resumeId) {
+		if(resumeId!=null||!(resumeId.equals(""))){
+			return adminMapper.findResumeEducation(resumeId);
+		}else{
+			return null;
+		}
+	}
+	
+	
+
+	
 
 	
 	

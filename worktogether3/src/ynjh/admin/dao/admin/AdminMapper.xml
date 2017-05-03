@@ -7,6 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="messagePushArticle" >	<!-- 消息推送 -->
 		insert into message(userId,resendId,messageContent,messageSendTime,messageResendStatus,messageSendStatus,messageStatus) values(#{userId},#{resendId},#{messageContent},#{messageSendTime},#{messageResendStatus},2,3) 
 	</insert>
+	<!-- 新增消息内容 -->
+	<insert id="addMessage" parameterType="SystemMessage">	
+		insert into systemMessage(sysmContent,sysmCreateTime,sysmScope,adminId) values(#{sysmContent},#{sysmCreateTime},#{sysmScope},#{adminId}) 
+	</insert>
 	<!--禁用普通用户  -->
 	<update id="disableUser">
 		update user set userStatus=#{userStatus} where userId=#{userId}
@@ -58,6 +62,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="maIntegerainAdmin" parameterType="Admin"><!-- 信息维护改 -->
 		update admin set adminName=#{adminEmail},adminTel=#{adminTel},adminEmail=#{adminEmail} where id=#{id}
+	</update>
+	<!-- 审核简历工作经历 -->
+	<update id="auditingWork">
+		update work set resumeType=#{resumeType} where resumeId=#{resumeId}
+	</update>
+	<!-- 审核简历项目经历 -->
+	<update id="auditingProject">
+		update project set resumeType=#{resumeType} where resumeId=#{resumeId}
+	</update>
+	<!-- 审核简历培训经历 -->
+	<update id="auditingEducation">
+		update education set resumeType=#{resumeType} where resumeId=#{resumeId}
 	</update>
 	
 	<!--查询普通用户状态  -->
@@ -196,5 +212,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where d.discussStatus=1 and d.discussUsersId=cd.id and ((case when  d.discussSendType=2 then d.discussBySendId=u.id end) or (case when d.discussSendType=1 then c.id=d.discussBySendId end))
 		group by d.id
         order by d.discussStatus,discussTime desc limit 5
+	</select>
+	<!-- 查询工作经历 -->
+	<select id="findResumeWork" parameterType="String" resultType="Work">
+		select * from work where resumeId=#{resumeId} order by workBeginTime
+	</select>
+	<!-- 查询项目经验 -->
+	<select id="findResumeProject" parameterType="String" resultType="Project">
+		select * from project where resumeId=#{resumeId} order by projectBeginTime
+	</select>
+	<!-- 查询培训经历 -->
+	<select id="findResumeEducation" parameterType="String" resultType="Education">
+		select * from education where resumeId=#{resumeId} order by educationBeginTime
 	</select>
 </mapper>
