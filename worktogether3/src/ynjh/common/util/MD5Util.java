@@ -29,6 +29,8 @@ public class MD5Util {
         }
         return hexValue.toString();
     }
-
+    public static void main(String[] args) throws Exception{
+    		System.out.println(MD5Util.md5Encode("admin"));
+    }
     
 }  

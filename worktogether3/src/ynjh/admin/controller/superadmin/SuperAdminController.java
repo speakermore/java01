@@ -99,7 +99,7 @@ public class SuperAdminController {
 	   * @Parameters: SuperAdminController
 	   * @Return: String
 	 */
-	@RequestMapping(value="superAdminAddUser",method=RequestMethod.GET)
+	@RequestMapping(value="/superAdminAddUser",method=RequestMethod.GET)
 	public String superAdminAddUser(){
 		return "superadmin/superAdminAddUser";
 	}

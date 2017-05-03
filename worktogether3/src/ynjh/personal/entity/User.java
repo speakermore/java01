@@ -92,14 +92,11 @@ public class User implements Serializable{
 	}
 
 	public void setUserPassword(String userPassword) {
-		MD5Util md5=new MD5Util();
-		String pass=null;
 		try {
-			pass=md5.md5Encode(userPassword);
+			this.userPassword=MD5Util.md5Encode(userPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		this.userPassword = pass;
+		}	
 	}
 
 	public String getUserName() {

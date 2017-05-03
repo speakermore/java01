@@ -21,7 +21,7 @@ public class AuditDiscuss implements Serializable {
 		// 评论状态1:待审 2：正常 3：审核不通过 4：隐藏
 		private Integer discussStatus;
 		// 1：企业id 2：个人用户id
-		private Integer discussUsersType;
+		private Integer discussSendType;
 		//被发送者id
 		private Integer discussBySendId;
 		//被评价用户姓名
@@ -34,7 +34,7 @@ public class AuditDiscuss implements Serializable {
 			super();
 		}
 		public AuditDiscuss(Integer discussUsersId, String discussContent, Integer discussLevel, Timestamp discussTime,
-				Integer discussStatus, Integer discussUsersType, Integer discussBySendId, String userName,
+				Integer discussStatus, Integer discussSendType, Integer discussBySendId, String userName,
 				String companyName) {
 			super();
 			this.discussUsersId = discussUsersId;
@@ -42,7 +42,7 @@ public class AuditDiscuss implements Serializable {
 			this.discussLevel = discussLevel;
 			this.discussTime = discussTime;
 			this.discussStatus = discussStatus;
-			this.discussUsersType = discussUsersType;
+			this.discussSendType = discussSendType;
 			this.discussBySendId = discussBySendId;
 			this.userName = userName;
 			this.companyName = companyName;
@@ -83,11 +83,12 @@ public class AuditDiscuss implements Serializable {
 		public void setDiscussStatus(Integer discussStatus) {
 			this.discussStatus = discussStatus;
 		}
-		public Integer getDiscussUsersType() {
-			return discussUsersType;
+		
+		public Integer getDiscussSendType() {
+			return discussSendType;
 		}
-		public void setDiscussUsersType(Integer discussUsersType) {
-			this.discussUsersType = discussUsersType;
+		public void setDiscussSendType(Integer discussSendType) {
+			this.discussSendType = discussSendType;
 		}
 		public Integer getDiscussBySendId() {
 			return discussBySendId;
@@ -119,7 +120,7 @@ public class AuditDiscuss implements Serializable {
 		public String toString() {
 			return "AuditDiscuss [id=" + id + ",discussUserName"+discussUserName+", discussUsersId=" + discussUsersId + ", discussContent="
 					+ discussContent + ", discussLevel=" + discussLevel + ", discussTime=" + discussTime
-					+ ", discussStatus=" + discussStatus + ", discussUsersType=" + discussUsersType
+					+ ", discussStatus=" + discussStatus + ", discussSendType=" + discussSendType
 					+ ", discussBySendId=" + discussBySendId + ", userName=" + userName + ", companyName=" + companyName
 					+ "]";
 		}

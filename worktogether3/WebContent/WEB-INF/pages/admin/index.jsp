@@ -2,6 +2,7 @@
 	import="ynjh.common.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page autoFlush="true" buffer="1024kb"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -147,10 +148,10 @@
 
 										<tr>
 											<td>${disc.discussUserName}</td>
-											<c:if test="${disc.discussUsersType==2 }">
+											<c:if test="${disc.discussSendType==2 }">
 												<td>${disc.userName}</td>
 											</c:if>
-											<c:if test="${disc.discussUsersType==1 }">
+											<c:if test="${disc.discussSendType==1 }">
 												<td>${disc.companyName}</td>
 											</c:if>
 											<td>${disc.discussContent}</td>

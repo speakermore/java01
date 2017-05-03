@@ -113,9 +113,6 @@
 								min : 6,
 								max : 50,
 								message : '用户名长度必须在6到50位之间'
-							},
-							emailAddress : {
-								message : '邮箱地址格式有误'
 							}
 						}
 					},
