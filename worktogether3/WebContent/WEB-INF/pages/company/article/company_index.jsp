@@ -28,7 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet" />
 	<link href="css/lrtk.css" rel="stylesheet" type="text/css" />
-    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <style type="text/css">
     	textarea {
 			resize:none;
@@ -38,84 +43,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			border: solid 1px #ccc;
 			box-sizing: border-box; 
 		}
-		.thumbnail>img{
-			 height: 100px;
-			 width: 200px;
-		}
     </style>
   </head>
   
   <body>
   	<%@include file="/WEB-INF/pages/nav.jsp" %>
 	<div class="container">
-		<div class="col-sm-9 column wt-hby-left" style="border-right: 2px solid #f8f8f8;">
-			<div class="row clearfix">
+		<div class="col-sm-9 column wt-hby-left">
+			<div class="row clearfix"  style="border-right: 2px solid #f8f8f8;">
 				<div class="col-sm-12 column">
 					<div class="row clearfix">
 						<div class="col-sm-10 column">
-							<div class="col-sm-5 column">
-								<h2>${user.companySimpleName }</h2>
-							</div>
-							<div class="col-sm-5 column">
-								<br />
-								<div class="col-sm-12">
-									<img src="img/icon_star_2.gif" />
-									<img src="img/icon_star_2.gif" />
-									<img src="img/icon_star_2.gif" />
-									<img src="img/icon_star_2.gif" />
-									<img src="img/icon_star_1.gif" />
-								</div>
-								<a class="btn" href="company/company/findById/${user.id}">更多详细资料 »</a>
-							</div>
-						</div>
-						<div class="col-sm-10 column">
+							<h2>企业简介</h2>
 							<p class="wt-hby-companyInt">
 								这里是相关的企业简单的简介,2017年2月23日上午，习近平总书记从中南海出发，驱车100多公里，专程到河北省安新县实地察看规划新区核心区概貌。在大王镇小王营村，总书记走进一片开阔地，极目远眺。这里就是规划中的雄安新区起步区的核心地块。 在展开的一张规划图前，习近平仔细察看区位、规划状况，详细了解人口搬迁安置、区域内的地质水文条件等情况......
 							</p>
+							<a class="btn" href="company/company/findById/${company.id }">查看公司详细资料 »</a>
+							<a class="btn" href="offer/offer">发送offer »</a>
+							
 						</div>
 					</div>
-					<div class="row">
-					    <div class="col-sm-6 col-md-3">
-					        <a title="通用的占位符缩略图" href="javascript:void()" class="thumbnail">
-					            <img src="img/1479175334419.jpg"
-					                 alt="通用的占位符缩略图" >
-					        </a>
-					    </div>
-					    <div class="col-sm-6 col-md-3">
-					        <a href="javascript:void()" class="thumbnail">
-					            <img src="img/1479176025323.jpg"
-					                 alt="通用的占位符缩略图">
-					        </a>
-					    </div>
-					    <div class="col-sm-6 col-md-3">
-					        <a href="javascript:void()" class="thumbnail">
-					            <img src="img/1479176138497.jpg"
-					                 alt="通用的占位符缩略图">
-					        </a>
-					    </div>
-					    <div class="col-sm-6 col-md-3">
-					        <a href="javascript:void()" class="thumbnail">
-					            <img src="img/1479176279291.jpg"
-					                 alt="通用的占位符缩略图">
-					        </a>
-					    </div>
-					</div>
-										
-					
+					<br />
+					<ul class="nav nav-pills">
+						<li>
+							<a href="#"><span class="badge pull-right">16</span>信息</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void()">其它操作<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="company/charge/charge">充值</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="company/artanddis/article/charge">发表文章</a>
+								</li>
+							</ul>
+						</li>	
+					</ul>
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
 					  		<div class="panel-heading">
-					   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">企业动态</a></h4>
+					   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">企业文章内容</a></h4>
 					  		</div>
 					  		<div id="collapseOne" class="panel-collapse collapse in">
 					   			<div class="panel-body">
 									<table class="table wt-hby-article">
 										<thead>
 											<tr>
-												<th>每日动态</th>
+												<th>文章标题</th>
 												<th>发表日期</th>
-												<th><i class="glyphicon glyphicon-thumbs-up"></i></th>
-												<th><i class="glyphicon glyphicon-user"></i></th>
+												<th>点赞数</th>
+												<th>阅读数</th>
+												<th>编辑</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -128,6 +109,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   									<td>${art.articleTime }</td>
 				   									<td>${art.articleLikeNum }</td>
 				   									<td>${art.articleReadNum }</td>
+				   									<td>
+										   				<c:if test="${art.usersId==company.id }">
+										   					<a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_edit"><i class="glyphicon glyphicon-edit"></i></a>
+										   				</c:if>
+				   									</td>
+				   									<td>
+										   				<c:if test="${art.usersId==company.id }">
+										   					<a href="company/artanddis/article/delete?id=${art.id }"><i class="glyphicon glyphicon-trash"></i></a>
+										   				</c:if>
+				   									</td>
 				   								</tr>
 				   							</c:forEach>
 										</tbody>
@@ -153,28 +144,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					 	<div class="panel panel-default">
 					  		<div class="panel-heading">
-					   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseTwo">评价企业内容</a></h4>
+					   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseTwo">评论企业内容</a></h4>
 					  		</div>
 					  		<div id="collapseTwo" class="panel-collapse collapse in">
 					   			<div class="panel-body">
-					   				
-										<c:if test="${discusses==null }">
+					   				<div>
+										<c:if test="${discuss==null }">
 			  								<jsp:forward page="/company/artanddis/discuss/finddiscuss/1"></jsp:forward>
 			  							</c:if>
-			  							<ol>
-											<c:forEach items="${discusses}" var="dis">
-												<li>
-													<div class="col-sm-10">
-														${dis.discussContent}
-													</div>
+										<c:forEach items="${discuss}" var="dis">
+											<div class="row">
+												<div class="col-sm-12" style="border-bottom: 1px solid #f5f5f5">
+													<div class="col-sm-10">${dis.discussContent}</div>
 													<div class="col-sm-2">
-														<c:if test="${dis.discussUsersId==user.id }">
-							   								<a href="company/artanddis/discuss/deletecompanydiscuss/${dis.id }"><em class="glyphicon glyphicon-trash"></em></a>
-							   							</c:if>
+														<c:if test="${dis.discussUsersId==userid }">
+						   									<a href="company/artanddis/discuss/deletecompanydiscuss/${dis.id }"><em class="glyphicon glyphicon-trash"></em></a>
+						   								</c:if>
 													</div>
-												</li>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+									<ul class="pager">
+										<li>
+											<c:if test="${curPage==null }">
+					   							<c:set var="curPage" value="1"></c:set>
+					   						</c:if>
+					   						<c:if test="${curPage>1 }">
+						   						<a href="company/artanddis/discuss/finddiscuss/${curPage-1 }">&laquo;</a>
+						   					</c:if>
+						   					<c:forEach items="${pageNo }" var="i">
+												<a href="company/artanddis/discuss/finddiscuss/${i }">${i }</a>
 											</c:forEach>
-										</ol>
+											<c:if test="${curPage<maxPage }">
+						   						<a href="company/artanddis/discuss/finddiscuss/${curPage+1 }">&raquo;</a>	
+						   					</c:if>
+										</li>
+									</ul>
 								</div>
 					  		</div>
 					 	</div>
@@ -183,27 +189,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<br />
 			<div>
-				<c:if test="${disUserId==user.id }">
-					<form action="company/artanddis/discuss/add_companydiscuss" method="post">
-						<div class="form-group col-sm-12">
-							<input type="hidden" name="discussLevel" id="discussLevel" />
-						   	<label class="col-sm-2">评价星级</label>
-						   	<div class="col-sm-10 raty" id="star" value="3.5" name="discussLevel"></div>
-					   	</div>
-					    <div class="form-group col-sm-12">
-					    	<label class="col-sm-2">评论内容</label>
-					    	<div class=col-sm-10">
-					    		<textarea name="discussContent" rows="7" cols="90" 
-					    			maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea>
-					    	</div>
-					    </div>
-					    <div class="col-sm-12">
-					    	<input type="submit" value="评论企业" class="btn btn-warning" />
-					    	<div class="col-sm-2"></div>
-					    	<div id="wordstip" class="col-sm-8 column"></div>
-					    </div>
-	   				</form>
-	   			</c:if>
+				<form action="company/artanddis/discuss/add_companydiscuss" method="post">
+					<c:if test="${disUserId!=user.id }">
+							<div class="alert alert-danger">非常抱歉，您不是个人用户，无法对企业用户进行评论</div>
+					</c:if>
+					<div class="form-group col-sm-12">
+						<input type="hidden" name="discussLevel" id="discussLevel" />
+					   	<label class="col-sm-2">评价星级</label>
+					   	<div class="col-sm-10 raty" id="star" value="3.5" name="discussLevel"></div>
+				   	</div>
+				    <div class="form-group col-sm-12">
+				    	<label class="col-sm-2">评论内容</label>
+				    	<div class=col-sm-10">
+				    		<textarea name="discussContent" rows="7" cols="90" 
+				    			maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea>
+				    	</div>
+				    </div>
+				    <div class="col-sm-12">
+				    	<input type="submit" value="评论企业" class="btn btn-warning" />
+				    	<div class="col-sm-2"></div>
+				    	<div id="wordstip" class="col-sm-8 column"></div>
+				    </div>
+	   			</form>
 			</div>
    			<div>
    				<div class=" col-sm-5 column"></div>
@@ -256,7 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					$("input[type='submit']").removeAttr("disabled");
 				}
 			});
-		});
+		s});
     </script>
 	
 	</body>

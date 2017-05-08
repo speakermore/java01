@@ -6,19 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
-<!-- <base href="http://localhost:8080/worktogether2/"> -->
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 </head>
 <body>
-	<c:if test="${company!=null }">
-		欢迎${company.companySimpleName}光临
-		<a href="company/company/logout">退出</a>
+<%@include file="/WEB-INF/pages/nav.jsp" %>
+	<c:if test="${company==null }">
+		<a href="company/company/companyLogin">登录</a>
+		<a href="company/company/add">注册</a>
+	</c:if>
+	
+	<c:if test="${comapny!=null }">
+		欢迎${company.name }光临
+		<a href="company/logout">退出</a>
 		<ul>
-			<li><a href="company/company/findById/${company.id }">查看资料</a>
-			<li><a href="company/charge/charge">充值</a></li>
-			<li><a href="company/charge/chargeTest">花钱</a></li>
-			<li><a href="">发表文章</a></li>
+			<li><a href="company/charge">充值</a></li>
 		</ul>
 	</c:if>
+	<hr/>
 </body>
 </html>

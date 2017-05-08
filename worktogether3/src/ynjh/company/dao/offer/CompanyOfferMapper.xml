@@ -8,39 +8,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addOffer" parameterType="Offer">
 		insert into offer(userId,companyId,offerJob,offerContent,offerInvitationTime,offerSendTime)
 		values(#{userId},#{companyId},#{offerJob},#{offerContent},#{offerInvitationTime},#{offerSendTime})
-	</insert>
-	
+	</insert>	
 	<update id="updateOfferAction" parameterType="int">
 		update offer set offerAction=#{offerAction} where id=#{id}
-	</update>	
+	</update>
 	
-	<select id="findCompanyOffers" resultType="Offer" parameterType="int">
-		select * from offer
-		<!-- select o.*,userName from offer o,user -->
-		<!-- where companyId=#{companyId} and o.userId=user.id and offerStatus=2 -->
+	<select id="findCompanyOffers" parameterType="int" resultType="Offer">
+		select o.*,u.userName from offer as o,user as u
+		where o.companyId=#{companyId} and o.userId=u.id and o.offerStatus=2
+		<!-- 语法：limit 开始记录号（从0开始），每页记录条数 -->
+		<if test="page!=null">limit #{page},5</if>
 	</select>
-	<select id="findUserOffers" resultType="Offer" parameterType="int">
-		select o.*,companySimpleName from offer o,company
-		where userId=#{userId} and o.companyId=company.id and offerStatus=2
+	<select id="getCompanyOffersRecord" parameterType="int" resultType="int">
+		select count(*) from offer where companyId=#{companyId} and offerStatus=2
 	</select>
-	<select id="findCompanyOffer" resultType="Offer" parameterType="int">
-		select * from offer 
-		where id=#{id}
-	</select>
-	<select id="findUserOffer" resultType="Offer" parameterType="int">
-		select * from offer
-		where id=#{id}
+	<select id="findCompanyOffer" parameterType="int" resultType="Offer">
+		select o.*,u.userName from offer as o,user as u
+		where o.Id=#{Id} and o.userId=u.id
 	</select>
 	
-	<select id="findAll" resultType="Offer" parameterType="int">
-		select * from offer 
-		<!-- <if test="page!=null">
-			limit #{page},5
-		</if>		 -->
+	<select id="findUserOffers" parameterType="int" resultType="Offer">
+		select o.*,c.companySimpleName from offer as o,company as c
+		where o.userId=#{userId} and o.companyId=c.id and o.offerStatus=2
+		<!-- 语法：limit 开始记录号（从0开始），每页记录条数 -->
+		<if test="page!=null">limit #{page},5</if>
 	</select>
-	
-	<select id="getMaxRecord" resultType="int">
-		select count(*) from offer
+	<select id="getUserOffersRecord" parameterType="int" resultType="int">
+		select count(*) from offer where userId=#{userId} and offerStatus=2
+	</select>
+	<select id="findUserOffer" parameterType="int" resultType="Offer">
+		select o.*,c.companyName from offer as o,company as c
+		where o.Id=#{Id} and o.companyId=c.id
 	</select>
 	
 </mapper>

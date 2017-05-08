@@ -37,12 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<%@include file="/WEB-INF/pages/nav.jsp" %>
 	<div class="container">
 		<div class="col-sm-8 column">
-			<div id="alert" class="alert alert-success hidden">
-				成功发表文章！等待管理员审核通过！
-				<a href="">1、返回企业首页</a>
-				<a href="">2、接着发表新文章</a>
-			</div>
-			<form action="company/artanddis/add_companyarticle" method="post" role="form" class="form-horizontal">
+			<form action="company/artanddis/article/add_companyarticle" method="post" role="form" class="form-horizontal">
 				<div class="form-group">
     				<label for="firstname" class="col-sm-2 control-label">文章标题</label>
     			<div class="col-sm-5">
@@ -50,17 +45,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</div>
   				</div>
 					<div class="form-group">
-					   <label for="keyname" class="col-sm-2 control-label">关键字</label>
+					   <label for="lastname" class="col-sm-2 control-label">关键字</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="keyname" placeholder="请输入关键字" name="articleKey">
 					</div>
 				</div>
 				<br />
-		    	<textarea name="articleContent" rows="10" cols="100"></textarea><br />
+		    	<textarea class="ckeditor" name="articleContent" rows="10" cols="100"></textarea><br />
 		  		<input type="submit" value="发表" class="btn btn-warning" />
-		  		<div class=" col-sm-11 column"></div>
+		  		<div class=" col-sm-10 column"></div>
    			</form>
-   			
 		</div>
 	</div>
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -70,33 +64,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script type="text/javascript">
 	    $(document).ready(function(){  
 	    	CKEDITOR.replace('articleContent'); 
+	    	
 	    });  
+	    
     </script>
-    <script type="text/javascript">
-    	$(document).ready(function(){
- 			$("textarea").get(0).change(function(){
-       			if( $.trim(this.value) == "" ){
-  					$("input[type='submit']").attr("disabled","disabled");
-				}else{
-  					$("input[type='submit']").removeAttr("disabled");
-				}
-			});
-		});
-    </script>
-	<!-- <script type="text/javascript">
-    	$(document).ready(function(){
-    		var id=document.getElementById("titlename").value;
-    		$.ajax({
-    			url:"company/artanddis/article/findid?id="+id,
-    			type:"POST",
-    			data:"id="+id,
-    			success:function(data){
-				     if(data){
-				         $("#alert").attr("class","alert alert-danger");
-				     }
-			     }
-    		});
-    	});
-    </script> -->
   </body>
 </html>

@@ -28,40 +28,35 @@ public class CompanyOfferServiceImpl implements CompanyOfferService {
 			logger.warn("发送面试邀请失败");
 		}
 		return result;
-	}
-	
+	}	
 	@Override
 	public int updateOfferAction(Integer id,Integer offerAction) {
 		return companyOfferMapper.updateOfferAction(id, offerAction);
 	}
 
 	@Override
-	public List<Offer> findCompanyOffers(Integer id) {
-		return companyOfferMapper.findCompanyOffers(id);
-	}
-	
+	public List<Offer> findCompanyOffers(Integer companyId,Integer page) {
+		return companyOfferMapper.findCompanyOffers(companyId,(page-1)*5);
+	}	
 	@Override
-	public List<Offer> findUserOffers(Integer id) {
-		return companyOfferMapper.findUserOffers(id);
-	}
-	
+	public int findCompanyOffersPage(Integer companyId) {		
+		return (companyOfferMapper.getCompanyOffersRecord(companyId)+4)/5;
+	}	
 	@Override
 	public Offer findCompanyOffer(Integer id) {
 		return companyOfferMapper.findCompanyOffer(id);
 	}
 	
 	@Override
+	public List<Offer> findUserOffers(Integer userId, Integer page) {
+		return companyOfferMapper.findUserOffers(userId,(page-1)*5);
+	}
+	@Override
+	public int findUserOffersPage(Integer userId) {
+		return (companyOfferMapper.getUserOffersRecord(userId)+4)/5;
+	}
+	@Override
 	public Offer findUserOffer(Integer id) {
 		return companyOfferMapper.findUserOffer(id);
-	}
-
-	@Override
-	public List<Offer> findAll(Integer page) {
-		return companyOfferMapper.findAll((page-1)*5);
-	}
-	
-	@Override
-	public int findMaxPage() {		
-		return (companyOfferMapper.getMaxRecord()+5-1)/5;
 	}
 }

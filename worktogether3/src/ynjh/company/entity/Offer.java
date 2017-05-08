@@ -15,6 +15,7 @@ public class Offer implements Serializable{
 	private Integer offerStatus=1;
 	private Integer offerAction=1;
 	private String companySimpleName;
+	private String companyName;
 	private String userName;
 	
 	public Offer() {
@@ -25,7 +26,7 @@ public class Offer implements Serializable{
 			String offerJob, String offerContent,
 			Timestamp offerInvitationTime, Timestamp offerSendTime,
 			Integer offerStatus, Integer offerAction,
-			String companySimpleName, String userName) {
+			String companySimpleName, String companyName,String userName) {
 		super();
 		this.id = id;		
 		this.companyId = companyId;
@@ -37,6 +38,7 @@ public class Offer implements Serializable{
 		this.offerStatus= offerStatus;
 		this.offerAction= offerAction;
 		this.companySimpleName= companySimpleName;
+		this.companyName=companyName;
 		this.userName= userName;
 	}
 
@@ -120,6 +122,14 @@ public class Offer implements Serializable{
 		this.companySimpleName = companySimpleName;
 	}
 	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -127,19 +137,21 @@ public class Offer implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
 	@Override
 	public String toString() {
-		return "Offer [id=" + id + 
-				", companyId=" + companyId + 
-				", userId=" + userId + 
-				", offerJob=" + offerJob + 
-				", offerContent=" + offerContent + 
-				", offerInvitationTime=" + offerInvitationTime + 
-				", offerSendTime=" + offerSendTime + 
-				", offerStatus=" + offerStatus + 
-				", offerAction=" + offerAction + 
-				", companySimpleName=" + companySimpleName + 
-				", userName=" + userName + 
+		return "Offer [id=" + id +
+				", companyId=" + companyId +
+				", userId=" + userId +
+				", offerJob=" + offerJob +
+				", offerContent=" + offerContent +
+				", offerInvitationTime=" + offerInvitationTime +
+				", offerSendTime=" + offerSendTime +
+				", offerStatus=" + offerStatus +
+				", offerAction=" + offerAction +
+				", companySimpleName=" + companySimpleName +
+				", companyName=" + companyName +
+				", userName=" + userName +
 				"]";				
 	}
 }
