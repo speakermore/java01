@@ -101,7 +101,7 @@
 			minView : "month"
 		});
 		
-		$("#userHeadImgPath").fileinput({'language': 'zh','showUpload':false, 'previewFileType':'any'});      
+		$("#userHeadImgPath").fileinput({uploadAsync:false,'language': 'zh','showUpload':false, 'previewFileType':'any'});      
 	
 		$("#otherForm").bootstrapValidator({
 			message : '这个值不能通过验证！！',

@@ -26,6 +26,8 @@ public interface ResumeService {
 	public List<Resume> selectResumeUserId(Integer page,Integer userId);	
 	// 根据id查询简历（审查接口）详细
 	public Resume selectResumeById(Integer id);
+	//根据userId查询最新简历（单个）
+	public Resume selectNewlyResumeByUserId(Integer userId);
 	 // 删除简历
 	public Integer deleteResumeById(Integer id);
 	

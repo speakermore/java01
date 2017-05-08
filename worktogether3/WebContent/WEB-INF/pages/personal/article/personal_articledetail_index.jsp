@@ -56,7 +56,9 @@
 				${comArt.commentArticleContent }
 			</div>
 			<div class="panel-footer work-together-right">
-				${comArt.commentArticleTime }<a href="#">更多....</a>
+			<fmt:formatDate value="${comArt.commentArticleTime }"
+										pattern="yyyy-MM-dd HH:mm" />
+				<a href="#">更多....</a>
 			</div>
 		</section>
 		</c:forEach>
@@ -64,7 +66,7 @@
 	<div class="row">
 		<!--发表状态小节-->
 		<section class="panel">
-			<div class="panel-heading">发表状态</div>
+			<div class="panel-heading">评论</div>
 			<div class="panel-body">
 				<form action="personal/commentarticle/addcommentarticle">
 				<input type="hidden" name="articleId" value="${article.id }" />

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.personal.dao.discuss.DiscussMapper">
 	<!-- 写评论 -->
 	<insert id="addUserCommentFirm" parameterType="Discuss">
-		insert into discuss(discussUsersId,discussContent,discussLevel,discussTime,discusUsersType) values(#{discussUsersId},#{discussContent},#{discussLevel},#{discussTime},#{discusUsersType})
+		insert into discuss(discussUsersId,discussContent,discussLevel,discussTime,discusSendType) values(#{discussUsersId},#{discussContent},#{discussLevel},#{discussTime},#{discusSendType})
 	</insert>
 	<!-- 删评论 -->
 	 <delete id="deleteUserCommentFirm" >

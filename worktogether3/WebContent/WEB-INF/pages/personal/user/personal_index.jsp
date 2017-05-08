@@ -29,8 +29,9 @@ table {
 								<li><a href="#panel-three" data-toggle="tab">文章中心</a></li>
 								<li class="dropdown pull-right"><a href="#"
 									data-toggle="dropdown" class="dropdown-toggle">管理<strong
-										class="caret"></strong></a> <%@include
-										file="/WEB-INF/pages/personal/common/selectformanage.jsp"%></li>
+										class="caret"></strong></a>
+										<!-- 管理下拉列表 --> 
+										<%@include file="/WEB-INF/pages/personal/common/selectformanage.jsp"%></li>
 							</ul>
 
 							<!-- 下拉列表结束 -->
@@ -38,10 +39,12 @@ table {
 							<div class="tab-content">
 								<div class="tab-pane active" id="panel-one">
 									<div class="col-md-7 column ">
+										<!-- 主页个人信息左边 -->
 										<%@include
 											file="/WEB-INF/pages/personal/user/personal_user.jsp"%>
 									</div>
 									<div class="col-md-5 column ">
+										<!-- 主页个人信息右边 -->
 										<%@include
 											file="/WEB-INF/pages/personal/common/user_right.jsp"%>
 									</div>
@@ -55,6 +58,7 @@ table {
 											class="alert-link">点我返回首页</a>|<a
 											href="personal/resume/createResume">点我创建新的简历</a>
 									</div>
+									<!-- 简历信息主页 -->
 									<%@include
 										file="/WEB-INF/pages/personal/user/personal_resume_index.jsp"%>
 								</div>
@@ -67,6 +71,7 @@ table {
 											class="alert-link">点我返回首页</a>|<a
 											href="personal/article/add_article">点我创建新的文章</a>
 									</div>
+									<!-- 文章信息主页 -->
 									<%@include
 										file="/WEB-INF/pages/personal/user/personal_article_index.jsp"%>
 								</div>
@@ -74,14 +79,10 @@ table {
 							<!-- 主要内容结束 -->
 						</div>
 					</div>
-					<!-- 	<div class="col-md-4 column ">
-						
-					</div> -->
 					<div class="col-md-1 column"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

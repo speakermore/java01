@@ -81,7 +81,7 @@
                             message: '标题长度必须在2到50位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 
@@ -105,7 +105,7 @@
                             message: '姓名长度必须在2到10位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 
@@ -145,7 +145,7 @@
                             message: '民族长度必须在1到10位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 
@@ -162,7 +162,7 @@
                             message: '籍贯长度必须在1到50位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 
@@ -187,7 +187,7 @@
                             message: '学历长度必须在1到20位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 
@@ -204,7 +204,7 @@
                             message: '毕业学校长度必须在1到50位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 
@@ -221,7 +221,7 @@
                             message: '专业长度必须在1到20位之间'
                         },
                         regexp: {
-                        	regexp: (/[\u4e00-\u9fa5]/g),
+                        	regexp: (/[\u4e00-\u9fa5]/),
                         	message: "请输入中文名字"
                     	}
 

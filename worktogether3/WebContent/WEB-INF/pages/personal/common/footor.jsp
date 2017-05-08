@@ -11,9 +11,6 @@
 	src="thirdpart/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script src="thirdpart/icheck/icheck.js"></script>
-<script type="text/javascript"
-	src="thirdpart/qqFace/js/jquery.qqFace.js"></script>
 <script type="text/javascript" src="thirdpart/dist/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="thirdpart/dist/js/language/zh_CN.js"></script>
 <script type="text/javascript" src="thirdpart/fileupload/js/fileinput.min.js"></script>

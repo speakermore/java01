@@ -33,8 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			limit #{page},5
 		</if>
 	</select>
+	<!-- 查询简历(详细) -->
 	<select id="selectResumeById" resultType="Resume" parameterType="Integer">
 		select * from resume where id=#{id}
+	</select>
+	<!-- 查询最新简历(详细) -->
+	<select id="selectNewlyResumeByUserId" resultType="Resume" parameterType="Integer">
+		select * from resume where userId=#{userId} order by resumeCreateDate desc limit 1
 	</select>
 	<!-- 删除简历 -->
 	<update id="deleteResumeById" parameterType="Integer">
@@ -63,8 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 项目经验 -->
 	<insert id="addProject" parameterType="Project">
 		insert into
-		project(userId,resumeId,projectBeginTime,projectEndTime,projectName,projectJob,projectDescription,projectMakeDescription)
-		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription},#{projectMakeDescription})
+		project(userId,resumeId,projectBeginTime,projectEndTime,projectName,projectJob,projectDescription)
+		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription})
 	</insert>
 
 	<update id="updateEducation" parameterType="Education">
@@ -152,4 +157,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from project where userId=#{userId} and resumeType=4
 	</select>
 	<!-- 分页结束 -->
+	
+	
+	<!-- 查看公司发布的招聘信息开始 -->
+	
+	<!-- 查看公司发布的招聘信息结束 -->
 </mapper>

@@ -22,22 +22,11 @@ public class Discuss implements Serializable {
 	// 评论状态1:待审 2：正常 3：审核不通过 4：隐藏
 	private Integer discussStatus;
 	// 1：企业id 2：个人用户id
-	private Integer discussUsersType;
+	private Integer discussSendType;
 	//被发送者id
 	private Integer discussBySendId;
 	
 	public Discuss() {
-	}
-
-	public Discuss(Integer discussUsersId, String discussContent,
-			Integer discussLevel, Timestamp discussTime,
-			Integer discussUsersType) {
-		super();
-		this.discussUsersId = discussUsersId;
-		this.discussContent = discussContent;
-		this.discussLevel = discussLevel;
-		this.discussTime = discussTime;
-		this.discussUsersType = discussUsersType;
 	}
 
 	public Integer getId() {
@@ -88,21 +77,31 @@ public class Discuss implements Serializable {
 		this.discussStatus = discussStatus;
 	}
 
-	public Integer getDiscussUsersType() {
-		return discussUsersType;
+	public Integer getDiscussSendType() {
+		return discussSendType;
 	}
 
-	public void setDiscussUsersType(Integer discussUsersType) {
-		this.discussUsersType = discussUsersType;
+	public void setDiscussSendType(Integer discussSendType) {
+		this.discussSendType = discussSendType;
+	}
+
+	public Integer getDiscussBySendId() {
+		return discussBySendId;
+	}
+
+	public void setDiscussBySendId(Integer discussBySendId) {
+		this.discussBySendId = discussBySendId;
 	}
 
 	@Override
 	public String toString() {
-		return "Discuss [id=" + id + ", discussUsersId=" + discussUsersId
-				+ ", discussContent=" + discussContent + ", discussLevel="
-				+ discussLevel + ", discussTime=" + discussTime
-				+ ", discussStatus=" + discussStatus + ", discussUsersType="
-				+ discussUsersType + "]";
+		return "Discuss [id=" + id + ", discussUsersId=" + discussUsersId + ", discussContent=" + discussContent
+				+ ", discussLevel=" + discussLevel + ", discussTime=" + discussTime + ", discussStatus=" + discussStatus
+				+ ", discussSendType=" + discussSendType + ", discussBySendId=" + discussBySendId + "]";
 	}
+
+	
+
+	
 
 }

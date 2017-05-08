@@ -10,14 +10,16 @@
 			<div class="row">
 				<table class="table">
 				<colgroup>
-						<col style="width: 25%">
-						<col style="width: 25%">
-						<col style="width: 25%">
-						<col style="width: 25%">
+						<col style="width: 20%">
+						<col style="width: 20%">
+						<col style="width: 20%">
+						<col style="width: 20%">
+						<col style="width: 20%">
 					</colgroup>
 					<thead>
 						<tr>
 							<th>简历标题</th>
+							<th>简历意向</th>
 							<th>创建日期</th>
 							<th>状态</th>
 							<th>操作</th>
@@ -25,9 +27,10 @@
 					</thead>
 					<!-- ajax分页开始 -->
 					<tbody id="ajaxResumesList">
-						<c:forEach items="${resumess }" var="res">
+						<c:forEach items="${resumes }" var="res">
 							<tr>
 								<td><a href="personal/resume/lookResume?id=${res.id }">${res.resumeTitle }</a></td>
+								<td>${res.resumeJor }</td>
 								<td><fmt:formatDate value="${res.resumeCreateDate}"
 										pattern="yyyy-MM-dd" /></td>
 								<c:if test="${res.resumeStatusThree==1}">

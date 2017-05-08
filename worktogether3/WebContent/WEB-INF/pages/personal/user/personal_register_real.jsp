@@ -82,11 +82,13 @@
 	</div>
 	<script type="text/javascript">
 		$("#userIDImgFace").fileinput({
+			uploadAsync:false,
 			'language' : 'zh',
 			'showUpload' : false,
 			'previewFileType' : 'any'
 		});
 		$("#userIDImgCon").fileinput({
+			uploadAsync:false,
 			'language' : 'zh',
 			'showUpload' : false,
 			'previewFileType' : 'any'

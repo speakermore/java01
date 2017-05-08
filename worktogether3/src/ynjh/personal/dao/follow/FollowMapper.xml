@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUserFollow" parameterType="Integer" resultType="Follow">
 		select * from follow where followId=#{followId}
 	</select> 
-	
-	
+	<!--查看关注的人数-->
+	<select id="selectUserFollowCount" parameterType="Integer" resultType="Integer">
+		select count(*) from follow where followId=#{followId}
+	</select>
+	<!--查看被关注的人数-->
+	<select id="selectUserByFollowCount" parameterType="Integer" resultType="Integer">
+		select count(*) from follow where byFollowId=#{byFollowId}
+	</select> 
 </mapper>

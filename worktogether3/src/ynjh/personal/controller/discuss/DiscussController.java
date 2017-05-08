@@ -29,7 +29,7 @@ public class DiscussController {
 	public ModelAndView addDiscuss(Discuss discuss){
 		ModelAndView mv=new ModelAndView();
 		discuss.setDiscussTime(new Timestamp(System.currentTimeMillis()));
-		discuss.setDiscussUsersType(2);
+		discuss.setDiscussSendType(2);
 		int result=dService.addDiscuss(discuss);
 		if (result>0) {
 			mv.addObject("operatorInfo","评论成功，请等待审核");
