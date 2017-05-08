@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import ynjh.personal.dao.user.UserMapper;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
 import ynjh.personal.service.UserService;
 /**
@@ -107,6 +108,35 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer addUserCharge(UserCharge userCharge) {
 		return userMapper.addUserCharge(userCharge);
+	}
+	/**
+	 * 软件人才列表
+	 */
+	@Override
+	public List<UserAndResume> findUserList(Integer page) {
+		if (page == null) {
+			page = 1;
+		}
+		if (page < 1) {
+			page = 1;
+		}
+		int maxPage = getMaxUserList();
+
+		if (page > maxPage) {
+			page = maxPage;
+		}
+		return userMapper.findUserList((page - 1) * 20);
+	}
+	/**
+	 * 软件人才列表总数据
+	 */
+	@Override
+	public Integer getMaxUserList() {
+		if (userMapper.getMaxUserList() <= 0) {
+			return 1;
+		} else {
+			return (userMapper.getMaxUserList() + 20 - 1) / 20;
+		}
 	}
 
 }

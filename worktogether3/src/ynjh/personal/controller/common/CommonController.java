@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Follow;
@@ -15,13 +17,17 @@ import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
 import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Mood;
+import ynjh.personal.entity.News;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
+import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.Work;
 import ynjh.personal.service.ArticleService;
 import ynjh.personal.service.FollowService;
 import ynjh.personal.service.MoodService;
+import ynjh.personal.service.NewlyService;
 import ynjh.personal.service.ResumeService;
+import ynjh.personal.service.UserService;
 
 @Controller
 @RequestMapping("/personal/common/")
@@ -34,6 +40,10 @@ public class CommonController {
 	private FollowService fService;
 	@Resource
 	private MoodService mService;
+	@Resource
+	private NewlyService nService;
+	@Resource
+	private UserService uService;
 	/**
 	 * 主页对象获取中转
 	 * 
@@ -73,6 +83,15 @@ public class CommonController {
 		//获取评论内容
 		Mood mood = mService.selectMoodById(userId);
 		session.setAttribute("mood", mood);
+		
+		//获取最新面试消息
+		Offer offer =nService.findNewsFaceByUserId(userId);
+		session.setAttribute("offer", offer);
+		
+		//获取软件人才对象信息
+		List<UserAndResume> userAndResumes =uService.findUserList(toPage);
+		session.setAttribute("userAndResumes", userAndResumes);
+		
 		
 		mv.addObject("curPage", toPage);
 		return mv;

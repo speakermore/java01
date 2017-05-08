@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="ynjh.common.util.*" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page autoFlush="true" buffer="1024kb"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <c:set var="SEX" value="${CommonStatus.SEX }"></c:set>
 <c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
 <c:set var="MARRY" value="${CommonStatus.MARRY }"></c:set>
-<!DOCTYPE html>
-<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

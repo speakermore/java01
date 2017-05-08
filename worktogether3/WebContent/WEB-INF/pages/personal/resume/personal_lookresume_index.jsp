@@ -20,6 +20,7 @@
 				<td class="col-md-4">${resume.resumeName }</td>
 				<td>${SEX[resume.resumeGender] }
 				</td>
+				<td>${resume.resumeWorks }</td>
 			</tr>
 			<tr>
 				<td>${resume.resumeJor }</td>

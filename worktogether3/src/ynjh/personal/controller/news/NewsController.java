@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author dage
  *
  */
-@Controller
+/*@Controller
 @RequestMapping("/personal/news")
 public class NewsController {
 
 	
-}
+}*/

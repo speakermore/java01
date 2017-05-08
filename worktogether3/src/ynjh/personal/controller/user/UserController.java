@@ -179,6 +179,13 @@ public class UserController {
 	public String addUser() {
 		return "personal/user/personal_register";
 	}
+	/**
+	 * 跳转软件人才界面
+	 */
+	@RequestMapping("/gotoSoft")
+	public String gotoSoft(){
+		return "personal/user/personal_userlist";
+	}
 
 	/**
 	 * 跳转完善信息页面
@@ -369,7 +376,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		return "personal/user/personal_commanylist";
+		return "personal/user/personal_userlist";
 	}
 
 	/**

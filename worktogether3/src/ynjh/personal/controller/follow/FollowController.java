@@ -27,14 +27,17 @@ public class FollowController {
 	 * @param session
 	 * @return 提示关注成功或失败
 	 */
-	@RequestMapping("/addFollow")
-	public ModelAndView addUserFollow(Follow follow,HttpSession session){
+	@RequestMapping("/addUserFollow")
+	public ModelAndView addUserFollow(Integer byFollowId,HttpSession session){
 		User user=(User) session.getAttribute("user");
+		Follow follow=new Follow();
 		follow.setId(user.getId());
+		follow.setByFollowId(byFollowId);
 		follow.setFollowDate(new Timestamp(System.currentTimeMillis()));
 		follow.setFollowStartType(2);
+		follow.setFollowType(2);
 		int result=followService.addUserFollow(follow);
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 		if(result>0) {
 			mv.addObject("operatorInfo", "添加关注成功！");
 		}else{

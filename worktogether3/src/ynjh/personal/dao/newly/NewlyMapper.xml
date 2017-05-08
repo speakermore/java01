@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ynjh.personal.dao.newly.NewlyMapper">
+	<!-- 查看最新发布面试消息 -->
+	<select id="findNewsFaceByUserId" resultType="Offer"
+		parameterType="Integer">
+		select c.companyName,o.* from offer o,company c where o.companyId=c.id and
+		o.userId=#{userId} and o.offerStatus=2 order by o.offerSendTime desc
+		limit 1
+	</select>
+	<!-- 查看关注者最新发布文章消息 -->
+	<!-- <select id="findNewsArticleByUserId"> select * from </select> -->
+	<!-- -->
+</mapper>

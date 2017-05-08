@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
 
 
@@ -47,7 +48,14 @@ public interface UserMapper {
 	 * 充值记录
 	 */
 	public Integer addUserCharge(UserCharge userCharge);
-	
+	/**
+	 * 软件人才列表
+	 */
+	public List<UserAndResume> findUserList(@Param("page")Integer page);
+	/**
+	 * 软件人才列表总数据
+	 */
+	 public Integer getMaxUserList();
 	/**
 	 * 搜索
 	 */
