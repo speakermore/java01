@@ -79,18 +79,18 @@ public class UserController {
 		if (!(validateCode.equalsIgnoreCase(value))) {
 			mv.setViewName("personal/user/personal_login");
 			mv.addObject("operatorInfo", "请输入正确的验证码或者密码！");
+			System.out.println("验证码输入不正确！！！！！！！！！！！");
 		} else {
 			// 验证成功
-		}
-
-		if (user == null) {
-			mv.addObject("errorInfo", "用户名或密码不正确");
-			mv.setViewName("personal/user/personal_login");
-		} else {
-			session.setAttribute("user", user);
-			mv.addObject("user", user);
-			/* mv.setViewName("personal/user/personal_index"); */
-			mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
+			if (user == null) {
+				mv.addObject("errorInfo", "用户名或密码不正确");
+				mv.setViewName("personal/user/personal_login");
+			} else {
+				session.setAttribute("user", user);
+				mv.addObject("user", user);
+				/* mv.setViewName("personal/user/personal_index"); */
+				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
+			}
 		}
 		return mv;
 	}
@@ -216,10 +216,14 @@ public class UserController {
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
 	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		user.setUserHeadImgPath(UploadFile.uploadFile("/WEB-INF/resources/img/upload/personal",new MultipartFile[]{files}, session)[0]);
+		User sessionUser=(User) session.getAttribute("user");
+		user.setId(sessionUser.getId());
+		user.setUserHeadImgPath(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				new MultipartFile[] { files }, session)[0]);
+		user.setUserRealName("无");
 		int result = uService.updateUserOther(user);
 		if (result > 0) {
-			mv.addObject("user", user);
+			session.setAttribute("user", user);
 			mv.addObject("operatorInfo", "完善资料成功！");
 			mv.setViewName("personal/user/personal_index");
 		} else {
@@ -228,8 +232,6 @@ public class UserController {
 		}
 		return mv;
 	}
-
-	
 
 	/**
 	 * 处理实名用户信息 跳转主页
@@ -241,13 +243,18 @@ public class UserController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.POST)
-	public ModelAndView addUserReal(User user, MultipartFile fileface,MultipartFile filecon, HttpSession session) {
+	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		user.setUserIDImgFace(UploadFile.uploadFile("/WEB-INF/resources/img/upload/personal",new MultipartFile[]{fileface}, session)[0]);
-		user.setUserIDImgCon(UploadFile.uploadFile("/WEB-INF/resources/img/upload/personal",new MultipartFile[]{filecon}, session)[0]);
+		User sessionUser=(User) session.getAttribute("user");
+		user.setId(sessionUser.getId());
+		user.setUserIDImgFace(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				new MultipartFile[] { fileface }, session)[0]);
+		user.setUserIDImgCon(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				new MultipartFile[] { filecon }, session)[0]);
+		user.setUserName(sessionUser.getUserName());
 		int result = uService.updateUserIDCord(user);
 		if (result > 0) {
-			mv.addObject("user", user);
+			session.setAttribute("user", user);
 			mv.addObject("operatorInfo", "实名认证成功！");
 			mv.setViewName("personal/user/personal_index");
 		} else {
@@ -362,7 +369,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		return "personal/user/test";
+		return "personal/user/personal_commanylist";
 	}
 
 	/**

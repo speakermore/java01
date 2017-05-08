@@ -14,58 +14,21 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp" %>
-	<div class="container">
-		<div class="row clearfix">
-			<div class="col-sm-3">
-				<%@include file="/WEB-INF/pages/company/menu.jsp" %>
-			</div>
-		<div class="col-sm-6">
-		<form class="form-horizontal" role="form" action="company/company/addCompany" method="post" >
-		<div class="form-group">
-			<div class="col-sm-3"> 公司手机:</div>	
-			<div class="col-sm-7">
-				<input type="text" class="form-control" id="exampleInputPassword1" name="companyLoginId"/>
-			</div>	
-		</div>
-		
-		<div class="form-group">
-			<div class="col-sm-3"> 密码:</div>	
-			<div class="col-sm-7">
-				<input type="password" class="form-control" id="exampleInputPassword1" name="companyLoginId"/>
-			</div>	
-		</div>
-		
-		<div class="form-group">
-			<div class="col-sm-3"> 确认密码:</div>	
-			<div class="col-sm-7">
-				<input type="password" class="form-control" id="exampleInputPassword1" name="realCompanyLoginId"/>
-			</div>	
-		</div>
-		
-		
-		
-			<!-- <form action="company/company/addCompany" method="post">
-			<input type="text" name="companyLoginId"><br/>
-			密码:<input type="password" name="companyPassword"><br/>
-			确认密码:<input type="password" name="realCompanyPassword"><br/> -->
-			<!-- 公司名称:<input type="text" name="companyName"><br/>
-			公司简称:<input type="text" name="companySimpleName"><br/>
-			公司logo:<input type="text" name="companyLogo"><br/>
-			公司营业执照:<input type="text" name="companyLicenseImg"><br/>
-			公司营业执照码:<input type="text" name="companyLicenseNo"><br/>
-			公司法人:<input type="text" name="companyCorporator"><br/>
-			公司电话:<input type="text" name=1"companyTel"><br/>
-			公司电子邮件:<input type="text" name="companyEmail"><br/>
-			公司地址:<input type="text" name="companyAddress"><br/>
-			公司环境照片:<input type="text" name="companyDetailImg"><br/>
-			公司状态:<input type="text" name="companyStatus">	<br/> -->
-			
-			<input class="btn btn-md btn-success" type="submit" value="注册">
-		</form>
-		</div>
-		<div class="col-sm-3">
-		</div>
-	</div>
-</div>
+	<form action="company/company/addCompany" method="post">
+		用户名:<input type="text" name="companyLoginId"><br/>
+		密码:<input type="password" name="companyPassword"><br/>
+		公司名称:<input type="text" name="companyName"><br/>
+		公司简称:<input type="text" name="companySimpleName"><br/>
+		公司logo:<input type="text" name="companyLogo"><br/>
+		公司营业执照:<input type="text" name="companyLicenseImg"><br/>
+		公司营业执照码:<input type="text" name="companyLicenseNo"><br/>
+		公司法人:<input type="text" name="companyCorporator"><br/>
+		公司电话:<input type="text" name="companyTel"><br/>
+		公司电子邮件:<input type="text" name="companyEmail"><br/>
+		公司地址:<input type="text" name="companyAddress"><br/>
+		公司环境照片:<input type="text" name="companyDetailImg"><br/>
+		公司状态:<input type="text" name="companyStatus">	<br/>
+		<input type="submit">
+	</form>
 </body>
 </html>

@@ -30,6 +30,11 @@ public interface ResumeMapper {
 	 * 根据id查询简历（单个）
 	 */
 	public Resume selectResumeById(Integer id);
+	/**
+	 * 根据userId查询最新简历（单个）
+	 */
+	public Resume selectNewlyResumeByUserId(Integer userId);
+	
 	/***
 	 * 删除简历
 	 */

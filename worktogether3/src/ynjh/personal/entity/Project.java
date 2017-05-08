@@ -21,10 +21,9 @@ public class Project implements Serializable{
 	private String projectName;
 	//项目岗位
 	private String projectJob;
-	//项目描述
-	private String projectDescription;
 	//责任描述与感受
-	private String projectMakeDescription;
+	private String projectDescription;
+	
 	//简历id
 	private Integer resumeId;
 	//状态 1.待审核 2.正常 3.审核未通过 4.删除
@@ -86,20 +85,14 @@ public class Project implements Serializable{
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
 	}
-	public String getProjectMakeDescription() {
-		return projectMakeDescription;
-	}
-	public void setProjectMakeDescription(String projectMakeDescription) {
-		this.projectMakeDescription = projectMakeDescription;
-	}
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", userId=" + userId
-				+ ", projectBeginTime=" + projectBeginTime
-				+ ", projectEndTime=" + projectEndTime + ", projectName="
-				+ projectName + ", projectJob=" + projectJob
-				+ ", projectDescription=" + projectDescription
-				+ ", projectMakeDescription=" + projectMakeDescription + "]";
+		return "Project [id=" + id + ", userId=" + userId + ", projectBeginTime=" + projectBeginTime
+				+ ", projectEndTime=" + projectEndTime + ", projectName=" + projectName + ", projectJob=" + projectJob
+				+ ", projectDescription=" + projectDescription + ", resumeId=" + resumeId + ", resumeType=" + resumeType
+				+ "]";
 	}
+	
+	
 	
 }

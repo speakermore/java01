@@ -421,4 +421,9 @@ public class ResumeServiceImpl implements ResumeService {
 	public Integer renewProjectByDelete(Integer id) {
 		return resumeMapper.renewProjectByDelete(id);
 	}
+
+	@Override
+	public Resume selectNewlyResumeByUserId(Integer userId) {
+		return resumeMapper.selectNewlyResumeByUserId(userId);
+	}
 }

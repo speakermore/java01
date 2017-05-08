@@ -44,6 +44,20 @@ public class FollowServiceImpl implements FollowService {
 	public List<Follow> selectUserFollow(Integer id) {
 		return followMapper.selectUserFollow(id);
 	}
+	/**
+	 * 查看关注者人数
+	 */
+	@Override
+	public Integer selectUserFollowCount(Integer followId) {
+		return followMapper.selectUserFollowCount(followId);
+	}
+	/**
+	 * 查看被关注者人数
+	 */
+	@Override
+	public Integer selectUserByFollowCount(Integer byFollowId) {
+		return followMapper.selectUserByFollowCount(byFollowId);
+	}
 
 	
 

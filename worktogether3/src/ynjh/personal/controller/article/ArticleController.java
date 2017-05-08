@@ -51,7 +51,7 @@ public class ArticleController {
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			mv.addObject("operatorInfo", "文章添加成功！");
-			mv.setViewName("redirect:../article/lookArticleList?toPage=1&userId=" + user.getId());
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 
 		} else {
 			mv.addObject("operatorInfo", "文章添加失败!");

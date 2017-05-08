@@ -32,7 +32,7 @@ public class CompanyDiscussController {
 		if(discuss.getDiscussUsersId()==user.getId()){
 			discuss.setDiscussUsersId(user.getId());
 			discuss.setDiscussTime(new Timestamp(System.currentTimeMillis()));
-			discuss.setDiscussUsersType(2);
+			discuss.setDiscussSendType(2);
 		}else {
 			mView.addObject("operatorInfo", "评论失败，请联系管理员或重新操作！");
 			mView.addObject("toPage", "company/artanddis/");

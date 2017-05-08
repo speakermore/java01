@@ -9,10 +9,12 @@ import ynjh.company.entity.Offer;
 public interface CompanyOfferMapper {
 	public Integer addOffer(Offer offer);
 	public Integer updateOfferAction(@Param("id")Integer id,@Param("offerAction")Integer offerAction);
-	public List<Offer> findCompanyOffers(Integer id);
-	public List<Offer> findUserOffers(Integer id);
+	
+	public List<Offer> findCompanyOffers(@Param("companyId")Integer companyId,@Param("page")Integer page);
+	public Integer getCompanyOffersRecord(Integer companyId);
 	public Offer findCompanyOffer(Integer id);
-	public Offer findUserOffer(Integer id);
-	public List<Offer> findAll(@Param("page")Integer page);
-	public int getMaxRecord();
+	
+	public List<Offer> findUserOffers(@Param("userId")Integer userId,@Param("page")Integer page);
+	public Integer getUserOffersRecord(Integer userId);
+	public Offer findUserOffer(Integer id);	
 }

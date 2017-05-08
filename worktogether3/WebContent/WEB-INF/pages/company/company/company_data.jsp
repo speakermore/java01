@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,31 +21,32 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-sm-3 column">
-		<%@include file="/WEB-INF/pages/company/menu.jsp" %>
+			<%@include file="/WEB-INF/pages/company/menu.jsp" %>
 		</div>
-		<div class="col-sm-6 column">
-			
-			
+		
+		
+		<div class="col-sm-6 column">			
 			<div class="tabbable" id="tabs-627235">
 	<ul class="nav nav-tabs">
 		<li class="active">
-			 <a href="#companySource" data-toggle="tab" >公司基本资料</a>
+			 <a href="#panel-100327" data-toggle="tab" >公司基本资料</a>
 		</li>
 		<li>
-			 <a href="#companyInt" data-toggle="tab">公司简介</a>
+			 <a href="#panel-464269" data-toggle="tab">公司简介</a>
 		</li>
 	</ul>
 	<div class="tab-content">
-		<div class="tab-pane active" id="companySource">
+	
+		<div class="tab-pane active" id="panel-100327">
 			<ul class="list-unstyled">
-				<table class="table ">
+				<table class="table">
 				<tbody>
 					<tr class="success">
 						<td>
 							公司全称：
 						</td>
 						<td>
-							${user.companyName}
+							${company.companyName}
 						</td>
 						
 					</tr>
@@ -54,7 +55,7 @@
 							公司简称：
 						</td>
 						<td>
-							${user.companySimpleName}
+							${company.companySimpleName}
 						</td>
 						
 					</tr>
@@ -63,7 +64,7 @@
 							公司logo：
 						</td>
 						<td>
-							${user.companyLogo}
+							${company.companyLogo}
 						</td>
 						
 					</tr>
@@ -72,7 +73,7 @@
 							公司营业执照（图）:
 						</td>
 						<td>
-							${user.companyLicenseImg}
+							${company.companyLicenseImg}
 						</td>
 					</tr>
 					<tr class="success">
@@ -80,7 +81,7 @@
 							公司营业执照码：
 						</td>
 						<td>
-							${user.companyLicenseNo}
+							${company.companyLicenseNo}
 						</td>
 						
 					</tr>
@@ -89,7 +90,7 @@
 							公司法人：
 						</td>
 						<td>
-							${user.companyCorporator}
+							${company.companyCorporator}
 						</td>
 						
 					</tr>
@@ -98,7 +99,7 @@
 							公司邮件：
 						</td>
 						<td>
-							${user.companyEmail}
+							${company.companyEmail}
 						</td>
 						
 					</tr>
@@ -107,9 +108,17 @@
 							公司地址：
 						</td>
 						<td>
-							${user.companyAddress}
+							${company.companyAddress}
 						</td>
 					</tr>
+					<tr class="success">
+						<td>
+							公司环境图片（图）：
+						</td>
+						<td>
+							${company.companyDetailImg}
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>
@@ -123,7 +132,7 @@
 
 
 
-	<div class="tab-pane" id="companyInt">
+	<div class="tab-pane" id="panel-464269">
 		<ul class="list-unstyled">
 		<table class="table">
 				<tbody>
@@ -193,18 +202,15 @@
 		<li><input type="hidden" value="${companyInt.cmpIntStatus}"></li>
 		<li>
 			<a href="company/company/updateCompanyInt">编辑</a>
-		</li>
-										
+		</li>										
 		</ul>
 		</div>
 	</div>
 </div>
-		</div>
-		<div class="col-sm-3 column">
-			广告位招租
-		</div>
-	</div>
 </div>
-		
+				
+</div>
+</div>
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 </body>
 </html>

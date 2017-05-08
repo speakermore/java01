@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html>
@@ -29,7 +29,7 @@
 					<div class="row">
 					            <section>
                 <div class="col-sm-8 col-sm-offset-2">
-                    <form id="defaultForm" method="post" class="form-horizontal" action="company/cmprs/companyRecruit/add_companyRecruit">
+                    <form id="defaultForm" method="post" class="form-horizontal" action="offer/add_offer">
                     <input type="hidden" name="id" value="${cmpr.id }"/>
                     <div class="form-group">
                             <label class="col-sm-3 control-label" >标题</label>
@@ -62,13 +62,15 @@
                            <textarea  class="form-control" name="cmpRecExperience" value="${cmpRecExperience}">
                             </textarea>
                             <script type="text/javascript">CKEDITOR.replace('cmpRecExperience');</script>
-                       </div>
+                       </div>   
                         	</div>
+                        	
                         <div class="form-group">
                             <div class="col-sm-9 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交添加</button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </section>

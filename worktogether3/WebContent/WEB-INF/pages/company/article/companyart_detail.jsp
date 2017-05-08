@@ -32,16 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
-    	textarea {
-			resize:none;
-			padding:5px; 
-			border-radius:3px;
-			box-shadow: inset 0 2px 3px rgba(0,0,0,0.2);
-			border: solid 1px #ccc;
-			box-sizing: border-box; 
-		}
-    </style>
   </head>
   
   <body>
@@ -62,9 +52,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<br />
 					<table class="table">
 						<tr>
-							<th><i class="glyphicon glyphicon-time"></i>&nbsp;${art.articleTime }</th>
-   							<th><a href="company/artanddis/article/like/${art.id }"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp; ${art.articleLikeNum }</th>
-   							<th><i class="glyphicon glyphicon-user"></i>&nbsp; ${art.articleReadNum }</th>
+							<th>发布时间：${art.articleTime }</th>
+   							<th><a href="company/artanddis/article/like/${art.id }">赞</a>：${art.articleLikeNum }</th>
+   							<th>阅读量：${art.articleReadNum }</th>
 						</tr>
 					</table>
 					<br />
@@ -85,12 +75,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   							<tr>
 			   						<td>${comment.commentArticleContent }</td>
 			   						<td>${comment.commentArticleTime }</td>
-			   						<td><a href="company/artanddis/comment/likecomment/${comment.id}"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp;${comment.commentArticleLikeNum }</td>
-			   						<c:if test="${comment.usersId!=user.id }">
-			   							<td></td>
-			   						</c:if>
+			   						<td><a href="company/artanddis/comment/likecomment/${comment.id}">赞</a>：${comment.commentArticleLikeNum }</td>
 			   						<c:if test="${comment.usersId==user.id }">
-			   							<td><a href="company/artanddis/comment/deletecomment/${comment.id}" ><i class="glyphicon glyphicon-trash"></i></a></td>
+			   							<td><a href="company/artanddis/comment/deletecomment/${comment.id}">删除</a></td>
 			   						</c:if>
 	   							</tr>
    							</c:forEach>
@@ -98,14 +85,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</table>
 				</div>
 			</div>
-			
+			<c:if test="${userId==user.id }">
 				<form action="company/artanddis/comment/add_companycomment" method="post">
-			    	<textarea name="discussContent" rows="7" cols="120"
-			    		maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea><br />
+			    	<textarea class="ckeditor" name="discussContent" rows="10" cols="100"></textarea><br />
 			    	<input type="submit" value="评论文章" class="btn btn-warning" />
-			    	<div id="wordstip" class=" col-sm-10 column"></div>
+			    	<div class=" col-sm-9 column"></div>
    				</form>
-			
+			</c:if>
    			<div>
    				<div class=" col-sm-5 column"></div>
    				<a href="#" class="cd-top">返回顶部</a>
@@ -122,20 +108,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/lrtk.js"></script> 
-    <script type="text/javascript">
-    	$(document).ready(function(){
- 			$("textarea").keyup(function(){
- 				var textarea=$("textarea");
- 				var wordstip=$("#wordstip");
- 				wordstip.html("你还可以输入<span style=\"color:red\">"+(140-$.trim(textarea.val()).length)+"</span>字");
-       			if( $.trim(textarea.val()) == "" ){
-  					$("input[type='submit']").attr("disabled","disabled");
-				}else{
-  					$("input[type='submit']").removeAttr("disabled");
-				}
-			});
-		});
-    </script>
   </body>
 
 </html>

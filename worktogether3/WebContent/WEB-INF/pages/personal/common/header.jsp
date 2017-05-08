@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page autoFlush="true" buffer="1024kb"%>
+<c:set var="SEX" value="${CommonStatus.SEX }"></c:set>
+<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
+<c:set var="MARRY" value="${CommonStatus.MARRY }"></c:set>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -14,7 +17,6 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
-<link rel="stylesheet" href="thirdpart/qqFace/css/reset.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -26,7 +28,6 @@
 <link rel="stylesheet" type="text/css" href="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" />
 <link rel="styleheet" href="personal/css/register.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="personal/css/personal_common.css" />
-<link href="thirdpart/icheck/skins/line/orange.css" rel="stylesheet">
 <link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="thirdpart/dist/css/bootstrapValidator.min.css">
 <link rel="stylesheet" type="text/css" href="thirdpart/fileupload/css/fileinput.min.css">

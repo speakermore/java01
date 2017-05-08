@@ -81,7 +81,7 @@
 					</div>
 					<div class="col-md-6">
 						<input type="radio" name="resumeMarriage" id="resumeMarriage"
-							value="2"> <label>未婚</label>
+							value="0"> <label>未婚</label>
 					</div>
 				</div>
 			</div>
@@ -139,7 +139,7 @@
 			<div class="form-group">
 				<label for="resumePersonality" class="col-sm-3 control-label">特点描述：</label>
 				<div class="col-sm-8">
-					<textarea class="form-control ckeditor" name="resumePersonality"
+					<textarea class="form-control" name="resumePersonality"
 						id="resumePersonality"></textarea>
 				</div>
 			</div>
@@ -203,6 +203,15 @@
 						<option value="4">精通</option>
 					</select>
 				</div>
+			</div>
+			<div class="form-group">
+				<a for="" class="col-md-offset-9 control-label ">添加教育记录</a>
+			</div>
+			<div class="form-group">
+				<a for="" class="col-md-offset-9 control-label">添加工作记录</a>
+			</div>
+			<div class="form-group">
+				<a for="" class="col-md-offset-9 control-label">添加项目记录</a>
 			</div>
 			<div class="form-group">
 				<div class="col-md-offset-9">

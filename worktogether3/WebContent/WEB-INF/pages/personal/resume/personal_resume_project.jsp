@@ -33,7 +33,7 @@
 					<div class="form-group">
 						<label for="projectDescription" class="col-md-3 control-label">项目描述：</label>
 						<div class="col-md-8">
-							<textarea class="form-control" name="projectDescription"
+							<textarea class="form-control" name="projectMakeDescription"
 								id="projectDescription" /></textarea>
 						</div>
 					</div>

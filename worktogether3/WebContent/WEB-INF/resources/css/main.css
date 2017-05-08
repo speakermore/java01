@@ -16,9 +16,9 @@ hr{
 .work-together-red{
 	color:#fa941b;
 }
-.work-together-deep{
+/* .work-together-deep{
     	background-color: #f98905;
-}
+} */
 /*文字右对齐*/
 .work-together-right{
     	text-align: right;
@@ -28,9 +28,9 @@ hr{
 	color:#b2b0af;
 }
 /*背景的浅红色*/
-.work-together-shallow{
+/* .work-together-shallow{
     	background-color: #fe6000;
-}
+} */
 .navbar-default .navbar-text{
     		color:#fff;
 }
@@ -44,9 +44,10 @@ a:focus, a:hover{
 		color:#000;
 		background-color:#fcdab1;
 }
-body{
+ body{
 	padding-top:70px ;
-}
+} 
+
 /*
  * 指定导航栏上的字体颜色为白色
  */
@@ -66,9 +67,7 @@ body{
    .sidebar{
    	background-color: #eef8fd;
    }
-   .table-striped>tbody>tr:nth-of-type(odd) {
-    		background-color: #feeee4;
-	}
+
 .btn-success{
 	background-color: #fa941b;
 	border-color: #fd6001;

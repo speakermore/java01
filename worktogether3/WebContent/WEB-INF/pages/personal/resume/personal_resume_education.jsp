@@ -6,9 +6,9 @@
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="personal/resume/CreateEducation"
-				class="form-horizontal" method="post" id="educationForm">
-				<input type="hidden" name="resumeId" value="${resume.id }" /><br/>
+			<!-- action="personal/resume/ajaxCreateEducation" -->
+			<form  class="form-horizontal" method="post" action="personal/resume/CreateEducation"  id="educationForm">
+				<input type="hidden" name="resumeId" value="${resume.id }" /><br />
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
@@ -46,7 +46,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-success">保存</button>
+					<button type="submit" class="btn btn-success" >保存</button>
 				</div>
 			</form>
 		</div>

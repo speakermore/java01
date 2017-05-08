@@ -96,7 +96,8 @@ public class User implements Serializable{
 			this.userPassword=MD5Util.md5Encode(userPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+
+		}
 	}
 
 	public String getUserName() {

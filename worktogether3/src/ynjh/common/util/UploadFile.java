@@ -31,7 +31,7 @@ public class UploadFile {
 		String oldFileName = files[i].getOriginalFilename();
 		String suffix = "." + FilenameUtils.getExtension(oldFileName);
 		String newFileName = System.currentTimeMillis() + RandomUtils.nextInt(10000) + suffix;
-		newFileNames[i]=newFileName;
+		newFileNames[i]=new SimpleDateFormat("yyyyMMdd").format(new Date())+newFileName;
 		// 创建file，并且服务器三创建实际存在的文件
 		File upload = new File(path + "/" + newFileName);
 		if (!upload.exists()) {

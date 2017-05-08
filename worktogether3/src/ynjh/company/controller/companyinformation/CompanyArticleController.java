@@ -48,7 +48,7 @@ public class CompanyArticleController {
 	
 	@RequestMapping(value="/add_companyarticle",method=RequestMethod.POST)
 	public ModelAndView addArticle(Article article,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
+		Company company=(Company)session.getAttribute("user");
 		article.setUsersId(company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
 		article.setArticleUsersType(2);

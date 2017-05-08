@@ -19,5 +19,8 @@ public interface FollowMapper {
 	 * 查看关注
 	 */
 	public List<Follow> selectUserFollow(Integer followId);
-	
+	//查看关注者人数
+	public Integer selectUserFollowCount(Integer followId);
+	//查看被关注者人数
+	public Integer selectUserByFollowCount(Integer byFollowId);
 }
