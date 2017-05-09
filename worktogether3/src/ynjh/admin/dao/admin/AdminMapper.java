@@ -12,6 +12,7 @@ import ynjh.personal.entity.Work;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
+import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
@@ -94,7 +95,7 @@ public interface AdminMapper {
 	   * @Version: V1.00 （版本号）
 	   * @Create Date: 2017年4月21日上午10:48:30
 	 */
-	public List<Article> findAuditArticle(@Param("page") Integer page);// 查询审核文章
+	public List<AuditArticle> findAuditArticle(@Param("page") Integer page);// 查询审核文章
 	/**
 	 * 
 	 * 审核文章评论
@@ -240,7 +241,7 @@ public interface AdminMapper {
 
 	public CommentArticle findAuditCommentsArticleById(Integer id);// 查询审核文章评论依据id
 
-	public Article findAuditArticleById(Integer id);// 查询审核文章依据id
+	public AuditArticle findAuditArticleById(Integer id);// 查询审核文章依据id
 	/**
 	 * 审核--查询审核简历ById
 	 * @author 周富强

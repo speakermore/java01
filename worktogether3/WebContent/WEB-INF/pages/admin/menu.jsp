@@ -24,7 +24,7 @@
     		<li><a href=""><span>审核类型</span></a></li>
     		<li><a href="admin/findAuditResume/${1}"><span>审核简历</span></a></li>
     		<li><a href="admin/findAuditArticle/${1}"><span>审核文章</span></a></li>
-    		<li><a href="admin/auditArticleComment"><span>审核文章评论</span></a></li>
+    		<li><a href="admin/findAuditCommentsArticle/1"><span>审核文章评论</span></a></li>
     		<li><a href="admin/auditCompanyComment"><span>审核个人企业互评</span></a></li>
     		<li><a href="admin/auditRecruitMent"><span>审核招聘信息</span></a></li>
     		<li><a href="admin/findAuditCompany"><span>审核企业资质</span></a></li>

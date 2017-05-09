@@ -20,7 +20,7 @@
 	<div><%@include file="superAdminHome.jsp"%></div>
 	<div class="col-md-offset-4">
 		<div class="row">
-			<div class="col-sm-10" style="border: 1px solid black">
+			<div class="col-sm-10">
 				<div class="row" style="background-color: #CCCCCC;">
 					<div class="col-sm-12">
 						

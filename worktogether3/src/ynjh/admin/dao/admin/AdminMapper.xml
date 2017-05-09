@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update resume set resumeStatusThree=#{resumeStatusThree}  where id=#{id}
 	</update>
 	
-	<update id="auditArticle" parameterType="Article"><!-- 文章审核 -->
+	<update id="auditArticle"><!-- 文章审核 -->
 		update article set articleStatus=#{articleStatus} where id=#{articleId}
 	</update>
 	
@@ -89,12 +89,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from resume order by resumeStatusThree,resumeCreateDate desc
 	</select>
 	
-	<select id="findAuditArticle" resultType="Article"><!-- 查询文章审核 -->
-		select * from article where articleStatus=1 order by articleTime limit #{page},10 
+	<select id="findAuditArticle" resultType="AuditArticle"><!-- 查询文章审核 -->
+		select a.*,u.userLoginId,u.userName from article a,`user` u where a.usersId=u.id order by a.articleTime,a.articleStatus limit #{page},10 
 	</select>
 	
 	<select id="findAuditCommentsArticle" resultType="CommentArticle"><!-- 查询文章评论审核 -->
-		select * from commentArticle where commentArticleStatus=1 limit #{page},10 order by commentArticleTime
+		select * from commentArticle order by commentArticleStatus,commentArticleTime desc limit #{page},10
 	</select>
 	
 	<select id="findAuditCompany" resultType="Company"><!-- 查询企业资质审核 -->
@@ -161,8 +161,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from resume where id=#{id}
 	</select>
 	
-	<select id="findAuditArticleById" resultType="Article" parameterType="int"><!-- 查询文章审核ById -->
-		select * from article where id=#{id}
+	<select id="findAuditArticleById" resultType="AuditArticle" parameterType="int"><!-- 查询文章审核ById -->
+		select a.*,u.userLoginId,u.userName from article as a,`user` as u where a.id=#{id} and a.usersId=u.id
 	</select>
 	
 	<select id="findAuditCommentsArticleById" resultType="CommentArticle" parameterType="int"><!-- 查询文章评论审核ById -->
@@ -199,7 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 5条文章显示 -->
 	<select id="find5Articles" resultType="AuditArticle">
-		select a.*,group_concat(DISTINCT u.userName) userName,group_concat(DISTINCT c.companyName) companyName 
+		select a.*,u.userLoginId,u.userName,c.companyName 
 		from article a,`user` u,company c 
 		where a.articleStatus=1 and ((case when  a.articleUsersType=2 then a.usersId=u.id end) or (case when a.articleUsersType=1 then c.id=a.usersId end)) 
 		group by a.id
@@ -224,5 +224,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 查询培训经历 -->
 	<select id="findResumeEducation" parameterType="String" resultType="Education">
 		select * from education where resumeId=#{resumeId} order by educationBeginTime
+	</select>
+	<!-- 查询管理员，通过帐号 -->
+	<select id="findLoginByAdminLoginId" parameterType="String" resultType="Admin">
+		select * from admin where adminLoginId=#{adminloginId}
 	</select>
 </mapper>

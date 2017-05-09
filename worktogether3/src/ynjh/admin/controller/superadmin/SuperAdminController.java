@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.admin.entity.Admin;
+import ynjh.admin.service.AdminService;
 import ynjh.admin.service.SuperAdminService;
 import ynjh.common.util.MD5Util;
 
@@ -20,6 +22,8 @@ import ynjh.common.util.MD5Util;
 public class SuperAdminController {
 	@Resource
 	private SuperAdminService superAdminService;
+	@Resource
+	private AdminService adminService;
 	
 	/*
 	 * 显示所有管理员页面
@@ -32,7 +36,7 @@ public class SuperAdminController {
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("list",list);
 		mv.addObject("page", page);
-		mv.setViewName("superadmin/findAll");//页面未写
+		mv.setViewName("admin/superadmin/findAll");//页面未写
 		return mv;
 	}
 	
@@ -80,10 +84,10 @@ public class SuperAdminController {
 		ModelAndView mv=new ModelAndView();
 		if(result>0){
 			mv.addObject("resultInfo","添加管理员成功!");
-			mv.setViewName("superadmin/findAll");
+			mv.setViewName("admin/superadmin/findAll");
 		}else{
 			mv.addObject("resultInfo","操作失败");
-			mv.setViewName("superadmin/findAll");//页面未写
+			mv.setViewName("admin/superadmin/findAll");//页面未写
 		}
 		return mv;
 	}
@@ -101,6 +105,17 @@ public class SuperAdminController {
 	 */
 	@RequestMapping(value="/superAdminAddUser",method=RequestMethod.GET)
 	public String superAdminAddUser(){
-		return "superadmin/superAdminAddUser";
+		return "admin/superadmin/superAdminAddUser";
+	}
+	
+	@RequestMapping("/testAdminLoginId")
+	@ResponseBody
+	public String testAdminLoginId(String adminLoginId){
+		Integer result=adminService.findAdminByAdminLoginId(adminLoginId);
+		if(result==1){
+			return "true";
+		}else{
+			return "false";
+		}
 	}
 }
