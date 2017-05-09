@@ -1,6 +1,11 @@
 package ynjh.personal.service;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import ynjh.company.entity.Company;
+import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
@@ -31,7 +36,20 @@ public interface UserService {
 	// 搜索
 	public List<String>	Search(String str);
 	//软件人才列表
-	public List<UserAndResume> findUserList(Integer page);
+	public List<UserAndResume> findUserList(Integer page,String userLoginId);
 	//软件人才列表总数据
 	 public Integer getMaxUserList();
+		/**
+		 * 企业列表
+		 */
+		public List<CompanyList> findCompanyList( Integer page);
+
+		/**
+		 * 企业列表总数据
+		 */
+		public Integer getMaxCompanyList();
+		/**
+		 * 企业详细
+		 */
+		public CompanyList findCompanyById(Integer id);
 }

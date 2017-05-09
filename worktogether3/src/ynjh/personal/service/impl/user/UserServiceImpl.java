@@ -3,7 +3,10 @@ package ynjh.personal.service.impl.user;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import ynjh.company.entity.Company;
 import ynjh.personal.dao.user.UserMapper;
+import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
@@ -113,7 +116,7 @@ public class UserServiceImpl implements UserService {
 	 * 软件人才列表
 	 */
 	@Override
-	public List<UserAndResume> findUserList(Integer page) {
+	public List<UserAndResume> findUserList(Integer page,String userLoginId) {
 		if (page == null) {
 			page = 1;
 		}
@@ -125,7 +128,7 @@ public class UserServiceImpl implements UserService {
 		if (page > maxPage) {
 			page = maxPage;
 		}
-		return userMapper.findUserList((page - 1) * 20);
+		return userMapper.findUserList((page - 1) * 20,userLoginId);
 	}
 	/**
 	 * 软件人才列表总数据
@@ -137,6 +140,33 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return (userMapper.getMaxUserList() + 20 - 1) / 20;
 		}
+	}
+	@Override
+	public List<CompanyList> findCompanyList(Integer page) {
+		if (page == null) {
+			page = 1;
+		}
+		if (page < 1) {
+			page = 1;
+		}
+		int maxPage = getMaxUserList();
+
+		if (page > maxPage) {
+			page = maxPage;
+		}
+		return userMapper.findCompanyList((page - 1) * 20);
+	}
+	@Override
+	public Integer getMaxCompanyList() {
+		if (userMapper.getMaxCompanyList() <= 0) {
+			return 1;
+		} else {
+			return (userMapper.getMaxCompanyList() + 20 - 1) / 20;
+		}
+	}
+	@Override
+	public CompanyList findCompanyById(Integer id) {
+		return userMapper.findCompanyById(id);
 	}
 
 }

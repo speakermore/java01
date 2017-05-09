@@ -2,6 +2,8 @@ package ynjh.personal.dao.follow;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.personal.entity.Follow;
 
 public interface FollowMapper {

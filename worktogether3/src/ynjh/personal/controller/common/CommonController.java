@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
+import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -20,6 +21,7 @@ import ynjh.personal.entity.Mood;
 import ynjh.personal.entity.News;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
+import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.Work;
 import ynjh.personal.service.ArticleService;
@@ -88,14 +90,23 @@ public class CommonController {
 		Offer offer =nService.findNewsFaceByUserId(userId);
 		session.setAttribute("offer", offer);
 		
-		//获取软件人才对象信息
-		List<UserAndResume> userAndResumes =uService.findUserList(toPage);
-		session.setAttribute("userAndResumes", userAndResumes);
-		
+		//获取已经关注的对象
+		List<Follow> followes=fService.selectUserFollow(userId);
+		session.setAttribute("followes", followes);
 		
 		mv.addObject("curPage", toPage);
 		return mv;
 	}
+	
+	@RequestMapping(value="gotoCompanyById",method=RequestMethod.GET)
+	public ModelAndView gotoCompanyById(Integer id){
+		ModelAndView mv=new ModelAndView("company/article/company_index");
+		CompanyList user=uService.findCompanyById(id);
+		mv.addObject("user", user);
+		return mv;
+	}
+	
+	
 
 	@RequestMapping(value = "/deleteRecord", method = RequestMethod.GET)
 	public ModelAndView deleteRecord(Integer toPage, Integer userId, HttpSession session) {

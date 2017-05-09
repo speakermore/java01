@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 public class UserAndResume implements Serializable{
 		//用户id
 		private Integer id;
+		//用户名
+		private String userLoginId;
 		// 昵称
 		private String userName;
 		// 性别
@@ -95,5 +97,11 @@ public class UserAndResume implements Serializable{
 		}
 		public void setResumeWorks(Integer resumeWorks) {
 			this.resumeWorks = resumeWorks;
+		}
+		public String getUserLoginId() {
+			return userLoginId;
+		}
+		public void setUserLoginId(String userLoginId) {
+			this.userLoginId = userLoginId;
 		}
 }

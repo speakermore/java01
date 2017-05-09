@@ -5,16 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.personal.dao.follow.FollowMapper">
 <!-- 添加关注 -->
 	<insert id="addUserFollow" parameterType="Follow">
-		insert into follow (followId,byFollowId,followDate,followStartType) value(#{followId},#{byFollowId},#{followDate},#{followStartType})
+		insert into follow (followId,byFollowId,followDate,followStartType,followType) value(#{followId},#{byFollowId},#{followDate},#{followStartType},#{followType})
 	</insert>
 <!--取消关注  -->
 	<delete id="deleteUserFollow">
-		delete from follow where followId=#{followId} and byFollowId=#{byFollowId}
+		delete from follow where id=#{id}
 	</delete>
 <!--查看关注-->
 	<select id="selectUserFollow" parameterType="Integer" resultType="Follow">
-		select * from follow where followId=#{followId}
-	</select> 
+		select f.*,r.resumeJor,r.resumeWorks,r.resumeEducation,u.userRealName,u.userGender,u.userBirthday from follow f,resume r,user u where f.followId=#{followId} and u.id=r.userId and u.id=f.byFollowId 	</select> 
 	<!--查看关注的人数-->
 	<select id="selectUserFollowCount" parameterType="Integer" resultType="Integer">
 		select count(*) from follow where followId=#{followId}

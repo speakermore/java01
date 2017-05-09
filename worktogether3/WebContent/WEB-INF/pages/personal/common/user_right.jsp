@@ -136,7 +136,7 @@ span.emotion:hover {
 		<section class="panel">
 			<div class="panel-body">
 				<ul class="nav nav-pills ">
-					<li class="active"><a href="#"><span
+					<li class="active"><a href="personal/follow/gotoFollow?followId=${user.id }"><span
 							class="badge pull-right">${follows }</span>我的关注</a></li>
 					<li class="active"><a href="#"> <span
 							class="badge pull-right">${byFollows }</span>我的粉丝

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -27,7 +28,10 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
+import ynjh.company.entity.Company;
+import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
 import ynjh.personal.service.UserService;
 
@@ -83,9 +87,16 @@ public class UserController {
 		} else {
 			// 验证成功
 			if (user == null) {
+				//获取软件人才对象信息
 				mv.addObject("errorInfo", "用户名或密码不正确");
 				mv.setViewName("personal/user/personal_login");
 			} else {
+				//查看软件人才列表
+				List<UserAndResume> userAndResumes =uService.findUserList(1,userLoginId);
+				session.setAttribute("userAndResumes", userAndResumes);
+				//查看企业列表
+				List<CompanyList> companyeList =uService.findCompanyList(1);
+				session.setAttribute("companyeList", companyeList);
 				session.setAttribute("user", user);
 				mv.addObject("user", user);
 				/* mv.setViewName("personal/user/personal_index"); */
@@ -129,8 +140,9 @@ public class UserController {
 	 * 		String
 	 */
 	@RequestMapping(value = "/gotoIndex", method = RequestMethod.GET)
-	public String gotoIndex() {
-		return "personal/user/personal_index";
+	public String gotoIndex(HttpSession session) {
+		User user=(User) session.getAttribute("user");
+		return "redirect:../common/initIndex?toPage=1&userId=" + user.getId();
 	}
 
 	/**
@@ -185,6 +197,13 @@ public class UserController {
 	@RequestMapping("/gotoSoft")
 	public String gotoSoft(){
 		return "personal/user/personal_userlist";
+	}
+	/**
+	 * 跳转名企招聘界面
+	 */
+	@RequestMapping("/gotoCompany")
+	public String gotoCompany(){
+		return "personal/user/personal_companylist";
 	}
 
 	/**
@@ -376,7 +395,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		return "personal/user/personal_userlist";
+		return "personal/user/personal_companylist";
 	}
 
 	/**

@@ -18,7 +18,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="personal/user/gotoIndex">首页</a></li>
 				<li><a href="personal/user/gotoSoft">软件人才</a></li>
-				<li><a href="#">名企招聘</a></li>
+				<li><a href="personal/user/gotoCompany">名企招聘</a></li>
 				<li><a href="#">技术众筹</a></li>
 				<li><a href="#">认证培训</a></li>
 				<li><a href="#">自主创业</a></li>

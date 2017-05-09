@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>名企招聘</title>
+<title>我的关注</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
@@ -13,7 +13,19 @@
 		<div class="row clearfix">
 			<div class="col-md-1 column"></div>
 			<div class="col-md-10 column">
-				<table class="table">
+			<div class="tabbable" id="tabs-userList">
+				<ul class="nav nav-tabs">
+					<li>
+						 <a href="#panel-user" data-toggle="tab">我关注的用户</a>
+					</li>
+					<li class="active">
+						 <a href="#panel-company" data-toggle="tab">我关注的企业</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane" id="panel-user">
+						<p>
+							<table class="table">
 				<colgroup>
 						<col style="width: 30%">
 						<col style="width: 10%">
@@ -49,43 +61,50 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${userAndResumes }" var="uar">
+				<c:forEach items="${followss }" var="fol">
 					<tr>
 						<td>
-							<a href="#">${uar.resumeJor }</a>
+							<a href="#">${fol.resumeJor }</a>
 						</td>
 						<td>
-							${uar.userRealName }
+							${fol.userRealName }
 						</td>
 						<td>
-							${SEX[uar.userGender] }
+							${SEX[fol.userGender] }
 						</td>
 						<td>
-							${uar.userBirthday }
+							${fol.userBirthday }
 						</td>
 						<td>
-							${uar.resumeWorks }
+							${fol.resumeWorks }
 						</td>
 						<td>
-							${uar.resumeEducation }
+							${fol.resumeEducation }
 						</td>
 						<td>
-							<c:if test="${user.userLoginId==uar.userLoginId }">已关注</c:if>
-							<c:if test="${user.userLoginId!=uar.userLoginId }">
-							<a href="javascript:ajaxFollow(${uar.id })">关注</a></c:if>
+							<a href="javascript:ajaxDeleteFollow(${fol.id })">取消关注</a>
 						</td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+						</p>
+					</div>
+					<div class="tab-pane active" id="panel-company">
+						<p>
+							<%@include file="/WEB-INF/pages/personal/follow/personal_company_followlist.jsp" %>
+						</p>
+					</div>
+				</div>
+			</div>
 			</div>
 			<div class="col-md-1 column"></div>
 		</div>
 	</div>
 	<script type="text/javascript">
-			var ajaxFollow=function(id){
+			var ajaxDeleteFollow=function(id){
 				$.ajax({
-					url:"personal/follow/addUserFollow?byFollowId="+id,
+					url:"personal/follow/cancelUserFollow?byFollowId="+id,
 					dataType:"json",
 					success:function(data){
 						alert(data.operatorInfo);
