@@ -13,4 +13,8 @@ public class CommonStatus {
 	public static final String[] USER_TYPE={"","企业","个人"};
 	//婚配
 	public static final String[] MARRY={"已婚","未婚"};
+	//企业类型
+	public static final String[] COMPANY_TYPE={"","政府机构","国有企业","民营企业","其他"};
+	//企业规模
+	public static final String[] COMPANY_SIZE={"","20人","50人","80人","100人","150人","200人","200人以上"};
 }

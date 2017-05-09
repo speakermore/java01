@@ -11,6 +11,6 @@ public interface CompanyService {
 	public Company login(String companyLoginId,String companyPassword);
 	//根据id查询
 	public Company findCompany(Integer id);
-	public Integer addCompanyDetailId(Integer id,String companyDetailImg);
+	public Integer addCompanyDetailId(Integer id,String companyDetailImg,Integer companyDetailDisc);
 	
 }

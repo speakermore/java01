@@ -1,26 +1,13 @@
 package ynjh.company.controller.company;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.company.entity.Company;
@@ -78,7 +65,7 @@ public class CompanyController {
 	@RequestMapping(value="/addCompany",method=RequestMethod.POST)
 	public ModelAndView addCompany(String companyLoginId,String companyPassword,String realCompanyPassword){
 		ModelAndView mv=new ModelAndView("company/info");
-		if(realCompanyPassword.equals(realCompanyPassword)){
+		
 			Company company=new Company();
 			company.setCompanyPassword(companyPassword);
 			company.setCompanyLoginId(companyLoginId);
@@ -91,10 +78,6 @@ public class CompanyController {
 				mv.addObject("operatorInfo","用户注册失败");
 				mv.addObject("toPage", "company/company/add");
 			}	
-		}else{
-			mv.addObject("operatorInfo","用户密码不一致");
-			mv.addObject("toPage", "company/company/add");
-		}
 		return mv;
 	}
 	
@@ -110,26 +93,26 @@ public class CompanyController {
 	
 	//修改用户资料
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,@RequestParam MultipartFile[] companyDetails){
+	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,MultipartFile licenseImg,@RequestParam MultipartFile[] companyImgs){
 		ModelAndView mv=new ModelAndView();
 		int resultDetail=0;
 		
-		Company user=(Company)session.getAttribute("user");
-		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img/",user.getCompanyLoginId());
+		String userPath=UploadFile.getUserImgPath("WEB-INF/resources/company/img",company.getCompanyLoginId());
 		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
-		
-			String[] fileNames=UploadFile.uploadFile(userPath,companyDetails, session);
-			for(String fileName:fileNames){
-				companyService.addCompanyDetailId(company.getId(), fileName);
+		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
+			String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
+			for(int i=0;i<fileNames.length;i++){
+				companyService.addCompanyDetailId(company.getId(), fileNames[i],i);
 				resultDetail+=1;
 			}
 		
 		company.setCompanyLogo(companyLogo[0]);
+		company.setCompanyLicenseImg(companyLicenseImg[0]);
 		int result=companyService.updateCompany(company);
-		if(result>0&&resultDetail>=(companyDetails.length-1)){
+		if(result>0&&resultDetail>=(companyImgs.length-1)){
 			mv.addObject("operatorInfo","用户修改成功");
 			session.setAttribute("company", company);
-			mv.addObject("toPage", "company/company/findById/"+company.getId());
+			mv.addObject("toPage", "direct:company/company/findById/"+company.getId());
 			mv.setViewName("company/info");
 		}else{
 			mv.addObject("operatorInfo","用户修改失败");

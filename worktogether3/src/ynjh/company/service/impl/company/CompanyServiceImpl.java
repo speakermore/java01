@@ -32,8 +32,29 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 
 	@Override
-	public Integer addCompanyDetailId(Integer companyId, String companyDetailImg) {
-		return companyMapper.addCompanyDetailImg(companyId, companyDetailImg);
+	public Integer addCompanyDetailId(Integer companyId, String companyDetailImg,Integer companyDetailDiscInt) {
+		String companyDetailDisc="";
+		switch(companyDetailDiscInt){
+		case 0:companyDetailDisc="大门";
+			break;
+		case 1:
+			companyDetailDisc="前台";
+			break;
+		case 2:
+			companyDetailDisc="办公区";
+			break;
+		case 3:
+			companyDetailDisc="会议室";
+			break;
+		case 4:
+			companyDetailDisc="休息区";
+			break;
+		case 5:companyDetailDisc="其他";
+			break;
+		default:
+		}
+		
+		return companyMapper.addCompanyDetailImg(companyId, companyDetailImg,companyDetailDisc);
 	}
 	
 }

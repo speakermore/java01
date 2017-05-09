@@ -17,45 +17,27 @@
 <body>
 <ul class="nav nav-pills nav-stacked wt-ly" >
 				<li>
-					 <a href="company/artanddis/">首页</a>
+					 <a href="company/artanddis/company_index">首页</a>
 				</li>
 				<li>
-					 <a href="company/company/findById/${company.id }">我的资料</a>
+					 <a href="company/company/company_data">我的资料</a>
 				</li>
 				<li>
-					 <a href="company/charge/company_charge/${company.id }">我的钱包</a>
+					 <a href="company/charge/companyCharge/${user.id}">我的钱包</a>
 				</li>
 				<li>
 					 <a href="company/charge/charge">充值</a>
 				</li>
 				<li>
-					 <a href="#">帮助中心</a>
+					<a href="company/artanddis/add_companyarticle">新闻发布</a>
 				</li>
+				<!-- <li>
+					 <a href="#">帮助中心</a>
+				</li> -->
 				<li>
 					 <a href="company/cmprs/companyRecruit/">发布招聘信息</a>
 				</li>
-				<li class="disabled">
-					 <a href="#">信息</a>
-				</li>
-				<li class="dropdown pull-right">
-					 <a href="#" data-toggle="dropdown" class="dropdown-toggle">下拉<strong class="caret"></strong></a>
-					<ul class="dropdown-menu">
-						<li>
-							 <a href="#">操作</a>
-						</li>
-						<li>
-							 <a href="#">设置栏目</a>
-						</li>
-						<li>
-							 <a href="#">更多设置</a>
-						</li>
-						<li class="divider">
-						</li>
-						<li>
-							 <a href="#">分割线</a>
-						</li>
-					</ul>
-				</li>
+				
 			</ul>
 
 </body>
