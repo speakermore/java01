@@ -98,7 +98,7 @@
 											<td><a title="点击查看详情"
 												href="admin/findAuditArticleById?id=${arti.id}">${arti.articleTitle}
 											</a></td>
-											<td>${arti.usersId}</td>
+											<td>${arti.userLoginId}</td>
 											<c:if test="${arti.articleUsersType==2 }">
 												<td>${arti.userName}</td>
 											</c:if>

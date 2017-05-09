@@ -17,15 +17,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
+import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
@@ -171,7 +173,7 @@ public class AdminController {
 				mv.addObject("admin", admin);
 				session.setAttribute("admin", admin);
 				if(admin.getAdminStatus()==2){
-					mv.setViewName("superadmin/findAll");
+					mv.setViewName("admin/superadmin/findAll");
 				}else{	
 				mv.setViewName("admin/index");
 				}
@@ -450,7 +452,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/findAuditArticle/{page}")
 	public ModelAndView findAuditArticle(@PathVariable Integer page) {
-		List<Article> articles = adminService.findAuditArticle(page);
+		List<AuditArticle> articles = adminService.findAuditArticle(page);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("article", articles);
 		mv.addObject("page", page);
@@ -567,18 +569,15 @@ public class AdminController {
 	 *            信息状态
 	 * @return
 	 */
-	@RequestMapping("/auditArticle")
-	public ModelAndView auditArticle(Integer articleId, Integer articleStatus) {
+	@RequestMapping("/auditArticle/{articleId}/{articleStatus}")
+	public ModelAndView auditArticle(@PathVariable Integer articleId,@PathVariable Integer articleStatus) {
 		int result = adminService.auditArticle(articleId, articleStatus);
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
-			mv.addObject("", "审核成功");
-			mv.addObject("", "");
-			mv.setViewName("");
+			mv.setViewName("admin/auditArticle");
 		} else {
-			mv.addObject("", "审核失败");
-			mv.addObject("", "");
-			mv.setViewName("");
+			mv.addObject("info", "审核失败,未能找到审核文章");
+			mv.setViewName("admin/auditArticle");
 		}
 		return mv;
 	}
@@ -595,19 +594,16 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/auditCommentsArticle")
-	public ModelAndView auditCommentsArticle(Integer id, Integer commentArticleStatus) {
+	@ResponseBody
+	public String auditCommentsArticle(Integer[] id, Integer commentArticleStatus) {
 		int result = adminService.auditCommentsArticle(id, commentArticleStatus);
-		ModelAndView mv = new ModelAndView();
+		String commentResult="";
 		if (result > 0) {
-			mv.addObject("", "审核成功");
-			mv.addObject("", "");
-			mv.setViewName("");
+			commentResult="true";
 		} else {
-			mv.addObject("", "审核失败");
-			mv.addObject("", "");
-			mv.setViewName("");
+			commentResult="false";
 		}
-		return mv;
+		return commentResult;
 	}
 
 	/**
@@ -994,7 +990,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/findAuditArticleById")
 	public ModelAndView findAuditArticleById(Integer id) {
-		Article articles = adminService.findAuditArticleById(id);
+		AuditArticle articles = adminService.findAuditArticleById(id);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("article", articles);
 		mv.setViewName("admin/auditing/auditingArticle");
@@ -1018,7 +1014,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentarticle", commentarticles);
 		mv.addObject("page", page);
-		mv.setViewName("admin/auditArticleComment");
+		mv.setViewName("admin/audit/auditArticleComment");
 		return mv;
 	}
 

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
+import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
@@ -35,9 +36,9 @@ public interface AdminService {
 	//审核文章
 	public Integer auditArticle(Integer articleId,Integer articleStatus);
 	//查询审核文章
-	public List<Article> findAuditArticle(@Param("page") Integer page);
+	public List<AuditArticle> findAuditArticle(@Param("page") Integer page);
 	//审核文章评论
-	public Integer auditCommentsArticle(Integer id,Integer commentsArticleStatus);
+	public Integer auditCommentsArticle(Integer[] id,Integer commentsArticleStatus);
 	//查询审核文章评论
 	public List<CommentArticle> findAuditCommentsArticle(Integer page);
 	//审核企业资质
@@ -63,7 +64,7 @@ public interface AdminService {
 	//查询审核简历ById
 	public Resume findAuditResumeById(Integer id);
 	//查询审核文章ById
-	public Article findAuditArticleById(Integer id);
+	public AuditArticle findAuditArticleById(Integer id);
 	//查询审核文章评论ById
 	public CommentArticle findAuditCommentsArticleById(Integer id);
 	//查询审核企业资质ById
@@ -162,6 +163,8 @@ public interface AdminService {
     
     //系统消息推送
     public Integer addMessage(SystemMessage systemMessage);
+    //查找管理员，通过管理员帐号
+	public Integer findAdminByAdminLoginId(String adminLoginId);
 
     
 }	

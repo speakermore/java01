@@ -17,6 +17,7 @@ import ynjh.admin.dao.companyvisitcount.CompanyVisitCountMapper;
 import ynjh.admin.dao.uservisitcount.UserVisitCountMapper;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
+import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
@@ -109,9 +110,9 @@ public class AdminServiceImpl implements AdminService {
 	   * @Create Date: 2017年4月21日上午10:48:30
 	 */
 	@Override
-	public List<Article> findAuditArticle(Integer page) {
+	public List<AuditArticle> findAuditArticle(Integer page) {
 		 
-		return adminMapper.findAuditArticle((page-1)*10);
+		return adminMapper.findAuditArticle((page-1)*0);
 	}
 
 	/**
@@ -123,9 +124,16 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public Integer auditCommentsArticle(Integer id, Integer commentsArticleStatus) {
-		 
-		return adminMapper.auditCommentsArticle(id, commentsArticleStatus);
+	public Integer auditCommentsArticle(Integer[] id, Integer commentsArticleStatus) {
+		if(id==null){
+			return -1;
+		}else{
+			int i=0;
+			for(;i<id.length;i++){
+				adminMapper.auditCommentsArticle(id[i],commentsArticleStatus);
+			}
+			return i+1;
+		}
 	}
 
 	/**
@@ -140,7 +148,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<CommentArticle> findAuditCommentsArticle(Integer page) {
 		 
-		return adminMapper.findAuditCommentsArticle(page);
+		return adminMapper.findAuditCommentsArticle((page-1)*10);
 	}
 
 	/**
@@ -673,7 +681,7 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public Article findAuditArticleById(Integer id) {
+	public AuditArticle findAuditArticleById(Integer id) {
 		 
 		return adminMapper.findAuditArticleById(id);
 	}
@@ -841,6 +849,16 @@ public class AdminServiceImpl implements AdminService {
 			return adminMapper.findResumeEducation(resumeId);
 		}else{
 			return null;
+		}
+	}
+
+	@Override
+	public Integer findAdminByAdminLoginId(String adminLoginId) {
+		Admin admin = adminMapper.findLoginByAdminLoginId(adminLoginId);
+		if(admin!=null){
+			return 1;
+		}else{
+			return 0;
 		}
 	}
 	
