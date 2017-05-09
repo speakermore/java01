@@ -2,6 +2,7 @@ package ynjh.personal.service;
 
 import java.util.List;
 import ynjh.personal.entity.User;
+import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
 /**
  * 
@@ -29,4 +30,8 @@ public interface UserService {
 	public Integer addUserCharge(UserCharge userCharge);
 	// 搜索
 	public List<String>	Search(String str);
+	//软件人才列表
+	public List<UserAndResume> findUserList(Integer page);
+	//软件人才列表总数据
+	 public Integer getMaxUserList();
 }

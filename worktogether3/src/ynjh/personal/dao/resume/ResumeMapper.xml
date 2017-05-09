@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resume(userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
 		resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
 		resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
-		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg)
+		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg,resumeWorks)
 		values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
 		#{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
 		#{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
-		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg})
+		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg},#{resumeWorks})
 	</insert>
 	<!-- 修改简历 -->
 	<update id="updateResume" parameterType="Integer">
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumeTitle=#{resumeTitle},resumeName=#{resumeName},resumeGender=#{resumeGender},resumeNation=#{resumeNation},
 		resumePlace=#{resumePlace},resumeBirthday=#{resumeBirthday},resumeMarriage=#{resumeMarriage},resumeGraduationSchool=#{resumeGraduationSchool},resumeGraduationTime=#{resumeGraduationTime},
 		resumeEducation=#{resumeEducation},resumeMajor=#{resumeMajor},resumeWages=#{resumeWages},resumePhone=#{resumePhone},resumeQQ=#{resumeQQ},resumePersonality=#{resumePersonality},
-		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeHeadImg=#{resumeHeadImg}
+		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeHeadImg=#{resumeHeadImg},resumeWorks=#{resumeWorks}
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->
@@ -157,9 +157,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from project where userId=#{userId} and resumeType=4
 	</select>
 	<!-- 分页结束 -->
-	
-	
-	<!-- 查看公司发布的招聘信息开始 -->
-	
-	<!-- 查看公司发布的招聘信息结束 -->
+	<!-- 发送简历 -->
+	<!-- <insert id="">
+		insert into 
+	</insert> -->
+
 </mapper>

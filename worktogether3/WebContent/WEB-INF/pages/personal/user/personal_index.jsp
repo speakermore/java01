@@ -7,10 +7,10 @@
 <%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
 <%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 <style type="text/css">
-table {
-	margin: 20px;
-}
-</style>
+.col-md-7,.col-md-5{
+margin: 0px;
+padding: 0px;
+}</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>

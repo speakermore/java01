@@ -66,9 +66,17 @@ public class Resume implements Serializable{
 	private String resumeJor;
 	//头像
 	private String resumeHeadImg;
+	//工作年限
+	private Integer resumeWorks;
 	
 	
 	
+	public Integer getResumeWorks() {
+		return resumeWorks;
+	}
+	public void setResumeWorks(Integer resumeWorks) {
+		this.resumeWorks = resumeWorks;
+	}
 	public String getResumeHeadImg() {
 		return resumeHeadImg;
 	}

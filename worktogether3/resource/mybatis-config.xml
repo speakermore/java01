@@ -51,6 +51,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="ynjh/personal/dao/commentarticle/CommentArticleMapper.xml" />
 		<mapper resource="ynjh/personal/dao/follow/FollowMapper.xml" />
 		<mapper resource="ynjh/personal/dao/resume/ResumeMapper.xml" />
+		<mapper resource="ynjh/personal/dao/newly/NewlyMapper.xml" />
+		<mapper resource="ynjh/personal/dao/mood/MoodMapper.xml" />
 		<!-- <mapper resource="ynjh/admin/dao/admin/AdminMapper.xml"/>
 		<mapper resource="ynjh/admin/dao/adminlog/AdminLogMapper.xml"/>
 		<mapper resource="ynjh/admin/dao/companyvisitcount/CompanyVisitCountMapper.xml"/>

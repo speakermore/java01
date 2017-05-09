@@ -303,7 +303,7 @@
 		/* 	$("#time").blur(function() {
 				alert(typeof ("#time"))
 			}); */
-		$('input').each(function() {
+		/* $('input').each(function() {
 			var self = $(this), label = self.next(), label_text = label.text();
 			label.remove();
 			self.iCheck({
@@ -311,7 +311,7 @@
 				radioClass : 'iradio_line-orange',
 				insert : '<div class="icheck_line-icon"></div>' + label_text
 			});
-		});
+		}); */
 		$("#resumeForm").bootstrapValidator({
 			message : '这个值不能通过验证！！',
 			feedbackIcons : {

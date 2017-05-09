@@ -31,7 +31,7 @@
 		</section>
 		<section class="panel">
 			<div class="panel-body">
-				@xxx公司发送了<<<a href="#">最新职位</a>>>
+			你收到${offer.companyName }的职位邀请<<<a href="#">${offer.offerJob }</a>>>
 			</div>
 			<div class="panel-footer work-together-right">
 				1分钟前.<a href="#">更多....</a>
