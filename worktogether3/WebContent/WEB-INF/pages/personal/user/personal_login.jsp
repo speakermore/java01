@@ -92,7 +92,7 @@
 										.attr(
 												"src",
 												path
-														+ "personal/user/codeValidate?time="
+														+ "admin/codeValidate?time="
 														+ new Date().getTime());
 							});
 

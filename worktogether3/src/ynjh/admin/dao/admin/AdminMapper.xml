@@ -199,7 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 5条文章显示 -->
 	<select id="find5Articles" resultType="AuditArticle">
-		select a.*,u.userLoginId,u.userName,c.companyName 
+		select a.*,group_concat(DISTINCT u.userLoginId) usersId,group_concat(DISTINCT u.userName) userName,group_concat(DISTINCT c.companyName) companyName
 		from article a,`user` u,company c 
 		where a.articleStatus=1 and ((case when  a.articleUsersType=2 then a.usersId=u.id end) or (case when a.articleUsersType=1 then c.id=a.usersId end)) 
 		group by a.id
