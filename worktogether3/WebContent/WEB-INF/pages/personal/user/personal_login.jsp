@@ -54,7 +54,7 @@
 						<div id="validateCodeToolTip" >${operatorInfo }</div></c:if>
 					</div>
 					<img id="validateCode" alt="validateCode "
-						src="personal/user/codeValidate?time=<%=new Date().getTime()%>" />
+						src="admin/codeValidate?time=<%=new Date().getTime()%>" />
 
 					<a class="btn btn-default" href="javascript:void(0)" role="button"
 						class="btn btn-primary btn-sm">看不清，换一张</a>

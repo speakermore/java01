@@ -36,8 +36,8 @@ import ynjh.personal.entity.UserCharge;
 import ynjh.personal.service.UserService;
 
 /**
- * 
- * @author dage 用户信息的控制器
+ * 用户信息的控制器
+ * @author 刘志浩 
  */
 @Controller
 @RequestMapping("/personal/user")
@@ -401,108 +401,5 @@ public class UserController {
 	public String test() {
 		return "personal/user/personal_companylist";
 	}
-
-	/**
-	 * 获取验证码
-	 * 
-	 * @author 朱吉
-	 * @param time
-	 *            验证码生成时间
-	 * @param request
-	 *            验证码请求
-	 * @param response
-	 *            验证码响应
-	 */
-	// 验证码字典
-	public static final String CHARs = "23456789qwertyupasdfghjkzxcvbnm";
-	private static Random random = new Random();
-	private int width = 90;
-	private int height = 40;
-	private int codeCount = 4;
-	private int lineCount = 7;
-
-	@RequestMapping("/codeValidate")
-	public void getCode(String time, HttpServletRequest request, HttpServletResponse response) {
-		// 储存验证码的类
-		StringBuilder buiderCode = new StringBuilder();
-		// 定义画布
-		BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		// 得到画笔
-		Graphics g = buffImg.getGraphics();
-		// 设置颜色,,画边框
-		g.setColor(Color.black);
-		g.drawRect(0, 0, width, height);
-		// 设置颜色，内部填充
-		g.setColor(Color.white);
-		g.fillRect(1, 1, width - 2, height - 2);
-		// 设置干扰线
-		for (int i = 0; i < lineCount; i++) {
-			g.setColor(Color.getHSBColor(random.nextFloat(), random.nextFloat(), random.nextFloat()));
-			g.drawOval(random.nextInt(width), random.nextInt(height), random.nextInt(50), random.nextInt(50));
-
-			g.drawLine(random.nextInt(width), random.nextInt(height), random.nextInt(width), random.nextInt(height));
-		}
-		// 设置验证码
-		Font font = new Font("Times New Roman", Font.PLAIN, 22);
-		g.setColor(Color.blue);
-		for (int i = 0; i < codeCount; i++) {
-			char c = CHARs.charAt(random.nextInt(CHARs.length() - 1));
-			buiderCode.append(c);
-			g.setFont(font);
-			g.drawString(c + "", 15 + (i * 17), random.nextInt(30) % (30 - 20 + 1) + 20);
-		}
-
-		// 禁止图像缓存
-		response.setHeader("Pragma", "no-cache");
-		response.setHeader("Cache-Control", "no-che");
-		response.setDateHeader("Expires", 0);
-		response.setContentType("image/png");
-
-		// 验证码生成时间设置
-		ValidateCode validate = new ValidateCode();
-		Date date = new Date();
-		try {
-			long l = Long.parseLong(time);
-			date.setTime(l);
-			validate.setvCodeString(buiderCode);
-			validate.setGenerateTime(date);
-		} catch (Exception e) {
-			validate.setvCodeString(buiderCode);
-			validate.setGenerateTime(date);
-		}
-
-		// 将validate保存到session中
-		HttpSession session = request.getSession();
-		session.setAttribute("codeValidate", validate);
-
-		// 输出到屏幕
-		ServletOutputStream sos = null;
-		try {
-			sos = response.getOutputStream();
-			ImageIO.write(buffImg, "png", sos);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// 关闭输出流
-		try {
-			sos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// // 转换时间
-	// public Timestamp comment(String time) {
-	// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	// Timestamp timestamp = null;
-	// try {
-	// Date dateTime = sdf.parse(time);
-	// timestamp = new Timestamp(dateTime.getTime());
-	// } catch (ParseException e) {
-	// e.printStackTrace();
-	// }
-	// return timestamp;
-	// }
 
 }
