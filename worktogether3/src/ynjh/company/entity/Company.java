@@ -19,13 +19,10 @@ public class Company {
 	private Integer companyStatus;	
 	
 	
-	
 	public Company(){
 		
 	}
 
-	
-	
 	public Company(Integer id, String companyLoginId, String companyPassword, String companyName,
 			String companySimpleName, String companyLogo, String companyLicenseImg, String companyLicenseNo,
 			String companyCorporator, String companyTel, String companyEmail, String companyAddress,
