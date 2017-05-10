@@ -32,6 +32,29 @@ public class UserAndResume implements Serializable{
 		private String resumeEducation;
 		//工作年限
 		private Integer resumeWorks;
+		
+		public UserAndResume() {
+		}
+		
+		public UserAndResume(Integer id, String userLoginId, String userName, Integer userGender, String userEmail,
+				String userRealName, String userHeadImgPath, Timestamp userBirthday, Integer userLevel,
+				String resumeJor, String resumeEducation, Integer resumeWorks) {
+			super();
+			this.id = id;
+			this.userLoginId = userLoginId;
+			this.userName = userName;
+			this.userGender = userGender;
+			this.userEmail = userEmail;
+			this.userRealName = userRealName;
+			this.userHeadImgPath = userHeadImgPath;
+			this.userBirthday = userBirthday;
+			this.userLevel = userLevel;
+			this.resumeJor = resumeJor;
+			this.resumeEducation = resumeEducation;
+			this.resumeWorks = resumeWorks;
+		}
+
+
 		public Integer getId() {
 			return id;
 		}
@@ -104,4 +127,13 @@ public class UserAndResume implements Serializable{
 		public void setUserLoginId(String userLoginId) {
 			this.userLoginId = userLoginId;
 		}
+		@Override
+		public String toString() {
+			return "UserAndResume [id=" + id + ", userLoginId=" + userLoginId + ", userName=" + userName
+					+ ", userGender=" + userGender + ", userEmail=" + userEmail + ", userRealName=" + userRealName
+					+ ", userHeadImgPath=" + userHeadImgPath + ", userBirthday=" + userBirthday + ", userLevel="
+					+ userLevel + ", resumeJor=" + resumeJor + ", resumeEducation=" + resumeEducation + ", resumeWorks="
+					+ resumeWorks + "]";
+		}
+		
 }

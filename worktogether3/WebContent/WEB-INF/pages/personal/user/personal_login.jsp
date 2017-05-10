@@ -50,6 +50,8 @@
 						<!--请求验证码---->
 						<input type="text" id="validateCode" class="form-control"
 							name="validateCode" placeholder="请输入验证码" required />
+							<c:if test="${operatorInfo!=null }">
+						<div id="validateCodeToolTip" >${operatorInfo }</div></c:if>
 					</div>
 					<img id="validateCode" alt="validateCode "
 						src="admin/codeValidate?time=<%=new Date().getTime()%>" />
