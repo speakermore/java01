@@ -100,10 +100,10 @@
 												href="admin/findAuditArticleById?id=${arti.id}">${arti.articleTitle}
 											</a></td>
 											<td>${arti.userLoginId}</td>
-											<c:if test="${arti.articleUsersType==2 }">
+											<c:if test="${arti.articleSendType==2 }">
 												<td>${arti.userName}</td>
 											</c:if>
-											<c:if test="${arti.articleUsersType==1 }">
+											<c:if test="${arti.articleSendType==1 }">
 												<td>${arti.companyName}</td>
 											</c:if>
 											<td>${USER_TYPE[arti.articleUsersType]}</td>

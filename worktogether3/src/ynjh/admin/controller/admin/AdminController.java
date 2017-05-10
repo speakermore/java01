@@ -138,9 +138,8 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminlogin", method = RequestMethod.POST)
 	public ModelAndView findLogin(String adminLoginId, String adminPassword, String validateCode,
-			HttpServletRequest request) {
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
 		String value = null;
 		if (validate != null) {

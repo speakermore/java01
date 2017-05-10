@@ -207,11 +207,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 5条评论显示 -->
 	<select id="find5Discuss" resultType="AuditDiscuss">
-		select d.*,group_concat(DISTINCT u.userName) userName,group_concat(DISTINCT c.companyName) companyName,d.discussUsersId,discussUserName
+		select d.*,group_concat(DISTINCT u.userName) userName,group_concat(DISTINCT c.companyName) companyName,d.discussUsersId,cd.discussUserName
 		from discuss d,`user` u,company c,(select u.id,u.userName discussUserName from discuss d,`user` u where d.discussUsersId=u.id) cd
-		where d.discussStatus=1 and d.discussUsersId=cd.id and ((case when  d.discussSendType=2 then d.discussBySendId=u.id end) or (case when d.discussSendType=1 then c.id=d.discussBySendId end))
+		where d.discussUsersId=cd.id and ((case when  d.discussSendType=2 then d.discussBySendId=u.id end) or (case when d.discussSendType=1 then c.id=d.discussBySendId end))
 		group by d.id
-        order by d.discussStatus,discussTime desc limit 5
+        order by d.discussStatus,d.discussTime desc limit 5
 	</select>
 	<!-- 查询工作经历 -->
 	<select id="findResumeWork" parameterType="String" resultType="Work">
