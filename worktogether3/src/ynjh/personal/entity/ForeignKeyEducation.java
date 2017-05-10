@@ -17,6 +17,4 @@ public class ForeignKeyEducation extends Education implements Serializable{
 	public void setResumeTitle(String resumeTitle) {
 		this.resumeTitle = resumeTitle;
 	}
-	
-	
 }

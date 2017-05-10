@@ -62,14 +62,6 @@ public class UserController {
 	public ModelAndView login(String userLoginId, String userPassword, @RequestParam String validateCode,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		String pass = null;
-		try {
-			pass = MD5Util.md5Encode(userPassword);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		User user = uService.login(userLoginId, pass);
-
 		// 判断
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
 		String value = validate.getvCodeString().toString();
@@ -85,17 +77,24 @@ public class UserController {
 			mv.addObject("operatorInfo", "请输入正确的验证码或者密码！");
 			System.out.println("验证码输入不正确！！！！！！！！！！！");
 		} else {
+			String pass = null;
+			try {
+				pass = MD5Util.md5Encode(userPassword);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			User user = uService.login(userLoginId, pass);
+
 			// 验证成功
 			if (user == null) {
-				//获取软件人才对象信息
 				mv.addObject("errorInfo", "用户名或密码不正确");
 				mv.setViewName("personal/user/personal_login");
 			} else {
-				//查看软件人才列表
-				List<UserAndResume> userAndResumes =uService.findUserList(1,userLoginId);
+				// 查看软件人才列表
+				List<UserAndResume> userAndResumes = uService.findUserList(1, userLoginId);
 				session.setAttribute("userAndResumes", userAndResumes);
-				//查看企业列表
-				List<CompanyList> companyeList =uService.findCompanyList(1);
+				// 查看企业列表
+				List<CompanyList> companyeList = uService.findCompanyList(1);
 				session.setAttribute("companyeList", companyeList);
 				session.setAttribute("user", user);
 				mv.addObject("user", user);
@@ -141,7 +140,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/gotoIndex", method = RequestMethod.GET)
 	public String gotoIndex(HttpSession session) {
-		User user=(User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		return "redirect:../common/initIndex?toPage=1&userId=" + user.getId();
 	}
 
@@ -191,18 +190,20 @@ public class UserController {
 	public String addUser() {
 		return "personal/user/personal_register";
 	}
+
 	/**
 	 * 跳转软件人才界面
 	 */
 	@RequestMapping("/gotoSoft")
-	public String gotoSoft(){
+	public String gotoSoft() {
 		return "personal/user/personal_userlist";
 	}
+
 	/**
 	 * 跳转名企招聘界面
 	 */
 	@RequestMapping("/gotoCompany")
-	public String gotoCompany(){
+	public String gotoCompany() {
 		return "personal/user/personal_companylist";
 	}
 
@@ -242,9 +243,10 @@ public class UserController {
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
 	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User sessionUser=(User) session.getAttribute("user");
+		User sessionUser = (User) session.getAttribute("user");
 		user.setId(sessionUser.getId());
-		user.setUserHeadImgPath(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+		user.setUserHeadImgPath(UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { files }, session)[0]);
 		user.setUserRealName("无");
 		int result = uService.updateUserOther(user);
@@ -271,11 +273,13 @@ public class UserController {
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.POST)
 	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User sessionUser=(User) session.getAttribute("user");
+		User sessionUser = (User) session.getAttribute("user");
 		user.setId(sessionUser.getId());
-		user.setUserIDImgFace(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+		user.setUserIDImgFace(UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { fileface }, session)[0]);
-		user.setUserIDImgCon(UploadFile.uploadFile(UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+		user.setUserIDImgCon(UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { filecon }, session)[0]);
 		user.setUserName(sessionUser.getUserName());
 		int result = uService.updateUserIDCord(user);

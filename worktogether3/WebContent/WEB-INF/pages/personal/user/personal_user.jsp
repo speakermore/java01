@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--左侧状态栏位-->
 <article
 	class="col-md-12 work-together-dev-height-2000 work-together-shadow work-together-shallow">
@@ -29,6 +30,8 @@
 		<section class="panel">
 			<div class="panel-title">最新动态</div>
 		</section>
+		<!-- 面试邀请开始 -->
+		<c:if test="${offer!=null }">
 		<section class="panel">
 			<div class="panel-body">
 			你收到${offer.companyName }的职位邀请<<<a href="#">${offer.offerJob }</a>>>
@@ -36,15 +39,21 @@
 			<div class="panel-footer work-together-right">
 				1分钟前.<a href="#">更多....</a>
 			</div>
-		</section>
+		</section></c:if>
+		<!-- 面试邀请结束-->
+		<!-- 文章信息开始 -->
+		<c:if test="${articleByFollows!=null }">
+		<c:forEach items="${articleByFollows }" var="abf">
 		<section class="panel">
 			<div class="panel-body">
-				@xxx1发表了<<<a href="#">我的一天</a>>>
+				${abf.userName }发表了<<<a href="#">${abf.articleTitle }</a>>>
 			</div>
 			<div class="panel-footer work-together-right">
 				1分钟前.<a href="#">更多....</a>
 			</div>
 		</section>
+		</c:forEach></c:if>
+		<!-- 文章信息结束 -->
 		<section class="panel">
 			<div class="panel-body">
 				@xxx2评论了<<<a href="#">我的一天</a>>>
