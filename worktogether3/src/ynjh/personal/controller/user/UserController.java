@@ -243,12 +243,13 @@ public class UserController {
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
 	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User sessionUser = (User) session.getAttribute("user");
-		user.setId(sessionUser.getId());
+		User sUser=(User) session.getAttribute("user");
+		User oldUser=uService.selectUserById(sUser.getId());
+		user.setId(oldUser.getId());
+		user.setUserRealName(oldUser.getUserRealName());
 		user.setUserHeadImgPath(UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { files }, session)[0]);
-		user.setUserRealName("无");
 		int result = uService.updateUserOther(user);
 		if (result > 0) {
 			session.setAttribute("user", user);
@@ -274,14 +275,15 @@ public class UserController {
 	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User sessionUser = (User) session.getAttribute("user");
-		user.setId(sessionUser.getId());
+		User oldUser=uService.selectUserById(sessionUser.getId());
+		user.setUserName(oldUser.getUserName());
+		user.setId(oldUser.getId());
 		user.setUserIDImgFace(UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { fileface }, session)[0]);
 		user.setUserIDImgCon(UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { filecon }, session)[0]);
-		user.setUserName(sessionUser.getUserName());
 		int result = uService.updateUserIDCord(user);
 		if (result > 0) {
 			session.setAttribute("user", user);

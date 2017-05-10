@@ -14,6 +14,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<!-- 查看评论(文章) -->
 	<select id="selectUserCommentArticle" resultType="CommentArticle" parameterType="Integer">
-	select * from commentarticle where articleId=#{articleId} 
+	select * from commentarticle c,user u where articleId=#{articleId} and u.id=c.usersId
 	</select>
 </mapper>

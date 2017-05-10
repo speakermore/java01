@@ -7,29 +7,39 @@ import java.io.Serializable;
  */
 import java.sql.Timestamp;
 
-public class CommentArticle implements Serializable{
-	//id
+public class CommentArticle implements Serializable {
+	// id
 	private Integer id;
-	//文章ID
+	// 文章ID
 	private Integer articleId;
-	//用户id
+	// 用户id
 	private Integer usersId;
-	//评论时间
+	// 评论时间
 	private Timestamp commentArticleTime;
-	//评论内容
+	// 评论内容
 	private String commentArticleContent;
-	//点赞数
+	// 点赞数
 	private Integer commentArticleLikeNum;
-	//评论文章状态1：等待审核  2：正常3：审核不通过 4：隐藏
+	// 评论文章状态1：等待审核 2：正常3：审核不通过 4：隐藏
 	private Integer commentArticleStatus;
-	//用户类型
+	// 用户类型
 	private Integer commentArticleUsersType;
-	public CommentArticle(){
-		
+	// 昵称
+	private String userName;
+	// 用户名
+	private String userLoginId;
+	// 用户头像
+	private String userHeadImgPath;
+
+	public CommentArticle() {
+
 	}
 
+	
+
 	public CommentArticle(Integer id, Integer articleId, Integer usersId, Timestamp commentArticleTime,
-			String commentArticleContent, Integer commentArticleLikeNum, Integer commentArticleStatus) {
+			String commentArticleContent, Integer commentArticleLikeNum, Integer commentArticleStatus,
+			Integer commentArticleUsersType, String userName, String userLoginId, String userHeadImgPath) {
 		super();
 		this.id = id;
 		this.articleId = articleId;
@@ -38,10 +48,40 @@ public class CommentArticle implements Serializable{
 		this.commentArticleContent = commentArticleContent;
 		this.commentArticleLikeNum = commentArticleLikeNum;
 		this.commentArticleStatus = commentArticleStatus;
+		this.commentArticleUsersType = commentArticleUsersType;
+		this.userName = userName;
+		this.userLoginId = userLoginId;
+		this.userHeadImgPath = userHeadImgPath;
 	}
 
-	
-	
+
+
+	public String getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
+	}
+
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserHeadImgPath() {
+		return userHeadImgPath;
+	}
+
+	public void setUserHeadImgPath(String userHeadImgPath) {
+		this.userHeadImgPath = userHeadImgPath;
+	}
+
 	public Integer getCommentArticleUsersType() {
 		return commentArticleUsersType;
 	}
@@ -111,7 +151,8 @@ public class CommentArticle implements Serializable{
 		return "CommentArticle [id=" + id + ", articleId=" + articleId + ", usersId=" + usersId
 				+ ", commentArticleTime=" + commentArticleTime + ", commentArticleContent=" + commentArticleContent
 				+ ", commentArticleLikeNum=" + commentArticleLikeNum + ", commentArticleStatus=" + commentArticleStatus
-				+ "]";
+				+ ", commentArticleUsersType=" + commentArticleUsersType + ", userName=" + userName + ", userLoginId="
+				+ userLoginId + ", userHeadImgPath=" + userHeadImgPath + "]";
 	}
-	
+
 }

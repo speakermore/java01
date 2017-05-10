@@ -27,6 +27,9 @@ span.emotion {
 span.emotion:hover {
 	background-position: 2px -28px
 }
+#headPhoto{
+	border:1px solid #9E9E9E;
+}
 /* 超出的文本用省略号代替:
 	必须定义一个宽度
 	必须将其设置成block
@@ -50,13 +53,13 @@ span.emotion:hover {
 		<section class="panel">
 			<div class="panel-title">我的信息</div>
 			<div class="panel-body">
-				<div class="col-sm-5 ">
+				<div class="col-sm-5 " >
 					<c:if test="${user.userHeadImgPath==null }">
-					<img src="personal/img/head.gif" width="80" height="80"
+					<img id="headPhoto" src="personal/img/head.gif" width="100" height="100"
 						title="我的头像" alt="我的头像" />
 					</c:if>
 					<c:if test="${user.userHeadImgPath!=null }">
-					<img src="personal/img/head.gif" width="80" height="80"
+					<img id="headPhoto" class="img-circle"  src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" width="100" height="100"
 						title="我的头像" alt="我的头像" />
 					</c:if>
 				</div>
