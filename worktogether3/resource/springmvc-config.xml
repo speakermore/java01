@@ -103,4 +103,11 @@
         			</props>
         		</property>
         </bean>
+        <!-- <mvc:interceptors>
+			<mvc:interceptor >
+				拦截路径指定
+				<mvc:mapping path="/**"/>
+				<bean class="ynjh.common.interceptor.UserLoginIntersepter" />
+			</mvc:interceptor>
+		</mvc:interceptors> -->
 </beans>
