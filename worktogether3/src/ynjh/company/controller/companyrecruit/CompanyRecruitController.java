@@ -15,6 +15,7 @@ import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
 
+
 @Controller
 @RequestMapping("/company/cmprs")
 public class CompanyRecruitController {
@@ -40,6 +41,7 @@ public class CompanyRecruitController {
 		if(result>0){
 			mv.addObject("operatorInfo","招聘信息添加成功");
 			mv.addObject("toPage","company/cmprs/companyRecruit/findAll");
+			session.setAttribute("companyRecruit", companyRecruit);
 		}else{
 			mv.addObject("operatorInfo", "招聘信息添加失败");
 			mv.setViewName("company/cmprs/add_companyRecruit");
@@ -48,14 +50,15 @@ public class CompanyRecruitController {
 	}
 	//查询所有招聘信息
 	 @RequestMapping(value="/companyRecruit/findAll")
-	 public ModelAndView findAll(Integer page){
-		 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page);
+	 public ModelAndView findAll(Integer page,HttpSession session){
+		 Integer companyId=((Company)session.getAttribute("user")).getId();
+		 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page,companyId);
 		 int maxPage=companyRecruitService.findMaxPage();
 		 ModelAndView mv=new ModelAndView("company/cmprs/companyRecruit_index");
 		 mv.addObject("companyRecruits", companyRecruits);
 		 mv.addObject("page", page);
 		 mv.addObject("maxPage", maxPage);
-		 return mv;
+		 return mv;	
 	 }
 		@RequestMapping(value="/companyRecruit/companyRecruit_index",method=RequestMethod.GET)
 		public String addUser(){
@@ -87,7 +90,7 @@ public class CompanyRecruitController {
 			return mv;
 	 }
 	 //修改
-/*		@RequestMapping(value={"/companyRecruit/updateCmpRecruit","/"}, method=RequestMethod.POST)
+/*		@RequestMapping(value={"/companyRecruit/+updateCmpRecruit","/"}, method=RequestMethod.POST)
 		public ModelAndView updateCmpRecruit(Integer id){
 			CompanyRecruit companyRecruit=companyRecruitService.findById(id);
 			ModelAndView mv=new ModelAndView();
@@ -111,5 +114,6 @@ public class CompanyRecruitController {
 		 }
 		 return mv;
 	 }
+	 
 }
 

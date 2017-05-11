@@ -101,12 +101,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from companyIntroduvtion where cmpIntStatus=1 limit #{page},10 order by companyId
 	</select>
 	
-	<select id="findAuditCommentsCompanyAndPeople" resultType="Discuss"><!-- 查询个人企业互评论审核 -->
-		select * from discuss where discussStatus=1 
-		<!-- <if test="page!=null">
-			limit #{page},10
-		</if> -->
-		order by discussTime
+	<select id="findAuditCommentsCompanyAndPeople" parameterType="Integer" resultType="Discuss"><!-- 查询个人企业互评论审核 -->
+		select * from discuss  
+		order by discussTime desc
 	</select>
 	
 	<select id="findAuditInfo" resultType="Message"><!-- 查询新闻审核 -->

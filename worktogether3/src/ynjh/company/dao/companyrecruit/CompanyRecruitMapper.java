@@ -13,7 +13,7 @@ public interface CompanyRecruitMapper {
 	//添加招聘信息
 	public int addCompanyRecruit(CompanyRecruit companyRecruit);
 	//查询所有招聘信息
-	public List<CompanyRecruit> findAll(@Param("page")Integer page);
+	public List<CompanyRecruit> findAll(@Param("page")Integer page,@Param("companyId")Integer companyId);
 	//根据id修改招聘信息状态
 	public Integer updateCmpRecStatus(@Param("cmpRecStatus")Integer cmpRecStatus,@Param("id")Integer id);
 	//根据id修改招聘信息
