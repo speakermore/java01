@@ -1,12 +1,13 @@
 package ynjh.admin.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 /**
  * 系统消息实体类
  * @author 曾瑞
  *
  */
-public class SystemMessage {
+public class SystemMessage implements Serializable {
 	private Integer id;
 	private String sysmContent;
 	private Timestamp sysmCreateTime;

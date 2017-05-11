@@ -183,9 +183,15 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public Integer auditCommentsCompanyAndPeople(Integer id, Integer discussStatus) {
-		 
-		return adminMapper.auditCommentsCompanyAndPeople(id, discussStatus);
+	public Integer auditCommentsCompanyAndPeople(Integer[] id, Integer discussStatus) {
+		if(id!=null){
+			int result=0;
+			for(int i=0;i<id.length;i++){
+				result=adminMapper.auditCommentsCompanyAndPeople(id[i], discussStatus);
+			}
+			return result;
+		}
+		return -1; 
 	}
 
 	/**
@@ -197,7 +203,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Discuss> findAuditCommentsCompanyAndPeople(Integer page) {
 		 
-		return adminMapper.findAuditCommentsCompanyAndPeople(page);
+		return adminMapper.findAuditCommentsCompanyAndPeople((page-1)*10);
 	}
 
 	/**

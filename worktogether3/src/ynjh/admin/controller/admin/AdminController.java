@@ -480,12 +480,12 @@ public class AdminController {
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditCommentsCompanyAndPeople")
-	public ModelAndView findAuditCommentsCompanyAndPeople(Integer page) {
+	@RequestMapping("/findAuditCommentsCompanyAndPeople/{page}")
+	public ModelAndView findAuditCommentsCompanyAndPeople(@PathVariable Integer page) {
 		List<Discuss> discuss = adminService.findAuditCommentsCompanyAndPeople(page);
-		ModelAndView mv = new ModelAndView("admin/auditCompanyComment");
+		ModelAndView mv = new ModelAndView("admin/audit/auditDiscuss");
 		mv.addObject("discuss", discuss);
-		mv.setViewName("admin/auditCompanyComment");
+		mv.setViewName("admin/audit/auditDiscuss");
 		return mv;
 	}
 
@@ -640,17 +640,14 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/auditCommentsCompanyAndPeople")
-	public ModelAndView auditCommentsCompanyAndPeople(Integer id, Integer discussStatus) {
+	@ResponseBody
+	public String auditCommentsCompanyAndPeople(Integer[] id, Integer discussStatus) {
 		int result = adminService.auditCommentsCompanyAndPeople(id, discussStatus);
-		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
-			mv.addObject("operatorInfo", "审核成功");
-			mv.setViewName("admin/auditSuccess");
+			return "true";
 		} else {
-			mv.addObject("operatorInfo", "审核失败");
-			mv.setViewName("admin/auditSuccess");
+			return "false";
 		}
-		return mv;
 	}
 
 	/**

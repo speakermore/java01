@@ -43,7 +43,7 @@
 												<td><a title="点击查看内容" href="admin/findAuditArticleById?id=${art.id }">
 														${art.articleTitle} </a></td>
 												<td>${art.articleKey}</td>
-												<td>${art.userLoginId}</td>
+												<td>${art.usersId}</td>
 												<td>${art.userName}</td>
 												<td>${art.articleTime}</td>
 												<td>${AUDIT_STATUS[art.articleStatus]}</td>
