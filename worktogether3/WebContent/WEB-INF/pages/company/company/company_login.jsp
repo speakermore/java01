@@ -9,7 +9,7 @@
     <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
     
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>首页</title>
+    <title>企业用户登录</title>
     <%@include file="/WEB-INF/pages/company/header.jsp" %>
 	<%@include file="/WEB-INF/pages/company/footer.jsp" %>
   </head>
@@ -22,7 +22,7 @@
 			<div class="bs-docs-header wt-hby-login-center"  id="content" tabindex="-1">
 				<div class="container bs-docs-container">
 					<form class="form-signin" action="company/company/login" method="post">
-      		  <h2 class="form-signin-heading">登录</h2>
+      		  <h2 class="form-signin-heading">企业用户登录</h2>
        			<label for="inputEmail" class="sr-only">邮箱/手机号</label>
         		<input type="text" id="inputEmail" class="form-control" placeholder="邮箱/手机号" required autofocus name="companyLoginId">
        			<label for="inputPassword" class="sr-only">密码</label>

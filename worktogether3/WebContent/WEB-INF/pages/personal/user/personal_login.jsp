@@ -35,7 +35,7 @@
 			<div class="container bs-docs-container">
 				<form class="form-signin" method="post" action="personal/user/login"
 					id="loginForm">
-					<h2 class="form-signin-heading">欢迎登录</h2>
+					<h2 class="form-signin-heading">欢迎个人用户登录</h2>
 					<div class="form-group">
 						<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
 							type="text" id="userLoginId" class="form-control"

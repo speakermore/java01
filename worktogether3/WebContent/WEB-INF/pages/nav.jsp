@@ -28,7 +28,13 @@
 		<!-- 判断是否登录开始 -->
 		<c:if test="${user==null }">
 			<a href="personal/user/login"
-				class="hidden-xs btn btn-default navbar-btn navbar-right">登录</a>
+				class="hidden-xs btn btn-default navbar-btn navbar-right">个人登录</a>
+				<a href="company/company/"
+				class="hidden-xs btn btn-default navbar-btn navbar-right">企业登录</a>
+				<a href="personal/user/addUser"
+			class="hidden-xs btn btn-default navbar-btn navbar-right">个人注册</a>
+			<a href="company/company/add"
+			class="hidden-xs btn btn-default navbar-btn navbar-right">企业注册</a>
 		</c:if>
 		<c:if test="${user!=null }">
 			<a href="personal/user/logout"
@@ -38,16 +44,15 @@
 				data-toggle="modal">充值</a>
 			<%-- <a href="personal/user/chargeById?id=${user.id }" --%>
 		</c:if>
-		<a href="personal/user/addUser"
-			class="hidden-xs btn btn-default navbar-btn navbar-right">注册</a>
+		
 		<!-- 判断是否登录结束 -->
-		<form class="navbar-form navbar-right hidden-xs" role="search">
+		<!-- <form class="navbar-form navbar-right hidden-xs" role="search">
 			<div class="form-group hidden-xs">
 				<input class="form-control" name="search" placeholder="软件工程师"
 					type="search" />
 			</div>
 			<button class="btn btn-default">搜索</button>
-		</form>
+		</form> -->
 	</div>
 </nav>
 <div class="modal fade" id="modal-container-charge" role="dialog"
@@ -66,7 +71,12 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">用户名：</label>
 						<div class="col-md-8">
-						<p class="form-control-static">${user.userLoginId }</p>
+						<c:if test="${user.id<1234567891 }">
+						 <p class="form-control-static">${user.companySimpleName }</p>
+						</c:if>
+						<c:if test="${user.id>=1234567891 }">
+						 <p class="form-control-static">${user.userName }</p>
+						</c:if> 
 						</div>
 					</div>
 					<div class="form-group">

@@ -45,7 +45,7 @@
 						for="confirmPassword" class="sr-only">确认密码：</label> <input
 						type="password" id="confirmPassword" class="form-control"
 						name="confirmPassword" placeholder="确认密码" required></div> 
-					<button class="btn btn-lg btn-primary btn-block" type="submit">立即注册</button>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">个人用户注册</button>
 					<div id="inputagree">
 						<a href="#">我已阅读并同意服务条款</a>
 					</div>
