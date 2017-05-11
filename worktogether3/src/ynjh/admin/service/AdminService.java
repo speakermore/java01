@@ -46,7 +46,7 @@ public interface AdminService {
 	//查询审核企业资质
 	public List<Company> findAuditCompany(Integer page);
 	//审核个人企业互评论
-	public Integer auditCommentsCompanyAndPeople(Integer id,Integer discussStatus);
+	public Integer auditCommentsCompanyAndPeople(Integer[] id,Integer discussStatus);
 	//查询审核个人企业互评论
 	public List<Discuss> findAuditCommentsCompanyAndPeople(Integer page);
 	//审核新闻
