@@ -37,9 +37,9 @@
 					id="loginForm">
 					<h2 class="form-signin-heading">欢迎个人用户登录</h2>
 					<div class="form-group">
-						<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
+						<label for="userLoginId" class="sr-only">手机号</label> <input
 							type="text" id="userLoginId" class="form-control"
-							name="userLoginId" required placeholder="邮箱/手机号">
+							name="userLoginId" required placeholder="手机号">
 					</div>
 					<div class="form-group">
 						<label for="userPassword" class="sr-only">密码</label> <input
@@ -60,14 +60,22 @@
 						class="btn btn-primary btn-sm">看不清，换一张</a>
 
 					<div class="checkbox">
-						<label> <input type="checkbox" value="remember-me">
+						
+					</div><!-- <div class="form-group">
+					<div id="inputagree checkbox">
+						<input name="acceptTerms" 
+							type="checkbox" /> 我已阅读并同意服务条款
+						<input type="checkbox" value="remember-me">
 							记住密码
-						</label>
+					</div></div> -->
+					<div class="form-group">
+						<div class="col-md-offset-1 column">
+							<div class="checkbox">
+								<input type="checkbox" name="acceptTerms" /><a href="#">我已阅读并同意服务条款</a>
+							</div>
+						</div>
 					</div>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-					<div id="inputagree">
-						<a href="#">我已阅读并同意服务条款</a>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -128,6 +136,13 @@
 							regexp : {
 								regexp : /^[a-zA-Z0-9_]+$/,
 								message : '密码只能包含大写、小写、数字和下划线'
+							}
+						}
+					},
+					acceptTerms : {
+						validators : {
+							notEmpty : {
+								message : '你必须已阅读并同意服务条款'
 							}
 						}
 					}

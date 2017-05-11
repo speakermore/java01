@@ -28,6 +28,10 @@ public interface ArticleService {
 	public Integer renewArticle(Integer id);
 	// 获取未删除的
 	public Integer getMaxArticleById(Integer usersId);
+	/**
+	 * 通过userId查看最新文章(详细)
+	 */
+	public Article findNewlyArticleByUserId(Integer userId);
 	
 	
 }

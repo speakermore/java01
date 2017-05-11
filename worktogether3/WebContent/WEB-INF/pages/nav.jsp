@@ -22,6 +22,7 @@
 				<li><a href="#">技术众筹</a></li>
 				<li><a href="#">认证培训</a></li>
 				<li><a href="#">自主创业</a></li>
+				<li><a href="#">咨询服务</a></li>
 				<li><a href="#">关于我们</a></li>
 			</ul>
 		</div>
@@ -29,7 +30,7 @@
 		<c:if test="${user==null }">
 			<a href="personal/user/login"
 				class="hidden-xs btn btn-default navbar-btn navbar-right">个人登录</a>
-				<a href="company/company/"
+				<a href="company/company/company_login"
 				class="hidden-xs btn btn-default navbar-btn navbar-right">企业登录</a>
 				<a href="personal/user/addUser"
 			class="hidden-xs btn btn-default navbar-btn navbar-right">个人注册</a>
@@ -85,7 +86,6 @@
 							<input class="form-control" name="userMoney" id="userMoney" />
 						</div>
 					</div>
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
