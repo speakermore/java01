@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleInputFile" class="col-xs-2 control-label">验证码</label>
-					<img id="validateCode" alt="validateCode " src="http://localhost:8080/worktogether3/admin/codeValidate?time=<%=new Date().getTime()%>" />
+					<img id="validateCode" alt="validateCode " src="admin/codeValidate?time=<%=new Date().getTime()%>" />
 					<a href="javascript:void(0)">看不清,换一张</a>
 					<div class="col-xs-4">
 						<input type="text" name="validateCode" placeholder="请输入验证码" value="">
@@ -60,7 +60,7 @@
 <script type="text/javascript">				
 $(function(){
 	$("#validateCode+a").click(function(){
-		$("img").attr("src","http://localhost:8080/worktogether3/admin/codeValidate?time="+new Date().getTime());
+		$("img").attr("src","admin/codeValidate?time="+new Date().getTime());
 	}); 
 })
 </script>
