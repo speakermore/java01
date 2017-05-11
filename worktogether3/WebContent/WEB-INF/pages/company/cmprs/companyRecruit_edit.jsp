@@ -8,16 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <title>招聘信息修改</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css"/>
-	 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrapValidator.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/main.css"/>
-     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.10.2.min.js"></script>
-     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrapValidator.js"></script>
-     <style type="text/css">
-    </style>
+<%@include file="/WEB-INF/pages/company/header.jsp" %>
+<%@include file="/WEB-INF/pages/company/footer.jsp" %>
   <head>
    <base href="<%=basePath %>" />
    <script type="text/javascript" src="<%=request.getContextPath() %>/thirdpart/ckeditor/ckeditor.js"> </script>

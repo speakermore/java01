@@ -28,7 +28,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	}
 
 	@Override
-	public List<CompanyRecruit> findAll(Integer page) {
+	public List<CompanyRecruit> findAll(Integer page,Integer companyId) {
 		if(page==null){
 			page=1;
 		}
@@ -39,7 +39,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		if(page>maxPage){
 			page=maxPage;
 		}
-		return companyRecruitMapper.findAll((page-1)*5);
+		return companyRecruitMapper.findAll((page-1)*20,companyId);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 
 	@Override
 	public int findMaxPage() {	
-		return (companyRecruitMapper.getMaxRecordCount()+5-1)/5;
+		return (companyRecruitMapper.getMaxRecordCount()+20-1)/20;
 	}
 
 	@Override

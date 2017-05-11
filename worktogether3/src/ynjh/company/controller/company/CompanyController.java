@@ -19,8 +19,13 @@ public class CompanyController {
 
 	@Resource
 	private CompanyService companyService;
-	
-	//登录验证
+	/**
+	 * 李胤：登录验证
+	 * @param companyLoginId
+	 * @param companyPassword
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView companyLogin(String companyLoginId,String companyPassword,HttpSession session){
 		String superPassword=null;
@@ -36,32 +41,46 @@ public class CompanyController {
 			mv.addObject("toPage", "company/company/company_login");
 			mv.setViewName("company/info");
 		}else{
-//				mv.addObject("operatorInfo","登录成功");
-//				mv.addObject("company",company);
 				session.setAttribute("user",company);
 				mv.setViewName("company/artanddis/company_index");
 		}
 		return mv;
 	}
-	
+	/**
+	 * 李胤：跳转公司主页
+	 * @return
+	 */
 	@RequestMapping(value="/companyIndex")
 	public String main(){
 		return "company/artanddis/company_index";
 		
 	}
 	
-	@RequestMapping(value={"/company_login","/"})
+	/**
+	 * 李胤：跳转公司主页面
+	 * @return
+	 */
+	@RequestMapping(value="/company_login")
 	public String index(){
 		return "company/company/company_login";
 	}
 	
-	
-	//点击注册跳转
+	/**
+	 * 李胤：跳转注册页面
+	 * @return
+	 */
 	@RequestMapping(value="/add",method=RequestMethod.GET)
 	public String addCompany(){
 		return "company/company/add_company";
 	}
-	//注册用户
+	
+	/**
+	 * 李胤：注册功能
+	 * @param companyLoginId
+	 * @param companyPassword
+	 * @param realCompanyPassword
+	 * @return
+	 */
 	@RequestMapping(value="/addCompany",method=RequestMethod.POST)
 	public ModelAndView addCompany(String companyLoginId,String companyPassword,String realCompanyPassword){
 		ModelAndView mv=new ModelAndView("company/info");
@@ -81,7 +100,10 @@ public class CompanyController {
 		return mv;
 	}
 	
-	//跳转修改界面
+	/**
+	 * 李胤：跳转资料修改页面
+	 * @return
+	 */
 	@RequestMapping(value="/updateCompany",method=RequestMethod.GET)
 	public String updatecompany(){
 //		ModelAndView mv=new ModelAndView("company/company/update_company");
@@ -91,13 +113,21 @@ public class CompanyController {
 		return "company/company/update_company";
 	}
 	
-	//修改用户资料
+	/**
+	 * 李胤：修改资料
+	 * @param company
+	 * @param session
+	 * @param logo
+	 * @param licenseImg
+	 * @param companyImgs
+	 * @return
+	 */
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,MultipartFile licenseImg,@RequestParam MultipartFile[] companyImgs){
 		ModelAndView mv=new ModelAndView();
 		int resultDetail=0;
 		
-		String userPath=UploadFile.getUserImgPath("WEB-INF/resources/company/img",company.getCompanyLoginId());
+		String userPath=UploadFile.getUserImgPath("WEB-INF/resources/img/upload/company/",company.getCompanyLoginId());
 		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
 		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
 			String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
@@ -110,10 +140,8 @@ public class CompanyController {
 		company.setCompanyLicenseImg(companyLicenseImg[0]);
 		int result=companyService.updateCompany(company);
 		if(result>0&&resultDetail>=(companyImgs.length-1)){
-			mv.addObject("operatorInfo","用户修改成功");
-			session.setAttribute("company", company);
-			mv.addObject("toPage", "direct:company/company/findById/"+company.getId());
-			mv.setViewName("company/info");
+			session.setAttribute("user", company);
+			mv.setViewName("redirect:../company/findById/"+company.getId());
 		}else{
 			mv.addObject("operatorInfo","用户修改失败");
 			mv.addObject("toPage", "company/company/update_company");
@@ -123,7 +151,10 @@ public class CompanyController {
 	}
 	
 	
-	//退出
+	/**
+	 * 李胤：退出
+	 * @return
+	 */
 	@RequestMapping("logout")
 	public String logout(HttpSession session){
 		session.invalidate();
