@@ -1,6 +1,8 @@
 package ynjh.company.entity;
 
-public class CompanyIntrodution {
+import java.io.Serializable;
+
+public class CompanyIntrodution implements Serializable{
 	private Integer companyId;//公司id
 	private String cmpIntroduction="";//公司简介
 	private Integer cmpIntQuality;//公司性质

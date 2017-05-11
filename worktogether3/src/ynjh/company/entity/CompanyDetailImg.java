@@ -1,6 +1,8 @@
 package ynjh.company.entity;
 
-public class CompanyDetailImg {
+import java.io.Serializable;
+
+public class CompanyDetailImg implements Serializable{
 	private Integer companyId;
 	private String companyDetailImg;
 	

@@ -1,8 +1,9 @@
 package ynjh.company.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class CompanyRecruit {
+public class CompanyRecruit implements Serializable{
 	private Integer id;//主键
 	private Integer companyId;//公司编号
 	private String cmpRecTitle;//公司标题

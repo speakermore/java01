@@ -1,8 +1,9 @@
 package ynjh.company.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class CompanyCharge {
+public class CompanyCharge implements Serializable{
 	private Integer companyId;//公司id
 	private Double cmpChargeMoney=0.0;	//充值金额
 	private Timestamp cmpChargeTime;//操作时间

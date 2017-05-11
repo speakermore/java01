@@ -1,8 +1,10 @@
 package ynjh.company.entity;
 
+import java.io.Serializable;
+
 import ynjh.common.util.MD5Util;
 
-public class Company {
+public class Company implements Serializable {
 	
 	private Integer id;
 	private String companyLoginId;
