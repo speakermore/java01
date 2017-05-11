@@ -22,13 +22,15 @@
 								<!--发表状态小节-->
 								<section class="panel">
 									<form role="form" class="form-horizontal"
-										action="personal/user/updateUser" method="post">
+										action="personal/user/updateUser" method="post"
+										id="updateUserForm">
 										<input type="hidden" name="userLoginId" value="${user.id }" /><br />
 										<div class="form-group">
 											<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
+											<!-- userHeadImgPath -->
 											<div class="col-md-8">
-												<input class="form-control" name="userHeadImgPath"
-													value="${user.userHeadImgPath }" id="userHeadImgPath" />
+												<input class="form-control file" name="files" type="file"
+													id="userHeadImgPath" multiple data-min-file-count="1" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -39,40 +41,40 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="userPassword" class="col-md-3 control-label">密码：</label>
+											<label for="usersPassword" class="col-md-3 control-label">密码：</label>
 											<div class="col-md-8">
-												<input class="form-control" name="userPassword"
-													name="userPassword" value="${user.userPassword }"
-													id="userPassword" />
+												<input type="password" class="form-control"  id="usersPassword"
+													name="userPassword" placeholder="密码" />
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="userPasswordtwo" class="col-md-3 control-label">确认密码：</label>
+											<label for="confirmPassword" class="col-md-3 control-label">确认密码：</label>
 											<div class="col-md-8">
-												<input class="form-control" name="userPasswordtwo"
-													name="userPasswordtwo" id="userPassword" />
+												<input type="password" class="form-control" id="confirmPassword"
+													name="confirmPassword" placeholder="确认密码" />
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group has-success">
 											<label for="userGender" class="col-md-3 control-label">性别：</label>
 											<div class="col-md-8">
 												<c:if test="${user.userGender==1 }">
-													<div class="col-md-6">
-														<input type="radio" name="userGender" id="userGender"
+													<div class="col-md-6 radio">
+														<input type="radio" name="userGender" id="userGender" 
 															value="1" checked="checked"> <label>男</label>
 													</div>
-													<div class="col-md-6">
-														<input type="radio" name="userGender" id="userGender"
-															value="2"> <label>女</label>
+													<div class="col-md-6 radio">
+														<input type="radio" name="userGender" id="userGender" 
+															value="0"> <label>女</label>
 													</div>
 												</c:if>
-												<c:if test="${user.userGender==2 }">
-													<div class="col-md-4">
-														<input type="radio" name="userGender" value="1"> <label>男</label>
+												<c:if test="${user.userGender==0 }">
+													<div class="col-md-6 radio">
+														<input type="radio" name="userGender" id="userGender" 
+															value="1"> <label>男</label>
 													</div>
-													<div class="col-md-4">
-														<input type="radio" name="userGender" value="2"
-															checked="checked"> <label>女</label>
+													<div class="col-md-6 radio">
+														<input type="radio" name="userGender" id="userGender" 
+															value="0" checked="checked"> <label>女</label>
 													</div>
 												</c:if>
 											</div>
@@ -104,17 +106,106 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$('input').each(function() {
-			var self = $(this), label = self.next(), label_text = label.text();
-			label.remove();
-			self.iCheck({
-				checkboxClass : 'icheckbox_line-orange',
-				radioClass : 'iradio_line-orange',
-				insert : '<div class="icheck_line-icon"></div>' + label_text
-			});
+		$("#userHeadImgPath").fileinput({
+			uploadAsync : false,
+			'language' : 'zh',
+			'showUpload' : false,
+			'previewFileType' : 'any'
+		});
+		$("#updateUserForm").bootstrapValidator({
+			message : '这个值不能通过验证！！',
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				userName : {
+					validators : {
+						notEmpty : {
+							message : '昵称不能为空'
+						},
+						stringLength : {
+							min : 2,
+							max : 10,
+							message : '昵称长度必须在2到10位之间'
+						}
+					}
+				},
+				userPassword : {
+					validators : {
+						notEmpty : {
+							message : '密码不能为空'
+						},
+						stringLength : {
+							min : 6,
+							max : 50,
+							message : '密码长度必须在6到50位之间'
+						},
+						regexp : {
+							regexp : /^[a-zA-Z0-9_]+$/,
+							message : '密码只能包含大写、小写、数字和下划线'
+						},
+						identical : {
+							field : 'confirmPassword',
+							message : '两次密码不一致'
+						}
+					}
+				},
+				confirmPassword : {
+					validators : {
+						notEmpty : {
+							message : '确认密码不能为空'
+						},
+						stringLength : {
+							min : 6,
+							max : 50,
+							message : '密码长度必须在6到50位之间'
+						},
+						regexp : {
+							regexp : /^[a-zA-Z0-9_]+$/,
+							message : '密码只能包含大写、小写、数字和下划线'
+						},
+						identical : {
+							field : 'userPassword',
+							message : '两次密码不一致'
+						}
+					}
+				},
+				userGender : {
+					validators : {
+						notEmpty : {
+							message : '请选择性别'
+						}
+					}
+				},
+				userBirthday : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				},
+				userEmail : {
+					validators : {
+						notEmpty : {
+							message : '邮箱地址不能为空'
+						},
+						emailAddress : {
+							message : '邮箱地址格式有误'
+						}
+					}
+				},
+				userHeadImgPath : {
+					validators : {
+						notEmpty : {
+							message : '头像不能为空'
+						}
+					}
+				}
+			}
 		});
 	</script>
-
 </body>
 
 </html>

@@ -66,14 +66,34 @@ public class CommonController {
 	public ModelAndView initIndex(Integer toPage, Integer userId, HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
 		// 简历未删除
-		List<Resume> resumes = rService.selectResumeUserId(toPage, userId);
+		List<Resume> resumes = rService.findResumeUserId(toPage, userId);
 		int maxResumePage = rService.getMaxResumeById(userId);
 		session.setAttribute("resumes", resumes);
 		session.setAttribute("maxResumePage", maxResumePage);
 
+		// 获取简历
+		Resume resume = rService.findResumeByOneUserId(userId);
+		
+		if (resume!=null) {
+			session.setAttribute("resume", resume);
+			// 获取教育
+			List<Education> edus = rService.findEducation(resume.getId());
+			session.setAttribute("edus", edus);
+			// 获取工作
+			List<Work> works = rService.findWork(resume.getId());
+			session.setAttribute("works", works);
+			// 获取项目
+			List<Project> projs = rService.findProject(resume.getId());
+			session.setAttribute("projs", projs);
+		}
+		
+		//最新发布文章
+		Article articleNewly =aService.findNewlyArticleByUserId(userId);
+		session.setAttribute("articleNewly", articleNewly);
+		
 		// 最近发布的简历
-		Resume resume = rService.selectNewlyResumeByUserId(userId);
-		session.setAttribute("resume", resume);
+		Resume resumeNewly = rService.findNewlyResumeByUserId(userId);
+		session.setAttribute("resumeNewly", resumeNewly);
 
 		// 文章未删除
 		List<Article> articles = aService.findUserArticle(toPage, userId);
@@ -126,6 +146,7 @@ public class CommonController {
 
 	/**
 	 * 删除简历信息时分配对象
+	 * 
 	 * @param toPage
 	 * @param userId
 	 * @param session

@@ -35,20 +35,32 @@
 					action="personal/user/addUser" id="registerForm">
 					<h2 class="form-signin-heading">还没有账号吗？</h2>
 					<div class="form-group">
-					<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
-						type="text" id="userLoginId" class="form-control"
-						name="userLoginId" placeholder="手机号" required autofocus>
-						</div><div class="form-group"> <label
-						for="userPassword" class="sr-only">密码</label> <input
-						type="password" id="userPassword" class="form-control"
-						name="userPassword" placeholder="密码" required></div><div class="form-group"> <label
-						for="confirmPassword" class="sr-only">确认密码：</label> <input
-						type="password" id="confirmPassword" class="form-control"
-						name="confirmPassword" placeholder="确认密码" required></div> 
-					<button class="btn btn-lg btn-primary btn-block" type="submit">个人用户注册</button>
-					<div id="inputagree">
-						<a href="#">我已阅读并同意服务条款</a>
+						<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
+							type="text" id="userLoginId" class="form-control"
+							name="userLoginId" placeholder="手机号" required autofocus>
 					</div>
+					<div class="form-group">
+						<label for="userPassword" class="sr-only">密码</label> <input
+							type="password" id="userPassword" class="form-control"
+							name="userPassword" placeholder="密码" required>
+					</div>
+					<div class="form-group">
+						<label for="confirmPassword" class="sr-only">确认密码：</label> <input
+							type="password" id="confirmPassword" class="form-control"
+							name="confirmPassword" placeholder="确认密码" required>
+					</div>
+					<!-- <div id="inputagree checkbox">
+						<input name="acceptTerms" type="checkbox" /> 
+					</div> -->
+					<div class="form-group">
+						<div class="col-md-offset-1 column">
+							<div class="checkbox">
+								<input type="checkbox" name="acceptTerms" /><a href="#">我已阅读并同意服务条款</a>
+							</div>
+						</div>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">个人用户注册</button>
+
 				</form>
 			</div>
 		</div>
@@ -66,78 +78,85 @@
 	<script type="text/javascript"
 		src="thirdpart/dist/js/language/zh_CN.js"></script>
 	<script type="text/javascript">
-	$(function () {
-        $("#registerForm").bootstrapValidator({
-            message: '这个值不能通过验证！',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields : {
-            	userLoginId:{
-            		validators:{
-            			notEmpty : {
-							message : '用户名不能为空'
-						},
-						stringLength : {
-							min : 6,
-							max : 50,
-							message : '用户名长度必须在6到50位之间'
+		$(function() {
+			$("#registerForm").bootstrapValidator({
+				message : '这个值不能通过验证！',
+				feedbackIcons : {
+					valid : 'glyphicon glyphicon-ok',
+					invalid : 'glyphicon glyphicon-remove',
+					validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					userLoginId : {
+						validators : {
+							notEmpty : {
+								message : '用户名不能为空'
+							},
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '用户名长度必须在6到50位之间'
+							}
 						}
-            		}
-            	},
-            	userPassword:{
-            		validators:{
-            			notEmpty : {
-							message : '密码不能为空'
-						},
-						stringLength : {
-							min : 6,
-							max : 50,
-							message : '密码长度必须在6到50位之间'
-						},
-						regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
-                            message: '密码只能包含大写、小写、数字和下划线'
-                        },
-                        identical: {
-                            field: 'confirmPassword',
-                            message: '两次密码不一致'
-                        },
-                        different: {
-                            field: 'userLoginId',
-                            message: '密码不能和用户名相同'
-                        }
-            		}
-            	},
-            	confirmPassword:{
-            		validators:{
-            			notEmpty : {
-							message : '确认密码不能为空'
-						},
-						stringLength : {
-							min : 6,
-							max : 50,
-							message : '密码长度必须在6到50位之间'
-						},
-						regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
-                            message: '密码只能包含大写、小写、数字和下划线'
-                        },
-                        identical: {
-                            field: 'userPassword',
-                            message: '两次密码不一致'
-                        },
-                        different: {
-                            field: 'userLoginId',
-                            message: '密码不能和用户名相同'
-                        }
-            		}
-            	}	
-            }
-        });
-	});
+					},
+					userPassword : {
+						validators : {
+							notEmpty : {
+								message : '密码不能为空'
+							},
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '密码长度必须在6到50位之间'
+							},
+							regexp : {
+								regexp : /^[a-zA-Z0-9_]+$/,
+								message : '密码只能包含大写、小写、数字和下划线'
+							},
+							identical : {
+								field : 'confirmPassword',
+								message : '两次密码不一致'
+							},
+							different : {
+								field : 'userLoginId',
+								message : '密码不能和用户名相同'
+							}
+						}
+					},
+					confirmPassword : {
+						validators : {
+							notEmpty : {
+								message : '确认密码不能为空'
+							},
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '密码长度必须在6到50位之间'
+							},
+							regexp : {
+								regexp : /^[a-zA-Z0-9_]+$/,
+								message : '密码只能包含大写、小写、数字和下划线'
+							},
+							identical : {
+								field : 'userPassword',
+								message : '两次密码不一致'
+							},
+							different : {
+								field : 'userLoginId',
+								message : '密码不能和用户名相同'
+							}
+						}
+					},
+					acceptTerms : {
+						validators : {
+							notEmpty : {
+								message : '你必须已阅读并同意服务条款'
+							}
+						}
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

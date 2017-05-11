@@ -54,6 +54,13 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="resumeWorks" class="col-md-3 control-label">工作年限：</label>
+				<div class="col-md-8">
+					<input value="${resume.resumeWorks }" class="form-control"
+						name="resumeWorks" id="resumeWorks" />
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="resumeWages" class="col-md-3 control-label">期望薪资：</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeWages }" class="form-control"

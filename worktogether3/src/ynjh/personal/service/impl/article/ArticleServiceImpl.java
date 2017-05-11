@@ -124,5 +124,12 @@ public class ArticleServiceImpl implements ArticleService {
 	public Integer renewArticle(Integer id) {
 		return articleMapper.renewArticle(id);
 	}
+	/**
+	 * 通过userId查看最新文章(详细)
+	 */
+	@Override
+	public Article findNewlyArticleByUserId(Integer userId) {
+		return articleMapper.findNewlyArticleByUserId(userId);
+	}
 	
 }

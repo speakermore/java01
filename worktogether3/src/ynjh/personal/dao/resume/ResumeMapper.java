@@ -25,15 +25,19 @@ public interface ResumeMapper {
 	/**
 	 * 根据Userid查询简历(多个)
 	 */
-	public List<Resume> selectResumeByUserId(@Param("page")Integer page,@Param("userId")Integer userId);
+	public List<Resume> findResumeByUserId(@Param("page")Integer page,@Param("userId")Integer userId);
 	/**
 	 * 根据id查询简历（单个）
 	 */
-	public Resume selectResumeById(Integer id);
+	public Resume findResumeById(Integer id);
+	/**
+	 * 查询简历(一人只有一份简历时使用)
+	 */
+	public Resume findResumeByOneUserId(Integer userId);
 	/**
 	 * 根据userId查询最新简历（单个）
 	 */
-	public Resume selectNewlyResumeByUserId(Integer userId);
+	public Resume findNewlyResumeByUserId(Integer userId);
 	
 	/***
 	 * 删除简历

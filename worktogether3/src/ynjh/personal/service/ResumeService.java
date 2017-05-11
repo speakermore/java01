@@ -23,17 +23,18 @@ public interface ResumeService {
 	// 修改简历
 	public Integer updateResume(Resume resume);	
 	// 根据id查询简历（审查接口）(所有)
-	public List<Resume> selectResumeUserId(Integer page,Integer userId);	
+	public List<Resume> findResumeUserId(Integer page,Integer userId);	
 	// 根据id查询简历（审查接口）详细
-	public Resume selectResumeById(Integer id);
+	public Resume findResumeById(Integer id);
 	//根据userId查询最新简历（单个）
-	public Resume selectNewlyResumeByUserId(Integer userId);
+	public Resume findNewlyResumeByUserId(Integer userId);
 	 // 删除简历
 	public Integer deleteResumeById(Integer id);
 	
 	// 恢复简历
 	public Integer renewResumeById(Integer id);
-	//////////////////////////////////
+	// 查询简历(一人只有一份简历时使用)
+	public Resume findResumeByOneUserId(Integer userId);
 	//教育记录添加
 	public Integer addEducation(Education education);
 	//教育记录修改
