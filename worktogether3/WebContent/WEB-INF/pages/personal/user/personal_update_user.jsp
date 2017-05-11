@@ -3,14 +3,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>个人用户-首页</title>
+<title>用户中心-修改用户信息</title>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-				<div class="row clearfix work-together-margin-top-150">
+				<div class="row clearfix ">
 					<div class="col-md-1 column"></div>
 					<div class="col-md-6 column ">
 						<!--左侧状态栏位-->

@@ -18,7 +18,7 @@
 				<%@include file="/WEB-INF/pages/company/menu.jsp" %>
 			</div>
 		<div class="col-sm-6">
-			<h3>用户注册</h3>
+			<h3>企业用户注册</h3>
 			<hr/>
 		</div>
 		<div class="col-sm-6">
