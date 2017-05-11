@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!--左侧状态栏位-->
 <article
 	class="col-md-12 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
@@ -13,21 +14,28 @@
 					<h1>最近保存文章</h1>
 					<div class="thumbnail">
 						<div class="caption">
-							<h3>文章标题</h3>
-							<p>文章内容 Cras justo odio, dapibus ac facilisis in, egestas
-								eget quam. Donec id elit non mi porta gravida at eget metus.
-								Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-								justo odio, dapibus ac facilisis in, egestas eget quam. Donec id
-								elit non mi porta gravida at eget metus. Nullam id dolor id nibh
-								ultricies vehicula ut id elit. Cras justo odio, dapibus ac
-								facilisis in, egestas eget quam. Donec id elit non mi porta
-								gravida at eget metus. Nullam id dolor id nibh ultricies
-								vehicula ut id elit.</p>
+							<h3 style="font-size: 30px; text-align: center;">
+								<c:if test="${fn:length(articleNewly.articleTitle)>15 }">  
+                         ${fn:substring(articleNewly.articleTitle, 0, 15)}...  
+                   </c:if>
+								<c:if test="${fn:length(articleNewly.articleTitle)<=15 }">  
+                         ${articleNewly.articleTitle }  
+                   </c:if>
+							</h3>
+
+							<p>
+								<c:if test="${fn:length(articleNewly.articleContent)>100 }">  
+                         ${fn:substring(articleNewly.articleContent, 0, 100)}...  
+                   </c:if>
+								<c:if test="${fn:length(articleNewly.articleContent)<=100 }">  
+                         ${articleNewly.articleContent }  
+                   </c:if>
+							</p>
 							<p>
 								<a class="btn btn-success "
-									href="personal/article/gotoUpdateArticle?id=${article.id }">修改</a>
+									href="personal/article/gotoUpdateArticle?id=${articleNewly.id }">修改</a>
 								<a class="btn"
-									href="javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${article.id }'}">删除</a>
+									href="javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${articleNewly.id }'}">删除</a>
 							</p>
 						</div>
 					</div>

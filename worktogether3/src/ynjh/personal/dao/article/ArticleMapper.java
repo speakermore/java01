@@ -26,6 +26,10 @@ public interface ArticleMapper {
 	 */
 	public Article selectArticleById(Integer id);
 	/**
+	 * 通过userId查看最新文章(详细)
+	 */
+	public Article findNewlyArticleByUserId(Integer userId);
+	/**
 	 * 修改文章内容
 	 */
 	public Integer updateArticleContent(Article article);

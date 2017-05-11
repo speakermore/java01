@@ -58,7 +58,7 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            用户id
 	 */
 	@Override
-	public List<Resume> selectResumeUserId(Integer page, Integer userId) {
+	public List<Resume> findResumeUserId(Integer page, Integer userId) {
 		if (page == null) {
 			page = 1;
 		}
@@ -70,7 +70,7 @@ public class ResumeServiceImpl implements ResumeService {
 		if (page > maxPage) {
 			page = maxPage;
 		}
-		return resumeMapper.selectResumeByUserId((page - 1) * 5, userId);
+		return resumeMapper.findResumeByUserId((page - 1) * 5, userId);
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            简历id
 	 */
 	@Override
-	public Resume selectResumeById(Integer id) {
-		return resumeMapper.selectResumeById(id);
+	public Resume findResumeById(Integer id) {
+		return resumeMapper.findResumeById(id);
 	}
 
 	/**
@@ -421,9 +421,18 @@ public class ResumeServiceImpl implements ResumeService {
 	public Integer renewProjectByDelete(Integer id) {
 		return resumeMapper.renewProjectByDelete(id);
 	}
-
+	/**
+	 * 根据userId查询最新简历（单个）
+	 */
 	@Override
-	public Resume selectNewlyResumeByUserId(Integer userId) {
-		return resumeMapper.selectNewlyResumeByUserId(userId);
+	public Resume findNewlyResumeByUserId(Integer userId) {
+		return resumeMapper.findNewlyResumeByUserId(userId);
+	}
+	/**
+	 * 查询简历(一人只有一份简历时使用)
+	 */
+	@Override
+	public Resume findResumeByOneUserId(Integer userId) {
+		return resumeMapper.findResumeByOneUserId(userId);
 	}
 }

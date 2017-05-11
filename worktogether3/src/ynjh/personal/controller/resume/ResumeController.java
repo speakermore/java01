@@ -95,7 +95,7 @@ public class ResumeController {
 	@RequestMapping("/ajaxFindAllResume")
 	@ResponseBody
 	public Object ajaxFindAllResume(Integer toPage, Integer userId) {
-		List<Resume> resumes = rService.selectResumeUserId(toPage, userId);
+		List<Resume> resumes = rService.findResumeUserId(toPage, userId);
 		int maxPage = rService.getMaxResumeById(userId);
 		StringBuffer sb = new StringBuffer();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -144,7 +144,7 @@ public class ResumeController {
 	@RequestMapping("/findAllResume")
 	public ModelAndView findAllResume(Integer toPage, Integer userId, HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		List<Resume> resumes = rService.selectResumeUserId(toPage, userId);
+		List<Resume> resumes = rService.findResumeUserId(toPage, userId);
 		int maxPage = rService.getMaxResumeById(userId);
 		mv.addObject("maxResumePage", maxPage);
 		mv.addObject("curResumePage", toPage);
@@ -166,7 +166,7 @@ public class ResumeController {
 	@RequestMapping(value = "/lookResume", method = RequestMethod.GET)
 	public ModelAndView lookResume(Integer id) {
 		ModelAndView mv = new ModelAndView();
-		Resume resume = rService.selectResumeById(id);
+		Resume resume = rService.findResumeById(id);
 		if (resume != null) {
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_lookresume");
@@ -186,7 +186,7 @@ public class ResumeController {
 	@RequestMapping(value = "/updateResume", method = RequestMethod.GET)
 	public ModelAndView gotoResume(Integer id) {
 		ModelAndView mv = new ModelAndView();
-		Resume resume = rService.selectResumeById(id);
+		Resume resume = rService.findResumeById(id);
 		if (resume != null) {
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_updateresume");
@@ -204,12 +204,14 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateResume", method = RequestMethod.POST)
-	public ModelAndView updateResume(Resume resume) {
+	public ModelAndView updateResume(Resume resume,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.updateResume(resume);
-		mv.addObject("operatorInfo", "修改简历成功！");
-		mv.addObject("resume", resume);
-		mv.setViewName("personal/user/personal_index");
+		if (result>0) {
+			mv.addObject("operatorInfo", "修改简历成功！");
+			session.setAttribute("resume", resume);
+			mv.setViewName("personal/user/personal_index");
+		}
 		/*
 		 * if (result>0) {
 		 * 
@@ -327,11 +329,11 @@ public class ResumeController {
 		education.setUserId(user.getId());
 		education.setResumeType(1);
 		int result = rService.addEducation(education);
-		Resume resume = rService.selectResumeById(education.getResumeId());
-
 		if (result > 0) {
+			Resume resume = rService.findResumeById(education.getResumeId());
+			List<Education> edus = rService.findEducation(resume.getId());
+			session.setAttribute("edus", edus);
 			mv.addObject("operatorInfo", "添加成功");
-			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_lookresume");
 		} else {
 			mv.addObject("operatorInfo", "添加失败");
@@ -390,7 +392,7 @@ public class ResumeController {
 		work.setUserId(user.getId());
 		work.setResumeType(1);
 		int result = rService.addWork(work);
-		Resume resume = rService.selectResumeById(work.getResumeId());
+		Resume resume = rService.findResumeById(work.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
 			mv.addObject("resume", resume);
@@ -418,7 +420,7 @@ public class ResumeController {
 		project.setUserId(user.getId());
 		project.setResumeType(1);
 		int result = rService.addProject(project);
-		Resume resume = rService.selectResumeById(project.getResumeId());
+		Resume resume = rService.findResumeById(project.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
 			mv.addObject("resume", resume);
@@ -439,12 +441,11 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping("/lookResumeEdus")
-	public ModelAndView lookResumeEducation(Integer resumeId) {
-		ModelAndView mv = new ModelAndView();
+	public String lookResumeEducation(Integer resumeId,HttpSession session) {
 		List<Education> edus = rService.findEducation(resumeId);
-		mv.addObject("edus", edus);
-		mv.setViewName("personal/resume/personal_lookresume");
-		return mv;
+		session.setAttribute("edus", edus);
+		return "personal/resume/personal_lookresume";
+		
 	}
 
 	/*@RequestMapping("/ajaxlookResumeEdus")
@@ -476,12 +477,10 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping("/lookResumeWork")
-	public ModelAndView lookResumeWork(Integer resumeId) {
-		ModelAndView mv = new ModelAndView();
+	public String lookResumeWork(Integer resumeId,HttpSession session) {
 		List<Work> works = rService.findWork(resumeId);
-		mv.addObject("works", works);
-		mv.setViewName("personal/resume/personal_lookresume");
-		return mv;
+		session.setAttribute("works", works);
+		return "personal/resume/personal_lookresume";
 	}
 
 	/**
@@ -493,12 +492,10 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping("/lookResumeProjs")
-	public ModelAndView lookResumeProject(Integer resumeId) {
-		ModelAndView mv = new ModelAndView();
+	public String lookResumeProject(Integer resumeId,HttpSession session) {
 		List<Project> projs = rService.findProject(resumeId);
-		mv.addObject("projs", projs);
-		mv.setViewName("personal/resume/personal_lookresume");
-		return mv;
+		session.setAttribute("projs", projs);
+		return "personal/resume/personal_lookresume";
 	}
 
 	/**

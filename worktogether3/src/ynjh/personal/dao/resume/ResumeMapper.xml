@@ -27,18 +27,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->
-	<select id="selectResumeByUserId" resultType="Resume">
+	<select id="findResumeByUserId" resultType="Resume">
 		select * from resume where userId=#{userId}
 		<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
+	<!-- 查询简历(一人只有一份简历时使用) -->
+	<select id="findResumeByOneUserId" resultType="Resume" parameterType="Integer">
+		select * from resume where userId=#{userId}
+	</select>
 	<!-- 查询简历(详细) -->
-	<select id="selectResumeById" resultType="Resume" parameterType="Integer">
+	<select id="findResumeById" resultType="Resume" parameterType="Integer">
 		select * from resume where id=#{id}
 	</select>
 	<!-- 查询最新简历(详细) -->
-	<select id="selectNewlyResumeByUserId" resultType="Resume" parameterType="Integer">
+	<select id="findNewlyResumeByUserId" resultType="Resume" parameterType="Integer">
 		select * from resume where userId=#{userId} order by resumeCreateDate desc limit 1
 	</select>
 	<!-- 删除简历 -->

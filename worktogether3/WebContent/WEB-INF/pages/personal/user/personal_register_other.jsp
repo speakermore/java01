@@ -11,7 +11,7 @@
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
-			<div class="col-md-12 column">
+			<div class="column">
 				<div class="row clearfix">
 					<div class="col-md-1 column"></div>
 					<div class="col-md-6 column ">
