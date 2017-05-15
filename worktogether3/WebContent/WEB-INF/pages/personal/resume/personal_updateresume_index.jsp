@@ -248,15 +248,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<a for="" class="col-md-offset-9 control-label ">添加教育记录</a>
-			</div>
-			<div class="form-group">
-				<a for="" class="col-md-offset-9 control-label">添加工作记录</a>
-			</div>
-			<div class="form-group">
-				<a for="" class="col-md-offset-9 control-label">添加项目记录</a>
-			</div>
-			<div class="form-group">
 				<div class="col-md-offset-9">
 					<input class="btn btn-success" type="submit" value="保存" />
 				</div>

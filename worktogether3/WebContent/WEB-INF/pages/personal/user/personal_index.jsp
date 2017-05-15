@@ -58,8 +58,7 @@ table {
 												class="alert-link">点我返回首页</a>
 										</div>
 										<!-- 简历信息主页 -->
-										<%@include
-											file="/WEB-INF/pages/personal/resume/personal_lookresume_index.jsp"%>
+										<%@include file="/WEB-INF/pages/personal/resume/personal_lookresume_index.jsp"%>
 									</c:if>
 									<c:if test="${resume==null }">
 										<div class="jumbotron">
