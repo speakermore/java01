@@ -184,8 +184,6 @@
 										<col style="width: 50%">
 										<col style="width: 50%">
 									</colgroup>
-
-
 									<tr>
 										<td>学校名称：</td>
 										<td>${edu.educationSchool }</td>

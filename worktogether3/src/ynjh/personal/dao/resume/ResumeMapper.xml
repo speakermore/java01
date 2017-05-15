@@ -60,20 +60,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 教育培训记录 -->
 	<insert id="addEducation" parameterType="Education">
 		insert into
-		education(userId,resumeId,educationBeginTime,educationEndTime,educationSchool,educationContent)
-		value(#{userId},#{resumeId},#{educationBeginTime},#{educationEndTime},#{educationSchool},#{educationContent})
+		education(userId,resumeId,educationBeginTime,educationEndTime,educationSchool,educationContent,resumeType)
+		value(#{userId},#{resumeId},#{educationBeginTime},#{educationEndTime},#{educationSchool},#{educationContent},#{resumeType})
 	</insert>
 	<!-- 工作记录 -->
 	<insert id="addWork" parameterType="Work" >
 		insert into
-		work(userId,resumeId,workBeginTime,workEndTime,workFirmName,workUnit,workDescription)
-		value(#{userId},#{resumeId},#{workBeginTime},#{workEndTime},#{workFirmName},#{workUnit},#{workDescription})
+		work(userId,resumeId,workBeginTime,workEndTime,workFirmName,workUnit,workDescription,resumeType)
+		value(#{userId},#{resumeId},#{workBeginTime},#{workEndTime},#{workFirmName},#{workUnit},#{workDescription},#{resumeType})
 	</insert>
 	<!-- 项目经验 -->
 	<insert id="addProject" parameterType="Project">
 		insert into
-		project(userId,resumeId,projectBeginTime,projectEndTime,projectName,projectJob,projectDescription)
-		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription})
+		project(userId,resumeId,projectBeginTime,projectEndTime,projectName,projectJob,projectDescription,resumeType)
+		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription},#{resumeType})
 	</insert>
 	<!-- 修改教育经历 -->
 	<update id="updateEducation" parameterType="Education">

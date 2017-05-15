@@ -395,6 +395,8 @@ public class ResumeController {
 		Resume resume = rService.findResumeById(work.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
+			List<Work> works = rService.findWork(resume.getId());
+			session.setAttribute("works", works);
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_lookresume");
 		} else {
@@ -423,6 +425,8 @@ public class ResumeController {
 		Resume resume = rService.findResumeById(project.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
+			List<Project> projs = rService.findProject(resume.getId());
+			session.setAttribute("projs", projs);
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_lookresume");
 		} else {

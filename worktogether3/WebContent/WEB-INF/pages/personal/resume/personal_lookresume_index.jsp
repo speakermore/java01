@@ -16,12 +16,14 @@
 	visibility: hidden;
 	font-size: 20px;
 }
-a:hover{
-				text-decoration: none;
-			}
-			a:focus{
-				text-decoration: none;
-			}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:focus {
+	text-decoration: none;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -49,7 +51,8 @@ a:hover{
 			</c:if>
 			<div class="media-body"
 				style="padding-top: 35px; padding-left: 35px;">
-				<a class="col-lg-offset-11" href="personal/resume/updateResume?resumeId=${resume.id }"><span
+				<a class="col-lg-offset-11"
+					href="personal/resume/updateResume?resumeId=${resume.id }"><span
 					class="glyphicon glyphicon-edit" id="hidden_photo"></span></a>
 				<h4 class="media-heading"
 					style="line-height: 35px; height: 35px; font-size: 20px;">
@@ -168,21 +171,56 @@ a:hover{
 			<!--mian-->
 		</div>
 		<!--2+-->
+
 		<div class="panel panel-default">
+		<c:if test="${works!=null }">
+			<c:forEach items="${works }" var="work">
+				<table class="table">
+					<colgroup>
+						<col style="width: 8%">
+						<col style="width: 50%">
+					</colgroup>
+					<tr>
+						<td>企业名称：</td>
+						<td>${work.workFirmName }</td>
+					</tr>
+					<tr>
+						<td>工作岗位：</td>
+						<td>${work.workUnit }</td>
+					</tr>
+					<tr>
+						<td>工作描述：</td>
+						<td>${work.workDescription }</td>
+					</tr>
+					<tr>
+						<td>工作时间：</td>
+						<td><fmt:formatDate value="${work.workBeginTime }"
+								pattern="yyyy-MM-dd" />到<fmt:formatDate
+								value="${work.workEndTime }" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="text-right"><a href="#">编辑</a>|<a
+							href="personal/resume/deleteResumeWork?id=${wrok.id }">删除</a></td>
+					</tr>
+				</table>
+			</c:forEach>
+			</c:if>
 			<div id="panel-element-work-show" class="panel-collapse in">
-				<div class="panel-body col-md-offset-3">
-					<span class="glyphicon glyphicon-list-alt"></span>
-					完善工作经验，展现工作内容及能力，让HR更了解你！
-				</div>
+				<c:if test="${works==NULL }">
+					<div class="panel-body col-md-offset-3">
+						<span class="glyphicon glyphicon-list-alt"></span>
+						完善工作经验，展现工作内容及能力，让HR更了解你！
+					</div>
+				</c:if>
 			</div>
 		</div>
 		<!--2-->
 	</div>
-
 	<!--
-                        	作者：18213026337@163.com
-                        	时间：2017-05-15
-                        	描述：项目经验 
+		作者：18213026337@163.com
+		时间：2017-05-15
+		描述：项目经验 
                         -->
 	<div class="panel-group" id="panel-project-main">
 		<div class="panel panel-default">
@@ -190,7 +228,7 @@ a:hover{
 				<span class="glyphicon glyphicon-signal"></span> 项目经验 <a
 					class="panel-title col-md-offset-9" data-toggle="collapse"
 					data-parent="#panel-project-main" href="#panel-element-project"><span
-					class="glyphicon glyphicon-plus"></span> 新增项目</a>
+					class="glyphicon glyphicon-plus"></span>新增项目</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-project" class="panel-collapse collapse">
@@ -247,12 +285,52 @@ a:hover{
 			<!--mian-->
 		</div>
 		<!--2+-->
+
 		<div class="panel panel-default">
+		<c:if test="${projs!=null }">
+			<c:forEach items="${projs }" var="pro">
+				<table class="table">
+					<colgroup>
+						<col style="width: 50%">
+						<col style="width: 50%">
+					</colgroup>
+					<tr>
+						<td>项目名称：</td>
+						<td>${pro.projectName }</td>
+					</tr>
+					<tr>
+						<td>项目岗位：</td>
+						<td>${pro.projectJob }</td>
+					</tr>
+					<tr>
+						<td>项目描述：</td>
+						<td>${pro.projectDescription }</td>
+					</tr>
+					<tr>
+						<td>责任描述与感受：</td>
+						<td>${pro.projectMakeDescription }</td>
+					</tr>
+					<tr>
+						<td>项目时间：</td>
+						<td><fmt:formatDate value="${pro.projectBeginTime }"
+								pattern="yyyy-MM-dd" />到<fmt:formatDate
+								value="${pro.projectEndTime }" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="text-right"><a href="#">编辑</a>|<a
+							href="personal/resume/deleteResumeProject?id=${pro.id }">删除</a></td>
+					</tr>
+				</table>
+			</c:forEach>
+			</c:if>
 			<div id="panel-element-project-show" class="panel-collapse in">
-				<div class="panel-body col-md-offset-3">
-					<span class="glyphicon glyphicon-signal"></span>
-					完善项目经验，展现社会工作能力，让HR更了解你！
-				</div>
+				<c:if test="${projs==null }">
+					<div class="panel-body col-md-offset-3">
+						<span class="glyphicon glyphicon-signal"></span>
+						完善项目经验，展现社会工作能力，让HR更了解你！
+					</div>
+				</c:if>
 			</div>
 		</div>
 		<!--2-->
@@ -331,3 +409,278 @@ a:hover{
 		<!--2-->
 	</div>
 </div>
+<script type="text/javascript">
+	/* 	$("#time").blur(function() {
+	alert(typeof ("#time"))
+	}); */
+	$(function() {
+		$("#datetimeStart").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#datetimeStart").datetimepicker("setEndDate",
+							$("#datetimeEnd").val())
+				});
+
+		$("#datetimeEnd").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#datetimeEnd").datetimepicker("setStartDate",
+							$("#datetimeStart").val())
+				});
+
+		$("#datetimeStart1").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#datetimeStart1").datetimepicker("setEndDate",
+							$("#datetimeEnd1").val())
+				});
+
+		$("#datetimeEnd1").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#datetimeEnd1").datetimepicker("setStartDate",
+							$("#datetimeStart1").val())
+				});
+
+		$("#datetimeStart2").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#datetimeStart2").datetimepicker("setEndDate",
+							$("#datetimeEnd2").val())
+				});
+
+		$("#datetimeEnd2").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#datetimeEnd2").datetimepicker("setStartDate",
+							$("#datetimeStart2").val())
+				});
+	});
+
+	$(function() {
+		$("#educationForm").bootstrapValidator({
+			message : '这个值不能通过验证！！',
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				educationSchool : {
+					validators : {
+						notEmpty : {
+							message : '学校名称不能为空'
+						},
+						stringLength : {
+							min : 2,
+							max : 50,
+							message : '学校名称必须在2到50位之间'
+						},
+						regexp : {
+							regexp : (/[\u4e00-\u9fa5]/g),
+							message : "请输入中文名字"
+						}
+
+					}
+				},
+				educationContent : {
+					validators : {
+						notEmpty : {
+							message : '专业不能为空'
+						},
+						stringLength : {
+							min : 2,
+							max : 50,
+							message : '专业必须在2到50位之间'
+						},
+						regexp : {
+							regexp : (/[\u4e00-\u9fa5]/g),
+							message : "请输入中文名字"
+						}
+
+					}
+				},
+				educationBeginTime : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				},
+				educationEndTime : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				}
+			}
+		});
+
+		$("#workForm").bootstrapValidator({
+			message : '这个值不能通过验证！！',
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+
+				workFirmName : {
+					validators : {
+						notEmpty : {
+							message : '企业名称不能为空'
+						},
+						stringLength : {
+							min : 1,
+							max : 50,
+							message : '企业名称必须在1到50位之间'
+						}
+					}
+				},
+				workUnit : {
+					validators : {
+						notEmpty : {
+							message : '工作岗位不能为空'
+						},
+						stringLength : {
+							min : 2,
+							max : 50,
+							message : '工作岗位必须在2到50位之间'
+						}
+					}
+				},
+				workDescription : {
+					validators : {
+						notEmpty : {
+							message : '工作描述不能为空'
+						},
+						stringLength : {
+							min : 10,
+							max : 500,
+							message : '工作描述必须在10到500位之间'
+						}
+					}
+				},
+				workBeginTime : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				},
+				workEndTime : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				},
+
+			}
+		});
+
+		$("#projectForm").bootstrapValidator({
+			message : '这个值不能通过验证！！',
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				projectName : {
+					validators : {
+						notEmpty : {
+							message : '项目名称不能为空'
+						},
+						stringLength : {
+							min : 2,
+							max : 100,
+							message : '项目名称必须在2到100位之间'
+						}
+					}
+				},
+				projectJob : {
+					validators : {
+						notEmpty : {
+							message : '项目岗位不能为空'
+						},
+						stringLength : {
+							min : 2,
+							max : 100,
+							message : '项目岗位必须在2到100位之间'
+						}
+					}
+				},
+				projectDescription : {
+					validators : {
+						notEmpty : {
+							message : '项目描述不能为空'
+						},
+						stringLength : {
+							min : 10,
+							max : 500,
+							message : '项目描述必须在10到500位之间'
+						}
+					}
+				},
+				projectBeginTime : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				},
+				projectEndTime : {
+					validators : {
+						notEmpty : {
+							message : '日期不能为空'
+						}
+					}
+				}
+			}
+		});
+	});
+</script>
