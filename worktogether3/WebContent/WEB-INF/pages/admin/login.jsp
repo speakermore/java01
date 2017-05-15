@@ -44,7 +44,7 @@
 					<div class="col-xs-offset-2 col-xs-4">
 						<button type="submit" class="btn btn-primary">登 录</button>
 					</div>
-					<div class="col-xs-offset-4 col-xs-8">
+					<div class="col-xs-offset-4 col-xs-8 " style="color:Red;">
 						${operatorInfo}
 					</div>
 				</div>

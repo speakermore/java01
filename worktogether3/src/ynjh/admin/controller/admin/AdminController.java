@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
+import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
@@ -35,6 +36,7 @@ import ynjh.admin.service.AdminService;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
@@ -525,10 +527,10 @@ public class AdminController {
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditRecruitment")
-	public ModelAndView findAuditRecruitment() {
-		List<CompanyRecruit> companyRecruits = adminService.findAuditRecruitment(null);
-		ModelAndView mv = new ModelAndView("");
+	@RequestMapping("/findAuditRecruitMent/{page}")
+	public ModelAndView findAuditRecruitment(@PathVariable Integer page) {
+		List<CompanyRecruit> companyRecruits = adminService.findAuditRecruitment(page);
+		ModelAndView mv = new ModelAndView("admin/audit/auditRecruit");
 		mv.addObject("companyRecruits", companyRecruits);
 		return mv;
 	}
@@ -707,19 +709,14 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/auditRecruitment") // 审核招聘信息
-	public ModelAndView auditRecruitment(Integer recruitmentId, Integer cmpRecStatus) {
-		int result = adminService.auditRecruitment(recruitmentId, cmpRecStatus);
-		ModelAndView mv = new ModelAndView();
-		if (result > 0) {
-			mv.addObject("", "审核成功");
-			mv.addObject("", "");
-			mv.setViewName("");
-		} else {
-			mv.addObject("", "审核失败");
-			mv.addObject("", "");
-			mv.setViewName("");
+	@ResponseBody
+	public String auditRecruitment(Integer[] id, Integer recruitStatus) {
+		int result = adminService.auditRecruitment(id, recruitStatus);
+		if(result>0){
+			return "true";
+		}else{
+			return "false";
 		}
-		return mv;
 	}
 
 	/**
@@ -970,7 +967,12 @@ public class AdminController {
 	@RequestMapping("/findAuditResumeById")
 	public ModelAndView findAuditResumeById(int id) {
 		Resume resume = adminService.findAuditResumeById(id);
+		User user=new User();
+		if(resume!=null){
+			user=adminService.findUserById(resume.getUserId());
+		}
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("resumeOwner",user);
 		mv.addObject("resume", resume);
 		mv.setViewName("admin/auditing/auditingResume");
 		return mv;
@@ -1089,11 +1091,16 @@ public class AdminController {
 	 *            招聘信息的id
 	 * @return
 	 */
-	@RequestMapping("/findAuditRecruitmentById")
-	public ModelAndView findAuditRecruitmentById(int id) {
-		List<CompanyRecruit> companyRecruits = adminService.findAuditRecruitmentById(id);
-		ModelAndView mv = new ModelAndView("auditingRecruitMent");
-		mv.addObject("companyRecruits", companyRecruits);
+	@RequestMapping("/findAuditRecruitmentById/{id}")
+	public ModelAndView findAuditRecruitmentById(@PathVariable Integer id) {
+		CompanyRecruit companyRecruit = adminService.findAuditRecruitmentById(id);
+		Company company=new Company();
+		if(companyRecruit!=null){
+			company=adminService.findAuditCompanyById(companyRecruit.getCompanyId());
+		}
+		ModelAndView mv = new ModelAndView("admin/auditing/auditingRecruit");
+		mv.addObject("company",company);
+		mv.addObject("companyRecruit", companyRecruit);
 		return mv;
 	}
 
@@ -1199,6 +1206,42 @@ public class AdminController {
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("edus",edus);
 		mv.setViewName("admin/auditing/auditingResume");
+		return mv;
+	}
+	
+	/**
+	 * 查找审核企业
+	 * @author 朱吉
+	 * @param page 偏移量
+	 */
+	@RequestMapping("/findCompanyIntro/{page}")
+	public ModelAndView findCompanyIntro(@PathVariable Integer page){
+		List<AuditComIntro> companyIntro=adminService.findCompanyIntro(page);
+		ModelAndView mv=new ModelAndView();
+		if(companyIntro!=null){		
+			mv.addObject("companyIntro", companyIntro);
+			mv.setViewName("admin/audit/auditComIntro");
+		}else{
+			mv.addObject("companyIntro", null);
+			mv.setViewName("admin/audit/auditComIntro");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 通过id找到企业审核
+	 * @author 朱吉
+	 * 
+	 */
+	@RequestMapping("/findAuditComById/{id}")
+	public ModelAndView findAuditComById(@PathVariable Integer id){
+		AuditComIntro auditComIntro=adminService.findAuditComById(id);
+		ModelAndView mv=new ModelAndView("admin/auditing/auditingCom");
+		if(auditComIntro!=null){
+			mv.addObject("auditComIntro", auditComIntro);
+		}else{
+			mv.addObject("auditComIntro", null);
+		}
 		return mv;
 	}
 
