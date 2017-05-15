@@ -11,11 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resume(userId,resumeTitle,resumeCreateDate,resumeName,resumeGender,resumeNation,
 		resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
 		resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
-		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg,resumeWorks)
+		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg,resumeWorks,
+		resumeHouseAddress,resumeNowResidence,resumeEmail)
 		values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
 		#{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
 		#{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
-		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg},#{resumeWorks})
+		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg},#{resumeWorks},
+		#{resumeHouseAddress},#{resumeNowResidence},#{resumeEmail})
 	</insert>
 	<!-- 修改简历 -->
 	<update id="updateResume" parameterType="Integer">
@@ -49,8 +51,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="deleteResumeById" parameterType="Integer">
 		update resume set resumeStatusThree=4 where id=#{id}
 	</update>
-	
-	
 	<!-- 恢复简历 -->
 	<update id="renewResumeById" parameterType="Integer">
 		update resume set resumeStatusThree=1 where id=#{id}
@@ -75,29 +75,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		project(userId,resumeId,projectBeginTime,projectEndTime,projectName,projectJob,projectDescription)
 		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription})
 	</insert>
-
+	<!-- 修改教育经历 -->
 	<update id="updateEducation" parameterType="Education">
 		update education set
 		educationBeginTime=#{educationBeginTime},educationEndTime=#{educationEndTime},educationSchool=#{educationSchool},educationContent=#{educationContent}
 		where resumeId=#{resumeId}
 	</update>
+	<!-- 修改工作经历 -->
 	<update id="updateWork" parameterType="Work">
 		update work set
 		workBeginTime=#{workBeginTime},workEndTime=#{workEndTime},workFirmName=#{workFirmName},workUnit=#{workUnit},workDescription=#{workDescription}
 		where resumeId=#{resumeId}
 	</update>
+	<!-- 修改项目经历 -->
 	<update id="updateProject" parameterType="Project">
 		update project set
 		projectBeginTime=#{projectBeginTime},projectEndTime=#{projectEndTime},projectName=#{projectName},projectJob=#{projectJob},projectDescription=#{projectDescription},projectMakeDescription=#{projectMakeDescription}
 		where resumeId=#{resumeId}
 	</update>
-
+	<!-- 查看教育经历 -->
 	<select id="findEducation" parameterType="Integer" resultType="Education">
 		select * from education where resumeId=#{resumeId} and not resumeType=4
 	</select>
+	<!-- 查看工作经历 -->
 	<select id="findWork" parameterType="Integer" resultType="Work">
 		select * from work where resumeId=#{resumeId} and not resumeType=4
 	</select>
+	<!-- 查看项目经历 -->
 	<select id="findProject" parameterType="Integer" resultType="Project">
 		select * from project where resumeId=#{resumeId} and not resumeType=4
 	</select>
@@ -113,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update project set resumeType=4 where id=#{id}
 	</update>
 	<!-- 删除结束 -->
-	<!-- 已删除记录 -->
+	<!-- 查看已删除记录 -->
 	<select id="findEducationByDelete" resultType="ForeignKeyEducation">
 	select r.resumeTitle,e.* from resume r,education e where e.resumeId=r.id  and resumeType=4 and e.userId=#{userId}
 	<if test="page!=null">
@@ -162,8 +166,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 分页结束 -->
 	<!-- 发送简历 -->
-	<!-- <insert id="">
-		insert into 
-	</insert> -->
-
+	<insert id="sendResumeToCompany">
+		
+	</insert>
+	<!-- 更换图片 -->
+	<update id="changeResumeHeadImg">
+		update resume set resumeHeadImg=#{resumeHeadImg} where id=#{resumeId}
+	</update>
 </mapper>
