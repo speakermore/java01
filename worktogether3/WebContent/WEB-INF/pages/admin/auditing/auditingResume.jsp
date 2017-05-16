@@ -17,7 +17,7 @@
 <body>
 	<!-- 加入显示数组 -->
 	<c:set var="genders" value="${CommonStatus.SEX }"></c:set>
-	<c:set var="MARRIAGE" value="${CommonStatus.MARRIAGE }"></c:set>
+	<c:set var="MARRIAGE" value="${CommonStatus.MARRY }"></c:set>
 	<div><%@include file="../menu.jsp"%></div>
 	<div class="container">
 		<div class="row">
