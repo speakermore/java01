@@ -2,6 +2,8 @@ package ynjh.personal.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import ynjh.personal.entity.Follow;
 
 /**
@@ -23,4 +25,8 @@ public interface FollowService {
 
 	// 查看被关注者人数
 	public Integer selectUserByFollowCount(Integer byFollowId);
+	/**
+	 *  判断是否关注 
+	 */
+	public Follow findIsFollowByFollowIdAndFollowId(Integer followId,Integer byFollowId);
 }

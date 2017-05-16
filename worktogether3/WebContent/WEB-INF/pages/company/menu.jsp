@@ -6,11 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.wt-ly li{
-		background-color: #fffcb8;
+	ul{
+		margin-top: 50px;
+		line-height: 200%;
+	}
+	
+	.wt-ly li:NTH-CHILD(odd){
+		background-color: #f5f5f5;
 	}
 	.wt-ly li>a{
-		color:#000000;
+		color:#fa941b;
 	}
 </style>
 </head>
@@ -35,7 +40,7 @@
 					 <a href="#">帮助中心</a>
 				</li> -->
 				<li>
-					 <a href="company/cmprs/companyRecruit/">发布招聘信息</a>
+					 <a href="company/cmprs/companyRecruit/">查看招聘信息</a>
 				</li>
 				
 			</ul>

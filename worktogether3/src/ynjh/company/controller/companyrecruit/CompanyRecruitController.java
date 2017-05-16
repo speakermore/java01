@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,18 +53,32 @@ public class CompanyRecruitController {
 	 @RequestMapping(value="/companyRecruit/findAll")
 	 public ModelAndView findAll(Integer page,HttpSession session){
 		 Integer companyId=((Company)session.getAttribute("user")).getId();
+		 Integer resumeCount=companyRecruitService.findCount(companyId);
 		 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page,companyId);
 		 int maxPage=companyRecruitService.findMaxPage();
 		 ModelAndView mv=new ModelAndView("company/cmprs/companyRecruit_index");
 		 mv.addObject("companyRecruits", companyRecruits);
 		 mv.addObject("page", page);
 		 mv.addObject("maxPage", maxPage);
+		 mv.addObject("resumeCount", resumeCount);
 		 return mv;	
 	 }
 		@RequestMapping(value="/companyRecruit/companyRecruit_index",method=RequestMethod.GET)
 		public String addUser(){
 			return "company/cmprs/companyRecruit_index";
 		}
+		//首页查询所有招聘信息
+		 @RequestMapping(value="/companyRecruit/findAllDetil/{page}")
+		 public ModelAndView findAllDetil(@PathVariable Integer page,HttpSession session){
+			 Integer companyId=((Company)session.getAttribute("user")).getId();
+			 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page,companyId);
+			 int maxPage=companyRecruitService.findMaxPage();
+			 ModelAndView mv=new ModelAndView("company/artanddis/company_index");
+			 mv.addObject("companyRecruits", companyRecruits);
+			 mv.addObject("page", page);
+			 mv.addObject("maxPage", maxPage);
+			 return mv;
+		 }
 	 //根据id查询所属招聘信息
 	 @RequestMapping(value="/companyRecruit/findById")
 	 public ModelAndView findById(Integer id,String toPage){
@@ -89,16 +104,7 @@ public class CompanyRecruitController {
 			}
 			return mv;
 	 }
-	 //修改
-/*		@RequestMapping(value={"/companyRecruit/+updateCmpRecruit","/"}, method=RequestMethod.POST)
-		public ModelAndView updateCmpRecruit(Integer id){
-			CompanyRecruit companyRecruit=companyRecruitService.findById(id);
-			ModelAndView mv=new ModelAndView();
-			mv.addObject("companyRecruit", companyRecruit);
-			mv.setViewName("company/cmprs/companyRecruit/companyRecruit_edit");
-			return mv;
-		}*/
-	 //修改招聘信息
+	 
 	 @RequestMapping(value="/companyRecruit/updateCmpRecruit",method=RequestMethod.POST)
 	 public ModelAndView updateCompanyRecruit(CompanyRecruit companyRecruit){
 		 int result=companyRecruitService.updateCompanyRecruit(companyRecruit);
@@ -114,6 +120,5 @@ public class CompanyRecruitController {
 		 }
 		 return mv;
 	 }
-	 
 }
 

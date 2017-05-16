@@ -17,6 +17,11 @@ import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.User;
 
+/**
+ * 
+ * @author 黄冰雁
+ *
+ */
 @Controller
 @RequestMapping("/company/artanddis")
 public class CompanyCommentArticleController {
@@ -24,6 +29,11 @@ public class CompanyCommentArticleController {
 	@Resource
 	private CompanyCommentArticleService ccArticleService;
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数commentArticle：增加每日动态评论
+	 */
 	@RequestMapping(value="/comment/add_companycomment",method=RequestMethod.POST)
 	public ModelAndView addCommentArticle(CommentArticle commentArticle,HttpSession session){
 		Article article=(Article)session.getAttribute("article");
@@ -44,6 +54,11 @@ public class CompanyCommentArticleController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数articleId：根据文章id查询所有每日动态评论
+	 */
 	@RequestMapping("/comment/findcomment")
 	public ModelAndView findcomment(Integer articleId,HttpSession session){
 		Article article=(Article)session.getAttribute("article");
@@ -55,6 +70,11 @@ public class CompanyCommentArticleController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数id：根据id查询删除该条每日动态评论
+	 */
 	@RequestMapping("/comment/deletecomment/{id}")
 	public ModelAndView deletecomment(@PathVariable Integer id,HttpSession session){
 		Article article=(Article)session.getAttribute("article");
@@ -70,6 +90,11 @@ public class CompanyCommentArticleController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数id：根据id查询增加该条每日动态评论点赞数
+	 */
 	@RequestMapping("/comment/likecomment/{id}")
 	public ModelAndView likecomment(@PathVariable Integer id,HttpSession session){
 		ccArticleService.updateLike(id);

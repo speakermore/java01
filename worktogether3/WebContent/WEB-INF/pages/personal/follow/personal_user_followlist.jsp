@@ -61,7 +61,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${followss }" var="fol">
+				<c:forEach items="${OldFollows }" var="fol">
 					<tr>
 						<td>
 							<a href="#">${fol.resumeJor }</a>
@@ -108,6 +108,7 @@
 					dataType:"json",
 					success:function(data){
 						alert(data.operatorInfo);
+						
 					}
 				});
 			}

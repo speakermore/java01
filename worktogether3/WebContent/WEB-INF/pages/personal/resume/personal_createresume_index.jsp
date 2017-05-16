@@ -7,7 +7,9 @@
 	<section class="panel">
 		<!-- 简历基本信息开始 -->
 		<div class="panel panel-default">
-			<form class="form-horizontal" action="personal/resume/createResume" method="post" style="margin-left: 35px; margin-top: 35px;">
+			<form class="form-horizontal" action="personal/resume/createResume"
+				method="post" id="resumeForm"
+				style="margin-left: 35px; margin-top: 35px;">
 				<div class="col-md-1 column">
 					<img src="img/head.gif" class="center-block" width="100"
 						height="120" />
@@ -46,14 +48,18 @@
 					<div class="form-group">
 						<label for="resumeGender" class="col-md-4 control-label">性别</label>
 						<div class="col-md-8">
-							<input type="radio" name="resumeGender" id="resumeGender"
-								value="1" checked="checked"> <label>男</label> <input
-								type="radio" name="resumeGender" id="resumeGender" value="0">
-							<label>女</label>
+							<div class="col-md-6">
+								<input type="radio" name="resumeGender" id="resumeGender"
+									value="1" checked="checked"> <label>男</label>
+							</div>
+							<div class="col-md-6">
+								<input type="radio" name="resumeGender" id="resumeGender"
+									value="0"> <label>女</label>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeWorks" class="col-md-4 control-label">开始工作年份</label>
+						<label for="resumeWorks" class="col-md-4 control-label">开始工作年月</label>
 						<div class="col-md-8">
 							<input class="form-control form_datetime" id="resumeWorks"
 								name="resumeWorks" readonly="readonly" placeholder="请选择日期" />
@@ -251,7 +257,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-md-offset-5 col-md-12">
-						<input type="submit" class="btn btn-success" value="保存"/>
+						<input type="submit" class="btn btn-success" value="保存" />
 					</div>
 				</div>
 			</form>

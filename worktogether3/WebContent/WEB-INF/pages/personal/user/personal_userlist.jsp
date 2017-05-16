@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>名企招聘</title>
+<title>软件人才</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
@@ -15,10 +16,10 @@
 			<div class="col-md-10 column">
 				<table class="table">
 				<colgroup>
-						<col style="width: 30%">
+						<col style="width: 20%">
 						<col style="width: 10%">
 						<col style="width: 10%">
-						<col style="width: 10%">
+						<col style="width: 20%">
 						<col style="width: 20%">
 						<col style="width: 10%">
 						<col style="width: 10%">
@@ -61,18 +62,22 @@
 							${SEX[uar.userGender] }
 						</td>
 						<td>
-							${uar.userBirthday }
+						<label>${uar.age}</label>岁(<fmt:formatDate value="${uar.userBirthday}" pattern="yyyy/MM/dd" />)
+						
 						</td>
 						<td>
-							${uar.resumeWorks }
+							${uar.works}年
 						</td>
 						<td>
 							${uar.resumeEducation }
 						</td>
 						<td>
-							<c:if test="${user.userLoginId==uar.userLoginId }">已关注</c:if>
-							<c:if test="${user.userLoginId!=uar.userLoginId }">
-							<a href="javascript:ajaxFollow(${uar.id })">关注</a></c:if>
+							<input id="followUserId" type="hidden" value="${uar.id}" />
+							<c:if test="${uar.isFoucse==true}"><label>已关注</label></c:if>
+							<c:if test="${uar.isFoucse==false}">
+								<a id="followUser" href="javascript:ajaxFollow(${uar.id})">关注</a>
+							</c:if>
+							
 						</td>
 					</tr>
 					</c:forEach>
@@ -89,6 +94,8 @@
 					dataType:"json",
 					success:function(data){
 						alert(data.operatorInfo);
+						$("[href='javascript:ajaxFollow("+id+")']").replaceWith('<label>已关注</label>');
+						/* $("[href='javascript:ajaxFollow("+id+")']").html('<label>已关注</label>'); */
 					}
 				});
 			}

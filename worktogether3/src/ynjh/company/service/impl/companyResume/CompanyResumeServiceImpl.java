@@ -19,11 +19,6 @@ public class CompanyResumeServiceImpl implements CompanyResumeService {
 	public List<CompanyResume> findAllResume(Integer companyId) {
 		return companyResumeMapper.findAllResume(companyId);
 	}
-
-	@Override
-	public int findCount(){	
-		return companyResumeMapper.getResumeCount();
-	}
 	@Override
 	public int findMaxPage() {	
 		return (companyResumeMapper.getMaxRecordCount()+20-1)/20;
@@ -32,4 +27,10 @@ public class CompanyResumeServiceImpl implements CompanyResumeService {
 	public CompanyResume findById(Integer id){
 		return companyResumeMapper.findById(id);
 	}
+	@Override
+	public Integer updateCmpResumeStatus(Integer id,Integer cmprAction){
+		return companyResumeMapper.updateCmpResumeStatus(id, cmprAction);
+	}
+
+
 }

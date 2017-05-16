@@ -3,6 +3,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style type="text/css">
+.test{
+	outline: 1px solid #E5E5E5;
+}
+.bg_more_color{
+	background-color: #F8F8FF;
+}
+
 #personal_border:hover {
 	outline: 1px solid #fa941b;
 }
@@ -38,6 +45,7 @@ a:focus {
 <div class="panel panel-default">
 	<div id="personal_border">
 		<div class="media">
+			<!-- 头像 -->
 			<c:if test="${resume.resumeHeadImg==null }">
 				<a href="#" style="margin-left: 35px; margin-top: 35px;"
 					class="pull-left"><img src="personal/img/head.gif"
@@ -49,6 +57,8 @@ a:focus {
 					src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}"
 					class="media-object" alt='我的头像' width="100" height="120" /></a>
 			</c:if>
+			<!-- 头像结束 -->
+			<!-- 简历基本信息 -->
 			<div class="media-body"
 				style="padding-top: 35px; padding-left: 35px;">
 				<a class="col-lg-offset-11"
@@ -59,17 +69,18 @@ a:focus {
 					<label class="control-label">${resume.resumeName }</label>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
-				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;${resume.resumeWorks }&nbsp;|&nbsp;${SEX[resume.resumeGender]}&nbsp;|&nbsp;岁数(<fmt:formatDate
+				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;${SEX[resume.resumeGender]}&nbsp;|&nbsp;<label>${resume.age}</label>岁(<fmt:formatDate
 						value="${resume.resumeBirthday }" pattern="yyyy/MM/dd" />
 					)&nbsp;|&nbsp;${resume.resumeJor }
 				</p>
 				<label class="control-label"><span
-					class="glyphicon glyphicon-envelope"></span> ${resume.resumeEmail }
-					<span class="glyphicon glyphicon-earphone"></span>
-					${resume.resumePhone }</label>
+					class="glyphicon glyphicon-envelope"></span>${resume.resumeEmail }&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="glyphicon glyphicon-earphone"></span>${resume.resumePhone }</label>
 			</div>
+			<!-- 简历基本信息结束 -->
 		</div>
 		<div class="panel-group">
+			<!-- 展开内容 -->
 			<div class="panel-heading">
 				<a class="panel-title col-md-offset-10" data-toggle="collapse"
 					data-parent="#panel" href="#panel-element-more">更多展开 <span
@@ -77,31 +88,160 @@ a:focus {
 			</div>
 			<div id="panel-element-more" class="panel-collapse collapse">
 				<div class="panel-body">
-					<div class="panel-body col-md-12">
-						<div class="col-md-offset-3">
-							<div class="col-md-6 column">
+					<div class="panel-body col-md-12 test bg_more_color">
+							<c:if test="${resume.resumePlace!=null }">
+							<div class="col-md-4 column">
 								<label class="control-label">籍贯：</label> <label
 									class="control-label">${resume.resumePlace }</label>
 							</div>
-							<div class="col-md-6 column">
+							</c:if><c:if test="${resume.resumeMarriage!=null }">
+							<div class="col-md-4 column">
 								<label class="control-label">婚姻状况：</label> <label
 									class="control-label">${MARRY[resume.resumeMarriage] }</label>
 							</div>
-							<div class="col-md-6 column">
+							</c:if><c:if test="${resume.resumeJor!=null }">
+							<div class="col-md-4 column">
 								<label class="control-label">求职意向：</label> <label
 									class="control-label">${resume.resumeJor }</label>
 							</div>
-							<div class="col-md-6 column">
+							</c:if><c:if test="${resume.resumeWages!=null }">
+							<div class="col-md-4 column">
 								<label class="control-label">期待薪资：</label> <label
 									class="control-label">${resume.resumeWages }</label>
 							</div>
-							<%-- <c:if test="">
-								
-							</c:if> --%>
-						</div>
+							</c:if><c:if test="${resume.resumeQQ!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">QQ或微信：</label> <label
+									class="control-label">${resume.resumeQQ }</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeNation!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">民族：</label> <label
+									class="control-label">${resume.resumeNation }</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeGraduationSchool!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">毕业院校：</label> <label
+									class="control-label">${resume.resumeGraduationSchool }</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeGraduationTime!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">毕业时间：</label><label
+									class="control-label"><fmt:formatDate value="${resume.resumeGraduationTime }" pattern="yyyy/MM/dd" />
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeEducation!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">学历：</label><label
+									class="control-label">${resume.resumeEducation }
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeMajor!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">专业：</label><label
+									class="control-label">${resume.resumeMajor }
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeFLAbility!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">外语水平：</label><label
+									class="control-label">
+									<c:if test="${resume.resumeFLAbility==1 }">入门
+									</c:if>
+									<c:if test="${resume.resumeFLAbility==2 }">一般
+									</c:if>
+									<c:if test="${resume.resumeFLAbility==3 }">熟练
+									</c:if>
+									<c:if test="${resume.resumeFLAbility==4 }">精通
+									</c:if>
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeFLType!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">外语类型：</label><label
+									class="control-label">
+									<c:if test="${resume.resumeFLType==1 }">英语
+									</c:if>
+									<c:if test="${resume.resumeFLType==2 }">日语
+									</c:if>
+									<c:if test="${resume.resumeFLType==3 }">德语
+									</c:if>
+									<c:if test="${resume.resumeFLType==4 }">法语
+									</c:if>
+									<c:if test="${resume.resumeFLType==5 }">俄语
+									</c:if>
+									<c:if test="${resume.resumeFLType==6 }">西班牙语
+									</c:if>
+									<c:if test="${resume.resumeFLType==7 }">丹麦语
+									</c:if>
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeEnglishGrade!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">英语等级：</label><label
+									class="control-label">
+									<c:if test="${resume.resumeEnglishGrade==1 }">国家英语考试3级
+									</c:if>
+									<c:if test="${resume.resumeEnglishGrade==2 }">国家英语考试4级
+									</c:if>
+									<c:if test="${resume.resumeEnglishGrade==3 }">国家英语考试6级
+									</c:if>
+									<c:if test="${resume.resumeEnglishGrade==4 }">专业4级
+									</c:if>
+									<c:if test="${resume.resumeEnglishGrade==5 }">专业8级
+									</c:if>
+									<c:if test="${resume.resumeEnglishGrade==6 }">未参加
+									</c:if>
+									<c:if test="${resume.resumeEnglishGrade==7 }">未通过
+									</c:if>
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeComputerAbility!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">计算机水平：</label><label
+									class="control-label">
+									<c:if test="${resume.resumeComputerAbility==1 }">入门
+									</c:if>
+									<c:if test="${resume.resumeComputerAbility==2 }">一般
+									</c:if>
+									<c:if test="${resume.resumeComputerAbility==3 }">熟练
+									</c:if>
+									<c:if test="${resume.resumeComputerAbility==4 }">精通
+									</c:if>
+								</label>
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeHeight!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">身高：</label> <label
+									class="control-label">${resume.resumeHeight }</label>cm
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeWeight!=null }">
+							<div class="col-md-4 column">
+								<label class="control-label">体重：</label> <label
+									class="control-label">${resume.resumeWeight }</label>(公斤)
+							</div>
+							</c:if>
+							<c:if test="${resume.resumeSelfEvaluation!=null }">
+							<div class="col-md-12 column">
+								<label class="control-label">自我评价：</label> <label
+									class="control-label">${resume.resumeSelfEvaluation }</label>
+							</div>
+							</c:if>
 					</div>
 				</div>
 			</div>
+			<!-- 展开内容结束 -->
 		</div>
 	</div>
 	<!--
@@ -336,10 +476,10 @@ a:focus {
 		<!--2-->
 	</div>
 	<!--
-                        	作者：18213026337@163.com
-                        	时间：2017-05-15
-                        	描述：教育经历
-                        -->
+		作者：18213026337@163.com
+		时间：2017-05-15
+		描述：教育经历
+	 -->
 	<div class="panel-group" id="panel-education-main">
 		<div class="panel panel-default">
 			<div class="panel-heading">

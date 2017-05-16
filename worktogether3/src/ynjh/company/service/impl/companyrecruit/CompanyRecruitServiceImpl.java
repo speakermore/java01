@@ -63,7 +63,11 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	}
 
 	@Override
-	public int updateCmpRecStatus(Integer id, Integer cmpRecStatus) {
-		return companyRecruitMapper.updateCmpRecStatus(id, cmpRecStatus);
+	public int updateCmpRecStatus(Integer id, Integer cmprAction) {
+		return companyRecruitMapper.updateCmpRecStatus(id, cmprAction);
+	}
+	@Override
+	public int findCount(Integer companyId){	
+		return companyRecruitMapper.getResumeCount(companyId);
 	}
 }

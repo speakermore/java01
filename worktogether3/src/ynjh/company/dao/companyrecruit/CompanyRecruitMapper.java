@@ -22,4 +22,6 @@ public interface CompanyRecruitMapper {
 	public CompanyRecruit findById(Integer id);
 	//得到最大页码数
 	public int getMaxRecordCount();
+	//得到未阅读简历个数
+	public int getResumeCount(Integer companyId);
 }

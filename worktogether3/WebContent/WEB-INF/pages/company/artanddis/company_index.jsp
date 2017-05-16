@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page autoFlush="true" buffer="1024kb"%>
 <%
 String path = request.getContextPath();
@@ -40,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.thumbnail>img{
 			 height: 100px;
-			 width: 200px;
+			 width: 100%;
 		}
     </style>
   </head>
@@ -53,10 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-sm-12 column">
 					<div class="row clearfix">
 						<div class="col-sm-10 column">
-							<div class="col-sm-5 column">
+							<div class="col-sm-6 column">
 								<h2>${user.companySimpleName }</h2>
 							</div>
-							<div class="col-sm-5 column">
+							<div class="col-sm-4 column">
 								<br />
 								<div class="col-sm-12">
 									<img src="img/icon_star_2.gif" />
@@ -67,45 +68,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<a class="btn" href="company/company/findById/${user.id}">更多详细资料 »</a>
 							</div>
+							
 						</div>
-						<div class="col-sm-10 column">
+						<div class="col-sm-11 column">
 							<p class="wt-hby-companyInt">
-								这里是相关的企业简单的简介,2017年2月23日上午，习近平总书记从中南海出发，驱车100多公里，专程到河北省安新县实地察看规划新区核心区概貌。在大王镇小王营村，总书记走进一片开阔地，极目远眺。这里就是规划中的雄安新区起步区的核心地块。 在展开的一张规划图前，习近平仔细察看区位、规划状况，详细了解人口搬迁安置、区域内的地质水文条件等情况......
+								${companyInt.cmpIntroduction }
 							</p>
 						</div>
 					</div>
 					<div class="row">
-					    <div class="col-sm-6 col-md-3">
-					        <a title="通用的占位符缩略图" href="javascript:void()" class="thumbnail">
-					            <img src="img/1479175334419.jpg"
-					                 alt="通用的占位符缩略图" >
-					        </a>
-					    </div>
-					    <div class="col-sm-6 col-md-3">
-					        <a href="javascript:void()" class="thumbnail">
-					            <img src="img/1479176025323.jpg"
-					                 alt="通用的占位符缩略图">
-					        </a>
-					    </div>
-					    <div class="col-sm-6 col-md-3">
-					        <a href="javascript:void()" class="thumbnail">
-					            <img src="img/1479176138497.jpg"
-					                 alt="通用的占位符缩略图">
-					        </a>
-					    </div>
-					    <div class="col-sm-6 col-md-3">
-					        <a href="javascript:void()" class="thumbnail">
-					            <img src="img/1479176279291.jpg"
-					                 alt="通用的占位符缩略图">
-					        </a>
-					    </div>
+						<c:forEach items="${detailImgs }" var="imgs">
+						    <div class="col-sm-6 col-sm-2">
+						        <a href="javascript:void()" class="thumbnail">
+						            <img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
+						        </a>
+						    </div>
+					    </c:forEach>
 					</div>
-										
-					
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
 					  		<div class="panel-heading">
-					   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">企业动态</a></h4>
+					   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">投递简历信息</a></h4>
 					  		</div>
 					  		<div id="collapseOne" class="panel-collapse collapse in">
 					   			<div class="panel-body">
@@ -125,7 +108,103 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   							<c:forEach items="${articles }" var="art">
 				   								<tr>
 				   									<td><a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_detail">${art.articleTitle }</a></td>
-				   									<td>${art.articleTime }</td>
+				   									<td>
+				   										
+				   									</td>
+				   									<td>${art.articleLikeNum }</td>
+				   									<td>${art.articleReadNum }</td>
+				   								</tr>
+				   							</c:forEach>
+										</tbody>
+									</table>
+									<ul class="pager">
+										<li>
+											<c:if test="${curPage2==null }">
+				   								<c:set var="curPage2" value="1"></c:set>
+				   							</c:if> 
+					   						<c:if test="${curPage2>1 }">
+					   							<a href="company/artanddis/article/find/${curPage2-1 }">&laquo;</a>
+					   						</c:if>
+					   						<c:forEach items="${pageNo2 }" var="i">
+												<a href="company/artanddis/article/find/${i }">${i }</a>
+											</c:forEach>
+									   		<c:if test="${curPage2<maxPage2 }">
+									   			<a href="company/artanddis/article/find/${curPage2+1 }">&raquo;</a>	
+									   		</c:if>	
+										</li>
+									</ul>
+								</div>
+					  		</div>
+						</div> 
+						<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+					  		<div class="panel-heading">
+					   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseTwo">招聘岗位信息</a></h4>
+					  		</div>
+					  		<div id="collapseTwo" class="panel-collapse collapse in">
+					   			<div class="panel-body">
+									<table class="table wt-hby-article">
+										<thead>
+											<tr>
+												<th>招聘岗位</th>
+												<th>发表日期</th>
+												<th>投递简历</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:if test="${companyRecruits==null }">
+				   								<jsp:forward page="/company/cmprs/companyRecruit/findAllDetil/1"></jsp:forward>
+				   							</c:if>
+				   							<c:forEach items="${companyRecruits}" var="rec">
+				   								<tr>
+				   									<td><a href="company/cmprs/companyRecruit/findById?id=${rec.id }&toPage=company/cmprs/companyRecruit_detail">${rec.cmpRecTitle}</a></td>
+				   									<td><fmt:formatDate value="${rec.cmpRecTime }" pattern="yyyy-MM-dd"/></td>
+				   									<td><a href="#">我要应聘</a></td>
+				   								</tr>
+				   							</c:forEach>
+										</tbody>
+									</table>
+									<ul class="pager">
+										<li>
+											<c:if test="${page==null }">
+				   								<c:set var="page" value="1"></c:set>
+				   							</c:if> 
+					   						<c:if test="${page>=1 }">
+					   							<a href="company/cmprs/companyRecruit/findAllDetil/${page-1 }">&laquo;</a>
+					   						</c:if>
+									   		<c:if test="${page<=maxPage }">
+									   			<a href="company/cmprs/companyRecruit/findAllDetil/${page+1 }">&raquo;</a>	
+									   		</c:if>	
+										</li>
+									</ul>
+								</div>
+					  		</div>
+						</div>
+						<div class="panel panel-default">
+					  		<div class="panel-heading">
+					   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">企业动态</a></h4>
+					  		</div>
+					  		<div id="collapseThree" class="panel-collapse collapse in">
+					   			<div class="panel-body">
+									<table class="table wt-hby-article">
+										<thead>
+											<tr>
+												<th>每日动态</th>
+												<th>发表日期</th>
+												<th><i class="glyphicon glyphicon-thumbs-up"></i></th>
+												<th><i class="glyphicon glyphicon-user"></i></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:if test="${articles==null }">
+				   								<jsp:forward page="/company/artanddis/article/find/1"></jsp:forward>
+				   							</c:if>
+				   							<c:forEach items="${articles }" var="art">
+				   								<tr>
+				   									<td><a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_detail">${art.articleTitle }</a></td>
+				   									<td>
+				   										<fmt:formatDate value="${art.articleTime }" pattern="yyyy-MM-dd"/>
+				   									</td>
 				   									<td>${art.articleLikeNum }</td>
 				   									<td>${art.articleReadNum }</td>
 				   								</tr>
@@ -153,13 +232,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					 	<div class="panel panel-default">
 					  		<div class="panel-heading">
-					   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseTwo">评价企业内容</a></h4>
+					   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseFour">评价企业内容</a></h4>
 					  		</div>
-					  		<div id="collapseTwo" class="panel-collapse collapse in">
+					  		<div id="collapseFour" class="panel-collapse collapse in">
 					   			<div class="panel-body">
-					   				
 										<c:if test="${discusses==null }">
-			  								<jsp:forward page="/company/artanddis/discuss/finddiscuss/1"></jsp:forward>
+			  								<jsp:forward page="/company/artanddis/discuss/finddiscuss"></jsp:forward>
 			  							</c:if>
 			  							<ol>
 											<c:forEach items="${discusses}" var="dis">
@@ -192,7 +270,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   	</div>
 					    <div class="form-group col-sm-12">
 					    	<label class="col-sm-2">评论内容</label>
-					    	<div class=col-sm-10">
+					    	<div class="col-sm-10">
 					    		<textarea name="discussContent" rows="7" cols="90" 
 					    			maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea>
 					    	</div>
@@ -209,13 +287,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				<div class=" col-sm-5 column"></div>
    				<a href="#" class="cd-top">返回顶部</a>
    			</div>
+			</div>
 		</div>
 		<div class="col-sm-3 column wt-hby-right">
 			此处为广告广告广告
 			广告未招租
 		</div>
 	</div>
-  	
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

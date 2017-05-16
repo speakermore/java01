@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{companyAddress},1)
 	</insert> 
 	<insert id="addCompanyDetailImg">
-		insert into companydetailimg(companyId,companyDetailImg,companyDetailDisc)values(#{companyId},#{companyDetailImg},#{companyDetailDisc})
+		insert into companyDetailImg(companyId,companyDetailImg,companyDetailDisc)values(#{companyId},#{companyDetailImg},#{companyDetailDisc})
 	</insert>
 	<!-- 更改用户信息 -->
 	<update id="updateCompanyById" parameterType="Company">
@@ -28,12 +28,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		companyLicenseNo=#{companyLicenseNo},companyCorporator=#{companyCorporator},companyTel=#{companyTel},
 		companyEmail=#{companyEmail},companyAddress=#{companyAddress},companyStatus=#{companyStatus} where id=#{id}
 	</update>
+	<update id="updatePassword" >
+		update company set companyPassword=#{companyPassword} where id=#{id}
+	</update>
+	<update id="updateImg">
+		update companyDetailImg set companyDetailImg=#{companyDetailImg} where id=#{id}
+	</update>
 	<select id="findByloginIdAndPassword" resultType="Company">
 		select * from company where companyLoginId=#{companyLoginId} and companyPassword=#{companyPassword}
 	</select>
 	<select id="findById" parameterType="Integer" resultType="Company">
 		select * from company where id=#{id}
 	</select>
-	
+	<select id="findDetailImg" parameterType="int" resultType="CompanyDetailImg">
+		select * from companyDetailImg where companyId=#{companyId}
+	</select>
 	
 </mapper>

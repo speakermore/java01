@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -25,14 +27,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.util.GetAge;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
 import ynjh.personal.entity.CompanyList;
+import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
+import ynjh.personal.service.FollowService;
 import ynjh.personal.service.UserService;
 
 /**
@@ -44,6 +50,8 @@ import ynjh.personal.service.UserService;
 public class UserController {
 	@Resource
 	private UserService uService;
+	@Resource
+	private FollowService fService;
 
 	/**
 	 * 登录（检测验证码、加密密码） 跳转主页
@@ -92,6 +100,21 @@ public class UserController {
 			} else {
 				// 查看软件人才列表
 				List<UserAndResume> userAndResumes = uService.findUserList(1, userLoginId);
+				SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+				for (UserAndResume userAndResume : userAndResumes) {
+					Follow follow =fService.findIsFollowByFollowIdAndFollowId(user.getId(), userAndResume.getId());
+					if (follow==null) {
+						userAndResume.setIsFoucse(false);
+					}else {
+						userAndResume.setIsFoucse(true);
+					}
+					try {
+						userAndResume.setAge(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
+						userAndResume.setWorks(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				}
 				session.setAttribute("userAndResumes", userAndResumes);
 				// 查看企业列表
 				List<CompanyList> companyeList = uService.findCompanyList(1);

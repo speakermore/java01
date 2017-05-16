@@ -23,18 +23,9 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 	}
 
 	@Override
-	public List<Discuss> findAll(Integer page) {
-		if (page==null) {
-			page=1;
-		}
-		if (page!=null&&page<1) {
-			page=1;
-		}
-		int maxpage=getMax();
-		if (page!=null&&page>maxpage) {
-			page=maxpage;
-		}
-		return cDiscussMapper.findAll((page-1)*5);
+	public List<Discuss> findAll() {
+		
+		return cDiscussMapper.findAll();
 	}
 
 	@Override
@@ -47,16 +38,6 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 	public int updateStatus(Integer id,Integer discussStatus) {
 		
 		return cDiscussMapper.updateDiscussStatus(id, discussStatus);
-	}
-
-	@Override
-	public int getMax() {
-		if(cDiscussMapper.getMaxRecordCount()<=0){
-			return 1;
-		}else{
-			return (cDiscussMapper.getMaxRecordCount()+(5-1))/5;
-		}
-		
 	}
 
 }

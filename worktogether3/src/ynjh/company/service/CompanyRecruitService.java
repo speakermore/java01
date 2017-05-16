@@ -20,4 +20,6 @@ public interface CompanyRecruitService {
 	public int updateCompanyRecruit(CompanyRecruit companyRecruit);
 	//招聘信息状态
 	public int updateCmpRecStatus(Integer id,Integer cmpRecStatus);
+	//简历数
+	public int findCount(Integer companyId);
 }

@@ -18,6 +18,11 @@ import ynjh.company.service.CompanyDiscussService;
 import ynjh.personal.entity.Discuss;
 import ynjh.personal.entity.User;
 
+/**
+ * 
+ * @author 黄冰雁
+ *
+ */
 @Controller
 @RequestMapping("/company/artanddis")
 public class CompanyDiscussController {
@@ -25,14 +30,23 @@ public class CompanyDiscussController {
 	@Resource
 	private CompanyDiscussService companyDiscussService;
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数discuss：添加企业评论
+	 *参数disUserId：存储给页面调取
+	 */
 	@RequestMapping(value="/discuss/add_companydiscuss",method=RequestMethod.POST)
-	public ModelAndView addCompanyDiscuss(Discuss discuss,HttpSession session){
+	public ModelAndView addCompanyDiscuss(Discuss discuss,Integer disUserId,HttpSession session){
 		User user=(User)session.getAttribute("user");
+		Company company=(Company)session.getAttribute("company");
+		disUserId=(Integer)session.getAttribute("disUserId");
 		ModelAndView mView=new ModelAndView("company/info");
-		if(discuss.getDiscussUsersId()==user.getId()){
+		if(disUserId==user.getId()){
 			discuss.setDiscussUsersId(user.getId());
 			discuss.setDiscussTime(new Timestamp(System.currentTimeMillis()));
-			discuss.setDiscussSendType(2);
+			discuss.setDiscussSendType(1);
+			discuss.setDiscussBySendId(company.getId());
 		}else {
 			mView.addObject("operatorInfo", "评论失败，请联系管理员或重新操作！");
 			mView.addObject("toPage", "company/artanddis/");
@@ -50,6 +64,11 @@ public class CompanyDiscussController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数id：根据id查询删除该条评论
+	 */
 	@RequestMapping("/discuss/deletecompanydiscuss/{id}")
 	public ModelAndView deletecompanydiscuss(@PathVariable Integer id,Integer discussStatus){
 		int result=companyDiscussService.updateStatus(id,4);
@@ -64,21 +83,23 @@ public class CompanyDiscussController {
 		return mView;
 	}
 	
-	@RequestMapping("/discuss/finddiscuss/{page}")
-	public ModelAndView finddiscuss(@PathVariable Integer page,Integer discussUsersId,HttpSession session){
-		
-		List<Discuss> discuss=companyDiscussService.findAll(page);
-		session.setAttribute("disUserId", discussUsersId);
-		int maxPage=companyDiscussService.getMax();
-		List<Integer> pageNo=new ArrayList<Integer>();
-		for(int i=1;i<=maxPage;i++){
-			pageNo.add(i);
-		}
+	/**
+	 * 
+	 * @author 黄冰雁
+	 *参数disc：查询所有评论
+	 */
+	@RequestMapping("/discuss/finddiscuss")
+	public ModelAndView finddiscuss(Discuss disc,HttpSession session){
+		Company company=(Company)session.getAttribute("user");
+//		User user=();
+//		session.setAttribute("user", user);
+//		session.setAttribute("company", company);
+//		company.setId(1);
+//		user.setId(1);
+		List<Discuss> discuss=companyDiscussService.findAll();
+		session.setAttribute("disUserId", company.getId());
 		ModelAndView mView=new ModelAndView("company/artanddis/company_index");
 		mView.addObject("discusses", discuss);
-		mView.addObject("curPage", page);
-		mView.addObject("pageNo", pageNo);
-		mView.addObject("maxPage", maxPage);
 		return mView;
 	}
 }
