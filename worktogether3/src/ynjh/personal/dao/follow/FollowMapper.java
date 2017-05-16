@@ -25,4 +25,8 @@ public interface FollowMapper {
 	public Integer selectUserFollowCount(Integer followId);
 	//查看被关注者人数
 	public Integer selectUserByFollowCount(Integer byFollowId);
+	/**
+	 *  判断是否关注 
+	 */
+	public Follow findIsFollowByFollowIdAndFollowId(@Param("followId")Integer followId,@Param("byFollowId")Integer byFollowId);
 }

@@ -31,4 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="Integer">
 		select count(*) from follow where byFollowId=#{byFollowId}
 	</select>
+	<!-- 判断是否关注 -->
+	<select id="findIsFollowByFollowIdAndFollowId" resultType="Follow">
+		select * from follow where followId=#{followId} and byFollowId=#{byFollowId}
+	</select>
 </mapper>

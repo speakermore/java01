@@ -1,5 +1,7 @@
 package ynjh.personal.controller.common;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javafx.scene.shape.Arc;
+import ynjh.common.util.GetAge;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.ArticleByFollow;
@@ -71,10 +74,16 @@ public class CommonController {
 		session.setAttribute("resumes", resumes);
 		session.setAttribute("maxResumePage", maxResumePage);
 
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
-		
 		if (resume!=null) {
+			try {
+				resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
+				resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			session.setAttribute("resume", resume);
 			// 获取教育
 			List<Education> edus = rService.findEducation(resume.getId());
@@ -112,27 +121,24 @@ public class CommonController {
 		int maxArticlePage = aService.getMaxArticleById(userId);
 		session.setAttribute("articles", articles);
 		session.setAttribute("maxArticlePage", maxArticlePage);
-
-		// 查看关注的人数
-		int follows = fService.selectUserFollowCount(userId);
-		session.setAttribute("follows", follows);
-
-		// 查看被关注的人数
-		int byFollows = fService.selectUserByFollowCount(userId);
-		session.setAttribute("byFollows", byFollows);
-
 		// 获取评论内容
 		Mood mood = mService.selectMoodById(userId);
 		session.setAttribute("mood", mood);
-
 		// 获取最新面试消息
 		Offer offer = nService.findNewlyFaceByUserId(userId);
 		session.setAttribute("offer", offer);
-
+		
+		
+		// 查看关注的人数
+		int follows = fService.selectUserFollowCount(userId);
+		session.setAttribute("follows", follows);
+		// 查看被关注的人数
+		int byFollows = fService.selectUserByFollowCount(userId);
+		session.setAttribute("byFollows", byFollows);
+		
 		// 获取已经关注的对象
-		List<Follow> followes = fService.selectUserFollow(userId);
-		session.setAttribute("followes", followes);
-
+		List<Follow> OldFollows = fService.selectUserFollow(userId);
+		session.setAttribute("OldFollows", OldFollows);
 		// 获取关注者的最新文章消息
 		List<ArticleByFollow> articleByFollows = nService.findNewlyArticleByFollow(userId);
 		session.setAttribute("articleByFollows", articleByFollows);
