@@ -82,3 +82,30 @@ body{
 	.panel-body{
 		padding: 30px;
 	}
+.info_title{
+	font-size:large;
+}
+/*
+*右侧边线
+*/
+.right-border{
+	border-right:1px solid gray;
+	padding-right: 5px;
+}
+.right-space-large{
+	margin-right: 20px;
+}
+.top-space{
+	margin-top: 30px;
+}
+.top-space-small{
+	margin-top:10px;
+}
+.bottom-border-large{
+	padding-bottom: 135px;
+	border-bottom: 2px solid gray;
+}
+.bottom-border{
+	padding-bottom:4px;
+	border-bottom:1px solid gray;
+}

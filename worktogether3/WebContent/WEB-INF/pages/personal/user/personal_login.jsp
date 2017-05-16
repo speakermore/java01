@@ -45,6 +45,7 @@
 						<label for="userPassword" class="sr-only">密码</label> <input
 							type="password" id="userPassword" class="form-control"
 							name="userPassword" placeholder="密码" required>
+							<!-- <div  role="tooltip" class="tooltip fade right in"></div> -->
 					</div>
 					<div class="form-group">
 						<!--请求验证码---->
@@ -59,9 +60,9 @@
 					<a class="btn btn-default" href="javascript:void(0)" role="button"
 						class="btn btn-primary btn-sm">看不清，换一张</a>
 
-					<div class="checkbox">
+					<!--<div class="checkbox">
 						
-					</div><!-- <div class="form-group">
+					</div> <div class="form-group">
 					<div id="inputagree checkbox">
 						<input name="acceptTerms" 
 							type="checkbox" /> 我已阅读并同意服务条款
@@ -82,6 +83,9 @@
 		<div class="wt-hby-login-bottom">
 			<img src="img/1-1-2.jpg" /> <a class="back-to-top" href="#top">返回顶部</a>
 		</div>
+		<%-- <c:if test="${operatorInfo!=null }">
+		<input type="hidden" id="operatorInfo" value="${operatorInfo }"/></c:if>
+		<c:if test="${errorInfo!=null }"><input type="hidden" id="errorInfo" value="${errorInfo }"/></c:if> --%>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="personal/js/jquery-3.1.1.min.js" type="text/javascript"
@@ -94,6 +98,11 @@
 		src="thirdpart/dist/js/language/zh_CN.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			/* if($("#operatorInfo").val()!=null){
+				alert($("#operatorInfo").val());
+			}else if($("#errorInfo").val()!=null){
+				alert($("#errorInfo").val());
+			} */
 			$("#validateCode+a")
 					.click(
 							function() {

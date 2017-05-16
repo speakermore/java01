@@ -13,7 +13,7 @@ public class Resume implements Serializable{
 	// 用户ID
 	private Integer userId;
 	// 简历标题
-	private String resumeTitle;
+	private String resumeTitle="我的简历";
 	// 创建时间
 	private Timestamp resumeCreateDate;
 	// 姓名
@@ -21,60 +21,85 @@ public class Resume implements Serializable{
 	// 性别
 	private Integer resumeGender;
 	// 民族
-	private String resumeNation;
+	private String resumeNation=null;
 	// 籍贯
-	private String resumePlace;
+	private String resumePlace=null;
 	// 生日
 	private Timestamp resumeBirthday;
 	// 婚姻
 	private Integer resumeMarriage;
 	// 毕业院校
-	private String resumeGraduationSchool;
+	private String resumeGraduationSchool=null;
 	// 毕业时间
-	private Timestamp resumeGraduationTime;
+	private Timestamp resumeGraduationTime=null;
 	// 学历
-	private String resumeEducation;
+	private String resumeEducation=null;
 	// 专业
-	private String resumeMajor;
+	private String resumeMajor=null;
 	// 期望待遇
-	private Integer resumeWages;
+	private Integer resumeWages=null;
 	// 电话
 	private String resumePhone;
 	// QQ
-	private String resumeQQ;
+	private String resumeQQ=null;
 	// 外语水平
-	private Integer resumeFLAbility;
+	private Integer resumeFLAbility=0;
 	// 外语类型
-	private Integer resumeFLType;
+	private Integer resumeFLType=0;
 	// 英语等级
-	private Integer resumeEnglishGrade;
+	private Integer resumeEnglishGrade=0;
 	// 计算机水平
-	private Integer resumeComputerAbility;
+	private Integer resumeComputerAbility=0;
 	// 特点描述
-	private String resumePersonality;
+	private String resumePersonality=null;
 	// 自我评价
-	private String resumeSelfEvaluation;
+	private String resumeSelfEvaluation=null;
 	// 状态(用户的操作)\n1.完全公开(默认)\n2.只限企业浏览\n3.只对应聘企业公开\n4.保密
 	private Integer resumeStatusOne;
 	// 身高
-	private Integer resumeHeight;
+	private Integer resumeHeight=null;
 	// 体重
-	private Integer resumeWeight;
+	private Integer resumeWeight=null;
 	//状态（管理员）1.待审核 2.正常	 3. 审核不通过  4.隐藏
 	private Integer resumeStatusThree;
 	//岗位意向
 	private String resumeJor;
 	//头像
-	private String resumeHeadImg;
+	private String resumeHeadImg=null;
 	//工作年限
-	private Integer resumeWorks;
+	private Timestamp resumeWorks;
+	//家庭地址
+	private String resumeHouseAddress=null;
+	//目前居住地
+	private String resumeNowResidence;
+	//邮箱地址
+	private String resumeEmail;
 	
 	
 	
-	public Integer getResumeWorks() {
+	public String getResumeNowResidence() {
+		return resumeNowResidence;
+	}
+	public void setResumeNowResidence(String resumeNowResidence) {
+		this.resumeNowResidence = resumeNowResidence;
+	}
+	public String getResumeEmail() {
+		return resumeEmail;
+	}
+	public void setResumeEmail(String resumeEmail) {
+		this.resumeEmail = resumeEmail;
+	}
+	public String getResumeHouseAddress() {
+		return resumeHouseAddress;
+	}
+	public void setResumeHouseAddress(String resumeHouseAddress) {
+		this.resumeHouseAddress = resumeHouseAddress;
+	}
+	
+	public Timestamp getResumeWorks() {
 		return resumeWorks;
 	}
-	public void setResumeWorks(Integer resumeWorks) {
+	public void setResumeWorks(Timestamp resumeWorks) {
 		this.resumeWorks = resumeWorks;
 	}
 	public String getResumeHeadImg() {
@@ -304,32 +329,20 @@ public class Resume implements Serializable{
 	public void setResumeWeight(Integer resumeWeight) {
 		this.resumeWeight = resumeWeight;
 	}
-
-
 	@Override
 	public String toString() {
-		return "Resume [id=" + id + ", userId=" + userId + ", resumeTitle="
-				+ resumeTitle + ", resumeCreateDate=" + resumeCreateDate
-				+ ", resumeName=" + resumeName + ", resumeGender="
-				+ resumeGender + ", resumeNation=" + resumeNation
-				+ ", resumePlace=" + resumePlace + ", resumeBirthday="
-				+ resumeBirthday + ", resumeMarriage=" + resumeMarriage
-				+ ", resumeGraduationSchool=" + resumeGraduationSchool
-				+ ", resumeGraduationTime=" + resumeGraduationTime
-				+ ", resumeEducation=" + resumeEducation + ", resumeMajor="
-				+ resumeMajor + ", resumeWages=" + resumeWages
-				+ ", resumePhone=" + resumePhone + ", resumeQQ=" + resumeQQ
-				+ ", resumeFLAbility=" + resumeFLAbility + ", resumeFLType="
-				+ resumeFLType + ", resumeEnglishGrade=" + resumeEnglishGrade
-				+ ", resumeComputerAbility=" + resumeComputerAbility
-				+ ", resumePersonality=" + resumePersonality
-				+ ", resumeSelfEvaluation=" + resumeSelfEvaluation
-				+ ", resumeStatusOne=" + resumeStatusOne + ", resumeHeight="
-				+ resumeHeight + ", resumeWeight=" + resumeWeight
-				+ ", resumeStatusThree=" + resumeStatusThree + "]";
+		return "Resume [id=" + id + ", userId=" + userId + ", resumeTitle=" + resumeTitle + ", resumeCreateDate="
+				+ resumeCreateDate + ", resumeName=" + resumeName + ", resumeGender=" + resumeGender + ", resumeNation="
+				+ resumeNation + ", resumePlace=" + resumePlace + ", resumeBirthday=" + resumeBirthday
+				+ ", resumeMarriage=" + resumeMarriage + ", resumeGraduationSchool=" + resumeGraduationSchool
+				+ ", resumeGraduationTime=" + resumeGraduationTime + ", resumeEducation=" + resumeEducation
+				+ ", resumeMajor=" + resumeMajor + ", resumeWages=" + resumeWages + ", resumePhone=" + resumePhone
+				+ ", resumeQQ=" + resumeQQ + ", resumeFLAbility=" + resumeFLAbility + ", resumeFLType=" + resumeFLType
+				+ ", resumeEnglishGrade=" + resumeEnglishGrade + ", resumeComputerAbility=" + resumeComputerAbility
+				+ ", resumePersonality=" + resumePersonality + ", resumeSelfEvaluation=" + resumeSelfEvaluation
+				+ ", resumeStatusOne=" + resumeStatusOne + ", resumeHeight=" + resumeHeight + ", resumeWeight="
+				+ resumeWeight + ", resumeStatusThree=" + resumeStatusThree + ", resumeJor=" + resumeJor
+				+ ", resumeHeadImg=" + resumeHeadImg + ", resumeWorks=" + resumeWorks + ", resumeHouseAddress="
+				+ resumeHouseAddress + "]";
 	}
-
-	
-	
-
 }

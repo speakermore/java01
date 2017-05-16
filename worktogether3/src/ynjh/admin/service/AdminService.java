@@ -10,10 +10,12 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
+import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
@@ -58,7 +60,7 @@ public interface AdminService {
 	//查询审核offer
 	public List<Offer> findAuditOffer(Integer page);
 	//审核招聘信息
-	public Integer auditRecruitment(Integer recruitmentId,Integer cmpRecStatus);
+	public Integer auditRecruitment(Integer[] recruitmentId,Integer cmpRecStatus);
 	//查询审核招聘信息
 	public List<CompanyRecruit> findAuditRecruitment(Integer page);
 	//查询审核简历ById
@@ -76,7 +78,7 @@ public interface AdminService {
 	//查询审核offerById
 	public Offer findAuditOfferById(Integer id);
 	//查询审核招聘信息ById
-	public List<CompanyRecruit> findAuditRecruitmentById(Integer id);
+	public CompanyRecruit findAuditRecruitmentById(Integer id);
 	//查询工作经历
 	public List<Work> findResumeWork(String resumeId);
 	//查询项目经历
@@ -165,6 +167,12 @@ public interface AdminService {
     public Integer addMessage(SystemMessage systemMessage);
     //查找管理员，通过管理员帐号
 	public Integer findAdminByAdminLoginId(String adminLoginId);
+	//查找个人用户，通过用户id
+	public User findUserById(Integer userId);
+	//查找企业简介
+	public List<AuditComIntro> findCompanyIntro(Integer page);
+	//通过id查找审核企业
+	public AuditComIntro findAuditComById(Integer id);
 
     
 }	

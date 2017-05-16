@@ -121,7 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findAuditRecruitment" resultType="CompanyRecruit"><!-- 查询招聘信息审核 -->
-		select * from message where cmpRecStatus=1 order by cmpRecTime limit #{page},10
+		select * from companyrecruit order by cmpRecStatus,cmpRecTime,companyId limit #{page},10
 	</select>
 	
 	<select id="findByAdminId" resultType="Admin" parameterType="String"><!-- 信息维护查询 -->
@@ -167,7 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findAuditCompanyById" resultType="Company" parameterType="Integer"><!-- 查询企业资质审核ById -->
-		select * from company where cmpIntStatus=1 and id=#{id}
+		select * from company where id=#{id}
 	</select>
 	
 	<select id="findAuditCommentsCompanyAndPeopleById" resultType="Discuss" ><!-- 查询个人企业互评论审核ById -->
@@ -182,8 +182,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from offer where offerType=1 and id=#{id}
 	</select>
 	
-	<select id="findAuditRecruitmentById" resultType="CompanyRecruit" parameterType="int"><!-- 查询招聘信息审核ById -->
-		select * from companyrecruit where cmpRecStatus=1 and id=#{id}
+	<select id="findAuditRecruitmentById" resultType="CompanyRecruit" parameterType="Integer"><!-- 查询招聘信息审核ById -->
+		select * from companyrecruit where id=#{id}
 	</select>
 	
 	<!-- 根据管理员登录名查找管理员 -->
@@ -225,5 +225,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 查询管理员，通过帐号 -->
 	<select id="findLoginByAdminLoginId" parameterType="String" resultType="Admin">
 		select * from admin where adminLoginId=#{adminloginId}
+	</select>
+	<!-- 查找用户通过用户表id -->
+	<select id="findUserById" parameterType="Integer" resultType="User">
+		select * from user where id=#{userId}
+	</select>
+	<!-- 查找企业简介 -->
+	<select id="findCompanyIntro" parameterType="Integer" resultType="AuditComIntro">
+		select c.*,i.* from companyintroduction i,company c where c.id=i.companyId limit #{page},10
+	</select>
+	<!-- 通过id查找被审核企业 -->
+	<select id="auditComIntro" parameterType="Integer" resultType="AuditComIntro">
+		select c.*,i.* from companyintroduction i,company c where c.id=i.companyId and c.id=#{id}
 	</select>
 </mapper>

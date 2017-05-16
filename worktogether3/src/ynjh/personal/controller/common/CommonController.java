@@ -78,13 +78,25 @@ public class CommonController {
 			session.setAttribute("resume", resume);
 			// 获取教育
 			List<Education> edus = rService.findEducation(resume.getId());
-			session.setAttribute("edus", edus);
+			if (edus.size()>0) {
+				session.setAttribute("edus", edus);
+			}else {
+				session.setAttribute("edus", null);
+			}
 			// 获取工作
 			List<Work> works = rService.findWork(resume.getId());
-			session.setAttribute("works", works);
+			if (works.size()>0) {
+				session.setAttribute("works", works);
+			}else {
+				session.setAttribute("works", null);
+			}
 			// 获取项目
 			List<Project> projs = rService.findProject(resume.getId());
-			session.setAttribute("projs", projs);
+			if (projs.size()>0) {
+				session.setAttribute("projs", projs);
+			}else {
+				session.setAttribute("projs", null);
+			}
 		}
 		
 		//最新发布文章

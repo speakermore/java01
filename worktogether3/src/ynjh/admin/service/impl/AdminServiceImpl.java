@@ -18,11 +18,13 @@ import ynjh.admin.dao.uservisitcount.UserVisitCountMapper;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
+import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
@@ -264,9 +266,17 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public Integer auditRecruitment(Integer recruitmentId, Integer cmpRecStatus) {
-		 
-		return adminMapper.auditRecruitment(recruitmentId, cmpRecStatus);
+	public Integer auditRecruitment(Integer[] recruitmentId, Integer cmpRecStatus) {
+		if(recruitmentId!=null){
+			int result=0;
+			for(int i=0;i<recruitmentId.length;i++){
+				result=adminMapper.auditRecruitment(recruitmentId[i], cmpRecStatus);
+				result++;
+			}
+			return result;
+		}else{
+		return -1;
+		}		
 	}
 
 	/**
@@ -278,7 +288,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<CompanyRecruit> findAuditRecruitment(Integer page) {
 		 
-		return adminMapper.findAuditRecruitment(page);
+		return adminMapper.findAuditRecruitment((page-1)*10);
 	}
 	
 	/**
@@ -749,7 +759,7 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public List<CompanyRecruit> findAuditRecruitmentById(Integer id) {
+	public CompanyRecruit findAuditRecruitmentById(Integer id) {
 		 
 		return adminMapper.findAuditRecruitmentById(id);
 	}
@@ -849,6 +859,7 @@ public class AdminServiceImpl implements AdminService {
 		}	
 	}
 
+	
 	@Override
 	public List<Education> findResumeEducation(String resumeId) {
 		if(resumeId!=null||!(resumeId.equals(""))){
@@ -866,6 +877,46 @@ public class AdminServiceImpl implements AdminService {
 		}else{
 			return 0;
 		}
+	}
+
+	/**
+	 * 通过id查找个人用户
+	 * @author 朱吉
+	 * @param userId 个人用户表id
+	 */
+	@Override
+	public User findUserById(Integer userId) {
+		return adminMapper.findUserById(userId);
+	}
+
+	/**
+	 * 查找企业简介
+	 * @author 朱吉
+	 * @param page 偏移量
+	 */
+	@Override
+	public List<AuditComIntro> findCompanyIntro(Integer page) {
+		if(page!=null){
+			page=(page-1)*10;
+			if(page<0){
+				page=0;
+			}
+			return adminMapper.findCompanyIntro(page);
+		}
+		return null;
+	}
+
+	/**
+	 * @author 朱吉
+	 * @param id 企业表id
+	 */
+	@Override
+	public AuditComIntro findAuditComById(Integer id) {
+		AuditComIntro auditComIntro=null;
+		if(id!=null&&id>0){
+			auditComIntro=adminMapper.findAuditComById(id);
+		}
+		return auditComIntro;
 	}
 	
 	

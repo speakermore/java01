@@ -32,7 +32,7 @@
 		<div class="col-md-2">
 			<span class="glyphicon glyphicon-user" aria-hidden="true"> </span>作者信息：
 		</div>
-		<div class="col-md-10">${article.userLoginId}&nbsp;${article.userName}</div>
+		<div class="col-md-10">${article.usersId}&nbsp;${article.userName}</div>
 		<div class="col-md-2">
 			<span class="glyphicon glyphicon-time" aria-hidden="true"> </span>发布时间：
 		</div>

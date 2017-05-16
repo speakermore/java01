@@ -16,7 +16,7 @@
 	<div><%@include file="menu.jsp"%></div>
 	<div class="col-md-offset-2">
 		<div class="row">
-			<div class="col-sm-11" style="border: 1px solid black">
+			<div class="col-sm-11">
 				<div class="row" style="background-color: #FFF;">
 					<div class="col-sm-12">
 						<h1>文章列表:</h1>

@@ -81,4 +81,8 @@ public interface ResumeService {
 	public Integer renewWorkByDelete(Integer id);
 	 // 恢复项目被删记录
 	public Integer renewProjectByDelete(Integer id);
+	/**
+	 * 更换头像
+	 */
+	public Integer changeResumeHeadImg(Integer resumeId,String resumeHeadImg);
 }
