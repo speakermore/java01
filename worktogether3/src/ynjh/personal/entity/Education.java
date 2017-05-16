@@ -8,9 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Education implements Serializable{
 	private Integer id;//ID
 	private Integer userId;//用户ID
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Timestamp educationBeginTime;//培训开始时间
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Timestamp educationEndTime;//培训结束时间
 	private String educationSchool;//培训地点
 	private Integer resumeId;

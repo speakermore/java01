@@ -3,7 +3,6 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <ul class="dropdown-menu">
 	<li><a href="#">修改个人密码</a></li>
-	<li><a href="personal/user/findById?id=${user.id }">修改个人资料</a></li>
 	<c:if test="${user.userRealName=='无' }">
 	<li><a href="personal/user/addUserReal">实名认证</a></li></c:if>
 	<c:if test="${user.userName=='无' }">

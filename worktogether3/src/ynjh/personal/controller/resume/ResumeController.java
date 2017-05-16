@@ -59,16 +59,16 @@ public class ResumeController {
 	 * 
 	 * 		ModelAndView
 	 */
-	@RequestMapping(value = "/createResume", method = RequestMethod.POST)
-	public ModelAndView createResume(Resume resume, MultipartFile resumeFile, HttpSession session) {
+	@RequestMapping(value="/createResume",method=RequestMethod.POST)
+	public ModelAndView createResume(Resume resume, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
-
-		resume.setResumeHeadImg(UploadFile.uploadFile(
+		resume.setResumeTitle("我的简历");
+		/*resume.setResumeHeadImg(UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/peraonal", user.getUserLoginId()),
-				new MultipartFile[] { resumeFile }, session)[0]);
+				new MultipartFile[] { resumeFile }, session)[0]);*/
 		int result = rService.addResume(resume);
 		if (result > 0) {
 			mv.addObject("resume", resume);
@@ -184,9 +184,9 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateResume", method = RequestMethod.GET)
-	public ModelAndView gotoResume(Integer id) {
+	public ModelAndView gotoResume(Integer resumeId) {
 		ModelAndView mv = new ModelAndView();
-		Resume resume = rService.findResumeById(id);
+		Resume resume = rService.findResumeById(resumeId);
 		if (resume != null) {
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_updateresume");
@@ -395,6 +395,8 @@ public class ResumeController {
 		Resume resume = rService.findResumeById(work.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
+			List<Work> works = rService.findWork(resume.getId());
+			session.setAttribute("works", works);
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_lookresume");
 		} else {
@@ -423,6 +425,8 @@ public class ResumeController {
 		Resume resume = rService.findResumeById(project.getResumeId());
 		if (result > 0) {
 			mv.addObject("operatorInfo", "添加成功");
+			List<Project> projs = rService.findProject(resume.getId());
+			session.setAttribute("projs", projs);
 			mv.addObject("resume", resume);
 			mv.setViewName("personal/resume/personal_lookresume");
 		} else {

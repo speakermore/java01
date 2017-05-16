@@ -151,4 +151,9 @@ public interface ResumeMapper {
 	/**
 	 * 结束
 	 */
+	
+	/**
+	 * 更换头像
+	 */
+	public Integer changeResumeHeadImg(@Param("resumeId")Integer resumeId,@Param("resumeHeadImg")String resumeHeadImg);
 }

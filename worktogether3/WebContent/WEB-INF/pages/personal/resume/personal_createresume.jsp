@@ -54,6 +54,14 @@
 				todayHighlight : true,
 				minView : "month"
 			});
+			$("#resumeWorks").datetimepicker({
+				format : 'yyyy-mm-dd',
+				language : 'zh-CN',
+				startDate : '1900-01-01', //选择器的开始日期
+				autoclose : true,
+				todayHighlight : true,
+				minView : "month"
+			});
 			/* 	$("#time").blur(function() {
 					alert(typeof ("#time"))
 				}); */

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyIntroduction;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.Work;
 
@@ -13,6 +14,7 @@ import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AuditArticle;
+import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
@@ -208,7 +210,7 @@ public interface AdminMapper {
 	 * @param id 招聘信息的id
 	 * @return
 	 */	
-	public List<CompanyRecruit> findAuditRecruitmentById(Integer id);// 查询审核招聘信息依据Id
+	public CompanyRecruit findAuditRecruitmentById(Integer id);// 查询审核招聘信息依据Id
 	/**
 	 * 查询审核offer的id
 	 * @author 周富强
@@ -393,4 +395,26 @@ public interface AdminMapper {
      * @return
      */
     public Integer auditingEducation(@Param("resumeId")String resumeId,@Param("resumeType")Integer resumeType);
+    
+    /**
+     * 查找个人用户通过用户表id
+     * @author 朱吉
+     * @param userId 个人用户表id
+     */
+    public User findUserById(Integer userId);
+    
+    /**
+     * 查找企业介绍
+     * @author 朱吉
+     * @param page 偏移量
+     * @return
+     */
+	public List<AuditComIntro> findCompanyIntro(Integer page);
+	
+	/**
+	 * 通过id查找审核企业
+	 * @param id
+	 * @return
+	 */
+	public AuditComIntro findAuditComById(Integer id);
 }

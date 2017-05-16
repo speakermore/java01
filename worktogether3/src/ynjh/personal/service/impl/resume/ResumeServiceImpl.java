@@ -435,4 +435,11 @@ public class ResumeServiceImpl implements ResumeService {
 	public Resume findResumeByOneUserId(Integer userId) {
 		return resumeMapper.findResumeByOneUserId(userId);
 	}
+	/**
+	 * 更换头像
+	 */
+	@Override
+	public Integer changeResumeHeadImg(Integer resumeId, String resumeHeadImg) {
+		return resumeMapper.changeResumeHeadImg(resumeId, resumeHeadImg);
+	}
 }
