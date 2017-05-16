@@ -148,6 +148,9 @@ public class CompanyController {
 		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
 		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
 		String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
+		
+		
+		
 			for(int i=0;i<fileNames.length;i++){
 				companyService.addCompanyDetailId(company.getId(), fileNames[i],i);
 				resultDetail+=1;

@@ -38,14 +38,14 @@
 						<div class="form-group" >
 					 		<div class="col-sm-3">公司全称：</div>
 					 		<div class="col-sm-9">
-					 			<input type="text" class="form-control" id="exampleInputEmail1" name="companyName" value=${user.companyName }/>
+					 			<input type="text" class="form-control" id="exampleInputEmail1" name="companyName" value=${user.companyName }>
 					 		</div>
 						</div> 
 							
 				<div class="form-group">
 					<div class="col-sm-3"> 公司简称：</div>	
 					 <div class="col-sm-9">
-					 	<input type="text" class="form-control" id="exampleInputPassword1" name="companySimpleName" value=${user.companySimpleName }/>
+					 	<input type="text" class="form-control" id="exampleInputPassword1" name="companySimpleName" value=${user.companySimpleName }>
 					</div>
 				</div>
 				<div class="form-group">
@@ -54,7 +54,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3">组织机构代码：</div>	
-					<div class="col-sm-9">  <input type="text" class="form-control" id="exampleInputPassword1" name="companyLicenseNo" value=${user.companyLicenseNo }/>
+					<div class="col-sm-9">  <input type="text" class="form-control" id="exampleInputPassword1" name="companyLicenseNo" value=${user.companyLicenseNo }>
 					</div>
 				</div>
 				<div class="form-group">
@@ -65,39 +65,35 @@
 				
 				<div class="form-group">
 					 	<div class="col-sm-3">公司法人：</div>
-					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyCorporator" value=${user.companyCorporator }/>
+					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyCorporator" value=${user.companyCorporator }>
 					</div>
 				</div>
 				<div class="form-group">
 					 	<div class="col-sm-3">公司电话：</div>
-					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyTel" value=${user.companyTel }/>
+					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyTel" value=${user.companyTel }>
 					</div>
 				</div>
 				<div class="form-group">
 					 	<div class="col-sm-3">Email：</div>
-					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyEmail" value=${user.companyEmail }/>
+					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyEmail" value=${user.companyEmail }>
 					</div>
 				</div>
 				<div class="form-group">
 					 	<div class="col-sm-3">公司地址：</div>
-					 <div class="col-sm-9"><input type="text" class="form-control" id="exampleInputPassword1" name="companyAddress" value=${user.companyAddress }/>
+					 <div class="col-sm-9"><input type="text" class="form-control" id="exampleInputPassword1" name="companyAddress" value=${user.companyAddress }>
 					</div>
 				</div>
-				
-				
 				<div class="form-group">
 					<div class="col-sm-3">公司环境：</div>
 					<div class="col-sm-9"> 
-							<span class="label label-default">大门</span><input id="companyImg" name="companyImgs" multiple type="file" class="form-control file">
-                    		<span class="label label-default">前台</span><input id="companyImg" name="companyImgs" multiple type="file" class="form-control file">
-                    		<span class="label label-default">办公区</span><input id="companyImg" name="companyImgs" multiple type="file" class="form-control file">
-                    		<span class="label label-default">会议室</span><input id="companyImg" name="companyImgs" multiple type="file" class="form-control file">
-                    		<span class="label label-default">休息区</span><input id="companyImg" name="companyImgs" multiple type="file" class="form-control file">
-                    		<span class="label label-default">其他</span><input id="companyImg" name="companyImgs" multiple type="file" class="form-control file">
+							<span class="label label-default">大门</span><input id="companyImg" name="companyImgs1" multiple type="file" class="form-control file">
+                    		<span class="label label-default">前台</span><input id="companyImg" name="companyImgs2" multiple type="file" class="form-control file">
+                    		<span class="label label-default">办公区</span><input id="companyImg" name="companyImgs3" multiple type="file" class="form-control file">
+                    		<span class="label label-default">会议室</span><input id="companyImg" name="companyImgs4" multiple type="file" class="form-control file">
+                    		<span class="label label-default">休息区</span><input id="companyImg" name="companyImgs5" multiple type="file" class="form-control file">
+                    		<span class="label label-default">其他</span><input id="companyImg" name="companyImgs6" multiple type="file" class="form-control file">
 					</div>
 				</div>
-                
-				
 				<div class="form-group">
 					<div class="col-sm-3">
 						<button type="submit" class="form-control btn btn-success">修改</button>

@@ -72,6 +72,9 @@ public class CompanyServiceImpl implements CompanyService{
 		return companyMapper.updatePassword(id, newPassword);
 	}
 
-	
-	
+	@Override
+	public Integer updateImg(Integer id, String companyDetailImg) {
+		
+		return companyMapper.updateImg(id, companyDetailImg);
+	}
 }

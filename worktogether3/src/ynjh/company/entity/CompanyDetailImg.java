@@ -3,15 +3,25 @@ package ynjh.company.entity;
 import java.io.Serializable;
 
 public class CompanyDetailImg implements Serializable{
+	private Integer id;
 	private Integer companyId;
 	private String companyDetailImg;
 	
 	public CompanyDetailImg(){}
 
-	public CompanyDetailImg(Integer companyId, String companyDetailImg) {
+	public CompanyDetailImg(Integer id, Integer companyId, String companyDetailImg) {
 		super();
+		this.id = id;
 		this.companyId = companyId;
 		this.companyDetailImg = companyDetailImg;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getCompanyId() {
