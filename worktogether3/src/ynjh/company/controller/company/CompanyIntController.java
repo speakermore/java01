@@ -54,9 +54,9 @@ public class CompanyIntController {
 	//跳转用户资料页面
 	@RequestMapping(value="/findById/{companyId}",method=RequestMethod.GET)
 	public ModelAndView companyIntShow(@PathVariable Integer companyId,HttpSession session){
-		ModelAndView mv=new ModelAndView("company/company/company_data");
-		CompanyIntroduction companyInt=companyIntService.findById(companyId);
-		session.setAttribute("companyInt", companyInt);
+		ModelAndView mv=new ModelAndView();
+//		CompanyIntroduction companyInt=companyIntService.findById(companyId);
+//		session.setAttribute("companyInt", companyInt);
 		mv.setViewName("company/company/company_data");
 		return mv;
 	}

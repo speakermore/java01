@@ -4,10 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.company.dao.companyResume.CompanyResumeMapper">
 <select id="findAllResume" resultType="CompanyResume" parameterType="int">
-		select * from CompanyResume c,resume r where c.companyId=#{companyId} and c.resumeId=r.id
-</select>
-<select id="getResumeCount" resultType="int">
-	select count(*) from companyResume where companyId=#{companyId} and cmprActiom=1
+	select * from companyResume c,resume r where c.companyId=#{companyId} and c.resumeId=r.id
 </select>
 <select id="getMaxRecordCount" resultType="int">
 	select count(*) from companyResume where cmpRStatus != 3
@@ -15,4 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findById" resultType="CompanyResume" parameterType="Integer">
 	select * from companyResume c,resume r where r.id=#{id}
 </select>
+<update id="updateCmpResumeStatus" >
+	update companyResume set cmprAction=#{cmprAction} where id=#{id}
+</update>
 </mapper>

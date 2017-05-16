@@ -2,19 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-    <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/thirdpart/ckeditor/ckeditor.js"></script>
+src="<%=request.getContextPath()%>/thirdpart/ckeditor/ckeditor.js"></script>
 <title>用户前台-发表招聘信息</title>
+<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <%@include file="/WEB-INF/pages/company/header.jsp"%>
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
-<base href="<%=basePath %>" />
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>

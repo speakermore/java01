@@ -8,7 +8,7 @@ import ynjh.company.entity.CompanyResume;
 
 public interface CompanyResumeMapper {
 	public List<CompanyResume> findAllResume(@Param("companyId")Integer companyId);
-	public int getResumeCount();
 	public int getMaxRecordCount();
 	public CompanyResume findById(Integer id);
+	public Integer updateCmpResumeStatus(@Param("id")Integer id,@Param("cmprAction")Integer cmprAction);
 }

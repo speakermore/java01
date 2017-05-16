@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="updateCmpRecStatus" parameterType="Int">
 		update companyRecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
 </update>
-<select id="findAll" resultType="CompanyRecruit">
+<select id="findAll"  resultType="CompanyRecruit">
 		select * from companyRecruit where companyId=#{companyId}
 	<if test="page!=null">
 		limit #{page},20
@@ -25,5 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <select id="getMaxRecordCount" resultType="int">
 	select count(*) from companyRecruit where cmpRecStatus != 3
+</select>
+<select id="getResumeCount" resultType="int">
+	select count(*) from companyResume where companyId=#{companyId} and cmprAction = 1
 </select>
 </mapper>

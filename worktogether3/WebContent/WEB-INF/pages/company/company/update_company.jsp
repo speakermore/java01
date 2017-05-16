@@ -38,14 +38,14 @@
 						<div class="form-group" >
 					 		<div class="col-sm-3">公司全称：</div>
 					 		<div class="col-sm-9">
-					 			<input type="text" class="form-control" id="exampleInputEmail1" value=${user.companyName } name="companyName"/>
+					 			<input type="text" class="form-control" id="exampleInputEmail1" name="companyName" value=${user.companyName }/>
 					 		</div>
 						</div> 
 							
 				<div class="form-group">
 					<div class="col-sm-3"> 公司简称：</div>	
 					 <div class="col-sm-9">
-					 	<input type="text" class="form-control" id="exampleInputPassword1" value=${user.companySimpleName } name="companySimpleName"/>
+					 	<input type="text" class="form-control" id="exampleInputPassword1" name="companySimpleName" value=${user.companySimpleName }/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -54,7 +54,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3">组织机构代码：</div>	
-					<div class="col-sm-9">  <input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyLicenseNo } name="companyLicenseNo"/>
+					<div class="col-sm-9">  <input type="text" class="form-control" id="exampleInputPassword1" name="companyLicenseNo" value=${user.companyLicenseNo }/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -65,22 +65,22 @@
 				
 				<div class="form-group">
 					 	<div class="col-sm-3">公司法人：</div>
-					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyCorporator } name="companyCorporator"/>
+					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyCorporator" value=${user.companyCorporator }/>
 					</div>
 				</div>
 				<div class="form-group">
 					 	<div class="col-sm-3">公司电话：</div>
-					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyTel } name="companyTel"/>
+					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyTel" value=${user.companyTel }/>
 					</div>
 				</div>
 				<div class="form-group">
 					 	<div class="col-sm-3">Email：</div>
-					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyEmail } name="companyEmail"/>
+					<div class="col-sm-9"> <input type="text" class="form-control" id="exampleInputPassword1" name="companyEmail" value=${user.companyEmail }/>
 					</div>
 				</div>
 				<div class="form-group">
 					 	<div class="col-sm-3">公司地址：</div>
-					 <div class="col-sm-9"><input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyAddress } name="companyAddress"/>
+					 <div class="col-sm-9"><input type="text" class="form-control" id="exampleInputPassword1" name="companyAddress" value=${user.companyAddress }/>
 					</div>
 				</div>
 				
@@ -99,7 +99,7 @@
                 
 				
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-sm-3">
 						<button type="submit" class="form-control btn btn-success">修改</button>
 					</div>
 				</div>

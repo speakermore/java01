@@ -1,9 +1,12 @@
 package ynjh.company.service.impl.company;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import ynjh.company.dao.company.CompanyMapper;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.service.CompanyService;
 
 @Service
@@ -56,5 +59,19 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		return companyMapper.addCompanyDetailImg(companyId, companyDetailImg,companyDetailDisc);
 	}
+
+	@Override
+	public List<CompanyDetailImg> findDetailImg(Integer companyId) {
+		
+		return companyMapper.findDetailImg(companyId);
+	}
+
+	@Override
+	public Integer updatePassword(Integer id, String newPassword) {
+		
+		return companyMapper.updatePassword(id, newPassword);
+	}
+
+	
 	
 }

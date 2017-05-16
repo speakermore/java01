@@ -21,13 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.service.CompanyArticleService;
 import ynjh.company.service.CompanyCommentArticleService;
+import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.User;
 
-
+/**
+ * 
+ * @author 黄冰雁
+ *
+ */
 @Controller
 @RequestMapping(value="/company/artanddis")
 public class CompanyArticleController {
@@ -35,20 +41,36 @@ public class CompanyArticleController {
 	private CompanyArticleService companyArticleService;
 	@Resource
 	private CompanyCommentArticleService ccArticleService;
-	
+	@Resource
+	private CompanyService companyService;
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 返回企业首页
+	 */
 	@RequestMapping(value={"/index","/"},method=RequestMethod.GET)
 	public String index(){
 		return "company/artanddis/company_index";
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 跳转添加企业每日动态页面
+	 */
 	@RequestMapping(value="/add_companyarticle",method=RequestMethod.GET)
 	public String addArticle(){
 		return "company/artanddis/add_companyarticle";
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 页面添加文章数据完成添加每日动态
+	 */
 	@RequestMapping(value="/add_companyarticle",method=RequestMethod.POST)
 	public ModelAndView addArticle(Article article,HttpSession session){
-		Company company=(Company)session.getAttribute("user");
+		Company company=(Company)session.getAttribute("company");
 		article.setUsersId(company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
 		article.setArticleUsersType(2);
@@ -57,9 +79,17 @@ public class CompanyArticleController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 参数page：实现分页效果
+	 * 根据企业用户id查询所以企业
+	 */
 	@RequestMapping("/article/find/{page}")
-	public ModelAndView find(@PathVariable Integer page){
+	public ModelAndView find(@PathVariable Integer page,HttpSession session){
+		Company company=(Company) session.getAttribute("user");
 		List<Article> articles=companyArticleService.findAll(page);
+		List<CompanyDetailImg> detailImgs = companyService.findDetailImg(company.getId());
 		int maxPage=companyArticleService.findMaxPage();
 		List<Integer> pageNo=new ArrayList<Integer>();
 		for(int i=1;i<=maxPage;i++){
@@ -70,9 +100,15 @@ public class CompanyArticleController {
 		mView.addObject("curPage2", page);
 		mView.addObject("maxPage2", maxPage);
 		mView.addObject("pageNo2", pageNo);
+		mView.addObject("detailImgs", detailImgs);
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 参数id：根据id查询所有文章和评论文章
+	 */
 	@RequestMapping("/article/findid")
 	public ModelAndView findId(Integer id,String toPage,HttpSession session,HttpServletRequest request){
 		String addr=request.getLocalAddr();
@@ -91,6 +127,11 @@ public class CompanyArticleController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 参数id:根据id查询删除文章
+	 */
 	@RequestMapping("/article/delete")
 	public ModelAndView delete(Integer id,Integer articleStatus){
 		int result=companyArticleService.updateStatus(id,4);
@@ -106,6 +147,11 @@ public class CompanyArticleController {
 		return mView;
 	}
 
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 参数id:根据id查询文章并修改文章
+	 */
 	@RequestMapping(value="/article/edit",method=RequestMethod.POST)
 	public ModelAndView edit(Integer id,String articleContent){
 		int result=companyArticleService.updateArtContent(id,articleContent);
@@ -120,6 +166,11 @@ public class CompanyArticleController {
 		return mView;
 	}
 	
+	/**
+	 * 
+	 * @author 黄冰雁
+	 * 参数id:根据id查询文章，递增点赞数
+	 */
 	@RequestMapping("/article/like/{id}")
 	public ModelAndView like(@PathVariable Integer id){
 		companyArticleService.updateLike(id);

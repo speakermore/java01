@@ -31,10 +31,12 @@ public class CompanyResumeController {
 	}
 	@RequestMapping(value="/companyResume/findById")
 	public ModelAndView findById(Integer id,String toPage,HttpSession session){
+		int result=companyResumeService.updateCmpResumeStatus(id, 4);
 		CompanyResume companyResume=companyResumeService.findById(id);
 		ModelAndView mv=new ModelAndView("company/cmprs/companyResumeInfomation");
 		session.setAttribute("cmprs", companyResume);
 		mv.setViewName(toPage);
 		return mv;
 	}
+	
 }
