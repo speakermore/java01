@@ -15,6 +15,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -67,8 +68,7 @@ public class UserController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String userLoginId, String userPassword, @RequestParam String validateCode,
-			HttpSession session) {
+	public ModelAndView login(String userLoginId, String userPassword,String re_remember,@RequestParam String validateCode,HttpSession session,HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		// 判断
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
@@ -115,6 +115,18 @@ public class UserController {
 						e.printStackTrace();
 					}
 				}
+		         if("1".equals(re_remember)){ //"1"表示用户勾选记住密码
+		             /*String cookieUserName = Utils.encrypt(name);
+		             String cookiePwd = Utils.encrypt(passWord);
+		             String loginInfo = cookieUserName+","+cookiePwd;*/
+		             String loginInfo = userLoginId+","+userPassword;
+		             Cookie userCookie=new Cookie("loginInfo",loginInfo); 
+
+		             userCookie.setMaxAge(30*24*60*60);   //存活期为一个月 30*24*60*60
+		             userCookie.setPath("/");
+		             response.addCookie(userCookie);
+		         }
+		         
 				session.setAttribute("userAndResumes", userAndResumes);
 				// 查看企业列表
 				List<CompanyList> companyeList = uService.findCompanyList(1);
