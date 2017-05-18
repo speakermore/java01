@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="row clearfix">
 						<div class="col-sm-10 column">
 							<div class="col-sm-6 column">
-								<h2>${user.companySimpleName }</h2>
+								<h2>${company.companySimpleName }</h2>
 							</div>
 							<div class="col-sm-4 column">
 								<br />
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<img src="img/icon_star_2.gif" />
 									<img src="img/icon_star_1.gif" />
 								</div>
-								<a class="btn" href="company/company/findById/${user.id}">更多详细资料 »</a>
+								<a class="btn" href="company/company/findById/${company.id}">更多详细资料 »</a>
 							</div>
 							
 						</div>
@@ -246,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														${dis.discussContent}
 													</div>
 													<div class="col-sm-2">
-														<c:if test="${dis.discussUsersId==user.id }">
+														<c:if test="${dis.discussUsersId==company.id }">
 							   								<a href="company/artanddis/discuss/deletecompanydiscuss/${dis.id }"><em class="glyphicon glyphicon-trash"></em></a>
 							   							</c:if>
 													</div>
@@ -261,7 +261,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<br />
 			<div>
-				<c:if test="${disUserId==user.id }">
+				<c:if test="${disUserId==company.id }">
 					<form action="company/artanddis/discuss/add_companydiscuss" method="post">
 						<div class="form-group col-sm-12">
 							<input type="hidden" name="discussLevel" id="discussLevel" />
@@ -336,6 +336,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
     </script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var name = $(".wt-hby-companyInt");
+				if(name.html().length > 150){
+					name.html(name.html().substring(0,150)+"......");
+				} 
+				
+		});
+	</script>
 	
 	</body>
 </html>
