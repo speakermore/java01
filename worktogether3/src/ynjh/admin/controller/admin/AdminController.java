@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -497,12 +498,12 @@ public class AdminController {
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditInfo")
-	public ModelAndView findAuditInfo(Integer page) {
-		List<Message> message = adminService.findAuditInfo(page);
+	@RequestMapping("/auditNews/{page}")
+	public ModelAndView findAuditInfo(@PathVariable Integer page) {
+		List<AuditArticle> articles = adminService.findAuditComArticle(page);
 		ModelAndView mv = new ModelAndView("admin/auditNews");
-		mv.addObject("message", message);
-		mv.setViewName("admin/auditNews");
+		mv.addObject("articles", articles);
+		mv.setViewName("admin/audit/auditComArticle");
 		return mv;
 	}
 
@@ -570,12 +571,18 @@ public class AdminController {
 	 *            信息状态
 	 * @return
 	 */
-	@RequestMapping("/auditArticle/{articleId}/{articleStatus}")
-	public ModelAndView auditArticle(@PathVariable Integer articleId,@PathVariable Integer articleStatus) {
+	@RequestMapping("/auditArticle/{articleId}/{articleStatus}/{articleUsersType}")
+	public ModelAndView auditArticle(@PathVariable Integer articleId,@PathVariable Integer articleStatus,@PathVariable Integer articleUsersType) {
 		int result = adminService.auditArticle(articleId, articleStatus);
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
-			mv.setViewName("admin/auditArticle");
+			if(articleUsersType==2){
+				mv.setViewName("admin/auditArticle");
+			}else if(articleUsersType==1){
+				mv.setViewName("admin/audit/auditComArticle");
+			}else{
+				mv.setViewName("admin/index");
+			}
 		} else {
 			mv.addObject("info", "审核失败,未能找到审核文章");
 			mv.setViewName("admin/auditArticle");
@@ -1204,6 +1211,9 @@ public class AdminController {
 	public ModelAndView showEducation(String resumeId){
 		List<Education> edus=adminService.findResumeEducation(resumeId);
 		ModelAndView mv=new ModelAndView();
+		if(edus==null){
+			edus=new ArrayList<Education>();
+		}
 		mv.addObject("edus",edus);
 		mv.setViewName("admin/auditing/auditingResume");
 		return mv;

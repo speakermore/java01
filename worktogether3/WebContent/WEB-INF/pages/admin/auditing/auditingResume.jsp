@@ -46,7 +46,7 @@
 					</div>
 					<div class="row">
 						<style>
-.col-sm-1, .col-sm-3, .col-sm-2 {
+.col-sm-1, .col-sm-3, .col-sm-2,.col-sm-4,.col-sm-7 {
 	padding: 0px;
 }
 </style>
@@ -169,17 +169,18 @@ blockquote h1 {
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;工作经历
 					</h1>
 				</blockquote>
+				<div class="row">
 				<c:forEach items="${works}" var="work" varStatus="status">
-					<div class="col-sm-11 top-space-small bottom-border-dashed">
-						<div class="row">
+					<div class="col-sm-12 top-space-small bottom-border-dashed">
+						<div class="row" >
 							<div class="col-sm-4">
-								<span class="right-space-large"><strong>${work.workFirmName}</strong></span>
+								<span ><strong>${work.workFirmName}</strong></span>
 							</div>
 							<div class="col-sm-6 item">
 								<span> <fmt:formatDate value="${work.workBeginTime}"
 										pattern="yyyy年  MM月 dd日" />
-								</span>-- <span class="right-space-large"> <fmt:formatDate
-										value="${work.workEndTime}" pattern="yyyy年  MM月 dd日" />
+								</span>-- <span> <fmt:formatDate
+										value="${work.workEndTime}" pattern="yyyy年  MM月 dd日" /></span>
 							</div>
 							<div class="col-sm-2">
 								<strong>${work.workUnit}</strong>
@@ -191,6 +192,7 @@ blockquote h1 {
 							</div>
 					</div>
 				</c:forEach>
+				</div>
 			</div>
 			<!-- end of work -->
 
@@ -204,8 +206,9 @@ blockquote h1 {
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;项目经验
 					</h1>
 				</blockquote>
+				<div class="row">
 				<c:forEach items="${projects}" var="project" varStatus="status">
-					<div class="col-sm-11 top-space-small bottom-border-dashed">
+					<div class="col-sm-12 top-space-small bottom-border-dashed">
 						<div class="row">
 							<div class="col-sm-7">
 								<strong>${project.projectName}</strong>
@@ -228,6 +231,7 @@ blockquote h1 {
 						</div>
 					</div>
 				</c:forEach>
+				</div>
 			</div>
 			<!-- end of project -->
 			<c:if test="${edus==null}">
@@ -239,8 +243,9 @@ blockquote h1 {
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;培训经历
 					</h1>
 				</blockquote>
+				<div class="row">
 				<c:forEach items="${edus}" var="edu" varStatus="status">
-					<div class="col-sm-11 top-space-small bottom-border-dashed">
+					<div class="col-sm-12 top-space-small bottom-border-dashed">
 						<div class="row">
 							<div class="col-sm-7">
 								<strong>${edu.educationSchool}</strong>
@@ -259,6 +264,7 @@ blockquote h1 {
 						</div>
 					</div>
 				</c:forEach>
+				</div>
 			</div>
 			<!-- end of education -->
 			<div class="col-sm-12">&nbsp;</div>
