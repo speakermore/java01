@@ -32,6 +32,12 @@ public class UserAndResume implements Serializable{
 		private String resumeEducation;
 		//工作年限
 		private Integer resumeWorks;
+		//判断是否关注的状态
+		private Boolean isFoucse;
+		//计算年龄
+		private Integer age;
+		//计算工作年限
+		private Integer works;
 		
 		public UserAndResume() {
 		}
@@ -53,7 +59,31 @@ public class UserAndResume implements Serializable{
 			this.resumeEducation = resumeEducation;
 			this.resumeWorks = resumeWorks;
 		}
+		
 
+		public Integer getWorks() {
+			return works;
+		}
+
+		public void setWorks(Integer works) {
+			this.works = works;
+		}
+
+		public Integer getAge() {
+			return age;
+		}
+
+		public void setAge(Integer age) {
+			this.age = age;
+		}
+
+		public Boolean getIsFoucse() {
+			return isFoucse;
+		}
+
+		public void setIsFoucse(Boolean isFoucse) {
+			this.isFoucse = isFoucse;
+		}
 
 		public Integer getId() {
 			return id;

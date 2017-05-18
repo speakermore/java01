@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import ynjh.personal.dao.follow.FollowMapper;
@@ -57,6 +58,13 @@ public class FollowServiceImpl implements FollowService {
 	@Override
 	public Integer selectUserByFollowCount(Integer byFollowId) {
 		return followMapper.selectUserByFollowCount(byFollowId);
+	}
+	/**
+	 *  判断是否关注 
+	 */
+	@Override
+	public Follow findIsFollowByFollowIdAndFollowId(Integer followId, Integer byFollowId) {
+		return followMapper.findIsFollowByFollowIdAndFollowId(followId, byFollowId);
 	}
 
 	

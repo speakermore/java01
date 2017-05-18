@@ -2,6 +2,7 @@
 	import="ynjh.common.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -18,68 +19,143 @@
 	<!-- 加入显示数组 -->
 	<c:set var="genders" value="${CommonStatus.SEX }"></c:set>
 	<c:set var="MARRIAGE" value="${CommonStatus.MARRIAGE }"></c:set>
+	<c:set var="flAbility" value="${CommonStatus.FL_ABILITY}"></c:set>
+	<c:set var="flType" value="${CommonStatus.FL_TYPE}"></c:set>
+	<c:set var="englishGrade" value="${CommonStatus.ENGLISH_GRADE}"></c:set>
+	<c:set var="computerAbility" value="${CommonStatus.COMPUTER_ABILITY}"></c:set>
 	<div><%@include file="../menu.jsp"%></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-offset-1 page-header">
-				<h1>${resume.resumeTitle}<small>${resume.resumeCreateDate}</small>
+				<h1>${resume.resumeTitle}<small><fmt:formatDate value="${resume.resumeCreateDate}" pattern="yyyy年 MM月 dd日"></fmt:formatDate> </small>
 				</h1>
 			</div>
-			<div class="col-sm-offset-1 bottom-border-large">
+			<div class="col-sm-offset-1 col-md-offset-1 col-xs-offset-1">
 				<div class="col-sm-2">
 					<img
 						src="/img/upload/personal/${resumeOwner.userLoginId}/${resume.resumeHeadImg}"
-						width="90px" height="120px">
+						width="90px" height="120px" />
 				</div>
 				<div class="col-sm-10">
 					<div class="row">
-						<span class="right-border">姓名：<strong>${resume.resumeName}</strong></span>
-						<span class="right-border">性别：${genders[resume.resumeGender]}</span>
-						<span>民族：${resume.resumeNation}</span>
+						<div class="col-xs-12">
+							<div id="name-space">
+								<strong>${resume.resumeName}</strong>
+							</div>
+						</div>
 					</div>
 					<div class="row">
-						<span class="right-border">籍贯：${resume.resumePlace}</span> <span>生日：
+						<style>
+.col-sm-1, .col-sm-3, .col-sm-2 {
+	padding: 0px;
+}
+</style>
+						<div class="col-sm-1">${resume.resumePlace}人|</div>
+						<div class="col-sm-3">现居${resume.resumeNowResidence}&nbsp;|
+
+						</div>
+						<div class="col-sm-1">
+							&nbsp;${genders[resume.resumeGender]}&nbsp;|</div>
+						<div class="col-sm-1">
+							&nbsp;${MARRIAGE[resume.resumeMarriage]}&nbsp;|</div>
+						<div class="col-sm-2">
 							<fmt:formatDate value="${resume.resumeBirthday}"
 								pattern="yyyy年 MM月 dd日" />
-						</span>
+
+						</div>
 					</div>
 					<div class="row">
-						<span class="right-border">婚姻状况：${MARRIAGE[resume.resumeMarriage]}</span>
-						<span class="right-border">身高：${resume.resumeHeight}</span> <span>体重：${resume.resumeWeight}</span>
-					</div>
-					<div class="row">
-						<span class="right-border">毕业院校：${resume.resumeGraduationSchool}</span>
-						<span>毕业时间：<fmt:formatDate
-								value="${resume.resumeGraduationTime}" pattern="yyyy年 MM月 dd日" /></span>
-					</div>
-					<div class="row">
-						<span class="right-border">学历：${resume.resumeEducation}</span> <span>专业：${resume.resumeMajor}</span>
+						<div class="col-sm-3 communication-info">
+							<em class="glyphicon glyphicon-phone-alt"></em>&nbsp;${resume.resumePhone}
+						</div>
+						<div class="col-sm-3 communication-info">
+							<span class="glyphicon glyphicon-cloud"></span>&nbsp;${resume.resumeQQ}
+						</div>
+						<div class="col-sm-3 communication-info">
+							<span class="glyphicon glyphicon-envelope"></span>&nbsp;${resume.resumeEmail}
+						</div>
 					</div>
 				</div>
 			</div>
-			<!-- end of simpleInfo -->
-			<div class="col-sm-offset-1 col-sm-11 top-space bottom-border">
-				<div class="label label-default col-sm-1">联系方式</div>
-				<div class=" col-sm-12">
-					<span class="right-space-large">电话：${resume.resumePhone}</span> <span>QQ：${resume.resumeQQ}</span>
-				</div>
-			</div>
-			<!-- end of communication Info -->
+
+			<style>
+blockquote h1 {
+	font-size: 18px;
+	color: #fa941b;
+	margin-bottom: 20px;
+	margin-top: 15px;
+}
+</style>
 			<div class="col-sm-offset-1 col-sm-11 top-space-small bottom-border">
-				<div class="label label-default col-sm-1">技能信息</div>
-				<div class=" col-sm-12">
-					<span class="right-space-large">外语类型：${resume.resumeFLType}</span>
-					<span>外语水平：${resume.resumeFLAbility}</span>
-					<div>计算机水平：${resume.resumeComputerAbility}</div>
-				</div>
+				<blockquote>
+					<h1>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;技能信息
+					</h1>
+				</blockquote>
+					<div class="row" >
+						<div class="col-sm-2 right-aline">
+							<span class="item">外语类型：</span>
+						</div>
+						<div class="col-sm-2">${flType[resume.resumeFLType]}</div>
+						<div class="col-sm-2 right-aline">
+							<span class="item">外语水平：</span>
+						</div>
+						<div class="col-sm-2">${flAbility[resume.resumeFLAbility]}</div>
+						<div class="col-sm-2 right-aline">
+							<span class="item">计算机水平：</span>
+						</div>
+						<div class="col-sm-2">${computerAbility[resume.resumeComputerAbility]}</div>
+					</div>
+				
 			</div>
-			<!-- end of communication Info -->
 			<div class="col-sm-offset-1 col-sm-11 top-space-small bottom-border">
-				<div class="label label-default col-sm-1">综合信息</div>
-				<div class=" col-sm-12">
-					<div>特点描述：${resume.resumePersonality}</div>
-					<div>自我评价：${resume.resumeSelfEvaluation}</div>
-				</div>
+				<blockquote>
+					<h1>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;教育信息
+					</h1>
+				</blockquote>
+				
+					<div class="row">
+						<div class="col-sm-2 right-aline">
+							<span class="item">毕业院校</span>
+						</div>
+						<div class="col-sm-4">：${resume.resumeGraduationSchool}</div>
+						<div class="col-sm-2 right-aline">
+							<span class="item">毕业时间</span>
+						</div>
+						<div class="col-sm-4">
+							：<fmt:formatDate value="${resume.resumeGraduationTime}" pattern="yyyy年 MM月 dd日" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2 right-aline">
+							<span class="item">学历</span>
+						</div>
+						<div class="col-sm-4">：${resume.resumeEducation}</div>
+						<div class="col-sm-2 right-aline">
+							<span class="item">专业</span>
+						</div>
+						<div class="col-sm-4">：${resume.resumeMajor}</div>
+					</div>
+				
+			</div>
+			<div class="col-sm-offset-1 col-sm-11 top-space-small bottom-border">
+				<blockquote>
+					<h1>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;自我认识
+					</h1>
+				</blockquote>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2 right-aline">
+								<span class="item">自我评价：</span>
+							</div>
+							<div class="col-sm-10">
+								${resume.resumeSelfEvaluation}
+							</div>
+						</div>	
+					</div>
+				
 			</div>
 			<!-- end of total Info -->
 			<div class="col-sm-12 top-space">
@@ -87,18 +163,32 @@
 					<jsp:forward page="/admin/work/?resumeId=${resume.id}" />
 				</c:if>
 			</div>
-			<div class="col-sm-12">
-				<div class="label label-default col-sm-1 col-sm-offset-1">
-					工作经历</div>
+			<div class="col-sm-offset-1 col-sm-11 top-space-small">
+				<blockquote>
+					<h1>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;工作经历
+					</h1>
+				</blockquote>
 				<c:forEach items="${works}" var="work" varStatus="status">
-					<div class=" col-sm-11 col-sm-offset-1">
-						<span class="right-space-large"><strong>${work.workFirmName}</strong></span>
-						<span> <fmt:formatDate value="${work.workBeginTime}"
-								pattern="yyyy年  MM月 dd日" />
-						</span>-- <span class="right-space-large"> <fmt:formatDate
-								value="${work.workEndTime}" pattern="yyyy年  MM月 dd日" />
-						</span> <span><strong>${work.workUnit}</strong></span>
-						<div class="bottom-border">工作内容：${work.workDescription}</div>
+					<div class="col-sm-11 top-space-small bottom-border-dashed">
+						<div class="row">
+							<div class="col-sm-4">
+								<span class="right-space-large"><strong>${work.workFirmName}</strong></span>
+							</div>
+							<div class="col-sm-6 item">
+								<span> <fmt:formatDate value="${work.workBeginTime}"
+										pattern="yyyy年  MM月 dd日" />
+								</span>-- <span class="right-space-large"> <fmt:formatDate
+										value="${work.workEndTime}" pattern="yyyy年  MM月 dd日" />
+							</div>
+							<div class="col-sm-2">
+								<strong>${work.workUnit}</strong>
+							</div>
+						</div>
+							<div class="row">
+								<div class="col-sm-1"><span class="item">工作描述</span></div>	
+								<div class="col-sm-11">${work.workDescription}</div>			
+							</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -108,21 +198,34 @@
 				<jsp:forward page="/admin/project/?resumeId=${resume.id}" />
 			</c:if>
 
-			<div class="col-sm-12 top-space">
-				<div class="label label-default col-sm-1 col-sm-offset-1">
-					项目经验</div>
+			<div class="col-sm-offset-1 col-sm-11 top-space">
+				<blockquote>
+					<h1>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;项目经验
+					</h1>
+				</blockquote>
 				<c:forEach items="${projects}" var="project" varStatus="status">
-					<div class=" col-sm-11 col-sm-offset-1">
-						<span class="right-space-large"><strong>${project.projectName}</strong></span>
-						<span> <fmt:formatDate value="${project.projectBeginTime}"
-								pattern="yyyy年  MM月 dd日" />
-						</span>-- <span> <fmt:formatDate value="${project.projectEndTime}"
-								pattern="yyyy年  MM月 dd日" />
-						</span>
-						<div>
-							项目岗位：<strong>${project.projectJob}</strong>
+					<div class="col-sm-11 top-space-small bottom-border-dashed">
+						<div class="row">
+							<div class="col-sm-7">
+								<strong>${project.projectName}</strong>
+							</div>
+							<div class="col-sm-5 item">
+								<span> <fmt:formatDate value="${project.projectBeginTime}"
+										pattern="yyyy年  MM月 dd日" />
+								</span>-- <span> <fmt:formatDate value="${project.projectEndTime}"
+										pattern="yyyy年  MM月 dd日" />
+								</span>
+							</div>
 						</div>
-						<div class="bottom-border">项目描述：${project.projectDescription}</div>
+						<div class="row">
+							<div class="col-sm-1"><span class="item">项目岗位</span></div>
+							<div class="col-sm-11"><strong>${project.projectJob}</strong></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"><span class="item">项目描述</span></div>
+							<div class="col-sm-11">${project.projectDescription}</div>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -130,16 +233,30 @@
 			<c:if test="${edus==null}">
 				<jsp:forward page="/admin/edu/?resumeId=${resume.id}" />
 			</c:if>
-			<div class="col-sm-12 top-space">
-				<div class="label label-default col-sm-1 col-sm-offset-1">
-					培训经历</div>
+			<div class="col-sm-offset-1 col-sm-11 top-space">
+				<blockquote>
+					<h1>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;培训经历
+					</h1>
+				</blockquote>
 				<c:forEach items="${edus}" var="edu" varStatus="status">
-					<div class=" col-sm-11 col-sm-offset-1">
-						<span class="right-space-large"><strong>${edu.educationSchool}</strong></span>
-						<span><fmt:formatDate value="${edu.educationBeginTime}"
-								pattern="yyyy年  MM月 dd日" /> </span>-- <span><fmt:formatDate
-								value="${edu.educationEndTime}" pattern="yyyy年  MM月 dd日" /> </span>
-						<div class="bottom-border">培训内容：${edu.educationContent}</div>
+					<div class="col-sm-11 top-space-small bottom-border-dashed">
+						<div class="row">
+							<div class="col-sm-7">
+								<strong>${edu.educationSchool}</strong>
+							</div>
+							<div class="col-sm-5 item">	
+								<span><fmt:formatDate value="${edu.educationBeginTime}"
+										pattern="yyyy年  MM月 dd日" />--<fmt:formatDate
+										value="${edu.educationEndTime}" pattern="yyyy年  MM月 dd日" /></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"><span class="item">培训内容</span></div>
+							<div class="col-sm-11">
+								${edu.educationContent}
+							</div>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

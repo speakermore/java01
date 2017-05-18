@@ -54,13 +54,11 @@ span.emotion:hover {
 			<div class="panel-title">我的信息</div>
 			<div class="panel-body">
 				<div class="col-sm-5 " >
-					<c:if test="${user.userHeadImgPath==null }">
-					<img id="headPhoto" src="personal/img/head.gif" width="100" height="100"
-						title="我的头像" alt="我的头像" />
+					<c:if test="${user.userHeadImgPath=='无' }">
+					<img id="headPhoto" src="personal/img/head.gif" style="width: 100px; height: 100px;" title="我的头像" alt="我的头像" />
 					</c:if>
 					<c:if test="${user.userHeadImgPath!=null }">
-					<img id="headPhoto" class="img-circle"  src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" width="100" height="100"
-						title="我的头像" alt="我的头像" />
+					<img id="headPhoto" class="img-circle"   src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" style="width: 100px; height: 100px;" title="我的头像" alt="我的头像" />
 					</c:if>
 				</div>
 				<div class="col-sm-7">

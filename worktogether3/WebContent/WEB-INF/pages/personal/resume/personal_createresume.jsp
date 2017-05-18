@@ -196,14 +196,13 @@
 
 						}
 					},
-					/* resumeBirthday:{
+					resumeBirthday:{
 						validators : {
-							data : {
-								format: 'YYYY-MM-DD',
+							notEmpty : {
 								message : '出生日期不能为空'
 							}
 						}
-					} */
+					},
 					resumeEducation : {
 						validators : {
 							notEmpty : {
@@ -372,6 +371,56 @@
 						validators : {
 							notEmpty : {
 								message : '计算机水平不能为空'
+							}
+						}
+					},
+					resumeGender : {
+						validators : {
+							notEmpty : {
+								message : '请选择性别'
+							}
+						}
+					},
+					resumeWorks : {
+						validators : {
+							notEmpty : {
+								message : '请选择工作年限'
+							}
+						}
+					},
+					resumeNowResidence : {
+						validators : {
+							notEmpty : {
+								message : '目前居住地不能为空'
+							}
+						}
+					},
+					resumeEmail : {
+						validators : {
+							notEmpty : {
+								message : '邮箱地址不能为空'
+							},
+							emailAddress : {
+								message : '邮箱地址格式有误'
+							}
+						}
+					},resumeGraduationTime : {
+						validators : {
+							notEmpty : {
+								message : '请选择毕业时间'
+							}
+						}
+					},resumeHouseAddress : {
+						validators : {
+							notEmpty : {
+								message : '请输入家庭地址'
+							}
+						}
+					},
+					resumeMarriage: {
+						validators : {
+							notEmpty : {
+								message : '请选择婚姻状况'
 							}
 						}
 					}

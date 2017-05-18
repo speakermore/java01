@@ -74,9 +74,24 @@ public class Resume implements Serializable{
 	private String resumeNowResidence;
 	//邮箱地址
 	private String resumeEmail;
+	//年龄
+	private Integer age;
+	//工作年限
+	private Integer works;
 	
 	
-	
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public Integer getWorks() {
+		return works;
+	}
+	public void setWorks(Integer works) {
+		this.works = works;
+	}
 	public String getResumeNowResidence() {
 		return resumeNowResidence;
 	}
