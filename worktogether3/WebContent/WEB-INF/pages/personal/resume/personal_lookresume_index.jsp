@@ -262,7 +262,7 @@ a:focus {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-list-alt"></span>工作经验 <a
-					class="panel-title col-md-offset-8" data-toggle="collapse"
+					class="panel-title col-md-offset-8	" data-toggle="collapse"
 					data-parent="#panel-work-main" href="#panel-element-work"><span
 					class="glyphicon glyphicon-plus"></span>新增工作</a>
 			</div>
