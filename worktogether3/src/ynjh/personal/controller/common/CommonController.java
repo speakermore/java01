@@ -162,11 +162,11 @@ public class CommonController {
 	 * @author 刘志浩 ModelAndView
 	 */
 	@RequestMapping(value = "gotoCompanyById", method = RequestMethod.GET)
-	public ModelAndView gotoCompanyById(Integer id) {
+	public ModelAndView gotoCompanyById(Integer id,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Company company = companyService.findCompany(id);
 		CompanyIntroduction companyInt=companyIntService.findById(company.getId());
-		mv.addObject("user", company);
+		session.setAttribute("company", company);
 		mv.addObject("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");
 		return mv;

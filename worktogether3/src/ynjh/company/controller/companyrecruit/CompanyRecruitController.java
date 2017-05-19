@@ -70,7 +70,7 @@ public class CompanyRecruitController {
 		//首页查询所有招聘信息
 		 @RequestMapping(value="/companyRecruit/findAllDetil/{page}")
 		 public ModelAndView findAllDetil(@PathVariable Integer page,HttpSession session){
-			 Integer companyId=((Company)session.getAttribute("user")).getId();
+			 Integer companyId=((Company)session.getAttribute("company")).getId();
 			 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page,companyId);
 			 int maxPage=companyRecruitService.findMaxPage();
 			 ModelAndView mv=new ModelAndView("company/artanddis/company_index");

@@ -90,7 +90,7 @@ public class CompanyDiscussController {
 	 */
 	@RequestMapping("/discuss/finddiscuss")
 	public ModelAndView finddiscuss(Discuss disc,HttpSession session){
-		Company company=(Company)session.getAttribute("user");
+		Company company=(Company)session.getAttribute("company");
 //		User user=();
 //		session.setAttribute("user", user);
 //		session.setAttribute("company", company);
