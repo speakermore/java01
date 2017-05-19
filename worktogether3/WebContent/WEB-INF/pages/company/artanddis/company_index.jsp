@@ -136,7 +136,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   								<tr>
 				   									<td><a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_detail">${art.articleTitle }</a></td>
 				   									<td>
-				   										
 				   									</td>
 				   									<td>${art.articleLikeNum }</td>
 				   									<td>${art.articleReadNum }</td>
