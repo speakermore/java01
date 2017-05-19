@@ -36,7 +36,7 @@
         		<div class="form-group">
 						<!--请求验证码---->
 						<input type="text" id="validateCode" class="form-control"
-							name="validateCode" placeholder="请输入验证码" required />
+							name="validateCode" placeholder="请输入验证码" required autocomplete="off"/>
 							<c:if test="${operatorInfo!=null }">
 						<div id="validateCodeToolTip" >${operatorInfo }</div></c:if>
 					</div>
@@ -49,8 +49,8 @@
         		
         		<div class="checkbox col-md-12" >
 	            	<!-- <input type="checkbox" value="remember-me" id="remeberPassword"> 记住密码 -->
-	            	<input name="aaaa" type="checkbox" onclick="remember();" id="remFlag">记住密码 
-	            	<a herf="#" class="col-md-offset-6">忘记密码？</a>
+	            	<input name="remFlag" type="checkbox" onclick="remember();" id="remFlag">记住密码 
+	            	<a href="#" class="col-md-offset-6">忘记密码？</a>
         		</div>
         		<button class="btn btn-lg btn-success btn-block" type="submit" id="btn">立即登录</button>
         		<label for="remember-me">

@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table">
 						<tr>
 							<th><i class="glyphicon glyphicon-time"></i>&nbsp;${art.articleTime }</th>
-   							<th><a href="company/artanddis/article/like/${art.id }"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp; ${art.articleLikeNum }</th>
+   							<th><a href="company/artanddis/article/like?id=${art.id }"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp; ${art.articleLikeNum }</th>
    							<th><i class="glyphicon glyphicon-user"></i>&nbsp; ${art.articleReadNum }</th>
 						</tr>
 					</table>
@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   							<tr>
 			   						<td>${comment.commentArticleContent }</td>
 			   						<td>${comment.commentArticleTime }</td>
-			   						<td><a href="company/artanddis/comment/likecomment/${comment.id}"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp;${comment.commentArticleLikeNum }</td>
+			   						<td><a href="company/artanddis/comment/likecomment?id=${comment.id}"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp;${comment.commentArticleLikeNum }</td>
 			   						<c:if test="${comment.usersId!=user.id }">
 			   							<td></td>
 			   						</c:if>

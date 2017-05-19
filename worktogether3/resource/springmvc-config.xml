@@ -103,11 +103,20 @@
         			</props>
         		</property>
         </bean>
-        <!-- <mvc:interceptors>
+		<mvc:interceptors>
+			<!-- <mvc:interceptor >
+					拦截路径指定
+					<mvc:mapping path="/**"/>
+					<bean class="ynjh.common.interceptor.UserLoginIntersepter" />
+				</mvc:interceptor> -->
 			<mvc:interceptor >
-				拦截路径指定
-				<mvc:mapping path="/**"/>
-				<bean class="ynjh.common.interceptor.UserLoginIntersepter" />
+				<!-- 拦截路径指定 -->
+				<mvc:mapping path="/company/artanddis/article/like"/>
+				<bean class="ynjh.common.interceptor.LikeInterceptor" />
 			</mvc:interceptor>
-		</mvc:interceptors> -->
+			<mvc:interceptor>
+				<mvc:mapping path="/company/artanddis/comment/likecomment"/>
+				<bean class="ynjh.common.interceptor.CommentLikeInterceptor"/>
+			</mvc:interceptor>
+		</mvc:interceptors>
 </beans>

@@ -3,6 +3,7 @@ package ynjh.company.dao.companyinformation;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.junit.runners.Parameterized.Parameters;
 
 import ynjh.personal.entity.Article;
 
@@ -19,7 +20,7 @@ public interface CompanyArticleMapper {
 	//修改点赞数
 	public Integer updateLikeNum(Integer id);
 	//查询所有文章
-	public List<Article> findAll(@Param("page")Integer page);
+	public List<Article> findAll(@Param("page")Integer page,@Param("usersId")Integer usersId);
 	//按照id查询文章
 	public Article findById(Integer id);
 	//最大的页数

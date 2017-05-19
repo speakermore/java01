@@ -12,7 +12,7 @@ public interface CompanyArticleService {
 	//增加每日动态
 	public int addArticle(Article article);
 	//查询所有每日动态
-	public List<Article> findAll(Integer page);
+	public List<Article> findAll(Integer page,Integer usersId);
 	//根据id查询该条动态
 	public Article findById(Integer id);
 	//根据id查询更改状态

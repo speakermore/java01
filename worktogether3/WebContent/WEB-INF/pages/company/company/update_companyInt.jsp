@@ -52,7 +52,7 @@
 					<div class="form-group">
 						<div class="col-sm-3">公司福利:</div>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="exampleInputPassword1"
+							<input type="text" class="form-control"
 								name="cmpIntComforts" value=${companyInt.cmpIntComforts } />
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 						<div class="col-sm-3">公司休息制度:</div>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								id="exampleInputPassword1" name="cmpIntRest"
+								name="cmpIntRest"
 								value=${companyInt.cmpIntRest } />
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 						<div class="col-sm-3">公司保险制度:</div>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								id="exampleInputPassword1" name="cmpIntInsurance"
+								name="cmpIntInsurance"
 								value=${companyInt.cmpIntInsurance } />
 						</div>
 					</div>
@@ -79,14 +79,14 @@
 						<div class="col-sm-3">职业薪资:</div>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								id="exampleInputPassword1" name="cmpIntWage"
+								name="cmpIntWage"
 								value=${companyInt.cmpIntWage } />
 						</div>
 					</div>
 					
 					<div class="form-group">
 					 	<div class="col-sm-3">公司地址：</div>
-					 <div class="col-sm-9"><input type="text" class="form-control" id="exampleInputPassword1" value=${user.companyAddress } name="companyAddress"/>
+					 <div class="col-sm-9"><input type="text" class="form-control" value=${user.companyAddress } name="companyAddress"/>
 					</div>
 					</div>
 					
@@ -94,7 +94,7 @@
 						<div class="col-sm-3">公司简介:</div>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								id="exampleInputPassword1" name="cmpIntroduction"
+								name="cmpIntroduction"
 								value=${companyInt.cmpIntroduction } />
 						</div>
 					</div>
