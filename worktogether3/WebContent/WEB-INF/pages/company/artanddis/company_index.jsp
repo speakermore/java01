@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   								<tr>
 				   									<td><a href="company/cmprs/companyRecruit/findById?id=${rec.id }&toPage=company/cmprs/companyRecruit_detail">${rec.cmpRecTitle}</a></td>
 				   									<td><fmt:formatDate value="${rec.cmpRecTime }" pattern="yyyy-MM-dd"/></td>
-				   									<td><a href="#">我要应聘</a></td>
+				   									<td><a href="personal/resume/sendResumeToCompany?companyId=${company.id}&companyrecruitId=${rec.id}">我要应聘</a></td>
 				   								</tr>
 				   							</c:forEach>
 										</tbody>

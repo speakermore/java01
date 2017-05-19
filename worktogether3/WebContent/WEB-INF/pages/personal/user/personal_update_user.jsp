@@ -88,11 +88,11 @@
 	$("#userHeadImgPath")
 			.fileinput(
 					{
-						uploadAsync : false,
 						'language' : 'zh',
+						'uploadAsync' : false,
 						'showUpload' : false,
 						'initialPreview' : [
-								'<img src="img/upload/personal/${user.userLoginId}/${user.userHeadImgPath}">', ],
+								'<img src="img/upload/personal/${user.userLoginId}/${user.userHeadImgPath}"/>' ],
 						'previewFileType' : 'any'
 					});
 	$("#time").datetimepicker({

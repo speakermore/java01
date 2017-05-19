@@ -167,7 +167,7 @@ public class CommonController {
 		Company company = companyService.findCompany(id);
 		CompanyIntroduction companyInt=companyIntService.findById(company.getId());
 		session.setAttribute("company", company);
-		mv.addObject("companyInt", companyInt);
+		session.setAttribute("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");
 		return mv;
 	}
