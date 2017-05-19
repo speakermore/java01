@@ -197,8 +197,7 @@ public class ResumeController {
 	/**
 	 * 修改简历 跳转主页
 	 * 
-	 * @param resume
-	 *            简历修改的对象
+	 * @param resume 简历修改的对象
 	 * @return
 	 * 
 	 * 		ModelAndView
@@ -220,7 +219,25 @@ public class ResumeController {
 		 */
 		return mv;
 	}
-
+	/**
+	 * 修改简历头像
+	 * 
+	 */
+	/*
+	@RequestMapping(value = "/ajaxUpdateResumeHeadImg", method = RequestMethod.GET)
+	public String ajaxUpdateResumeHeadImg(Integer resumeId,MultipartFile resumeHeadImg,HttpSession session){
+		User user =(User) session.getAttribute("user");
+		String uploadImgNewFileName=UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				new MultipartFile[] { resumeHeadImg }, session)[0];
+		Integer result=rService.changeResumeHeadImg(resumeId, uploadImgNewFileName);
+		if (result>0) {
+			return uploadImgNewFileName;
+		}else {
+			return null;
+		}
+	}*/
+	
 	/**
 	 * 删除简历 跳转主页
 	 * 

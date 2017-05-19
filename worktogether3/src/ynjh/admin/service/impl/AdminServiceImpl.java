@@ -228,9 +228,16 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public List<Message> findAuditInfo(Integer page) {
-		 
-		return adminMapper.findAuditInfo(page);
+	public List<AuditArticle> findAuditComArticle(Integer page) {
+		if(page!=null&&page>=0){
+			page=(page-1)*10;
+			if(page<0){
+				page=0;
+			}
+			return adminMapper.findAuditComArticle(page);
+		}else{
+			return new ArrayList<AuditArticle>();
+		}
 	}
 
 	/**

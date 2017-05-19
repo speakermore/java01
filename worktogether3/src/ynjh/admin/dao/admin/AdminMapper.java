@@ -172,8 +172,8 @@ public interface AdminMapper {
 	 * @param page 偏移量
 	 * @return
 	 */
-	public List<Message> findAuditInfo(Integer page);// 查询审核新闻
-	/**
+	public List<AuditArticle> findAuditComArticle(Integer page);// 查询审核新闻
+	/**                      
 	 * 审核offer
 	 * @author 周富强
 	 * @param id offer的id

@@ -83,7 +83,7 @@ body{
 		padding: 30px;
 	}
 .info_title{
-	font-size:large;
+	font-size:40px;
 }
 /*
 *右侧边线
@@ -113,6 +113,10 @@ body{
 	padding-bottom:16px;
 	border-bottom:1px dotted #fa941b;
 }
+.bottom-border-dashed-wide{
+	padding-bottom:16px;
+	border-bottom:3px dotted #fa941b;
+}
 
 #name-space{
 	height:30px;
@@ -130,17 +134,18 @@ body{
 .communication-info{
 	line-height: 50px;
 }
-.my-label-1{
-	margin-top: 11px;
-	margin-bottom: 11px;
-	margin-left: 24px;
-	border-radius: 5px;
-	width: 80px;
-	height: 29px;
-	line-height:29px;
-	background-color: #fa941b;
-	color:#fff;
-}
 .right-aline{
 	text-align: right;
+}
+.pass{
+	color:#32CD32;
+}
+.reject{
+	color:#FF3030;
+}
+.wait-audit{
+	color:#FFB90F;
+}
+.delete{
+	color:#1E90FF;
 }

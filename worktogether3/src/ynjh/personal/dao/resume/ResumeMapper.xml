@@ -167,7 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 分页结束 -->
 	<!-- 发送简历 -->
 	<insert id="sendResumeToCompany">
-		
+		insert into companyresume(companyId,resumeId,companyResumeId,companyrecruitId,cmprTime) value(#{companyId},#{resumeId},#{companyResumeId},#{companyrecruitId},#{cmprTime})
 	</insert>
 	<!-- 更换图片 -->
 	<update id="changeResumeHeadImg">

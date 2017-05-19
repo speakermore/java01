@@ -141,6 +141,9 @@ public class UserServiceImpl implements UserService {
 			return (userMapper.getMaxUserList() + 20 - 1) / 20;
 		}
 	}
+	/**
+	 * 获取企业列表
+	 */
 	@Override
 	public List<CompanyList> findCompanyList(Integer page) {
 		if (page == null) {
@@ -156,6 +159,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return userMapper.findCompanyList((page - 1) * 20);
 	}
+	/**
+	 * 企鹅列表分页
+	 */
 	@Override
 	public Integer getMaxCompanyList() {
 		if (userMapper.getMaxCompanyList() <= 0) {
@@ -164,9 +170,4 @@ public class UserServiceImpl implements UserService {
 			return (userMapper.getMaxCompanyList() + 20 - 1) / 20;
 		}
 	}
-	@Override
-	public CompanyList findCompanyById(Integer id) {
-		return userMapper.findCompanyById(id);
-	}
-
 }

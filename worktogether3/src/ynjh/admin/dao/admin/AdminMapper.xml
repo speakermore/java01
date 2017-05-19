@@ -106,11 +106,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by discussTime desc
 	</select>
 	
-	<select id="findAuditInfo" resultType="Message"><!-- 查询新闻审核 -->
-		select * from message where messageSendStatus=1 order by messageSendTime
-		<!-- <if test="page!=null">
-			limit #{page},10
-		</if> -->
+	<select id="findAuditComArticle" resultType="AuditArticle" parameterType="Integer"><!-- 查询新闻审核 -->
+		select a.*,c.* from article a,company c where a.articleUsersType=1 and a.usersId=c.id
+		order by a.articleStatus,a.articleTime
+		limit #{page},10
 	</select>
 	
 	<select id="findAuditOffer" resultType="Offer"><!-- 查询offer审核 -->
@@ -159,7 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findAuditArticleById" resultType="AuditArticle" parameterType="int"><!-- 查询文章审核ById -->
-		select a.*,u.userLoginId,u.userName from article as a,`user` as u where a.id=#{id} and a.usersId=u.id
+		select a.*,group_concat(DISTINCT u.userLoginId) userLoginId,group_concat(DISTINCT u.userName) userName,group_concat(DISTINCT c.companyName) companyName from article as a,`user` as u,`company` as c where a.id=#{id} and ((case when a.articleUsersType=1 then a.usersId=c.id end) or (case when a.articleUsersType=2 then a.usersId=u.id end)) 
 	</select>
 	
 	<select id="findAuditCommentsArticleById" resultType="CommentArticle" parameterType="int"><!-- 查询文章评论审核ById -->

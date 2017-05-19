@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -30,7 +31,6 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 	<script type="text/javascript">
 		$("#resumeHeadImg").fileinput({
 			'language' : 'zh',
