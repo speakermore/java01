@@ -26,10 +26,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="company/css/magnifier.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet" />
 	<link href="css/lrtk.css" rel="stylesheet" type="text/css" />
-    
     <style type="text/css">
     	textarea {
 			resize:none;
@@ -42,6 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.thumbnail>img{
 			 height: 100px;
 			 width: 100%;
+		}
+		#magnifier1{
+			margin-left:130px; 
 		}
     </style>
   </head>
@@ -74,16 +77,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="wt-hby-companyInt">
 								${companyInt.cmpIntroduction }
 							</p>
+							
 						</div>
 					</div>
 					<div class="row">
-						<c:forEach items="${detailImgs }" var="imgs">
-						    <div class="col-sm-6 col-sm-2">
-						        <a href="javascript:void()" class="thumbnail">
-						            <img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
-						        </a>
-						    </div>
-					    </c:forEach>
+						<div class="magnifier" id="magnifier1">
+							<div class="magnifier-container">
+								<div class="images-cover"></div>
+								<!--当前图片显示容器-->
+								<div class="move-view"></div>
+								<!--跟随鼠标移动的盒子-->
+							</div>
+							<div class="magnifier-assembly">
+								<div class="magnifier-btn">
+									<span class="magnifier-btn-left">&lt;</span>
+									<span class="magnifier-btn-right">&gt;</span>
+								</div>
+								<!--按钮组-->
+								<div class="magnifier-line">
+									<ul class="clearfix animation03">
+										 <c:forEach items="${detailImgs }" var="imgs">
+											<li>
+												<div class="small-img">
+													<img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${company.companyLoginId }/${imgs.companyDetailImg}" />
+												</div>
+											</li>
+										</c:forEach>
+									</ul>
+								</div>
+								<!--缩略图-->
+							</div>
+							<div class="magnifier-view"></div>
+							<!--经过放大的图片显示容器-->
+						</div>	
 					</div>
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
@@ -99,6 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<th>发表日期</th>
 												<th><i class="glyphicon glyphicon-thumbs-up"></i></th>
 												<th><i class="glyphicon glyphicon-user"></i></th>
+												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -113,6 +140,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   									</td>
 				   									<td>${art.articleLikeNum }</td>
 				   									<td>${art.articleReadNum }</td>
+				   									<c:if test="${art.usersId==company.id }">
+			   											<td><a href="company/artanddis/article/delete/${art.id}" ><i class="glyphicon glyphicon-trash"></i></a></td>
+			   										</c:if>
 				   								</tr>
 				   							</c:forEach>
 										</tbody>
@@ -135,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</ul>
 								</div>
 					  		</div>
-						</div> 
+						</div>
 						<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
 					  		<div class="panel-heading">
@@ -293,15 +323,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			此处为广告广告广告
 			广告未招租
 		</div>
-	</div>
+	</div> 	
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  	
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
   	<script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.raty.min.js"></script>
+	<script type="text/javascript" src="company/js/magnifier.js"></script>
 	<script src="js/lrtk.js"></script>
 	<script type="text/javascript">
-		$(function(){
+		var hby_magnifier=function() {
+			
+			var magnifierConfig = {
+				magnifier : "#magnifier1",//最外层的大容器
+				width : 500,//承载容器宽
+				height : 370,//承载容器高
+				moveWidth : null,//如果设置了移动盒子的宽度，则不计算缩放比例
+				zoom : 5//缩放比例
+			};
+		
+			var _magnifier = magnifier(magnifierConfig);
+		
+		/*magnifier的内置函数调用*/
+		/*
+			//设置magnifier函数的index属性
+			_magnifier.setIndex(1);
+	
+			//重新载入主图,根据magnifier函数的index属性
+			_magnifier.eqImg();
+		*/
+	};
+	</script>
+	<script type="text/javascript">
+		var hby_star=function(){
 		    $("#star").raty({
 		        score:function(){
 		            return $(this).attr("value");
@@ -320,7 +375,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				$("#discussLevel").val(score);
   				} 
 		    });
-		});
+		};
 	</script>
 	<script type="text/javascript">
     	$(document).ready(function(){
@@ -339,12 +394,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var name = $(".wt-hby-companyInt");
-				if(name.html().length > 150){
-					name.html(name.html().substring(0,150)+"......");
-				} 
-				
+			if(name.html().length > 150){
+				name.html(name.html().substring(0,150)+"......");
+			}
+			
+			hby_star();
+			hby_magnifier();	
 		});
 	</script>
-	
 	</body>
 </html>
