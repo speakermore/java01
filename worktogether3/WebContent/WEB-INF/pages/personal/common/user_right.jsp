@@ -6,29 +6,50 @@
 header {
 	height: 300px;
 }
+
 .work-together-margin-top-150 {
 	margin-top: 150px;
 }
+
 .work-together-dev-height-2000 {
 	height: auto;
 }
+
 .work-together-sample-1 {
 	background-color: white;
 }
+
 .panel-footer {
 	color: #ababab;
 }
+
 span.emotion {
 	width: 45px;
 	height: 20px;
 	padding-left: 20px;
 	cursor: pointer
 }
+
 span.emotion:hover {
 	background-position: 2px -28px
 }
-#headPhoto{
-	border:1px solid #9E9E9E;
+
+#headPhoto {
+	border: 1px solid #9E9E9E;
+	width: 100px;
+	height: 100px;
+}
+
+.panel-body {
+	padding: 0px;
+}
+
+.padding_head {
+	padding: 20px;
+}
+
+.padding_head_img {
+	text-align: center;
 }
 /* 超出的文本用省略号代替:
 	必须定义一个宽度
@@ -53,15 +74,18 @@ span.emotion:hover {
 		<section class="panel">
 			<div class="panel-title">我的信息</div>
 			<div class="panel-body">
-				<div class="col-sm-5 " >
-					<c:if test="${user.userHeadImgPath=='无' }">
-					<img id="headPhoto" src="personal/img/head.gif" style="width: 100px; height: 100px;" title="我的头像" alt="我的头像" />
+				<div class="col-md-12 padding_head padding_head_img">
+					<c:if test="${user.userHeadImgPath=='无'}">
+						<img id="headPhoto" class="img-circle" src="personal/img/head.gif"
+							style="width: 80px; height: 100px;" title="我的头像" alt="我的头像" />
 					</c:if>
-					<c:if test="${user.userHeadImgPath!=null }">
-					<img id="headPhoto" class="img-circle"   src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" style="width: 100px; height: 100px;" title="我的头像" alt="我的头像" />
+					<c:if test="${user.userHeadImgPath!='无' }">
+						<img id="headPhoto" class="img-circle"
+							src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}"
+							title="我的头像" alt="我的头像" />
 					</c:if>
 				</div>
-				<div class="col-sm-7">
+				<div class="col-md-12 padding_head">
 					<!--我的信息左边文字-->
 					<c:if test="${user.userRealName!='无' }">
 						<div class="row">
@@ -78,7 +102,7 @@ span.emotion:hover {
 					<c:if test="${user.userRealName=='无' }">
 						<div class="row">
 							<p class="col-md-12">
-								请<a href="personal/user/addUserReal">实名认证</a>
+								请<a href="javascript:ajaxTest('personal/user/personal_register_real')">实名认证</a>
 							</p>
 						</div>
 					</c:if>
@@ -98,7 +122,7 @@ span.emotion:hover {
 					<c:if test="${user.userName=='无' }">
 						<div class="row">
 							<p class="col-md-12">
-								请<a href="personal/user/addUserOther">完善信息</a>
+								请<a href="javascript:ajaxTest('personal/user/personal_register_other')">完善信息</a>
 							</p>
 						</div>
 					</c:if>
@@ -123,21 +147,26 @@ span.emotion:hover {
 				</div>
 			</div>
 		</section>
-		<section class="panel">
-			<div class="panel-body">
-				<!--我的信息左边文字结束-->
-				<div class="col-sm-12"><%-- <c:if test="${fn:length(mood.moodContent)>48 }">  
+		<c:if test="${mood.moodContent!=null }">
+			<section class="panel">
+				<div class="panel-body">
+					<!--我的信息左边文字结束-->
+					<div class="col-sm-12">
+						<%-- <c:if test="${fn:length(mood.moodContent)>48 }">  
                          			${fn:substring(mood.moodContent, 0, 48)}...  
                    				</c:if> <c:if test="${fn:length(mood.moodContent)<=48 }">  
                          			 ${mood.moodContent } 
                   			 	</c:if> --%>
-                  			 	${mood.moodContent } </div>
-			</div>
-		</section>
+						${mood.moodContent }
+					</div>
+				</div>
+			</section>
+		</c:if>
 		<section class="panel">
 			<div class="panel-body">
 				<ul class="nav nav-pills ">
-					<li class="active"><a href="personal/follow/gotoFollow?followId=${user.id }"><span
+					<li class="active"><a
+						href="personal/follow/gotoFollow?followId=${user.id }"><span
 							class="badge pull-right">${follows }</span>我的关注</a></li>
 					<li class="active"><a href="#"> <span
 							class="badge pull-right">${byFollows }</span>我的粉丝
@@ -156,6 +185,11 @@ span.emotion:hover {
 		</section>
 	</c:if>
 	<!--我的信息结束-->
+	<!--我的信息列表开始-->
+	<section class="panel">
+		<%@include file="/WEB-INF/pages/personal/common/selectformanage.jsp"%>
+	</section>
+	<!--我的信息列表结束-->
 	<section class="panel">
 		<div class="panel-title">手机App下载</div>
 		<div class="panel-body">

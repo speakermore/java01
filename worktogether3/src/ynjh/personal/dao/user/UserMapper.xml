@@ -55,17 +55,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 企业信息列表 -->
 	<select id="findCompanyList" resultType="CompanyList" parameterType="Integer">
-		select * from company c,companyintroduction ci where companyStatus=1 and c.id=ci.companyId and cmpIntStatus=2
+		select * from company c,companyintroduction ci where c.companyStatus=1 and c.id=ci.companyId and ci.cmpIntStatus=2
 		<if test="page!=null">
 			limit #{page},20
 		</if>
 	</select>
+	<!-- 企业信息列表分页 -->
 	<select id="getMaxCompanyList" resultType="Integer">
-		select count(*) from company c,companyintroduction ci where companyStatus=1 and c.id=ci.companyId and cmpIntStatus=2
-	</select>
-	
-	<!-- 企业信息（详细） -->
-	<select id="findCompanyById" resultType="CompanyList" parameterType="Integer">
-	select * from company c,companyintroduction ci where companyStatus=1 and c.id=ci.companyId and cmpIntStatus=2	and c.id=#{id}	
+		select count(*) from company c,companyintroduction ci where c.companyStatus=1 and c.id=ci.companyId and ci.cmpIntStatus=2
 	</select>
 </mapper>

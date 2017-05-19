@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
@@ -156,4 +157,9 @@ public interface ResumeMapper {
 	 * 更换头像
 	 */
 	public Integer changeResumeHeadImg(@Param("resumeId")Integer resumeId,@Param("resumeHeadImg")String resumeHeadImg);
+	
+	/**
+	 * 投递简历
+	 */
+	public Integer sendResumeToCompany(CompanyResume companyresume);
 }

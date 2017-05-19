@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+
+import ynjh.company.entity.CompanyResume;
 import ynjh.personal.dao.resume.ResumeMapper;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -441,5 +443,12 @@ public class ResumeServiceImpl implements ResumeService {
 	@Override
 	public Integer changeResumeHeadImg(Integer resumeId, String resumeHeadImg) {
 		return resumeMapper.changeResumeHeadImg(resumeId, resumeHeadImg);
+	}
+	/**
+	 * 投递简历
+	 */
+	@Override
+	public Integer sendResumeToCompany(CompanyResume companyresume) {
+		return resumeMapper.sendResumeToCompany(companyresume);
 	}
 }

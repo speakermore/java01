@@ -14,17 +14,31 @@ public class CompanyResume extends Resume implements Serializable{
 	private Integer cmprStatus;//审核状态：1.等待审核 2.审核通过 3.审核不通过
 	private Integer companyResumeId;//投递简历的用户ID
 	private Integer cmprAction;//接收状态： 1.尚未阅读 2.接受简历 3.拒绝简历4.已阅读
-
+	private Integer companyrecruitId;//岗位ID
 	public CompanyResume(){
 		
 	}
 
-	@Override
-	public String toString() {
-		return "CompanyResume [companyId=" + companyId + ", resumeId="
-				+ resumeId  + ", cmprTime=" + cmprTime
-				+ ", cmprStatus=" + cmprStatus + ", companyResumeId="
-				+ companyResumeId + ", cmprAction=" + cmprAction + "]";
+	public CompanyResume(Integer id, Integer companyId, Integer resumeId, Timestamp cmprTime, Integer cmprStatus,
+			Integer companyResumeId, Integer cmprAction, Integer companyrecruitId) {
+		super();
+		this.id = id;
+		this.companyId = companyId;
+		this.resumeId = resumeId;
+		this.cmprTime = cmprTime;
+		this.cmprStatus = cmprStatus;
+		this.companyResumeId = companyResumeId;
+		this.cmprAction = cmprAction;
+		this.companyrecruitId = companyrecruitId;
+	}
+
+
+	public Integer getCompanyrecruitId() {
+		return companyrecruitId;
+	}
+
+	public void setCompanyrecruitId(Integer companyrecruitId) {
+		this.companyrecruitId = companyrecruitId;
 	}
 
 	public Integer getId() {
@@ -80,6 +94,13 @@ public class CompanyResume extends Resume implements Serializable{
 
 	public void setCmprAction(Integer cmprAction) {
 		this.cmprAction = cmprAction;
+	}
+
+	@Override
+	public String toString() {
+		return "CompanyResume [id=" + id + ", companyId=" + companyId + ", resumeId=" + resumeId + ", cmprTime="
+				+ cmprTime + ", cmprStatus=" + cmprStatus + ", companyResumeId=" + companyResumeId + ", cmprAction="
+				+ cmprAction + ", companyrecruitId=" + companyrecruitId + "]";
 	}
 	
 }
