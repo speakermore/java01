@@ -5,7 +5,7 @@ hr{
 	border-top:1px dotted #afafaf;
 }
 .work-together-background{
-    	background-image: linear-gradient(to bottom,#fa941b,#fe6000);
+    	background-image: linear-gradient(to bottom,#fe6000,#fff);
 }
 .work-together-shadow{
     		box-shadow: 3px 3px 6px 3px #e7e9e8;
@@ -35,7 +35,7 @@ hr{
     		color:#fff;
 }
 .navbar-default	.navbar-nav li a{
-		color:#fff;
+		color:#000;
 }
 a:focus, a:hover{
 	color:#be5515;
@@ -45,7 +45,7 @@ a:focus, a:hover{
 		background-color:#fcdab1;
 }
  body{
-	padding-top:70px ;
+	padding-top:100px ;
 } 
 
 /*

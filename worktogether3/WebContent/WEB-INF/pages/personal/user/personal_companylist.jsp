@@ -6,10 +6,7 @@
 <head>
 <title>名企招聘</title>
 <style type="text/css">
-img {
-	padding: 10px;
-	margin-right: 20px;
-}
+
 
 .media {
 	border-radius: 5px;
