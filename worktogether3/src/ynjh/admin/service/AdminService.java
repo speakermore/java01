@@ -54,7 +54,7 @@ public interface AdminService {
 	//审核新闻
 	public Integer auditInfo(Integer InfoId,Integer cmpInfStatus);
 	//查询审核新闻
-	public List<Message> findAuditInfo(Integer page);
+	public List<AuditArticle> findAuditComArticle(Integer page);
 	//审核offer
 	public Integer auditOffer(Integer id,Integer offerType);
 	//查询审核offer

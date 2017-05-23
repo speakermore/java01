@@ -1,30 +1,23 @@
 package ynjh.company.controller.companyinformation;
 
-import java.io.File;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
+import ynjh.company.entity.LikeNum;
 import ynjh.company.service.CompanyArticleService;
 import ynjh.company.service.CompanyCommentArticleService;
 import ynjh.company.service.CompanyService;
+import ynjh.company.service.LikeNumService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.User;
@@ -43,6 +36,8 @@ public class CompanyArticleController {
 	private CompanyCommentArticleService ccArticleService;
 	@Resource
 	private CompanyService companyService;
+	@Resource
+	private LikeNumService likeService;
 	/**
 	 * 
 	 * @author 黄冰雁
@@ -70,11 +65,12 @@ public class CompanyArticleController {
 	 */
 	@RequestMapping(value="/add_companyarticle",method=RequestMethod.POST)
 	public ModelAndView addArticle(Article article,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
+		Company company=(Company)session.getAttribute("user");
 		article.setUsersId(company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
 		article.setArticleUsersType(2);
 		companyArticleService.addArticle(article);
+		
 		ModelAndView mView=new ModelAndView("redirect:../../../company/artanddis/");
 		return mView;
 	}
@@ -88,7 +84,7 @@ public class CompanyArticleController {
 	@RequestMapping("/article/find/{page}")
 	public ModelAndView find(@PathVariable Integer page,HttpSession session){
 		Company company=(Company) session.getAttribute("user");
-		List<Article> articles=companyArticleService.findAll(page);
+		List<Article> articles=companyArticleService.findAll(page,company.getId());
 		List<CompanyDetailImg> detailImgs = companyService.findDetailImg(company.getId());
 		int maxPage=companyArticleService.findMaxPage();
 		List<Integer> pageNo=new ArrayList<Integer>();
@@ -100,14 +96,14 @@ public class CompanyArticleController {
 		mView.addObject("curPage2", page);
 		mView.addObject("maxPage2", maxPage);
 		mView.addObject("pageNo2", pageNo);
-		mView.addObject("detailImgs", detailImgs);
+		session.setAttribute("detailImgs", detailImgs);
 		return mView;
 	}
 	
 	/**
 	 * 
 	 * @author 黄冰雁
-	 * 参数id：根据id查询所有文章和评论文章
+	 * 参数id：根据id查询文章和该文章的所有评论
 	 */
 	@RequestMapping("/article/findid")
 	public ModelAndView findId(Integer id,String toPage,HttpSession session,HttpServletRequest request){
@@ -117,11 +113,11 @@ public class CompanyArticleController {
 			companyArticleService.updateRead(id);
 			session.setAttribute("readAddr",addr);
 		}
+		
 		Article article=companyArticleService.findById(id);
-		session.setAttribute("article", article);
+		session.setAttribute("art", article);
 		List<CommentArticle> commentArticles=ccArticleService.findAll(article.getId());
 		ModelAndView mView=new ModelAndView();
-		mView.addObject("art", article);
 		mView.addObject("comments", commentArticles);
 		mView.setViewName(toPage);
 		return mView;
@@ -133,7 +129,7 @@ public class CompanyArticleController {
 	 * 参数id:根据id查询删除文章
 	 */
 	@RequestMapping("/article/delete")
-	public ModelAndView delete(Integer id,Integer articleStatus){
+	public ModelAndView delete(Integer id){
 		int result=companyArticleService.updateStatus(id,4);
 		ModelAndView mView=new ModelAndView("company/info");
 		if (result>0) {
@@ -171,13 +167,25 @@ public class CompanyArticleController {
 	 * @author 黄冰雁
 	 * 参数id:根据id查询文章，递增点赞数
 	 */
-	@RequestMapping("/article/like/{id}")
-	public ModelAndView like(@PathVariable Integer id){
+	@RequestMapping("/article/like")
+	public ModelAndView like(Integer id,HttpSession session,LikeNum likeNum){
 		companyArticleService.updateLike(id);
 		Article article=companyArticleService.findById(id);
+		Object user=session.getAttribute("user");
+		if(user instanceof Company){
+			likeNum.setArticleId(article.getId());
+			likeNum.setUsersId(((Company) user).getId());
+			likeService.addLike(likeNum);
+		} else if (user instanceof User) {
+			likeNum.setArticleId(article.getId());
+			likeNum.setUsersId(((User) user).getId());
+			likeService.addLike(likeNum);
+		}
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("art",article);
-		mView.setViewName("redirect:../../article/findid?id="+id+"&toPage=company/artanddis/companyart_detail");
+		mView.setViewName("redirect:../article/findid?id="+id+"&toPage=company/artanddis/companyart_detail");
+
+		
 		return mView;
 	}
 	

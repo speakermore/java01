@@ -76,10 +76,6 @@ public interface UserMapper {
 	 * 企业列表总数据
 	 */
 	public Integer getMaxCompanyList();
-	/**
-	 * 企业详细
-	 */
-	public CompanyList findCompanyById(Integer id);
 	
 
 	/**

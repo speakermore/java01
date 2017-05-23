@@ -1,43 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-<%@include file="/WEB-INF/pages/company/header.jsp" %>
-<%@include file="/WEB-INF/pages/company/footer.jsp" %>
-<base href="<%=basePath %>" />
-	</head>
-	<body>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<%@include file="/WEB-INF/pages/company/header.jsp"%>
+<%@include file="/WEB-INF/pages/company/footer.jsp"%>
+<base href="<%=basePath%>" />
+</head>
+<body>
 	<article
-	class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
+		class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
 		<!--发表状态小节-->
 		<section class="panel">
 			<table class="table">
-			<c:forEach items="${cmprs }" var="cmprs">
+				<c:forEach items="${cmprs }" var="cmprs">
 
-				<tr>
-					<td colspan="3">
-						<h3 class="text-center">${cmprs.resumeTitle }</h3>
-					</td>
-				</tr>
-				<tr>
-					<td rowspan="4" class="col-md-1"><a href="#"><img
-							src="img/personal/head.gif" width="180" height="180" /></a></td>
-				</tr>
-				
-				<tr>
-					<td class="col-md-4">${cmprs.resumeName }</td>
-					<td>${cmprs.resumeGender }</td>
-				</tr>
-				<tr>
-					<td>${cmprs.resumeJor }</td>
-					<td>${cmprs.resumeWages }</td>
-				</tr>
+					<tr>
+						<td colspan="3">
+							<h3 class="text-center">${cmprs.resumeTitle }</h3></td>
+					</tr>
+					<tr>
+						<td rowspan="4" class="col-md-1"><a href="#"><img
+								src="img/personal/head.gif" width="180" height="180" />
+						</a>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="col-md-4">${cmprs.resumeName }</td>
+						<td>${cmprs.resumeGender }</td>
+					</tr>
+					<tr>
+						<td>${cmprs.resumeJor }</td>
+						<td>${cmprs.resumeWages }</td>
+					</tr>
 			</table>
 			<div class="panel-group" id="panel">
 				<div class="panel panel-default">
@@ -123,9 +126,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 				</div>
-				</div>
+			</div>
 			</c:forEach>
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-sm-12 column">
+						<button type="button" class="btn btn-lg btn-warning">
+						<a href="offer/add_offer">发送面试邀请</a>
+						</button>
+					</div>
+				</div>
+			</div>
 		</section>
-		</article>
-	</body>
+	</article>
+</body>
 </html>

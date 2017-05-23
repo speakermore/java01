@@ -9,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>管理员后台-简历审核</title>
-<div><%@include file="header.jsp"%></div>
+<%@include file="header.jsp"%>
 </head>
 <c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS}"></c:set>
 <body>
-	<div><%@include file="menu.jsp"%></div>
+	<%@include file="menu.jsp"%>
 	<div class="col-md-offset-2">
 		<div class="row">
 			<div class="col-sm-11">

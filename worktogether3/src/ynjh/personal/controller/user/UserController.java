@@ -15,6 +15,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -67,8 +69,7 @@ public class UserController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String userLoginId, String userPassword, @RequestParam String validateCode,
-			HttpSession session) {
+	public ModelAndView login(String userLoginId, String userPassword,String re_remember,@RequestParam String validateCode,HttpSession session,HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		// 判断
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
@@ -115,12 +116,20 @@ public class UserController {
 						e.printStackTrace();
 					}
 				}
+		         if("1".equals(re_remember)){ //"1"表示用户勾选记住密码
+		             /*String cookieUserName = Utils.encrypt(name);
+		             String cookiePwd = Utils.encrypt(passWord);
+		             String loginInfo = cookieUserName+","+cookiePwd;*/
+		             String loginInfo = userLoginId+","+userPassword;
+		             Cookie userCookie=new Cookie("loginInfo",loginInfo); 
+
+		             userCookie.setMaxAge(30*24*60*60);   //存活期为一个月 30*24*60*60
+		             userCookie.setPath("/");
+		             response.addCookie(userCookie);
+		         }
+		         
 				session.setAttribute("userAndResumes", userAndResumes);
-				// 查看企业列表
-				List<CompanyList> companyeList = uService.findCompanyList(1);
-				session.setAttribute("companyeList", companyeList);
 				session.setAttribute("user", user);
-				mv.addObject("user", user);
 				/* mv.setViewName("personal/user/personal_index"); */
 				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 			}
@@ -226,7 +235,10 @@ public class UserController {
 	 * 跳转名企招聘界面
 	 */
 	@RequestMapping("/gotoCompany")
-	public String gotoCompany() {
+	public String gotoCompany(HttpSession session) {
+		// 查看企业列表
+		List<CompanyList> companyeList = uService.findCompanyList(1);
+		session.setAttribute("companyeList", companyeList);
 		return "personal/user/personal_companylist";
 	}
 
@@ -347,16 +359,21 @@ public class UserController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public ModelAndView updateUser(User user) {
+	public ModelAndView updateUser(User user,MultipartFile fileHeadImg, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		user.setUserBirthday(new Timestamp(System.currentTimeMillis()));
+		User oldUser =(User) session.getAttribute("user");
+		user.setId(oldUser.getId());
+		user.setUserLoginId(oldUser.getUserLoginId());
+		user.setUserHeadImgPath(UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
+				new MultipartFile[] { fileHeadImg }, session)[0]);
 		int result = uService.updateUser(user);
 		if (result > 0) {
-			mv.addObject("operatorInfo", "修改成功！");
+			session.setAttribute("user", user);
 			mv.setViewName("personal/user/personal_index");
 		} else {
 			mv.addObject("operatorInfo", "修改失败！");
-			mv.setViewName("personal/user/personal_register");
+			mv.setViewName("personal/user/personal_login");
 		}
 		return mv;
 	}
@@ -425,6 +442,12 @@ public class UserController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "personal/user/personal_companylist";
+	}
+	
+	@RequestMapping("/ajax")
+	@ResponseBody
+	public ModelAndView ajax(String page){
+		return new ModelAndView(page);
 	}
 
 }

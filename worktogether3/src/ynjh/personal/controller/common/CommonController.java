@@ -1,5 +1,6 @@
 package ynjh.personal.controller.common;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -8,11 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javafx.scene.shape.Arc;
 import ynjh.common.util.GetAge;
+import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyIntroduction;
+import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
+import ynjh.company.service.CompanyIntService;
+import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.ArticleByFollow;
 import ynjh.personal.entity.CompanyList;
@@ -22,11 +27,9 @@ import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
 import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Mood;
-import ynjh.personal.entity.Newly;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
-import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.Work;
 import ynjh.personal.service.ArticleService;
 import ynjh.personal.service.FollowService;
@@ -56,6 +59,10 @@ public class CommonController {
 	private NewlyService nService;
 	@Resource
 	private UserService uService;
+	@Resource
+	private CompanyService companyService;
+	@Resource
+	private CompanyIntService companyIntService;
 
 	/**
 	 * 主页对象获取中转
@@ -155,10 +162,39 @@ public class CommonController {
 	 * @author 刘志浩 ModelAndView
 	 */
 	@RequestMapping(value = "gotoCompanyById", method = RequestMethod.GET)
-	public ModelAndView gotoCompanyById(Integer id) {
-		ModelAndView mv = new ModelAndView("company/article/company_index");
-		CompanyList user = uService.findCompanyById(id);
-		mv.addObject("user", user);
+	public ModelAndView gotoCompanyById(Integer id,HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		Company company = companyService.findCompany(id);
+		CompanyIntroduction companyInt=companyIntService.findById(company.getId());
+		session.setAttribute("company", company);
+		session.setAttribute("companyInt", companyInt);
+		mv.setViewName("company/artanddis/company_index");
+		return mv;
+	}
+	/***
+	 * 投递简历
+	 * 
+	 * @param id
+	 * @return
+	 * @author 刘志浩 ModelAndView
+	 */
+	@RequestMapping(value = "sendResumeToCompany", method = RequestMethod.GET)
+	public ModelAndView sendResumeToCompany(Integer companyId,Integer resumeId,Integer companyResumeId,Integer companyrecruitId) {
+		ModelAndView mv = new ModelAndView("personal/info");
+		CompanyResume companyresume = new CompanyResume();
+		companyresume.setCompanyId(companyId);
+		companyresume.setResumeId(resumeId);
+		companyresume.setCompanyResumeId(companyResumeId);
+		companyresume.setCompanyrecruitId(companyrecruitId);
+		companyresume.setCmprTime(new Timestamp(System.currentTimeMillis()));
+		int result=rService.sendResumeToCompany(companyresume);
+		if (result>0) {
+			mv.addObject("operatorInfo", "投递简历成功");
+			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=" + companyresume.getCompanyId());
+		}else {
+			mv.addObject("operatorInfo", "投递简历失败");
+			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=" + companyresume.getCompanyId());
+		}
 		return mv;
 	}
 
@@ -171,9 +207,11 @@ public class CommonController {
 	 * @return
 	 * @author 刘志浩 ModelAndView
 	 */
-	@RequestMapping(value = "/deleteRecord", method = RequestMethod.GET)
-	public ModelAndView deleteRecord(Integer toPage, Integer userId, HttpSession session) {
-		ModelAndView mv = new ModelAndView("personal/user/personal_delete");
+	@RequestMapping("/deleteRecord")
+	@ResponseBody
+	public ModelAndView deleteRecord(Integer toPage,String page,HttpSession session) {
+		ModelAndView mv = new ModelAndView(page);
+		User oldUser=(User) session.getAttribute("user");
 		mv.addObject("curPage", toPage);
 		/*
 		 * // 文章已删除 List<Article> articleDels =
@@ -187,18 +225,18 @@ public class CommonController {
 		 */
 
 		// 教育记录已删除
-		List<ForeignKeyEducation> educationDels = rService.findEducationByDelete(toPage, userId);
-		int maxEducationDels = rService.getMaxEducationDeleteById(userId);
+		List<ForeignKeyEducation> educationDels = rService.findEducationByDelete(toPage, oldUser.getId());
+		int maxEducationDels = rService.getMaxEducationDeleteById(oldUser.getId());
 		session.setAttribute("educationDels", educationDels);
 		session.setAttribute("maxEducationDels", maxEducationDels);
 		// 工作记录已删除
-		List<ForeignKeyWork> workDels = rService.findWorkByDelete(toPage, userId);
-		int maxWorkDels = rService.getMaxWorkDeleteById(userId);
+		List<ForeignKeyWork> workDels = rService.findWorkByDelete(toPage, oldUser.getId());
+		int maxWorkDels = rService.getMaxWorkDeleteById(oldUser.getId());
 		session.setAttribute("workDels", workDels);
 		session.setAttribute("maxWorkDels", maxWorkDels);
 		// 项目记录已删除
-		List<ForeignKeyProject> projectDels = rService.findProjectByDelete(toPage, userId);
-		int maxProjectDels = rService.getMaxProjectDeleteById(userId);
+		List<ForeignKeyProject> projectDels = rService.findProjectByDelete(toPage, oldUser.getId());
+		int maxProjectDels = rService.getMaxProjectDeleteById(oldUser.getId());
 		session.setAttribute("projectDels", projectDels);
 		session.setAttribute("maxProjectDels", maxProjectDels);
 		return mv;

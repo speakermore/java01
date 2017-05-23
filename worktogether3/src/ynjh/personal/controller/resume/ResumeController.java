@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import ynjh.common.util.UploadFile;
+import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
@@ -197,8 +198,7 @@ public class ResumeController {
 	/**
 	 * 修改简历 跳转主页
 	 * 
-	 * @param resume
-	 *            简历修改的对象
+	 * @param resume 简历修改的对象
 	 * @return
 	 * 
 	 * 		ModelAndView
@@ -220,7 +220,25 @@ public class ResumeController {
 		 */
 		return mv;
 	}
-
+	/**
+	 * 修改简历头像
+	 * 
+	 */
+	/*
+	@RequestMapping(value = "/ajaxUpdateResumeHeadImg", method = RequestMethod.GET)
+	public String ajaxUpdateResumeHeadImg(Integer resumeId,MultipartFile resumeHeadImg,HttpSession session){
+		User user =(User) session.getAttribute("user");
+		String uploadImgNewFileName=UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				new MultipartFile[] { resumeHeadImg }, session)[0];
+		Integer result=rService.changeResumeHeadImg(resumeId, uploadImgNewFileName);
+		if (result>0) {
+			return uploadImgNewFileName;
+		}else {
+			return null;
+		}
+	}*/
+	
 	/**
 	 * 删除简历 跳转主页
 	 * 
@@ -341,7 +359,7 @@ public class ResumeController {
 		}
 		return mv;
 	}
-	@RequestMapping("/ajaxCreateEducation")
+	/*@RequestMapping("/ajaxCreateEducation")
 	@ResponseBody
 	public Object ajaxCreateEducation(Education education, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -349,9 +367,9 @@ public class ResumeController {
 		education.setResumeType(1);
 		int result = rService.addEducation(education);
 		if (result > 0) {
-			/*mv.addObject("operatorInfo", "添加成功");
+			mv.addObject("operatorInfo", "添加成功");
 			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");*/
+			mv.setViewName("personal/resume/personal_lookresume");
 			StringBuffer sb = new StringBuffer();
 			List<Education> edus = rService.findEducation(education.getResumeId());
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -369,12 +387,12 @@ public class ResumeController {
 			}
 			return sb;
 		} else {
-			/*mv.addObject("operatorInfo", "添加失败");
-			mv.setViewName("personal/resume/personal_resume_education");*/
+			mv.addObject("operatorInfo", "添加失败");
+			mv.setViewName("personal/resume/personal_resume_education");
 		}
 		return "空";
 		
-	}
+	}*/
 
 	/**
 	 * 新建工作经历
@@ -733,6 +751,39 @@ public class ResumeController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "personal/resume/test";
+	}
+	/**
+	 * 发送简历
+	 * 参数
+	 * companyId 公司id,
+	 * resumeId 简历id,
+	 * companyResumeId 投递简历的用户ID,
+	 * companyrecruitId 岗位ID,
+	 * cmprTime 投递时间
+	 * @return
+	 * 
+	 * String
+	 */
+	@RequestMapping("/sendResumeToCompany")
+	public ModelAndView sendResumeToCompany(Integer companyId,Integer companyrecruitId,HttpSession session){
+		ModelAndView mv=new ModelAndView("company/info");
+		CompanyResume companyResume =new CompanyResume();
+		Resume oldResume=(Resume) session.getAttribute("resume");
+		User oldUser =(User) session.getAttribute("user");
+		companyResume.setCompanyId(companyId);
+		companyResume.setCompanyResumeId(oldUser.getId());
+		companyResume.setResumeId(oldResume.getId());
+		companyResume.setCompanyrecruitId(companyrecruitId);
+		companyResume.setCmprTime(new Timestamp(System.currentTimeMillis()));
+		int result =rService.sendResumeToCompany(companyResume);
+		if (result>0) {
+			mv.addObject("operatorInfo", "投递简称成功，请静候佳音！");
+			mv.addObject("toPage", "company/artanddis/company_index");
+		}else {
+			mv.addObject("operatorInfo", "投递简称失败，请检查你的人品！");
+			mv.addObject("toPage", "company/artanddis/company_index");
+		}
+		return mv;
 	}
 
 }

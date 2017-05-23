@@ -76,7 +76,7 @@
                   			 	</c:if>
 									</p>
 									<div class="btn-group">
-										<a href="personal/user/gotoCompanyById?id=${cl.id }" class="btn btn-default" type="button">
+										<a href="personal/common/gotoCompanyById?id=${cl.id }" class="btn btn-default" type="button">
 											<em class="glyphicon glyphicon-align-left"></em> 进入
 										</a>
 										<a href="#" class="btn btn-default" type="button">

@@ -1,5 +1,6 @@
 package ynjh.personal.service.impl.article;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import ynjh.personal.dao.article.ArticleMapper;
 import ynjh.personal.entity.Article;
+import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
 /**
  * @author 胡林飞

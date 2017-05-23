@@ -26,10 +26,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="company/css/magnifier.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet" />
 	<link href="css/lrtk.css" rel="stylesheet" type="text/css" />
-    
     <style type="text/css">
     	textarea {
 			resize:none;
@@ -43,6 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 height: 100px;
 			 width: 100%;
 		}
+		#magnifier1{
+			margin-left:130px; 
+		}
     </style>
   </head>
   
@@ -55,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="row clearfix">
 						<div class="col-sm-10 column">
 							<div class="col-sm-6 column">
-								<h2>${user.companySimpleName }</h2>
+								<h2>${company.companySimpleName }</h2>
 							</div>
 							<div class="col-sm-4 column">
 								<br />
@@ -66,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<img src="img/icon_star_2.gif" />
 									<img src="img/icon_star_1.gif" />
 								</div>
-								<a class="btn" href="company/company/findById/${user.id}">更多详细资料 »</a>
+								<a class="btn" href="company/company/findById/${company.id}">更多详细资料 »</a>
 							</div>
 							
 						</div>
@@ -74,16 +77,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="wt-hby-companyInt">
 								${companyInt.cmpIntroduction }
 							</p>
+							
 						</div>
 					</div>
 					<div class="row">
-						<c:forEach items="${detailImgs }" var="imgs">
-						    <div class="col-sm-6 col-sm-2">
-						        <a href="javascript:void()" class="thumbnail">
-						            <img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
-						        </a>
-						    </div>
-					    </c:forEach>
+						<div class="magnifier" id="magnifier1">
+							<div class="magnifier-container">
+								<div class="images-cover"></div>
+								<!--当前图片显示容器-->
+								<div class="move-view"></div>
+								<!--跟随鼠标移动的盒子-->
+							</div>
+							<div class="magnifier-assembly">
+								<div class="magnifier-btn">
+									<span class="magnifier-btn-left">&lt;</span>
+									<span class="magnifier-btn-right">&gt;</span>
+								</div>
+								<!--按钮组-->
+								<div class="magnifier-line">
+									<ul class="clearfix animation03">
+										 <c:forEach items="${detailImgs }" var="imgs">
+											<li>
+												<div class="small-img">
+													<img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${company.companyLoginId }/${imgs.companyDetailImg}" />
+												</div>
+											</li>
+										</c:forEach>
+									</ul>
+								</div>
+								<!--缩略图-->
+							</div>
+							<div class="magnifier-view"></div>
+							<!--经过放大的图片显示容器-->
+						</div>	
 					</div>
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
@@ -99,6 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<th>发表日期</th>
 												<th><i class="glyphicon glyphicon-thumbs-up"></i></th>
 												<th><i class="glyphicon glyphicon-user"></i></th>
+												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -109,10 +136,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   								<tr>
 				   									<td><a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_detail">${art.articleTitle }</a></td>
 				   									<td>
-				   										
 				   									</td>
 				   									<td>${art.articleLikeNum }</td>
 				   									<td>${art.articleReadNum }</td>
+				   									<c:if test="${art.usersId==company.id }">
+			   											<td><a href="company/artanddis/article/delete/${art.id}" ><i class="glyphicon glyphicon-trash"></i></a></td>
+			   										</c:if>
 				   								</tr>
 				   							</c:forEach>
 										</tbody>
@@ -135,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</ul>
 								</div>
 					  		</div>
-						</div> 
+						</div>
 						<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
 					  		<div class="panel-heading">
@@ -159,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   								<tr>
 				   									<td><a href="company/cmprs/companyRecruit/findById?id=${rec.id }&toPage=company/cmprs/companyRecruit_detail">${rec.cmpRecTitle}</a></td>
 				   									<td><fmt:formatDate value="${rec.cmpRecTime }" pattern="yyyy-MM-dd"/></td>
-				   									<td><a href="#">我要应聘</a></td>
+				   									<td><a href="personal/resume/sendResumeToCompany?companyId=${company.id}&companyrecruitId=${rec.id}">我要应聘</a></td>
 				   								</tr>
 				   							</c:forEach>
 										</tbody>
@@ -246,7 +275,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														${dis.discussContent}
 													</div>
 													<div class="col-sm-2">
-														<c:if test="${dis.discussUsersId==user.id }">
+														<c:if test="${dis.discussUsersId==company.id }">
 							   								<a href="company/artanddis/discuss/deletecompanydiscuss/${dis.id }"><em class="glyphicon glyphicon-trash"></em></a>
 							   							</c:if>
 													</div>
@@ -261,7 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<br />
 			<div>
-				<c:if test="${disUserId==user.id }">
+				<c:if test="${disUserId==company.id }">
 					<form action="company/artanddis/discuss/add_companydiscuss" method="post">
 						<div class="form-group col-sm-12">
 							<input type="hidden" name="discussLevel" id="discussLevel" />
@@ -293,15 +322,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			此处为广告广告广告
 			广告未招租
 		</div>
-	</div>
+	</div> 	
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  	
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
   	<script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.raty.min.js"></script>
+	<script type="text/javascript" src="company/js/magnifier.js"></script>
 	<script src="js/lrtk.js"></script>
 	<script type="text/javascript">
-		$(function(){
+		var hby_magnifier=function() {
+			
+			var magnifierConfig = {
+				magnifier : "#magnifier1",//最外层的大容器
+				width : 500,//承载容器宽
+				height : 370,//承载容器高
+				moveWidth : null,//如果设置了移动盒子的宽度，则不计算缩放比例
+				zoom : 5//缩放比例
+			};
+		
+			var _magnifier = magnifier(magnifierConfig);
+		
+		/*magnifier的内置函数调用*/
+		/*
+			//设置magnifier函数的index属性
+			_magnifier.setIndex(1);
+	
+			//重新载入主图,根据magnifier函数的index属性
+			_magnifier.eqImg();
+		*/
+	};
+	</script>
+	<script type="text/javascript">
+		var hby_star=function(){
 		    $("#star").raty({
 		        score:function(){
 		            return $(this).attr("value");
@@ -320,7 +374,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				$("#discussLevel").val(score);
   				} 
 		    });
-		});
+		};
 	</script>
 	<script type="text/javascript">
     	$(document).ready(function(){
@@ -336,6 +390,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
     </script>
-	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var name = $(".wt-hby-companyInt");
+			if(name.html().length > 150){
+				name.html(name.html().substring(0,150)+"......");
+			}
+			
+			hby_star();
+			hby_magnifier();	
+		});
+	</script>
 	</body>
 </html>

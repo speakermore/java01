@@ -33,7 +33,7 @@ public class CompanyController {
 	
 	//登录验证
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView companyLogin(String companyLoginId,String companyPassword,HttpSession session,@RequestParam String validateCode,HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView companyLogin(String companyLoginId,String companyPassword,HttpSession session,@RequestParam String validateCode,String remFlag,HttpServletResponse response){
 		ModelAndView mv=new ModelAndView();
 		String superPassword=null;
 		// 判断
@@ -64,8 +64,6 @@ public class CompanyController {
 			mv.addObject("toPage", "company/company/company_login");
 			mv.setViewName("company/info");
 		}else{
-			
-			String remFlag = request.getParameter("aaaa");
 	         if("1".equals(remFlag)){ //"1"表示用户勾选记住密码
 	             /*String cookieUserName = Utils.encrypt(name);
 	             String cookiePwd = Utils.encrypt(passWord);
@@ -76,14 +74,16 @@ public class CompanyController {
 	             userCookie.setMaxAge(30*24*60*60);   //存活期为一个月 30*24*60*60
 	             userCookie.setPath("/");
 	             response.addCookie(userCookie); 
+//	             mv.addObject("userCookie", userCookie);
 	         }
 			
 //				mv.addObject("operatorInfo","登录成功");
 //				mv.addObject("company",company);
 				session.setAttribute("user",company);
+				session.setAttribute("company",company);
 				CompanyIntroduction companyInt=companyIntService.findById(company.getId());
 				session.setAttribute("companyInt", companyInt);
-				mv.setViewName("company/artanddis/company_index");
+				mv.setViewName("company/company/company_data");
 				
 		}
 		return mv;

@@ -7,8 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.company.entity.CompanyResume;
 
 public interface CompanyResumeMapper {
-	public List<CompanyResume> findAllResume(@Param("companyId")Integer companyId);
-	public int getMaxRecordCount();
+	public List<CompanyResume> findAllResume(Integer companyId);
 	public CompanyResume findById(Integer id);
 	public Integer updateCmpResumeStatus(@Param("id")Integer id,@Param("cmprAction")Integer cmprAction);
 }

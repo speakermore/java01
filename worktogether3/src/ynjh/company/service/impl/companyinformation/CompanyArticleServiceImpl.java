@@ -24,7 +24,7 @@ public class CompanyArticleServiceImpl implements CompanyArticleService{
 	}
 
 	@Override
-	public List<Article> findAll(Integer page) {
+	public List<Article> findAll(Integer page,Integer usersId) {
 		if (page==null) {
 			page=1;
 		}
@@ -35,7 +35,7 @@ public class CompanyArticleServiceImpl implements CompanyArticleService{
 		if (page!=null&&page>maxPage) {
 			page=maxPage;
 		}
-		return companyArticleMapper.findAll((page-1)*10);
+		return companyArticleMapper.findAll((page-1)*10,usersId);
 	}
 
 	@Override

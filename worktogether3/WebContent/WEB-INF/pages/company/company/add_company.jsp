@@ -29,7 +29,7 @@
 						<div class="col-sm-3">公司手机:</div>
 						<div class="col-sm-7">
 							<input type="text" class="form-control"
-								id="exampleInputPassword1" name="companyLoginId" />
+								id="exampleInputPassword1" name="companyLoginId" autocomplete="off"/>
 						</div>
 					</div>
 
@@ -37,7 +37,7 @@
 						<div class="col-sm-3">密码:</div>
 						<div class="col-sm-7">
 							<input type="password" class="form-control"
-								id="exampleInputPassword1" name="companyPassword" />
+								id="exampleInputPassword1" name="companyPassword" autocomplete="off"/>
 						</div>
 					</div>
 
@@ -45,7 +45,7 @@
 						<div class="col-sm-3">确认密码:</div>
 						<div class="col-sm-7">
 							<input type="password" class="form-control"
-								id="exampleInputPassword1" name="realCompanyPassword" />
+								id="exampleInputPassword1" name="realCompanyPassword" autocomplete="off"/>
 						</div>
 					</div>
 

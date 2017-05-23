@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ynjh.company.dao.company.LikeNumMapper">
+	<!-- 添加文章点赞 -->
+	<insert id="addLikeNum" parameterType="LikeNum">
+		insert into likeNum(articleId,usersId,commentArticleId)
+			values(#{articleId},#{usersId},#{commentArticleId})
+	</insert>
+	<!-- 查询文章点赞数 -->
+	<select id="findByArticle" parameterType="Integer" resultType="LikeNum">
+		select * from likeNum where articleId=#{articleId} and usersId=#{usersId}
+	</select>
+	<!-- 查询文章的评论的点赞数 -->
+	<select id="findByCommentArticle" parameterType="Integer" resultType="LikeNum">
+		select * from likeNum where commentArticleId=#{commentArticleId} and usersId=#{usersId}
+	</select>
+</mapper>
