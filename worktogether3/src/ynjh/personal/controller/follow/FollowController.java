@@ -24,7 +24,7 @@ public class FollowController {
 	@Resource
 	private FollowService followService;
 	/**
-	 * 添加关注
+	 * 添加关注（用户）
 	 * @param follow 关注对象
 	 * @param session
 	 * @return 提示关注成功或失败
@@ -48,6 +48,32 @@ public class FollowController {
 		}
 		return map;
 	}
+	/**
+	 * 添加关注（企业）
+	 * @param follow 关注对象
+	 * @param session
+	 * @return 提示关注成功或失败
+	 */
+	@RequestMapping("/addCompanyFollow")
+	@ResponseBody
+	public HashMap<String, String> addCompanyFollow(Integer byFollowId,HttpSession session){
+		User user=(User) session.getAttribute("user");
+		Follow follow=new Follow();
+		follow.setFollowId(user.getId());
+		follow.setByFollowId(byFollowId);
+		follow.setFollowDate(new Timestamp(System.currentTimeMillis()));
+		follow.setFollowStartType(1);
+		follow.setFollowType(2);
+		int result=followService.addUserFollow(follow);
+		HashMap<String, String> map=new HashMap<String, String>();
+		if(result>0) {
+			map.put("operatorInfo", "添加关注成功！");
+		}else{
+			map.put("operatorInfo", "添加关注失败！");
+		}
+		return map;
+	}
+	
 	/**
 	 * 取消关注
 	 * @param followId 关注者ID

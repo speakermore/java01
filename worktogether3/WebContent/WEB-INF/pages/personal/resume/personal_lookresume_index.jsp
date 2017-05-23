@@ -2,16 +2,23 @@
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="MARRY" value="${CommonStatus.MARRY }"></c:set>
 <style type="text/css">
-.test{
+.test {
 	outline: 1px solid #E5E5E5;
 }
-.personal_resume_defualt{
-	padding:15px;
+
+.personal_resume_defualt {
+	padding: 15px;
 	background-color: #F8F8FF;
 }
-.personal_resume_margin{
+
+.personal_resume_margin {
 	margin: 20px;
+}
+
+.personal_resume_padding {
+	padding: 20px;
 }
 
 #personal_border:hover {
@@ -23,7 +30,7 @@
 	margin: 5px;
 }
 
-#hidden_photo {
+#personal_hidden_photo {
 	visibility: hidden;
 	font-size: 20px;
 }
@@ -35,18 +42,24 @@ a:hover {
 a:focus {
 	text-decoration: none;
 }
-.updateHeadImg{
-	margin-left: 35px; margin-top: 35px;
+
+.updateHeadImg {
+	margin-left: 35px;
+	margin-top: 35px;
+}
+.table{
+	width: 93%;
 }
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#personal_border').mousemove(function() {
-			$("#hidden_photo").css("visibility", "visible");
-			$("#imgHiddenText").css("visibility", "visible");i
+			$("#personal_hidden_photo").css("visibility", "visible");
+			$("#imgHiddenText").css("visibility", "visible");
+			i
 		});
 		$("#personal_border").mouseleave(function() {
-			$("#hidden_photo").css("visibility", "hidden");
+			$("#personal_hidden_photo").css("visibility", "hidden");
 			$("#imgHiddenText").css("visibility", "hidden");
 		});
 	});
@@ -56,15 +69,16 @@ a:focus {
 		<div class="media">
 			<!-- 头像 -->
 			<div class="resumeheadImg">
-			<c:if test="${resume.resumeHeadImg==null }">
-				<img class="pull-left updateHeadImg" src="personal/img/head.gif"
-					class="media-object" alt='我的头像' width="100" height="120" />
-				
-			</c:if>
-			<c:if test="${resume.resumeHeadImg!=null }">
-				<img class="pull-left updateHeadImg" src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}"
-					class="media-object" alt='我的头像' width="100" height="120" />
-			</c:if>
+				<c:if test="${resume.resumeHeadImg==null }">
+					<img class="pull-left updateHeadImg" src="personal/img/head.gif"
+						class="media-object" alt='我的头像' width="100" height="120" />
+
+				</c:if>
+				<c:if test="${resume.resumeHeadImg!=null }">
+					<img class="pull-left updateHeadImg"
+						src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}"
+						class="media-object" alt='我的头像' width="100" height="120" />
+				</c:if>
 			</div>
 			<!-- 头像结束 -->
 			<!-- 简历基本信息 -->
@@ -72,14 +86,15 @@ a:focus {
 				style="padding-top: 35px; padding-left: 35px;">
 				<a class="col-lg-offset-10"
 					href="personal/resume/updateResume?resumeId=${resume.id }"><span
-					class="glyphicon glyphicon-edit" id="hidden_photo"></span></a>
+					class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<h4 class="media-heading"
 					style="line-height: 35px; height: 35px; font-size: 20px;">
 					<label class="control-label">${resume.resumeName }</label>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
-				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;${SEX[resume.resumeGender]}&nbsp;|&nbsp;<label>${resume.age}</label>岁(<fmt:formatDate
-						value="${resume.resumeBirthday }" pattern="yyyy/MM/dd" />
+				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;${SEX[resume.resumeGender]}&nbsp;|&nbsp;<label>${resume.age}</label>岁(
+					<fmt:formatDate value="${resume.resumeBirthday }"
+						pattern="yyyy/MM/dd" />
 					)&nbsp;|&nbsp;${resume.resumeJor }
 				</p>
 				<label class="control-label"><span
@@ -98,155 +113,137 @@ a:focus {
 			<div id="panel-element-more" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_margin">
 					<div class="panel-body col-md-12 test personal_resume_defualt">
-							<c:if test="${resume.resumePlace!=null }">
+						<c:if test="${resume.resumePlace!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">籍贯：</label> <label
 									class="control-label">${resume.resumePlace }</label>
 							</div>
-							</c:if><c:if test="${resume.resumeMarriage!=null }">
+						</c:if>
+						<c:if test="${resume.resumeMarriage!=null}">
 							<div class="col-md-6 column">
-								<label class="control-label">婚姻状况：</label> <label
-									class="control-label">${MARRY[resume.resumeMarriage] }</label>
+								<label class="control-label">婚姻状况：${MARRY[resume.resumeMarriage]}</label>
 							</div>
-							</c:if><c:if test="${resume.resumeJor!=null }">
+						</c:if>
+						<c:if test="${resume.resumeJor!=null}">
 							<div class="col-md-6 column">
 								<label class="control-label">求职意向：</label> <label
-									class="control-label">${resume.resumeJor }</label>
+									class="control-label">${resume.resumeJor}</label>
 							</div>
-							</c:if><c:if test="${resume.resumeWages!=null }">
+						</c:if>
+						<c:if test="${resume.resumeWages!=null}">
 							<div class="col-md-6 column">
 								<label class="control-label">期待薪资：</label> <label
-									class="control-label">${resume.resumeWages }</label>
+									class="control-label">${resume.resumeWages}</label>
 							</div>
-							</c:if><c:if test="${resume.resumeQQ!=null }">
+						</c:if>
+						<c:if test="${resume.resumeQQ!=null}">
 							<div class="col-md-6 column">
 								<label class="control-label">QQ或微信：</label> <label
-									class="control-label">${resume.resumeQQ }</label>
+									class="control-label">${resume.resumeQQ}</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeNation!=null }">
+						</c:if>
+						<c:if test="${resume.resumeNation!=null}">
 							<div class="col-md-6 column">
 								<label class="control-label">民族：</label> <label
-									class="control-label">${resume.resumeNation }</label>
+									class="control-label">${resume.resumeNation}</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeGraduationSchool!=null }">
+						</c:if>
+						<c:if test="${resume.resumeGraduationSchool!=null}">
 							<div class="col-md-6 column">
-								<label class="control-label">毕业院校：</label> <label
-									class="control-label">${resume.resumeGraduationSchool }</label>
+								<label class="control-label">毕业院校：${resume.resumeGraduationSchool}</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeGraduationTime!=null }">
+						</c:if>
+						<c:if test="${resume.resumeGraduationTime!=null}">
 							<div class="col-md-6 column">
 								<label class="control-label">毕业时间：</label><label
-									class="control-label"><fmt:formatDate value="${resume.resumeGraduationTime }" pattern="yyyy/MM/dd" />
+									class="control-label"><fmt:formatDate
+										value="${resume.resumeGraduationTime}" pattern="yyyy/MM/dd" />
 								</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeEducation!=null }">
+						</c:if>
+						<c:if test="${resume.resumeEducation!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">学历：</label><label
-									class="control-label">${resume.resumeEducation }
-								</label>
+									class="control-label">${resume.resumeEducation } </label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeMajor!=null }">
+						</c:if>
+						<c:if test="${resume.resumeMajor!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">专业：</label><label
-									class="control-label">${resume.resumeMajor }
-								</label>
+									class="control-label">${resume.resumeMajor } </label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeFLAbility!=null }">
+						</c:if>
+						<c:if test="${resume.resumeFLAbility!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">外语水平：</label><label
-									class="control-label">
-									<c:if test="${resume.resumeFLAbility==1 }">入门
-									</c:if>
-									<c:if test="${resume.resumeFLAbility==2 }">一般
-									</c:if>
-									<c:if test="${resume.resumeFLAbility==3 }">熟练
-									</c:if>
-									<c:if test="${resume.resumeFLAbility==4 }">精通
+									class="control-label"> <c:if
+										test="${resume.resumeFLAbility==1 }">入门
+									</c:if> <c:if test="${resume.resumeFLAbility==2 }">一般
+									</c:if> <c:if test="${resume.resumeFLAbility==3 }">熟练
+									</c:if> <c:if test="${resume.resumeFLAbility==4 }">精通
 									</c:if>
 								</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeFLType!=null }">
+						</c:if>
+						<c:if test="${resume.resumeFLType!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">外语类型：</label><label
-									class="control-label">
-									<c:if test="${resume.resumeFLType==1 }">英语
-									</c:if>
-									<c:if test="${resume.resumeFLType==2 }">日语
-									</c:if>
-									<c:if test="${resume.resumeFLType==3 }">德语
-									</c:if>
-									<c:if test="${resume.resumeFLType==4 }">法语
-									</c:if>
-									<c:if test="${resume.resumeFLType==5 }">俄语
-									</c:if>
-									<c:if test="${resume.resumeFLType==6 }">西班牙语
-									</c:if>
-									<c:if test="${resume.resumeFLType==7 }">丹麦语
+									class="control-label"> <c:if
+										test="${resume.resumeFLType==1 }">英语
+									</c:if> <c:if test="${resume.resumeFLType==2 }">日语
+									</c:if> <c:if test="${resume.resumeFLType==3 }">德语
+									</c:if> <c:if test="${resume.resumeFLType==4 }">法语
+									</c:if> <c:if test="${resume.resumeFLType==5 }">俄语
+									</c:if> <c:if test="${resume.resumeFLType==6 }">西班牙语
+									</c:if> <c:if test="${resume.resumeFLType==7 }">丹麦语
 									</c:if>
 								</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeEnglishGrade!=null }">
+						</c:if>
+						<c:if test="${resume.resumeEnglishGrade!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">英语等级：</label><label
-									class="control-label">
-									<c:if test="${resume.resumeEnglishGrade==1 }">国家英语考试3级
-									</c:if>
-									<c:if test="${resume.resumeEnglishGrade==2 }">国家英语考试4级
-									</c:if>
-									<c:if test="${resume.resumeEnglishGrade==3 }">国家英语考试6级
-									</c:if>
-									<c:if test="${resume.resumeEnglishGrade==4 }">专业4级
-									</c:if>
-									<c:if test="${resume.resumeEnglishGrade==5 }">专业8级
-									</c:if>
-									<c:if test="${resume.resumeEnglishGrade==6 }">未参加
-									</c:if>
-									<c:if test="${resume.resumeEnglishGrade==7 }">未通过
+									class="control-label"> <c:if
+										test="${resume.resumeEnglishGrade==1 }">国家英语考试3级
+									</c:if> <c:if test="${resume.resumeEnglishGrade==2 }">国家英语考试4级
+									</c:if> <c:if test="${resume.resumeEnglishGrade==3 }">国家英语考试6级
+									</c:if> <c:if test="${resume.resumeEnglishGrade==4 }">专业4级
+									</c:if> <c:if test="${resume.resumeEnglishGrade==5 }">专业8级
+									</c:if> <c:if test="${resume.resumeEnglishGrade==6 }">未参加
+									</c:if> <c:if test="${resume.resumeEnglishGrade==7 }">未通过
 									</c:if>
 								</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeComputerAbility!=null }">
+						</c:if>
+						<c:if test="${resume.resumeComputerAbility!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">计算机水平：</label><label
-									class="control-label">
-									<c:if test="${resume.resumeComputerAbility==1 }">入门
-									</c:if>
-									<c:if test="${resume.resumeComputerAbility==2 }">一般
-									</c:if>
-									<c:if test="${resume.resumeComputerAbility==3 }">熟练
-									</c:if>
-									<c:if test="${resume.resumeComputerAbility==4 }">精通
+									class="control-label"> <c:if
+										test="${resume.resumeComputerAbility==1 }">入门
+									</c:if> <c:if test="${resume.resumeComputerAbility==2 }">一般
+									</c:if> <c:if test="${resume.resumeComputerAbility==3 }">熟练
+									</c:if> <c:if test="${resume.resumeComputerAbility==4 }">精通
 									</c:if>
 								</label>
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeHeight!=null }">
+						</c:if>
+						<c:if test="${resume.resumeHeight!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">身高：</label> <label
-									class="control-label">${resume.resumeHeight }</label>cm
+									class="control-label">${resume.resumeHeight }</label>(cm)
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeWeight!=null }">
+						</c:if>
+						<c:if test="${resume.resumeWeight!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">体重：</label> <label
 									class="control-label">${resume.resumeWeight }</label>(公斤)
 							</div>
-							</c:if>
-							<c:if test="${resume.resumeSelfEvaluation!=null }">
+						</c:if>
+						<c:if test="${resume.resumeSelfEvaluation!=null }">
 							<div class="col-md-12 column">
-								<label class="control-label">自我评价：</label> <label
-									class="control-label">${resume.resumeSelfEvaluation }</label>
+								<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label> 
 							</div>
-							</c:if>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -263,12 +260,13 @@ a:focus {
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-list-alt"></span>工作经验 <a
 					class="panel-title col-md-offset-8	" data-toggle="collapse"
-					data-parent="#panel-work-main" href="#panel-element-work"><span
+					data-parent="#panel-work-main" href="#panel-element-work"
+					id="hiddenWork"><span
 					class="glyphicon glyphicon-plus"></span>新增工作</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-work" class="panel-collapse collapse">
-				<div class="panel-body">
+				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-md-12">
 						<form action="personal/resume/CreateWork" class="form-horizontal"
 							method="post" id="workForm">
@@ -296,22 +294,23 @@ a:focus {
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">日期：</label>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="form-control" name="workBeginTime" size="30"
 											type="text" id="datetimeStart1" readonly
-											class="form_datetime" placeholder="请选择起始日期">
+											class="form_datetime" placeholder="选择起始日期">
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="form-control" name="workEndTime" size="30"
 											type="text" id="datetimeEnd1" readonly class="form_datetime"
-											placeholder="请选择结束日期">
+											placeholder="选择结束日期">
 									</div>
 								</div>
 							</div>
 							<div class="col-md-offset-5">
 								<button type="submit" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
-									data-parent="#panel-work-main" href="#panel-element-work-show">关闭</a>
+									data-parent="#panel-work-main" href="#panel-element-work-show"
+									id="showWork">关闭</a>
 							</div>
 						</form>
 					</div>
@@ -320,44 +319,43 @@ a:focus {
 			<!--mian-->
 		</div>
 		<!--2+-->
-
 		<div class="panel panel-default">
-		<c:if test="${works!=null }">
-			<c:forEach items="${works }" var="work">
-				<table class="table">
-					<colgroup>
-						<col style="width: 8%">
-						<col style="width: 50%">
-					</colgroup>
-					<tr>
-						<td>企业名称：</td>
-						<td>${work.workFirmName }</td>
-					</tr>
-					<tr>
-						<td>工作岗位：</td>
-						<td>${work.workUnit }</td>
-					</tr>
-					<tr>
-						<td>工作描述：</td>
-						<td>${work.workDescription }</td>
-					</tr>
-					<tr>
-						<td>工作时间：</td>
-						<td><fmt:formatDate value="${work.workBeginTime }"
-								pattern="yyyy-MM-dd" />到<fmt:formatDate
-								value="${work.workEndTime }" pattern="yyyy-MM-dd" /></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td class="text-right"><a href="#">编辑</a>|<a
-							href="personal/resume/deleteResumeWork?id=${wrok.id }">删除</a></td>
-					</tr>
-				</table>
-			</c:forEach>
+			<c:if test="${works!=null }">
+				<c:forEach items="${works }" var="work">
+					<table class="table">
+						<colgroup>
+							<col style="width: 10%">
+							<col style="width: 50%">
+						</colgroup>
+						<tr>
+							<td>企业名称：</td>
+							<td>${work.workFirmName }</td>
+						</tr>
+						<tr>
+							<td>工作岗位：</td>
+							<td>${work.workUnit }</td>
+						</tr>
+						<tr>
+							<td>工作描述：</td>
+							<td>${work.workDescription }</td>
+						</tr>
+						<tr>
+							<td>工作时间：</td>
+							<td><fmt:formatDate value="${work.workBeginTime }"
+									pattern="yyyy-MM-dd" />到<fmt:formatDate
+									value="${work.workEndTime }" pattern="yyyy-MM-dd" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="text-right"><a href="#">编辑</a>|<a
+								href="personal/resume/deleteResumeWork?id=${wrok.id }">删除</a></td>
+						</tr>
+					</table>
+				</c:forEach>
 			</c:if>
 			<div id="panel-element-work-show" class="panel-collapse in">
 				<c:if test="${works==NULL }">
-					<div class="panel-body col-md-offset-3">
+					<div class="panel-body col-md-offset-3 personal_resume_padding">
 						<span class="glyphicon glyphicon-list-alt"></span>
 						完善工作经验，展现工作内容及能力，让HR更了解你！
 					</div>
@@ -376,12 +374,13 @@ a:focus {
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-signal"></span>项目经验 <a
 					class="panel-title col-md-offset-8" data-toggle="collapse"
-					data-parent="#panel-project-main" href="#panel-element-project"><span
-					class="glyphicon glyphicon-plus"></span>新增项目</a>
+					data-parent="#panel-project-main" href="#panel-element-project"
+					id="hiddenProject"><span
+					class="glyphicon glyphicon-plus" ></span>新增项目</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-project" class="panel-collapse collapse">
-				<div class="panel-body">
+				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-md-12">
 						<form action="personal/resume/CreateProject"
 							class="form-horizontal" method="post" id="projectForm">
@@ -403,21 +402,21 @@ a:focus {
 								<div class="form-group">
 									<label for="projectDescription" class="col-md-3 control-label">项目描述：</label>
 									<div class="col-md-8">
-										<textarea class="form-control" name="projectMakeDescription"
+										<textarea class="form-control" name="projectDescription"
 											id="projectDescription" /></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">日期：</label>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="form-control" name="projectBeginTime" size="30"
 											type="text" id="datetimeStart2" readonly
-											class="form_datetime" placeholder="请选择起始日期" />
+											class="form_datetime" placeholder="选择起始日期" />
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="form-control" name="projectEndTime" size="30"
 											type="text" id="datetimeEnd2" readonly class="form_datetime"
-											placeholder="请选择结束日期" />
+											placeholder="选择结束日期" />
 									</div>
 								</div>
 							</div>
@@ -425,7 +424,8 @@ a:focus {
 								<button type="submit" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-project-main"
-									href="#panel-element-project-show">关闭</a>
+									href="#panel-element-project-show"
+									id="showProject">关闭</a>
 							</div>
 						</form>
 					</div>
@@ -436,46 +436,46 @@ a:focus {
 		<!--2+-->
 
 		<div class="panel panel-default">
-		<c:if test="${projs!=null }">
-			<c:forEach items="${projs }" var="pro">
-				<table class="table">
-					<colgroup>
-						<col style="width: 50%">
-						<col style="width: 50%">
-					</colgroup>
-					<tr>
-						<td>项目名称：</td>
-						<td>${pro.projectName }</td>
-					</tr>
-					<tr>
-						<td>项目岗位：</td>
-						<td>${pro.projectJob }</td>
-					</tr>
-					<tr>
-						<td>项目描述：</td>
-						<td>${pro.projectDescription }</td>
-					</tr>
-					<tr>
-						<td>责任描述与感受：</td>
-						<td>${pro.projectMakeDescription }</td>
-					</tr>
-					<tr>
-						<td>项目时间：</td>
-						<td><fmt:formatDate value="${pro.projectBeginTime }"
-								pattern="yyyy-MM-dd" />到<fmt:formatDate
-								value="${pro.projectEndTime }" pattern="yyyy-MM-dd" /></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td class="text-right"><a href="#">编辑</a>|<a
-							href="personal/resume/deleteResumeProject?id=${pro.id }">删除</a></td>
-					</tr>
-				</table>
-			</c:forEach>
+			<c:if test="${projs!=null }">
+				<c:forEach items="${projs }" var="pro">
+					<table class="table">
+						<colgroup>
+							<col style="width: 50%">
+							<col style="width: 50%">
+						</colgroup>
+						<tr>
+							<td>项目名称：</td>
+							<td>${pro.projectName }</td>
+						</tr>
+						<tr>
+							<td>项目岗位：</td>
+							<td>${pro.projectJob }</td>
+						</tr>
+						<tr>
+							<td>项目描述：</td>
+							<td>${pro.projectDescription }</td>
+						</tr>
+						<tr>
+							<td>责任描述与感受：</td>
+							<td>${pro.projectDescription }</td>
+						</tr>
+						<tr>
+							<td>项目时间：</td>
+							<td><fmt:formatDate value="${pro.projectBeginTime }"
+									pattern="yyyy-MM-dd" />到<fmt:formatDate
+									value="${pro.projectEndTime }" pattern="yyyy-MM-dd" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="text-right"><a href="#">编辑</a>|<a
+								href="personal/resume/deleteResumeProject?id=${pro.id }">删除</a></td>
+						</tr>
+					</table>
+				</c:forEach>
 			</c:if>
 			<div id="panel-element-project-show" class="panel-collapse in">
 				<c:if test="${projs==null }">
-					<div class="panel-body col-md-offset-3">
+					<div class="panel-body col-md-offset-3 personal_resume_padding">
 						<span class="glyphicon glyphicon-signal"></span>
 						完善项目经验，展现社会工作能力，让HR更了解你！
 					</div>
@@ -494,12 +494,13 @@ a:focus {
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-book"></span>教育经历 <a
 					class="panel-title col-md-offset-8" data-toggle="collapse"
-					data-parent="#panel-education-main" href="#panel-element-education"><span
+					data-parent="#panel-education-main" href="#panel-element-education"
+					id="hiddenEducation"><span
 					class="glyphicon glyphicon-plus"></span>新增教育</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-education" class="panel-collapse collapse">
-				<div class="panel-body">
+				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-md-12">
 						<form class="form-horizontal" method="post"
 							action="personal/resume/CreateEducation" id="educationForm">
@@ -522,15 +523,15 @@ a:focus {
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">日期：</label>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="form-control" name="educationBeginTime"
 											size="30" type="text" id="datetimeStart" readonly
-											class="form_datetime" placeholder="请选择起始日期">
+											class="form_datetime" placeholder="选择起始日期">
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="form-control" name="educationEndTime" size="30"
 											type="text" id="datetimeEnd" readonly class="form_datetime"
-											placeholder="请选择结束日期">
+											placeholder="选择结束日期">
 									</div>
 								</div>
 							</div>
@@ -538,7 +539,8 @@ a:focus {
 								<button type="submit" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-education-main"
-									href="#panel-element-education-show">关闭</a>
+									href="#panel-element-education-show"
+									id="showEducation">关闭</a>
 							</div>
 						</form>
 					</div>
@@ -549,7 +551,7 @@ a:focus {
 		<!--2+-->
 		<div class="panel panel-default">
 			<div id="panel-element-education-show" class="panel-collapse in">
-				<div class="panel-body col-md-offset-3">
+				<div class="panel-body col-md-offset-3 personal_resume_padding">
 					<span class="glyphicon glyphicon-book"></span>
 					完善教育经历，展现专业能力，让HR更了解你！
 				</div>
@@ -559,9 +561,29 @@ a:focus {
 	</div>
 </div>
 <script type="text/javascript">
-	/* 	$("#time").blur(function() {
-	alert(typeof ("#time"))
-	}); */
+	$(document).ready(function() {
+		//工作
+		$("#hiddenWork").click(function() {
+			$("#hiddenWork").hide();
+		});
+		$("#showWork").click(function() {
+			$("#hiddenWork").show();
+		});
+		//项目
+		$("#hiddenProject").click(function() {
+			$("#hiddenProject").hide();
+		});
+		$("#showProject").click(function() {
+			$("#hiddenProject").show();
+		});
+		//教育
+		$("#hiddenEducation").click(function() {
+			$("#hiddenEducation").hide();
+		});
+		$("#showEducation").click(function() {
+			$("#hiddenEducation").show();
+		});
+	});
 	$(function() {
 		$("#datetimeStart").datetimepicker({
 			format : 'yyyy-mm-dd',

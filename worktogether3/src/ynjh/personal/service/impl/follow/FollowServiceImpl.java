@@ -22,6 +22,7 @@ public class FollowServiceImpl implements FollowService {
 	 * 添加关注
 	 * @return Integer 成功1 失败2
 	 * @param follow 关注对象
+	 * @author 胡林飞
 	 */
 	@Override
 	public Integer addUserFollow(Follow follow) {
@@ -31,15 +32,17 @@ public class FollowServiceImpl implements FollowService {
 	 * 取消关注
 	 * @return Integer 成功1 失败2
 	 * @param id 关注ID
+	 * @author 胡林飞
 	 */
 	@Override
 	public Integer deleteUserFollow(Integer id) {
 		return followMapper.deleteUserFollow(id);
 	}
 	/**
-	 * 查看关注
+	 * 查看关注(用户)
 	 * @return List<Follow> 关注 列表
 	 * @param id 关注者ID
+	 * @author 刘志浩
 	 */
 	@Override
 	public List<Follow> selectUserFollow(Integer id) {
@@ -47,6 +50,7 @@ public class FollowServiceImpl implements FollowService {
 	}
 	/**
 	 * 查看关注者人数
+	 * @author 刘志浩
 	 */
 	@Override
 	public Integer selectUserFollowCount(Integer followId) {
@@ -54,6 +58,7 @@ public class FollowServiceImpl implements FollowService {
 	}
 	/**
 	 * 查看被关注者人数
+	 * @author 刘志浩
 	 */
 	@Override
 	public Integer selectUserByFollowCount(Integer byFollowId) {
@@ -61,10 +66,19 @@ public class FollowServiceImpl implements FollowService {
 	}
 	/**
 	 *  判断是否关注 
+	 *  @author 刘志浩
 	 */
 	@Override
 	public Follow findIsFollowByFollowIdAndFollowId(Integer followId, Integer byFollowId) {
 		return followMapper.findIsFollowByFollowIdAndFollowId(followId, byFollowId);
+	}
+	/**
+	 * 查看关注(企业)
+	 * @author 刘志浩
+	 */
+	@Override
+	public List<Follow> selectCompanyFollow(Integer followId) {
+		return followMapper.selectCompanyFollow(followId);
 	}
 
 	

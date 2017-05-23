@@ -6,7 +6,6 @@
 		<li class="active"><a href="javascript:ajaxPage('personal/user/personal_index_myNewly')" >我的动态</a>
 		</li>
 		<li><a href="javascript:ajaxPage('personal/user/personal_index_myResume')" >我的简历</a></li>
-		<li><a href="javascript:ajaxPage('personal/user/personal_index_myArticle')" >我的文章</a></li>
 		<c:if test="${user.userRealName=='无' }">
 			<li>
 				<!-- <a href="personal/user/addUserReal">实名认证</a> --> <a
@@ -22,30 +21,30 @@
 		<li><a href="javascript:ajaxPage('personal/user/personal_update_user')">修改用户信息</a></li>
 		<li><a href="javascript:deleteRecord('personal/user/personal_delete')">查看删除记录</a></li>
 		<li><a href="javascript:ajaxPage('personal/user/personal_index_myPassword')">我的密码</a></li>
-		<li><a href="#panel-myAmount" data-toggle="tab">我的额度</a></li>
-		<li><a href="#panel-shareAmount" data-toggle="tab">分享额度</a></li>
-		<li><a href="#panel-rechargeAmount" data-toggle="tab">充值额度</a></li>
-		<li><a href="#panel-blockedCompany" data-toggle="tab">我屏蔽的公司</a>
+		<li><a href="#panel-myAmount" >我的额度</a></li>
+		<li><a href="#panel-shareAmount" >分享额度</a></li>
+		<li><a href="#panel-rechargeAmount" >充值额度</a></li>
+		<li><a href="#panel-blockedCompany" >我屏蔽的公司</a>
 		</li>
-		<li><a href="#panel-myFollowCompany" data-toggle="tab">我关注的公司</a>
+		<li><a href="javascript:ajaxPage('personal/follow/personal_company_followlist')" >我关注的公司</a>
 		</li>
-		<li><a href="#panel-followMeCompany" data-toggle="tab">关注我的公司</a>
+		<li><a href="#panel-followMeCompany" >关注我的公司</a>
 		</li>
-		<li><a href="#panel-myDeliveryResume" data-toggle="tab">我投过的简历</a>
+		<li><a href="javascript:ajaxPage('personal/resume/personal_index_mySendResume')" >我投过的简历</a>
 		</li>
-		<li><a href="#panel-myReceivedInvitation" data-toggle="tab">我收到的邀请</a>
+		<li><a href="javascript:ajaxPage('personal/resume/personal_index_myReceiveOffer')" >我收到的邀请</a>
 		</li>
-		<li><a href="#panel-myReleaseChips" data-toggle="tab">我发布的众筹</a>
+		<li><a href="#panel-myReleaseChips" >我发布的众筹</a>
 		</li>
-		<li><a href="#panel-myParticipateChips" data-toggle="tab">我参加的众筹</a>
+		<li><a href="#panel-myParticipateChips" >我参加的众筹</a>
 		</li>
-		<li><a href="#panel-myReleaseStartup" data-toggle="tab">我发布的创业</a>
+		<li><a href="#panel-myReleaseStartup" >我发布的创业</a>
 		</li>
-		<li><a href="#panel-myParticipateStartup" data-toggle="tab">我参加的创业</a>
+		<li><a href="#panel-myParticipateStartup" >我参加的创业</a>
 		</li>
-		<li><a href="#panel-myReleaseArticle" data-toggle="tab">我发表的文章</a>
+		<li><a href="javascript:ajaxPage('personal/user/personal_index_myArticle')" >我发表的文章</a></li>
 		</li>
-		<li><a href="#panel-myEvaluate" data-toggle="tab">我的评价</a></li>
+		<li><a href="#panel-myEvaluate" >我的评价</a></li>
 	</ul>
 </div>
 

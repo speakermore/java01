@@ -13,13 +13,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteUserFollow">
 		delete from follow where id=#{id}
 	</delete>
-	<!--查看关注 -->
+	<!--查看关注（用户） -->
 	<select id="selectUserFollow" parameterType="Integer"
 		resultType="Follow">
 		select
 		f.*,r.resumeJor,r.resumeWorks,r.resumeEducation,u.userRealName,u.userGender,u.userBirthday
-		from follow f,resume r,user u where f.followId=#{followId} and
-		u.id=r.userId and u.id=f.byFollowId
+		from follow f,resume r,user u
+		where f.followId=#{followId}
+		and u.id=r.userId
+		and u.id=f.byFollowId
+		and f.followStartType=2
+	</select>
+	<!-- 查看关注（企业） -->
+	<select id="selectCompanyFollow" parameterType="Integer"
+		resultType="Follow">
+		select * from follow f,company c,companyintroduction ci
+		where f.followId=#{userId}
+		and f.byFollowId=c.id
+		and c.id=ci.companyId
+		and f.followStartType=1
 	</select>
 	<!--查看关注的人数 -->
 	<select id="selectUserFollowCount" parameterType="Integer"
@@ -33,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 判断是否关注 -->
 	<select id="findIsFollowByFollowIdAndFollowId" resultType="Follow">
-		select * from follow where followId=#{followId} and byFollowId=#{byFollowId}
+		select * from follow where followId=#{followId} and
+		byFollowId=#{byFollowId}
 	</select>
 </mapper>

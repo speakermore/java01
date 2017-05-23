@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+#cke_articleContent{
+width: 100%;
+}
+#cke_1_contents{
+width: 100%;
+}
+</style>
 <article class="col-md-12 work-together-dev-height-2000  work-together-shadow work-together-deep">
 	<!--我的信息-->
 	<section class="panel">

@@ -3,7 +3,7 @@ package ynjh.company.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Offer implements Serializable{
+public class Offer extends Company implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer companyId;

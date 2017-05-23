@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--左侧状态栏位-->
 <article
 	class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
@@ -11,29 +12,50 @@
 			enctype="multipart/form-data">
 			<input type="hidden" name="id" value="${resume.id }" />
 			<div class="form-group">
-				<label for="resumeTitle" class="col-md-3 control-label">简历标题：</label>
+				<label for="resumeTitle" class="col-md-3 control-label">简历标题</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeTitle }" class="form-control"
 						name="resumeTitle" id="resumeTitle" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeName" class="col-md-3 control-label">姓名：</label>
+				<label for="resumeName" class="col-md-3 control-label">姓名</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeName }" class="form-control"
 						name="resumeName" id="resumeName" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeHeadImg" class="col-md-3 control-label">头像：</label>
-				<!-- userHeadImgPath -->
+				<label for="resumeNowResidence" class="col-md-3 control-label">目前居住地</label>
 				<div class="col-md-8">
-					<input class="form-control file" name="resumeFile" type="file"
-						id="resumeHeadImg" multiple data-min-file-count="1" />
+					<input value="${resume.resumeNowResidence }" class="form-control"
+						name="resumeNowResidence" id="resumeNowResidence" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeGender" class="col-md-3 control-label">性别：</label>
+				<label for="resumeEmail" class="col-md-3 control-label">邮箱</label>
+				<div class="col-md-8">
+					<input value="${resume.resumeEmail }" class="form-control"
+						name="resumeEmail" id="resumeEmail" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="resumeHouseAddress" class="col-md-3 control-label">家庭地址</label>
+				<div class="col-md-8">
+					<input value="${resume.resumeHouseAddress }" class="form-control"
+						name="resumeHouseAddress" id="resumeHouseAddress" />
+				</div>
+			</div>
+				<div class="form-group">
+					<label for="resumeHeadImg" class="col-md-3 control-label">头像</label>
+					<!-- userHeadImgPath -->
+					<div class="col-md-8">
+						<input class="form-control file" name="resumeFile" type="file"
+							id="resumeHeadImg" multiple data-min-file-count="1" />
+					</div>
+				</div>
+			<div class="form-group">
+				<label for="resumeGender" class="col-md-3 control-label">性别</label>
 				<div class="col-md-8">
 					<c:if test="${resume.resumeGender==1 }">
 						<div class="col-md-6">
@@ -54,50 +76,55 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeWorks" class="col-md-3 control-label">工作年限：</label>
+				<label for="resumeWorks" class="col-md-3 control-label">开始工作时间</label>
 				<div class="col-md-8">
-					<input value="${resume.resumeWorks }" class="form-control"
-						name="resumeWorks" id="resumeWorks" />
+					<input
+						value="<fmt:formatDate
+						value="${resume.resumeWorks }" pattern="yyyy-MM-dd" />"
+						placeholder="请选择日期" class="form-control" name="resumeWorks"
+						id="resumeWorks" readonly />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeWages" class="col-md-3 control-label">期望薪资：</label>
+				<label for="resumeWages" class="col-md-3 control-label">期望薪资</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeWages }" class="form-control"
 						name="resumeWages" id="resumeWages" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeJor" class="col-md-3 control-label">意向：</label>
+				<label for="resumeJor" class="col-md-3 control-label">岗位意向</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeJor }" class="form-control"
 						name="resumeJor" id="resumeJor" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeNation" class="col-md-3 control-label">民族：</label>
+				<label for="resumeNation" class="col-md-3 control-label">民族</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeNation }" class="form-control"
 						name="resumeNation" id="resumeNation" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumePlace" class="col-md-3 control-label">籍贯：</label>
+				<label for="resumePlace" class="col-md-3 control-label">籍贯</label>
 				<div class="col-md-8">
 					<input value="${resume.resumePlace }" class="form-control"
 						name="resumePlace" id="resumePlace" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeBirthday" class="col-md-3 control-label">出生日期：</label>
+				<label for="resumeBirthday" class="col-md-3 control-label">出生日期</label>
 				<div class="col-md-8">
-					<input value="${resume.resumeBirthday }"
+					<input
+						value="<fmt:formatDate
+						value="${resume.resumeBirthday }" pattern="yyyy-MM-dd" />"
 						class="form-control form_datetime" placeholder="请选择日期"
 						name="resumeBirthday" id="resumeBirthday" readonly />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeMarriage" class="col-md-3 control-label">婚配：</label>
+				<label for="resumeMarriage" class="col-md-3 control-label">婚姻状况</label>
 				<div class="col-md-8">
 					<c:if test="${resume.resumeMarriage==1 }">
 						<div class="col-md-6">
@@ -118,14 +145,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeEducation" class="col-md-3 control-label">学历：</label>
+				<label for="resumeEducation" class="col-md-3 control-label">学历</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeEducation }" class="form-control"
 						name="resumeEducation" id="resumeEducation" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeGraduationSchool" class="col-md-3 control-label">毕业学校：</label>
+				<label for="resumeGraduationSchool" class="col-md-3 control-label">毕业学校</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeGraduationSchool }"
 						class="form-control" name="resumeGraduationSchool"
@@ -133,65 +160,59 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeGraduationTime" class="col-md-3 control-label">毕业日期：</label>
+				<label for="resumeGraduationTime" class="col-md-3 control-label">毕业日期</label>
 				<div class="col-md-8">
-					<input value="${resume.resumeGraduationTime }"
+					<input
+						value="<fmt:formatDate
+						value="${resume.resumeGraduationTime}" pattern="yyyy-MM-dd" />"
 						class="form-control form_datetime" placeholder="请选择日期"
 						name="resumeGraduationTime" id="resumeGraduationTime" readonly />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeMajor" class="col-md-3 control-label">专业：</label>
+				<label for="resumeMajor" class="col-md-3 control-label">专业</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeMajor }" class="form-control"
 						name="resumeMajor" id="resumeMajor" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumePhone" class="col-md-3 control-label">电话号码：</label>
+				<label for="resumePhone" class="col-md-3 control-label">电话号码</label>
 				<div class="col-md-8">
 					<input value="${resume.resumePhone }" class="form-control"
 						name="resumePhone" id="resumePhone" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeQQ" class="col-md-3 control-label">QQ或微信：</label>
+				<label for="resumeQQ" class="col-md-3 control-label">QQ或微信</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeQQ }" class="form-control"
 						name="resumeQQ" id="resumeQQ" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeHeight" class="col-md-3 control-label">身高（厘米）：</label>
+				<label for="resumeHeight" class="col-md-3 control-label">身高（厘米）</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeHeight }" class="form-control"
 						name="resumeHeight" id="resumeHeight" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeWeight" class="col-md-3 control-label">体重（斤）：</label>
+				<label for="resumeWeight" class="col-md-3 control-label">体重（斤）</label>
 				<div class="col-md-8">
 					<input value="${resume.resumeWeight }" class="form-control"
 						name="resumeWeight" id="resumeWeight" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumePersonality" class="col-sm-3 control-label">特点描述：</label>
+				<label for="resumeSelfEvaluation" class="col-sm-3 control-label">自我评价</label>
 				<div class="col-sm-8">
-					<textarea value="${resume.resumePersonality }" class="form-control"
-						name="resumePersonality" id="resumePersonality"></textarea>
+					<textarea class="form-control" name="resumeSelfEvaluation"
+						id="resumeSelfEvaluation">${resume.resumeSelfEvaluation }</textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeSelfEvaluation" class="col-sm-3 control-label">自我评价：</label>
-				<div class="col-sm-8">
-					<textarea value="${resume.resumeSelfEvaluation }"
-						class="form-control" name="resumeSelfEvaluation"
-						id="resumeSelfEvaluation"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="resumeEnglishGrade" class="col-md-3 control-label">英语等级：</label>
+				<label for="resumeEnglishGrade" class="col-md-3 control-label">英语等级</label>
 				<div class="col-md-8">
 					<select name="resumeEnglishGrade" id="resumeEnglishGrade"
 						class="form-control">
@@ -207,7 +228,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeFLType" class="col-md-3 control-label">外语类型：</label>
+				<label for="resumeFLType" class="col-md-3 control-label">外语类型</label>
 				<div class="col-md-8">
 					<select name="resumeFLType" id="resumeFLType" class="form-control">
 						<option value=" " selected="selected">--未选择--</option>
@@ -222,7 +243,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeFLAbility" class="col-md-3 control-label">外语水平：</label>
+				<label for="resumeFLAbility" class="col-md-3 control-label">外语水平</label>
 				<div class="col-md-8">
 					<select name="resumeFLAbility" id="resumeFLAbility"
 						class="form-control">
@@ -235,7 +256,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeComputerAbility" class="col-md-3 control-label">计算机水平：</label>
+				<label for="resumeComputerAbility" class="col-md-3 control-label">计算机水平</label>
 				<div class="col-md-8">
 					<select name="resumeComputerAbility" id="resumeComputerAbility"
 						class="form-control">
@@ -265,6 +286,15 @@
 	</section>
 </article>
 <script type="text/javascript">
+	$("#resumeHeadImg")
+			.fileinput(
+					{
+						'language' : 'zh',
+						'uploadAsync' : false,
+						'showUpload' : false,
+						'initialPreview' : [ '<img src="img/upload/personal/${user.userLoginId}/${resume.resumeHeadImg}"/>' ],
+						'previewFileType' : 'any'
+					});
 	$(function() {
 		var resumeFLAbility = $("#HresumeFLAbility").val();
 		var resumeFLType = $("#HresumeFLType").val();
@@ -276,12 +306,14 @@
 		$("#resumeEnglishGrade").val(resumeEnglishGrade);
 		$("#resumeComputerAbility").val(resumeComputerAbility);
 
-		$("#resumeHeadImg").fileinput({
-			'language' : 'zh',
-			'showUpload' : false,
-			'previewFileType' : 'any'
+		$("#resumeWorks").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
 		});
-
 		$("#resumeBirthday").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',

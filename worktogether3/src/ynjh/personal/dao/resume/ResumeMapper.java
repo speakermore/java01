@@ -5,10 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.company.entity.CompanyResume;
+import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
 import ynjh.personal.entity.ForeignKeyWork;
+import ynjh.personal.entity.MySendResume;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.Work;
@@ -162,4 +164,13 @@ public interface ResumeMapper {
 	 * 投递简历
 	 */
 	public Integer sendResumeToCompany(CompanyResume companyresume);
+	
+	/**
+	 * 我发送过的简历
+	 */
+	public List<MySendResume> findMySendResume(Integer userId);
+	/**
+	 * 我收到的面试邀请
+	 */
+	public List<Offer> findMyReceiveOffer(Integer userId);
 }

@@ -1,32 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<!--发表状态小节-->
-	<section class="panel">
-		<form role="form" class="form-horizontal"
-			 action="personal/user/updateUser"
-			method="post" id="updatePasswordForm">
-			<div class="form-group">
-				<label for="usersPassword" class="col-md-3 control-label">密码：</label>
-				<div class="col-md-8">
-					<input type="password" class="form-control" id="usersPassword"
-						name="userPassword" placeholder="密码" />
-				</div>
+<!--发表状态小节-->
+<section class="panel">
+	<form role="form" class="form-horizontal"
+		action="personal/user/updateUser" method="post"
+		id="updatePasswordForm">
+		<div class="form-group">
+			<label for="usersPassword" class="col-md-3 control-label">密码：</label>
+			<div class="col-md-8">
+				<input type="password" class="form-control" id="usersPassword"
+					name="userPassword" placeholder="密码" />
 			</div>
-			<div class="form-group">
-				<label for="confirmPassword" class="col-md-3 control-label">确认密码：</label>
-				<div class="col-md-8">
-					<input type="password" class="form-control" id="confirmPassword"
-						name="confirmPassword" placeholder="确认密码" />
-				</div>
+		</div>
+		<div class="form-group">
+			<label for="confirmPassword" class="col-md-3 control-label">确认密码：</label>
+			<div class="col-md-8">
+				<input type="password" class="form-control" id="confirmPassword"
+					name="confirmPassword" placeholder="确认密码" />
 			</div>
-			<div class="form-group">
-				<div class="col-md-offset-9">
-					<input class="btn btn-success" type="submit" value="完成" /> <input
-						class="btn btn-success" type="reset" value="重置" />
-				</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-9">
+				<input class="btn btn-success" type="submit" value="完成" /> <input
+					class="btn btn-success" type="reset" value="重置" />
 			</div>
-		</form>
-	</section>
+		</div>
+	</form>
+</section>
 <script type="text/javascript">
 	$("#updatePasswordForm").bootstrapValidator({
 		message : '这个值不能通过验证！！',

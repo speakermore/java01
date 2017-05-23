@@ -29,7 +29,6 @@
 	<!--wt-姓名首字母-相关文字-->
 	<div id="wt-hby-login">
 		<%@include file="/WEB-INF/pages/nav.jsp"%>
-
 		<div class="bs-docs-header wt-hby-login-center" id="content"
 			tabindex="-1">
 			<div class="container bs-docs-container">

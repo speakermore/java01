@@ -27,6 +27,7 @@ import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
 import ynjh.personal.entity.ForeignKeyWork;
 import ynjh.personal.entity.Mood;
+import ynjh.personal.entity.MySendResume;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
@@ -81,10 +82,26 @@ public class CommonController {
 		session.setAttribute("resumes", resumes);
 		session.setAttribute("maxResumePage", maxResumePage);
 
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// 我投递过的简历
+		List<MySendResume> mySendResumes = rService.findMySendResume(userId);
+		if (mySendResumes.size() > 0) {
+			session.setAttribute("mySendResumes", mySendResumes);
+		} else {
+			session.setAttribute("mySendResumes", null);
+		}
+
+		// 我收到的面试邀请
+		List<Offer> offers = rService.findMyReceiveOffer(userId);
+		if (offers.size() > 0) {
+			session.setAttribute("offers", offers);
+		} else {
+			session.setAttribute("offers", null);
+		}
+
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
-		if (resume!=null) {
+		if (resume != null) {
 			try {
 				resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
 				resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
@@ -94,31 +111,34 @@ public class CommonController {
 			session.setAttribute("resume", resume);
 			// 获取教育
 			List<Education> edus = rService.findEducation(resume.getId());
-			if (edus.size()>0) {
+			if (edus.size() > 0) {
 				session.setAttribute("edus", edus);
-			}else {
+			} else {
 				session.setAttribute("edus", null);
 			}
 			// 获取工作
 			List<Work> works = rService.findWork(resume.getId());
-			if (works.size()>0) {
+			if (works.size() > 0) {
 				session.setAttribute("works", works);
-			}else {
+			} else {
 				session.setAttribute("works", null);
 			}
 			// 获取项目
 			List<Project> projs = rService.findProject(resume.getId());
-			if (projs.size()>0) {
+			if (projs.size() > 0) {
 				session.setAttribute("projs", projs);
-			}else {
+			} else {
 				session.setAttribute("projs", null);
 			}
 		}
-		
-		//最新发布文章
-		Article articleNewly =aService.findNewlyArticleByUserId(userId);
+		// 获取最新面试消息
+		Offer offer = nService.findNewlyFaceByUserId(userId);
+		session.setAttribute("offer", offer);
+
+		// 最新发布文章
+		Article articleNewly = aService.findNewlyArticleByUserId(userId);
 		session.setAttribute("articleNewly", articleNewly);
-		
+
 		// 最近发布的简历
 		Resume resumeNewly = rService.findNewlyResumeByUserId(userId);
 		session.setAttribute("resumeNewly", resumeNewly);
@@ -131,21 +151,21 @@ public class CommonController {
 		// 获取评论内容
 		Mood mood = mService.selectMoodById(userId);
 		session.setAttribute("mood", mood);
-		// 获取最新面试消息
-		Offer offer = nService.findNewlyFaceByUserId(userId);
-		session.setAttribute("offer", offer);
-		
-		
+
 		// 查看关注的人数
 		int follows = fService.selectUserFollowCount(userId);
 		session.setAttribute("follows", follows);
 		// 查看被关注的人数
 		int byFollows = fService.selectUserByFollowCount(userId);
 		session.setAttribute("byFollows", byFollows);
-		
+
 		// 获取已经关注的对象
-		List<Follow> OldFollows = fService.selectUserFollow(userId);
-		session.setAttribute("OldFollows", OldFollows);
+		List<Follow> UserFollows = fService.selectUserFollow(userId);
+		session.setAttribute("UserFollows", UserFollows);
+		// 获取已经关注的企业
+		List<Follow> CompanyFollows = fService.selectCompanyFollow(userId);
+		session.setAttribute("CompanyFollows", CompanyFollows);
+
 		// 获取关注者的最新文章消息
 		List<ArticleByFollow> articleByFollows = nService.findNewlyArticleByFollow(userId);
 		session.setAttribute("articleByFollows", articleByFollows);
@@ -162,15 +182,16 @@ public class CommonController {
 	 * @author 刘志浩 ModelAndView
 	 */
 	@RequestMapping(value = "gotoCompanyById", method = RequestMethod.GET)
-	public ModelAndView gotoCompanyById(Integer id,HttpSession session) {
+	public ModelAndView gotoCompanyById(Integer id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Company company = companyService.findCompany(id);
-		CompanyIntroduction companyInt=companyIntService.findById(company.getId());
+		CompanyIntroduction companyInt = companyIntService.findById(company.getId());
 		session.setAttribute("company", company);
 		session.setAttribute("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");
 		return mv;
 	}
+
 	/***
 	 * 投递简历
 	 * 
@@ -179,7 +200,8 @@ public class CommonController {
 	 * @author 刘志浩 ModelAndView
 	 */
 	@RequestMapping(value = "sendResumeToCompany", method = RequestMethod.GET)
-	public ModelAndView sendResumeToCompany(Integer companyId,Integer resumeId,Integer companyResumeId,Integer companyrecruitId) {
+	public ModelAndView sendResumeToCompany(Integer companyId, Integer resumeId, Integer companyResumeId,
+			Integer companyrecruitId) {
 		ModelAndView mv = new ModelAndView("personal/info");
 		CompanyResume companyresume = new CompanyResume();
 		companyresume.setCompanyId(companyId);
@@ -187,11 +209,11 @@ public class CommonController {
 		companyresume.setCompanyResumeId(companyResumeId);
 		companyresume.setCompanyrecruitId(companyrecruitId);
 		companyresume.setCmprTime(new Timestamp(System.currentTimeMillis()));
-		int result=rService.sendResumeToCompany(companyresume);
-		if (result>0) {
+		int result = rService.sendResumeToCompany(companyresume);
+		if (result > 0) {
 			mv.addObject("operatorInfo", "投递简历成功");
 			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=" + companyresume.getCompanyId());
-		}else {
+		} else {
 			mv.addObject("operatorInfo", "投递简历失败");
 			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=" + companyresume.getCompanyId());
 		}
@@ -209,9 +231,9 @@ public class CommonController {
 	 */
 	@RequestMapping("/deleteRecord")
 	@ResponseBody
-	public ModelAndView deleteRecord(Integer toPage,String page,HttpSession session) {
+	public ModelAndView deleteRecord(Integer toPage, String page, HttpSession session) {
 		ModelAndView mv = new ModelAndView(page);
-		User oldUser=(User) session.getAttribute("user");
+		User oldUser = (User) session.getAttribute("user");
 		mv.addObject("curPage", toPage);
 		/*
 		 * // 文章已删除 List<Article> articleDels =

@@ -20,9 +20,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findByUserIdAndUserPassword"  resultType="User">
         select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword}
     </select>
-    <!-- 修改用户信息：头像、密码、性别、email、出生日期、昵称 -->
+    <!-- 修改用户信息：头像、性别、email、出生日期、昵称 -->
 	<update id="updateUser" parameterType="User">
-	    update `user` set userHeadImgPath=#{userHeadImgPath},userPassword=#{userPassword},userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where id=#{id}
+	    update `user` set userHeadImgPath=#{userHeadImgPath},userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where id=#{id}
 	</update>
 	<!-- 修改用户密码 -->
 	<update id="updateUserById" parameterType="User">

@@ -36,7 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	<!-- 查询简历(一人只有一份简历时使用) -->
-	<select id="findResumeByOneUserId" resultType="Resume" parameterType="Integer">
+	<select id="findResumeByOneUserId" resultType="Resume"
+		parameterType="Integer">
 		select * from resume where userId=#{userId}
 	</select>
 	<!-- 查询简历(详细) -->
@@ -44,16 +45,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from resume where id=#{id}
 	</select>
 	<!-- 查询最新简历(详细) -->
-	<select id="findNewlyResumeByUserId" resultType="Resume" parameterType="Integer">
-		select * from resume where userId=#{userId} order by resumeCreateDate desc limit 1
+	<select id="findNewlyResumeByUserId" resultType="Resume"
+		parameterType="Integer">
+		select * from resume where userId=#{userId} order by
+		resumeCreateDate desc limit 1
 	</select>
 	<!-- 删除简历 -->
 	<update id="deleteResumeById" parameterType="Integer">
-		update resume set resumeStatusThree=4 where id=#{id}
+		update resume set
+		resumeStatusThree=4 where id=#{id}
 	</update>
 	<!-- 恢复简历 -->
 	<update id="renewResumeById" parameterType="Integer">
-		update resume set resumeStatusThree=1 where id=#{id}
+		update resume set
+		resumeStatusThree=1 where id=#{id}
 	</update>
 
 	<!-- 开始 -->
@@ -64,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		value(#{userId},#{resumeId},#{educationBeginTime},#{educationEndTime},#{educationSchool},#{educationContent},#{resumeType})
 	</insert>
 	<!-- 工作记录 -->
-	<insert id="addWork" parameterType="Work" >
+	<insert id="addWork" parameterType="Work">
 		insert into
 		work(userId,resumeId,workBeginTime,workEndTime,workFirmName,workUnit,workDescription,resumeType)
 		value(#{userId},#{resumeId},#{workBeginTime},#{workEndTime},#{workFirmName},#{workUnit},#{workDescription},#{resumeType})
@@ -95,11 +100,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 查看教育经历 -->
 	<select id="findEducation" parameterType="Integer" resultType="Education">
-		select * from education where resumeId=#{resumeId} and not resumeType=4
+		select * from education where resumeId=#{resumeId} and not
+		resumeType=4
 	</select>
 	<!-- 查看工作经历 -->
 	<select id="findWork" parameterType="Integer" resultType="Work">
-		select * from work where resumeId=#{resumeId} and not resumeType=4
+		select
+		* from work where resumeId=#{resumeId} and not resumeType=4
 	</select>
 	<!-- 查看项目经历 -->
 	<select id="findProject" parameterType="Integer" resultType="Project">
@@ -108,69 +115,97 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 删除 -->
 	<update id="deleteEducation" parameterType="Integer">
-		update education set resumeType=4 where id=#{id}
+		update education set
+		resumeType=4 where id=#{id}
 	</update>
 	<update id="deleteWork" parameterType="Integer">
-		update work set resumeType=4 where id=#{id}
+		update work set
+		resumeType=4 where id=#{id}
 	</update>
 	<update id="deleteProject" parameterType="Integer">
-		update project set resumeType=4 where id=#{id}
+		update project set
+		resumeType=4 where id=#{id}
 	</update>
 	<!-- 删除结束 -->
 	<!-- 查看已删除记录 -->
 	<select id="findEducationByDelete" resultType="ForeignKeyEducation">
-	select r.resumeTitle,e.* from resume r,education e where e.resumeId=r.id  and resumeType=4 and e.userId=#{userId}
-	<if test="page!=null">
+		select r.resumeTitle,e.* from resume r,education e where
+		e.resumeId=r.id and resumeType=4 and e.userId=#{userId}
+		<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
 	<select id="findWorkByDelete" resultType="ForeignKeyWork">
-	select r.resumeTitle,w.* from resume r,work w where w.resumeId=r.id  and resumeType=4 and w.userId=#{userId}
-	<if test="page!=null">
+		select r.resumeTitle,w.* from resume r,work w where w.resumeId=r.id
+		and resumeType=4 and w.userId=#{userId}
+		<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
 	<select id="findProjectByDelete" resultType="ForeignKeyProject">
-	select r.resumeTitle,p.* from resume r,project p where p.resumeId=r.id  and resumeType=4 and p.userId=#{userId}
-	<if test="page!=null">
+		select r.resumeTitle,p.* from resume r,project p where p.resumeId=r.id
+		and resumeType=4 and p.userId=#{userId}
+		<if test="page!=null">
 			limit #{page},5
 		</if>
 	</select>
 	<!-- 已删除记录结束 -->
 	<!-- 恢复被删记录 -->
 	<update id="renewEducationByDelete" parameterType="Integer">
-		update education set resumeType=1 where id=#{id}
+		update
+		education set resumeType=1 where id=#{id}
 	</update>
 	<update id="renewWorkByDelete" parameterType="Integer">
-		update work set resumeType=1 where id=#{id}
+		update work set
+		resumeType=1 where id=#{id}
 	</update>
 	<update id="renewProjectByDelete" parameterType="Integer">
-		update project set resumeType=1 where id=#{id}
+		update project
+		set resumeType=1 where id=#{id}
 	</update>
 	<!-- 恢复被删记录结束 -->
 
 	<!-- 分页 -->
 	<!-- 查询此ID的简历数量 -->
 	<select id="getMaxResumeById" resultType="Integer">
-		select count(*) from resume where userId=#{userId}
+		select count(*) from
+		resume where userId=#{userId}
 	</select>
 
 	<select id="getMaxEducationDeleteById" resultType="Integer">
-		select count(*) from education where userId=#{userId} and resumeType=4
+		select
+		count(*) from education where userId=#{userId} and resumeType=4
 	</select>
 	<select id="getMaxWorkDeleteById" resultType="Integer">
-		select count(*) from work where userId=#{userId} and resumeType=4
+		select count(*)
+		from work where userId=#{userId} and resumeType=4
 	</select>
 	<select id="getMaxProjectDeleteById" resultType="Integer">
-		select count(*) from project where userId=#{userId} and resumeType=4
+		select count(*)
+		from project where userId=#{userId} and resumeType=4
 	</select>
 	<!-- 分页结束 -->
 	<!-- 发送简历 -->
 	<insert id="sendResumeToCompany">
-		insert into companyresume(companyId,resumeId,companyResumeId,companyrecruitId,cmprTime) value(#{companyId},#{resumeId},#{companyResumeId},#{companyrecruitId},#{cmprTime})
+		insert into
+		companyresume(companyId,resumeId,companyResumeId,companyrecruitId,cmprTime)
+		value(#{companyId},#{resumeId},#{companyResumeId},#{companyrecruitId},#{cmprTime})
 	</insert>
 	<!-- 更换图片 -->
 	<update id="changeResumeHeadImg">
-		update resume set resumeHeadImg=#{resumeHeadImg} where id=#{resumeId}
+		update resume set resumeHeadImg=#{resumeHeadImg}
+		where id=#{resumeId}
 	</update>
+	<!-- 我发过的简历 -->
+	<select id="findMySendResume" resultType="MySendResume" parameterType="Integer">
+		select * from companyresume cre,company
+		c,companyrecruit crt
+		where cre.companyId=c.id
+		and cre.companyrecruitId=crt.id
+		and cre.companyResumeId=#{userId}
+	</select>
+	<!-- 我收到的面试邀请 -->
+	<select id="findMyReceiveOffer" resultType="Offer" parameterType="Integer">
+		select * from offer o,company c where o.companyId=c.id and o.userId=#{userId}
+	</select>
 </mapper>

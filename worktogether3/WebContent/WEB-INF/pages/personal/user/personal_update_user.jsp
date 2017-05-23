@@ -3,80 +3,80 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!--左侧状态栏位-->
-	<div class="row">
-		<!--发表状态小节-->
-		<section class="panel">
-			<form role="form" class="form-horizontal"
-				enctype="multipart/form-data" action="personal/user/updateUser"
-				method="post" id="updateUserForm">
-				<input type="hidden" id="loginId" value="${user.userLoginId }" /> <input
-					type="hidden" id="headImgPath" value="${user.userHeadImgPath}" /><br />
-				<div class="form-group">
-					<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
-					<!-- userHeadImgPath -->
-					<div class="col-md-8">
-						<input class="form-control file" name="fileHeadImg" type="file"
-							id="userHeadImgPath" multiple data-min-file-count="1" />
-					</div>
+<div class="row">
+	<!--发表状态小节-->
+	<section class="panel">
+		<form role="form" class="form-horizontal"
+			enctype="multipart/form-data" action="personal/user/updateUser"
+			method="post" id="updateUserForm">
+			<input type="hidden" id="loginId" value="${user.userLoginId }" /> <input
+				type="hidden" id="headImgPath" value="${user.userHeadImgPath}" /><br />
+			<div class="form-group">
+				<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
+				<!-- userHeadImgPath -->
+				<div class="col-md-8">
+					<input class="form-control file" name="fileHeadImg" type="file"
+						id="userHeadImgPath" multiple data-min-file-count="1" />
 				</div>
-				<div class="form-group">
-					<label for="userName" class="col-md-3 control-label">昵称：</label>
-					<div class="col-md-8">
-						<input class="form-control" name="userName" id="userName"
-							value="${user.userName }" />
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="userName" class="col-md-3 control-label">昵称：</label>
+				<div class="col-md-8">
+					<input class="form-control" name="userName" id="userName"
+						value="${user.userName }" />
 				</div>
-				<div class="form-group">
-					<label for="time" class="col-md-3 control-label">出生日期：</label>
-					<div class="col-md-8">
-						<input class="form_datetime form-control" placeholder="请选择日期"
-							name="userBirthday" id="time" readonly type="text"
-							value="<fmt:formatDate
+			</div>
+			<div class="form-group">
+				<label for="time" class="col-md-3 control-label">出生日期：</label>
+				<div class="col-md-8">
+					<input class="form_datetime form-control" placeholder="请选择日期"
+						name="userBirthday" id="time" readonly type="text"
+						value="<fmt:formatDate
 						value="${user.userBirthday }" pattern="yyyy-MM-dd" />" />
 
-					</div>
 				</div>
-				<div class="form-group has-success">
-					<label for="userGender" class="col-md-3 control-label">性别：</label>
-					<div class="col-md-8">
-						<c:if test="${user.userGender==1 }">
-							<div class="col-md-6 radio">
-								<input type="radio" name="userGender" id="userGender" value="1"
-									checked="checked"> <label>男</label>
-							</div>
-							<div class="col-md-6 radio">
-								<input type="radio" name="userGender" id="userGender" value="0">
-								<label>女</label>
-							</div>
-						</c:if>
-						<c:if test="${user.userGender==0 }">
-							<div class="col-md-6 radio">
-								<input type="radio" name="userGender" id="userGender" value="1">
-								<label>男</label>
-							</div>
-							<div class="col-md-6 radio">
-								<input type="radio" name="userGender" id="userGender" value="0"
-									checked="checked"> <label>女</label>
-							</div>
-						</c:if>
-					</div>
+			</div>
+			<div class="form-group has-success">
+				<label for="userGender" class="col-md-3 control-label">性别：</label>
+				<div class="col-md-8">
+					<c:if test="${user.userGender==1 }">
+						<div class="col-md-6 radio">
+							<input type="radio" name="userGender" id="userGender" value="1"
+								checked="checked"> <label>男</label>
+						</div>
+						<div class="col-md-6 radio">
+							<input type="radio" name="userGender" id="userGender" value="0">
+							<label>女</label>
+						</div>
+					</c:if>
+					<c:if test="${user.userGender==0 }">
+						<div class="col-md-6 radio">
+							<input type="radio" name="userGender" id="userGender" value="1">
+							<label>男</label>
+						</div>
+						<div class="col-md-6 radio">
+							<input type="radio" name="userGender" id="userGender" value="0"
+								checked="checked"> <label>女</label>
+						</div>
+					</c:if>
 				</div>
-				<div class="form-group">
-					<label for="userEmail" class="col-md-3 control-label">邮箱：</label>
-					<div class="col-md-8">
-						<input class="form-control" name="userEmail" id="userEmail"
-							value="${user.userEmail }" />
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="userEmail" class="col-md-3 control-label">邮箱：</label>
+				<div class="col-md-8">
+					<input class="form-control" name="userEmail" id="userEmail"
+						value="${user.userEmail }" />
 				</div>
-				<div class="form-group">
-					<div class="col-md-offset-9">
-						<input class="btn btn-success" type="submit" value="完成" /> <input
-							class="btn btn-success" type="reset" value="重置" />
-					</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-9">
+					<input class="btn btn-success" type="submit" value="完成" /> <input
+						class="btn btn-success" type="reset" value="重置" />
 				</div>
-			</form>
-		</section>
-	</div>
+			</div>
+		</form>
+	</section>
+</div>
 <script type="text/javascript">
 	var loginId = null;
 	var headImgPath = null;
@@ -91,8 +91,7 @@
 						'language' : 'zh',
 						'uploadAsync' : false,
 						'showUpload' : false,
-						'initialPreview' : [
-								'<img src="img/upload/personal/${user.userLoginId}/${user.userHeadImgPath}"/>' ],
+						'initialPreview' : [ '<img src="img/upload/personal/${user.userLoginId}/${user.userHeadImgPath}"/>' ],
 						'previewFileType' : 'any'
 					});
 	$("#time").datetimepicker({

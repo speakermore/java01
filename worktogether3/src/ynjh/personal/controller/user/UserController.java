@@ -237,7 +237,16 @@ public class UserController {
 	@RequestMapping("/gotoCompany")
 	public String gotoCompany(HttpSession session) {
 		// 查看企业列表
+		User oldUser= (User) session.getAttribute("user");
 		List<CompanyList> companyeList = uService.findCompanyList(1);
+		for (CompanyList companyList : companyeList) {
+			Follow follow =fService.findIsFollowByFollowIdAndFollowId(oldUser.getId(), companyList.getId());
+			if (follow==null) {
+				companyList.setIsFoucse(false);
+			}else {
+				companyList.setIsFoucse(true);
+			}
+		}
 		session.setAttribute("companyeList", companyeList);
 		return "personal/user/personal_companylist";
 	}
@@ -367,6 +376,7 @@ public class UserController {
 		user.setUserHeadImgPath(UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
 				new MultipartFile[] { fileHeadImg }, session)[0]);
+		user.setUserRealName(oldUser.getUserRealName());
 		int result = uService.updateUser(user);
 		if (result > 0) {
 			session.setAttribute("user", user);

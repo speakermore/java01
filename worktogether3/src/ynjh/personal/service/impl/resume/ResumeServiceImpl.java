@@ -7,11 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import ynjh.company.entity.CompanyResume;
+import ynjh.company.entity.Offer;
 import ynjh.personal.dao.resume.ResumeMapper;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
 import ynjh.personal.entity.ForeignKeyProject;
 import ynjh.personal.entity.ForeignKeyWork;
+import ynjh.personal.entity.MySendResume;
 import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.Work;
@@ -450,5 +452,15 @@ public class ResumeServiceImpl implements ResumeService {
 	@Override
 	public Integer sendResumeToCompany(CompanyResume companyresume) {
 		return resumeMapper.sendResumeToCompany(companyresume);
+	}
+
+	@Override
+	public List<MySendResume> findMySendResume(Integer userId) {
+		return resumeMapper.findMySendResume(userId);
+	}
+
+	@Override
+	public List<Offer> findMyReceiveOffer(Integer userId) {
+		return resumeMapper.findMyReceiveOffer(userId);
 	}
 }

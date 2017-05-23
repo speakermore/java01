@@ -2,8 +2,14 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 
+/**
+ * 名企列表
+ * @author dage
+ *
+ */
 public class CompanyList implements Serializable{
 	private Integer id;
+	private String companyLoginId;
 	private String companyName;
 	private String companySimpleName;
 	private String companyLogo;
@@ -21,8 +27,20 @@ public class CompanyList implements Serializable{
 	private String cmpIntRest="";//公司休息制度
 	private String cmpIntInsurance="";//公司保险
 	private String cmpIntWage="";//ְ职业薪资
+	private Boolean isFoucse;//判断是否关注过
 	
-	
+	public String getCompanyLoginId() {
+		return companyLoginId;
+	}
+	public void setCompanyLoginId(String companyLoginId) {
+		this.companyLoginId = companyLoginId;
+	}
+	public Boolean getIsFoucse() {
+		return isFoucse;
+	}
+	public void setIsFoucse(Boolean isFoucse) {
+		this.isFoucse = isFoucse;
+	}
 	public Integer getId() {
 		return id;
 	}
