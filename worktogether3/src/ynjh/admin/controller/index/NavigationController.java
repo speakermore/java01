@@ -19,6 +19,7 @@ import ynjh.personal.entity.Resume;
  *
  */
 @Controller
+
 public class NavigationController {
 	
 	@Resource
@@ -58,7 +59,7 @@ public class NavigationController {
 	/**
 	 * 跳转首页
 	 */
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/index",method=RequestMethod.GET)
 	public ModelAndView index(){
 		ModelAndView mv= new ModelAndView("admin/index");
 		return mv;
