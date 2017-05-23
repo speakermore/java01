@@ -32,8 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update commentArticle set commentArticleStatus=#{commentArticleStatus} where id=#{id}
 	</update>
 	
-	<update id="auditCompany" parameterType="Company"><!-- 企业资质审核 -->
-		update company set cmpIntStatus=#{companyIntStatus} where id=#{id}
+	<update id="auditCompany"><!-- 企业资质审核 -->
+		update company set companyStatus=#{companyIntStatus} where id=#{id}
 	</update>
 	
 	<update id="auditCommentsCompanyAndPeople" parameterType="Discuss"><!-- 个人企业互评论审核 -->
@@ -75,6 +75,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="auditingEducation">
 		update education set resumeType=#{resumeType} where resumeId=#{resumeId}
 	</update>
+	<!-- 审核企业基本信息 -->
+	<update id="auditCompanyNo">
+		update companyintroduction set cmpIntStatus=#{cmpIntStatus} where companyId=#{companyId}
+	</update>
 	
 	<!--查询普通用户状态  -->
 	<select id="findUser" resultType="User">
@@ -112,11 +116,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{page},10
 	</select>
 	
-	<select id="findAuditOffer" resultType="Offer"><!-- 查询offer审核 -->
-		select * from offer where offerStatus=1 order by offerSendTime
-		<!-- <if test="page!=null">
-			limit #{page},10
-		</if> -->
+	<select id="findAuditOffer" resultType="AuditOffer" parameterType="Integer" ><!-- 查询offer审核 -->
+		select o.*,c.*,u.* from offer as o,company as c,user as u where o.companyId=c.id and o.userId=u.id order by o.offerStatus,o.offerSendTime limit #{page},10
 	</select>
 	
 	<select id="findAuditRecruitment" resultType="CompanyRecruit"><!-- 查询招聘信息审核 -->
@@ -237,4 +238,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="auditComIntro" parameterType="Integer" resultType="AuditComIntro">
 		select c.*,i.* from companyintroduction i,company c where c.id=i.companyId and c.id=#{id}
 	</select>
+	<!-- 查找审核公司通过id -->
+	<select id="findAuditComById" parameterType="Integer" resultType="AuditComIntro">
+		select c.*,i.* from companyintroduction i,company c where c.id=#{id} and c.id=i.companyId
+	</select>
+	<!-- 通过公司表id查找公司图片 -->
+	<select id="findCompanyImgById" parameterType="Integer" resultType="CompanyDetailImg">
+		select * from companydetailimg where companyId=#{id}
+	</select>
+	<!-- 查找需要禁用的个人用户 -->
+	<select id="findDisabledUser" resultType="User">
+		select * from user order by userStatus desc
+	</select>
+	<!-- 查找需要禁用的企业用户 -->
+	<select id="findDisabledCompany" resultType="Company">
+		select * from company order by companyStatus desc
+	</select> 
 </mapper>

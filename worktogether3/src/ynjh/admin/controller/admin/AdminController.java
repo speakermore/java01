@@ -30,6 +30,7 @@ import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
+import ynjh.admin.entity.AuditOffer;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
@@ -37,6 +38,7 @@ import ynjh.admin.service.AdminService;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
@@ -376,6 +378,20 @@ public class AdminController {
 	}
 
 	/**
+	 * 访问管理员的信息维护界面
+	 * @author 朱吉
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value="/maIntegerainAdmin",method=RequestMethod.GET)
+	public ModelAndView maIntegerainAdmin(HttpSession session){
+		Admin admin=(Admin)session.getAttribute("admin");
+		ModelAndView mv=new ModelAndView("admin/update/adminUpdate");
+		mv.addObject("admin",admin);
+		return mv;
+	}
+	
+	/**
 	 * 登录的管理员，自我信息修改
 	 * 
 	 * @author
@@ -388,9 +404,10 @@ public class AdminController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/maIntegerainAdmin")
+	@RequestMapping(value="/maIntegerainAdmin",method=RequestMethod.POST)
 	public ModelAndView maIntegerainAdmin(String adminName, String adminTel, String adminEmail, HttpSession session) {
 		Admin admin = (Admin) session.getAttribute("admin");
+		Admin adminFalse=admin;
 		admin.setAdminName(adminName);
 		admin.setAdminEmail(adminEmail);
 		admin.setAdminTel(adminTel);
@@ -399,10 +416,12 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		if (result >= 1) {
 			mv.addObject("operatorInfo", "信息修改成功！");
-			mv.setViewName("info");
+			mv.setViewName("admin/update/adminUpdate");
+			mv.addObject("admin", admin);
 		} else {
 			mv.addObject("operatorInfo", "修改失败！");
-			mv.setViewName("info");
+			mv.setViewName("admin/update/adminUpdate");
+			mv.addObject("admin", adminFalse);
 		}
 		return mv;
 	}
@@ -513,12 +532,12 @@ public class AdminController {
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditOffer")
-	public ModelAndView findAuditOffer(Integer page) {
-		List<Offer> offer = adminService.findAuditOffer(page);
+	@RequestMapping("/findAuditOffer/{page}")
+	public ModelAndView findAuditOffer(@PathVariable Integer page) {
+		List<AuditOffer> auditOffer = adminService.findAuditOffer(page);
 		ModelAndView mv = new ModelAndView("admin/auditOffer");
-		mv.addObject("offer", offer);
-		mv.setViewName("admin/auditOffer");
+		mv.addObject("auditOffer", auditOffer);
+		mv.setViewName("admin/audit/auditOffer");
 		return mv;
 	}
 
@@ -624,18 +643,15 @@ public class AdminController {
 	 *            企业发表待审核状态
 	 * @return
 	 */
-	@RequestMapping("/auditCompany")
-	public ModelAndView auditCompany(Integer id, Integer cmpIntStatus) {
-		int result = adminService.auditCompany(id, cmpIntStatus);
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping("/auditCompany/{id}/{companyStatus}")
+	@ResponseBody
+	public String auditCompany(@PathVariable Integer id,@PathVariable Integer companyStatus) {
+		int result = adminService.auditCompany(id, companyStatus);
 		if (result > 0) {
-			mv.addObject("operatorInfo", "审核成功");
-			mv.setViewName("admin/auditSuccess");
+			return "true";
 		} else {
-			mv.addObject("operatorInfo", "审核失败");
-			mv.setViewName("admin/auditFailure");
+			return "false";
 		}
-		return mv;
 	}
 
 	/**
@@ -693,17 +709,15 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/auditOffer") // 审核offer
-	public ModelAndView auditOffer(Integer id, Integer offerType) {
-		int result = adminService.auditOffer(id, offerType);
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public String auditOffer(Integer[] ids, Integer offerStatus) {
+		
+		int result = adminService.auditOffer(ids, offerStatus);
 		if (result > 0) {
-			mv.addObject("operatorInfo", "审核成功");
-			mv.setViewName("admin/auditSuccess");
+			return "true";
 		} else {
-			mv.addObject("operatorInfo", "审核失败");
-			mv.setViewName("admin/auditSuccess");
+			return "false";
 		}
-		return mv;
 	}
 
 	/**
@@ -1246,14 +1260,35 @@ public class AdminController {
 	@RequestMapping("/findAuditComById/{id}")
 	public ModelAndView findAuditComById(@PathVariable Integer id){
 		AuditComIntro auditComIntro=adminService.findAuditComById(id);
-		ModelAndView mv=new ModelAndView("admin/auditing/auditingCom");
+		ModelAndView mv=new ModelAndView("admin/auditing/auditingCompany");
 		if(auditComIntro!=null){
+			Integer CompanyId=auditComIntro.getId();
+			List<CompanyDetailImg> detailImgs=adminService.findCompanyImgById(CompanyId);
 			mv.addObject("auditComIntro", auditComIntro);
+			mv.addObject("detailImgs", detailImgs);
 		}else{
 			mv.addObject("auditComIntro", null);
 		}
 		return mv;
 	}
+	
+	/**
+	 * 审核企业基本信息
+	 * @author 朱吉
+	 * @param companyId 企业表中的id号
+	 * @param cmpIntStatus 企业基本信息的审核状态
+	 */
+	@RequestMapping("/auditCompanyInfo/{companyid}/{cmpIntStatus}")
+	@ResponseBody
+	public String auditCompanyInfo(@PathVariable Integer companyId,@PathVariable Integer cmpIntStatus){
+		Integer result=adminService.auditCompanyInfo(companyId,cmpIntStatus);
+		if(result!=null&&result>0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+	
 
 	/**
 	 * 获取验证码
