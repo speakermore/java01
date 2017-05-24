@@ -47,12 +47,12 @@
 								<td>${cmpr.cmpRecTitle}</td>
 								<td>${cmpr.cmpRecWage }</td>
 								<td>${cmpr.cmpRecEducation }</td>
-								<td>${cmpr.cmpRecPeople }</td>
+								<td>${cmpr.cmpRecPeople }人</td>
 								<td><fmt:formatDate value="${cmpr.cmpRecTime }"
 										pattern="yyyy年MM月dd日" /></td>
 								<td>${AUDIT_STATUS[cmpr.cmpRecStatus] }</td>
 								<td><a
-								href="company/cmprs/companyResume/findAllResume">人数
+								href="company/cmprs/companyResume/findAllResume">${resumeCount }
 								</a></td>
 								<td><a
 									href="company/cmprs/companyRecruit/findById?id=${cmpr.id}&toPage=company/cmprs/companyRecruit_edit">编辑</a>

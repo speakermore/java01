@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    import="ynjh.common.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -47,8 +47,8 @@
 </head>
 <body>
 <%@include file="/WEB-INF/pages/nav.jsp" %>
-
-
+<c:set var="COMPANY_TYPE" value="${CommonStatus.COMPANY_TYPE }"></c:set>
+<c:set var="COMPANY_SIZE" value="${CommonStatus.COMPANY_SIZE }"></c:set>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-sm-2 column">
@@ -177,11 +177,11 @@
 										</tr>
 										<tr>
 											<td>公司性质：</td>
-											<td>${companyInt.cmpIntQuality}</td>
+											<td>${COMPANY_TYPE[companyInt.cmpIntQuality] }</td>
 										</tr>
 										<tr>
 											<td>公司规模：</td>
-											<td>${companyInt.cmpIntPeopleNum}人</td>
+											<td>${COMPANY_SIZE[companyInt.cmpIntPeopleNum] }</td>
 										</tr>
 										<tr>
 											<td>公司福利：</td>

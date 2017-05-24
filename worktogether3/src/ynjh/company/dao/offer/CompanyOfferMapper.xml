@@ -4,41 +4,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ynjh.company.dao.offer.CompanyOfferMapper">
-
+	<!-- 发送offer -->
 	<insert id="addOffer" parameterType="Offer">
 		insert into offer(userId,companyId,offerJob,offerContent,offerInvitationTime,offerSendTime)
 		values(#{userId},#{companyId},#{offerJob},#{offerContent},#{offerInvitationTime},#{offerSendTime})
-	</insert>	
+	</insert>
+	<!-- 修改offer的状态 -->
 	<update id="updateOfferAction" parameterType="int">
 		update offer set offerAction=#{offerAction} where id=#{id}
 	</update>
 	
-	<select id="findCompanyOffers" parameterType="int" resultType="Offer">
-		select o.*,u.userName from offer as o,user as u
-		where o.companyId=#{companyId} and o.userId=u.id and o.offerStatus=2
-		<!-- 语法：limit 开始记录号（从0开始），每页记录条数 -->
-		<if test="page!=null">limit #{page},5</if>
-	</select>
+	<!-- 计算当前公司发出的所有offer共有几条 -->
 	<select id="getCompanyOffersRecord" parameterType="int" resultType="int">
 		select count(*) from offer where companyId=#{companyId} and offerStatus=2
 	</select>
+	<!-- 查找当前公司发出的所有offer -->
+	<select id="findCompanyOffers" parameterType="int" resultType="Offer">
+		<!-- 查询offer表和user表中的userName字段 -->
+		select o.*,u.userName from offer as o,user as u
+		where o.companyId=#{companyId} and o.userId=u.id and o.offerStatus=2
+		<!-- 根据发送时间倒序排列 -->
+		order by offerSendTime DESC
+		<!-- 从start开始算本页的第一条，每页10条 -->
+		limit #{start},5
+	</select>
+	<!-- 查找当前公司发出的某条offer（根据id查询） -->
 	<select id="findCompanyOffer" parameterType="int" resultType="Offer">
+		<!-- 查询offer表和user表中的userName字段 -->
 		select o.*,u.userName from offer as o,user as u
 		where o.Id=#{Id} and o.userId=u.id
 	</select>
 	
-	<select id="findUserOffers" parameterType="int" resultType="Offer">
-		select o.*,c.companySimpleName from offer as o,company as c
-		where o.userId=#{userId} and o.companyId=c.id and o.offerStatus=2
-		<!-- 语法：limit 开始记录号（从0开始），每页记录条数 -->
-		<if test="page!=null">limit #{page},5</if>
-	</select>
+	<!-- 计算当前用户收到的所有offer共有几条 -->
 	<select id="getUserOffersRecord" parameterType="int" resultType="int">
 		select count(*) from offer where userId=#{userId} and offerStatus=2
 	</select>
+	<!-- 查找当前用户收到的所有offer -->
+	<select id="findUserOffers" parameterType="int" resultType="Offer">
+		<!-- 查询offer表和company表中的companySimpleName字段 -->
+		select o.*,c.companySimpleName from offer as o,company as c
+		where o.userId=#{userId} and o.companyId=c.id and o.offerStatus=2
+		<!-- 根据发送时间倒序排列 -->
+		order by offerSendTime DESC
+		<!-- 从start开始算本页的第一条，每页10条 -->
+		limit #{start},10
+	</select>
+	<!-- 查找当前用户收到的某条offer（根据id查询） -->
 	<select id="findUserOffer" parameterType="int" resultType="Offer">
+		<!-- 查询offer表和company表中的companyName字段 -->
 		select o.*,c.companyName from offer as o,company as c
 		where o.Id=#{Id} and o.companyId=c.id
-	</select>
-	
+	</select>	
 </mapper>

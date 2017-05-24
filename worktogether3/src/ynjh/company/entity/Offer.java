@@ -3,7 +3,8 @@ package ynjh.company.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Offer extends Company implements Serializable{
+// 对应数据库offer表
+public class Offer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer companyId;
@@ -17,9 +18,9 @@ public class Offer extends Company implements Serializable{
 	private String companySimpleName;
 	private String companyName;
 	private String userName;
-	
+
 	public Offer() {
-		
+
 	}
 
 	public Offer(Integer id, Integer companyId, Integer userId,
@@ -28,7 +29,7 @@ public class Offer extends Company implements Serializable{
 			Integer offerStatus, Integer offerAction,
 			String companySimpleName, String companyName,String userName) {
 		super();
-		this.id = id;		
+		this.id = id;
 		this.companyId = companyId;
 		this.userId = userId;
 		this.offerJob = offerJob;
@@ -48,7 +49,7 @@ public class Offer extends Company implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}	
+	}
 
 	public Integer getCompanyId() {
 		return companyId;
@@ -57,7 +58,7 @@ public class Offer extends Company implements Serializable{
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
 	}
-	
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -65,7 +66,7 @@ public class Offer extends Company implements Serializable{
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	
+
 	public String getOfferJob() {
 		return offerJob;
 	}
@@ -121,7 +122,7 @@ public class Offer extends Company implements Serializable{
 	public void setCompanySimpleName(String companySimpleName) {
 		this.companySimpleName = companySimpleName;
 	}
-	
+
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -137,7 +138,7 @@ public class Offer extends Company implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Offer [id=" + id +
@@ -152,6 +153,6 @@ public class Offer extends Company implements Serializable{
 				", companySimpleName=" + companySimpleName +
 				", companyName=" + companyName +
 				", userName=" + userName +
-				"]";				
+				"]";
 	}
 }
