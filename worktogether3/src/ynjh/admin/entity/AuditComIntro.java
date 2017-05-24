@@ -1,7 +1,10 @@
 package ynjh.admin.entity;
 
-public class AuditComIntro {
+import java.io.Serializable;
+
+public class AuditComIntro implements Serializable {
 	private Integer id;
+	private String companyLoginId;
 	private String companyName;
 	private String companySimpleName;
 	private String companyLogo;
@@ -20,6 +23,14 @@ public class AuditComIntro {
 	private String cmpIntInsurance="";//公司保险
 	private String cmpIntWage="";//ְ职业薪资
 	private Integer cmpIntStatus;//公司简介状态
+	
+	
+	public String getCompanyLoginId() {
+		return companyLoginId;
+	}
+	public void setCompanyLoginId(String companyLoginId) {
+		this.companyLoginId = companyLoginId;
+	}
 	public Integer getId() {
 		return id;
 	}

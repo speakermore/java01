@@ -19,11 +19,13 @@ import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
+import ynjh.admin.entity.AuditOffer;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
@@ -248,9 +250,17 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public Integer auditOffer(Integer offerId, Integer offerType) {
-		 
-		return adminMapper.auditOffer(offerId, offerType);
+	public Integer auditOffer(Integer[] ids, Integer offerStatus) {
+		 if(ids!=null){
+			 Integer result=0;
+			 for(int i=0;i<ids.length;i++){
+				 adminMapper.auditOffer(ids[i], offerStatus);
+				 result++;
+			 }
+			 return result;
+		 }else{
+			 return null;
+		 }
 	}
 
 	/**
@@ -260,9 +270,16 @@ public class AdminServiceImpl implements AdminService {
 	 * @return
 	 */
 	@Override
-	public List<Offer> findAuditOffer(Integer page) {
-		 
-		return adminMapper.findAuditOffer(page);
+	public List<AuditOffer> findAuditOffer(Integer page) {
+		if(page!=null){
+			page=(page-1)*10;
+			if(page<0){
+				page=0;
+			}
+			return adminMapper.findAuditOffer(page);
+		}else{
+			return null;
+		}
 	}
 
 	/**
@@ -723,8 +740,11 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public Company findAuditCompanyById(Integer id) {
-		 
-		return adminMapper.findAuditCompanyById(id);
+		if(id!=null&&id>0){ 
+			return adminMapper.findAuditCompanyById(id);
+		}else{
+			return null;
+		}
 	}
 
 	/**
@@ -924,6 +944,54 @@ public class AdminServiceImpl implements AdminService {
 			auditComIntro=adminMapper.findAuditComById(id);
 		}
 		return auditComIntro;
+	}
+
+	/**
+	 * 通过公司表id查找公司图片
+	 * @author 朱吉
+	 * @param Integer id 公司表id
+	 */
+	@Override
+	public List<CompanyDetailImg> findCompanyImgById(Integer id) {
+		if(id!=null&&id>=0){
+			return adminMapper.findCompanyImgById(id);
+		}else{
+			return null;
+		}	
+	}
+
+	/**
+	 * 审核企业基本信息
+	 * @author 朱吉
+	 * @param companyId company表找的id号
+	 * @param cmpIntStatus 企业基本信息审核状态
+	 */
+	@Override
+	public Integer auditCompanyInfo(Integer companyId, Integer cmpIntStatus) {
+		if(companyId!=null&&companyId>=0&&cmpIntStatus!=null&&cmpIntStatus>=0){
+			Integer result=adminMapper.auditCompanyNo(companyId, cmpIntStatus);
+		}else{
+			return null;
+		}
+		return -1;
+	}
+
+	/**
+	 * 查找需要禁用的个人用户、
+	 * @author 朱吉
+	 */
+	@Override
+	public List<User> findDisabledUser() {
+		return adminMapper.findDisabledUser();
+	}
+
+	/**
+	 * 查找需要禁用的企业用户
+	 * @author 朱吉
+	 */
+	@Override
+	public List<Company> findDisabledCompany() {
+		return adminMapper.findDisabledCompany();
 	}
 	
 	

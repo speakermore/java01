@@ -11,10 +11,12 @@ import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
+import ynjh.admin.entity.AuditOffer;
 import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
@@ -56,9 +58,9 @@ public interface AdminService {
 	//查询审核新闻
 	public List<AuditArticle> findAuditComArticle(Integer page);
 	//审核offer
-	public Integer auditOffer(Integer id,Integer offerType);
+	public Integer auditOffer(Integer[] id,Integer offerStatus);
 	//查询审核offer
-	public List<Offer> findAuditOffer(Integer page);
+	public List<AuditOffer> findAuditOffer(Integer page);
 	//审核招聘信息
 	public Integer auditRecruitment(Integer[] recruitmentId,Integer cmpRecStatus);
 	//查询审核招聘信息
@@ -173,6 +175,14 @@ public interface AdminService {
 	public List<AuditComIntro> findCompanyIntro(Integer page);
 	//通过id查找审核企业
 	public AuditComIntro findAuditComById(Integer id);
+	//通过id查找审核企业照片
+	public List<CompanyDetailImg> findCompanyImgById(Integer id);
+	//审核企业基本信息
+	public Integer auditCompanyInfo(Integer companyId, Integer cmpIntStatus);
+	//查找需要禁用的个人用户
+	public List<User> findDisabledUser();
+	//查找需要禁用的企业用户
+	public List<Company> findDisabledCompany();
 
     
 }	

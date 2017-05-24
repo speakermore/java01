@@ -9,6 +9,7 @@ img { border: none; max-width: 100%; }
 a, a:link, a:visited { cursor: pointer; text-decoration: none;}
 a:hover { cursor: pointer; }
 .table { border-collapse: collapse; border-spacing: 0; }
+   
 .clear { clear: both; float: none; overflow: hidden; height: 0; font-size: 0; }
 .clearFix:after { clear: both; display: block; visibility: hidden; height: 0; line-height: 0; content: "."; }
 .clearFix { zoom: 1; }

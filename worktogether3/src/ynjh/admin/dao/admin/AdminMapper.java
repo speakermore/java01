@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.Work;
@@ -15,6 +16,7 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
+import ynjh.admin.entity.AuditOffer;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
@@ -121,11 +123,10 @@ public interface AdminMapper {
 	 * 审核企业资质
 	 * @author 周富强
 	 * @param companyId 企业id
-	 * @param cmpIntegerStatus  企业发表待审核状态
+	 * @param companyStatus  企业基本信息审核状态
 	 * @return
 	 */
-	public Integer auditCompany(@Param("id") Integer id,
-			@Param("companyIntStatus") Integer companyIntStatus);
+	public Integer auditCompany(@Param("id") Integer id,@Param("companyStatus") Integer companyStatus);
 	/**
 	 * 查询审核企业资质
 	 * @author 周富强
@@ -136,12 +137,12 @@ public interface AdminMapper {
 	/**
 	 * 
 	 * @author 周富强
-	 * @param id
-	 * @param companyIntStatus
+	 * @param companyId company表中的id
+	 * @param cmpIntStatus 企业审核状态
 	 * @return
 	 */
-	public Integer auditCompanyNo(@Param("id") Integer id,
-			@Param("companyIntStatus") Integer companyIntStatus);// 审核企业资质
+	public Integer auditCompanyNo(@Param("companyId") Integer id,
+			@Param("cmpIntStatus") Integer cmpIntStatus);// 审核企业资质
 	/**
 	 * 审核个人企业互评
 	 * @author 周富强
@@ -187,7 +188,7 @@ public interface AdminMapper {
 	 * @param page 偏移量
 	 * @return
 	 */	
-	public List<Offer> findAuditOffer(Integer page);// 查询审核offer
+	public List<AuditOffer> findAuditOffer(Integer page);// 查询审核offer
 	/**
 	 * 审核招聘信息
 	 * @author 周富强
@@ -413,8 +414,30 @@ public interface AdminMapper {
 	
 	/**
 	 * 通过id查找审核企业
+	 * @author 朱吉
 	 * @param id
 	 * @return
 	 */
 	public AuditComIntro findAuditComById(Integer id);
+	
+	/**
+	 * 通过公司表id查找公司图片
+	 * @author 朱吉
+	 * @param Integer id 公司表id
+	 */
+	public List<CompanyDetailImg> findCompanyImgById(Integer id);
+	
+	/**
+	 * 查找需要禁用的个人用户
+	 * @author 朱吉
+	 * @return
+	 */
+	public List<User> findDisabledUser();
+	
+	/**
+	 * 查找需要禁用的企业用户
+	 * @author 朱吉
+	 * @return
+	 */
+	public List<Company> findDisabledCompany();
 }
