@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<div><%@include file="../menu.jsp"%></div>
+	<%@include file="../menu.jsp"%>
 	<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS}"></c:set>
 	<div class="col-sm-offset-2">
 		<div class="container">
@@ -60,7 +60,7 @@
 		</div>
 		<!-- end of container -->
 	</div>
-	<div><%@include file="../footer.jsp"%></div>
+	<%@include file="../footer.jsp"%>
 	<script type="text/javascript"
 		src="thirdpart/dist/js/bootstrapValidator.min.js"></script>
 	<script type="text/javascript"
