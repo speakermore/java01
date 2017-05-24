@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ynjh.common.crowdfund.dao.job.JobMapper">
+<!-- 何爽 岗位操作 -->
+<!-- 增加岗位 -->
+<insert id="addJob" parameterType="Job">
+	insert into
+	<if test="jobParentId!=null">
+		job(jobName,jobParentId) values(#{jobName},#{jobParentId})
+	</if>
+	<if test="jobParentId==null">
+		job(jobName) values(#{jobName})
+	</if>
+</insert>
+
+<!-- 修改岗位 -->
+<update id="updateJob" parameterType="Job">
+	update job
+	<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+		<if test="jobName!=null">jobName=#{jobName}</if>
+		<if test="jobParentId!=null">jobParentId=#{jobParentId}</if>
+	</trim>
+</update>
+<!-- 删除岗位-->
+<select id="deleteJob">
+	delete from job where id=#{id}
+</select>
+<!-- 查询一级岗位 -->
+<select id="findJob1" resultType="Job">
+	SELECT * FROM job WHERE jobParentId IS NULL
+</select>
+<!-- 根据一级岗位查二级岗位 -->
+<select id="findJob2" resultType="Job">
+	SELECT j2.id AS id,j1.jobName AS jobType,j2.jobName AS jobName FROM job j1 
+	INNER JOIN job j2 
+		WHERE j2.jobParentId=j1.id AND j1.jobName=#{jobType}
+</select>
+</mapper>

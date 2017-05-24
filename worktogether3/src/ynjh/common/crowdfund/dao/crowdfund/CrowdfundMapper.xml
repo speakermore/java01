@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ynjh.common.crowdfund.dao.crowdfund.CrowdfundMapper">
+	<!--何爽-项目众筹-->
+	
+	<!-- 添加众筹项目信息 -->
+	<insert id="addCrowdfund" parameterType="Crowdfund">
+		insert into crowdfund(crowdfundProjectName,crowdfundProjectSummary,
+			crowdfundProjectMoney,crowdfundProjectCycle,crowdfundProjectMethod,
+			crowdfundProjectStartDate,crowdfundProjectEndDate,publisherId)
+		values(#{crowdfundProjectName},
+			#{crowdfundProjectSummary},#{crowdfundProjectMoney},
+			#{crowdfundProjectCycle},#{crowdfundProjectMethod},
+			#{crowdfundProjectStartDate},#{crowdfundProjectEndDate},#{publisherId})
+	</insert>
+	<!-- 项目更改 -->
+	<update id="updateCrowdfund" parameterType="Crowdfund">
+		update crowdfund 
+		<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+			<if test="crowdfundProjectName!=null">crowdfundProjectName=#{crowdfundProjectName},</if>
+			<if test="crowdfundProjectSummary!=null">crowdfundProjectSummary=#{crowdfundProjectSummary},</if>
+			<if test="crowdfundProjectMoney!=null">crowdfundProjectMoney=#{crowdfundProjectMoney},</if>
+			<if test="crowdfundProjectCycle!=null">crowdfundProjectCycle=#{crowdfundProjectCycle},</if>
+			<if test="crowdfundProjectMethod!=null">crowdfundProjectMethod=#{crowdfundProjectMethod},</if>
+			<if test="crowdfundProjectStartDate!=null">crowdfundProjectStartDate=#{crowdfundProjectStartDate},</if>
+			<if test="crowdfundProjectEndDate!=null">crowdfundProjectEndDate=#{crowdfundProjectEndDate},</if>
+			<if test="crowdfundProjectCheckState!=null">crowdfundProjectCheckState=#{crowdfundProjectCheckState}</if>
+		</trim>
+	</update>
+	
+	<!-- 项目删除 -->
+	<delete id="deleteCrowdfund">
+		delete from crowdfund where id=#{id}
+	</delete>
+	
+	<!-- 全部众筹项目信息查看 (审核通过的)-->
+	<select id="findCrowdfundAll" resultType="Crowdfund">
+		select * from crowdfund where crowdfundProjectCheckState=2
+		order by crowdfundProjectStartDate desc
+		<!-- 语法：limit 开始记录号page，每页记录条数pageSize -->
+		<if test="page!=null">limit #{page},6</if>
+	</select>
+	
+	<!-- 模糊查询需要的众筹信息(审核通过的) -->
+	<select id="wantFindCrowdfundAll" resultType="Crowdfund">
+		select * from crowdfund 
+				where crowdfundProjectCheckState=2 and
+				crowdfundProjectName like concat(concat('%',#{crowdfundWantFind}),'%')
+				or crowdfundProjectSummary like concat(concat('%',#{crowdfundWantFind}),'%')
+		order by crowdfundProjectStartDate desc
+		<!-- 数据量限制，暂时不做模糊查询的分页，后续有需要的同学你把注释取消了，在加个获取模糊数量进行分页，OK? -->
+		<!-- 语法：limit 开始记录号page，每页记录条数pageSize -->
+		<!-- <if test="page!=null">limit #{page},#{pageSize}</if> -->
+	</select>
+	
+	<!-- 众筹推送(猜你喜欢、审核通过) -->
+	<select id="getCrowdfundJob" resultType="Crowdfund">
+		SELECT cf.* FROM crowdfund cf INNER JOIN crowdfunddemand cfd 
+			WHERE cf.id=cfd.crowdfundId AND cf.crowdfundProjectCheckState=2 AND cfd.demandJobName 
+				LIKE concat(concat('%',#{interesting}),'%')
+					 GROUP BY cf.crowdfundProjectName 
+					 limit 6
+	</select>
+	
+	<!-- 获取单个众筹项目信息 -->
+	<select id="findCrowdfundOnly" resultType="Crowdfund">
+		select * from crowdfund where id = #{id}
+	</select>
+	
+	<!-- 获取个人发布的众筹信息 -->
+	<select id="findMyCrowdfundOnly" resultType="Crowdfund">
+		select * from crowdfund where publisherId = #{publisherId} 
+	</select>
+	<!-- 获取众筹总数量 审核通过的 -->
+	<select id="crowdfundCount" resultType="int">
+		select count(*) from crowdfund where crowdfundProjectCheckState=2
+	</select>
+	<!-- 获取用户匹配的众筹数量 审核通过-->
+	<select id="crowdfundCountJob">
+		select count(*) from crowdfund 
+				where crowdfundProjectCheckState=2 and 
+				crowdfundProjectName like concat(concat('%',#{crowdfundWantFind}),'%')
+				or crowdfundProjectSummary like concat(concat('%',#{crowdfundWantFind}),'%')
+		order by crowdfundProjectStartDate desc
+	</select>
+	<!-- 根据多条件查询众筹ID -->
+	<select id="findPublisherId" parameterType="Crowdfund" resultType="int">
+		SELECT id FROM crowdfund WHERE crowdfundProjectName=#{crowdfundProjectName}
+			AND crowdfundProjectMoney =#{crowdfundProjectMoney} 
+				AND crowdfundProjectEndDate=#{crowdfundProjectEndDate}
+				AND publisherId = #{publisherId}
+	</select>
+	<!-- 查询未审核众筹项目 -->
+	<select id="checkCrowdfund" resultType="Crowdfund">
+		SELECT * FROM crowdfund WHERE crowdfundProjectCheckState=1
+	</select>
+</mapper>
