@@ -95,6 +95,7 @@ public class Resume implements Serializable{
 	public String getResumeNowResidence() {
 		return resumeNowResidence;
 	}
+	
 	public void setResumeNowResidence(String resumeNowResidence) {
 		this.resumeNowResidence = resumeNowResidence;
 	}

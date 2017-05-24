@@ -26,3 +26,4 @@
 <link rel="styleheet" href="personal/css/register.css" type="text/css">
 <link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="thirdpart/fileupload/css/fileinput.min.css">
+<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" >
