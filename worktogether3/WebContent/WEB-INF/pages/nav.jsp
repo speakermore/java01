@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar navbar-default navbar-fixed-top"
 	role="navigation">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-8 work-together-background">
-				<h6 style="color:#888">相.<em><small>取人才</small></em>，职.<em><small>载未来</small></em></h6>
+				<h6 style="color:#888">相.<em><small>取人才</small></em>，职.<em><small>载未来</small></em>，网.<em><small>聚英才</small></em></h6>
 			</div>
 			<div class="col-sm-4 work-together-background">
 			<style>
@@ -42,13 +42,12 @@
 				<span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><img src="img/21495074072_.pic.png" width="28" height="30" /></a>
+			<a class="navbar-brand" href="#"><img style="margin-left:10px" src="img/21495074072_.pic.png" width="28" height="30" /></a>
 		</div>
 		<div class="collapse navbar-collapse nav-divider"
 			id="work_together_nav">
-			
 			<ul class="nav navbar-nav">
-				<li><a href="personal/user/gotoIndex">首页</a></li>
+				<li><a href="#">首页</a></li>
 				<li><a href="personal/user/gotoSoft">软件人才</a></li>
 				<li><a href="personal/user/gotoCompany">名企招聘</a></li>
 				<li><a href="crowdfund/crowdfundAllList?page=1">技术众筹</a></li>

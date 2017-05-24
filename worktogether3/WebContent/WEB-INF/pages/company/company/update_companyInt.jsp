@@ -101,7 +101,7 @@
 					
 					<div class="col-sm-3">
 						<button type="submit" class="form-control btn btn-success"
-							style="color: black;">注册</button>
+							style="color: black;">修改</button>
 					</div>
 
 				</form>

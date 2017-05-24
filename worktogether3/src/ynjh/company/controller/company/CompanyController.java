@@ -1,6 +1,7 @@
 package ynjh.company.controller.company;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -18,6 +19,7 @@ import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyService;
@@ -148,13 +150,21 @@ public class CompanyController {
 		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
 		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
 		String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
-		
-		
-		
-			for(int i=0;i<fileNames.length;i++){
+		List<CompanyDetailImg> a=companyService.findDetailImg(company.getId());
+		Integer b=a.size();
+		if(a.size()==0){
+				for(int i=0;i<fileNames.length;i++){
 				companyService.addCompanyDetailId(company.getId(), fileNames[i],i);
 				resultDetail+=1;
 			}
+		}else{
+			for(int i=0;i<fileNames.length;i++){
+				companyService.updateImg(company.getId(), fileNames[i],i);
+				resultDetail+=1;
+			}
+		}
+		
+			
 		company.setCompanyLogo(companyLogo[0]);
 		company.setCompanyLicenseImg(companyLicenseImg[0]);
 		int result=companyService.updateCompany(company);

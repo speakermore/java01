@@ -3,14 +3,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>个人用户-首页</title>
 <%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
 <%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
-<style type="text/css">
-table {
-	margin: 20px;
-}
-</style>
+<title>个人用户-首页</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>

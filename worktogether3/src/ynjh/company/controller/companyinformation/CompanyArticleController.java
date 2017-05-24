@@ -1,16 +1,26 @@
 package ynjh.company.controller.companyinformation;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.interceptor.LikeInterceptor;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.LikeNum;
@@ -88,8 +98,27 @@ public class CompanyArticleController {
 		List<CompanyDetailImg> detailImgs = companyService.findDetailImg(company.getId());
 		int maxPage=companyArticleService.findMaxPage();
 		List<Integer> pageNo=new ArrayList<Integer>();
-		for(int i=1;i<=maxPage;i++){
-			pageNo.add(i);
+		if (maxPage <=5 ) {
+			for(int i= 1;i <maxPage;i++){
+				pageNo.add(i);
+			}
+        }else if (maxPage >5) {
+        	if (page<3) {
+        		for(int i= 1;i <=5;i++){
+    				pageNo.add(i);
+    			}
+			}
+        	if (page>=3) {
+        		for (int i = page; i < page+5; i++) {
+            		if (page>=maxPage) {
+						pageNo.add(i-4);
+					} else if (page>maxPage-2&&page<=maxPage-1) {
+						pageNo.add(i-3);
+					} else {
+						pageNo.add(i-2);
+					}
+    			}
+			}
 		}
 		ModelAndView mView=new ModelAndView("company/artanddis/company_index");
 		mView.addObject("articles", articles);
@@ -113,7 +142,6 @@ public class CompanyArticleController {
 			companyArticleService.updateRead(id);
 			session.setAttribute("readAddr",addr);
 		}
-		
 		Article article=companyArticleService.findById(id);
 		session.setAttribute("art", article);
 		List<CommentArticle> commentArticles=ccArticleService.findAll(article.getId());
@@ -148,7 +176,7 @@ public class CompanyArticleController {
 	 * @author 黄冰雁
 	 * 参数id:根据id查询文章并修改文章
 	 */
-	@RequestMapping(value="/article/edit",method=RequestMethod.POST)
+	/*@RequestMapping(value="/article/edit",method=RequestMethod.POST)
 	public ModelAndView edit(Integer id,String articleContent){
 		int result=companyArticleService.updateArtContent(id,articleContent);
 		ModelAndView mView=new ModelAndView("company/info");
@@ -160,7 +188,7 @@ public class CompanyArticleController {
 			mView.addObject("toPage", "../../companyart_edit");
 		}
 		return mView;
-	}
+	}*/
 	
 	/**
 	 * 

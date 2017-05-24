@@ -38,7 +38,7 @@ hr{
 		color:#777;
 }
 a:focus, a:hover{
-	color:#be5515;
+	color:#fa941b;
 }
 .navbar-default	.navbar-nav .active a{
 		color:#000;
@@ -47,12 +47,16 @@ a:focus, a:hover{
  body{
 	padding-top:100px ;
 } 
-
 /*
  * 指定导航栏上的字体颜色为白色
  */
 .navbar-inverse .navbar-brand,.navbar-inverse .navbar-nav>li>a{
 	color:#fff;
+}
+/* 鼠标放到导航栏上的文字出现一个下划线 */
+ul.nav>li>a:hover{
+	border-bottom: 4px solid #fe6000;
+	padding-bottom:11px;
 }
 /*
  * 选中，激活之后的背景及字体颜色
@@ -62,7 +66,7 @@ a:focus, a:hover{
    	background-color: #fcdab1;
    }
    a{
-   	color:#fd9555;
+   	color:#777;
    }
    .sidebar{
    	background-color: #eef8fd;
@@ -72,10 +76,10 @@ a:focus, a:hover{
 	background-color: #fa941b;
 	border-color: #fd6001;
 }
-	.btn-success:hover{
-		background-color:#be5515;
-		border-color: #e56618;
-	}
-	.panel-body{
-		padding: 30px;
-	}
+.btn-success:hover{
+	background-color:#be5515;
+	border-color: #e56618;
+}
+.panel-body{
+	padding: 30px;
+}

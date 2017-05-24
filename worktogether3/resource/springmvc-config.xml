@@ -103,6 +103,7 @@
         			</props>
         		</property>
         </bean>
+        <!-- interceptors 拦截 -->
 		<mvc:interceptors>
 			<!-- <mvc:interceptor >
 					拦截路径指定

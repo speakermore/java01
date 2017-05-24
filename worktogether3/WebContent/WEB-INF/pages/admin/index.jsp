@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<div><%@include file="menu.jsp"%></div>
+	<%@include file="menu.jsp"%>
 	<div class="container">
 		<!-- 首页主体内容 -->
 		<div class="row">
@@ -174,7 +174,7 @@
 			</div>
 			<!-- 首页主体内容结束 -->
 		</div>
-		<div><%@include file="footer.jsp"%></div>
+<%@include file="footer.jsp"%>
 	</div>
 	<!-- end of container-fluid -->
 </body>

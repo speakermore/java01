@@ -39,5 +39,8 @@
 				<li>
 					 <a href="company/cmprs/companyRecruit/">招聘信息</a>
 				</li>
+				<li>
+					 <a href="offer/company_offer_list/1">发送offer</a>
+				</li>
 				
 			</ul>
