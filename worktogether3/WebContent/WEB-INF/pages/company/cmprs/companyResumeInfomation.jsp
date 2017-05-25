@@ -128,15 +128,9 @@
 				</div>
 			</div>
 			</c:forEach>
-			<div class="container">
-				<div class="row clearfix">
-					<div class="col-sm-12 column">
-						<button type="button" class="btn btn-lg btn-warning">
+			
 						<a href="offer/add_offer">发送面试邀请</a>
-						</button>
-					</div>
-				</div>
-			</div>
+
 		</section>
 	</article>
 </body>
