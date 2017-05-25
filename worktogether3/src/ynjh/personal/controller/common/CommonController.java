@@ -207,7 +207,7 @@ public class CommonController {
 		companyresume.setCompanyId(companyId);
 		companyresume.setResumeId(resumeId);
 		companyresume.setCompanyResumeId(companyResumeId);
-		companyresume.setCompanyrecruitId(companyrecruitId);
+		companyresume.setCompanyRecruitId(companyrecruitId);
 		companyresume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result = rService.sendResumeToCompany(companyresume);
 		if (result > 0) {
