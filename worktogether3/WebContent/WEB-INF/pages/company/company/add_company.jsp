@@ -98,7 +98,7 @@
 												companyLoginId : {/*键名username和input name值对应*/
 													validators : {
 														notEmpty : {/*非空提示*/
-															message : '用户名不能为空'
+															message : '手机号码不能为空'
 														},
 														stringLength : {/*长度提示*/
 															min : 6,
@@ -132,7 +132,7 @@
 														},
 														different : {
 															field : 'companyLoginId',
-															message : '密码不能和用户名相同'
+															message : '密码不能和账号相同'
 														}
 													}
 												},
@@ -156,7 +156,7 @@
 														},
 														different : {
 															field : 'companyLoginId',
-															message : '密码不能和用户名相同'
+															message : '密码不能和账号相同'
 														}
 													}
 												}

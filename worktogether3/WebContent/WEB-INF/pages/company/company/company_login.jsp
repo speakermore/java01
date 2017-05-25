@@ -20,7 +20,7 @@
 				<%@include file="/WEB-INF/pages/nav.jsp" %> 
 			<div class="bs-docs-header wt-hby-login-center"  id="content" tabindex="-1">
 				<div class="container bs-docs-container">
-					<form class="form-signin" action="company/company/login" method="post">
+					<form class="form-signin" action="company/company/login" method="post" id="login">
 					<h2 class="form-signin-heading">欢迎企业用户登录</h2>
 					<div class="form-group">
 						<label for="companyLoginId" class="sr-only">手机号</label> <input
@@ -123,7 +123,7 @@ $(document).ready(function() {
      * 下面是进行插件初始化
      * 你只需传入相应的键值对
      * */
-    $('#updateCompany').bootstrapValidator({
+    $('#login').bootstrapValidator({
             message: 'This value is not valid',
             feedbackIcons: {/*输入框不同状态，显示图片的样式*/
                 valid: 'glyphicon glyphicon-ok',
@@ -150,17 +150,14 @@ $(document).ready(function() {
 				companyPassword:{
 					validators:{
 						notEmpty:{
-							message:'手机号不能为空！'
+							message:'密码不能为空！'
 						},
 						StringLength:{
-							min:13,
-							max:13,
-							message:'公司电话不能为空'
-						},
-						regexp: {//匹配规则
-	                    	regexp: /^0?(13[0-9]|15[012356789]|18[0-9]|17[0-9])[0-9]{8}$/,
-	                        message: '请输入有效的手机号码'
-	                    }
+							min:0,
+							max:6,
+							message:'请输入至少6位密码'
+						}
+						
 					}
 				}
 				

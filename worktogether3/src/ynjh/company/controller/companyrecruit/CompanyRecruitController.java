@@ -33,10 +33,11 @@ public class CompanyRecruitController {
 	//添加招聘信息并默认信息状态为待审
 	@RequestMapping(value="/companyRecruit/add_companyRecruit", method=RequestMethod.POST)
 	public ModelAndView addCompanyRecruit(CompanyRecruit companyRecruit,HttpSession session){
-		Company company=(Company)session.getAttribute("user");
+		Company company=(Company)session.getAttribute("company");
 		companyRecruit.setCmpRecStatus(1);
 		companyRecruit.setCmpRecTime(new Timestamp(System.currentTimeMillis()));
-		companyRecruit.setCompanyId(company.getId());
+		Integer companyId=((Company)session.getAttribute("user")).getId();
+		companyRecruit.setCompanyId(companyId);
 		int result=companyRecruitService.addCompanyRecruit(companyRecruit);
 		ModelAndView mv=new ModelAndView("company/cmprs/companyRecruit_info");
 		if(result>0){
@@ -70,7 +71,7 @@ public class CompanyRecruitController {
 		//首页查询所有招聘信息
 		 @RequestMapping(value="/companyRecruit/findAllDetil/{page}")
 		 public ModelAndView findAllDetil(@PathVariable Integer page,HttpSession session){
-			 Integer companyId=((Company)session.getAttribute("company")).getId();
+			 Integer companyId=((Company)session.getAttribute("user")).getId();
 			 List<CompanyRecruit> companyRecruits=companyRecruitService.findAll(page,companyId);
 			 int maxPage=companyRecruitService.findMaxPage();
 			 ModelAndView mv=new ModelAndView("company/artanddis/company_index");
@@ -106,7 +107,7 @@ public class CompanyRecruitController {
 	 }
 	 
 	 @RequestMapping(value="/companyRecruit/updateCmpRecruit",method=RequestMethod.POST)
-	 public ModelAndView updateCompanyRecruit(CompanyRecruit companyRecruit){
+	 public ModelAndView updateCompanyRecruit(CompanyRecruit companyRecruit,HttpSession session){
 		 int result=companyRecruitService.updateCompanyRecruit(companyRecruit);
 		 ModelAndView mv=new ModelAndView();
 		 if(result>0){
