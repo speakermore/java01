@@ -5,7 +5,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!--左侧状态栏位-->
 <article
-	class="col-md-12  alert-danger work-together-shadow work-together-shallow">
+	class="col-md-12 work-together-shadow work-together-shallow">
 	<div class="row">
 		<!-- 文章内容开始 -->
 		<section class="panel">

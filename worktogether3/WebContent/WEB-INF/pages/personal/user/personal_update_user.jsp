@@ -7,18 +7,8 @@
 	<!--发表状态小节-->
 	<section class="panel">
 		<form role="form" class="form-horizontal"
-			enctype="multipart/form-data" action="personal/user/updateUser"
+			 action="personal/user/updateUser"
 			method="post" id="updateUserForm">
-			<input type="hidden" id="loginId" value="${user.userLoginId }" /> <input
-				type="hidden" id="headImgPath" value="${user.userHeadImgPath}" /><br />
-			<div class="form-group">
-				<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
-				<!-- userHeadImgPath -->
-				<div class="col-md-8">
-					<input class="form-control file" name="fileHeadImg" type="file"
-						id="userHeadImgPath" multiple data-min-file-count="1" />
-				</div>
-			</div>
 			<div class="form-group">
 				<label for="userName" class="col-md-3 control-label">昵称：</label>
 				<div class="col-md-8">
@@ -78,22 +68,6 @@
 	</section>
 </div>
 <script type="text/javascript">
-	var loginId = null;
-	var headImgPath = null;
-	$(function() {
-		loginId = $("#loginId").val();
-		headImgPath = $("#headImgPath").val();
-
-	});
-	$("#userHeadImgPath")
-			.fileinput(
-					{
-						'language' : 'zh',
-						'uploadAsync' : false,
-						'showUpload' : false,
-						'initialPreview' : [ '<img src="img/upload/personal/${user.userLoginId}/${user.userHeadImgPath}"/>' ],
-						'previewFileType' : 'any'
-					});
 	$("#time").datetimepicker({
 		format : 'yyyy-mm-dd',
 		language : 'zh-CN',

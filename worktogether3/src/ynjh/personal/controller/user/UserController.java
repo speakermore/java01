@@ -356,15 +356,13 @@ public class UserController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public ModelAndView updateUser(User user,MultipartFile fileHeadImg, HttpSession session) {
+	public ModelAndView updateUser(User user, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User oldUser =(User) session.getAttribute("user");
 		user.setId(oldUser.getId());
 		user.setUserLoginId(oldUser.getUserLoginId());
-		user.setUserHeadImgPath(UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
-				new MultipartFile[] { fileHeadImg }, session)[0]);
 		user.setUserRealName(oldUser.getUserRealName());
+		user.setUserHeadImgPath(oldUser.getUserHeadImgPath());
 		int result = uService.updateUser(user);
 		if (result > 0) {
 			session.setAttribute("user", user);
@@ -458,13 +456,18 @@ public class UserController {
 	 * 修改用户头像
 	 */
 	@RequestMapping(value="/updateUserHeadImgPathById",method=RequestMethod.POST)
-	public String updateUserHeadImgPathById(String userHeadImgPath,HttpSession session){
-		User user=(User) session.getAttribute("user");
-		int result=uService.updateUserHeadImgPathById(userHeadImgPath, user.getId());
+	public String updateUserHeadImgPathById(MultipartFile fileHeadImg,HttpSession session){
+		User oldUser=(User) session.getAttribute("user");
+		String urlName=UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
+				new MultipartFile[] { fileHeadImg }, session)[0];
+		oldUser.setUserHeadImgPath(urlName);
+		int result=uService.updateUserHeadImgPathById(urlName, oldUser.getId());
 		if (result>0) {
-			return "修改成功";
+			session.setAttribute("user",oldUser);
+			return "redirect:../common/initIndex?toPage=1&userId=" + oldUser.getId();
 		}else {
-			return "修改失败";
+			return "error";
 		}
 	}
 	/**
