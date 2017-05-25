@@ -84,7 +84,7 @@ a:focus {
 			<!-- 简历基本信息 -->
 			<div class="media-body"
 				style="padding-top: 35px; padding-left: 35px;">
-				<a class="col-lg-offset-10"
+				<a class="col-md-offset-10"
 					href="personal/resume/updateResume?resumeId=${resume.id }"><span
 					class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<h4 class="media-heading"

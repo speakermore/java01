@@ -68,7 +68,7 @@ span.emotion:hover {
 </style>
 
 <article
-	class="col-md-12 work-together-dev-height-2000  work-together-shadow work-together-deep">
+	class="col-md-12   work-together-shadow work-together-deep">
 	<c:if test="${user!=null }">
 		<!--我的信息-->
 		<section class="panel">

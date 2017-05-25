@@ -14,6 +14,8 @@ public class ArticleByFollow implements Serializable {
 	private Timestamp userBirthday;
 	// 用户等级
 	private Integer userLevel;
+	//文章ID
+	private Integer articleId;
 	// 用户名
 	private Integer usersId;
 	// 文章标题
@@ -66,6 +68,14 @@ public class ArticleByFollow implements Serializable {
 		this.followStartType = followStartType;
 	}
 
+	
+	public Integer getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(Integer articleId) {
+		this.articleId = articleId;
+	}
 
 	public Integer getFollowId() {
 		return followId;

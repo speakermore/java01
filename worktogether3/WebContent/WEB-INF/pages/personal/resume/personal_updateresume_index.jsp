@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--左侧状态栏位-->
 <article
-	class="col-md-12 work-together-margin-left-30 work-together-dev-height-2000 alert-danger work-together-shadow work-together-shallow">
+	class="col-md-12   alert-danger work-together-shadow work-together-shallow">
 	<!--发表状态小节-->
 	<section class="panel">
 		<!-- 简历基本信息开始 -->
