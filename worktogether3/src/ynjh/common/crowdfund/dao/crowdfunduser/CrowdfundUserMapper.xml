@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ynjh.common.crowdfund.dao.crowdfunduser.CrowdfundUserMapper">
+<!-- 何爽 用户加入众筹操作 -->
+<!-- 申请参与众筹-->
+<insert id="addCrowdfundUser" parameterType="CrowdfundUser">
+	insert into crowdfunduser(crowdfundId,demandJobName,userId,checkStatus)
+	values(#{crowdfundId},#{demandJobName},#{userId},#{checkStatus})
+</insert>
+
+<!-- 修改参与者状态 -->
+<update id="updateJob" parameterType="CrowdfundUser">
+	update crowdfunduser set checkStatus=#{checkStatus} where 
+	<if test="userId!=null">userId=#{userId}</if>
+</update>
+
+<!-- 根据众筹项目ID或用户ID查看参与用户表查询 -->
+<select id="listcfUser" resultType="CrowdfundUser">
+	SELECT cf.*,cfu.checkStatus FROM crowdfund AS cf 
+		INNER JOIN crowdfunduser AS cfu 
+			WHERE cf.id=cfu.crowdfundId AND cf.crowdfundProjectCheckState=2 
+				AND cfu.userId=#{id}
+</select>
+
+
+</mapper>

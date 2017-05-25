@@ -22,5 +22,5 @@ public interface CompanyMapper {
 	//查询公司环境图片
 	public List<CompanyDetailImg> findDetailImg(Integer companyId);
 	//修改公司环境图片
-	public Integer updateImg(@Param("id")Integer id,@Param("companyDetailImg") String companyDetailImg);
+	public Integer updateImg(@Param("id")Integer id,@Param("companyDetailImg") String companyDetailImg,@Param("companyDetailDisc")String companyDetailDisc);
 }

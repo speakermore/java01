@@ -773,7 +773,7 @@ public class ResumeController {
 		companyResume.setCompanyId(companyId);
 		companyResume.setCompanyResumeId(oldUser.getId());
 		companyResume.setResumeId(oldResume.getId());
-		companyResume.setCompanyrecruitId(companyrecruitId);
+		companyResume.setCompanyRecruitId(companyrecruitId);
 		companyResume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result =rService.sendResumeToCompany(companyResume);
 		if (result>0) {
