@@ -9,10 +9,10 @@
 	<section class="panel">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>最近保存文章</h1>
+				<h3>最近保存文章</h3>
 				<div class="thumbnail">
 					<div class="caption">
-						<h3 style="font-size: 30px; text-align: center;">
+						<h3 style="font-size: 20px; text-align: center;">
 							<c:if test="${fn:length(articleNewly.articleTitle)>15 }">  
                          ${fn:substring(articleNewly.articleTitle, 0, 15)}...  
                    </c:if>
@@ -20,7 +20,6 @@
                          ${articleNewly.articleTitle }  
                    </c:if>
 						</h3>
-
 						<p>
 							<c:if test="${fn:length(articleNewly.articleContent)>100 }">  
                          ${fn:substring(articleNewly.articleContent, 0, 100)}...  

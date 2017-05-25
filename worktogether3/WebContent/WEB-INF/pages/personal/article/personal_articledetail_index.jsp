@@ -8,13 +8,12 @@
 }
 </style>
 <article
-	class="col-md-12 work-together-dev-height-2000  work-together-shadow work-together-deep">
+	class="col-md-12  work-together-shadow work-together-deep">
 	<!--我的信息-->
 	<section class="panel">
-		<div class="main">
 			<div class="col-md-12 column">
-				<h3 align=center>${article.articleTitle}</h3>
-				<div align=right>
+				<h3 align="center">${article.articleTitle}</h3>
+				<div align="right">
 					<fmt:formatDate value="${article.articleTime}"
 						pattern="yyyy-MM-dd mm:hh" />
 				</div>
@@ -29,8 +28,6 @@
 				<div class="ppp">点击数：${article.articleReadNum}</div>
 			</div>
 			<br />
-		</div>
-
 	</section>
 	<!--评论列表开始-->
 	<div class="row">

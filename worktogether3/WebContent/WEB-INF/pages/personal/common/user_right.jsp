@@ -223,3 +223,17 @@ span.emotion:hover {
 		</div>
 	</section>
 </article>
+<script type="text/javascript">
+var ajaxTest=function(page){
+	$.ajax({
+		url:"personal/user/ajax",
+		data:"page="+page,
+		type:"POST",
+		dataType:"html",
+		success:function(data){
+			$("#my-content").html(data);
+		}
+	});
+}
+
+</script>

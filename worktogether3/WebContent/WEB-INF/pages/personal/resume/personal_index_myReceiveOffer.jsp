@@ -12,18 +12,18 @@
 			<div class="row">
 				<table class="table">
 					<colgroup>
-						<col style="width: 25%">
-						<col style="width: 25%">
-						<col style="width: 10%">
+						<col style="width: 30%">
+						<col style="width: 15%">
+						<col style="width: 15%">
 						<col style="width: 30%">
 						<col style="width: 10%">
 					</colgroup>
 					<thead>
 						<tr>
-							<th>面试时间</th>
 							<th>公司</th>
+							<th>面试日期</th>
+							<th>面试时间</th>
 							<th>岗位</th>
-							<th>内容</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -31,15 +31,12 @@
 					<tbody id="ajaxEducationsList">
 						<c:forEach items="${offers }" var="offer">
 							<tr>
+								<td><a href="offer/user_offer_detail/${o.id }">${offer.companyName}</a></td>
 								<td><fmt:formatDate value="${offer.offerInvitationTime }"
-										pattern="yyyy-MM-dd HH:mm" /></td>
-								<td>${offer.companyName}</td>
+							pattern="yyyy年MM月dd日" /></td>
+					<td><fmt:formatDate value="${offer.offerInvitationTime }"
+							pattern="HH点mm分" /></td>		
 								<td>${offer.offerJob}</td>
-								<td><c:if test="${fn:length(offer.offerContent)>10 }">  
-                         ${fn:substring(offer.offerContent, 0, 10)}...  
-                   </c:if> <c:if test="${fn:length(offer.offerContent)<=10 }">  
-                         ${offer.offerContent }  
-                   </c:if></td>
 								<td><a href="#">同意</a>|<a href="#">拒绝</a></td>
 							</tr>
 						</c:forEach>

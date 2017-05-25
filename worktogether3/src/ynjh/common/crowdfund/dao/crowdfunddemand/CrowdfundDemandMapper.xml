@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ynjh.common.crowdfund.dao.crowdfunddemand.CrowdfundDemandMapper">
+<!-- 何爽 众筹岗位需求 -->
+<!-- 增加需求岗位信息 -->
+<insert id="addCrowdfundDemand" parameterType="CrowdfundDemand">
+	insert into crowdfunddemand(crowdfundId,demandJobName,demandSummary,demandPeopleCount)
+	values(#{crowdfundId},#{demandJobName},#{demandSummary},#{demandPeopleCount});
+</insert>
+<!-- 修改需求岗位信息 -->
+<update id="updateCrowdfundDemand" parameterType="CrowdfundDemand">
+	update crowdfunddemand
+	<trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+		<if test="demandJobName!=null">demandJobName=#{demandJobName},</if>
+		<if test="demandSummary!=null">demandSummary=#{demandSummary},</if>
+		<if test="demandPeopleCount!=null">demandPeopleCount=#{demandPeopleCount}</if>
+	</trim>
+</update>
+<!-- 删除需求岗位信息 -->
+<delete id="deleteCrowdfundDemand" parameterType="CrowdfundDemand" >
+	delete from crowdfunddemand where
+	<if test="id!=null">id=#{id}</if>
+	<if test="crowdfundId!=null">crowdfundId=#{crowdfundId}</if>
+</delete>
+<!-- 按项目查询所有岗位 -->
+<select id="listCrowdfundDemand" resultType="CrowdfundDemand">
+	select * from crowdfunddemand where crowdfundId=#{crowdfundId}
+</select>
+<!-- 按岗位ID查询岗位信息 -->
+<select id="getCrowdfundDemand" resultType="CrowdfundDemand">
+	select * from crowdfunddemand where id=#{id}
+</select>
+
+</mapper>

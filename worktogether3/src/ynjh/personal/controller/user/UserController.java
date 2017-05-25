@@ -105,15 +105,15 @@ public class UserController {
 				for (UserAndResume userAndResume : userAndResumes) {
 					Follow follow =fService.findIsFollowByFollowIdAndFollowId(user.getId(), userAndResume.getId());
 					if (follow==null) {
+						try {
+							userAndResume.setAge(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
+							userAndResume.setWorks(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
 						userAndResume.setIsFoucse(false);
 					}else {
 						userAndResume.setIsFoucse(true);
-					}
-					try {
-						userAndResume.setAge(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
-						userAndResume.setWorks(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
-					} catch (ParseException e) {
-						e.printStackTrace();
 					}
 				}
 		         if("1".equals(re_remember)){ //"1"表示用户勾选记住密码
@@ -123,7 +123,7 @@ public class UserController {
 		             String loginInfo = userLoginId+","+userPassword;
 		             Cookie userCookie=new Cookie("loginInfo",loginInfo); 
 
-		             userCookie.setMaxAge(30*24*60*60);   //存活期为一个月 30*24*60*60
+		             userCookie.setMaxAge(7*24*60*60);   //存活期为一个月 30*24*60*60
 		             userCookie.setPath("/");
 		             response.addCookie(userCookie);
 		         }
