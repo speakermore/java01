@@ -440,4 +440,18 @@ public interface AdminMapper {
 	 * @return
 	 */
 	public List<Company> findDisabledCompany();
+	
+	/**
+	 * 查找企业用户通过LoginId
+	 * @param companyLoginId 企业账号
+	 * @return
+	 */
+	public Company findCompanyByLoginId(String companyLoginId);
+	
+	/**
+	 * 通过个人用户账号查找个人用户
+	 * @author 朱吉
+	 * @param 个人用户登录Id（账号）
+	 */
+	public User findUserByLoginId(String userLoginId);
 }

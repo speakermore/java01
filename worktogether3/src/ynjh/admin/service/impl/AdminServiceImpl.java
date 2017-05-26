@@ -993,6 +993,49 @@ public class AdminServiceImpl implements AdminService {
 	public List<Company> findDisabledCompany() {
 		return adminMapper.findDisabledCompany();
 	}
+
+	/**
+	 * 通过企业账号查找企业用户
+	 * @author 朱吉
+	 * @param companyLoginId 企业账号
+	 */
+	@Override
+	public Company findCompanyByLoginId(String companyLoginId) {
+		return adminMapper.findCompanyByLoginId(companyLoginId);
+	}
+
+	/**
+	 * 通过个人用户账号查找个人用户
+	 * @author 朱吉
+	 * @param 个人用户登录Id（账号）
+	 */
+	@Override
+	public User findUserByLoginId(String userLoginId) {
+		return adminMapper.findUserByLoginId(userLoginId);
+	}
+
+	/**
+	 * 通过个人用户id禁用/解禁用户
+	 * @author 朱吉
+	 * @param ids 个人用户id
+	 * @param userStatus 用户状态：1正常，2禁用
+	 */
+	@Override
+	public Integer personalMag(Integer[] ids, Integer userStatus) {
+		if(ids!=null&&userStatus!=null&&ids.length>0){
+			int result=0;
+			for(result=0;result<ids.length;result++){
+				adminMapper.disableUser(ids[result], userStatus);
+			}
+			if(result>0&&result==ids.length){
+				return 1;//成功修改状态
+			}else{
+				return 0;//未能修改状态
+			}
+		}else{
+			return -1;//参数错误
+		}
+	}
 	
 	
 
