@@ -78,7 +78,8 @@ public class CompanyArticleController {
 		Company company=(Company)session.getAttribute("user");
 		article.setUsersId(company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
-		article.setArticleUsersType(2);
+		article.setArticleUsersType(1);
+		article.setArticleStatus(1);
 		companyArticleService.addArticle(article);
 		
 		ModelAndView mView=new ModelAndView("redirect:../../../company/artanddis/");

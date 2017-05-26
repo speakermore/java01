@@ -54,7 +54,7 @@ a:focus, a:hover{
 	color:#fff;
 }
 /* 鼠标放到导航栏上的文字出现一个下划线 */
-ul.nav>li>a:hover{
+ul.work-together-nav>li>a:hover{
 	border-bottom: 4px solid #fe6000;
 	padding-bottom:11px;
 }

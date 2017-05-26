@@ -28,7 +28,7 @@
 				<%@include file="/WEB-INF/pages/company/menu.jsp"%>
 			</div>
 			<div class="col-md-9 column">
-				<form action="
+				<form role="form" action="
 					company/cmprs/companyRecruit/updateCmpRecruit" method="post" id="updateCmpRecruit">
 					<div class="page-header">
 						<h2>${cmpr.cmpRecTitle }</h2>

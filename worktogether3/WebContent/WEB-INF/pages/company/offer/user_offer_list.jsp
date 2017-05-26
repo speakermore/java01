@@ -26,13 +26,13 @@
 		<!-- offer列表 -->
 		<div class="col-sm-9">
 			<div class="col-sm-12 col-sm-offset-0">
+			
 				<table class="table table-hover">
 					<caption>收到的面试邀请</caption>
 					<thead>
 						<tr>
-							<th>查看详情</th>
 							<th>公司简称</th>
-							<th>招聘岗位</th>
+							<th>招聘岗位</th>														
 							<th>面试日期</th>
 							<th>面试时间</th>
 							<th>邀请状态</th>
@@ -42,8 +42,7 @@
 						<c:forEach items="${offer }" var="o">
 						<tr>
 							<!-- 点击查看详细信息 -->
-							<td><a href="offer/user_offer_detail/${o.id }">${o.offerSendTime }</a></td>
-							<td>${o.companySimpleName }</td>
+							<td><a href="offer/user_offer_detail/${o.id }">${o.companySimpleName }</a></td>
 							<td>${o.offerJob }</td>
 							<td><fmt:formatDate value="${o.offerInvitationTime }" pattern="yyyy年MM月dd日"/></td>
 							<td><fmt:formatDate value="${o.offerInvitationTime }" pattern="HH点mm分"/></td>

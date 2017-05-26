@@ -36,9 +36,9 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.width = 800;
+	config.width = 'auto';
 	config.toolbarCanCollapse = true
-	config.height = 300;
+	config.height = 'auto';
 	config.resize_enabled = false;
 	config.image_previewText=' '; //预览区域显示内容
 	config.filebrowserImageUploadUrl = "upload";//上传图片

@@ -14,7 +14,7 @@ public class CompanyResume extends Resume implements Serializable{
 	private Integer cmprStatus;//审核状态：1.等待审核 2.审核通过 3.审核不通过
 	private Integer companyResumeId;//投递简历的用户ID
 	private Integer cmprAction;//接收状态： 1.尚未阅读 2.接受简历 3.拒绝简历4.已阅读
-	private Integer companyRecruitId;
+	private Integer companyRecruitId;//岗位id
 
 	public CompanyResume(){
 		

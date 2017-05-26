@@ -46,7 +46,7 @@
 		</div>
 		<div class="collapse navbar-collapse nav-divider"
 			id="work_together_nav">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav work-together-nav">
 				<li><a href="#">首页</a></li>
 				<li><a href="personal/user/gotoSoft">软件人才</a></li>
 				<li><a href="personal/user/gotoCompany">名企招聘</a></li>

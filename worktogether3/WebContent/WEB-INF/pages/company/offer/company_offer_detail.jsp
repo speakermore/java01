@@ -29,18 +29,18 @@
 				<form class="form-horizontal" action="offer/update_offerAction/${o.id }" method="post">
 					
 					<div class="form-group">
+						<label class="col-sm-2 control-label">应聘者名:</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">${o.userName }</p>
+						</div>
+					</div>
+					
+					<div class="form-group">
 						<label class="col-sm-2 control-label">招聘岗位:</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">${o.offerJob }</p>
 						</div>
 					</div>
-					
-					<div class="form-group">
-						<label class="col-sm-2 control-label">应聘者名:</label>
-						<div class="col-sm-10">
-							<p class="form-control-static">${o.userName }</p>
-						</div>
-					</div>					
 					
 					<div class="form-group">
 						<label class="col-sm-2 control-label">面试日期:</label>
