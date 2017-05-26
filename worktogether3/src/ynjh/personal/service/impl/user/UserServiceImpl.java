@@ -66,15 +66,8 @@ public class UserServiceImpl implements UserService {
 	public Integer updateUser(User user) {
 		return userMapper.updateUser(user);
 	}
-	/**
-	 * 修改用户密码
-	 * @return Integer 大于0成功 其余失败
-	 * @param Integer 用户id
-	 */
-	@Override
-	public Integer updateUserPassword(Integer userId) {
-		return userMapper.updateUserById(userId);
-	}
+	
+	
 	/**
 	 * 查询用户详细信息
 	 * @return User 用户对象
@@ -169,5 +162,23 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return (userMapper.getMaxCompanyList() + 20 - 1) / 20;
 		}
+	}
+	/**
+	 * 修改用户密码
+	 * @return Integer 大于0成功 其余失败
+	 * @param Integer 用户id
+	 */
+	@Override
+	public Integer updateUserPasswordById(String userPassword, Integer userId) {
+		return userMapper.updateUserPasswordById(userPassword, userId);
+	}
+	/**
+	 * 修改用户头像
+	 * @return Integer 大于0成功 其余失败
+	 * @param Integer 用户id
+	 */
+	@Override
+	public Integer updateUserHeadImgPathById(String userHeadImgPath, Integer userId) {
+		return userMapper.updateUserHeadImgPathById(userHeadImgPath, userId);
 	}
 }

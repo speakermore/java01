@@ -6,11 +6,12 @@
 <style type="text/css">
 .test {
 	outline: 1px solid #E5E5E5;
+	margin-bottom: 5px;
 }
 
 .personal_resume_defualt {
 	padding: 15px;
-	background-color: #F8F8FF;
+	background-color: #FFFFFF;
 }
 
 .personal_resume_margin {
@@ -47,7 +48,8 @@ a:focus {
 	margin-left: 35px;
 	margin-top: 35px;
 }
-.table{
+
+.table {
 	width: 93%;
 }
 </style>
@@ -56,7 +58,6 @@ a:focus {
 		$('#personal_border').mousemove(function() {
 			$("#personal_hidden_photo").css("visibility", "visible");
 			$("#imgHiddenText").css("visibility", "visible");
-			i
 		});
 		$("#personal_border").mouseleave(function() {
 			$("#personal_hidden_photo").css("visibility", "hidden");
@@ -70,23 +71,25 @@ a:focus {
 			<!-- 头像 -->
 			<div class="resumeheadImg">
 				<c:if test="${resume.resumeHeadImg==null }">
-					<img class="pull-left updateHeadImg" src="personal/img/head.gif"
-						class="media-object" alt='我的头像' width="100" height="120" />
+					<img class="pull-left updateHeadImg media-object "
+						src="personal/img/head.gif" alt='我的头像' width="100" height="120" />
 
 				</c:if>
 				<c:if test="${resume.resumeHeadImg!=null }">
-					<img class="pull-left updateHeadImg"
+					<img class="pull-left updateHeadImg media-object "
 						src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}"
-						class="media-object" alt='我的头像' width="100" height="120" />
+						alt='我的头像' width="100" height="120" />
 				</c:if>
 			</div>
 			<!-- 头像结束 -->
 			<!-- 简历基本信息 -->
 			<div class="media-body"
 				style="padding-top: 35px; padding-left: 35px;">
-				<a class="col-lg-offset-10"
+				<!-- 修改图标开始 -->
+				<a class="col-md-offset-10"
 					href="personal/resume/updateResume?resumeId=${resume.id }"><span
 					class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
+				<!-- 修改图标结束 -->
 				<h4 class="media-heading"
 					style="line-height: 35px; height: 35px; font-size: 20px;">
 					<label class="control-label">${resume.resumeName }</label>
@@ -241,7 +244,7 @@ a:focus {
 						</c:if>
 						<c:if test="${resume.resumeSelfEvaluation!=null }">
 							<div class="col-md-12 column">
-								<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label> 
+								<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label>
 							</div>
 						</c:if>
 					</div>
@@ -261,8 +264,7 @@ a:focus {
 				<span class="glyphicon glyphicon-list-alt"></span>工作经验 <a
 					class="panel-title col-md-offset-8	" data-toggle="collapse"
 					data-parent="#panel-work-main" href="#panel-element-work"
-					id="hiddenWork"><span
-					class="glyphicon glyphicon-plus"></span>新增工作</a>
+					id="hiddenWork"><span class="glyphicon glyphicon-plus"></span>新增工作</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-work" class="panel-collapse collapse">
@@ -322,39 +324,30 @@ a:focus {
 		<div class="panel panel-default">
 			<c:if test="${works!=null }">
 				<c:forEach items="${works }" var="work">
-					<table class="table">
-						<colgroup>
-							<col style="width: 10%">
-							<col style="width: 50%">
-						</colgroup>
-						<tr>
-							<td>企业名称：</td>
-							<td>${work.workFirmName }</td>
-						</tr>
-						<tr>
-							<td>工作岗位：</td>
-							<td>${work.workUnit }</td>
-						</tr>
-						<tr>
-							<td>工作描述：</td>
-							<td>${work.workDescription }</td>
-						</tr>
-						<tr>
-							<td>工作时间：</td>
-							<td><fmt:formatDate value="${work.workBeginTime }"
-									pattern="yyyy-MM-dd" />到<fmt:formatDate
-									value="${work.workEndTime }" pattern="yyyy-MM-dd" /></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td class="text-right"><a href="#">编辑</a>|<a
-								href="personal/resume/deleteResumeWork?id=${wrok.id }">删除</a></td>
-						</tr>
-					</table>
+					<div class="panel-body test personal_resume_defualt">
+						<div class="col-md-12 column">
+							<label class="control-label">企业名称：</label>${work.workFirmName }
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">工作岗位：</label>${work.workUnit }
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">工作描述：</label>${work.workDescription }
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">工作时间：</label><fmt:formatDate
+									value="${work.workBeginTime }" pattern="yyyy-MM-dd" />到<fmt:formatDate
+									value="${work.workEndTime }" pattern="yyyy-MM-dd" />
+						</div>
+						<div class="col-md-12 col-md-offset-10 column">
+							<a href="#">编辑</a>|<a
+								href="personal/resume/deleteResumeWork?id=${work.id}">删除</a>
+						</div>
+					</div>
 				</c:forEach>
 			</c:if>
 			<div id="panel-element-work-show" class="panel-collapse in">
-				<c:if test="${works==NULL }">
+				<c:if test="${works==null }">
 					<div class="panel-body col-md-offset-3 personal_resume_padding">
 						<span class="glyphicon glyphicon-list-alt"></span>
 						完善工作经验，展现工作内容及能力，让HR更了解你！
@@ -375,8 +368,7 @@ a:focus {
 				<span class="glyphicon glyphicon-signal"></span>项目经验 <a
 					class="panel-title col-md-offset-8" data-toggle="collapse"
 					data-parent="#panel-project-main" href="#panel-element-project"
-					id="hiddenProject"><span
-					class="glyphicon glyphicon-plus" ></span>新增项目</a>
+					id="hiddenProject"><span class="glyphicon glyphicon-plus"></span>新增项目</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-project" class="panel-collapse collapse">
@@ -424,8 +416,7 @@ a:focus {
 								<button type="submit" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-project-main"
-									href="#panel-element-project-show"
-									id="showProject">关闭</a>
+									href="#panel-element-project-show" id="showProject">关闭</a>
 							</div>
 						</form>
 					</div>
@@ -438,39 +429,29 @@ a:focus {
 		<div class="panel panel-default">
 			<c:if test="${projs!=null }">
 				<c:forEach items="${projs }" var="pro">
-					<table class="table">
-						<colgroup>
-							<col style="width: 50%">
-							<col style="width: 50%">
-						</colgroup>
-						<tr>
-							<td>项目名称：</td>
-							<td>${pro.projectName }</td>
-						</tr>
-						<tr>
-							<td>项目岗位：</td>
-							<td>${pro.projectJob }</td>
-						</tr>
-						<tr>
-							<td>项目描述：</td>
-							<td>${pro.projectDescription }</td>
-						</tr>
-						<tr>
-							<td>责任描述与感受：</td>
-							<td>${pro.projectDescription }</td>
-						</tr>
-						<tr>
-							<td>项目时间：</td>
-							<td><fmt:formatDate value="${pro.projectBeginTime }"
-									pattern="yyyy-MM-dd" />到<fmt:formatDate
-									value="${pro.projectEndTime }" pattern="yyyy-MM-dd" /></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td class="text-right"><a href="#">编辑</a>|<a
-								href="personal/resume/deleteResumeProject?id=${pro.id }">删除</a></td>
-						</tr>
-					</table>
+					<div class="panel-body test personal_resume_defualt">
+						<div class="col-md-12 column">
+							<label class="control-label">项目名称：</label>${pro.projectName }
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">项目岗位：</label>${pro.projectJob }
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">项目描述：</label>${pro.projectDescription }
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">项目时间：</label>
+							<fmt:formatDate value="${pro.projectBeginTime }"
+								pattern="yyyy-MM-dd" />
+							到
+							<fmt:formatDate value="${pro.projectEndTime }"
+								pattern="yyyy-MM-dd" />
+						</div>
+						<div class="col-md-12 col-md-offset-10 column">
+							<a href="#">编辑</a>|<a
+								href="personal/resume/deleteResumeProject?id=${pro.id }">删除</a>
+						</div>
+					</div>
 				</c:forEach>
 			</c:if>
 			<div id="panel-element-project-show" class="panel-collapse in">
@@ -495,8 +476,7 @@ a:focus {
 				<span class="glyphicon glyphicon-book"></span>教育经历 <a
 					class="panel-title col-md-offset-8" data-toggle="collapse"
 					data-parent="#panel-education-main" href="#panel-element-education"
-					id="hiddenEducation"><span
-					class="glyphicon glyphicon-plus"></span>新增教育</a>
+					id="hiddenEducation"><span class="glyphicon glyphicon-plus"></span>新增教育</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-education" class="panel-collapse collapse">
@@ -539,8 +519,7 @@ a:focus {
 								<button type="submit" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-education-main"
-									href="#panel-element-education-show"
-									id="showEducation">关闭</a>
+									href="#panel-element-education-show" id="showEducation">关闭</a>
 							</div>
 						</form>
 					</div>
@@ -550,11 +529,37 @@ a:focus {
 		</div>
 		<!--2+-->
 		<div class="panel panel-default">
+			<c:if test="${edus!=null }">
+				<c:forEach items="${edus }" var="edu">
+					<div class="panel-body test personal_resume_defualt">
+						<div class="col-md-12 column">
+							<label class="control-label">学校名称：</label>${edu.educationSchool}
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">教育描述：</label>${edu.educationContent}
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">教育时间：</label>
+							<fmt:formatDate value="${edu.educationBeginTime}"
+								pattern="yyyy-MM-dd" />
+							到
+							<fmt:formatDate value="${edu.educationEndTime}"
+								pattern="yyyy-MM-dd" />
+						</div>
+						<div class="col-md-12 col-md-offset-10 column">
+							<a href="#">编辑</a>|<a
+								href="personal/resume/deleteResumeEducation?id=${edu.id }">删除</a>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
 			<div id="panel-element-education-show" class="panel-collapse in">
-				<div class="panel-body col-md-offset-3 personal_resume_padding">
-					<span class="glyphicon glyphicon-book"></span>
-					完善教育经历，展现专业能力，让HR更了解你！
-				</div>
+				<c:if test="${edus==null }">
+					<div class="panel-body col-md-offset-3 personal_resume_padding">
+						<span class="glyphicon glyphicon-book"></span>
+						完善教育经历，展现专业能力，让HR更了解你！
+					</div>
+				</c:if>
 			</div>
 		</div>
 		<!--2-->

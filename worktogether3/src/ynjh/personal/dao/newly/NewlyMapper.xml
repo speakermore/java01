@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 查看关注者最新发布文章消息 -->
 	<select id="findNewlyArticleByFollow" resultType="ArticleByFollow">
 		<!-- select * from follow f,article a,user u where f.followId=#{userId} and f.byFollowId=u.id and u.id=a.usersId -->
-		select * from (select * from article order by articleTime desc) a,user u,follow f where u.id=a.usersId and u.id=f.byFollowId and f.followId=#{userId} group by a.usersId
+		select max(u.userName) userName,max(a.articleTitle) articleTitle,max(a.id) articleId from (select * from article order by articleTime desc limit #{maxNum} )a,user u,follow f where u.id=a.usersId and u.id=f.byFollowId and f.followId=#{userId} group by a.usersId
 	</select>
 	<!-- 查看被关注者发布文章消息的数量 -->
 	<select id="getByFollowIdCount" resultType="Integer" parameterType="Integer">

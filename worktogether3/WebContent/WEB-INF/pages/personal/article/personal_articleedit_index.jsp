@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <article
-	class="col-md-12 work-together-dev-height-2000  work-together-shadow work-together-deep">
+	class="col-md-12   work-together-shadow work-together-deep">
 	<!--我的信息-->
 	<section class="panel">
 		<form class="form-horizontal" action="personal/article/updateArticle"
