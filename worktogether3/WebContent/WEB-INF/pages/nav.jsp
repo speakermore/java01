@@ -46,11 +46,11 @@
 		</div>
 		<div class="collapse navbar-collapse nav-divider"
 			id="work_together_nav">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav work-together-nav">
 				<li><a href="#">首页</a></li>
 				<li><a href="personal/user/gotoSoft">软件人才</a></li>
 				<li><a href="personal/user/gotoCompany">名企招聘</a></li>
-				<li><a href="#">技术众筹</a></li>
+				<li><a href="crowdfund/crowdfundAllList?page=1">技术众筹</a></li>
 				<li><a href="#">认证培训</a></li>
 				<li><a href="#">自主创业</a></li>
 				<li><a href="#">咨询服务</a></li>

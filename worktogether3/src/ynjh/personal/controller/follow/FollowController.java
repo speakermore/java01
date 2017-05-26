@@ -100,7 +100,7 @@ public class FollowController {
 	public ModelAndView gotoFOllow(Integer followId){
 		ModelAndView mv=new ModelAndView();
 		List<Follow> follows=followService.selectUserFollow(followId);
-		mv.addObject("followss", follows);
+		mv.addObject("UserFollows", follows);
 		mv.setViewName("personal/follow/personal_user_followlist");
 		return mv;
 		

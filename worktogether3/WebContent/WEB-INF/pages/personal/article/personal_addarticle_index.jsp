@@ -8,7 +8,7 @@ width: 100%;
 width: 100%;
 }
 </style>
-<article class="col-md-12 work-together-dev-height-2000  work-together-shadow work-together-deep">
+<article class="col-md-12   work-together-shadow work-together-deep">
 	<!--我的信息-->
 	<section class="panel">
 		<form role="form" class="form-horizontal" action="personal/article/add_article" method="post">

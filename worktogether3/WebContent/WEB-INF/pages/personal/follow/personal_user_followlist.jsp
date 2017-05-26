@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 <title>我的关注</title>
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
@@ -16,8 +16,7 @@
 				<div class="tabbable" id="tabs-userList">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#panel-user" data-toggle="tab">我关注的用户</a></li>
-						<li><a href="#panel-company" data-toggle="tab">我关注的企业</a>
-						</li>
+						<li><a href="#panel-company" data-toggle="tab">我关注的企业</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="panel-user">

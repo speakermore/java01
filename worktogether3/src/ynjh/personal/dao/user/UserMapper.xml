@@ -25,9 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    update `user` set userHeadImgPath=#{userHeadImgPath},userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where id=#{id}
 	</update>
 	<!-- 修改用户密码 -->
-	<update id="updateUserById" parameterType="User">
-	    update `user` set userPassword=#{userPassword} where userLoginId=#{userLoginId}
+	<update id="updateUserPasswordById" parameterType="User">
+	    update `user` set userPassword=#{userPassword} where id=#{userId}
 	</update>
+	
+	<!-- 修改用户头像 -->
+	<update id="updateUserHeadImgPathById" parameterType="User">
+	    update `user` set userHeadImgPath=#{userHeadImgPath} where id=#{userId}
+	</update>
+	
 	<!-- 根据id查询用户（显示用户信息） -->
 	<select id="selectUserById" resultType="User" parameterType="Integer">
 	    select * from `user` where id=#{id}
@@ -44,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!-- 人才信息列表 -->
 	<select id="findUserList" resultType="UserAndResume">
-		select * from resume r,user u where r.userId=u.id and not userLoginId=#{userLoginId}
+		select r.resumeJor,r.resumeWorks,r.resumeEducation,u.* from resume r,user u where r.userId=u.id and not userLoginId=#{userLoginId}
 		<if test="page!=null">
 			limit #{page},20
 		</if>

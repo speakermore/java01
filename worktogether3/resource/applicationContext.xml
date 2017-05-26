@@ -35,7 +35,7 @@
     
     <!-- Dao -->    
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    		<property name="basePackage" value="ynjh.personal.dao,ynjh.admin.dao,ynjh.company.dao"></property>
+    		<property name="basePackage" value="ynjh.common.crowdfund.dao,ynjh.personal.dao,ynjh.admin.dao,ynjh.company.dao"></property>
     </bean>
     <!-- Service -->
     <!-- 扫描注解定义 -->
@@ -72,5 +72,6 @@
     		<aop:advisor pointcut="execution(* ynjh.personal.service.impl.*.*(..))" advice-ref="txAdvice" />
     		<aop:advisor pointcut="execution(* ynjh.admin.service.impl.*.*(..))" advice-ref="txAdvice" />
     		<aop:advisor pointcut="execution(* ynjh.company.service.impl.*.*(..))" advice-ref="txAdvice" />
+    		
     </aop:config>
 </beans>

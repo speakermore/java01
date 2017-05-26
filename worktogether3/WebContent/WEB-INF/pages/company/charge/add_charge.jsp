@@ -15,10 +15,23 @@
 <body>
 <%@include file="/WEB-INF/pages/nav.jsp" %>
 
+<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-3 column">
+				<%@include file="/WEB-INF/pages/company/menu.jsp" %>
+			</div>
+			<div class="col-md-6 column">
+				<form action="company/charge/addMoney" method="post">
+				充值金额：<input type="text" name="cmpChargeMoney">
+				<input type="submit" value="充值">
+				</form>
+			</div>
+			<div class="col-md-3 column">
+			</div>
+		</div>
+	</div>
 
-	<form action="company/charge/addMoney" method="post">
-		充值金额：<input type="text" name="cmpChargeMoney">
-		<input type="submit" value="充值">
-	</form>
+
+	
 </body>
 </html>

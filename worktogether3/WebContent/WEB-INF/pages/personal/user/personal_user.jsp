@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--左侧状态栏位-->
 <article id="my-content"
-	class="col-md-12 work-together-dev-height-2000 work-together-shadow work-together-shallow">
+	class="col-md-12  work-together-shadow work-together-shallow">
 	<!--发表状态小节-->
 	<section class="panel">
 		<div class="tab-content">
@@ -46,11 +46,11 @@
 					</c:if>
 					<!-- 面试邀请结束-->
 					<!-- 文章信息开始 -->
-					<c:if test="${articleByFollows!=null }">
-						<c:forEach items="${articleByFollows }" var="abf">
+					<c:if test="${articleByFollows!=null}">
+						<c:forEach items="${articleByFollows}" var="abf">
 							<section class="panel">
 								<div class="panel-body">
-									${abf.userName }发表了<<<a href="#">${abf.articleTitle }</a>>>
+									@<a href="#">${abf.userName}</a>发表了<<<a href="personal/article/lookArticleById?id=${abf.articleId}">${abf.articleTitle}</a>>>
 								</div>
 								<div class="panel-footer work-together-right">
 									1分钟前.<a href="#">更多....</a>

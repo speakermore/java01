@@ -31,7 +31,7 @@
 					<div class="col-sm-8 column"></div>
 					<div class="col-sm-4 column">
 					<p>
-						 <a class="btn" href="company/charge/chargeRecord/${companyCharge.companyId }">消费记录</a>
+						 <a class="form-control btn btn-success" href="company/charge/chargeRecord/${companyCharge.companyId }" class="form-control btn btn-success">消费记录</a>
 					</p>
 					</div>
 				</div>

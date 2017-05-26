@@ -245,12 +245,12 @@ $("#logo").fileinput({
 												companyName : {
 													validators : {
 														notEmpty : {/*非空提示*/
-															message : '用户名不能为空'
+															message : '公司名不能为空'
 														},
 														stringLength : {
 															min : 6,
 															max : 40,
-															message : '密码长度必须在6到50位之间'
+															message : '名称必须在6到50位之间'
 														}
 													}
 
@@ -258,7 +258,7 @@ $("#logo").fileinput({
 												companySimpleName : {
 													validators : {
 														notEmpty : {/*非空提示*/
-															message : '用户名不能为空'
+															message : '公司简称不能为空'
 														},
 														StringLength : {
 															min : 2,

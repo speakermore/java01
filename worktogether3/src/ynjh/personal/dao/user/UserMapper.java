@@ -40,8 +40,14 @@ public interface UserMapper {
 	/**
 	 * 修改用户密码
 	 */
-	public Integer updateUserById(Integer userLoginId);
+	public Integer updateUserPasswordById(@Param("userPassword")String userPassword,@Param("userId")Integer userId);
 
+	/**
+	 * 修改用户头像
+	 */
+	public Integer updateUserHeadImgPathById(@Param("userHeadImgPath")String userHeadImgPath,@Param("userId")Integer userId);
+
+	
 	/**
 	 * 根据id查询用户（显示用户信息）
 	 */

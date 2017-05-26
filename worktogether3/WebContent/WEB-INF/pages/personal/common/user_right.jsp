@@ -3,53 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
-header {
-	height: 300px;
-}
-
-.work-together-margin-top-150 {
-	margin-top: 150px;
-}
-
-.work-together-dev-height-2000 {
-	height: auto;
-}
-
-.work-together-sample-1 {
-	background-color: white;
-}
-
-.panel-footer {
-	color: #ababab;
-}
-
-span.emotion {
-	width: 45px;
-	height: 20px;
-	padding-left: 20px;
-	cursor: pointer
-}
-
-span.emotion:hover {
-	background-position: 2px -28px
-}
-
+/* 头像样式  */
 #headPhoto {
 	border: 1px solid #9E9E9E;
 	width: 100px;
 	height: 100px;
 }
-
+/* panel-body的内边距设置 */
 .panel-body {
 	padding: 0px;
 }
-
+/*设置头部的内边距*/
 .padding_head {
 	padding: 20px;
 }
-
+/*设置头像居中*/
 .padding_head_img {
 	text-align: center;
+}
+/*设置图片的操作隐藏*/
+#userImgHiddenText {
+	visibility: hidden;
 }
 /* 超出的文本用省略号代替:
 	必须定义一个宽度
@@ -67,23 +41,65 @@ span.emotion:hover {
 } */
 </style>
 
-<article
-	class="col-md-12 work-together-dev-height-2000  work-together-shadow work-together-deep">
+<article class="col-md-12   work-together-shadow work-together-deep">
 	<c:if test="${user!=null }">
 		<!--我的信息-->
 		<section class="panel">
 			<div class="panel-title">我的信息</div>
 			<div class="panel-body">
-				<div class="col-md-12 padding_head padding_head_img">
+				<div id="personal_headImg_border"
+					class="col-md-12 padding_head padding_head_img">
 					<c:if test="${user.userHeadImgPath=='无'}">
-						<img id="headPhoto" class="img-circle" src="personal/img/head.gif"
-							style="width: 80px; height: 100px;" title="我的头像" alt="我的头像" />
+						<img id="headPhoto" class="img-thumbnail"
+							src="personal/img/head.gif" title="我的头像" alt="我的头像" />
+
 					</c:if>
 					<c:if test="${user.userHeadImgPath!='无' }">
-						<img id="headPhoto" class="img-circle"
+						<img id="headPhoto" class="img-thumbnail"
 							src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}"
 							title="我的头像" alt="我的头像" />
 					</c:if>
+					<div class="caption" id="userImgHiddenText">
+						<p>
+							<a id="modal-headImg" href="#modal-container-headImg"
+								role="button" class="btn" data-toggle="modal">修改 </a><a href="#"
+								class="btn" role="button">删除</a>
+						</p>
+					</div>
+
+					<div class="modal fade" id="modal-container-headImg" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">标题</h4>
+								</div>
+								<!-- 修改头像的表单 -->
+								<form action="personal/user/updateUserHeadImgPathById"
+									enctype="multipart/form-data" class="form-horizontal"
+									role="form" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
+											<div class="col-md-8">
+												<input class="form-control file" name="fileHeadImg"
+													type="file" id="userHeadImgPath" multiple
+													data-min-file-count="1" />
+											</div>
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">关闭</button>
+										<input type="submit" class="btn btn-primary" value="保存" />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-12 padding_head">
 					<!--我的信息左边文字-->
@@ -102,7 +118,8 @@ span.emotion:hover {
 					<c:if test="${user.userRealName=='无' }">
 						<div class="row">
 							<p class="col-md-12">
-								请<a href="javascript:ajaxTest('personal/user/personal_register_real')">实名认证</a>
+								请<a
+									href="javascript:ajaxTest('personal/user/personal_register_real')">实名认证</a>
 							</p>
 						</div>
 					</c:if>
@@ -122,7 +139,8 @@ span.emotion:hover {
 					<c:if test="${user.userName=='无' }">
 						<div class="row">
 							<p class="col-md-12">
-								请<a href="javascript:ajaxTest('personal/user/personal_register_other')">完善信息</a>
+								请<a
+									href="javascript:ajaxTest('personal/user/personal_register_other')">完善信息</a>
 							</p>
 						</div>
 					</c:if>
@@ -223,3 +241,30 @@ span.emotion:hover {
 		</div>
 	</section>
 </article>
+<script type="text/javascript">
+	$("#userHeadImgPath").fileinput({
+		'language' : 'zh',
+		'uploadAsync' : false,
+		'showUpload' : false,
+		'previewFileType' : 'any'
+	});
+	var ajaxTest = function(page) {
+		$.ajax({
+			url : "personal/user/ajax",
+			data : "page=" + page,
+			type : "POST",
+			dataType : "html",
+			success : function(data) {
+				$("#my-content").html(data);
+			}
+		});
+	}
+	$(document).ready(function() {
+		$('#personal_headImg_border').mousemove(function() {
+			$("#userImgHiddenText").css("visibility", "visible");
+		});
+		$("#personal_headImg_border").mouseleave(function() {
+			$("#userImgHiddenText").css("visibility", "hidden");
+		});
+	});
+</script>

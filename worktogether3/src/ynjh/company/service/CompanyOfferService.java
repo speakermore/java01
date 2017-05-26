@@ -5,14 +5,22 @@ import java.util.List;
 import ynjh.company.entity.Offer;
 
 public interface CompanyOfferService {
+	// 发送offer
 	public int addOffer(Offer offer);
+	// 修改offer的状态
 	public int updateOfferAction(Integer id,Integer offerAction);
-	
-	public List<Offer> findCompanyOffers(Integer companyId,Integer page);
+
+	// 计算当前公司发出的所有offer所占页数
 	public int findCompanyOffersPage(Integer companyId);
+	// 查找当前公司发出的所有offer
+	public List<Offer> findCompanyOffers(Integer companyId,Integer page);
+	// 查找当前公司发出的某条offer（根据id查询）
 	public Offer findCompanyOffer(Integer id);
-	
-	public List<Offer> findUserOffers(Integer userId,Integer page);
+
+	// 计算当前用户收到的所有offer所占页数
 	public int findUserOffersPage(Integer userId);
+	// 查找当前用户收到的所有offer
+	public List<Offer> findUserOffers(Integer userId,Integer page);
+	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
 }

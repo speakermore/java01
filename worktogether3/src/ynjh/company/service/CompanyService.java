@@ -21,5 +21,5 @@ public interface CompanyService {
 	//修改密码
 	public Integer updatePassword(Integer id,String newPassword);
 	//修改公司环境图片
-	public Integer updateImg(Integer id,String companyDetailImg);
+	public Integer updateImg(Integer id,String companyDetailImg,Integer companyDetailDiscInt);
 }

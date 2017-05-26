@@ -4,10 +4,11 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
-<%@include file="/WEB-INF/pages/nav.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -18,7 +19,7 @@
 							<button type="button" class="close" data-dismiss="alert"
 								aria-hidden="true">×</button>
 							<h4>注意!</h4>
-							文章写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
+							文章写完需要审核通过后才能发表. <a href="personal/user/gotoIndex"
 								class="alert-link">返回首页</a>
 						</div>
 						<%@include
@@ -30,6 +31,6 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+	
 </body>
 </html>

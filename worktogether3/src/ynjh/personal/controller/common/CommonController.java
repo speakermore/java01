@@ -17,6 +17,7 @@ import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
 import ynjh.company.service.CompanyIntService;
+import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.ArticleByFollow;
@@ -64,6 +65,8 @@ public class CommonController {
 	private CompanyService companyService;
 	@Resource
 	private CompanyIntService companyIntService;
+	@Resource
+	private CompanyOfferService companyOfferService;
 
 	/**
 	 * 主页对象获取中转
@@ -92,12 +95,20 @@ public class CommonController {
 		}
 
 		// 我收到的面试邀请
-		List<Offer> offers = rService.findMyReceiveOffer(userId);
+		List<Offer> offers=companyOfferService.findUserOffers(userId,toPage);
+		int maxPage=companyOfferService.findUserOffersPage(userId);
+		if (offers.size() > 0) {
+			session.setAttribute("offers", offers);
+			session.setAttribute("maxPage",maxPage);
+		} else {
+			session.setAttribute("offers", null);
+		}
+		/*List<Offer> offers = rService.findMyReceiveOffer(userId);
 		if (offers.size() > 0) {
 			session.setAttribute("offers", offers);
 		} else {
 			session.setAttribute("offers", null);
-		}
+		}*/
 
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
@@ -207,7 +218,7 @@ public class CommonController {
 		companyresume.setCompanyId(companyId);
 		companyresume.setResumeId(resumeId);
 		companyresume.setCompanyResumeId(companyResumeId);
-		companyresume.setCompanyrecruitId(companyrecruitId);
+		companyresume.setCompanyRecruitId(companyrecruitId);
 		companyresume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result = rService.sendResumeToCompany(companyresume);
 		if (result > 0) {

@@ -2,32 +2,52 @@
 	pageEncoding="UTF-8"%>
 <!--发表状态小节-->
 <section class="panel">
-	<form role="form" class="form-horizontal"
-		action="personal/user/updateUser" method="post"
+	<form role="form" class="form-horizontal" method="post"
 		id="updatePasswordForm">
 		<div class="form-group">
 			<label for="usersPassword" class="col-md-3 control-label">密码：</label>
 			<div class="col-md-8">
 				<input type="password" class="form-control" id="usersPassword"
-					name="userPassword" placeholder="密码" />
+					name="userPassword" placeholder="密码" autocomplete="off"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="confirmPassword" class="col-md-3 control-label">确认密码：</label>
 			<div class="col-md-8">
 				<input type="password" class="form-control" id="confirmPassword"
-					name="confirmPassword" placeholder="确认密码" />
+					name="confirmPassword" placeholder="确认密码" autocomplete="off" />
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-md-offset-9">
-				<input class="btn btn-success" type="submit" value="完成" /> <input
-					class="btn btn-success" type="reset" value="重置" />
+				<input class="btn btn-success" type="button"  onclick="ajaxFormUpdatePassword();"  value="完成" />
+				<input class="btn btn-success" type="reset" value="重置" />
 			</div>
 		</div>
 	</form>
 </section>
 <script type="text/javascript">
+	function ajaxFormUpdatePassword(){
+		var form = new FormData(document.getElementById("updatePasswordForm"));
+		$.ajax({
+            url:"personal/user/updateUserPasswordById",
+            type:"post",
+            data:form,
+            dataType:"json",
+            processData:false,
+            contentType:false,
+            success:function(data){
+            	if (data.status=='success') {
+            		alert("恭喜你，密码修改成功！");
+            		window.location.href="personal/user/login";
+				}else if(data.status=='error'){
+					alert("很遗憾,密码修改失败！");
+					window.location.href="personal/user/gotoIndex";
+				} 
+            }
+        });        
+	}
+
 	$("#updatePasswordForm").bootstrapValidator({
 		message : '这个值不能通过验证！！',
 		feedbackIcons : {

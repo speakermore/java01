@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update company set companyPassword=#{companyPassword} where id=#{id}
 	</update>
 	<update id="updateImg">
-		update companyDetailImg set companyDetailImg=#{companyDetailImg} where id=#{id}
+		update companyDetailImg set companyDetailImg=#{companyDetailImg} where id=#{id} and companyDetailDisc=#{companyDetailDisc}
 	</update>
 	<select id="findByloginIdAndPassword" resultType="Company">
 		select * from company where companyLoginId=#{companyLoginId} and companyPassword=#{companyPassword}

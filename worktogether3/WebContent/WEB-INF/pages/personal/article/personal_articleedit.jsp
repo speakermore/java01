@@ -4,10 +4,11 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
-<%@include file="/WEB-INF/pages/nav.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -24,14 +25,10 @@
 						<%@include
 							file="/WEB-INF/pages/personal/article/personal_articleedit_index.jsp"%>
 					</div>
-					<%-- <div class="col-md-4 column ">
-						<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
-					</div> --%>
 					<div class="col-md-1 column"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </body>
 </html>

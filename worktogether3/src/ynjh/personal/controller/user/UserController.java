@@ -1,27 +1,17 @@
 package ynjh.personal.controller.user;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
+
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,12 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.common.util.GetAge;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
-import ynjh.company.entity.Company;
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.User;
@@ -105,15 +93,15 @@ public class UserController {
 				for (UserAndResume userAndResume : userAndResumes) {
 					Follow follow =fService.findIsFollowByFollowIdAndFollowId(user.getId(), userAndResume.getId());
 					if (follow==null) {
+						try {
+							userAndResume.setAge(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
+							userAndResume.setWorks(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
 						userAndResume.setIsFoucse(false);
 					}else {
 						userAndResume.setIsFoucse(true);
-					}
-					try {
-						userAndResume.setAge(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
-						userAndResume.setWorks(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
-					} catch (ParseException e) {
-						e.printStackTrace();
 					}
 				}
 		         if("1".equals(re_remember)){ //"1"表示用户勾选记住密码
@@ -123,7 +111,7 @@ public class UserController {
 		             String loginInfo = userLoginId+","+userPassword;
 		             Cookie userCookie=new Cookie("loginInfo",loginInfo); 
 
-		             userCookie.setMaxAge(30*24*60*60);   //存活期为一个月 30*24*60*60
+		             userCookie.setMaxAge(7*24*60*60);   //存活期为一个月 30*24*60*60
 		             userCookie.setPath("/");
 		             response.addCookie(userCookie);
 		         }
@@ -368,15 +356,13 @@ public class UserController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public ModelAndView updateUser(User user,MultipartFile fileHeadImg, HttpSession session) {
+	public ModelAndView updateUser(User user, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User oldUser =(User) session.getAttribute("user");
 		user.setId(oldUser.getId());
 		user.setUserLoginId(oldUser.getUserLoginId());
-		user.setUserHeadImgPath(UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
-				new MultipartFile[] { fileHeadImg }, session)[0]);
 		user.setUserRealName(oldUser.getUserRealName());
+		user.setUserHeadImgPath(oldUser.getUserHeadImgPath());
 		int result = uService.updateUser(user);
 		if (result > 0) {
 			session.setAttribute("user", user);
@@ -443,6 +429,48 @@ public class UserController {
 	}
 
 	/**
+	 * 修改用户密码
+	 */
+	@RequestMapping(value="/updateUserPasswordById",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> updateUserPasswordById(String userPassword,HttpSession session){
+		User user=(User) session.getAttribute("user");
+		 Map<String, String> map =new HashMap<String, String>();
+		String md5userPassword = null;
+		try {
+			md5userPassword = MD5Util.md5Encode(userPassword);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int result=uService.updateUserPasswordById(md5userPassword, user.getId());
+		if (result>0) {
+			session.invalidate();
+			map.put("status", "success");
+			return map;
+		}else {
+			map.put("status", "error");
+			return map;
+		}
+	}
+	/**
+	 * 修改用户头像
+	 */
+	@RequestMapping(value="/updateUserHeadImgPathById",method=RequestMethod.POST)
+	public String updateUserHeadImgPathById(MultipartFile fileHeadImg,HttpSession session){
+		User oldUser=(User) session.getAttribute("user");
+		String urlName=UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
+				new MultipartFile[] { fileHeadImg }, session)[0];
+		oldUser.setUserHeadImgPath(urlName);
+		int result=uService.updateUserHeadImgPathById(urlName, oldUser.getId());
+		if (result>0) {
+			session.setAttribute("user",oldUser);
+			return "redirect:../common/initIndex?toPage=1&userId=" + oldUser.getId();
+		}else {
+			return "error";
+		}
+	}
+	/**
 	 * 跳转测试页面
 	 * 
 	 * @return
@@ -459,5 +487,6 @@ public class UserController {
 	public ModelAndView ajax(String page){
 		return new ModelAndView(page);
 	}
+	
 
 }
