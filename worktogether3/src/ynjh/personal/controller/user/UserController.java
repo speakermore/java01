@@ -482,6 +482,13 @@ public class UserController {
 		return "personal/user/personal_companylist";
 	}
 	
+	/**
+	 * 主页的ajax显示
+	 * @param page
+	 * @return
+	 * 
+	 * ModelAndView
+	 */
 	@RequestMapping("/ajax")
 	@ResponseBody
 	public ModelAndView ajax(String page){

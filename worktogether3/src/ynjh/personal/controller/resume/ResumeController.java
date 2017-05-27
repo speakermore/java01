@@ -184,13 +184,13 @@ public class ResumeController {
 	 * 
 	 * 		ModelAndView
 	 */
-	@RequestMapping(value = "/updateResume", method = RequestMethod.GET)
-	public ModelAndView gotoResume(Integer resumeId) {
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping("/updateResumeById")
+	@ResponseBody
+	public ModelAndView updateResumeById(String page,Integer resumeId,HttpSession session) {
+		ModelAndView mv = new ModelAndView(page);
 		Resume resume = rService.findResumeById(resumeId);
 		if (resume != null) {
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_updateresume");
+			session.setAttribute("resume_update", resume);
 		}
 		return mv;
 	}

@@ -87,7 +87,7 @@ a:focus {
 				style="padding-top: 35px; padding-left: 35px;">
 				<!-- 修改图标开始 -->
 				<a class="col-md-offset-10"
-					href="personal/resume/updateResume?resumeId=${resume.id }"><span
+					href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span
 					class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<!-- 修改图标结束 -->
 				<h4 class="media-heading"
@@ -109,7 +109,7 @@ a:focus {
 		<div class="panel-group">
 			<!-- 展开内容 -->
 			<div class="panel-heading">
-				<a class="panel-title col-md-offset-9" data-toggle="collapse"
+				<a class="panel-title col-md-offset-10" data-toggle="collapse"
 					data-parent="#panel" href="#panel-element-more">更多展开 <span
 					class="glyphicon glyphicon-chevron-down"></span></a>
 			</div>
@@ -335,13 +335,16 @@ a:focus {
 							<label class="control-label">工作描述：</label>${work.workDescription }
 						</div>
 						<div class="col-md-12 column">
-							<label class="control-label">工作时间：</label><fmt:formatDate
-									value="${work.workBeginTime }" pattern="yyyy-MM-dd" />到<fmt:formatDate
-									value="${work.workEndTime }" pattern="yyyy-MM-dd" />
+							<label class="control-label">工作时间：</label>
+							<fmt:formatDate value="${work.workBeginTime }"
+								pattern="yyyy-MM-dd" />
+							到
+							<fmt:formatDate value="${work.workEndTime }" pattern="yyyy-MM-dd" />
 						</div>
 						<div class="col-md-12 col-md-offset-10 column">
-							<a href="#">编辑</a>|<a
-								href="personal/resume/deleteResumeWork?id=${work.id}">删除</a>
+							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
+								href="personal/resume/deleteResumeWork?id=${work.id}"><span
+								class="glyphicon glyphicon-trash"></span></a>
 						</div>
 					</div>
 				</c:forEach>
@@ -448,8 +451,9 @@ a:focus {
 								pattern="yyyy-MM-dd" />
 						</div>
 						<div class="col-md-12 col-md-offset-10 column">
-							<a href="#">编辑</a>|<a
-								href="personal/resume/deleteResumeProject?id=${pro.id }">删除</a>
+							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
+								href="personal/resume/deleteResumeProject?id=${pro.id }"><span
+								class="glyphicon glyphicon-trash"></span></a>
 						</div>
 					</div>
 				</c:forEach>
@@ -547,8 +551,9 @@ a:focus {
 								pattern="yyyy-MM-dd" />
 						</div>
 						<div class="col-md-12 col-md-offset-10 column">
-							<a href="#">编辑</a>|<a
-								href="personal/resume/deleteResumeEducation?id=${edu.id }">删除</a>
+							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
+								href="personal/resume/deleteResumeEducation?id=${edu.id }"><span
+								class="glyphicon glyphicon-trash"></span></a>
 						</div>
 					</div>
 				</c:forEach>
@@ -859,4 +864,15 @@ a:focus {
 			}
 		});
 	});
+	var ajaxPageById = function(page, id) {
+		$.ajax({
+			url : "personal/resume/updateResumeById",
+			data : "page=" + page + "&resumeId=" + id,
+			type : "POST",
+			dataType : "html",
+			success : function(data) {
+				$("#my-content").html(data);
+			}
+		});
+	}
 </script>

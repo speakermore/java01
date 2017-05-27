@@ -59,7 +59,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">个人用户注册</button>
+					<button class="btn btn-lg btn-success btn-block" type="submit">个人用户注册</button>
 
 				</form>
 			</div>

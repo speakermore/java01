@@ -24,6 +24,11 @@
 <link rel="stylesheet"
 	href="thirdpart/dist/css/bootstrapValidator.min.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
+<style type="text/css">
+#validateCodeToolTip{
+color: red;
+}
+</style>
 </head>
 <body>
 	<!--wt-姓名首字母-相关文字-->
@@ -45,6 +50,9 @@
 						<label for="userPassword" class="sr-only">密码</label> <input
 							type="password" id="userPassword" class="form-control "
 							name="userPassword" placeholder="密码" required>
+							<c:if test="${errorInfo!=null }">
+								<div id="validateCodeToolTip">${errorInfo }</div>
+							</c:if>
 						<!-- <div  role="tooltip" class="tooltip fade right in"></div> -->
 					</div>
 					<div class="form-group i_height">
@@ -75,7 +83,7 @@
 								id="remFlag">记住密码 <a href="#" class="col-md-offset-6">忘记密码？</a>
 						</div>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+					<button class="btn btn-lg btn-success btn-block" type="submit">登录</button>
 				</form>
 			</div>
 		</div>

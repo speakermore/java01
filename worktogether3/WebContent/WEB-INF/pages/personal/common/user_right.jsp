@@ -85,7 +85,7 @@
 											<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
 											<div class="col-md-8">
 												<input class="form-control file" name="fileHeadImg"
-													type="file" id="userHeadImgPath" multiple
+													type="file" id="userHeadImgPathIndex" multiple
 													data-min-file-count="1" />
 											</div>
 										</div>
@@ -242,7 +242,7 @@
 	</section>
 </article>
 <script type="text/javascript">
-	$("#userHeadImgPath").fileinput({
+	$("#userHeadImgPathIndex").fileinput({
 		'language' : 'zh',
 		'uploadAsync' : false,
 		'showUpload' : false,

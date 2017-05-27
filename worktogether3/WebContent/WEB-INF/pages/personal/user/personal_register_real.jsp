@@ -76,11 +76,11 @@
 									stringLength : {
 										min : 2,
 										max : 10,
-										message : '真实姓名长度必须在2到10位之间'
+										message : '请输入正确姓名'
 									},
 									regexp : {
 										regexp : (/[\u4e00-\u9fa5]/g),
-										message : "请输入中文名字"
+										message : "请输入正确姓名"
 									}
 								}
 							},

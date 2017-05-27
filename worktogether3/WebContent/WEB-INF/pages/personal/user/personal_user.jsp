@@ -37,7 +37,7 @@
 					<c:if test="${offer!=null }">
 						<section class="panel">
 							<div class="panel-body">
-								你收到${offer.companyName }的职位邀请<<<a href="#">${offer.offerJob }</a>>>
+								你收到<a href="#">${offer.companyName }</a>的职位邀请<<<a href="#">${offer.offerJob }</a>>>
 							</div>
 							<div class="panel-footer work-together-right">
 								1分钟前.<a href="#">更多....</a>
@@ -84,65 +84,6 @@
 						</div>
 					</section>
 				</div>
-			</div>
-			<div class="tab-pane" id="panel-myResume"></div>
-			<div class="tab-pane" id="panel-myArticle"></div>
-			<div class="tab-pane" id="panel-myReal">
-				<p>实名认证</p>
-			</div>
-			<div class="tab-pane" id="panel-myOther">
-				<p>完善信息</p>
-			</div>
-			<div class="tab-pane" id="panel-updateUser">
-				<p>修改用户信息</p>
-			</div>
-			<div class="tab-pane" id="panel-lookUser">
-				<p>查看个人信息</p>
-			</div>
-			<div class="tab-pane" id="panel-lookByDelete">
-				<p>查看删除记录</p>
-			</div>
-			<div class="tab-pane" id="panel-myPass">
-				<p>我的密码</p>
-			</div>
-			<div class="tab-pane" id="panel-myAmount">
-				<p>我的额度</p>
-			</div>
-			<div class="tab-pane" id="panel-shareAmoun">
-				<p>分享额度</p>
-			</div>
-			<div class="tab-pane" id="panel-rechargeAmount">
-				<p>充值额度</p>
-			</div>
-			<div class="tab-pane" id="panel-myFollowCompany">
-				<p>我屏蔽的公司</p>
-			</div>
-			<div class="tab-pane" id="panel-followMeCompany">
-				<p>关注我的公司</p>
-			</div>
-			<div class="tab-pane" id="panel-myDeliveryResume">
-				<p>我投过的简历</p>
-			</div>
-			<div class="tab-pane" id="panel-myReceivedInvitation">
-				<p>我收到的邀请</p>
-			</div>
-			<div class="tab-pane" id="panel-myReleaseChips">
-				<p>我发布的众筹</p>
-			</div>
-			<div class="tab-pane" id="panel-myParticipateChips">
-				<p>我参加的众筹</p>
-			</div>
-			<div class="tab-pane" id="panel-myReleaseStartup">
-				<p>我发布的创业</p>
-			</div>
-			<div class="tab-pane" id="panel-myParticipateStartup">
-				<p>我参加的创业</p>
-			</div>
-			<div class="tab-pane" id="panel-myReleaseArticle">
-				<p>我发表的文章</p>
-			</div>
-			<div class="tab-pane" id="panel-myEvaluate">
-				<p>我的评价</p>
 			</div>
 		</div>
 	</section>

@@ -30,7 +30,7 @@
 	<c:if test="${offer!=null }">
 		<section class="panel">
 			<div class="panel-body">
-				你收到${offer.companyName }的职位邀请<<<a href="#">${offer.offerJob }</a>>>
+				你收到@<a href="#">${offer.companyName }</a>的职位邀请<<<a href="#">${offer.offerJob }</a>>>
 			</div>
 			<div class="panel-footer work-together-right">
 				1分钟前.<a href="#">更多....</a>
@@ -43,7 +43,7 @@
 		<c:forEach items="${articleByFollows }" var="abf">
 			<section class="panel">
 				<div class="panel-body">
-					${abf.userName }发表了<<<a href="#">${abf.articleTitle }</a>>>
+					@<a href="#">${abf.userName}</a>发表了<<<a href="#">${abf.articleTitle }</a>>>
 				</div>
 				<div class="panel-footer work-together-right">
 					1分钟前.<a href="#">更多....</a>
