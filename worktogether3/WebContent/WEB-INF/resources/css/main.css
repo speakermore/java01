@@ -16,6 +16,15 @@ hr{
 .work-together-red{
 	color:#fa941b;
 }
+
+/* 设置一个通用的无序列表的样式，让列表项之间的间隔拉大 */
+.work-together-list li{
+	margin-bottom:10px;
+}
+/* 设置子标题与标题之间的间隔，缩小它们之间的间隔 */
+.work-together-subtitle{
+	margin-top:-8px;
+}
 /* .work-together-deep{
     	background-color: #f98905;
 } */
@@ -37,14 +46,11 @@ hr{
 .navbar-default	.navbar-nav li a{
 		color:#777;
 }
-a:focus, a:hover{
-	color:#fa941b;
-}
 .navbar-default	.navbar-nav .active a{
 		color:#000;
 		background-color:#fcdab1;
 }
- body{
+body{
 	padding-top:100px ;
 } 
 /*
@@ -65,21 +71,31 @@ ul.work-together-nav>li>a:hover{
    	color:#000;
    	background-color: #fcdab1;
    }
+   /* 默认超链接的样式 */
    a{
    	color:#777;
    }
+   a:focus, a:hover{
+		color:#fa941b;
+	}
    .sidebar{
-   	background-color: #eef8fd;
+   		background-color: #eef8fd;
    }
-
-.btn-success{
+/* 默认按钮样式的修正 */
+.btn-success,.btn-primary{
 	background-color: #fa941b;
 	border-color: #fd6001;
 }
-.btn-success:hover{
+.btn-success:hover,.btn-primary:hover,
+.btn-success:focus,.btn-primary:focus,
+.btn-success:active,.btn-primary:active,
+.btn-success:active:focus,.btn-primary:active:focus,
+.btn-success[disabled]:hover,.btn-primary[disabled]:hover{
 	background-color:#be5515;
 	border-color: #e56618;
 }
+/* 重设面板的内间隔，原来的感觉太宽了 */
 .panel-body{
 	padding: 30px;
 }
+
