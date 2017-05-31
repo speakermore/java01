@@ -4,11 +4,12 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
-<%@include file="/WEB-INF/pages/nav.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -45,7 +46,27 @@
 				autoclose : true,
 				todayHighlight : true,
 				minView : "month"
-			});
+			}).on(
+					"click",
+					function() {
+						$("#resumeBirthday").datetimepicker("setEndDate",
+								$("#resumeWorks").val())
+					});
+
+			$("#resumeWorks").datetimepicker({
+				format : 'yyyy-mm-dd',
+				language : 'zh-CN',
+				startDate : '1900-01-01', //选择器的开始日期
+				autoclose : true,
+				todayHighlight : true,
+				minView : "month"
+			}).on(
+					"click",
+					function() {
+						$("#resumeWorks").datetimepicker("setStartDate",
+								$("#resumeBirthday").val())
+					});
+
 			$("#resumeGraduationTime").datetimepicker({
 				format : 'yyyy-mm-dd',
 				language : 'zh-CN',
@@ -54,14 +75,7 @@
 				todayHighlight : true,
 				minView : "month"
 			});
-			$("#resumeWorks").datetimepicker({
-				format : 'yyyy-mm-dd',
-				language : 'zh-CN',
-				startDate : '1900-01-01', //选择器的开始日期
-				autoclose : true,
-				todayHighlight : true,
-				minView : "month"
-			});
+
 			/* 	$("#time").blur(function() {
 					alert(typeof ("#time"))
 				}); */
@@ -93,12 +107,7 @@
 								min : 0,
 								max : 50,
 								message : '请正确输入的标题'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请正确输入的标题"
 							}
-
 						}
 					},
 					resumeName : {
@@ -110,22 +119,13 @@
 								min : 2,
 								max : 10,
 								message : '请输入正确的名字'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入正确的名字"
 							}
-
 						}
 					},
 					resumeWorks : {
 						validators : {
 							notEmpty : {
 								message : '工作年限不能为空'
-							},
-							regexp : {
-								regexp : /^[0-9]+$/,
-								message : '请输入正确的工作年限'
 							}
 						}
 					},
@@ -155,12 +155,7 @@
 								min : 0,
 								max : 10,
 								message : '请输入正确的民族'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入正确的民族"
 							}
-
 						}
 					},
 					resumePlace : {
@@ -169,15 +164,10 @@
 								min : 0,
 								max : 50,
 								message : '请输入正确籍贯'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入正确籍贯"
 							}
-
 						}
 					},
-					resumeBirthday:{
+					resumeBirthday : {
 						validators : {
 							notEmpty : {
 								message : '出生日期不能为空'
@@ -190,12 +180,7 @@
 								min : 0,
 								max : 20,
 								message : '请正确的输入学历'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请正确的输入学历"
 							}
-
 						}
 					},
 					resumeGraduationSchool : {
@@ -204,12 +189,7 @@
 								min : 0,
 								max : 50,
 								message : '请正确的输入毕业学校'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请正确的输入毕业学校"
 							}
-
 						}
 					},
 					resumeMajor : {
@@ -218,12 +198,7 @@
 								min : 0,
 								max : 20,
 								message : '请正确的输入专业'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请正确的输入专业"
 							}
-
 						}
 					},
 					resumePhone : {
@@ -324,20 +299,22 @@
 								message : '邮箱地址格式有误'
 							}
 						}
-					},resumeGraduationTime : {
+					},
+					resumeGraduationTime : {
 						validators : {
 							notEmpty : {
 								message : '请选择毕业时间'
 							}
 						}
-					},resumeHouseAddress : {
+					},
+					resumeHouseAddress : {
 						validators : {
 							notEmpty : {
 								message : '请输入家庭地址'
 							}
 						}
 					},
-					resumeMarriage: {
+					resumeMarriage : {
 						validators : {
 							notEmpty : {
 								message : '请选择婚姻状况'

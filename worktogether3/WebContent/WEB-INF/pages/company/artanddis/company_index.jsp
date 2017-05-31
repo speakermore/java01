@@ -291,7 +291,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br />
 			<div>
 				<c:if test="${disUserId==company.id }">
-					<form action="company/artanddis/discuss/add_companydiscuss" method="post">
+				<!-- company/artanddis/discuss/add_companydiscuss -->
+					<form action="personal/discuss/addDiscuss?companyId=${company.id}" method="post">
 						<div class="form-group col-sm-12">
 							<input type="hidden" name="discussLevel" id="discussLevel" />
 						   	<label class="col-sm-2">评价星级</label>

@@ -21,7 +21,6 @@ import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.ArticleByFollow;
-import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -98,10 +97,10 @@ public class CommonController {
 		List<Offer> offers=companyOfferService.findUserOffers(userId,toPage);
 		int maxPage=companyOfferService.findUserOffersPage(userId);
 		if (offers.size() > 0) {
-			session.setAttribute("offers", offers);
+			session.setAttribute("personal_offers_list", offers);
 			session.setAttribute("maxPage",maxPage);
 		} else {
-			session.setAttribute("offers", null);
+			session.setAttribute("personal_offers_list", null);
 		}
 		/*List<Offer> offers = rService.findMyReceiveOffer(userId);
 		if (offers.size() > 0) {
@@ -144,7 +143,7 @@ public class CommonController {
 		}
 		// 获取最新面试消息
 		Offer offer = nService.findNewlyFaceByUserId(userId);
-		session.setAttribute("offer", offer);
+		session.setAttribute("personal_offer", offer);
 
 		// 最新发布文章
 		Article articleNewly = aService.findNewlyArticleByUserId(userId);
@@ -156,9 +155,14 @@ public class CommonController {
 
 		// 文章未删除
 		List<Article> articles = aService.findUserArticle(toPage, userId);
-		int maxArticlePage = aService.getMaxArticleById(userId);
-		session.setAttribute("articles", articles);
-		session.setAttribute("maxArticlePage", maxArticlePage);
+		if (articles.size()>0) {
+			int maxArticlePage = aService.getMaxArticleById(userId);
+			session.setAttribute("personal_article_list", articles);
+			session.setAttribute("maxArticlePage", maxArticlePage);
+		}else {
+			session.setAttribute("personal_article_list", null);
+		}
+		
 		// 获取评论内容
 		Mood mood = mService.selectMoodById(userId);
 		session.setAttribute("mood", mood);
@@ -197,6 +201,7 @@ public class CommonController {
 		ModelAndView mv = new ModelAndView();
 		Company company = companyService.findCompany(id);
 		CompanyIntroduction companyInt = companyIntService.findById(company.getId());
+		
 		session.setAttribute("company", company);
 		session.setAttribute("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");

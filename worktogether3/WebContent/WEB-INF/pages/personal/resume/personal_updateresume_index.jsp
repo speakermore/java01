@@ -358,7 +358,7 @@
 		$("#resumeFLType").val(resumeFLType);
 		$("#resumeEnglishGrade").val(resumeEnglishGrade);
 		$("#resumeComputerAbility").val(resumeComputerAbility);
-
+		
 		$("#resumeWorks").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -366,7 +366,13 @@
 			autoclose : true,
 			todayHighlight : true,
 			minView : "month"
-		});
+		}).on(
+				"click",
+				function() {
+					$("#resumeWorks").datetimepicker("setEndDate",
+							$("#resumeBirthday").val())
+				});
+
 		$("#resumeBirthday").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -374,7 +380,13 @@
 			autoclose : true,
 			todayHighlight : true,
 			minView : "month"
-		});
+		}).on(
+				"click",
+				function() {
+					$("#resumeBirthday").datetimepicker("setStartDate",
+							$("#resumeWorks").val())
+				});
+
 		$("#resumeGraduationTime").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',

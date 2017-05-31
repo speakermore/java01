@@ -1,22 +1,15 @@
 package ynjh.personal.controller.resume;
 
-import java.util.Date;
 import java.util.List;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import javax.annotation.Resource;
-import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import ynjh.common.util.UploadFile;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -753,7 +746,7 @@ public class ResumeController {
 		return "personal/resume/test";
 	}
 	/**
-	 * 发送简历
+	 * 发送简历(只能发送已审核的)
 	 * 参数
 	 * companyId 公司id,
 	 * resumeId 简历id,
@@ -785,7 +778,5 @@ public class ResumeController {
 		}
 		return mv;
 	}
-
-	
 
 }

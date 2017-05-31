@@ -41,7 +41,7 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="personal_follow_list">
 									<c:forEach items="${UserFollows }" var="fol">
 										<tr>
 											<td><a href="#">${fol.resumeJor }</a></td>
@@ -76,7 +76,7 @@
 				dataType : "json",
 				success : function(data) {
 					alert(data.operatorInfo);
-
+					$("#personal_follow_list").html(data.UserFollows);
 				}
 			});
 		}

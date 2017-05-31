@@ -34,10 +34,12 @@
 						<div class="panel-title">最新动态</div>
 					</section>
 					<!-- 面试邀请开始 -->
-					<c:if test="${offer!=null }">
+					<c:if test="${personal_offer!=null }">
 						<section class="panel">
 							<div class="panel-body">
-								你收到<a href="#">${offer.companyName }</a>的职位邀请<<<a href="#">${offer.offerJob }</a>>>
+								你收到@<a
+									href="personal/common/gotoCompanyById?id=${personal_offer.companyId}">${personal_offer.companyName }</a>的职位邀请<<<a
+									href="#">${personal_offer.offerJob }</a>>>
 							</div>
 							<div class="panel-footer work-together-right">
 								1分钟前.<a href="#">更多....</a>

@@ -124,6 +124,13 @@ public class UserController {
 		}
 		return mv;
 	}
+	
+	public ModelAndView cookielogin(String userLoginId, String userPassword){
+		ModelAndView mv=new ModelAndView();
+		
+		return mv;
+	} 
+	
 
 	/**
 	 * 退出 跳转登录 取消会话信息

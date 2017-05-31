@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-md-offset-8">
+			<div class="col-md-offset-9">
 				<input class="btn btn-success" type="submit" value="保存" /> <input
 					class="btn btn-success" type="reset" value="重置" />
 			</div>

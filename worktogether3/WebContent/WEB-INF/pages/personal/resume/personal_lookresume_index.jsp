@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="MARRY" value="${CommonStatus.MARRY }"></c:set>
+<c:set var="SEX" value="${CommonStatus.SEX }"></c:set>
+<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
 <style type="text/css">
 .test {
 	outline: 1px solid #E5E5E5;
@@ -92,10 +94,10 @@ a:focus {
 				<!-- 修改图标结束 -->
 				<h4 class="media-heading"
 					style="line-height: 35px; height: 35px; font-size: 20px;">
-					<label class="control-label">${resume.resumeName }</label>
+					<label class="control-label">${resume.resumeName }</label><small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small><small class="col-md-offset-3">${SEX[resume.resumeGender]}</small>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
-				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;${SEX[resume.resumeGender]}&nbsp;|&nbsp;<label>${resume.age}</label>岁(
+				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;&nbsp;|&nbsp;<label>${resume.age}</label>岁(
 					<fmt:formatDate value="${resume.resumeBirthday }"
 						pattern="yyyy/MM/dd" />
 					)&nbsp;|&nbsp;${resume.resumeJor }
@@ -326,7 +328,7 @@ a:focus {
 				<c:forEach items="${works }" var="work">
 					<div class="panel-body test personal_resume_defualt">
 						<div class="col-md-12 column">
-							<label class="control-label">企业名称：</label>${work.workFirmName }
+							<label class="control-label">企业名称：</label>${work.workFirmName }<small class="col-md-offset-8">(${AUDIT_STATUS[work.resumeType]})</small>
 						</div>
 						<div class="col-md-12 column">
 							<label class="control-label">工作岗位：</label>${work.workUnit }
@@ -434,7 +436,7 @@ a:focus {
 				<c:forEach items="${projs }" var="pro">
 					<div class="panel-body test personal_resume_defualt">
 						<div class="col-md-12 column">
-							<label class="control-label">项目名称：</label>${pro.projectName }
+							<label class="control-label">项目名称：</label>${pro.projectName }<small class="col-md-offset-8">(${AUDIT_STATUS[pro.resumeType]})</small>
 						</div>
 						<div class="col-md-12 column">
 							<label class="control-label">项目岗位：</label>${pro.projectJob }
@@ -537,7 +539,7 @@ a:focus {
 				<c:forEach items="${edus }" var="edu">
 					<div class="panel-body test personal_resume_defualt">
 						<div class="col-md-12 column">
-							<label class="control-label">学校名称：</label>${edu.educationSchool}
+							<label class="control-label">学校名称：</label>${edu.educationSchool}<small class="col-md-offset-8">(${AUDIT_STATUS[edu.resumeType]})</small>
 						</div>
 						<div class="col-md-12 column">
 							<label class="control-label">教育描述：</label>${edu.educationContent}
@@ -698,12 +700,7 @@ a:focus {
 							min : 2,
 							max : 50,
 							message : '学校名称必须在2到50位之间'
-						},
-						regexp : {
-							regexp : (/[\u4e00-\u9fa5]/g),
-							message : "请输入中文名字"
 						}
-
 					}
 				},
 				educationContent : {
@@ -715,12 +712,7 @@ a:focus {
 							min : 2,
 							max : 50,
 							message : '专业必须在2到50位之间'
-						},
-						regexp : {
-							regexp : (/[\u4e00-\u9fa5]/g),
-							message : "请输入中文名字"
 						}
-
 					}
 				},
 				educationBeginTime : {

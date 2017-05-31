@@ -23,9 +23,9 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 	}
 
 	@Override
-	public List<Discuss> findAll() {
+	public List<Discuss> findAll(Integer discussBySendId) {
 		
-		return cDiscussMapper.findAll();
+		return cDiscussMapper.findAll(discussBySendId);
 	}
 
 	@Override

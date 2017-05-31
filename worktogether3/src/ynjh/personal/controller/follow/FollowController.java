@@ -81,11 +81,14 @@ public class FollowController {
 	 */
 	@RequestMapping("/cancelUserFollow")
 	@ResponseBody
-	public HashMap<String, String> cancelUserFollow(Integer byFollowId,HttpSession session){
+	public HashMap<String, Object> cancelUserFollow(Integer byFollowId,HttpSession session){
 		int result=followService.deleteUserFollow(byFollowId);
-		HashMap<String, String> map=new HashMap<String, String>();
+		User oldUser =(User) session.getAttribute("user");
+		List<Follow> UserFollows = followService.selectUserFollow(oldUser.getId());
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		if (result > 0) {
 			map.put("operatorInfo", "取消关注成功！");
+			map.put("UserFollows", UserFollows);
 		} else {
 			map.put("operatorInfo", "取消关注失败！");
 		}

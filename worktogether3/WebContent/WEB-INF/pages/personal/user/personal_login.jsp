@@ -104,15 +104,18 @@ color: red;
 	<script type="text/javascript"
 		src="thirdpart/dist/js/language/zh_CN.js"></script>
 	<script type="text/javascript">
+		
 		$(document).ready(function() {
 			//记住密码功能
 			var str = getCookie("loginInfo");
-			str = str.substring(1, str.length - 1);
-			var userLoginId = str.split(",")[0];
-			var userPassword = str.split(",")[1];
-			//自动填充用户名和密码
-			$("#userLoginId").val(userLoginId);
-			$("#userPassword").val(userPassword);
+			if (str!=null) {
+				str = str.substring(1, str.length - 1);
+				var userLoginId = str.split(",")[0];
+				var userPassword = str.split(",")[1];
+				//自动填充用户名和密码
+				$("#userLoginId").val(userLoginId);
+				$("#userPassword").val(userPassword);
+			}
 		});
 
 		//获取cookie
@@ -145,67 +148,57 @@ color: red;
 				$("#remFlag").val("");
 			}
 		}
-		$(document)
-				
-		.ready(
-						function() {
-							$("#validateCode+a")
-									.click(
-											function() {
-												var path = "${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/";
-												$("img")
-														.attr(
-																"src",
-																path
-																		+ "admin/codeValidate?time="
-																		+ new Date()
-																				.getTime());
-											});
+		
+		$(document).ready(function(){
+			$("#validateCode+a").click(function() {
+				var path = "${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/";
+				$("img").attr("src",path+ "admin/codeValidate?time="+ new Date().getTime());
+		});
 
-							$("#loginForm").bootstrapValidator({
-								message : '这个值不能通过验证！！',
-								feedbackIcons : {
-									valid : 'glyphicon glyphicon-ok',
-									invalid : 'glyphicon glyphicon-remove',
-									validating : 'glyphicon glyphicon-refresh'
-								},
-								fields : {
-									userLoginId : {
-										validators : {
-											notEmpty : {
-												message : '用户名不能为空'
-											},
-											stringLength : {
-												min : 6,
-												max : 50,
-												message : '用户名长度必须在6到50位之间'
-											}
-										}
-									},
-									userPassword : {
-										validators : {
-											stringLength : {
-												min : 6,
-												max : 50,
-												message : '密码长度必须在6到50位之间'
-											},
-											regexp : {
-												regexp : /^[a-zA-Z0-9_]+$/,
-												message : '密码只能包含大写、小写、数字和下划线'
-											}
-										}
-									},
-									acceptTerms : {
-										validators : {
-											notEmpty : {
-												message : '你必须已阅读并同意服务条款'
-											}
-										}
-									}
-								}
+		$("#loginForm").bootstrapValidator({
+			message : '这个值不能通过验证！！',
+			feedbackIcons : {
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					userLoginId : {
+						validators : {
+							notEmpty : {
+								message : '用户名不能为空'
+							},
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '用户名长度必须在6到50位之间'
+							}
+						}
+					},
+					userPassword : {
+						validators : {
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '密码长度必须在6到50位之间'
+							},
+							regexp : {
+								regexp : /^[a-zA-Z0-9_]+$/,
+								message : '密码只能包含大写、小写、数字和下划线'
+							}
+						}
+					},
+					acceptTerms : {
+						validators : {
+							notEmpty : {
+								message : '你必须已阅读并同意服务条款'
+							}
+						}
+					}
+				}
 
-							});
-						});
+			});
+		});
 	</script>
 </body>
 </html>
