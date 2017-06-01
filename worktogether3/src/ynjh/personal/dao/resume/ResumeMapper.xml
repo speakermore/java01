@@ -12,12 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
 		resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
 		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg,resumeWorks,
-		resumeHouseAddress,resumeNowResidence,resumeEmail)
+		resumeHouseAddress,resumeNowResidence,resumeEmail,resumeEnglishGrade,resumeComputerAbility,resumeFLAbility,resumeFLType)
 		values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
 		#{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
 		#{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
 		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg},#{resumeWorks},
-		#{resumeHouseAddress},#{resumeNowResidence},#{resumeEmail})
+		#{resumeHouseAddress},#{resumeNowResidence},#{resumeEmail},#{resumeEnglishGrade},#{resumeComputerAbility},#{resumeFLAbility},#{resumeFLType})
 	</insert>
 	<!-- 修改简历 -->
 	<update id="updateResume" parameterType="Integer">
@@ -25,7 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumeTitle=#{resumeTitle},resumeName=#{resumeName},resumeGender=#{resumeGender},resumeNation=#{resumeNation},
 		resumePlace=#{resumePlace},resumeBirthday=#{resumeBirthday},resumeMarriage=#{resumeMarriage},resumeGraduationSchool=#{resumeGraduationSchool},resumeGraduationTime=#{resumeGraduationTime},
 		resumeEducation=#{resumeEducation},resumeMajor=#{resumeMajor},resumeWages=#{resumeWages},resumePhone=#{resumePhone},resumeQQ=#{resumeQQ},resumePersonality=#{resumePersonality},
-		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeHeadImg=#{resumeHeadImg},resumeWorks=#{resumeWorks}
+		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeWorks=#{resumeWorks},
+		resumeHouseAddress=#{resumeHouseAddress},resumeNowResidence=#{resumeNowResidence},resumeEmail=#{resumeEmail},resumeEnglishGrade=#{resumeEnglishGrade},resumeComputerAbility=#{resumeComputerAbility},
+		resumeFLAbility=#{resumeFLAbility},resumeFLType=#{resumeFLType}
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->

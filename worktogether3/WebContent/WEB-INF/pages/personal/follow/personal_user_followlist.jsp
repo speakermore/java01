@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -47,7 +48,7 @@
 											<td><a href="#">${fol.resumeJor }</a></td>
 											<td>${fol.userRealName }</td>
 											<td>${SEX[fol.userGender] }</td>
-											<td>${fol.userBirthday }</td>
+											<td><fmt:formatDate value="${fol.userBirthday }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
 											<td>${fol.resumeWorks }</td>
 											<td>${fol.resumeEducation }</td>
 											<td><a href="javascript:ajaxDeleteFollow(${fol.id })">取消关注</a>

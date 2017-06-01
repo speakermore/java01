@@ -3,8 +3,6 @@ package ynjh.personal.service.impl.user;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-
-import ynjh.company.entity.Company;
 import ynjh.personal.dao.user.UserMapper;
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
@@ -116,7 +114,7 @@ public class UserServiceImpl implements UserService {
 		if (page < 1) {
 			page = 1;
 		}
-		int maxPage = getMaxUserList();
+		int maxPage = getMaxUserList(userLoginId);
 
 		if (page > maxPage) {
 			page = maxPage;
@@ -127,11 +125,11 @@ public class UserServiceImpl implements UserService {
 	 * 软件人才列表总数据
 	 */
 	@Override
-	public Integer getMaxUserList() {
-		if (userMapper.getMaxUserList() <= 0) {
+	public Integer getMaxUserList(String userLoginId) {
+		if (userMapper.getMaxUserList(userLoginId) <= 0) {
 			return 1;
 		} else {
-			return (userMapper.getMaxUserList() + 20 - 1) / 20;
+			return (userMapper.getMaxUserList(userLoginId) + 20 - 1) / 20;
 		}
 	}
 	/**
@@ -145,7 +143,7 @@ public class UserServiceImpl implements UserService {
 		if (page < 1) {
 			page = 1;
 		}
-		int maxPage = getMaxUserList();
+		int maxPage = getMaxCompanyList();
 
 		if (page > maxPage) {
 			page = maxPage;
@@ -180,5 +178,38 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer updateUserHeadImgPathById(String userHeadImgPath, Integer userId) {
 		return userMapper.updateUserHeadImgPathById(userHeadImgPath, userId);
+	}
+	/**
+	 * 软件人才列表1
+	 */
+	@Override
+	public List<UserAndResume> findUserListForOther(Integer page) {
+		if (page == null) {
+			page = 1;
+		}
+		if (page < 1) {
+			page = 1;
+		}
+		int maxPage = getMaxUserListForOther();
+
+		if (page > maxPage) {
+			page = maxPage;
+		}
+		return userMapper.findUserListForOther((page - 1) * 20);
+	}
+	/**
+	 * 软件人才中数据2
+	 */
+	@Override
+	public Integer getMaxUserListForOther() {
+		if (userMapper.getMaxUserListForOther() <= 0) {
+			return 1;
+		} else {
+			return (userMapper.getMaxUserListForOther() + 20 - 1) / 20;
+		}
+	}
+	@Override
+	public User verificationUserLoginId(String userLoginId) {
+		return userMapper.verificationUserLoginId(userLoginId);
 	}
 }

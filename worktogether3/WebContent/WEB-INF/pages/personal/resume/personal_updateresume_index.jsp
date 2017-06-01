@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 简历基本信息开始 -->
 <div class="panel panel-default">
-	<form class="form-horizontal" action="personal/resume/createResume"
+	<form class="form-horizontal" action="personal/resume/updateResume"
 		method="post" id="resumeForm" style="margin-top: 35px;">
 		<div class="col-md-2 column">
 			<img src="img/head.gif" class="center-block" width="100" height="120" />
@@ -359,19 +359,6 @@
 		$("#resumeEnglishGrade").val(resumeEnglishGrade);
 		$("#resumeComputerAbility").val(resumeComputerAbility);
 		
-		$("#resumeWorks").datetimepicker({
-			format : 'yyyy-mm-dd',
-			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : "month"
-		}).on(
-				"click",
-				function() {
-					$("#resumeWorks").datetimepicker("setEndDate",
-							$("#resumeBirthday").val())
-				});
 
 		$("#resumeBirthday").datetimepicker({
 			format : 'yyyy-mm-dd',
@@ -383,8 +370,22 @@
 		}).on(
 				"click",
 				function() {
-					$("#resumeBirthday").datetimepicker("setStartDate",
+					$("#resumeBirthday").datetimepicker("setEndDate",
 							$("#resumeWorks").val())
+				});
+				
+		$("#resumeWorks").datetimepicker({
+			format : 'yyyy-mm-dd',
+			language : 'zh-CN',
+			startDate : '1900-01-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : "month"
+		}).on(
+				"click",
+				function() {
+					$("#resumeWorks").datetimepicker("setStartDate",
+							$("#resumeBirthday").val())
 				});
 
 		$("#resumeGraduationTime").datetimepicker({

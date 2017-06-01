@@ -57,6 +57,36 @@ public class ResumeController {
 	public ModelAndView createResume(Resume resume, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
+		if (resume.getResumePlace().equals("")) {
+			resume.setResumePlace(null);
+		}
+		if (resume.getResumeNation().equals("")) {
+			resume.setResumeNation(null);
+		}
+		if (resume.getResumeQQ().equals("")) {
+			resume.setResumeQQ(null);
+		}
+		if (resume.getResumeEducation().equals("")) {
+			resume.setResumeEducation(null);
+		}
+		if (resume.getResumeMajor().equals("")) {
+			resume.setResumeMajor(null);
+		}
+		if (resume.getResumeGraduationSchool().equals("")) {
+			resume.setResumeGraduationSchool(null);
+		}
+		if (resume.getResumeGraduationTime().equals("")) {
+			resume.setResumeGraduationTime(null);
+		}
+		if (resume.getResumeSelfEvaluation().equals("")) {
+			resume.setResumeSelfEvaluation(null);
+		}
+		if (resume.getResumeHouseAddress().equals("")) {
+			resume.setResumeHouseAddress(null);
+		}
+		if (resume.getResumeNation().equals("")) {
+			resume.setResumeNation(null);
+		}
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
 		resume.setResumeTitle("我的简历");
@@ -199,6 +229,7 @@ public class ResumeController {
 	@RequestMapping(value = "/updateResume", method = RequestMethod.POST)
 	public ModelAndView updateResume(Resume resume,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		Resume oldResume= (Resume) session.getAttribute("resume_update");
 		int result = rService.updateResume(resume);
 		if (result>0) {
 			mv.addObject("operatorInfo", "修改简历成功！");
