@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.personal.dao.commentarticle.CommentArticleMapper">
 	<!-- 写评论 -->
 	<insert id="addUserCommentArticle" parameterType="CommentArticle">
-		insert into commentarticle(articleId,usersId,commentArticleTime,commentArticleContent,commentArticleUsersType)
-			value(#{articleId},#{usersId},#{commentArticleTime},#{commentArticleContent},#{commentArticleUsersType})
+		insert into commentarticle(articleId,usersId,commentArticleTime,commentArticleContent,commentArticleUsersType,commentArticleStatus)
+			value(#{articleId},#{usersId},#{commentArticleTime},#{commentArticleContent},#{commentArticleUsersType},#{commentArticleStatus})
 	</insert>
 	<!-- 删评论 -->
 	 <delete id="deleteUserCommentArticle" parameterType="Integer">

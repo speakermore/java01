@@ -68,20 +68,7 @@
 								</div>
 							</form>
 						</div>
-						<p>
-							<c:if test="${curPage==null }">
-								<c:set var="curPage" value="1"></c:set>
-							</c:if>
-							<a href="admin/findAuditResume/1">首页</a>
-							<c:if test="${curPage>1 }">
-								<a href="admin/findAuditResume/${curPage-1 }">上一页</a>
-							</c:if>
-							<c:if test="${curPage<maxPage}">
-								<a href="admin/findAuditResume${curPage+1 }">下一页</a>
-							</c:if>
-							<a href="admin/findAuditResume/${maxPage }">尾页</a>
-						</p>
-
+						
 					</div>
 
 				</div>

@@ -100,7 +100,7 @@ public class CompanyArticleController {
 		int maxPage=companyArticleService.findMaxPage();
 		List<Integer> pageNo=new ArrayList<Integer>();
 		if (maxPage <=5 ) {
-			for(int i= 1;i <maxPage;i++){
+			for(int i= 1;i <=maxPage;i++){
 				pageNo.add(i);
 			}
         }else if (maxPage >5) {

@@ -12,11 +12,11 @@
 			<div class="row">
 				<table class="table">
 					<colgroup>
-						<col style="width: 30%">
+						<col style="width: 25%">
+						<col style="width: 20%">
 						<col style="width: 15%">
-						<col style="width: 15%">
-						<col style="width: 30%">
-						<col style="width: 10%">
+						<col style="width: 20%">
+						<col style="width: 20%">
 					</colgroup>
 					<thead>
 						<tr>
@@ -29,9 +29,9 @@
 					</thead>
 					<!-- ajax分页开始 -->
 					<tbody id="ajaxEducationsList">
-						<c:forEach items="${offers }" var="offer">
+						<c:forEach items="${personal_offers_list }" var="offer">
 							<tr>
-								<td><a href="offer/user_offer_detail/${o.id }">${offer.companyName}</a></td>
+								<td><a href="offer/user_offer_detail/${o.id }">${offer.companySimpleName}</a></td>
 								<td><fmt:formatDate value="${offer.offerInvitationTime }"
 							pattern="yyyy年MM月dd日" /></td>
 					<td><fmt:formatDate value="${offer.offerInvitationTime }"

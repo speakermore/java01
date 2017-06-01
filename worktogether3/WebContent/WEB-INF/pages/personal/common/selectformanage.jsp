@@ -27,7 +27,7 @@
 		<li><a
 			href="javascript:ajaxPage('personal/user/personal_index_myPassword')">我的密码</a></li>
 		<li><a href="#panel-shareAmount">分享额度</a></li>
-		<li><a href="#panel-rechargeAmount">充值额度</a></li>
+		<li><a href="javascript:ajaxPage('personal/user/personal_index_chargeMyMoney')">充值额度</a></li>
 		<li><a href="#panel-blockedCompany">我屏蔽的公司</a></li>
 		<li><a
 			href="javascript:ajaxPage('personal/follow/personal_company_followlist')">我关注的公司</a>
@@ -69,7 +69,6 @@
 		$.ajax({
 			url : "personal/common/deleteRecord",
 			data : "toPage=1&page=" + page,
-			type : "POST",
 			dataType : "html",
 			success : function(data) {
 				$("#my-content").html(data);

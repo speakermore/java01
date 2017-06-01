@@ -23,6 +23,7 @@ import ynjh.common.util.GetAge;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
+import ynjh.company.entity.Company;
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.User;
@@ -33,7 +34,8 @@ import ynjh.personal.service.UserService;
 
 /**
  * 用户信息的控制器
- * @author 刘志浩 
+ * 
+ * @author 刘志浩
  */
 @Controller
 @RequestMapping("/personal/user")
@@ -57,7 +59,8 @@ public class UserController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String userLoginId, String userPassword,String re_remember,@RequestParam String validateCode,HttpSession session,HttpServletResponse response) {
+	public ModelAndView login(String userLoginId, String userPassword, String re_remember,
+			@RequestParam String validateCode, HttpSession session, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		// 判断
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
@@ -87,41 +90,31 @@ public class UserController {
 				mv.addObject("errorInfo", "用户名或密码不正确");
 				mv.setViewName("personal/user/personal_login");
 			} else {
-				// 查看软件人才列表
-				List<UserAndResume> userAndResumes = uService.findUserList(1, userLoginId);
-				SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
-				for (UserAndResume userAndResume : userAndResumes) {
-					Follow follow =fService.findIsFollowByFollowIdAndFollowId(user.getId(), userAndResume.getId());
-					if (follow==null) {
-						try {
-							userAndResume.setAge(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
-							userAndResume.setWorks(GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-						userAndResume.setIsFoucse(false);
-					}else {
-						userAndResume.setIsFoucse(true);
-					}
-				}
-		         if("1".equals(re_remember)){ //"1"表示用户勾选记住密码
-		             /*String cookieUserName = Utils.encrypt(name);
-		             String cookiePwd = Utils.encrypt(passWord);
-		             String loginInfo = cookieUserName+","+cookiePwd;*/
-		             String loginInfo = userLoginId+","+userPassword;
-		             Cookie userCookie=new Cookie("loginInfo",loginInfo); 
+				if ("1".equals(re_remember)) { // "1"表示用户勾选记住密码
+					/*
+					 * String cookieUserName = Utils.encrypt(name); String
+					 * cookiePwd = Utils.encrypt(passWord); String loginInfo =
+					 * cookieUserName+","+cookiePwd;
+					 */
+					String loginInfo = userLoginId + "," + userPassword;
+					Cookie userCookie = new Cookie("loginInfo", loginInfo);
 
-		             userCookie.setMaxAge(7*24*60*60);   //存活期为一个月 30*24*60*60
-		             userCookie.setPath("/");
-		             response.addCookie(userCookie);
-		         }
-		         
-				session.setAttribute("userAndResumes", userAndResumes);
+					userCookie.setMaxAge(7 * 24 * 60 * 60); // 存活期为一个月
+															// 30*24*60*60
+					userCookie.setPath("/");
+					response.addCookie(userCookie);
+				}
 				session.setAttribute("user", user);
 				/* mv.setViewName("personal/user/personal_index"); */
 				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 			}
 		}
+		return mv;
+	}
+
+	public ModelAndView cookielogin(String userLoginId, String userPassword) {
+		ModelAndView mv = new ModelAndView();
+
 		return mv;
 	}
 
@@ -215,7 +208,50 @@ public class UserController {
 	 * 跳转软件人才界面
 	 */
 	@RequestMapping("/gotoSoft")
-	public String gotoSoft() {
+	public String gotoSoft(HttpSession session) {
+		User user = null;
+		Company company = null;
+		List<UserAndResume> userAndResumes = null;
+		try {
+			user = (User) session.getAttribute("user");
+			userAndResumes = uService.findUserList(1, user.getUserLoginId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			user = null;
+		}
+		if (user == null) {
+			try {
+				company = (Company) session.getAttribute("user");
+				userAndResumes = uService.findUserListForOther(1);
+			} catch (Exception e) {
+				e.printStackTrace();
+				company = null;
+			}
+		}
+		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		for (UserAndResume userAndResume : userAndResumes) {
+			Follow follow = null;
+			if (user != null) {
+				follow = fService.findIsFollowByFollowIdAndFollowId(user.getId(), userAndResume.getId());
+			} else if (company != null) {
+				follow = fService.findIsFollowByFollowIdAndFollowId(company.getId(), userAndResume.getId());
+
+			}
+			if (follow == null) {
+				try {
+					userAndResume.setAge(
+							GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
+					userAndResume.setWorks(
+							GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				userAndResume.setIsFoucse(false);
+			} else {
+				userAndResume.setIsFoucse(true);
+			}
+		}
+		session.setAttribute("userAndResumes", userAndResumes);
 		return "personal/user/personal_userlist";
 	}
 
@@ -225,13 +261,13 @@ public class UserController {
 	@RequestMapping("/gotoCompany")
 	public String gotoCompany(HttpSession session) {
 		// 查看企业列表
-		User oldUser= (User) session.getAttribute("user");
+		User oldUser = (User) session.getAttribute("user");
 		List<CompanyList> companyeList = uService.findCompanyList(1);
 		for (CompanyList companyList : companyeList) {
-			Follow follow =fService.findIsFollowByFollowIdAndFollowId(oldUser.getId(), companyList.getId());
-			if (follow==null) {
+			Follow follow = fService.findIsFollowByFollowIdAndFollowId(oldUser.getId(), companyList.getId());
+			if (follow == null) {
 				companyList.setIsFoucse(false);
-			}else {
+			} else {
 				companyList.setIsFoucse(true);
 			}
 		}
@@ -275,8 +311,8 @@ public class UserController {
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
 	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User sUser=(User) session.getAttribute("user");
-		User oldUser=uService.selectUserById(sUser.getId());
+		User sUser = (User) session.getAttribute("user");
+		User oldUser = uService.selectUserById(sUser.getId());
 		user.setId(oldUser.getId());
 		user.setUserRealName(oldUser.getUserRealName());
 		user.setUserHeadImgPath(UploadFile.uploadFile(
@@ -307,7 +343,7 @@ public class UserController {
 	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User sessionUser = (User) session.getAttribute("user");
-		User oldUser=uService.selectUserById(sessionUser.getId());
+		User oldUser = uService.selectUserById(sessionUser.getId());
 		user.setUserName(oldUser.getUserName());
 		user.setId(oldUser.getId());
 		user.setUserIDImgFace(UploadFile.uploadFile(
@@ -358,7 +394,7 @@ public class UserController {
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateUser(User user, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User oldUser =(User) session.getAttribute("user");
+		User oldUser = (User) session.getAttribute("user");
 		user.setId(oldUser.getId());
 		user.setUserLoginId(oldUser.getUserLoginId());
 		user.setUserRealName(oldUser.getUserRealName());
@@ -431,45 +467,47 @@ public class UserController {
 	/**
 	 * 修改用户密码
 	 */
-	@RequestMapping(value="/updateUserPasswordById",method=RequestMethod.POST)
+	@RequestMapping(value = "/updateUserPasswordById", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> updateUserPasswordById(String userPassword,HttpSession session){
-		User user=(User) session.getAttribute("user");
-		 Map<String, String> map =new HashMap<String, String>();
+	public Map<String, String> updateUserPasswordById(String userPassword, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		Map<String, String> map = new HashMap<String, String>();
 		String md5userPassword = null;
 		try {
 			md5userPassword = MD5Util.md5Encode(userPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int result=uService.updateUserPasswordById(md5userPassword, user.getId());
-		if (result>0) {
+		int result = uService.updateUserPasswordById(md5userPassword, user.getId());
+		if (result > 0) {
 			session.invalidate();
 			map.put("status", "success");
 			return map;
-		}else {
+		} else {
 			map.put("status", "error");
 			return map;
 		}
 	}
+
 	/**
 	 * 修改用户头像
 	 */
-	@RequestMapping(value="/updateUserHeadImgPathById",method=RequestMethod.POST)
-	public String updateUserHeadImgPathById(MultipartFile fileHeadImg,HttpSession session){
-		User oldUser=(User) session.getAttribute("user");
-		String urlName=UploadFile.uploadFile(
+	@RequestMapping(value = "/updateUserHeadImgPathById", method = RequestMethod.POST)
+	public String updateUserHeadImgPathById(MultipartFile fileHeadImg, HttpSession session) {
+		User oldUser = (User) session.getAttribute("user");
+		String urlName = UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", oldUser.getUserLoginId()),
 				new MultipartFile[] { fileHeadImg }, session)[0];
 		oldUser.setUserHeadImgPath(urlName);
-		int result=uService.updateUserHeadImgPathById(urlName, oldUser.getId());
-		if (result>0) {
-			session.setAttribute("user",oldUser);
+		int result = uService.updateUserHeadImgPathById(urlName, oldUser.getId());
+		if (result > 0) {
+			session.setAttribute("user", oldUser);
 			return "redirect:../common/initIndex?toPage=1&userId=" + oldUser.getId();
-		}else {
+		} else {
 			return "error";
 		}
 	}
+
 	/**
 	 * 跳转测试页面
 	 * 
@@ -481,12 +519,36 @@ public class UserController {
 	public String test() {
 		return "personal/user/personal_companylist";
 	}
-	
+
+	/**
+	 * 主页的ajax显示
+	 * 
+	 * @param page
+	 * @return
+	 * 
+	 * 		ModelAndView
+	 */
 	@RequestMapping("/ajax")
 	@ResponseBody
-	public ModelAndView ajax(String page){
+	public ModelAndView ajax(String page) {
 		return new ModelAndView(page);
 	}
 	
+	
+	/**
+	 * 验证用户名是否重复
+	 */
+	@RequestMapping("/verificationUserLoginId")
+	@ResponseBody
+	public Map<String, Boolean> verificationUserLoginId(String userLoginId){
+		Map<String, Boolean> map=new HashMap<String, Boolean>();
+		User user =uService.verificationUserLoginId(userLoginId);
+		if (user!=null) {//(重复)
+			map.put("valid",false);
+		}else {//(不重复)
+			map.put("valid", true);
+		}	
+		return map;
+	}
 
 }

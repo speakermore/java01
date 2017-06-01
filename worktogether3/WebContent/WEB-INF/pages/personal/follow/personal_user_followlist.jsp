@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -41,13 +42,13 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="personal_follow_list">
 									<c:forEach items="${UserFollows }" var="fol">
 										<tr>
 											<td><a href="#">${fol.resumeJor }</a></td>
 											<td>${fol.userRealName }</td>
 											<td>${SEX[fol.userGender] }</td>
-											<td>${fol.userBirthday }</td>
+											<td><fmt:formatDate value="${fol.userBirthday }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
 											<td>${fol.resumeWorks }</td>
 											<td>${fol.resumeEducation }</td>
 											<td><a href="javascript:ajaxDeleteFollow(${fol.id })">取消关注</a>
@@ -76,7 +77,7 @@
 				dataType : "json",
 				success : function(data) {
 					alert(data.operatorInfo);
-
+					$("#personal_follow_list").html(data.UserFollows);
 				}
 			});
 		}

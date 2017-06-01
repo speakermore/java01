@@ -4,11 +4,12 @@
 <html lang="zh-CN">
 <head>
 <title>个人用户-首页</title>
-<%@include file="/WEB-INF/pages/nav.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
+<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+
 </head>
 <body>
-	<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
-	<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
+	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -45,7 +46,27 @@
 				autoclose : true,
 				todayHighlight : true,
 				minView : "month"
-			});
+			}).on(
+					"click",
+					function() {
+						$("#resumeBirthday").datetimepicker("setEndDate",
+								$("#resumeWorks").val())
+					});
+
+			$("#resumeWorks").datetimepicker({
+				format : 'yyyy-mm-dd',
+				language : 'zh-CN',
+				startDate : '1900-01-01', //选择器的开始日期
+				autoclose : true,
+				todayHighlight : true,
+				minView : "month"
+			}).on(
+					"click",
+					function() {
+						$("#resumeWorks").datetimepicker("setStartDate",
+								$("#resumeBirthday").val())
+					});
+
 			$("#resumeGraduationTime").datetimepicker({
 				format : 'yyyy-mm-dd',
 				language : 'zh-CN',
@@ -54,14 +75,7 @@
 				todayHighlight : true,
 				minView : "month"
 			});
-			$("#resumeWorks").datetimepicker({
-				format : 'yyyy-mm-dd',
-				language : 'zh-CN',
-				startDate : '1900-01-01', //选择器的开始日期
-				autoclose : true,
-				todayHighlight : true,
-				minView : "month"
-			});
+
 			/* 	$("#time").blur(function() {
 					alert(typeof ("#time"))
 				}); */
@@ -89,25 +103,10 @@
 				fields : {
 					resumeTitle : {
 						validators : {
-							notEmpty : {
-								message : '标题不能为空'
-							},
 							stringLength : {
-								min : 2,
+								min : 0,
 								max : 50,
-								message : '标题长度必须在2到50位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
-							}
-
-						}
-					},
-					resumeHeadImg : {
-						validators : {
-							notEmpty : {
-								message : '头像不能为空'
+								message : '请正确输入的标题'
 							}
 						}
 					},
@@ -119,34 +118,22 @@
 							stringLength : {
 								min : 2,
 								max : 10,
-								message : '姓名长度必须在2到10位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
+								message : '请输入正确的名字'
 							}
-
 						}
 					},
 					resumeWorks : {
 						validators : {
 							notEmpty : {
 								message : '工作年限不能为空'
-							},
-							regexp : {
-								regexp : /^[0-9]+$/,
-								message : '请输入数字'
 							}
 						}
 					},
 					resumeWages : {
 						validators : {
-							notEmpty : {
-								message : '薪资不能为空'
-							},
 							regexp : {
 								regexp : /^[0-9]+$/,
-								message : '请输入数字'
+								message : '请输入正确的薪资'
 							}
 						}
 					},
@@ -158,45 +145,29 @@
 							stringLength : {
 								min : 2,
 								max : 8,
-								message : '意向长度必须在2到45位之间'
+								message : '请输入正确的意向'
 							}
 						}
 					},
 					resumeNation : {
 						validators : {
-							notEmpty : {
-								message : '民族不能为空'
-							},
 							stringLength : {
-								min : 1,
+								min : 0,
 								max : 10,
-								message : '民族长度必须在1到10位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
+								message : '请输入正确的民族'
 							}
-
 						}
 					},
 					resumePlace : {
 						validators : {
-							notEmpty : {
-								message : '籍贯不能为空'
-							},
 							stringLength : {
-								min : 1,
+								min : 0,
 								max : 50,
-								message : '籍贯长度必须在1到50位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
+								message : '请输入正确籍贯'
 							}
-
 						}
 					},
-					resumeBirthday:{
+					resumeBirthday : {
 						validators : {
 							notEmpty : {
 								message : '出生日期不能为空'
@@ -205,53 +176,29 @@
 					},
 					resumeEducation : {
 						validators : {
-							notEmpty : {
-								message : '学历不能为空'
-							},
 							stringLength : {
-								min : 1,
+								min : 0,
 								max : 20,
-								message : '学历长度必须在1到20位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
+								message : '请正确的输入学历'
 							}
-
 						}
 					},
 					resumeGraduationSchool : {
 						validators : {
-							notEmpty : {
-								message : '毕业学校不能为空'
-							},
 							stringLength : {
-								min : 1,
+								min : 0,
 								max : 50,
-								message : '毕业学校长度必须在1到50位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
+								message : '请正确的输入毕业学校'
 							}
-
 						}
 					},
 					resumeMajor : {
 						validators : {
-							notEmpty : {
-								message : '专业不能为空'
-							},
 							stringLength : {
-								min : 1,
+								min : 0,
 								max : 20,
-								message : '专业长度必须在1到20位之间'
-							},
-							regexp : {
-								regexp : (/[\u4e00-\u9fa5]/),
-								message : "请输入中文名字"
+								message : '请正确的输入专业'
 							}
-
 						}
 					},
 					resumePhone : {
@@ -262,7 +209,7 @@
 							stringLength : {
 								min : 7,
 								max : 11,
-								message : '电话号码长度必须在11到11位之间'
+								message : '请输入正确的电话号码'
 							},
 							regexp : {
 								regexp : /^[0-9]+$/,
@@ -273,30 +220,24 @@
 					},
 					resumeQQ : {
 						validators : {
-							notEmpty : {
-								message : 'QQ或微信不能为空'
-							},
 							stringLength : {
 								min : 6,
-								max : 11,
-								message : 'QQ或微信长度必须在6到20位之间'
+								max : 20,
+								message : '请输入正确的QQ或微信'
 							},
 							regexp : {
 								regexp : /^[a-zA-Z0-9_-]+$/,
-								message : '请输入正确的电话号码！'
+								message : '请输入正确的QQ或微信'
 							}
 
 						}
 					},
 					resumeHeight : {
 						validators : {
-							notEmpty : {
-								message : '身高不能为空'
-							},
 							stringLength : {
 								min : 2,
 								max : 3,
-								message : '身高必须在2到3位之间'
+								message : '请输入正确的身高数'
 							},
 							regexp : {
 								regexp : /^[0-9]+$/,
@@ -307,70 +248,24 @@
 					},
 					resumeWeight : {
 						validators : {
-							notEmpty : {
-								message : '体重不能为空'
-							},
 							stringLength : {
 								min : 2,
 								max : 3,
-								message : '体重必须在2到3位之间'
+								message : '请输入正确的体重数'
 							},
 							regexp : {
 								regexp : /^[0-9]+$/,
-								message : '请输入正确的体重数！'
+								message : '请输入正确的体重数'
 							}
 
 						}
 					},
-					resumePersonality : {
-						validators : {
-							notEmpty : {
-								message : '特点描述不能为空'
-							},
-							stringLength : {
-								min : 10,
-								max : 50,
-								message : '特点描述必须在10到50位之间'
-							}
-						}
-					},
 					resumeSelfEvaluation : {
 						validators : {
-							notEmpty : {
-								message : '自我评价不能为空'
-							},
 							stringLength : {
-								min : 10,
+								min : 0,
 								max : 500,
-								message : '自我评价必须在10到500位之间'
-							}
-						}
-					},
-					resumeEnglishGrade : {
-						validators : {
-							notEmpty : {
-								message : '英语等级不能为空'
-							}
-						}
-					},
-					resumeFLType : {
-						validators : {
-							notEmpty : {
-								message : '外语类型不能为空'
-							}
-						}
-					},
-					resumeFLAbility : {
-						validators : {
-							notEmpty : {
-								message : '外语水平不能为空'
-							}
-						}
-					},
-					resumeComputerAbility : {
-						validators : {
-							notEmpty : {
-								message : '计算机水平不能为空'
+								message : '自我评价最多500字'
 							}
 						}
 					},
@@ -384,7 +279,7 @@
 					resumeWorks : {
 						validators : {
 							notEmpty : {
-								message : '请选择工作年限'
+								message : '请选择开始工作年月'
 							}
 						}
 					},
@@ -404,20 +299,22 @@
 								message : '邮箱地址格式有误'
 							}
 						}
-					},resumeGraduationTime : {
+					},
+					resumeGraduationTime : {
 						validators : {
 							notEmpty : {
 								message : '请选择毕业时间'
 							}
 						}
-					},resumeHouseAddress : {
+					},
+					resumeHouseAddress : {
 						validators : {
 							notEmpty : {
 								message : '请输入家庭地址'
 							}
 						}
 					},
-					resumeMarriage: {
+					resumeMarriage : {
 						validators : {
 							notEmpty : {
 								message : '请选择婚姻状况'

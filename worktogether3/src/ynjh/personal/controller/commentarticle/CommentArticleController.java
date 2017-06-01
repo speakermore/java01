@@ -11,13 +11,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import ynjh.personal.dao.commentarticle.CommentArticleMapper;
-import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.User;
 import ynjh.personal.service.CommentArticleService;
@@ -62,6 +57,7 @@ public class CommentArticleController {
 		commentArticle.setCommentArticleTime(new Timestamp(System.currentTimeMillis()));
 		commentArticle.setUsersId(userId);
 		commentArticle.setCommentArticleUsersType(2);
+		commentArticle.setCommentArticleStatus(1);
 		int result = commentArticleService.writeUserCommentArticle(commentArticle);
 		if (result>0) {
 			mv.addObject("operatorInfo", "评论已提交，请等待审核！");

@@ -151,18 +151,21 @@ public class AdminController {
 			value = validate.getvCodeString().toString();
 		} else {
 			mv.setViewName("admin/login");
+			mv.addObject("adminLoginId", adminLoginId);
 			mv.addObject("operatorInfo", "验证码异常！");
 			return mv;
 		}
 		Date date = new Date();
 		Date generateDate = validate.getGenerateTime();
-		if ((date.getTime() - generateDate.getTime()) > 450000) {
+		if ((date.getTime() - generateDate.getTime()) > 45000) {
 			mv.setViewName("admin/login");
+			mv.addObject("adminLoginId", adminLoginId);
 			mv.addObject("operatorInfo", "登录失败,验证码超时！");
 			return mv;
 		}
 		if (!(validateCode.equalsIgnoreCase(value))) {
 			mv.setViewName("admin/login");
+			mv.addObject("adminLoginId", adminLoginId);
 			mv.addObject("operatorInfo", "登录失败,请输入正确的验证码！");
 		} else {
 			String pass = null;
@@ -174,6 +177,12 @@ public class AdminController {
 			}
 			Admin admin = adminService.findLogin(adminLoginId, pass);
 			if (admin != null) {
+				if(admin.getAdminStatus()==0){
+					mv.addObject("adminLoginId", adminLoginId);
+					mv.setViewName("admin/login");
+					mv.addObject("operatorInfo", "你已被禁用,请联系超级管理员！！！");
+					return mv;
+				}
 				mv.addObject("admin", admin);
 				session.setAttribute("admin", admin);
 				if(admin.getAdminStatus()==2){
@@ -182,6 +191,7 @@ public class AdminController {
 				mv.setViewName("admin/index");
 				}
 			} else {
+				mv.addObject("adminLoginId", adminLoginId);
 				mv.addObject("operatorInfo", "登录失败，请输入正确的id和密码！");
 				mv.setViewName("admin/login");
 			}

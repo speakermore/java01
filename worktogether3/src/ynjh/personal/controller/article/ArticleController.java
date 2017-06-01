@@ -47,6 +47,7 @@ public class ArticleController {
 		article.setUsersId(user.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
 		article.setArticleUsersType(2);
+		article.setArticleStatus(1);
 		int result = articleService.writeUserArticle(article);
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
@@ -204,12 +205,13 @@ public class ArticleController {
 	 * @return 修改文章内容成功，跳转index，失败也是index
 	 */
 	@RequestMapping("/updateArticle")
-	public ModelAndView uptateArticleContent(Article article) {
+	public ModelAndView uptateArticleContent(Article article,HttpSession session) {
 		int result = articleService.updateArticleContent(article);
+		User oldUser=(User) session.getAttribute("user");
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			mv.addObject("operatorInfo", "修改文章内容成功！");
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+oldUser.getId());
 		} else {
 			mv.addObject("operatorInfo", "修改文章内容失败，请联系管理员");
 			mv.setViewName("personal/user/personal_index");

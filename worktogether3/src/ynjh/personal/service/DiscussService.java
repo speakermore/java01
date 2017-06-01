@@ -7,7 +7,7 @@ import ynjh.personal.entity.Discuss;
  * 
  */
 public interface DiscussService {
-		//写评论 
+		//写评论 addUserCommentFirm
 		public Integer addDiscuss(Discuss discuss);
 		//删评论
 		public Integer deleteUserDiscuss(Integer id);

@@ -37,7 +37,7 @@ public class DiscussServiceImpl implements DiscussService {
 		return discussMapper.selectUserCommentFirm(id, discussUsersId);
 	}
 	/**
-	 * 添加评论
+	 * 添加评论addUserCommentFirm
 	 * @return Integer 成功1 失败2
 	 * @param discuss 评论企业对象
 	 */

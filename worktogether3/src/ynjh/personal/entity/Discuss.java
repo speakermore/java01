@@ -25,8 +25,15 @@ public class Discuss implements Serializable {
 	private Integer discussSendType;
 	//被发送者id
 	private Integer discussBySendId;
-	
-	public Discuss() {
+	// 1：企业id 2：个人用户id
+	private Integer discussBySendType;
+
+	public Integer getDiscussBySendType() {
+		return discussBySendType;
+	}
+
+	public void setDiscussBySendType(Integer discussBySendType) {
+		this.discussBySendType = discussBySendType;
 	}
 
 	public Integer getId() {
@@ -97,11 +104,8 @@ public class Discuss implements Serializable {
 	public String toString() {
 		return "Discuss [id=" + id + ", discussUsersId=" + discussUsersId + ", discussContent=" + discussContent
 				+ ", discussLevel=" + discussLevel + ", discussTime=" + discussTime + ", discussStatus=" + discussStatus
-				+ ", discussSendType=" + discussSendType + ", discussBySendId=" + discussBySendId + "]";
+				+ ", discussSendType=" + discussSendType + ", discussBySendId=" + discussBySendId
+				+ ", discussBySendType=" + discussBySendType + "]";
 	}
-
-	
-
-	
 
 }

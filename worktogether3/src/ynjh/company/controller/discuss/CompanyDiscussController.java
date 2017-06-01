@@ -96,8 +96,8 @@ public class CompanyDiscussController {
 //		session.setAttribute("company", company);
 //		company.setId(1);
 //		user.setId(1);
-		List<Discuss> discuss=companyDiscussService.findAll();
-		session.setAttribute("disUserId", company.getId());
+		List<Discuss> discuss=companyDiscussService.findAll(company.getId());
+//		session.setAttribute("disUserId", company.getId());
 		ModelAndView mView=new ModelAndView("company/artanddis/company_index");
 		mView.addObject("discusses", discuss);
 		return mView;

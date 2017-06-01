@@ -1,22 +1,15 @@
 package ynjh.personal.controller.resume;
 
-import java.util.Date;
 import java.util.List;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import javax.annotation.Resource;
-import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import ynjh.common.util.UploadFile;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -64,6 +57,36 @@ public class ResumeController {
 	public ModelAndView createResume(Resume resume, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
+		if (resume.getResumePlace().equals("")) {
+			resume.setResumePlace(null);
+		}
+		if (resume.getResumeNation().equals("")) {
+			resume.setResumeNation(null);
+		}
+		if (resume.getResumeQQ().equals("")) {
+			resume.setResumeQQ(null);
+		}
+		if (resume.getResumeEducation().equals("")) {
+			resume.setResumeEducation(null);
+		}
+		if (resume.getResumeMajor().equals("")) {
+			resume.setResumeMajor(null);
+		}
+		if (resume.getResumeGraduationSchool().equals("")) {
+			resume.setResumeGraduationSchool(null);
+		}
+		if (resume.getResumeGraduationTime().equals("")) {
+			resume.setResumeGraduationTime(null);
+		}
+		if (resume.getResumeSelfEvaluation().equals("")) {
+			resume.setResumeSelfEvaluation(null);
+		}
+		if (resume.getResumeHouseAddress().equals("")) {
+			resume.setResumeHouseAddress(null);
+		}
+		if (resume.getResumeNation().equals("")) {
+			resume.setResumeNation(null);
+		}
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
 		resume.setResumeTitle("我的简历");
@@ -184,13 +207,13 @@ public class ResumeController {
 	 * 
 	 * 		ModelAndView
 	 */
-	@RequestMapping(value = "/updateResume", method = RequestMethod.GET)
-	public ModelAndView gotoResume(Integer resumeId) {
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping("/updateResumeById")
+	@ResponseBody
+	public ModelAndView updateResumeById(String page,Integer resumeId,HttpSession session) {
+		ModelAndView mv = new ModelAndView(page);
 		Resume resume = rService.findResumeById(resumeId);
 		if (resume != null) {
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_updateresume");
+			session.setAttribute("resume_update", resume);
 		}
 		return mv;
 	}
@@ -206,6 +229,7 @@ public class ResumeController {
 	@RequestMapping(value = "/updateResume", method = RequestMethod.POST)
 	public ModelAndView updateResume(Resume resume,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		Resume oldResume= (Resume) session.getAttribute("resume_update");
 		int result = rService.updateResume(resume);
 		if (result>0) {
 			mv.addObject("operatorInfo", "修改简历成功！");
@@ -753,7 +777,7 @@ public class ResumeController {
 		return "personal/resume/test";
 	}
 	/**
-	 * 发送简历
+	 * 发送简历(只能发送已审核的)
 	 * 参数
 	 * companyId 公司id,
 	 * resumeId 简历id,
@@ -785,7 +809,5 @@ public class ResumeController {
 		}
 		return mv;
 	}
-
-	
 
 }

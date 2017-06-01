@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.personal.entity.Discuss;
 
 public interface DiscussMapper {
-	//写评论 
+	//写评论 addUserCommentFirm
 	public Integer addUserCommentFirm(Discuss discuss);
 	//删评论
 	public Integer deleteUserCommentFirm(Integer id);

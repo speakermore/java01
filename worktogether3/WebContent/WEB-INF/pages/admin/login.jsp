@@ -21,7 +21,7 @@
 				<div class="form-group">
 					<label for="login-name" class="col-xs-2 control-label">登录名称</label>
 					<div class="col-xs-7">
-						<input type="text" name="adminLoginId" class="form-control " placeholder="登录名称">
+						<input type="text" name="adminLoginId" class="form-control " value="${adminLoginId}" placeholder="登录名称">
 						<label class="control-label helplable" for="login-name">注册时填写的名称或者电子邮件</label>
 					</div>
 				</div>

@@ -111,7 +111,7 @@
 					dataType:"json",
 					success:function(data){
 						alert(data.operatorInfo);
-						$("[href='javascript:ajaxFollow("+id+")']").replaceWith('<label>已关注</label>');
+						$("[href='javascript:ajaxFollow("+id+")']").replaceWith("<label class=\'btn btn-default\'><em class=\'glyphicon glyphicon-align-right\'></em>已关注</label>");
 						/* $("[href='javascript:ajaxFollow("+id+")']").html('<label>已关注</label>'); */
 					}
 				});

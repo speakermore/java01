@@ -55,8 +55,20 @@ public interface UserService {
 	// 软件人才列表
 	public List<UserAndResume> findUserList(Integer page, String userLoginId);
 
-	// 软件人才列表总数据
-	public Integer getMaxUserList();
+	/**
+	 * 软件人才列表总数据1
+	 */
+	public Integer getMaxUserList(String userLoginId);
+
+	/**
+	 * 软件人才列表2
+	 */
+	public List<UserAndResume> findUserListForOther(Integer page);
+
+	/**
+	 * 软件人才列表总数据2
+	 */
+	public Integer getMaxUserListForOther();
 
 	/**
 	 * 企业列表
@@ -67,4 +79,9 @@ public interface UserService {
 	 * 企业列表总数据
 	 */
 	public Integer getMaxCompanyList();
+	
+	/**
+	 * 匹配用户名是否重复
+	 */
+	public User verificationUserLoginId(String userLoginId);
 }
