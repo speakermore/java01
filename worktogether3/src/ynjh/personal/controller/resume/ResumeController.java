@@ -230,6 +230,12 @@ public class ResumeController {
 	public ModelAndView updateResume(Resume resume,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Resume oldResume= (Resume) session.getAttribute("resume_update");
+		resume.setResumeCreateDate(oldResume.getResumeCreateDate());
+		resume.setId(oldResume.getId());
+		resume.setUserId(oldResume.getUserId());
+		resume.setResumePersonality(oldResume.getResumePersonality());
+		resume.setResumeStatusOne(oldResume.getResumeStatusOne());
+		resume.setResumeHeadImg(oldResume.getResumeHeadImg());
 		int result = rService.updateResume(resume);
 		if (result>0) {
 			mv.addObject("operatorInfo", "修改简历成功！");

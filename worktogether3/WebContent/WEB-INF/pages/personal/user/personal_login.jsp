@@ -106,6 +106,10 @@ color: red;
 	<script type="text/javascript">
 		
 		$(document).ready(function() {
+			
+		$("body").click(function(){
+			$("#validateCodeToolTip").hide();
+		});
 			//记住密码功能
 			var str = getCookie("loginInfo");
 			if (str!=null) {
