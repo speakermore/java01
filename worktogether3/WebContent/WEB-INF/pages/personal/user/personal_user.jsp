@@ -61,14 +61,20 @@
 						</c:forEach>
 					</c:if>
 					<!-- 文章信息结束 -->
+					<!-- 最新评论开始 -->
+					<c:if test="${personal_articleByComments!=null }">
+					<c:forEach items="${personal_articleByComments}" var="articleByComment">
 					<section class="panel">
 						<div class="panel-body">
-							@xxx2评论了<<<a href="#">我的一天</a>>>
+							@<a href="#">${articleByComment.userName}</a>评论了<<<a href="#">${articleByComment.articleTitle }</a>>>
 						</div>
 						<div class="panel-footer work-together-right">
 							1分钟前.<a href="#">更多....</a>
 						</div>
 					</section>
+					</c:forEach>
+					</c:if>
+					<!-- 最新评论结束 -->
 					<section class="panel">
 						<div class="panel-body">
 							@xxx3回复了@xxx2对<<<a href="#">我的一天</a>>>的评论

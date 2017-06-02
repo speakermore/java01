@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ynjh.company.entity.Offer;
 import ynjh.personal.dao.newly.NewlyMapper;
+import ynjh.personal.entity.ArticleByComment;
 import ynjh.personal.entity.ArticleByFollow;
 import ynjh.personal.service.NewlyService;
 
@@ -20,7 +21,7 @@ import ynjh.personal.service.NewlyService;
 @Service
 public class NewlyServiceImpl implements NewlyService {
 	@Resource
-	private NewlyMapper newsMapper;
+	private NewlyMapper newlyMapper;
 
 	/**
 	 * 查看最新发布面试消息
@@ -29,7 +30,7 @@ public class NewlyServiceImpl implements NewlyService {
 	 */
 	@Override
 	public Offer findNewlyFaceByUserId(Integer userId) {
-		return newsMapper.findNewlyFaceByUserId(userId);
+		return newlyMapper.findNewlyFaceByUserId(userId);
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class NewlyServiceImpl implements NewlyService {
 	public List<ArticleByFollow> findNewlyArticleByFollow(Integer userId) {
 		int maxNum = getByFollowIdCount(userId);
 		if (maxNum > 0) {
-			return newsMapper.findNewlyArticleByFollow(maxNum, userId);
+			return newlyMapper.findNewlyArticleByFollow(maxNum, userId);
 		} else {
 			return null;
 		}
@@ -55,7 +56,14 @@ public class NewlyServiceImpl implements NewlyService {
 	 */
 	@Override
 	public Integer getByFollowIdCount(Integer userId) {
-		return newsMapper.getByFollowIdCount(userId);
+		return newlyMapper.getByFollowIdCount(userId);
 	}
-
+	/**
+	 * 查看最新评论
+	 */
+	@Override
+	public List<ArticleByComment> findNewlyCommentArticleByUserId(Integer userId) {
+		return newlyMapper.findNewlyCommentArticleByUserId(userId);
+	}
+	
 }

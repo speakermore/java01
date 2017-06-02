@@ -6,18 +6,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 查看最新发布面试消息 -->
 	<select id="findNewlyFaceByUserId" resultType="Offer"
 		parameterType="Integer">
-		select c.companyName,o.* from offer o,company c where o.companyId=c.id and
-		o.userId=#{userId} and o.offerStatus=2 order by o.offerSendTime desc
+		select c.companyName,o.* from offer o,company c where
+		o.companyId=c.id and
+		o.userId=#{userId} and o.offerStatus=2 order by
+		o.offerSendTime desc
 		limit 1
 	</select>
 	<!-- 查看关注者最新发布文章消息 -->
 	<select id="findNewlyArticleByFollow" resultType="ArticleByFollow">
-		<!-- select * from follow f,article a,user u where f.followId=#{userId} and f.byFollowId=u.id and u.id=a.usersId -->
-		select max(u.userName) userName,max(a.articleTitle) articleTitle,max(a.id) articleId from (select * from article order by articleTime desc limit #{maxNum} )a,user u,follow f where u.id=a.usersId and u.id=f.byFollowId and f.followId=#{userId} group by a.usersId
+		<!-- select * from follow f,article a,user u where f.followId=#{userId} 
+			and f.byFollowId=u.id and u.id=a.usersId -->
+		select max(u.userName) userName,max(a.articleTitle)
+		articleTitle,max(a.id) articleId from (select * from article order by
+		articleTime desc limit #{maxNum} )a,user u,follow f where
+		u.id=a.usersId and u.id=f.byFollowId and f.followId=#{userId} group by
+		a.usersId
 	</select>
 	<!-- 查看被关注者发布文章消息的数量 -->
-	<select id="getByFollowIdCount" resultType="Integer" parameterType="Integer">
-		select count(*) from article a,user u,follow f where f.followId=#{userId} and u.id=a.usersId and u.id=f.byFollowId order by a.articleTime desc
+	<select id="getByFollowIdCount" resultType="Integer"
+		parameterType="Integer">
+		select count(*) from article a,user u,follow f where
+		f.followId=#{userId} and u.id=a.usersId and u.id=f.byFollowId order by
+		a.articleTime desc
 	</select>
-	<!-- -->
+	<!-- 查看最新评论 -->
+	<select id="findNewlyCommentArticleByUserId" parameterType="Integer"
+		resultType="ArticleByComment">
+		select * from commentarticle ca,article a,user u where
+		u.id=#{userId} and a.id=ca.articleId and u.id=a.usersId and
+		a.usersId=ca.usersId group by a.id order by ca.commentArticleTime
+		desc;
+	</select>
 </mapper>
