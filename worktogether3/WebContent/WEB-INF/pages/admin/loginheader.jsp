@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     <base
 	href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-	<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" >
 <!-- jQuery -->
 <script src="admin/js/jquery-2.1.0.min.js"></script>
 <!-- Bootstrap -->

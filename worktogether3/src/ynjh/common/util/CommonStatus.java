@@ -29,4 +29,8 @@ public class CommonStatus {
 	public static final String[] COMPUTER_ABILITY={"","入门","一般","熟练","精通"};
 	//账号状态
 	public static final String[] USER_STATUS={"","正常","禁用"};
+	//管理员帐号状态
+	public static final String[] ADMIN_STATUS={"已禁用","正常"};
+	//管理员在线状态
+	public static final String[] ADMIN_STATUS_NOW={"下线","在线"};
 }

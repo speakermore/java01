@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	import="ynjh.common.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- html开始 -->
@@ -12,7 +12,10 @@
 <title>管理用户</title>
 <%@include file="header.jsp"%>
 </head>
+
 <body>
+<c:set var="ADMIN_STATUS" value="${CommonStatus.ADMIN_STATUS}"></c:set>
+<c:set var="ADMIN_STATUS_NOW" value="${CommonStatus.ADMIN_STATUS_NOW}"></c:set>
 	<div><%@include file="superAdminHome.jsp"%></div>
 	<form action="/disableAdmin" method="post">
 		<div class="col-md-offset-2">
@@ -20,6 +23,18 @@
 				<div class="col-sm-10" >
 					<div class="row" style="background-color: #FFF;">
 						<div class="col-sm-12">
+							<div id="result-info" class="col-sm-12">
+								<c:if test="${resultInfoSuccess!=null}">
+									<div class="alert alert-success" role="alert">
+										${resultInfoSuccess}
+									</div>
+								</c:if>	
+								<c:if test="${resultInfoFalse!=null}">
+									<div class="alert alert-danger" role="alert">
+										${resultInfoFalse}	
+									</div>
+								</c:if>
+							</div>
 							<h2>所有管理员：</h2>
 							<section class="panel">
 								<heading class="panel-heading"> <c:if
@@ -27,8 +42,7 @@
 									<jsp:forward page="/superAdmin/findAllAdmin/0" />
 								</c:if>
 								<table class="table table-striped">
-									<tr class="tb">
-										<td></td>
+									<tr class="tb">	
 										<td>id</td>
 										<td>账号</td>
 										<td>电话</td>
@@ -40,16 +54,15 @@
 									</tr>
 									<c:forEach items="${list}" var="list">
 										<tr class="tb">
-											<td><input name="id" type="checkbox" value="${list.id }"></input></td>
+											
 											<td>${list.id }</td>
 											<td><a href="superAdmin/disableAdmin?id=${list.id}">${list.adminLoginId}
 											</a></td>
-
 											<td>${list.adminTel }</td>
 											<td>${list.adminEmail }</td>
 											<td>${list.adminName }</td>
-											<td>${list.adminStatusNow }</td>
-											<td>${list.adminStatus }</td>
+											<td>${ADMIN_STATUS_NOW[list.adminStatusNow]}</td>
+											<td>${ADMIN_STATUS[list.adminStatus]}</td>
 											<td><a href="findId/${list.id}"></a> <a
 												href="javascript:if(confirm('你确定要禁用吗？')){location.href='superAdmin/disableAdmin?adminStatus=1&id=${list.id}'}">恢复</a>|
 												<a
@@ -67,5 +80,11 @@
 	</form>
 	<%@include file="footer.jsp"%>
 </body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".alert-success").slideDown(1000);
+		$(".alert-danger").slideDown(1000);
+	})
+</script>
 <!-- html结束 -->
 </html>
