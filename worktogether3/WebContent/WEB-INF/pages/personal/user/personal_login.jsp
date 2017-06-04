@@ -13,8 +13,9 @@
 	href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!--<link href="css/main.css" rel="stylesheet" />-->
 <link href="css/login.css" rel="stylesheet" />
+<!--<link href="css/main.css" rel="stylesheet" />-->
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -25,74 +26,98 @@
 	href="thirdpart/dist/css/bootstrapValidator.min.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <style type="text/css">
-#validateCodeToolTip{
-color: red;
+#validateCodeToolTip {
+	color: red;
 }
 </style>
 </head>
 <body>
 	<!--wt-姓名首字母-相关文字-->
-	<div id="wt-hby-login">
+	<div class="container">
 		<%@include file="/WEB-INF/pages/nav.jsp"%>
-		<div class="bs-docs-header wt-hby-login-center" id="content"
-			tabindex="-1">
-			<div class="container bs-docs-container">
-				<form class="form-signin" method="post" action="personal/user/login"
-					id="loginForm">
-					<h2 class="form-signin-heading i_height">欢迎个人用户登录</h2>
-					<div class="form-group i_height">
-						<label for="userLoginId" class="sr-only">手机号</label> <input
-							type="text" id="userLoginId" class="form-control "
-							name="userLoginId" required placeholder="手机号">
-					</div>
-					
-					<div class="form-group i_height">
-						<label for="userPassword" class="sr-only">密码</label> <input
-							type="password" id="userPassword" class="form-control "
-							name="userPassword" placeholder="密码" required>
-							<c:if test="${errorInfo!=null }">
-								<div id="validateCodeToolTip">${errorInfo }</div>
-							</c:if>
-						<!-- <div  role="tooltip" class="tooltip fade right in"></div> -->
-					</div>
-					<div class="form-group i_height">
-						<!--请求验证码---->
-						<input type="text" id="validateCode" class="form-control "
-							name="validateCode" placeholder="请输入验证码" required autocomplete="off"/>
-						<c:if test="${operatorInfo!=null }">
-							<div id="validateCodeToolTip">${operatorInfo }</div>
-						</c:if>
-					</div>
-					<img id="validateCode" alt="validateCode "
-						src="admin/codeValidate?time=<%=new Date().getTime()%>" /> <a
-						class="btn btn-default" href="javascript:void(0)" role="button"
-						class="btn btn-primary btn-sm">看不清，换一张</a>
+		<div class="row clearfix">
+			<div class="col-sm-offset-4 col-sm-4 wrok-together-login-border">
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#panel-login" data-toggle="tab">已有账号看这里</a></li>
+						<li><a href="#panel-register" data-toggle="tab">没有账号看这里</a></li>
+					</ul>
+					<div class="tab-content">
+						<!-- 用户登录 -->
+						<div class="tab-pane active" id="panel-login">
+							<form class="form-horizontal" method="post"
+								action="personal/user/login" id="loginForm">
+								<h3 class="form-signin-heading">欢迎个人用户登录</h3>
+								<div class="form-group">
+									<input type="text" id="userLoginId" class="form-control"
+										name="userLoginId" required placeholder="手机号">
+								</div>
 
-					<!--<div class="checkbox">
-						
-					</div> <div class="form-group">
-					<div id="inputagree checkbox">
-						<input name="acceptTerms" 
-							type="checkbox" /> 我已阅读并同意服务条款
-						<input type="checkbox" value="remember-me">
-							记住密码
-					</div></div> -->
-					<div class="form-group ">
-						<div class="checkbox col-md-12 ">
-							<input name="re_remember" type="checkbox" onclick="remember();"
-								id="remFlag">记住密码 <a href="#" class="col-md-offset-6">忘记密码？</a>
+								<div class="form-group">
+									<input type="password" id="userPassword" class="form-control "
+										name="userPassword" placeholder="密码" required>
+									<c:if test="${errorInfo!=null }">
+										<div id="validateCodeToolTip">${errorInfo }</div>
+									</c:if>
+								</div>
+								<div class="form-group">
+									<!--请求验证码---->
+									<input type="text" id="validateCode" class="form-control "
+										name="validateCode" placeholder="请输入验证码" required
+										autocomplete="off" />
+									<c:if test="${operatorInfo!=null }">
+										<div id="validateCodeToolTip">${operatorInfo }</div>
+									</c:if>
+								</div>
+								<img id="validateCode" alt="validateCode "
+									src="admin/codeValidate?time=<%=new Date().getTime()%>" /> <a
+									class="btn btn-default" href="javascript:void(0)" role="button"
+									class="btn btn-primary btn-sm">看不清，换一张</a>
+								<div class="form-group">
+									<div class="checkbox col-md-12 ">
+										<input name="re_remember" type="checkbox"
+											onclick="remember();" id="remFlag">记住密码 <a href="#"
+											class="col-md-offset-6">忘记密码？</a>
+									</div>
+								</div>
+								<button class="btn btn-lg btn-success btn-block" type="submit">立即登录</button>
+							</form>
 						</div>
+						<!-- 用户登录结束 -->
+						<!-- 用户注册 -->
+						<div class="tab-pane" id="panel-register">
+							<form class="form-horizontal" method="post"
+								action="personal/user/addUser" id="registerForm">
+								<h3 class="form-signin-heading">欢迎个人用户注册</h3>
+								<div class="form-group">
+									<input type="text" id="userLoginId" class="form-control"
+										name="userLoginId" placeholder="请输入常用手机号" required autofocus>
+								</div>
+								<div class="form-group">
+									<label for="userPassword" class="sr-only">密码</label> <input
+										type="password" id="userPassword" class="form-control"
+										name="userPassword" placeholder="请输入密码" required>
+								</div>
+								<div class="form-group">
+									<input type="password" id="confirmPassword"
+										class="form-control" name="confirmPassword" placeholder="请再次输入密码"
+										required>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-1 column">
+										<div class="checkbox">
+											<input type="checkbox" name="acceptTerms" /><a href="#">我已阅读并同意服务条款</a>
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-lg btn-success btn-block" type="submit">个人用户注册</button>
+							</form>
+						</div>
+						<!-- 用户注册结束 -->
 					</div>
-					<button class="btn btn-lg btn-success btn-block" type="submit">登录</button>
-				</form>
+				</div>
 			</div>
 		</div>
-		<div class="wt-hby-login-bottom">
-			<img src="img/1-1-2.jpg" /> <a class="back-to-top" href="#top">返回顶部</a>
-		</div>
-		<%-- <c:if test="${operatorInfo!=null }">
-		<input type="hidden" id="operatorInfo" value="${operatorInfo }"/></c:if>
-		<c:if test="${errorInfo!=null }"><input type="hidden" id="errorInfo" value="${errorInfo }"/></c:if> --%>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="personal/js/jquery-3.1.1.min.js" type="text/javascript"
@@ -104,15 +129,14 @@ color: red;
 	<script type="text/javascript"
 		src="thirdpart/dist/js/language/zh_CN.js"></script>
 	<script type="text/javascript">
-		
+	
 		$(document).ready(function() {
-			
-		$("body").click(function(){
-			$("#validateCodeToolTip").hide();
-		});
+			$("body").click(function() {
+				$("#validateCodeToolTip").hide();
+			});
 			//记住密码功能
 			var str = getCookie("loginInfo");
-			if (str!=null) {
+			if (str != null) {
 				str = str.substring(1, str.length - 1);
 				var userLoginId = str.split(",")[0];
 				var userPassword = str.split(",")[1];
@@ -121,7 +145,6 @@ color: red;
 				$("#userPassword").val(userPassword);
 			}
 		});
-
 		//获取cookie
 		function getCookie(cname) {
 			var name = cname + "=";
@@ -129,13 +152,13 @@ color: red;
 			for (var i = 0; i < ca.length; i++) {
 				var c = ca[i];
 				while (c.charAt(0) == ' ')
-					c = c.substring(1);
+				c = c.substring(1);
 				if (c.indexOf(name) != -1)
 					return c.substring(name.length, c.length);
 			}
 			return "";
 		}
-
+	
 		//记住密码功能
 		function remember() {
 			var remFlag = $("input[type='checkbox']").is(':checked');
@@ -152,19 +175,19 @@ color: red;
 				$("#remFlag").val("");
 			}
 		}
-		
-		$(document).ready(function(){
+	
+		$(document).ready(function() {
 			$("#validateCode+a").click(function() {
 				var path = "${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/";
-				$("img").attr("src",path+ "admin/codeValidate?time="+ new Date().getTime());
-		});
-
-		$("#loginForm").bootstrapValidator({
-			message : '这个值不能通过验证！！',
-			feedbackIcons : {
-			valid : 'glyphicon glyphicon-ok',
-			invalid : 'glyphicon glyphicon-remove',
-			validating : 'glyphicon glyphicon-refresh'
+				$("img").attr("src", path + "admin/codeValidate?time=" + new Date().getTime());
+			});
+	
+			$("#loginForm").bootstrapValidator({
+				message : '这个值不能通过验证！！',
+				feedbackIcons : {
+					valid : 'glyphicon glyphicon-ok',
+					invalid : 'glyphicon glyphicon-remove',
+					validating : 'glyphicon glyphicon-refresh'
 				},
 				fields : {
 					userLoginId : {
@@ -200,7 +223,82 @@ color: red;
 						}
 					}
 				}
-
+			});
+			$("#registerForm").bootstrapValidator({
+				message : '这个值不能通过验证！',
+				feedbackIcons : {
+					valid : 'glyphicon glyphicon-ok',
+					invalid : 'glyphicon glyphicon-remove',
+					validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					userLoginId : {
+						//有6字符以上才发送ajax请求，（input中输入一个字符，插件会向服务器发送一次，设置限制，11字符以上才开始）
+						threshold : 11,
+						validators : {
+							notEmpty : {
+								message : '用户名不能为空'
+							},
+							regexp : {
+								regexp : '^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$',
+								message : '请输入正确的用户名'
+							},
+							remote : {
+								url : "personal/user/verificationUserLoginId",
+								message : '用户名已被注册',
+								delay : 5000,
+								type : 'post'
+							}
+						}
+					},
+					userPassword : {
+						verbose : false, //多验证的情况下默认第一验证错误，则提示当前错误信息后面的验证不执行
+						validators : {
+							notEmpty : {
+								message : '密码不能为空'
+							},
+							stringLength : {
+								min : 6,
+								max : 50,
+								message : '密码长度必须在6到50位之间'
+							},
+							regexp : {
+								regexp : /^[a-zA-Z0-9_]+$/,
+								message : '密码只能包含大写、小写、数字和下划线'
+							},
+							different : {
+								field : 'userLoginId',
+								message : '密码不能和用户名相同'
+							}
+						}
+					},
+					confirmPassword : {
+						validators : {
+							notEmpty : {
+								message : '确认密码不能为空'
+							},
+							regexp : {
+								regexp : /^[a-zA-Z0-9_]+$/,
+								message : '密码只能包含大写、小写、数字和下划线'
+							},
+							identical : {
+								field : 'userPassword',
+								message : '两次密码不一致'
+							},
+							different : {
+								field : 'userLoginId',
+								message : '密码不能和用户名相同'
+							}
+						}
+					},
+					acceptTerms : {
+						validators : {
+							notEmpty : {
+								message : '你必须已阅读并同意服务条款'
+							}
+						}
+					}
+				}
 			});
 		});
 	</script>

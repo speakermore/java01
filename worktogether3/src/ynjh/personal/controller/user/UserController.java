@@ -263,13 +263,17 @@ public class UserController {
 		// 查看企业列表
 		User oldUser = (User) session.getAttribute("user");
 		List<CompanyList> companyeList = uService.findCompanyList(1);
-		for (CompanyList companyList : companyeList) {
-			Follow follow = fService.findIsFollowByFollowIdAndFollowId(oldUser.getId(), companyList.getId());
-			if (follow == null) {
-				companyList.setIsFoucse(false);
-			} else {
-				companyList.setIsFoucse(true);
+		try {
+			for (CompanyList companyList : companyeList) {
+				Follow follow = fService.findIsFollowByFollowIdAndFollowId(oldUser.getId(), companyList.getId());
+				if (follow == null) {
+					companyList.setIsFoucse(false);
+				} else {
+					companyList.setIsFoucse(true);
+				}
 			}
+		} catch (Exception e) {
+			//牟勇：判断用户是否登录，如果用户没有登录，会经过这里
 		}
 		session.setAttribute("companyeList", companyeList);
 		return "personal/user/personal_companylist";

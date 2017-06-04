@@ -116,10 +116,29 @@
 		<div class="row">
 			<!--左侧分类栏-->
 			<div class="col-sm-3">
+				<!-- 最新资讯 -->
+				<div class="work-together-title">
+					<span>最新资讯</span>
+				</div>
+				<div class="panel">
+					<ol class="panel-body">
+						<li><a href="">面试中5个核心问题我们该如何回答</a></li>
+						<li><a href="">结束面试谈话技巧分享</a></li>
+						<li><a href="">什么样的猎头顾问不靠谱</a></li>
+						<li><a href="">面试缺席率高怎么办</a></li>
+						<li><a href="">面试礼仪与求职技巧</a></li>
+						<li><a href="">HR更相信自己通过简历看到的事实</a></li>
+						<li><a href="">5句话帮你面试成功</a></li>
+						<li><a href="">为什么企业会对猎头公司产生误解</a></li>
+						<li><a href="">如何提高企业现场招聘工作的效果</a></li>
+						<li><a href="">哪些技巧能通过简历获得面试的机会</a></li>
+					</ol>
+				</div>
+				<!-- 最新资讯结束 -->
+				<!--职位分类开始-->
 				<div class="work-together-title">
 					<span>职位分类</span>
 				</div>
-				<!--职位分类开始-->
 				<div class="panel">
 					<div class="panel-title">
 						<h4>软件开发类</h4>
@@ -204,25 +223,6 @@
 					</ul>
 				</div>
 				<!--明星企业展示结束-->
-				<!-- 最新资讯 -->
-				<div class="work-together-title">
-					<span>最新资讯</span>
-				</div>
-				<div class="panel">
-					<ol class="panel-body">
-						<li><a href="">面试中5个核心问题我们该如何回答</a></li>
-						<li><a href="">结束面试谈话技巧分享</a></li>
-						<li><a href="">什么样的猎头顾问不靠谱</a></li>
-						<li><a href="">面试缺席率高怎么办</a></li>
-						<li><a href="">面试礼仪与求职技巧</a></li>
-						<li><a href="">HR更相信自己通过简历看到的事实</a></li>
-						<li><a href="">5句话帮你面试成功</a></li>
-						<li><a href="">为什么企业会对猎头公司产生误解</a></li>
-						<li><a href="">如何提高企业现场招聘工作的效果</a></li>
-						<li><a href="">哪些技巧能通过简历获得面试的机会</a></li>
-					</ol>
-				</div>
-				<!-- 最新资讯结束 -->
 			</div><!--左侧分类栏结束-->
 			<!--右侧分类栏-->
 			<div class="col-sm-9">
@@ -316,28 +316,30 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								人才列表（<b>3762</b>人）
+								技术人才（<b>3762</b>人）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">吴*</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">向*飞</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">张*</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
+							<!-- 昵称，学历，岗位，工作年限 -->
+								<li class="row"><a href=""><span class="col-sm-3">招财猫</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">10年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">向*飞</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">张*</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
 							</ul>
 						</div>
 					</article>
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								人才列表（<b>3762</b>人）
+								管理人才（<b>3762</b>人）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">吴*</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">向*飞</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">张*</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
+							<!-- 昵称，学历，岗位，工作年限 -->
+								<li class="row"><a href=""><span class="col-sm-3">招财猫</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">10年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">向*飞</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">张*</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
 							</ul>
 						</div>
 					</article>
@@ -355,21 +357,22 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								岗位列表（<b>26547</b>职位）
+								软件企业（<b>26547</b>职位）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">景洪</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
+								<!-- 工作地点，公司名称，招聘岗位，人数 -->
+								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">2人</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">3人</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10人</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">景洪</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">1人</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5人</span></a></li>
 							</ul>
 						</div>
 					</article>
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								岗位列表（<b>26547</b>职位）
+								非软件企业（<b>26547</b>职位）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
@@ -394,7 +397,7 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								众筹列表（<b>367</b>项目）
+								企业众筹（<b>367</b>项目）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<li class="row"><a href=""><span class="col-sm-3">众筹859</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
@@ -408,7 +411,7 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								众筹列表（<b>367</b>项目）
+								个人众筹（<b>367</b>项目）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<li class="row"><a href=""><span class="col-sm-3">众筹112</span><b class="col-sm-7">前端工程师</b><span class="col-sm-2">5w</span></a></li>
@@ -421,6 +424,45 @@
 					</article>
 				</div>
 				<!-- 技术众筹结束 -->
+				<!-- 精品文章 -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="work-together-title">
+							<span>精品文章</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<article class="panel col-sm-6 work-together-subtitle">
+						<div class="panel-body">
+							<div class="work-together-title">
+								企业文章（<b>367</b>项目）
+							</div>
+							<ul type="square" class="work-together-list list-unstyled">
+								<li class="row"><a href=""><span class="col-sm-3">众筹859</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹356</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹211</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹899</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹78</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+							</ul>
+						</div>
+					</article>
+					<article class="panel col-sm-6 work-together-subtitle">
+						<div class="panel-body">
+							<div class="work-together-title">
+								个人文章（<b>367</b>项目）
+							</div>
+							<ul type="square" class="work-together-list list-unstyled">
+								<li class="row"><a href=""><span class="col-sm-3">众筹112</span><b class="col-sm-7">前端工程师</b><span class="col-sm-2">5w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹423</span><b class="col-sm-7">UI工程师</b><span class="col-sm-2">15w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹67</span><b class="col-sm-7">测试工程师</b><span class="col-sm-2">10w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹123</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">众筹77</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+							</ul>
+						</div>
+					</article>
+				</div>
+				<!-- 精品文章结束 -->
 			</div><!--右侧分类栏结束-->
 		</div>
 	</div>
