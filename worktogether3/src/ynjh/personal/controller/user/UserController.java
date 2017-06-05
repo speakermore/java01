@@ -261,9 +261,10 @@ public class UserController {
 	@RequestMapping("/gotoCompany")
 	public String gotoCompany(HttpSession session) {
 		// 查看企业列表
-		User oldUser = (User) session.getAttribute("user");
+		
 		List<CompanyList> companyeList = uService.findCompanyList(1);
 		try {
+			User oldUser = (User) session.getAttribute("user");
 			for (CompanyList companyList : companyeList) {
 				Follow follow = fService.findIsFollowByFollowIdAndFollowId(oldUser.getId(), companyList.getId());
 				if (follow == null) {
