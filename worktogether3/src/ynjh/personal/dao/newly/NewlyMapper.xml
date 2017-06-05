@@ -31,10 +31,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 查看最新评论 -->
 	<select id="findNewlyCommentArticleByUserId" parameterType="Integer"
-		resultType="ArticleByComment">
-		select * from commentarticle ca,article a,user u where
-		u.id=#{userId} and a.id=ca.articleId and u.id=a.usersId and
-		a.usersId=ca.usersId group by a.id order by ca.commentArticleTime
+		resultType="CommentArticle">
+		select max(ca.articleId) articleId,max(ca.usersId)
+		usersId,max(ca.commentArticleTime)
+		commentArticleTime,max(a.articleTitle) articleTitle,max(u.userName)
+		userName from commentarticle ca,article a,user u where
+		u.id=#{userId}
+		and a.id=ca.articleId and u.id=a.usersId and
+		a.usersId=ca.usersId group
+		by a.id order by ca.commentArticleTime
 		desc;
 	</select>
 </mapper>

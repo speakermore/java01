@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import ynjh.company.entity.Offer;
 import ynjh.personal.dao.newly.NewlyMapper;
-import ynjh.personal.entity.ArticleByComment;
 import ynjh.personal.entity.ArticleByFollow;
+import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.service.NewlyService;
 
 /**
@@ -62,7 +62,7 @@ public class NewlyServiceImpl implements NewlyService {
 	 * 查看最新评论
 	 */
 	@Override
-	public List<ArticleByComment> findNewlyCommentArticleByUserId(Integer userId) {
+	public List<CommentArticle> findNewlyCommentArticleByUserId(Integer userId) {
 		return newlyMapper.findNewlyCommentArticleByUserId(userId);
 	}
 	

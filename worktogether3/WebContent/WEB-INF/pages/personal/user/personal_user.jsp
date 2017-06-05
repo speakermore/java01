@@ -66,7 +66,7 @@
 					<c:forEach items="${personal_articleByComments}" var="articleByComment">
 					<section class="panel">
 						<div class="panel-body">
-							@<a href="#">${articleByComment.userName}</a>评论了<<<a href="#">${articleByComment.articleTitle }</a>>>
+							@<a href="#">${articleByComment.userName}</a>评论了<<<a href="personal/article/lookArticleById?id=${articleByComment.articleId}">${articleByComment.articleTitle }</a>>>
 						</div>
 						<div class="panel-footer work-together-right">
 							1分钟前.<a href="#">更多....</a>

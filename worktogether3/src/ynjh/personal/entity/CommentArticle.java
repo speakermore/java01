@@ -30,31 +30,16 @@ public class CommentArticle implements Serializable {
 	private String userLoginId;
 	// 用户头像
 	private String userHeadImgPath;
+	// 文章标题
+	private String articleTitle;
 
-	public CommentArticle() {
-
+	public String getArticleTitle() {
+		return articleTitle;
 	}
 
-	
-
-	public CommentArticle(Integer id, Integer articleId, Integer usersId, Timestamp commentArticleTime,
-			String commentArticleContent, Integer commentArticleLikeNum, Integer commentArticleStatus,
-			Integer commentArticleUsersType, String userName, String userLoginId, String userHeadImgPath) {
-		super();
-		this.id = id;
-		this.articleId = articleId;
-		this.usersId = usersId;
-		this.commentArticleTime = commentArticleTime;
-		this.commentArticleContent = commentArticleContent;
-		this.commentArticleLikeNum = commentArticleLikeNum;
-		this.commentArticleStatus = commentArticleStatus;
-		this.commentArticleUsersType = commentArticleUsersType;
-		this.userName = userName;
-		this.userLoginId = userLoginId;
-		this.userHeadImgPath = userHeadImgPath;
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
 	}
-
-
 
 	public String getUserLoginId() {
 		return userLoginId;
@@ -63,8 +48,6 @@ public class CommentArticle implements Serializable {
 	public void setUserLoginId(String userLoginId) {
 		this.userLoginId = userLoginId;
 	}
-
-
 
 	public String getUserName() {
 		return userName;
@@ -152,7 +135,9 @@ public class CommentArticle implements Serializable {
 				+ ", commentArticleTime=" + commentArticleTime + ", commentArticleContent=" + commentArticleContent
 				+ ", commentArticleLikeNum=" + commentArticleLikeNum + ", commentArticleStatus=" + commentArticleStatus
 				+ ", commentArticleUsersType=" + commentArticleUsersType + ", userName=" + userName + ", userLoginId="
-				+ userLoginId + ", userHeadImgPath=" + userHeadImgPath + "]";
+				+ userLoginId + ", userHeadImgPath=" + userHeadImgPath + ", articleTitle=" + articleTitle + "]";
 	}
+
+	
 
 }

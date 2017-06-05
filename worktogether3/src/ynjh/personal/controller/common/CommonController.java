@@ -20,8 +20,8 @@ import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
-import ynjh.personal.entity.ArticleByComment;
 import ynjh.personal.entity.ArticleByFollow;
+import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -153,7 +153,7 @@ public class CommonController {
 		session.setAttribute("personal_offer", offer);
 
 		// 获取最新动态评论消息
-		List<ArticleByComment> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
+		List<CommentArticle> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
 		if (articleByComments.size()>0) {
 			session.setAttribute("personal_articleByComments", articleByComments);
 		}else {
