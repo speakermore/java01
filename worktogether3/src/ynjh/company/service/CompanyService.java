@@ -3,6 +3,7 @@ package ynjh.company.service;
 import java.util.List;
 
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
 
 public interface CompanyService {
@@ -22,4 +23,10 @@ public interface CompanyService {
 	public Integer updatePassword(Integer id,String newPassword);
 	//修改公司环境图片
 	public Integer updateImg(Integer id,String companyDetailImg,Integer companyDetailDiscInt);
+	//添加公司联系方式
+	public Integer addCompanyConnection(CompanyConnection companyConnection);
+	//修改公司联系方式
+	public Integer updateCompanyConnection(CompanyConnection companyConnection);
+	//查询公司联系方式
+	public List<CompanyConnection> findCompanyConnection(Integer companyId);
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     import="ynjh.common.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -49,6 +49,7 @@
 <%@include file="/WEB-INF/pages/nav.jsp" %>
 <c:set var="COMPANY_TYPE" value="${CommonStatus.COMPANY_TYPE }"></c:set>
 <c:set var="COMPANY_SIZE" value="${CommonStatus.COMPANY_SIZE }"></c:set>
+<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-sm-2 column">
@@ -100,6 +101,10 @@
 										<tr>
 											<td>公司地址：</td>
 											<td>${user.companyAddress}</td>
+										</tr>
+										<tr>
+											<td>审核状态：</td>
+											<td>${AUDIT_STATUS[user.companyStatus] }</td>
 										</tr>
 										<tr>
 											<td></td>

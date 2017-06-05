@@ -1,0 +1,31 @@
+$(function(){
+	//岗位控制
+	var index=($("#connectionIndex").val())-1;
+	$("#addTel").click(function(){
+		var maxjob=5;
+		if(index<maxjob){
+			if(window.confirm("确定要增加职务吗?")){
+				index++;
+				$(".companyTel:eq(0)").clone(false).insertBefore($(".newTel"));
+				$("#deleteTel").css("display","block");
+				//控制台打印
+				console.log($(".onejob").length);
+			}
+		}else{
+			alert("您的权限最多只能添加"+(maxjob+1)+"个岗位");
+		}
+	});
+	//删除最后一个岗位
+	$("#deleteTel").click(function(){
+		if($(".companyTel").length>1){
+			if(window.confirm("确定要删除最后一个职务栏?")){
+				$(".companyTel:last").remove();
+				index--;
+			}
+		}
+		if($(".companyTel").length==1){
+			$("#deleteTel").css("display","none");
+		}
+	});
+});
+	//

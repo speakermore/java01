@@ -12,15 +12,10 @@
 #file {
 	height: 100px;
 	width: 400px;
-	
-}
-.panel-group {
-    margin-bottom: 0px;
 }
 </style>
 </head>
 <body>
-	
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
@@ -30,18 +25,7 @@
 			<div class="col-sm-6">
 				<h3>基本资料修改</h3>
 				<hr />
-				
-				
-				
-				<div class="panel-group" id="panel-199314">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-199314" href="#panel-element-571190">基本资料</a>
-					</div>
-					<div id="panel-element-571190" class="panel-collapse collapse in">
-						<div class="panel-body">
-							<!--  -->
-					<form class="form-horizontal" role="form"
+				<form class="form-horizontal" role="form"
 					action="company/company/update" method="post"
 					enctype="multipart/form-data" id="updateCompany">
 					<input type="hidden" value=${user.id } name="id"> <input
@@ -121,27 +105,7 @@
 						</div>
 					</div>
 					<input type="hidden" name="companyStatus" value=${companyStatus } id="companyStatus">
-						<div class="form-group">
-							<div class="col-sm-3">
-								<button type="submit" class="form-control btn btn-success">修改</button>
-							</div>
-						</div>
-					</form>	
-							<!--  -->
-						</div>
-					</div>
-				</div>
-				</div>
-				<div class="panel-group" id="panel-199314">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-199314" href="#panel-element-484510">公司环境图片</a>
-					</div>
-					<div id="panel-element-484510" class="panel-collapse collapse">
-						<div class="panel-body">
-						<!--  -->
-						<form action="company/company/updateCompanyImg" method="post" enctype="multipart/form-data">
-						<div class="form-group">
+					<div class="form-group">
 						<div class="col-sm-3">公司环境：</div>
 						<div class="col-sm-9">
 							<span class="label label-default">大门</span><input id="companyImg1"
@@ -170,82 +134,11 @@
 						</div>
 					</div>
 				</form>
-						
-						<!--  -->
-				
-						</div>
-					</div>
-				</div>
-				</div>
-				
-				<div class="panel-group" id="panel-199314">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						
-							
-							 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-199314" href="#companyConnection">公司联系电话</a>
-								
-	      				
-					</div>
-					<div id="companyConnection" class="panel-collapse collapse">
-						<div class="panel-body">
-						<!--  --> 
-						<div class="col-sm-offset-10">
-							<div class="col-sm-5">
-								<a id="addTel" title="新增岗位" href="javascript:void(0)" >
-			      					 	 <span class="glyphicon glyphicon-plus"></span>
-			      				</a>
-							</div>
-							<div class="col-sm-5">
-								<a id="deleteTel" title="删除最后一个岗位" style="display: none;">
-			      					 	 	<span class="glyphicon glyphicon-minus "></span>
-			      				</a>
-							</div>
-						</div>
-						
-						<form action="company/company/updateCompanyTel" method="post">
-						
-						<!-- 点击加号添加内容 -->
-						<c:forEach items="${companyConnections }" var="connection">
-						<div class="companyTel">
-							<div class="form-group">
-							<input type="hidden" name="companyId" value="${user.id }">
-							<div class="col-sm-5">昵称
-								<input type="text" class="form-control"
-									name="cmpConnectionNames" value="${connection.cmpConnectionName }">
-							</div>
-							<div class="col-sm-7">
-								电话：
-								<input type="text" class="form-control" name="companyTels" value="${connection.cmpConnection }">
-							</div>
-							</div>
-						</div>
-						</c:forEach>
-						<!-- 点击加号添加内容完 -->
-						
-						<div class="newTel"></div>
-					<div class="form-group">
-						<div class="col-sm-3">
-							<button type="submit" class="form-control btn btn-success">修改</button>
-						</div>
-					</div>
-					
-					
-				</form>
-						
-						<!--  -->
-				
-						</div>
-					</div>
-				</div>
-				</div>
 			</div>
 			<div class="col-sm-3 column">日常广告位</div>
 		</div>
 	</div>
-	<input type="hidden" id="connectionIndex" value="${companyConnections.size() }" />
 </body>
-<script type="text/javascript" src="company/js/addTel.js"></script>
 <!-- <script>
 $("#logo").fileinput({	
 	 'language': 'zh',
@@ -430,7 +323,7 @@ $("#logo").fileinput({
 															message : '公司邮件不能为空'
 														},
 														emailAddress : {
-															message : '你输出入的电子邮箱不合法'
+															message : 'hello'
 														}
 													/* regexp:{
 														regexp:/^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i,
@@ -457,7 +350,6 @@ $("#logo").fileinput({
 	
 
 </script>
-
 <script type="text/javascript">
 $(document).ready(function(){
 	/* var i=$("#companyStatus").value();

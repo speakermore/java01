@@ -78,10 +78,11 @@ public class CompanyArticleController {
 		Company company=(Company)session.getAttribute("user");
 		article.setUsersId(company.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
-		article.setArticleUsersType(2);
+		article.setArticleUsersType(1);
+		article.setArticleStatus(1);
 		companyArticleService.addArticle(article);
 		
-		ModelAndView mView=new ModelAndView("redirect:../../../company/artanddis/");
+		ModelAndView mView=new ModelAndView("company/artanddis/add_companyarticle");
 		return mView;
 	}
 	
@@ -99,7 +100,7 @@ public class CompanyArticleController {
 		int maxPage=companyArticleService.findMaxPage();
 		List<Integer> pageNo=new ArrayList<Integer>();
 		if (maxPage <=5 ) {
-			for(int i= 1;i <maxPage;i++){
+			for(int i= 1;i <=maxPage;i++){
 				pageNo.add(i);
 			}
         }else if (maxPage >5) {

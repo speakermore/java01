@@ -46,6 +46,7 @@ public class CompanyCommentArticleController {
 		commentArticle.setUsersId(user.getId());
 		commentArticle.setArticleId(article.getId());
 		commentArticle.setCommentArticleTime(new Timestamp(System.currentTimeMillis()));
+		commentArticle.setCommentArticleStatus(1);
 		commentArticle.setCommentArticleUsersType(2);
 		int result=ccArticleService.addArticle(commentArticle);
 		ModelAndView mView=new ModelAndView("company/info");

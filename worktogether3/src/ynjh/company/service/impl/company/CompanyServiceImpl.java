@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import ynjh.company.dao.company.CompanyMapper;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.service.CompanyService;
 
@@ -95,5 +96,20 @@ public class CompanyServiceImpl implements CompanyService{
 		default:
 		}
 		return companyMapper.updateImg(id, companyDetailImg,companyDetailDisc);
+	}
+
+	@Override
+	public Integer addCompanyConnection(CompanyConnection companyConnection) {
+		return companyMapper.addCompanyConnection(companyConnection);
+	}
+
+	@Override
+	public Integer updateCompanyConnection(CompanyConnection companyConnection) {
+		return companyMapper.updateCompanyConnection(companyConnection);
+	}
+
+	@Override
+	public List<CompanyConnection> findCompanyConnection(Integer companyId) {
+		return companyMapper.findCompanyConnection(companyId);
 	}
 }
