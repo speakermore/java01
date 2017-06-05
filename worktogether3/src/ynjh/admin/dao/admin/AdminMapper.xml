@@ -129,8 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!--个人热门文章 -->
-	<select id="findPersonBestArticle" resultType="Article">
-		select * from article  where  articleUsersType=2 order by articleReadNum desc limit 10
+	<!-- 只选取个人发表的已通过审核的文章 -->
+	<select id="findPersonBestArticle" resultType="AuditArticle">
+		select a.*,u.* from article as a,user as u where  a.usersId=u.id and a.articleUsersType=2 and a.articleStatus=2 order by articleReadNum desc limit 10
 	</select>
 	<!--企业热门文章 -->
 	<select id="findCompanyBestArticle" resultType="Article">

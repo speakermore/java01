@@ -97,7 +97,7 @@ public interface AdminService {
 	public List<Company> findBestCompany();
 	
 	//个人热门文章查询
-	public List<Article> findPersonBestArticle();
+	public List<AuditArticle> findPersonBestArticle();
 	//企业热门文章查询
 	public List<Article> findCompanyBestArticle();
 	

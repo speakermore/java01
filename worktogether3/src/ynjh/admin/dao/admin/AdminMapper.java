@@ -288,7 +288,7 @@ public interface AdminMapper {
 	 * 个人热门文章查询
 	 * @author 张宇
 	 */
-	public List<Article> findPersonBestArticle();// 个人热门文章
+	public List<AuditArticle> findPersonBestArticle();// 个人热门文章
 	/**
 	 * 企业热门文章查询
 	 * @author 张宇

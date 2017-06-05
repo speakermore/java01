@@ -416,13 +416,15 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public List<Company> findBestCompany() { 
-		List<Integer> list=adminMapper.findCompanyId();
+		List<Integer> list=adminMapper.findCompanyId();//找到最佳企业id
 		List<Company> listCompany=new ArrayList();
-		for(int i=0;i<list.size();i++){
-			Company company=adminMapper.findCompanyById(list.get(i));
-			listCompany.add(company);
-		}
-		return listCompany;
+		if(list!=null&&list.size()>0){
+			for(int i=0;i<list.size();i++){
+				Company company=adminMapper.findCompanyById(list.get(i));
+				listCompany.add(company);
+			}
+		}	
+			return listCompany;	
 	}
 
 	/**
@@ -807,8 +809,8 @@ public class AdminServiceImpl implements AdminService {
 	 * @author 张宇
 	 */
 	@Override
-	public List<Article> findPersonBestArticle() {
-		 
+	public List<AuditArticle> findPersonBestArticle() {
+		
 		return adminMapper.findPersonBestArticle();
 	}
 

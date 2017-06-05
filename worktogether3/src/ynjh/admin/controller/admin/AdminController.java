@@ -289,10 +289,10 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/findBestArticle", method = RequestMethod.GET) // 热门文章查询
 	public ModelAndView findBestArticle() {
-		List<Article> companyBestArticle = adminService.findCompanyBestArticle();// 企业热门文章
-		List<Article> personBestArticle = adminService.findPersonBestArticle();// 个人热门文章
+		// 企业热门文章 List<Article> companyBestArticle = adminService.findCompanyBestArticle();
+		List<AuditArticle> personBestArticle = adminService.findPersonBestArticle();// 个人热门文章
 		ModelAndView mv = new ModelAndView("admin/findBestArticle");
-		mv.addObject("companyBestArticle", companyBestArticle);
+		// 企业热门文章 mv.addObject("companyBestArticle", companyBestArticle);
 		mv.addObject("personBestArticle", personBestArticle);
 		return mv;
 	}

@@ -21,7 +21,7 @@
 <body>
 	<div><%@include file="menu.jsp"%></div>
 	<form  class="form-horizontal" action="admin/messagePush" method="post">
-		<div class="col-sm-offset-2 col-sm-5">
+		<div class="col-sm-offset-1 col-sm-3">
 						<!--工作对象-->
 						<div class="form-group">
 							<select class="form-control" name="sysmScope">
