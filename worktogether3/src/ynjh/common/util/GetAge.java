@@ -2,7 +2,11 @@ package ynjh.common.util;
 
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+ * 
+ * @author 何爽
+ *
+ */
 public class GetAge {
 
 	public static int getAgeTools(Date dateOfBirth) {
