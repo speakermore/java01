@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.id=#{userId}
 		and a.id=ca.articleId and u.id=a.usersId and
 		a.usersId=ca.usersId group
-		by a.id order by ca.commentArticleTime
+		by a.id,ca.commentArticleTime order by ca.commentArticleTime
 		desc;
 	</select>
 </mapper>
