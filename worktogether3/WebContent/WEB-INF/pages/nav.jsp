@@ -23,6 +23,12 @@
 				class="hidden-xs">企业用户入口</a>
 		</c:if>
 		<c:if test="${user!=null }">
+			<c:if test="${user.id>=1234567890 }">
+				<a href="personal/common/initIndex?toPage=1&userId=${user.id }">个人中心</a>
+			</c:if>
+			<c:if test="${user.id<1234567890 }">
+				<a href="company/company/findById/${user.id }">企业中心</a>
+			</c:if>
 			<a href="personal/user/logout"
 				class="hidden-xs">退出</a>
 		</c:if>
