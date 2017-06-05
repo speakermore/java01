@@ -21,7 +21,7 @@ import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.ArticleByFollow;
-import ynjh.personal.entity.CompanyList;
+import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -95,20 +95,19 @@ public class CommonController {
 		}
 
 		// 我收到的面试邀请
-		List<Offer> offers=companyOfferService.findUserOffers(userId,toPage);
-		int maxPage=companyOfferService.findUserOffersPage(userId);
+		List<Offer> offers = companyOfferService.findUserOffers(userId, toPage);
+		int maxPage = companyOfferService.findUserOffersPage(userId);
 		if (offers.size() > 0) {
-			session.setAttribute("offers", offers);
-			session.setAttribute("maxPage",maxPage);
+			session.setAttribute("personal_offers_list", offers);
+			session.setAttribute("maxPage", maxPage);
 		} else {
-			session.setAttribute("offers", null);
+			session.setAttribute("personal_offers_list", null);
 		}
-		/*List<Offer> offers = rService.findMyReceiveOffer(userId);
-		if (offers.size() > 0) {
-			session.setAttribute("offers", offers);
-		} else {
-			session.setAttribute("offers", null);
-		}*/
+		/*
+		 * List<Offer> offers = rService.findMyReceiveOffer(userId); if
+		 * (offers.size() > 0) { session.setAttribute("offers", offers); } else
+		 * { session.setAttribute("offers", null); }
+		 */
 
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
@@ -142,10 +141,29 @@ public class CommonController {
 				session.setAttribute("projs", null);
 			}
 		}
-		// 获取最新面试消息
-		Offer offer = nService.findNewlyFaceByUserId(userId);
-		session.setAttribute("offer", offer);
+		/*
+		 * 最新动态
+		 */
+		// 获取最新动态关注者的最新文章消息
+		List<ArticleByFollow> articleByFollows = nService.findNewlyArticleByFollow(userId);
+		session.setAttribute("articleByFollows", articleByFollows);
 
+		// 获取最新动态面试消息
+		Offer offer = nService.findNewlyFaceByUserId(userId);
+		session.setAttribute("personal_offer", offer);
+
+		// 获取最新动态评论消息
+		List<CommentArticle> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
+		if (articleByComments.size()>0) {
+			session.setAttribute("personal_articleByComments", articleByComments);
+		}else {
+			articleByComments=null;
+		}
+		
+		
+		/*
+		 * 最新动态结束
+		 */
 		// 最新发布文章
 		Article articleNewly = aService.findNewlyArticleByUserId(userId);
 		session.setAttribute("articleNewly", articleNewly);
@@ -156,9 +174,14 @@ public class CommonController {
 
 		// 文章未删除
 		List<Article> articles = aService.findUserArticle(toPage, userId);
-		int maxArticlePage = aService.getMaxArticleById(userId);
-		session.setAttribute("articles", articles);
-		session.setAttribute("maxArticlePage", maxArticlePage);
+		if (articles.size() > 0) {
+			int maxArticlePage = aService.getMaxArticleById(userId);
+			session.setAttribute("personal_article_list", articles);
+			session.setAttribute("maxArticlePage", maxArticlePage);
+		} else {
+			session.setAttribute("personal_article_list", null);
+		}
+
 		// 获取评论内容
 		Mood mood = mService.selectMoodById(userId);
 		session.setAttribute("mood", mood);
@@ -177,10 +200,6 @@ public class CommonController {
 		List<Follow> CompanyFollows = fService.selectCompanyFollow(userId);
 		session.setAttribute("CompanyFollows", CompanyFollows);
 
-		// 获取关注者的最新文章消息
-		List<ArticleByFollow> articleByFollows = nService.findNewlyArticleByFollow(userId);
-		session.setAttribute("articleByFollows", articleByFollows);
-
 		mv.addObject("curPage", toPage);
 		return mv;
 	}
@@ -197,6 +216,7 @@ public class CommonController {
 		ModelAndView mv = new ModelAndView();
 		Company company = companyService.findCompany(id);
 		CompanyIntroduction companyInt = companyIntService.findById(company.getId());
+
 		session.setAttribute("company", company);
 		session.setAttribute("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");

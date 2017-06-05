@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 用于傳遞驗證碼
- * @author 35607
+ * @author 朱吉
  *
  */
 public class ValidateCode {

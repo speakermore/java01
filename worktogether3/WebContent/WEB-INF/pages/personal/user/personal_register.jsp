@@ -38,6 +38,7 @@
 						<label for="userLoginId" class="sr-only">邮箱/手机号</label> <input
 							type="text" id="userLoginId" class="form-control"
 							name="userLoginId" placeholder="手机号" required autofocus>
+						<div id="userLoginIdError" style="color: red;"></div>
 					</div>
 					<div class="form-group">
 						<label for="userPassword" class="sr-only">密码</label> <input
@@ -59,7 +60,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">个人用户注册</button>
+					<button class="btn btn-lg btn-success btn-block" type="submit">个人用户注册</button>
 
 				</form>
 			</div>
@@ -79,6 +80,18 @@
 		src="thirdpart/dist/js/language/zh_CN.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			/* 比对数据库里的用户名 */
+			/* $("#userLoginId").blur(function(){
+				$.ajax({
+					url:"personal/user/verificationUserLoginId",
+					data:"userLoginId="+$(this).val(),
+					dataType:"html",
+					success:function(data){
+						$("#userLoginIdError").html(data);
+					}
+				});
+			});	 */
+			/* 表单验证 */
 			$("#registerForm").bootstrapValidator({
 				message : '这个值不能通过验证！',
 				feedbackIcons : {
@@ -88,18 +101,26 @@
 				},
 				fields : {
 					userLoginId : {
+						//有6字符以上才发送ajax请求，（input中输入一个字符，插件会向服务器发送一次，设置限制，11字符以上才开始）
+						threshold :11,
 						validators : {
 							notEmpty : {
 								message : '用户名不能为空'
 							},
-							stringLength : {
-								min : 6,
-								max : 50,
-								message : '用户名长度必须在6到50位之间'
+							regexp : {
+								regexp : '^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$',
+								message : '请输入正确的用户名'
+							},
+							remote: {
+								url:"personal/user/verificationUserLoginId",
+								message: '用户名已被注册',
+								delay: 5000,
+								type : 'post'
 							}
 						}
 					},
 					userPassword : {
+						verbose: false,//多验证的情况下默认第一验证错误，则提示当前错误信息后面的验证不执行
 						validators : {
 							notEmpty : {
 								message : '密码不能为空'
@@ -113,10 +134,6 @@
 								regexp : /^[a-zA-Z0-9_]+$/,
 								message : '密码只能包含大写、小写、数字和下划线'
 							},
-							identical : {
-								field : 'confirmPassword',
-								message : '两次密码不一致'
-							},
 							different : {
 								field : 'userLoginId',
 								message : '密码不能和用户名相同'
@@ -127,11 +144,6 @@
 						validators : {
 							notEmpty : {
 								message : '确认密码不能为空'
-							},
-							stringLength : {
-								min : 6,
-								max : 50,
-								message : '密码长度必须在6到50位之间'
 							},
 							regexp : {
 								regexp : /^[a-zA-Z0-9_]+$/,

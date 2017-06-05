@@ -6,6 +6,11 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.core.convert.converter.Converter;
 
+/**
+ * 完成字符串到Timestamp的类型转换器
+ * @author 牟勇
+ *
+ */
 public class StringToDateConvertor implements Converter<String, Timestamp> {
 	private String datePattner;
 	

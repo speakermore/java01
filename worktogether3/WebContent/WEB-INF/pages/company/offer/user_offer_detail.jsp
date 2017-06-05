@@ -40,8 +40,8 @@
 						<div class="col-sm-10">
 							<p class="form-control-static">${o.offerJob }</p>
 						</div>
-					</div>
-					
+					</div>			
+										
 					<div class="form-group">
 						<label class="col-sm-2 control-label">面试日期:</label>
 						<div class="col-sm-10">

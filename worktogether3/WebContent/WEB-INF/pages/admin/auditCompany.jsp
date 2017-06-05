@@ -42,17 +42,6 @@
 
 								</ul>
 							</c:forEach>
-							<tr>
-								<td colspan="5"><c:if test="${curPage==null }">
-										<c:set var="curPage" value="1"></c:set>
-									</c:if><a href="admin/findAuditArticle/1">首页</a> <c:if test="${curPage>1 }">
-
-										<a href="admin/findAuditArticle/${curPage-1 }">上一页</a>
-									</c:if> <c:if test="${curPage<maxPage}">
-										<a href="admin/findAuditArticle${curPage+1 }">下一页</a>
-
-									</c:if><a href="admin/findAuditArticle/${maxPage }">尾页</a></td>
-							</tr>
 							</heading>
 						</section>
 					</div>

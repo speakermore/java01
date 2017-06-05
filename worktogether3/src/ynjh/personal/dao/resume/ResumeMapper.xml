@@ -12,12 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumePlace,resumeBirthday,resumeMarriage,resumeGraduationSchool,resumeGraduationTime,
 		resumeEducation,resumeMajor,resumeWages,resumePhone,resumeQQ,resumePersonality,
 		resumeSelfEvaluation,resumeHeight,resumeWeight,resumeJor,resumeHeadImg,resumeWorks,
-		resumeHouseAddress,resumeNowResidence,resumeEmail)
+		resumeHouseAddress,resumeNowResidence,resumeEmail,resumeEnglishGrade,resumeComputerAbility,resumeFLAbility,resumeFLType)
 		values(#{userId},#{resumeTitle},#{resumeCreateDate},#{resumeName},#{resumeGender},#{resumeNation},
 		#{resumePlace},#{resumeBirthday},#{resumeMarriage},#{resumeGraduationSchool},#{resumeGraduationTime},
 		#{resumeEducation},#{resumeMajor},#{resumeWages},#{resumePhone},#{resumeQQ},#{resumePersonality},
 		#{resumeSelfEvaluation},#{resumeHeight},#{resumeWeight},#{resumeJor},#{resumeHeadImg},#{resumeWorks},
-		#{resumeHouseAddress},#{resumeNowResidence},#{resumeEmail})
+		#{resumeHouseAddress},#{resumeNowResidence},#{resumeEmail},#{resumeEnglishGrade},#{resumeComputerAbility},#{resumeFLAbility},#{resumeFLType})
 	</insert>
 	<!-- 修改简历 -->
 	<update id="updateResume" parameterType="Integer">
@@ -25,7 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumeTitle=#{resumeTitle},resumeName=#{resumeName},resumeGender=#{resumeGender},resumeNation=#{resumeNation},
 		resumePlace=#{resumePlace},resumeBirthday=#{resumeBirthday},resumeMarriage=#{resumeMarriage},resumeGraduationSchool=#{resumeGraduationSchool},resumeGraduationTime=#{resumeGraduationTime},
 		resumeEducation=#{resumeEducation},resumeMajor=#{resumeMajor},resumeWages=#{resumeWages},resumePhone=#{resumePhone},resumeQQ=#{resumeQQ},resumePersonality=#{resumePersonality},
-		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeHeadImg=#{resumeHeadImg},resumeWorks=#{resumeWorks}
+		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeWorks=#{resumeWorks},
+		resumeHouseAddress=#{resumeHouseAddress},resumeNowResidence=#{resumeNowResidence},resumeEmail=#{resumeEmail},resumeEnglishGrade=#{resumeEnglishGrade},resumeComputerAbility=#{resumeComputerAbility},
+		resumeFLAbility=#{resumeFLAbility},resumeFLType=#{resumeFLType}
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->
@@ -174,15 +176,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getMaxEducationDeleteById" resultType="Integer">
 		select
-		count(*) from education where userId=#{userId} and resumeType=4
+		count(*) from resume r,education e where
+		e.resumeId=r.id and
+		resumeType=4 and e.userId=#{userId}
 	</select>
 	<select id="getMaxWorkDeleteById" resultType="Integer">
 		select count(*)
-		from work where userId=#{userId} and resumeType=4
+		from resume r,work w where w.resumeId=r.id
+		and resumeType=4 and
+		w.userId=#{userId}
 	</select>
 	<select id="getMaxProjectDeleteById" resultType="Integer">
 		select count(*)
-		from project where userId=#{userId} and resumeType=4
+		from resume r,project p where p.resumeId=r.id
+		and resumeType=4 and
+		p.userId=#{userId}
 	</select>
 	<!-- 分页结束 -->
 	<!-- 发送简历 -->
@@ -197,15 +205,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{resumeId}
 	</update>
 	<!-- 我发过的简历 -->
-	<select id="findMySendResume" resultType="MySendResume" parameterType="Integer">
+	<select id="findMySendResume" resultType="MySendResume"
+		parameterType="Integer">
 		select * from companyresume cre,company
-		c,companyrecruit crt
+		c,companyrecruit
+		crt
 		where cre.companyId=c.id
 		and cre.companyrecruitId=crt.id
-		and cre.companyResumeId=#{userId}
+		and
+		cre.companyResumeId=#{userId}
 	</select>
 	<!-- 我收到的面试邀请 -->
-	<select id="findMyReceiveOffer" resultType="Offer" parameterType="Integer">
-		select * from offer o,company c where o.companyId=c.id and o.userId=#{userId}
+	<select id="findMyReceiveOffer" resultType="Offer"
+		parameterType="Integer">
+		select * from offer o,company c where o.companyId=c.id
+		and o.userId=#{userId}
 	</select>
 </mapper>

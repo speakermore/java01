@@ -111,10 +111,11 @@
 										
 										<select  size="1" id="job1" name="job1" class="col-xs-6 jobcoo">
 											<c:forEach items="${listJob1}" var="job1">
+					
 												<option value="${job1.jobName}">${job1.jobName}</option>
+												
 											</c:forEach>
 										</select>
-										
 										<select style="display: none" size="1" name="job2" class="job2 col-xs-6 jobcoo">
 										</select>
 										

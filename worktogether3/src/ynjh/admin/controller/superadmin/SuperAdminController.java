@@ -51,11 +51,11 @@ public class SuperAdminController {
 		int result=superAdminService.disableAdmin(id, adminStatus);
 		ModelAndView mv=new ModelAndView();
 		if(result>0){
-			mv.addObject("","操作成功");
-			mv.setViewName("");//页面未写
+			mv.addObject("resultInfoSuccess","操作成功");
+			mv.setViewName("admin/superadmin/findAll");//页面未写
 		}else{
-			mv.addObject("","操作失败");
-			mv.setViewName("");//页面未写
+			mv.addObject("resultInfoFalse","操作失败");
+			mv.setViewName("admin/superadmin/findAll");//页面未写
 		}
 		return mv;
 	}
@@ -83,10 +83,10 @@ public class SuperAdminController {
 		int result=superAdminService.addAdmin(adminLoginId, pass, adminTel, adminEmail, adminName);
 		ModelAndView mv=new ModelAndView();
 		if(result>0){
-			mv.addObject("resultInfo","添加管理员成功!");
+			mv.addObject("resultInfoSuccess","添加管理员成功!");
 			mv.setViewName("admin/superadmin/findAll");
 		}else{
-			mv.addObject("resultInfo","操作失败");
+			mv.addObject("resultInfoFalse","操作失败");
 			mv.setViewName("admin/superadmin/findAll");//页面未写
 		}
 		return mv;

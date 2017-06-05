@@ -59,8 +59,9 @@ public class CompanyController {
 		}
 		if (!(validateCode.equalsIgnoreCase(value))) {
 			mv.setViewName("company/company/company_login");
-			mv.addObject("operatorInfo", "请输入正确的验证码或者密码！");
-			System.out.println("验证码输入不正确！！！！！！！！！！！");
+			//牟勇：保存用户账号，以便纠正在验证码输入错误后返回登录页面时账号被刷新为空的问题
+			mv.addObject("companyLoginId",companyLoginId);
+			mv.addObject("operatorInfo", "请输入正确的验证码！");
 		} else {
 			try {
 				superPassword=MD5Util.md5Encode(companyPassword);
@@ -74,6 +75,8 @@ public class CompanyController {
 			mv.addObject("operatorInfo","登录失败");
 			mv.addObject("toPage", "company/company/company_login");
 			mv.setViewName("company/info");
+			//牟勇：保存用户账号，以便纠正在验证码输入错误后返回登录页面时账号被刷新为空的问题
+			mv.addObject("companyLoginId",companyLoginId);
 		}else{
 	         if("1".equals(remFlag)){ //"1"表示用户勾选记住密码
 	             /*String cookieUserName = Utils.encrypt(name);
@@ -85,11 +88,7 @@ public class CompanyController {
 	             userCookie.setMaxAge(30*24*60*60);   //存活期为一个月 30*24*60*60
 	             userCookie.setPath("/");
 	             response.addCookie(userCookie); 
-//	             mv.addObject("userCookie", userCookie);
 	         }
-			
-//				mv.addObject("operatorInfo","登录成功");
-//				mv.addObject("company",company);
 				session.setAttribute("user",company);
 				session.setAttribute("company",company);
 				CompanyIntroduction companyInt=companyIntService.findById(company.getId());

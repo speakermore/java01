@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="ynjh.common.util.*" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
 <!--左侧状态栏位-->
 <div class="row">
 	<!-- 文章内容开始 -->
@@ -19,7 +20,9 @@
 							<c:if test="${fn:length(articleNewly.articleTitle)<=15 }">  
                          ${articleNewly.articleTitle }  
                    </c:if>
+                   <small class="">(${AUDIT_STATUS[articleNewly.articleStatus]})</small>
 						</h3>
+						
 						<p>
 							<c:if test="${fn:length(articleNewly.articleContent)>100 }">  
                          ${fn:substring(articleNewly.articleContent, 0, 100)}...  
@@ -54,23 +57,12 @@
 				</thead>
 				<!-- ajax分页开始 -->
 				<tbody id="ajaxArticlesList">
-					<c:forEach items="${articles }" var="art">
+					<c:forEach items="${personal_article_list }" var="art">
 						<tr>
 							<td><a href="personal/article/lookArticleById?id=${art.id }">${art.articleTitle }</a></td>
 							<td><fmt:formatDate value="${art.articleTime}"
 									pattern="yyyy-MM-dd" /></td>
-							<c:if test="${art.articleStatus==1}">
-								<th>待审核</th>
-							</c:if>
-							<c:if test="${art.articleStatus==2}">
-								<th>正常</th>
-							</c:if>
-							<c:if test="${art.articleStatus==3}">
-								<th>审核未通过</th>
-							</c:if>
-							<c:if test="${art.articleStatus==4}">
-								<th>已被删除</th>
-							</c:if>
+								<td><small >${AUDIT_STATUS[art.articleStatus]}</small></td>
 							<td><c:if test="${art.articleStatus==4}">
 									<a href="personal/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
 										href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='personal/article/renewArticle?id=${art.id }'}">恢复</a>

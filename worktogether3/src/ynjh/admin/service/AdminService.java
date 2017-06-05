@@ -183,6 +183,12 @@ public interface AdminService {
 	public List<User> findDisabledUser();
 	//查找需要禁用的企业用户
 	public List<Company> findDisabledCompany();
+	//通过账号查找企业
+	public Company findCompanyByLoginId(String companyLoginId);
+	//通过账号查找用户
+	public User findUserByLoginId(String userLoginId);
+	//用户管理，通过个人用户id禁用/解禁用户
+	public Integer personalMag(Integer[] ids, Integer userStatus);
 
     
 }	

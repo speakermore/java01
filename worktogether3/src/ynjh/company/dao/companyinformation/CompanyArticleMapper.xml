@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update article set articleLikeNum=1+articleLikeNum where id=#{id}
 	</update>
 	<select id="findAll" resultType="Article">
-		select * from article where usersId=#{usersId} and articleStatus!=4 and articleStatus!=3 and articleStatus!=1
+		select * from article where usersId=#{usersId} and articleStatus!=4 and articleStatus!=3 and articleStatus!=1 order by articleTime desc
 		<if test="page!=null">
 			limit #{page},10
 		</if>

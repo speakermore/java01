@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-md-offset-8">
+			<div class="col-md-offset-9">
 				<input class="btn btn-success" type="submit" value="保存" /> <input
 					class="btn btn-success" type="reset" value="重置" />
 			</div>
@@ -76,11 +76,11 @@
 									stringLength : {
 										min : 2,
 										max : 10,
-										message : '真实姓名长度必须在2到10位之间'
+										message : '请输入正确姓名'
 									},
 									regexp : {
 										regexp : (/[\u4e00-\u9fa5]/g),
-										message : "请输入中文名字"
+										message : "请输入正确姓名"
 									}
 								}
 							},

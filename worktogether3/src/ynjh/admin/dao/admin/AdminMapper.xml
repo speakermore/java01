@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!--禁用普通用户  -->
 	<update id="disableUser">
-		update user set userStatus=#{userStatus} where userId=#{userId}
+		update user set userStatus=#{userStatus} where id=#{userId}
 	</update>
 	<!--禁用企业用户  -->
 	<update id="disableCompany">
@@ -254,4 +254,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findDisabledCompany" resultType="Company">
 		select * from company order by companyStatus desc
 	</select> 
+	<!-- 查找企业用户通过企业账号 -->
+	<select id="findCompanyByLoginId" parameterType="String" resultType="Company">
+		select * from company where companyLoginId=#{companyLoginId}
+	</select>
+	<!-- 查找个人用户，通过userLoginId -->
+	<select id="findUserByLoginId" parameterType="String" resultType="User">
+		select * from user where userLoginId=#{userLoginId}
+	</select>
 </mapper>

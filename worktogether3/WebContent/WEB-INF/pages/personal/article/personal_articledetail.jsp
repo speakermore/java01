@@ -19,7 +19,7 @@
 							<button type="button" class="close" data-dismiss="alert"
 								aria-hidden="true">×</button>
 							<h4>注意!</h4>
-							文章写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
+							文章写完需要审核通过后才能发表. <a href="personal/user/gotoIndex"
 								class="alert-link">返回首页</a>
 						</div>
 						<%@include

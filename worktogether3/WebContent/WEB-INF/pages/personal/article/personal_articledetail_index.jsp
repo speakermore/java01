@@ -24,8 +24,14 @@
 				<hr />
 			</div>
 			<div class="hrr">
-				<a href="personal/article/updateLike?id=${article.id }">赞:${article.articleLikeNum}</a>
-				<div class="ppp">点击数：${article.articleReadNum}</div>
+			<ul class="nav nav-pills">
+				<li>	
+					<a href="personal/article/updateLike?id=${article.id }"><span class="glyphicon glyphicon-thumbs-up"></span><span class="badge pull-right">${article.articleLikeNum}</span></a>
+				</li>
+				<li>
+					<a><span class="glyphicon glyphicon-eye-open"></span><span class="badge pull-right">${article.articleReadNum}</span></a>
+				</li>
+			</ul>
 			</div>
 			<br />
 	</section>

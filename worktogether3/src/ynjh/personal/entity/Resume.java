@@ -21,23 +21,23 @@ public class Resume implements Serializable{
 	// 性别
 	private Integer resumeGender;
 	// 民族
-	private String resumeNation=null;
+	private String resumeNation;
 	// 籍贯
-	private String resumePlace=null;
+	private String resumePlace;
 	// 生日
 	private Timestamp resumeBirthday;
 	// 婚姻
 	private Integer resumeMarriage;
 	// 毕业院校
-	private String resumeGraduationSchool=null;
+	private String resumeGraduationSchool;
 	// 毕业时间
-	private Timestamp resumeGraduationTime=null;
+	private Timestamp resumeGraduationTime;
 	// 学历
-	private String resumeEducation=null;
+	private String resumeEducation;
 	// 专业
-	private String resumeMajor=null;
+	private String resumeMajor;
 	// 期望待遇
-	private Integer resumeWages=null;
+	private Integer resumeWages;
 	// 电话
 	private String resumePhone;
 	// QQ

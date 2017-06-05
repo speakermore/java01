@@ -17,15 +17,10 @@
 			<h6 class="col-sm-offset-3">
 		<!-- 判断是否登录开始 -->
 		<c:if test="${user==null }">
-			登录（
 			<a href="personal/user/login"
-				class="hidden-xs">个人</a>&nbsp;|
-				<a href="company/company/company_login"
-				class="hidden-xs">企业</a>&nbsp;）
-			注册（<a href="personal/user/addUser"
-			class="hidden-xs">个人</a>&nbsp;|
-			<a href="company/company/add"
-			class="hidden-xs">企业</a>&nbsp;）
+				class="hidden-xs">个人用户入口</a>|
+			<a href="company/company/company_login"
+				class="hidden-xs">企业用户入口</a>
 		</c:if>
 		<c:if test="${user!=null }">
 			<a href="personal/user/logout"
@@ -46,7 +41,7 @@
 		</div>
 		<div class="collapse navbar-collapse nav-divider"
 			id="work_together_nav">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav work-together-nav">
 				<li><a href="#">首页</a></li>
 				<li><a href="personal/user/gotoSoft">软件人才</a></li>
 				<li><a href="personal/user/gotoCompany">名企招聘</a></li>
@@ -54,6 +49,7 @@
 				<li><a href="#">认证培训</a></li>
 				<li><a href="#">自主创业</a></li>
 				<li><a href="#">咨询服务</a></li>
+				<li><a href="#">直播</a></li>
 				<li><a href="#">关于我们</a></li>
 			</ul>
 		</div>

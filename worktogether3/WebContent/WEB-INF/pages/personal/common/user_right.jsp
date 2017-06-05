@@ -50,12 +50,12 @@
 				<div id="personal_headImg_border"
 					class="col-md-12 padding_head padding_head_img">
 					<c:if test="${user.userHeadImgPath=='无'}">
-						<img id="headPhoto" class="img-thumbnail"
+						<img id="headPhoto" class="img-thumbnail" onerror="javascript:this.src='img/head.gif'" style="display:none" onload="this.style.display=''"
 							src="personal/img/head.gif" title="我的头像" alt="我的头像" />
 
 					</c:if>
 					<c:if test="${user.userHeadImgPath!='无' }">
-						<img id="headPhoto" class="img-thumbnail"
+						<img id="headPhoto" class="img-thumbnail" onerror="javascript:this.src='img/head.gif'" style="display:none" onload="this.style.display=''"
 							src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}"
 							title="我的头像" alt="我的头像" />
 					</c:if>
@@ -85,7 +85,7 @@
 											<label for="userHeadImgPath" class="col-md-3 control-label">头像：</label>
 											<div class="col-md-8">
 												<input class="form-control file" name="fileHeadImg"
-													type="file" id="userHeadImgPath" multiple
+													type="file" id="userHeadImgPathIndex" multiple
 													data-min-file-count="1" />
 											</div>
 										</div>
@@ -242,7 +242,7 @@
 	</section>
 </article>
 <script type="text/javascript">
-	$("#userHeadImgPath").fileinput({
+	$("#userHeadImgPathIndex").fileinput({
 		'language' : 'zh',
 		'uploadAsync' : false,
 		'showUpload' : false,

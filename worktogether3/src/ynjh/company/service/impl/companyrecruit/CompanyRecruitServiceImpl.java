@@ -35,7 +35,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		if(page<1){
 			page=1;
 		}
-		int maxPage=findMaxPage();
+		int maxPage=findMaxPage()==0?1:findMaxPage();
 		if(page>maxPage){
 			page=maxPage;
 		}

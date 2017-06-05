@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.company.entity.Company;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.User;
 import ynjh.personal.service.FollowService;
@@ -32,13 +34,32 @@ public class FollowController {
 	@RequestMapping("/addUserFollow")
 	@ResponseBody
 	public HashMap<String, String> addUserFollow(Integer byFollowId,HttpSession session){
-		User user=(User) session.getAttribute("user");
+		User user =null;
+		Company company=null;
 		Follow follow=new Follow();
-		follow.setFollowId(user.getId());
+		try {
+			user=(User) session.getAttribute("user");
+			follow.setFollowStartType(2);
+			follow.setFollowType(2);
+			follow.setFollowId(user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			user=null;
+		}
+		if (user==null) {
+			try {
+				company=(Company) session.getAttribute("user");
+				follow.setFollowStartType(2);
+				follow.setFollowType(1);
+				follow.setFollowId(company.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+				company=null;
+			}
+		}
 		follow.setByFollowId(byFollowId);
 		follow.setFollowDate(new Timestamp(System.currentTimeMillis()));
-		follow.setFollowStartType(2);
-		follow.setFollowType(2);
+		
 		int result=followService.addUserFollow(follow);
 		HashMap<String, String> map=new HashMap<String, String>();
 		if(result>0) {
@@ -81,11 +102,14 @@ public class FollowController {
 	 */
 	@RequestMapping("/cancelUserFollow")
 	@ResponseBody
-	public HashMap<String, String> cancelUserFollow(Integer byFollowId,HttpSession session){
+	public HashMap<String, Object> cancelUserFollow(Integer byFollowId,HttpSession session){
 		int result=followService.deleteUserFollow(byFollowId);
-		HashMap<String, String> map=new HashMap<String, String>();
+		User oldUser =(User) session.getAttribute("user");
+		List<Follow> UserFollows = followService.selectUserFollow(oldUser.getId());
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		if (result > 0) {
 			map.put("operatorInfo", "取消关注成功！");
+			map.put("UserFollows", UserFollows);
 		} else {
 			map.put("operatorInfo", "取消关注失败！");
 		}

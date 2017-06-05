@@ -13,6 +13,8 @@ public class CommonStatus {
 	public static final String[] USER_TYPE={"","企业","个人"};
 	//婚配
 	public static final String[] MARRY={"已婚","未婚"};
+	//婚姻状况2
+	public static final String[] MARRIAGE={"未婚","已婚"};
 	//企业类型
 	public static final String[] COMPANY_TYPE={"","政府机构","国有企业","民营企业","其他"};
 	//企业规模
@@ -25,4 +27,10 @@ public class CommonStatus {
 	public static final String[] ENGLISH_GRADE={"","国家英语考试3级","国家英语考试4级","国家英语考试6级","专业4级","专业8级","未参加","未通过"};
 	//计算机水平
 	public static final String[] COMPUTER_ABILITY={"","入门","一般","熟练","精通"};
+	//账号状态
+	public static final String[] USER_STATUS={"","正常","禁用"};
+	//管理员帐号状态
+	public static final String[] ADMIN_STATUS={"已禁用","正常"};
+	//管理员在线状态
+	public static final String[] ADMIN_STATUS_NOW={"下线","在线"};
 }

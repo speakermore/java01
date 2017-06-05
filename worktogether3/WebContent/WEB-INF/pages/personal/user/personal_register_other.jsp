@@ -48,7 +48,7 @@
 			<!-- userHeadImgPath -->
 			<div class="col-md-8">
 				<input class="form-control file" name="files" type="file"
-					id="userHeadImgPath" multiple data-min-file-count="1" />
+					id="userHeadImgPathOther" multiple data-min-file-count="1" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -70,7 +70,7 @@
 		minView : "month"
 	});
 
-	$("#userHeadImgPath").fileinput({
+	$("#userHeadImgPathOther").fileinput({
 		uploadAsync : false,
 		'language' : 'zh',
 		'showUpload' : false,

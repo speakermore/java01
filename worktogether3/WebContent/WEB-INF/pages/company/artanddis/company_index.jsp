@@ -332,6 +332,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   				<a href="#" class="cd-top">返回顶部</a>
 		   			</div>
 				</div>
+
+			</div>
+			<br />
+			<div>
+				<c:if test="${disUserId==company.id }">
+				<!-- company/artanddis/discuss/add_companydiscuss -->
+					<form action="personal/discuss/addDiscuss?companyId=${company.id}" method="post">
+						<div class="form-group col-sm-12">
+							<input type="hidden" name="discussLevel" id="discussLevel" />
+						   	<label class="col-sm-2">评价星级</label>
+						   	<div class="col-sm-10 raty" id="star" value="3.5" name="discussLevel"></div>
+					   	</div>
+					    <div class="form-group col-sm-12">
+					    	<label class="col-sm-2">评论内容</label>
+					    	<div class="col-sm-10">
+					    		<textarea name="discussContent" rows="7" cols="90" 
+					    			maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea>
+					    	</div>
+					    </div>
+					    <div class="col-sm-12">
+					    	<input type="submit" value="评论企业" class="btn btn-warning" />
+					    	<div class="col-sm-2"></div>
+					    	<div id="wordstip" class="col-sm-8 column"></div>
+					    </div>
+	   				</form>
+	   			</c:if>
+			</div>
+   			<div>
+   				<div class=" col-sm-5 column"></div>
+   				<a href="#" class="cd-top">返回顶部</a>
+   			</div>
+
 			</div>
 		</div>
 		<div class="col-sm-3 column wt-hby-right">

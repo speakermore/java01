@@ -31,7 +31,7 @@ public class UserAndResume implements Serializable{
 		// 学历
 		private String resumeEducation;
 		//工作年限
-		private Integer resumeWorks;
+		private Timestamp resumeWorks;
 		//判断是否关注的状态
 		private Boolean isFoucse;
 		//计算年龄
@@ -44,7 +44,7 @@ public class UserAndResume implements Serializable{
 		
 		public UserAndResume(Integer id, String userLoginId, String userName, Integer userGender, String userEmail,
 				String userRealName, String userHeadImgPath, Timestamp userBirthday, Integer userLevel,
-				String resumeJor, String resumeEducation, Integer resumeWorks) {
+				String resumeJor, String resumeEducation, Timestamp resumeWorks) {
 			super();
 			this.id = id;
 			this.userLoginId = userLoginId;
@@ -145,25 +145,29 @@ public class UserAndResume implements Serializable{
 		public void setResumeEducation(String resumeEducation) {
 			this.resumeEducation = resumeEducation;
 		}
-		public Integer getResumeWorks() {
+		
+		public Timestamp getResumeWorks() {
 			return resumeWorks;
 		}
-		public void setResumeWorks(Integer resumeWorks) {
+
+		public void setResumeWorks(Timestamp resumeWorks) {
 			this.resumeWorks = resumeWorks;
 		}
+
 		public String getUserLoginId() {
 			return userLoginId;
 		}
 		public void setUserLoginId(String userLoginId) {
 			this.userLoginId = userLoginId;
 		}
+
 		@Override
 		public String toString() {
 			return "UserAndResume [id=" + id + ", userLoginId=" + userLoginId + ", userName=" + userName
 					+ ", userGender=" + userGender + ", userEmail=" + userEmail + ", userRealName=" + userRealName
 					+ ", userHeadImgPath=" + userHeadImgPath + ", userBirthday=" + userBirthday + ", userLevel="
 					+ userLevel + ", resumeJor=" + resumeJor + ", resumeEducation=" + resumeEducation + ", resumeWorks="
-					+ resumeWorks + "]";
+					+ resumeWorks + ", isFoucse=" + isFoucse + ", age=" + age + ", works=" + works + "]";
 		}
-		
+	
 }

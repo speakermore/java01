@@ -30,7 +30,6 @@
 		margin-top: 10px;
 	}
 	#jobName{
-		border:none;
 		background-color:#f5f5f5;
 	}
 	.jobdemand{
