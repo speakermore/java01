@@ -235,7 +235,7 @@ a:focus {
 						<c:if test="${resume.resumeHeight!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">身高：</label> <label
-									class="control-label">${resume.resumeHeight }</label>(cm)
+									class="control-label">${resume.resumeHeight }</label>(厘米)
 							</div>
 						</c:if>
 						<c:if test="${resume.resumeWeight!=null }">
@@ -343,7 +343,7 @@ a:focus {
 							到
 							<fmt:formatDate value="${work.workEndTime }" pattern="yyyy-MM-dd" />
 						</div>
-						<div class="col-md-12 col-md-offset-10 column">
+						<div class="col-md-offset-10 column">
 							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
 								href="personal/resume/deleteResumeWork?id=${work.id}"><span
 								class="glyphicon glyphicon-trash"></span></a>
@@ -452,7 +452,7 @@ a:focus {
 							<fmt:formatDate value="${pro.projectEndTime }"
 								pattern="yyyy-MM-dd" />
 						</div>
-						<div class="col-md-12 col-md-offset-10 column">
+						<div class="col-md-offset-10 column">
 							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
 								href="personal/resume/deleteResumeProject?id=${pro.id }"><span
 								class="glyphicon glyphicon-trash"></span></a>
@@ -552,7 +552,7 @@ a:focus {
 							<fmt:formatDate value="${edu.educationEndTime}"
 								pattern="yyyy-MM-dd" />
 						</div>
-						<div class="col-md-12 col-md-offset-10 column">
+						<div class="col-md-offset-10 column">
 							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
 								href="personal/resume/deleteResumeEducation?id=${edu.id }"><span
 								class="glyphicon glyphicon-trash"></span></a>

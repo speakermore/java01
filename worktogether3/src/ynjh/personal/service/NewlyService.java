@@ -20,5 +20,5 @@ public interface NewlyService {
 	// 查看被关注者发布文章消息的数量
 	public Integer getByFollowIdCount(Integer userId);
 	//查看最新评论
-	public List<CommentArticle>  findNewlyCommentArticleByUserId(Integer userId);
+	public List<CommentArticle>  findNewlyCommentArticleByUserId(Integer userId, Integer notUserId);
 }

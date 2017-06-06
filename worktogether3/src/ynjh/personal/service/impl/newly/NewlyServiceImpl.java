@@ -62,8 +62,8 @@ public class NewlyServiceImpl implements NewlyService {
 	 * 查看最新评论
 	 */
 	@Override
-	public List<CommentArticle> findNewlyCommentArticleByUserId(Integer userId) {
-		return newlyMapper.findNewlyCommentArticleByUserId(userId);
+	public List<CommentArticle> findNewlyCommentArticleByUserId(Integer userId, Integer notUserId) {
+		return newlyMapper.findNewlyCommentArticleByUserId(userId,notUserId);
 	}
 	
 }

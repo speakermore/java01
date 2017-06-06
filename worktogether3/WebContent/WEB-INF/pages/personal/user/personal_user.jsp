@@ -13,7 +13,7 @@
 					<div class="panel-body">
 						<form action="personal/mood/addMood" id="moodForm">
 							<div class="form-group">
-								<textarea name="moodContent" class="form-control" rows="5"
+								<textarea style="resize: none;" name="moodContent" class="form-control" rows="5"
 									placeholder="说点什么呗"></textarea>
 							</div>
 							<div class="form-group">

@@ -153,7 +153,7 @@ public class CommonController {
 		session.setAttribute("personal_offer", offer);
 
 		// 获取最新动态评论消息
-		List<CommentArticle> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
+		List<CommentArticle> articleByComments = nService.findNewlyCommentArticleByUserId(userId,userId);
 		if (articleByComments.size()>0) {
 			session.setAttribute("personal_articleByComments", articleByComments);
 		}else {

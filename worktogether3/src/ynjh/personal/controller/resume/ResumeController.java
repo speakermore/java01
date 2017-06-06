@@ -2,6 +2,7 @@ package ynjh.personal.controller.resume;
 
 import java.util.List;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.util.GetAge;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -226,8 +229,9 @@ public class ResumeController {
 	 * 
 	 * 		ModelAndView
 	 */
-	@RequestMapping(value = "/updateResume", method = RequestMethod.POST)
-	public ModelAndView updateResume(Resume resume,HttpSession session) {
+	@RequestMapping(value="/updateResume",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView updateResume(Resume resume,String page,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Resume oldResume= (Resume) session.getAttribute("resume_update");
 		resume.setResumeCreateDate(oldResume.getResumeCreateDate());
@@ -235,12 +239,19 @@ public class ResumeController {
 		resume.setUserId(oldResume.getUserId());
 		resume.setResumePersonality(oldResume.getResumePersonality());
 		resume.setResumeStatusOne(oldResume.getResumeStatusOne());
+		resume.setResumeStatusThree(1);
 		resume.setResumeHeadImg(oldResume.getResumeHeadImg());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
+			resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		int result = rService.updateResume(resume);
 		if (result>0) {
-			mv.addObject("operatorInfo", "修改简历成功！");
 			session.setAttribute("resume", resume);
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName(page);
 		}
 		/*
 		 * if (result>0) {
