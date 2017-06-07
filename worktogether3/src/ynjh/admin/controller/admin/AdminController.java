@@ -1173,10 +1173,10 @@ public class AdminController {
 		ModelAndView mv=new ModelAndView();
 		if (result>0) {
 			mv.addObject("result", result);
-			mv.setViewName("admin/auditResume");
+			mv.setViewName("admin/adminAddMessage");
 		}else{
 			mv.addObject("result",result);
-			mv.setViewName("admin/auditResume");
+			mv.setViewName("admin/adminAddMessage");
 		}
 		return mv;
 	}

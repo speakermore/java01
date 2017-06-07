@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ynjh.admin.entity.SysMessageWithAuthor;
 import ynjh.admin.service.AdminService;
 import ynjh.company.entity.Company;
 import ynjh.personal.entity.User;
@@ -34,7 +35,7 @@ public class userManageController {
 	@RequestMapping("/userMag")
 	public ModelAndView findAllUser(){
 		List<User> users=adminService.findDisabledUser();
-		//List<Company> companys=adminService.findDisabledCompany();
+		//List<Company> companys=adminService.findDisabledCompany();只查找个人用户发表的文章，暂时注释了企业文章
 		ModelAndView mv=new ModelAndView();
 		//mv.addObject("companys",companys);
 		mv.addObject("users",users);
@@ -102,5 +103,19 @@ public class userManageController {
 		}else{
 			return "false";
 		}
+	}
+	
+	/**
+	 * 查找已经发送的系统消息
+	 * @author 朱吉
+	 * @return
+	 */
+	@RequestMapping("/findSysMessages")
+	public ModelAndView findSysMessages(){
+		List<SysMessageWithAuthor> list=adminService.findSysMsgWithAuth();
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("sysMessages", list);
+		mv.setViewName("admin/adminAddMessage");
+		return mv;
 	}
 }

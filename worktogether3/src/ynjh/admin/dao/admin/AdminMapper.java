@@ -17,6 +17,7 @@ import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.AuditOffer;
+import ynjh.admin.entity.SysMessageWithAuthor;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
@@ -454,4 +455,11 @@ public interface AdminMapper {
 	 * @param 个人用户登录Id（账号）
 	 */
 	public User findUserByLoginId(String userLoginId);
+	
+	/**
+	 * 查找带有作者的系统消息
+	 * @author 朱吉
+	 * @return
+	 */
+	public List<SysMessageWithAuthor> findSysMsgWithAuth();
 }

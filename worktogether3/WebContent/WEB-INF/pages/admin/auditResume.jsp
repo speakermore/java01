@@ -66,6 +66,6 @@
 		</div>
 	</div>
 	<!-- end of container-fluid -->
-	<div><%@include file="footer.jsp"%></div>
+	<%@include file="footer.jsp"%>
 </body>
 </html>

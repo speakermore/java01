@@ -263,4 +263,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserByLoginId" parameterType="String" resultType="User">
 		select * from user where userLoginId=#{userLoginId}
 	</select>
+	<!-- 查找带有作者的系统消息 -->
+	<select id="findSysMsgWithAuth" resultType="SysMessageWithAuthor">
+		select admin.adminLoginId,systemmessage.* from admin,systemmessage where admin.id=systemmessage.adminid order by systemmessage.sysmcreatetime desc
+	</select>
 </mapper>
