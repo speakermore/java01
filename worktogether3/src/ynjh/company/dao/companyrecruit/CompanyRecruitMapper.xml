@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cmpRecEducation=#{cmpRecEducation},cmpRecExperience=#{cmpRecExperience},
 		cmpRecPeople=#{cmpRecPeople} where id=#{id}
 </update>
-<update id="updateCmpRecStatus" parameterType="Int">
+<update id="updateCmpRecStatus" parameterType="Int" >
 		update companyRecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
 </update>
 <select id="findAll"  resultType="CompanyRecruit">
@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(*) from companyRecruit where cmpRecStatus != 3
 </select>
 <select id="getResumeCount" resultType="int">
-	select count(*) from companyResume where companyId=#{companyId} and cmprAction = 1
+	select count(*) from companyResume c,companyRecruit r where c.companyRecruitId=r.id and cmprAction = 1
+</select>
+<select id="findCompanyRecruitId" resultType="int">
+	select companyRecruitId from companyResume c,companyRecruit r where c.companyRecruitId=r.id
+</select>
+<select id="findJobs" resultType="CompanyJob">
+	select * from job
 </select>
 </mapper>

@@ -3,6 +3,7 @@ package ynjh.company.entity;
 import java.io.Serializable;
 
 public class CompanyConnection implements Serializable{
+	private Integer id;
 	private Integer companyId;
 	private String cmpConnection;
 	private String cmpConnectionName;
@@ -12,6 +13,17 @@ public class CompanyConnection implements Serializable{
 		this.companyId = companyId;
 		this.cmpConnection = cmpConnection;
 		this.cmpConnectionName = cmpConnectionName;
+	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public void setCompanyId(Integer companyId) {
+		this.companyId = companyId;
 	}
 	public Integer getCompanyId() {
 		return companyId;

@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import ynjh.company.dao.companyrecruit.CompanyRecruitMapper;
+import ynjh.company.entity.CompanyJob;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
 @Service
@@ -35,7 +36,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		if(page<1){
 			page=1;
 		}
-		int maxPage=findMaxPage()==0?1:findMaxPage();
+		int maxPage=findMaxPage();
 		if(page>maxPage){
 			page=maxPage;
 		}
@@ -52,7 +53,7 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 }
 
 	@Override
-	public int findMaxPage() {	
+	public int findMaxPage() {
 		return (companyRecruitMapper.getMaxRecordCount()+20-1)/20;
 	}
 
@@ -67,7 +68,19 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		return companyRecruitMapper.updateCmpRecStatus(id, cmprAction);
 	}
 	@Override
-	public int findCount(Integer companyId){	
-		return companyRecruitMapper.getResumeCount(companyId);
+	public int findCount(Integer companyRecruitId){	
+		return companyRecruitMapper.getResumeCount(companyRecruitId);
+	}
+	@Override
+	public int findCompanyRecruitId(){
+		return companyRecruitMapper.findCompanyRecruitId();
+	}
+	@Override
+	public int recover(Integer id){
+		return companyRecruitMapper.updateCmpRecStatus(3, id);
+	}
+	@Override
+	public List<CompanyJob> findJobs(){
+		return companyRecruitMapper.findJobs();
 	}
 }

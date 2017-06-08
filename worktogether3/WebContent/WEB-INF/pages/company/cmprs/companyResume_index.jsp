@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>${cmprs.resumeWages }</td>
 				<td>${cmprs.resumePhone }</td>
 				<td><a
-					href="company/cmprs/companyResume/findById?id=${cmprs.id}&toPage=company/cmprs/companyResumeInfomation">查看详情
+					href="company/cmprs/companyResume/findById?id=${cmprs.id}&toPage=company/cmprs/companyResumesdetail">查看详情
 				</a></td>
 			</tr>
 		</c:forEach>

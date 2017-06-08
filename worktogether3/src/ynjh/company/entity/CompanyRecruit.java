@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class CompanyRecruit implements Serializable{
 	private Integer id;//主键
 	private Integer companyId;//公司编号
-	private String cmpRecTitle;//公司标题
+	private String cmpRecTitle;//工作标题
 	private String cmpRecWage;//公司薪资
 	private String cmpRecEducation;//公司学历需求
 	private String cmpRecExperience;//工作所需技能及水平描述
