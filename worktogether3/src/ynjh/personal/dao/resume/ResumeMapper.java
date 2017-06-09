@@ -60,7 +60,7 @@ public interface ResumeMapper {
 	/**
 	 * 教育记录修改
 	 */
-	public Integer updateEducation(Education education);
+	public Integer updateEducation(@Param("education")Education education,@Param("id")Integer id);
 	/**
 	 * 教育记录查询
 	 */
@@ -77,7 +77,7 @@ public interface ResumeMapper {
 	/**
 	 * 工作记录修改
 	 */
-	public Integer updateWork(Work work);
+	public Integer updateWork(@Param("work")Work work,@Param("id")Integer id);
 	/**
 	 * 工作记录查询
 	 */
@@ -93,7 +93,7 @@ public interface ResumeMapper {
 	/**
 	 * 项目记录修改
 	 */
-	public Integer updateProject(Project project);
+	public Integer updateProject(@Param("project")Project project,@Param("id")Integer id);
 	/**
 	 * 项目记录查询
 	 */

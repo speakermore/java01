@@ -294,4 +294,9 @@ public class CommonController {
 		session.setAttribute("maxProjectDels", maxProjectDels);
 		return mv;
 	}
+	
+	@RequestMapping("/test")
+	public String test(){
+		return "personal/resume/personal_resume_project";
+	}
 }

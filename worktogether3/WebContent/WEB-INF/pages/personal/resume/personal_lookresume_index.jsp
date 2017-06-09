@@ -46,13 +46,9 @@ a:focus {
 	text-decoration: none;
 }
 
-.updateHeadImg {
-	margin-left: 35px;
-	margin-top: 35px;
-}
-
-.table {
-	width: 93%;
+.margin_bottom_AND_margin_top {
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 </style>
 <script type="text/javascript">
@@ -71,7 +67,7 @@ a:focus {
 	<div id="personal_border">
 		<div class="media">
 			<!-- 头像 -->
-			<div class="resumeheadImg">
+			<div class="resumeheadImg col-md-offset-1" style="margin-top: 35px;">
 				<c:if test="${resume.resumeHeadImg==null }">
 					<img class="pull-left updateHeadImg media-object "
 						src="personal/img/head.gif" alt='我的头像' width="100" height="120" />
@@ -85,24 +81,24 @@ a:focus {
 			</div>
 			<!-- 头像结束 -->
 			<!-- 简历基本信息 -->
-			<div class="media-body"
-				style="padding-top: 35px; padding-left: 35px;">
+			<div class="media-body ">
 				<!-- 修改图标开始 -->
 				<a class="col-md-offset-10"
 					href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span
 					class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<!-- 修改图标结束 -->
-				<h4 class="media-heading"
+				<h4 class="media-heading col-md-offset-1"
 					style="line-height: 35px; height: 35px; font-size: 20px;">
-					<label class="control-label">${resume.resumeName }</label><small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small><small class="col-md-offset-3">${SEX[resume.resumeGender]}</small>
+					<label class="control-label">${resume.resumeName }</label><small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small><small
+						class="col-md-offset-3">${SEX[resume.resumeGender]}</small>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
-				<p class="static">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;&nbsp;|&nbsp;<label>${resume.age}</label>岁(
+				<p class="static col-md-offset-1">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;&nbsp;|&nbsp;<label>${resume.age}</label>岁(
 					<fmt:formatDate value="${resume.resumeBirthday }"
 						pattern="yyyy/MM/dd" />
 					)&nbsp;|&nbsp;${resume.resumeJor }
 				</p>
-				<label class="control-label"><span
+				<label class="control-label col-md-offset-1"><span
 					class="glyphicon glyphicon-envelope"></span>${resume.resumeEmail }&nbsp;&nbsp;&nbsp;&nbsp;
 					<span class="glyphicon glyphicon-earphone"></span>${resume.resumePhone }</label>
 			</div>
@@ -323,43 +319,12 @@ a:focus {
 			<!--mian-->
 		</div>
 		<!--2+-->
-		<div class="panel panel-default">
-			<c:if test="${works!=null }">
-				<c:forEach items="${works }" var="work">
-					<div class="panel-body test personal_resume_defualt">
-						<div class="col-md-12 column">
-							<label class="control-label">企业名称：</label>${work.workFirmName }<small class="col-md-offset-8">(${AUDIT_STATUS[work.resumeType]})</small>
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">工作岗位：</label>${work.workUnit }
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">工作描述：</label>${work.workDescription }
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">工作时间：</label>
-							<fmt:formatDate value="${work.workBeginTime }"
-								pattern="yyyy-MM-dd" />
-							到
-							<fmt:formatDate value="${work.workEndTime }" pattern="yyyy-MM-dd" />
-						</div>
-						<div class="col-md-offset-10 column">
-							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
-								href="personal/resume/deleteResumeWork?id=${work.id}"><span
-								class="glyphicon glyphicon-trash"></span></a>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<div id="panel-element-work-show" class="panel-collapse in">
-				<c:if test="${works==null }">
-					<div class="panel-body col-md-offset-3 personal_resume_padding">
-						<span class="glyphicon glyphicon-list-alt"></span>
-						完善工作经验，展现工作内容及能力，让HR更了解你！
-					</div>
-				</c:if>
-			</div>
+		<!-- 局部刷新开始 -->
+		<div class="panel panel-default" id="workFresh">
+			<%@include
+				file="/WEB-INF/pages/personal/resume/personal_resume_work.jsp"%>
 		</div>
+		<!-- 局部刷新结束 -->
 		<!--2-->
 	</div>
 	<!--
@@ -430,47 +395,15 @@ a:focus {
 			<!--mian-->
 		</div>
 		<!--2+-->
-
-		<div class="panel panel-default">
-			<c:if test="${projs!=null }">
-				<c:forEach items="${projs }" var="pro">
-					<div class="panel-body test personal_resume_defualt">
-						<div class="col-md-12 column">
-							<label class="control-label">项目名称：</label>${pro.projectName }<small class="col-md-offset-8">(${AUDIT_STATUS[pro.resumeType]})</small>
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">项目岗位：</label>${pro.projectJob }
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">项目描述：</label>${pro.projectDescription }
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">项目时间：</label>
-							<fmt:formatDate value="${pro.projectBeginTime }"
-								pattern="yyyy-MM-dd" />
-							到
-							<fmt:formatDate value="${pro.projectEndTime }"
-								pattern="yyyy-MM-dd" />
-						</div>
-						<div class="col-md-offset-10 column">
-							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
-								href="personal/resume/deleteResumeProject?id=${pro.id }"><span
-								class="glyphicon glyphicon-trash"></span></a>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<div id="panel-element-project-show" class="panel-collapse in">
-				<c:if test="${projs==null }">
-					<div class="panel-body col-md-offset-3 personal_resume_padding">
-						<span class="glyphicon glyphicon-signal"></span>
-						完善项目经验，展现社会工作能力，让HR更了解你！
-					</div>
-				</c:if>
-			</div>
+		<!-- 局部刷新开始 -->
+		<div class="panel panel-default" id="projectFresh">
+			<%@include
+				file="/WEB-INF/pages/personal/resume/personal_resume_project.jsp"%>
 		</div>
+		<!-- 局部刷新结束 -->
 		<!--2-->
 	</div>
+
 	<!--
 		作者：18213026337@163.com
 		时间：2017-05-15
@@ -534,41 +467,12 @@ a:focus {
 			<!--mian-->
 		</div>
 		<!--2+-->
-		<div class="panel panel-default">
-			<c:if test="${edus!=null }">
-				<c:forEach items="${edus }" var="edu">
-					<div class="panel-body test personal_resume_defualt">
-						<div class="col-md-12 column">
-							<label class="control-label">学校名称：</label>${edu.educationSchool}<small class="col-md-offset-8">(${AUDIT_STATUS[edu.resumeType]})</small>
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">教育描述：</label>${edu.educationContent}
-						</div>
-						<div class="col-md-12 column">
-							<label class="control-label">教育时间：</label>
-							<fmt:formatDate value="${edu.educationBeginTime}"
-								pattern="yyyy-MM-dd" />
-							到
-							<fmt:formatDate value="${edu.educationEndTime}"
-								pattern="yyyy-MM-dd" />
-						</div>
-						<div class="col-md-offset-10 column">
-							<a href="#"><span class="glyphicon glyphicon-cog"></span></a>|<a
-								href="personal/resume/deleteResumeEducation?id=${edu.id }"><span
-								class="glyphicon glyphicon-trash"></span></a>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<div id="panel-element-education-show" class="panel-collapse in">
-				<c:if test="${edus==null }">
-					<div class="panel-body col-md-offset-3 personal_resume_padding">
-						<span class="glyphicon glyphicon-book"></span>
-						完善教育经历，展现专业能力，让HR更了解你！
-					</div>
-				</c:if>
-			</div>
+<!-- 局部刷新开始 -->
+		<div class="panel panel-default" id="educationFresh">
+			<%@include
+				file="/WEB-INF/pages/personal/resume/personal_resume_education.jsp"%>
 		</div>
+		<!-- 局部刷新结束 -->			
 		<!--2-->
 	</div>
 </div>
@@ -597,6 +501,7 @@ a:focus {
 		});
 	});
 	$(function() {
+		/* 项目 */
 		$("#datetimeStart").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -624,7 +529,7 @@ a:focus {
 					$("#datetimeEnd").datetimepicker("setStartDate",
 							$("#datetimeStart").val())
 				});
-
+		/* 工作 */
 		$("#datetimeStart1").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -636,7 +541,7 @@ a:focus {
 				"click",
 				function() {
 					$("#datetimeStart1").datetimepicker("setEndDate",
-							$("#datetimeEnd1").val())
+							$("#datetimeEnd1").val());
 				});
 
 		$("#datetimeEnd1").datetimepicker({
@@ -652,7 +557,7 @@ a:focus {
 					$("#datetimeEnd1").datetimepicker("setStartDate",
 							$("#datetimeStart1").val())
 				});
-
+		/* 教育 */
 		$("#datetimeStart2").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',

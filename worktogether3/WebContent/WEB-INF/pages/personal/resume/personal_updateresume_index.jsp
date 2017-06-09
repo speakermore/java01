@@ -4,8 +4,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 简历基本信息开始 -->
 <div class="panel panel-default">
-	<form class="form-horizontal" action="personal/resume/updateResume"
-		method="post" id="resumeForm" style="margin-top: 35px;">
+	<form class="form-horizontal" id="resumeForms"
+		style="margin-top: 35px;">
 		<div class="col-md-2 column">
 			<img src="img/head.gif" class="center-block" width="100" height="120" />
 		</div>
@@ -20,8 +20,8 @@
 			<div class="form-group">
 				<label for="resumeName" class="col-md-4 control-label">姓名</label>
 				<div class="col-md-8">
-					<input value="${resume_update.resumeName }" class="form-control"
-						name="resumeName" id="resumeName" />
+					<!-- value="${resume_update.resumeName}" -->
+					<input class="form-control" name="resumeName" id="resumeName" value="${resume_update.resumeName}" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -309,8 +309,9 @@
 		</div>
 		<div class="form-group">
 			<div class="col-md-offset-5 col-md-12">
-				<a href="javascript:ajaxUpdateResume('personal/user/personal_index_myResume')"
-					class="btn btn-success">保存</a>
+				<input type="button"
+					onclick="ajaxUpdateResume('personal/user/personal_index_myResume')"
+					class="btn btn-success" value="保存"/>
 			</div>
 		</div>
 	</form>
@@ -354,12 +355,12 @@
 <!-- 简历基本信息结束 -->
 <script type="text/javascript">
 	//ajax提交表单
-	var resumeForm = new FormData(document.getElementById("resumeForm"));
 	var ajaxUpdateResume = function(page) {
+		var resumeForm = new FormData(document.getElementById("resumeForms"));
 		$.ajax({
-			url : "personal/resume/updateResume?page="+page,
+			url : "personal/resume/updateResume?page=" + page,
 			data : resumeForm,
-			type:"post",
+			type : "post",
 			dataType : "html",
 			processData : false,
 			contentType : false,
@@ -439,6 +440,7 @@
 					}
 				},
 				resumeName : {
+					verbose : false, //多验证的情况下默认第一验证错误，则提示当前错误信息后面的验证不执行
 					validators : {
 						notEmpty : {
 							message : '姓名不能为空'
