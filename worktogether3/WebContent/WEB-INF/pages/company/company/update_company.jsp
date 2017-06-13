@@ -205,30 +205,32 @@
 
 								<form action="company/company/updateCompanyTel" method="post">
 									<!-- 点击加号添加内容 -->
-									<%-- <c:if test="${companyConnections==null }">
+									<c:if test="${companyConnections.size()==0}">
+										
 										<input type="hidden" name="companyId" value="${user.id }">
 										<div class="companyTel">
 											<div class="form-group">
 												<div class="col-sm-5">
+												
 													<span class="label label-default">昵称</span> 
-													<input type="hidden" class="deleteIds" value="${connection.id }">
+													<input type="hidden" class="ids" value="" name="">
 													<input
 														type="text" class="form-control connectionName" 
-														name="cmpConnectionNames"
-														value="${connection.cmpConnectionName }">
+														name="addConnectionNames"
+														value="">
 												</div>
 												<div class="col-sm-7">
 													<span class="label label-default">电话</span> <input
-														type="text" class="form-control"
-														name="companyTels" value="${connection.cmpConnection }">
+														type="text" class="form-control companyTels"
+														name="addCompanyTels" value="">
 													<a  title="删除电话" href="javascript:void(0)" onclick="deletePhonefunction($(this).parent().parent().parent())"
 														style="color: red;" id="deleteConnection"> <span
-														class="glyphicon glyphicon-minus"></span>
+														class="glyphicon glyphicon-minus" style="display:none;"></span>
 													</a>
 												</div>
 											</div>
 										</div>
-									</c:if> --%>
+									</c:if>
 									<c:forEach items="${companyConnections }" var="connection">
 									<input type="hidden" name="companyId" value="${user.id }">
 										<div class="companyTel">
@@ -498,7 +500,7 @@ $("#logo").fileinput({
 $(document).ready(function(){
 	/* var i=$("#companyStatus").value();
 	alert(i); */
-	if(${user.companyStatus}==1||${user.companyStatus}==2){
+	if(${user.companyStatus}==2){
 		$(".disabled").attr("readonly",true);
 	}
 	
