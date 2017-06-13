@@ -62,7 +62,7 @@ a:focus {
 					<img class="pull-left updateHeadImg" src="personal/img/head.gif"
 						class="media-object" alt='我的头像' width="100" height="120" /> <img
 						class="pull-left updateHeadImg"
-						src="img/upload/personal/${company.userLoginId }/${cmprs.resumeHeadImg}"
+						src="img/upload/personal/${company.companyLoginId }/${cmprs.resumeHeadImg}"
 						class="media-object" alt='我的头像' width="100" height="120" />
 				</div>
 				<div class="media-body"

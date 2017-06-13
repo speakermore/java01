@@ -1,9 +1,7 @@
 package ynjh.company.controller.company;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -94,7 +92,6 @@ public class CompanyController {
 				CompanyIntroduction companyInt=companyIntService.findById(company.getId());
 				session.setAttribute("companyInt", companyInt);
 				List<CompanyConnection> companyConnections=companyService.findCompanyConnection(company.getId());
-				session.setAttribute("companyConnectionIndex", companyConnections.size());
 				session.setAttribute("companyConnections", companyConnections);
 				mv.setViewName("company/company/company_data");
 				
@@ -114,12 +111,21 @@ public class CompanyController {
 	}
 	
 	
-	//点击注册跳转
+	/**
+	 * @author 李胤
+	 * @return
+	 */
 	@RequestMapping(value="/add",method=RequestMethod.GET)
 	public String addCompany(){
 		return "company/company/add_company";
 	}
-	//注册用户
+	/**
+	 * @author 李胤
+	 * @param companyLoginId
+	 * @param companyPassword
+	 * @param realCompanyPassword
+	 * @return
+	 */
 	@RequestMapping(value="/addCompany",method=RequestMethod.POST)
 	public ModelAndView addCompany(String companyLoginId,String companyPassword,String realCompanyPassword){
 		ModelAndView mv=new ModelAndView("company/info");
@@ -139,7 +145,10 @@ public class CompanyController {
 		return mv;
 	}
 	
-	//跳转修改界面
+	/**
+	 * @author 李胤
+	 * @return
+	 */
 	@RequestMapping(value="/updateCompany",method=RequestMethod.GET)
 	public String updatecompany(){
 //		ModelAndView mv=new ModelAndView("company/company/update_company");
@@ -158,24 +167,34 @@ public class CompanyController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateCompanyTel",method=RequestMethod.POST)
-	public ModelAndView updateCompanyTel(String[] companyTels,String[] cmpConnectionNames,Integer companyId,HttpSession session){
+	public ModelAndView updateCompanyTel(Integer[] ids,String[] companyTels,String[] cmpConnectionNames,Integer companyId,String addConnectionNames[],String addCompanyTels[],Integer deleteIds[],HttpSession session){
 		ModelAndView mv=new ModelAndView();
-		
-		CompanyConnection companyConnection=new CompanyConnection();
-		
-		
-		
-		
-		
-		List<CompanyConnection> companyConnections=(List<CompanyConnection>)session.getAttribute("companyConnections");
-		Integer index=companyTels.length-companyConnections.size();
-		if(index>0){
-			for(int i=0;i<companyConnections.size();i++){
-//				companyService.updateCompanyConnection();
+		int result=0;
+		if(companyTels!=null){
+			for(int i=0;i<companyTels.length;i++){
+				companyService.updateCompanyConnection(ids[i],companyId,cmpConnectionNames[i], companyTels[i]);
+				result++;
 			}
 		}
-		
-		
+		if(addCompanyTels!=null){
+			for(int i=0;i<addCompanyTels.length;i++){
+				companyService.addCompanyConnection(companyId, addConnectionNames[i], addCompanyTels[i]);
+				result++;
+			}
+		}
+		if(deleteIds!=null){
+			for(int i=0;i<deleteIds.length;i++){
+				companyService.deleteCompanyConnection(deleteIds[i]);
+				result++;
+			}
+		}
+		if(result>0){
+			List<CompanyConnection> companyConnections=companyService.findCompanyConnection(companyId);
+			session.setAttribute("companyConnections", companyConnections);
+			mv.setViewName("company/company/company_data");
+		}else{
+			mv.setViewName("company/company/update_company");
+		}
 		return mv;
 	}
 	/**
@@ -262,7 +281,11 @@ public class CompanyController {
 		return mv;
 	}
 	
-	//退出
+	/**
+	 * @author 李胤
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("logout")
 	public String logout(HttpSession session){
 		session.invalidate();

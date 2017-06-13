@@ -9,15 +9,17 @@ $(function(){
 				index++;
 				$(".companyTel:eq(0)").clone(false).show().insertBefore($(".newTel"));
 				$("#deleteTel").css("display","block");
-				
+				/*$("#addInput").find(":input:last").val();*/
+				$("#addInput").find(".companyTel:last").find(":input").val("");
 			}
 		}else{
 			alert("您的权限最多只能添加"+(maxjob+1)+"个岗位");
 		}
 		//清空clone内容的value值
-		$("#addInput").find(":input").val("");
+		
 		$("#addInput").find(".connectionName").attr("name","addConnectionNames");
-		$("#addInput").find(".companyTel").attr("name","addCompanyTels");
+		$("#addInput").find(".companyTels").attr("name","addCompanyTels");
+		$("#addInput").find(".ids").attr("name","");
 		$("#addInput").find("#deleteConnection").css("display","none");
 	});
 	//删除最后一个岗位
@@ -34,12 +36,15 @@ $(function(){
 	});
 	
 });
+
 var deletePhonefunction=function(div){
 	div.hide();
-	var i=div.find(".deleteIds");
+	var i=div.find(".ids");
 	i.attr("name","deleteIds");
 	index-=1;
+	div.find(".connectionName").attr("name","");
+	div.find(".companyTels").attr("name","");
 	if(index==0){
-		$("#deleteTel").css("display","none ");
+		$("#deleteTel").css("display","none");
 	}
 }

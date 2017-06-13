@@ -25,9 +25,11 @@ public interface CompanyMapper {
 	//修改公司环境图片
 	public Integer updateImg(@Param("id")Integer id,@Param("companyDetailImg") String companyDetailImg,@Param("companyDetailDisc")String companyDetailDisc);
 	//增加公司联系电话
-	public Integer addCompanyConnection(CompanyConnection companyConnection);
+	public Integer addCompanyConnection(@Param("companyId")Integer companyId,@Param("cmpConnectionName")String cmpConnectionName,@Param("cmpConnection")String cmpConnection);
 	//修改公司联系电话
-	public Integer updateCompanyConnection(CompanyConnection companyConnection);
+	public Integer updateCompanyConnection(@Param("id")Integer id,@Param("companyId")Integer companyId,@Param("cmpConnectionName")String cmpConnectionName,@Param("cmpConnection")String cmpConnection);
 	//查询公司联系电话
 	public List<CompanyConnection> findCompanyConnection(Integer companyId);
+	//删除公司联系电话
+	public Integer deleteCompanyConnection(Integer id);
 }

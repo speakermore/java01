@@ -102,6 +102,12 @@
 											<td>公司地址：</td>
 											<td>${user.companyAddress}</td>
 										</tr>
+										<c:forEach var="connections" items="${companyConnections }">
+											<tr>
+												<td>公司联系电话：</td>
+													<td>${connections.cmpConnectionName }:${connections.cmpConnection }</td>
+											</tr>
+										</c:forEach>
 										<tr>
 											<td>审核状态：</td>
 											<td>${AUDIT_STATUS[user.companyStatus] }</td>

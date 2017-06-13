@@ -205,8 +205,8 @@
 
 								<form action="company/company/updateCompanyTel" method="post">
 									<!-- 点击加号添加内容 -->
-									<c:forEach items="${companyConnections }" var="connection">
-									<input type="hidden" name="companyId" value="${user.id }">
+									<%-- <c:if test="${companyConnections==null }">
+										<input type="hidden" name="companyId" value="${user.id }">
 										<div class="companyTel">
 											<div class="form-group">
 												<div class="col-sm-5">
@@ -228,11 +228,31 @@
 												</div>
 											</div>
 										</div>
-										<!-- <script type="text/javascript">
-											var deletePhonefunction=function(id){
-												$("#deleteConnection"+id).hide();
-											}
-										</script> -->
+									</c:if> --%>
+									<c:forEach items="${companyConnections }" var="connection">
+									<input type="hidden" name="companyId" value="${user.id }">
+										<div class="companyTel">
+											<div class="form-group">
+												<div class="col-sm-5">
+												
+													<span class="label label-default">昵称</span> 
+													<input type="hidden" class="ids" value="${connection.id }" name="ids">
+													<input
+														type="text" class="form-control connectionName" 
+														name="cmpConnectionNames"
+														value="${connection.cmpConnectionName }">
+												</div>
+												<div class="col-sm-7">
+													<span class="label label-default">电话</span> <input
+														type="text" class="form-control companyTels"
+														name="companyTels" value="${connection.cmpConnection }">
+													<a  title="删除电话" href="javascript:void(0)" onclick="deletePhonefunction($(this).parent().parent().parent())"
+														style="color: red;" id="deleteConnection"> <span
+														class="glyphicon glyphicon-minus"></span>
+													</a>
+												</div>
+											</div>
+										</div>
 									</c:forEach>
 
 									<!-- 点击加号添加内容完 -->
@@ -394,7 +414,7 @@ $("#logo").fileinput({
 												logo : {
 													validators : {
 														notEmpty : {/*非空提示*/
-															message : '用户名不能为空'
+															message : '公司logo不能为空'
 														}
 													}
 												},

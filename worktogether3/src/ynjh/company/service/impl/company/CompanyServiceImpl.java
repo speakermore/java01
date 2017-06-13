@@ -98,18 +98,26 @@ public class CompanyServiceImpl implements CompanyService{
 		return companyMapper.updateImg(id, companyDetailImg,companyDetailDisc);
 	}
 
-	@Override
-	public Integer addCompanyConnection(CompanyConnection companyConnection) {
-		return companyMapper.addCompanyConnection(companyConnection);
-	}
-
-	@Override
-	public Integer updateCompanyConnection(CompanyConnection companyConnection) {
-		return companyMapper.updateCompanyConnection(companyConnection);
-	}
-
+	
 	@Override
 	public List<CompanyConnection> findCompanyConnection(Integer companyId) {
 		return companyMapper.findCompanyConnection(companyId);
+	}
+
+	@Override
+	public Integer addCompanyConnection(Integer id, String cmpConnectionName, String cmpConnection) {
+		return companyMapper.addCompanyConnection(id, cmpConnectionName, cmpConnection);
+	}
+
+	@Override
+	public Integer deleteCompanyConnection(Integer id) {
+		return companyMapper.deleteCompanyConnection(id);
+	}
+
+	@Override
+	public Integer updateCompanyConnection(Integer id, Integer companyId, String cmpConnectionName,
+			String cmpConnection) {
+		
+		return companyMapper.updateCompanyConnection(id, companyId, cmpConnectionName, cmpConnection);
 	}
 }

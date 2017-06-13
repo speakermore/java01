@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addCompanyDetailImg">
 		insert into companyDetailImg(companyId,companyDetailImg,companyDetailDisc)values(#{companyId},#{companyDetailImg},#{companyDetailDisc})
 	</insert>
-	<insert id="addCompanyConnection" parameterType="CompanyConnection">
+	<insert id="addCompanyConnection">
 		insert into companyconnection(companyId,cmpConnection,cmpConnectionName)values(#{companyId},#{cmpConnection},#{cmpConnectionName})
 	</insert>
 	<!-- 更改用户信息 -->
@@ -37,9 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateImg">
 		update companyDetailImg set companyDetailImg=#{companyDetailImg} where id=#{id} and companyDetailDisc=#{companyDetailDisc}
 	</update>
-	<update id="updateCompanyConnection" parameterType="CompanyConnection">
-		update companyconnection set companyId=#{companyId},cmpConnection=#{cmpConnection},cmpConnectionName=#{cmpConnection} where id=#{id}
+	<update id="updateCompanyConnection">
+		update companyconnection set companyId=#{companyId},cmpConnection=#{cmpConnection},cmpConnectionName=#{cmpConnectionName} where id=#{id}
 	</update>
+	<delete id="deleteCompanyConnection" parameterType="Integer">
+		delete from companyconnection where id=#{id}
+	</delete>
+	
 	<select id="findByloginIdAndPassword" resultType="Company">
 		select * from company where companyLoginId=#{companyLoginId} and companyPassword=#{companyPassword}
 	</select>
