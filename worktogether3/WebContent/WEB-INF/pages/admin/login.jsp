@@ -29,7 +29,7 @@
 					<label for="login-pass" class="col-xs-2 control-label">登录密码</label>
 					<div class="col-xs-7">
 						<input type="password" name="adminPassword" class="form-control" placeholder="登录密码">
-						<label class="control-label helplable" for="login-pass">注册时填写的名称,忘记密码 <a href="admin/forgetpwd">点此找回</a></label>
+						<label class="control-label helplable" for="login-pass">注册时填写的名称<!-- <a href="admin/forgetpwd">点此找回</a> --></label>
 					</div>
 				</div>
 				<div class="form-group">

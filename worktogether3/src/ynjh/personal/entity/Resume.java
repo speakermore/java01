@@ -359,6 +359,8 @@ public class Resume implements Serializable{
 				+ ", resumeStatusOne=" + resumeStatusOne + ", resumeHeight=" + resumeHeight + ", resumeWeight="
 				+ resumeWeight + ", resumeStatusThree=" + resumeStatusThree + ", resumeJor=" + resumeJor
 				+ ", resumeHeadImg=" + resumeHeadImg + ", resumeWorks=" + resumeWorks + ", resumeHouseAddress="
-				+ resumeHouseAddress + "]";
+				+ resumeHouseAddress + ", resumeNowResidence=" + resumeNowResidence + ", resumeEmail=" + resumeEmail
+				+ ", age=" + age + ", works=" + works + "]";
 	}
+	
 }

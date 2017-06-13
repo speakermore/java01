@@ -4,24 +4,24 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 简历基本信息开始 -->
 <div class="panel panel-default">
-	<form class="form-horizontal" action="personal/resume/updateResume"
-		method="post" id="resumeForm" style="margin-top: 35px;">
+	<form class="form-horizontal" id="resumeForms"
+		style="margin-top: 35px;">
 		<div class="col-md-2 column">
 			<img src="img/head.gif" class="center-block" width="100" height="120" />
 		</div>
 		<div class="col-md-5 column">
-			<div class="form-group">
+			<%-- <div class="form-group">
 				<label for="resumeTitle" class="col-md-4 control-label">简历标题</label>
 				<div class="col-md-8">
 					<input value="${resume_update.resumeTitle }" class="form-control"
 						name="resumeTitle" id="resumeTitle" />
 				</div>
-			</div>
+			</div> --%>
 			<div class="form-group">
 				<label for="resumeName" class="col-md-4 control-label">姓名</label>
 				<div class="col-md-8">
-					<input value="${resume_update.resumeName }" class="form-control"
-						name="resumeName" id="resumeName" />
+					<!-- value="${resume_update.resumeName}" -->
+					<input class="form-control" name="resumeName" id="resumeName" value="${resume_update.resumeName}" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeWorks" class="col-md-4 control-label">开始工作时间</label>
+				<label for="resumeWorks" class="col-md-4 control-label">开始工作</label>
 				<div class="col-md-8">
 					<input
 						value="<fmt:formatDate
@@ -86,7 +86,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeNowResidence" class="col-md-4 control-label">目前居住地</label>
+				<label for="resumeNowResidence" class="col-md-4 control-label">目前居住</label>
 				<div class="col-md-8">
 					<input value="${resume_update.resumeNowResidence }"
 						class="form-control" name="resumeNowResidence"
@@ -108,8 +108,8 @@
 					data-parent="#panel" href="#panel-element-more">更多展开 <span
 					class="glyphicon glyphicon-chevron-down"></span></a>
 			</div>
-			<div id="panel-element-more" class="panel-collapse collapse" >
-				<div class="panel-body" >
+			<div id="panel-element-more" class="panel-collapse collapse">
+				<div class="panel-body">
 					<div class="col-md-6 column" style="margin-top: 35px;">
 						<div class="form-group">
 							<label for="resumeQQ" class="col-md-4 control-label">QQ或微信</label>
@@ -179,14 +179,15 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="resumeSelfEvaluation" class="col-sm-4 control-label">自我评价</label>
-							<div class="col-sm-8">
-								<textarea class="form-control" name="resumeSelfEvaluation"
-									id="resumeSelfEvaluation">${resume_update.resumeSelfEvaluation }</textarea>
+							<label for="resumeWeight" class="col-md-4 control-label">体重</label>
+							<div class="col-md-7 input-group">
+								<input value="${resume_update.resumeWeight }"
+									class="form-control" name="resumeWeight" id="resumeWeight" />
+								<span class="input-group-addon">（公斤）</span>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-5 column" style="margin-top: 35px;">
+					<div class="col-md-6 column" style="margin-top: 35px;">
 						<div class="form-group">
 							<label for="resumeEducation" class="col-md-4 control-label">学历</label>
 							<div class="col-md-8">
@@ -275,20 +276,13 @@
 						</div>
 						<div class="form-group">
 							<label for="resumeHeight" class="col-md-4 control-label">身高</label>
-							<div class="col-md-8 input-group">
+							<div class="col-md-7 input-group">
 								<input value="${resume_update.resumeHeight }"
 									class="form-control" name="resumeHeight" id="resumeHeight" />
-									 <span class="input-group-addon">（厘米）</span>
+								<span class="input-group-addon">（厘米）</span>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="resumeWeight" class="col-md-4 control-label">体重</label>
-							<div class="col-md-8 input-group">
-								<input value="${resume_update.resumeWeight }"
-									class="form-control" name="resumeWeight" id="resumeWeight" />
-									 <span class="input-group-addon">（斤）</span>
-							</div>
-						</div>
+
 						<!-- 取值 -->
 						<input type="hidden" id="HresumeFLAbility"
 							value="${resume_update.resumeFLAbility}"> <input
@@ -301,11 +295,23 @@
 						<!-- 取值 末-->
 					</div>
 				</div>
+				<!-- 自我评价 -->
+				<div class="col-md-12 column">
+					<div class="form-group">
+						<label for="resumeSelfEvaluation" class="col-md-2 control-label">自我评价</label>
+						<div class="col-md-10">
+							<textarea style="resize: none;" class="form-control"
+								name="resumeSelfEvaluation" id="resumeSelfEvaluation">${resume_update.resumeSelfEvaluation }</textarea>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-md-offset-5 col-md-12">
-				<input type="submit" class="btn btn-success" value="保存" />
+				<input type="button"
+					onclick="ajaxUpdateResume('personal/user/personal_index_myResume')"
+					class="btn btn-success" value="保存"/>
 			</div>
 		</div>
 	</form>
@@ -348,6 +354,21 @@
 </div>
 <!-- 简历基本信息结束 -->
 <script type="text/javascript">
+	//ajax提交表单
+	var ajaxUpdateResume = function(page) {
+		var resumeForm = new FormData(document.getElementById("resumeForms"));
+		$.ajax({
+			url : "personal/resume/updateResume?page=" + page,
+			data : resumeForm,
+			type : "post",
+			dataType : "html",
+			processData : false,
+			contentType : false,
+			success : function(data) {
+				$("#my-content").html(data);
+			}
+		});
+	}
 	$(function() {
 		var resumeFLAbility = $("#HresumeFLAbility").val();
 		var resumeFLType = $("#HresumeFLType").val();
@@ -358,7 +379,6 @@
 		$("#resumeFLType").val(resumeFLType);
 		$("#resumeEnglishGrade").val(resumeEnglishGrade);
 		$("#resumeComputerAbility").val(resumeComputerAbility);
-		
 
 		$("#resumeBirthday").datetimepicker({
 			format : 'yyyy-mm-dd',
@@ -373,7 +393,7 @@
 					$("#resumeBirthday").datetimepicker("setEndDate",
 							$("#resumeWorks").val())
 				});
-				
+
 		$("#resumeWorks").datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -420,6 +440,7 @@
 					}
 				},
 				resumeName : {
+					verbose : false, //多验证的情况下默认第一验证错误，则提示当前错误信息后面的验证不执行
 					validators : {
 						notEmpty : {
 							message : '姓名不能为空'

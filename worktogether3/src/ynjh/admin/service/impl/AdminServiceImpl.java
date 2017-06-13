@@ -21,6 +21,7 @@ import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.AuditOffer;
 import ynjh.admin.entity.CompanyVisitCount;
+import ynjh.admin.entity.SysMessageWithAuthor;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
@@ -416,13 +417,15 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public List<Company> findBestCompany() { 
-		List<Integer> list=adminMapper.findCompanyId();
+		List<Integer> list=adminMapper.findCompanyId();//找到最佳企业id
 		List<Company> listCompany=new ArrayList();
-		for(int i=0;i<list.size();i++){
-			Company company=adminMapper.findCompanyById(list.get(i));
-			listCompany.add(company);
-		}
-		return listCompany;
+		if(list!=null&&list.size()>0){
+			for(int i=0;i<list.size();i++){
+				Company company=adminMapper.findCompanyById(list.get(i));
+				listCompany.add(company);
+			}
+		}	
+			return listCompany;	
 	}
 
 	/**
@@ -807,8 +810,8 @@ public class AdminServiceImpl implements AdminService {
 	 * @author 张宇
 	 */
 	@Override
-	public List<Article> findPersonBestArticle() {
-		 
+	public List<AuditArticle> findPersonBestArticle() {
+		
 		return adminMapper.findPersonBestArticle();
 	}
 
@@ -1035,6 +1038,29 @@ public class AdminServiceImpl implements AdminService {
 		}else{
 			return -1;//参数错误
 		}
+	}
+
+	/**
+	 * 查找带有作者的系统消息
+	 * 截短系统消息内容长度，方便显示
+	 * @author 朱吉
+	 */
+	@Override
+	public List<SysMessageWithAuthor> findSysMsgWithAuth() {
+		List<SysMessageWithAuthor> list=adminMapper.findSysMsgWithAuth();
+		if(list!=null&&list.size()>0){
+			for(int i=0;i<list.size();i++){
+				SysMessageWithAuthor message=list.get(i);
+				String context=message.getSysmContent();
+				String shortContext=null;
+				if(context.length()>11){
+					shortContext=context.substring(0, 10);
+					shortContext+="……";
+					message.setSysmContent(shortContext);
+				}
+			}
+		}
+		return list;
 	}
 	
 	

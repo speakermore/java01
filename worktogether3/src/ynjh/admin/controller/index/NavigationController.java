@@ -19,7 +19,6 @@ import ynjh.personal.entity.Resume;
  *
  */
 @Controller
-
 public class NavigationController {
 	
 	@Resource

@@ -2,6 +2,7 @@ package ynjh.personal.controller.resume;
 
 import java.util.List;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ynjh.common.util.GetAge;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -53,7 +55,7 @@ public class ResumeController {
 	 * 
 	 * 		ModelAndView
 	 */
-	@RequestMapping(value="/createResume",method=RequestMethod.POST)
+	@RequestMapping(value = "/createResume", method = RequestMethod.POST)
 	public ModelAndView createResume(Resume resume, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
@@ -90,9 +92,12 @@ public class ResumeController {
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
 		resume.setResumeTitle("我的简历");
-		/*resume.setResumeHeadImg(UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/peraonal", user.getUserLoginId()),
-				new MultipartFile[] { resumeFile }, session)[0]);*/
+		/*
+		 * resume.setResumeHeadImg(UploadFile.uploadFile(
+		 * UploadFile.getUserImgPath("/WEB-INF/resources/img/peraonal",
+		 * user.getUserLoginId()), new MultipartFile[] { resumeFile },
+		 * session)[0]);
+		 */
 		int result = rService.addResume(resume);
 		if (result > 0) {
 			mv.addObject("resume", resume);
@@ -127,7 +132,7 @@ public class ResumeController {
 			sb.append("<tr>");
 			sb.append("<td><a href='personal/resume/lookResume?id=" + resume.getId() + "'>" + resume.getResumeTitle()
 					+ "</a></td>");
-			sb.append("<td>"+resume.getResumeJor()+"</td>");
+			sb.append("<td>" + resume.getResumeJor() + "</td>");
 			sb.append("<td>" + sdf.format(resume.getResumeCreateDate()) + "</td>");
 			if (resume.getResumeStatusThree() == 1) {
 				sb.append("<th>待审核</th>");
@@ -209,7 +214,7 @@ public class ResumeController {
 	 */
 	@RequestMapping("/updateResumeById")
 	@ResponseBody
-	public ModelAndView updateResumeById(String page,Integer resumeId,HttpSession session) {
+	public ModelAndView updateResumeById(String page, Integer resumeId, HttpSession session) {
 		ModelAndView mv = new ModelAndView(page);
 		Resume resume = rService.findResumeById(resumeId);
 		if (resume != null) {
@@ -221,26 +226,35 @@ public class ResumeController {
 	/**
 	 * 修改简历 跳转主页
 	 * 
-	 * @param resume 简历修改的对象
+	 * @param resume
+	 *            简历修改的对象
 	 * @return
 	 * 
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/updateResume", method = RequestMethod.POST)
-	public ModelAndView updateResume(Resume resume,HttpSession session) {
+	@ResponseBody
+	public ModelAndView updateResume(Resume resume, String page, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		Resume oldResume= (Resume) session.getAttribute("resume_update");
+		Resume oldResume = (Resume) session.getAttribute("resume_update");
 		resume.setResumeCreateDate(oldResume.getResumeCreateDate());
 		resume.setId(oldResume.getId());
 		resume.setUserId(oldResume.getUserId());
 		resume.setResumePersonality(oldResume.getResumePersonality());
 		resume.setResumeStatusOne(oldResume.getResumeStatusOne());
+		resume.setResumeStatusThree(1);
 		resume.setResumeHeadImg(oldResume.getResumeHeadImg());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
+			resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		int result = rService.updateResume(resume);
-		if (result>0) {
-			mv.addObject("operatorInfo", "修改简历成功！");
+		if (result > 0) {
 			session.setAttribute("resume", resume);
-			mv.setViewName("personal/user/personal_index");
+			mv.setViewName(page);
 		}
 		/*
 		 * if (result>0) {
@@ -255,20 +269,18 @@ public class ResumeController {
 	 * 
 	 */
 	/*
-	@RequestMapping(value = "/ajaxUpdateResumeHeadImg", method = RequestMethod.GET)
-	public String ajaxUpdateResumeHeadImg(Integer resumeId,MultipartFile resumeHeadImg,HttpSession session){
-		User user =(User) session.getAttribute("user");
-		String uploadImgNewFileName=UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
-				new MultipartFile[] { resumeHeadImg }, session)[0];
-		Integer result=rService.changeResumeHeadImg(resumeId, uploadImgNewFileName);
-		if (result>0) {
-			return uploadImgNewFileName;
-		}else {
-			return null;
-		}
-	}*/
-	
+	 * @RequestMapping(value = "/ajaxUpdateResumeHeadImg", method =
+	 * RequestMethod.GET) public String ajaxUpdateResumeHeadImg(Integer
+	 * resumeId,MultipartFile resumeHeadImg,HttpSession session){ User user
+	 * =(User) session.getAttribute("user"); String
+	 * uploadImgNewFileName=UploadFile.uploadFile(
+	 * UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal",
+	 * user.getUserLoginId()), new MultipartFile[] { resumeHeadImg },
+	 * session)[0]; Integer result=rService.changeResumeHeadImg(resumeId,
+	 * uploadImgNewFileName); if (result>0) { return uploadImgNewFileName; }else
+	 * { return null; } }
+	 */
+
 	/**
 	 * 删除简历 跳转主页
 	 * 
@@ -371,7 +383,8 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/CreateEducation", method = RequestMethod.POST)
-	public ModelAndView CreateEducation(Education education, HttpSession session) {
+	@ResponseBody
+	public ModelAndView CreateEducation(Education education,String createEducationpage,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
 		education.setUserId(user.getId());
@@ -381,48 +394,12 @@ public class ResumeController {
 			Resume resume = rService.findResumeById(education.getResumeId());
 			List<Education> edus = rService.findEducation(resume.getId());
 			session.setAttribute("edus", edus);
-			mv.addObject("operatorInfo", "添加成功");
-			mv.setViewName("personal/resume/personal_lookresume");
+			mv.setViewName(createEducationpage);
 		} else {
-			mv.addObject("operatorInfo", "添加失败");
-			mv.setViewName("personal/resume/personal_resume_education");
+			mv.setViewName("error");
 		}
 		return mv;
 	}
-	/*@RequestMapping("/ajaxCreateEducation")
-	@ResponseBody
-	public Object ajaxCreateEducation(Education education, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		education.setUserId(user.getId());
-		education.setResumeType(1);
-		int result = rService.addEducation(education);
-		if (result > 0) {
-			mv.addObject("operatorInfo", "添加成功");
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");
-			StringBuffer sb = new StringBuffer();
-			List<Education> edus = rService.findEducation(education.getResumeId());
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-			for(Education edu:edus){
-			sb.append("<tr>");
-			sb.append("<td>学校名称：</td>");
-			sb.append("<td>"+edu.getEducationSchool()+"</td></tr>");
-			sb.append("<tr><td>教育描述：</td>");
-			sb.append("<td><p>"+edu.getEducationContent()+"</p></td></tr>");
-			sb.append("<tr><td>教育时间：</td>");
-			sb.append("<td>"+sdf.format(edu.getEducationBeginTime()));
-			sb.append("到"+sdf.format(edu.getEducationEndTime())+"</td></tr>");
-			sb.append("<tr><td></td><td class='text-right'><a href='#'>编辑</a>|<a href='personal/resume/deleteResumeEducation?id=${edu.id }'>删除</a></td>");
-			sb.append("</tr>");
-			}
-			return sb;
-		} else {
-			mv.addObject("operatorInfo", "添加失败");
-			mv.setViewName("personal/resume/personal_resume_education");
-		}
-		return "空";
-		
-	}*/
 
 	/**
 	 * 新建工作经历
@@ -434,23 +411,22 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/CreateWork", method = RequestMethod.POST)
-	public ModelAndView CreateWork(Work work, HttpSession session) {
+	@ResponseBody
+	public ModelAndView CreateWork(Work work,String createWorkpage, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
 		work.setUserId(user.getId());
 		work.setResumeType(1);
 		int result = rService.addWork(work);
-		Resume resume = rService.findResumeById(work.getResumeId());
 		if (result > 0) {
-			mv.addObject("operatorInfo", "添加成功");
+			Resume resume = rService.findResumeById(work.getResumeId());
 			List<Work> works = rService.findWork(resume.getId());
 			session.setAttribute("works", works);
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");
-		} else {
-			mv.addObject("operatorInfo", "添加失败");
-			mv.setViewName("personal/resume/personal_resume_work");
-		}
+			session.setAttribute("resume", resume);
+			mv.setViewName(createWorkpage);
+		}else{
+			mv.setViewName("error");
+		} 
 		return mv;
 	}
 
@@ -464,22 +440,21 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/CreateProject", method = RequestMethod.POST)
-	public ModelAndView CreateProject(HttpSession session, Project project) {
+	@ResponseBody
+	public ModelAndView CreateProject(HttpSession session,String createProjectpage, Project project) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
 		project.setUserId(user.getId());
 		project.setResumeType(1);
 		int result = rService.addProject(project);
-		Resume resume = rService.findResumeById(project.getResumeId());
 		if (result > 0) {
-			mv.addObject("operatorInfo", "添加成功");
+			Resume resume = rService.findResumeById(project.getResumeId());
 			List<Project> projs = rService.findProject(resume.getId());
 			session.setAttribute("projs", projs);
 			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");
+			mv.setViewName(createProjectpage);
 		} else {
-			mv.addObject("operatorInfo", "添加失败");
-			mv.setViewName("personal/resume/personal_resume_project");
+			mv.setViewName("error");
 		}
 		return mv;
 	}
@@ -493,32 +468,31 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping("/lookResumeEdus")
-	public String lookResumeEducation(Integer resumeId,HttpSession session) {
+	public String lookResumeEducation(Integer resumeId, HttpSession session) {
 		List<Education> edus = rService.findEducation(resumeId);
 		session.setAttribute("edus", edus);
 		return "personal/resume/personal_lookresume";
-		
+
 	}
 
-	/*@RequestMapping("/ajaxlookResumeEdus")
-	@ResponseBody
-	public Object ajaxlookResumeEducation(Integer resumeId) {
-		StringBuffer sb = new StringBuffer();
-		List<Education> edus = rService.findEducation(resumeId);
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		for(Education edu:edus){
-		sb.append("<tr><td>学校名称：</td>");
-		sb.append("<td>"+edu.getEducationSchool()+"</td></tr>");
-		sb.append("<tr><td>教育描述：</td>");
-		sb.append("<td><p>"+edu.getEducationContent()+"</p></td></tr>");
-		sb.append("<tr><td>教育时间：</td>");
-		sb.append("<td>"+sdf.format(edu.getEducationBeginTime()));
-		sb.append("到"+sdf.format(edu.getEducationEndTime())+"</td></tr>");
-		sb.append(
-				"<tr><td></td><td class=\"text-right\"><a href=\"#\">编辑</a>|<a href=\"personal/resume/deleteResumeEducation?id=${edu.id }\">删除</a></td></tr>");
-		}
-		return sb;
-	}*/
+	/*
+	 * @RequestMapping("/ajaxlookResumeEdus")
+	 * 
+	 * @ResponseBody public Object ajaxlookResumeEducation(Integer resumeId) {
+	 * StringBuffer sb = new StringBuffer(); List<Education> edus =
+	 * rService.findEducation(resumeId); SimpleDateFormat sdf=new
+	 * SimpleDateFormat("yyyy-MM-dd"); for(Education edu:edus){
+	 * sb.append("<tr><td>学校名称：</td>");
+	 * sb.append("<td>"+edu.getEducationSchool()+"</td></tr>");
+	 * sb.append("<tr><td>教育描述：</td>");
+	 * sb.append("<td><p>"+edu.getEducationContent()+"</p></td></tr>");
+	 * sb.append("<tr><td>教育时间：</td>");
+	 * sb.append("<td>"+sdf.format(edu.getEducationBeginTime()));
+	 * sb.append("到"+sdf.format(edu.getEducationEndTime())+"</td></tr>");
+	 * sb.append(
+	 * "<tr><td></td><td class=\"text-right\"><a href=\"#\">编辑</a>|<a href=\"personal/resume/deleteResumeEducation?id=${edu.id }\">删除</a></td></tr>"
+	 * ); } return sb; }
+	 */
 
 	/**
 	 * 查看工作记录列表
@@ -529,7 +503,7 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping("/lookResumeWork")
-	public String lookResumeWork(Integer resumeId,HttpSession session) {
+	public String lookResumeWork(Integer resumeId, HttpSession session) {
 		List<Work> works = rService.findWork(resumeId);
 		session.setAttribute("works", works);
 		return "personal/resume/personal_lookresume";
@@ -544,7 +518,7 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping("/lookResumeProjs")
-	public String lookResumeProject(Integer resumeId,HttpSession session) {
+	public String lookResumeProject(Integer resumeId, HttpSession session) {
 		List<Project> projs = rService.findProject(resumeId);
 		session.setAttribute("projs", projs);
 		return "personal/resume/personal_lookresume";
@@ -560,14 +534,22 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/deleteResumeEducation", method = RequestMethod.GET)
-	public ModelAndView deleteResumeEducation(Integer id, HttpSession session) {
+	@ResponseBody
+	public ModelAndView deleteResumeEducation(Integer id,String page,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.deleteEducation(id);
-		Resume resume = (Resume) session.getAttribute("resume");
 		if (result > 0) {
-			mv.addObject("operatorInfo", "删除成功！");
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");
+			Resume resume = (Resume) session.getAttribute("resume");
+			List<Education> edus = rService.findEducation(resume.getId());
+			if (edus.size()>0) {
+				session.setAttribute("edus", edus);
+			}else {
+				session.setAttribute("edus", null);
+			}
+			session.setAttribute("resume", resume);
+			mv.setViewName(page);
+		}else {
+			mv.setViewName("error");
 		}
 		return mv;
 	}
@@ -582,14 +564,22 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/deleteResumeWork", method = RequestMethod.GET)
-	public ModelAndView deleteResumeWork(Integer id, HttpSession session) {
+	@ResponseBody
+	public ModelAndView deleteResumeWork(Integer id,String page, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.deleteWork(id);
-		Resume resume = (Resume) session.getAttribute("resume");
 		if (result > 0) {
-			mv.addObject("operatorInfo", "删除成功！");
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");
+			Resume resume = (Resume) session.getAttribute("resume");
+			List<Work> works = rService.findWork(resume.getId());
+			if (works.size()>0) {
+				session.setAttribute("works", works);
+			}else {
+				session.setAttribute("works", null);
+			}
+			session.setAttribute("resume", resume);
+			mv.setViewName(page);
+		}else {
+			mv.setViewName("error");
 		}
 		return mv;
 	}
@@ -604,14 +594,22 @@ public class ResumeController {
 	 * 		ModelAndView
 	 */
 	@RequestMapping(value = "/deleteResumeProject", method = RequestMethod.GET)
-	public ModelAndView deleteResumeProject(Integer id, HttpSession session) {
+	@ResponseBody
+	public ModelAndView deleteResumeProject(Integer id,String page, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		int result = rService.deleteProject(id);
-		Resume resume = (Resume) session.getAttribute("resume");
 		if (result > 0) {
-			mv.addObject("operatorInfo", "删除成功！");
-			mv.addObject("resume", resume);
-			mv.setViewName("personal/resume/personal_lookresume");
+			Resume resume = (Resume) session.getAttribute("resume");
+			List<Project> projs = rService.findProject(resume.getId());
+			if (projs.size()>0) {
+				session.setAttribute("projs", projs);
+			}else {
+				session.setAttribute("projs", null);
+			}
+			session.setAttribute("resume", resume);
+			mv.setViewName(page);
+		}else {
+			mv.setViewName("error");
 		}
 		return mv;
 	}
@@ -782,38 +780,126 @@ public class ResumeController {
 	public String test() {
 		return "personal/resume/test";
 	}
+
 	/**
-	 * 发送简历(只能发送已审核的)
-	 * 参数
-	 * companyId 公司id,
-	 * resumeId 简历id,
-	 * companyResumeId 投递简历的用户ID,
-	 * companyrecruitId 岗位ID,
-	 * cmprTime 投递时间
+	 * 发送简历(只能发送已审核的) 参数 companyId 公司id, resumeId 简历id, companyResumeId
+	 * 投递简历的用户ID, companyrecruitId 岗位ID, cmprTime 投递时间
+	 * 
 	 * @return
 	 * 
-	 * String
+	 * 		String
 	 */
 	@RequestMapping("/sendResumeToCompany")
-	public ModelAndView sendResumeToCompany(Integer companyId,Integer companyrecruitId,HttpSession session){
-		ModelAndView mv=new ModelAndView("company/info");
-		CompanyResume companyResume =new CompanyResume();
-		Resume oldResume=(Resume) session.getAttribute("resume");
-		User oldUser =(User) session.getAttribute("user");
+	public ModelAndView sendResumeToCompany(Integer companyId, Integer companyrecruitId, HttpSession session) {
+		ModelAndView mv = new ModelAndView("company/info");
+		CompanyResume companyResume = new CompanyResume();
+		Resume oldResume = (Resume) session.getAttribute("resume");
+		User oldUser = (User) session.getAttribute("user");
 		companyResume.setCompanyId(companyId);
 		companyResume.setCompanyResumeId(oldUser.getId());
 		companyResume.setResumeId(oldResume.getId());
 		companyResume.setCompanyRecruitId(companyrecruitId);
 		companyResume.setCmprTime(new Timestamp(System.currentTimeMillis()));
-		int result =rService.sendResumeToCompany(companyResume);
-		if (result>0) {
+		int result = rService.sendResumeToCompany(companyResume);
+		if (result > 0) {
 			mv.addObject("operatorInfo", "投递简称成功，请静候佳音！");
 			mv.addObject("toPage", "company/artanddis/company_index");
-		}else {
+		} else {
 			mv.addObject("operatorInfo", "投递简称失败，请检查你的人品！");
 			mv.addObject("toPage", "company/artanddis/company_index");
 		}
 		return mv;
 	}
 
+	/**
+	 * 刘志浩：修改教育记录
+	 * 
+	 * @param education
+	 * @param page
+	 * @return
+	 * 
+	 * 		ModelAndView
+	 */
+	@RequestMapping(value = "/updateEducation", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView updateEducation(Education education, Integer id, String page, HttpSession session) {
+		ModelAndView mv = new ModelAndView(page);
+		Resume oldResume = (Resume) session.getAttribute("resume");
+		User oldUser = (User) session.getAttribute("user");
+		education.setUserId(oldUser.getId());
+		education.setResumeId(oldResume.getId());
+		education.setResumeType(1);
+		int result = rService.updateEducation(education, id);
+		if (result > 0) {
+			// 获取教育
+			List<Education> edus = rService.findEducation(oldResume.getId());
+			if (edus.size() > 0) {
+				session.setAttribute("edus", edus);
+			} else {
+				session.setAttribute("edus", null);
+			}
+		}
+		return mv;
+	}
+
+	/**
+	 * 刘志浩：修改工作记录
+	 * 
+	 * @param education
+	 * @param page
+	 * @return
+	 * 
+	 * 		ModelAndView
+	 */
+	@RequestMapping(value = "/updateWork", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView updateWork(Work work, Integer id, String page, HttpSession session) {
+		ModelAndView mv = new ModelAndView(page);
+		Resume oldResume = (Resume) session.getAttribute("resume");
+		User oldUser = (User) session.getAttribute("user");
+		work.setUserId(oldUser.getId());
+		work.setResumeId(oldResume.getId());
+		work.setResumeType(1);
+		int result=rService.updateWork(work, id);
+		if (result>0) {
+			List<Work> works = rService.findWork(oldResume.getId());
+			if (works.size() > 0) {
+				session.setAttribute("works", works);
+			} else {
+				session.setAttribute("works", null);
+			}
+		}
+		return mv;
+	}
+
+	/**
+	 * 刘志浩：修改项目记录
+	 * 
+	 * @param education
+	 * @param page
+	 * @return
+	 * 
+	 * 		ModelAndView
+	 */
+	@RequestMapping(value = "/updateProject", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView updateProject(Project project, Integer id, String page, HttpSession session) {
+		ModelAndView mv = new ModelAndView(page);
+		Resume oldResume = (Resume) session.getAttribute("resume");
+		User oldUser = (User) session.getAttribute("user");
+		project.setUserId(oldUser.getId());
+		project.setResumeId(oldResume.getId());
+		project.setResumeType(1);
+		int result = rService.updateProject(project, id);
+		if (result > 0) {
+			// 获取项目
+			List<Project> projs = rService.findProject(oldResume.getId());
+			if (projs.size() > 0) {
+				session.setAttribute("projs", projs);
+			} else {
+				session.setAttribute("projs", null);
+			}
+		}
+		return mv;
+	}
 }

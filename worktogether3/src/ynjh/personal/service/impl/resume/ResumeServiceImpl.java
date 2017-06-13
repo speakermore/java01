@@ -2,10 +2,7 @@ package ynjh.personal.service.impl.resume;
 
 import java.util.List;
 import javax.annotation.Resource;
-
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
-
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
 import ynjh.personal.dao.resume.ResumeMapper;
@@ -135,8 +132,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            教育记录对象
 	 */
 	@Override
-	public Integer updateEducation(Education education) {
-		return resumeMapper.updateEducation(education);
+	public Integer updateEducation(Education education,Integer id) {
+		return resumeMapper.updateEducation(education,id);
 	}
 
 	/**
@@ -183,8 +180,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            工作记录对象
 	 */
 	@Override
-	public Integer updateWork(Work work) {
-		return resumeMapper.updateWork(work);
+	public Integer updateWork(Work work,Integer id) {
+		return resumeMapper.updateWork(work,id);
 	}
 
 	/**
@@ -231,8 +228,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            项目记录对象
 	 */
 	@Override
-	public Integer updateProject(Project project) {
-		return resumeMapper.updateProject(project);
+	public Integer updateProject(Project project,Integer id) {
+		return resumeMapper.updateProject(project,id);
 	}
 
 	/**

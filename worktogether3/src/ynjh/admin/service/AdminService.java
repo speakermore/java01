@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import ynjh.admin.entity.SysMessageWithAuthor;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
@@ -97,7 +98,7 @@ public interface AdminService {
 	public List<Company> findBestCompany();
 	
 	//个人热门文章查询
-	public List<Article> findPersonBestArticle();
+	public List<AuditArticle> findPersonBestArticle();
 	//企业热门文章查询
 	public List<Article> findCompanyBestArticle();
 	
@@ -189,6 +190,8 @@ public interface AdminService {
 	public User findUserByLoginId(String userLoginId);
 	//用户管理，通过个人用户id禁用/解禁用户
 	public Integer personalMag(Integer[] ids, Integer userStatus);
+	//查找带有作者的系统消息
+	public List<SysMessageWithAuthor> findSysMsgWithAuth();
 
     
 }	

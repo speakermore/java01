@@ -17,15 +17,17 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <%@include file="header.jsp" %>
+   
+	
   </head>
   <body>
   <div class="container">
   	<h3 class="col-md-offset-2">请填写新管理员信息</h3>
-    <form role="form" class="form-horizontal" action="superAdmin/addAdmin" method="post">
+    <form id="add-admin" role="form" class="form-horizontal" action="superAdmin/addAdmin" method="post">
 		<div class="form-group">
 			<label for="userName" class="col-sm-2 control-label">管理员名字：</label>
 			<div class="col-sm-5">
-				<input class="form-control" name="adminName" value="${superAdm.adminName }" />
+				<input id="userName" class="form-control" name="adminName" value="${superAdm.adminName }" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -86,5 +88,94 @@
   	});
   });
   </script>
+  <script type="text/javascript">
+		$(document).ready(function() {
+        $("#add-admin").bootstrapValidator({
+        	 message: '不符合要求',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    adminName: {
+                        validators: {
+                            notEmpty: {                            	
+                                message: '这是必填的！！！'                                
+                            },
+                            stringLength:{
+                            	min:1,
+                            	max:18,
+                            	message:"长度在1~18个字符之间"
+                            },
+                            regexp: {
+                            	regexp: (/[\u4e00-\u9fa5]/g),
+                            	message: "请输入中文名字"
+                        	}
+
+                        }
+                    },
+                    adminLoginId: {
+                    	validators:{
+                    		notEmpty: {                            	
+                                message: '这是必填的！！！'                                
+                           },
+                           stringLength:{
+                        	 	min:6,
+                        	 	max:20,
+                        	 	message:"最小6个字符，最大20个字符"
+                           }
+                    	}
+                    },
+                    adminPassword:{
+                    	validators:{
+                    		notEmpty: {                            	
+                                message: '这是必填的！！！'                                
+                           },
+                           stringLength:{
+	                       	 	min:6,
+	                       	 	max:20,
+	                       	 	message:"最小6个字符，最大20个字符"
+                          }
+                    	}
+                    },
+                    adminPasswordRepeat:{
+                    	validators:{
+                    		identical:{
+                    			field:"adminPassword",
+                    			message:"两次输入不一致"
+                    		}
+                    	}
+                    },
+                    adminTel: {
+                    	validators:{
+                    		notEmpty: {                            	
+                                message: '这是必填的！！！'                                
+                           },
+                    		regexp:{
+                    			regexp:(/^[1][3-9][0-9]{9}$/),
+                    			message:"请输入有效的手机号"
+                    		}
+                    	}
+                    },
+                    adminEmail:{
+                    	validators:{
+                    		notEmpty:{
+                    			message:'这是必填的！！！'
+                    		},
+                    		regexp:{
+                    			regexp:(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/),
+                    			message:"请输入正确的邮箱地址！！！"
+                    		}
+                    	}
+                    }
+                }
+        });
+    });
+	</script>
+	 <script type="text/javascript" src="admin/js/jquery-1.10.2.min.js" ></script>
+    <script type="text/javascript" src="admin/js/bootstrap.js" ></script>
+    <script type="text/javascript" src="admin/dist/js/bootstrapValidator.min.js" ></script>
+    <link rel="stylesheet" href="admin/dist/css/bootstrapValidator.min.css" />
   <!--html结束  -->
 </html>

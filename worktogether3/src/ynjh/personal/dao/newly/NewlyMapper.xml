@@ -29,17 +29,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		f.followId=#{userId} and u.id=a.usersId and u.id=f.byFollowId order by
 		a.articleTime desc
 	</select>
-	<!-- 查看最新评论 -->
-	<select id="findNewlyCommentArticleByUserId" parameterType="Integer"
-		resultType="CommentArticle">
+	<!-- 查看最新评论（先按照时间算出最新的-排序、然后根据文章id分组保留最新的一个、最后在进行一次时间排序） -->
+	<select id="findNewlyCommentArticleByUserId" resultType="CommentArticle">
 		select max(ca.articleId) articleId,max(ca.usersId)
 		usersId,max(ca.commentArticleTime)
 		commentArticleTime,max(a.articleTitle) articleTitle,max(u.userName)
-		userName from commentarticle ca,article a,user u where
-		u.id=#{userId}
-		and a.id=ca.articleId and u.id=a.usersId and
-		a.usersId=ca.usersId group
-		by a.id,ca.commentArticleTime order by ca.commentArticleTime
-		desc;
+		userName,max(ca.commentArticleContent) commentArticleContent
+		from (select * from commentarticle order by commentArticleTime desc)
+		ca,article a,user u
+		where a.usersId=${userId} and not ca.usersId=${notUserId} and
+		a.id=ca.articleId and ca.usersId=u.id group by ca.articleId order by
+		commentArticleTime desc;
+
+
 	</select>
 </mapper>

@@ -83,22 +83,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		value(#{userId},#{resumeId},#{projectBeginTime},#{projectEndTime},#{projectName},#{projectJob},#{projectDescription},#{resumeType})
 	</insert>
 	<!-- 修改教育经历 -->
-	<update id="updateEducation" parameterType="Education">
+	<update id="updateEducation" >
 		update education set
-		educationBeginTime=#{educationBeginTime},educationEndTime=#{educationEndTime},educationSchool=#{educationSchool},educationContent=#{educationContent}
-		where resumeId=#{resumeId}
+		educationBeginTime=#{education.educationBeginTime},educationEndTime=#{education.educationEndTime},educationSchool=#{education.educationSchool},educationContent=#{education.educationContent},resumeType=#{education.resumeType}
+		where id=#{id}
 	</update>
 	<!-- 修改工作经历 -->
-	<update id="updateWork" parameterType="Work">
+	<update id="updateWork" >
 		update work set
-		workBeginTime=#{workBeginTime},workEndTime=#{workEndTime},workFirmName=#{workFirmName},workUnit=#{workUnit},workDescription=#{workDescription}
-		where resumeId=#{resumeId}
+		workBeginTime=#{work.workBeginTime},workEndTime=#{work.workEndTime},workFirmName=#{work.workFirmName},workUnit=#{work.workUnit},workDescription=#{work.workDescription},resumeType=#{work.resumeType}
+		where id=#{id}
 	</update>
 	<!-- 修改项目经历 -->
-	<update id="updateProject" parameterType="Project">
-		update project set
-		projectBeginTime=#{projectBeginTime},projectEndTime=#{projectEndTime},projectName=#{projectName},projectJob=#{projectJob},projectDescription=#{projectDescription},projectMakeDescription=#{projectMakeDescription}
-		where resumeId=#{resumeId}
+	<update id="updateProject">
+		update project set projectBeginTime=#{project.projectBeginTime},projectEndTime=#{project.projectEndTime},projectName=#{project.projectName},projectJob=#{project.projectJob},projectDescription=#{project.projectDescription},resumeType=#{project.resumeType}
+		where id=#{id}
 	</update>
 	<!-- 查看教育经历 -->
 	<select id="findEducation" parameterType="Integer" resultType="Education">

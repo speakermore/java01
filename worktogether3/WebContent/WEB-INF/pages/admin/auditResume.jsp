@@ -11,7 +11,7 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>管理员后台-简历审核</title>
 
-<div><%@include file="header.jsp"%></div>
+<%@include file="header.jsp"%>
 </head>
 <body>
 	<div class="container-fluid">
@@ -66,6 +66,6 @@
 		</div>
 	</div>
 	<!-- end of container-fluid -->
-	<div><%@include file="footer.jsp"%></div>
+	<%@include file="footer.jsp"%>
 </body>
 </html>

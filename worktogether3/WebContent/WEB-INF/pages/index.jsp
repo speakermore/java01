@@ -439,11 +439,11 @@
 								企业文章（<b>367</b>项目）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">众筹859</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹356</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹211</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹899</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹78</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">让青春之花，舞动人间真情</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">让青春与企业共成长</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">从《水浒》看企业管理经验</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">公司管理不善的12个通病</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">企业家自我修养</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
 							</ul>
 						</div>
 					</article>
@@ -453,11 +453,11 @@
 								个人文章（<b>367</b>项目）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">众筹112</span><b class="col-sm-7">前端工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹423</span><b class="col-sm-7">UI工程师</b><span class="col-sm-2">15w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹67</span><b class="col-sm-7">测试工程师</b><span class="col-sm-2">10w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹123</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹77</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">招财猫</span><b class="col-sm-7">怎么写出一本程序员风格的修真小说？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">溜狗狗</span><b class="col-sm-7">编程到底难在哪里？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">西瓜</span><b class="col-sm-7">什么样的 BUG 会让你目瞪口呆？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">百浪</span><b class="col-sm-7">王小波的计算机水平到底有多好？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">无印良吕</span><b class="col-sm-7">程序员很闷骚么？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
 							</ul>
 						</div>
 					</article>
