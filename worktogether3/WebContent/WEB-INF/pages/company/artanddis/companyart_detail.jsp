@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -52,9 +53,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-sm-12 column">
 					<div class="row clearfix">
 						<div class="col-sm-11 column">
-							<h2>${art.articleTitle }</h2>
+							<div class="col-sm-12">
+								<a href="company/artanddis/company_index">
+									返回企业首页<em class="glyphicon glyphicon-send"></em>
+								</a>
+							</div>
+							<div class="col-sm-12">
+								<h2>${art.articleTitle }</h2>
+							</div>
 							<br />
-							<div class="wt-hby-artdetail">
+							<div class="wt-hby-artdetail col-sm-12">
 								${art.articleContent }
 							</div>
 						</div>
@@ -62,8 +70,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<br />
 					<table class="table">
 						<tr>
-							<th><i class="glyphicon glyphicon-time"></i>&nbsp;${art.articleTime }</th>
-   							<th><a href="company/artanddis/article/like?id=${art.id }"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp; ${art.articleLikeNum }</th>
+							<th>
+								<i class="glyphicon glyphicon-time"></i>&nbsp;<fmt:formatDate value="${art.articleTime }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;
+								<a href="company/artanddis/company_index">
+									<em class="glyphicon glyphicon-send"> 返回企业首页</em>
+								</a>
+							</th>
+   							<th>
+	   							<a href="company/artanddis/article/like?id=${art.id }"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp; ${art.articleLikeNum }
+	   						</th>
    							<th><i class="glyphicon glyphicon-user"></i>&nbsp; ${art.articleReadNum }</th>
 						</tr>
 					</table>
@@ -98,14 +113,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</table>
 				</div>
 			</div>
-			
+			<c:if test="${user.id>12345690}">
 				<form action="company/artanddis/comment/add_companycomment" method="post">
 			    	<textarea name="discussContent" rows="7" cols="120"
 			    		maxlength="140" placeholder="请输入评论内容，最大不超过140个字！"></textarea><br />
 			    	<input type="submit" value="评论文章" class="btn btn-warning" />
 			    	<div id="wordstip" class=" col-sm-10 column"></div>
    				</form>
-			
+			</c:if>
    			<div>
    				<div class=" col-sm-5 column"></div>
    				<a href="#" class="cd-top">返回顶部</a>

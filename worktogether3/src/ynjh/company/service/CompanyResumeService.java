@@ -9,7 +9,7 @@ import ynjh.personal.entity.Work;
 
 public interface CompanyResumeService {
 	//查询
-	public List<CompanyResume> findAllResume(Integer companyId);
+	public List<CompanyResume> findAllResume(Integer companyRecruitId);
 	//查询想详细信息
 	public CompanyResume findById(Integer Id);
 	//修改简历状态
@@ -20,4 +20,5 @@ public interface CompanyResumeService {
 	public List<Work> findWork(Integer resumeId);
 	//查询教育经历
 	public List<Education> findEducation(Integer resumeId);
+	
 }

@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet" />
+	<link href="thirdpart/dist/css/bootstrapValidator.min.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,17 +43,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="">1、返回企业首页</a>
 				<a href="">2、接着发表新文章</a>
 			</div>
-			<form action="company/artanddis/add_companyarticle" method="post" role="form" class="form-horizontal">
+			<form action="company/artanddis/add_companyarticle" method="post" role="form" 
+				class="form-horizontal" id="addArt">
 				<div class="form-group">
-    				<label for="firstname" class="col-sm-2 control-label">文章标题</label>
+    				<label for="titlename" class="col-sm-2 control-label" id="titlename">文章标题</label>
     			<div class="col-sm-5">
-      				<input type="text" class="form-control" id="titlename" placeholder="请输入标题" name="articleTitle">
+      				<input type="text" class="form-control" id="titlename" placeholder="请输入标题" name="articleTitle"
+      					data-bv-notempty="true"	data-bv-notempty-message="标题不能为空!"
+						data-bv-stringlength="true" data-bv-stringlength-min="2" data-bv-stringlength-max="20" 
+						data-bv-stringlength-message="标题请输入至少2-20个字!">
     			</div>
   				</div>
 					<div class="form-group">
-					   <label for="keyname" class="col-sm-2 control-label">关键字</label>
+					   <label for="keyname" class="col-sm-2 control-label" id="keyname">关键字</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="keyname" placeholder="请输入关键字" name="articleKey">
+						<input type="text" class="form-control" id="keyname" placeholder="请输入关键字" name="articleKey"
+							data-bv-notempty="true"	data-bv-notempty-message="关键字不能为空!"
+							data-bv-stringlength="true" data-bv-stringlength-min="2" data-bv-stringlength-max="10" 
+							data-bv-stringlength-message="请输入至少2-10个关键字!">
 					</div>
 				</div>
 				<br />
@@ -67,22 +75,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
   	<!-- Include all compiled plugins (below), or include individual files as needed -->
   	<script src="js/bootstrap.min.js"></script>
+  	<script type="text/javascript"
+		src="thirdpart/dist/js/bootstrapValidator.min.js"></script>
+	<script type="text/javascript"
+		src="thirdpart/dist/js/language/zh_CN.js"></script>
   	<script type="text/javascript">
 	    $(document).ready(function(){  
 	    	CKEDITOR.replace('articleContent'); 
 	    });  
     </script>
-    <script type="text/javascript">
-    	$(document).ready(function(){
- 			$("textarea").get(0).change(function(){
-       			if( $.trim(this.value) == "" ){
-  					$("input[type='submit']").attr("disabled","disabled");
-				}else{
-  					$("input[type='submit']").removeAttr("disabled");
-				}
-			});
-		});
-    </script>
+   
 	<!-- <script type="text/javascript">
     	$(document).ready(function(){
     		var id=document.getElementById("titlename").value;
@@ -98,5 +100,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		});
     	});
     </script> -->
+    <!-- 添加文章验证 -->
+    <script type="text/javascript">
+    	$(document).ready(function(){
+	    	$('#addArt').bootstrapValidator({
+		    	message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        }
+	        });
+    	});
+    </script>
   </body>
 </html>

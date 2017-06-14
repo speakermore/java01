@@ -17,7 +17,6 @@
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/thirdpart/ckeditor/ckeditor.js">
-	
 </script>
 </head>
 <body>
@@ -28,7 +27,7 @@
 				<%@include file="/WEB-INF/pages/company/menu.jsp"%>
 			</div>
 			<div class="col-md-9 column">
-				<form role="form" action="
+				<form action="
 					company/cmprs/companyRecruit/updateCmpRecruit" method="post" id="updateCmpRecruit">
 					<div class="page-header">
 						<h2>${cmpr.cmpRecTitle }</h2>
@@ -43,16 +42,18 @@
 							</tr>
 						</thead>
 						<tr>
-							<td><input type="text" class="form-control"
-								name="cmpRecWage" value="${cmpRecWage} " maxlength="20"/></td>
-							<td><input type="text" class="form-control"
-								name="cmpRecEducation" value="${cmpRecEducation}" maxlength="20"/>
-							</td><%--
-								<c:if test="${companyresumes==null}">
-									<jsp:forward page="/company/cmprs/companyResume/updateCompanyRecruit"></jsp:forward>
-								</c:if>
-							--%><td><input type="text" class="form-control"
-								name="cmpRecPeople" value="${cmpRecPeople}" maxlength="11"/>
+							<td><div class="form-group">
+							<input type="text" class="form-control"
+								name="cmpRecWage" value="${cmpr.cmpRecWage} " maxlength="20"/>
+							</div></td>
+							<td><div class="form-group">
+							<input type="text" class="form-control"
+								name="cmpRecEducation" value="${cmpr.cmpRecEducation}" maxlength="20"/>
+							</div></td>
+							<td><div class="form-group">
+							<input type="text" class="form-control"
+								name="cmpRecPeople" value="${cmpr.cmpRecPeople}" maxlength="11"/>
+								</div>
 							</td>
 						</tr>
 					</table>
@@ -61,17 +62,23 @@
 							<th>工作所需技能及水平描述</th>
 						</tr>
 						<tr>
-							<td><textarea class="ckeditor" name="cmpRecExperience"
-									value="${cmpRecExperience}" cols="20" rows="2"
+							<td>
+							<div class="form-group">
+							<textarea class="ckeditor" name="cmpRecExperience"
+									value="${cmpr.cmpRecExperience}" cols="20" rows="2"
 									maxlength="500">
+									${cmpr.cmpRecExperience}
 								</textarea> <script type="text/javascript">
 									CKEDITOR.replace('cmpRecExperience');
-								</script></td>
+								</script>
+								</div>
+								</td>
 						</tr>
 					</table>
+					
 					<div class="form-group">
 						<div class="col-sm-9 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">提交添加</button>
+							<button type="submit" class="btn btn-primary">提交修改</button>
 						</div>
 					</div>
 				</form>

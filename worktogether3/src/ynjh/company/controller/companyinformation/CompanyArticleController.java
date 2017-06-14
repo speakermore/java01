@@ -82,7 +82,7 @@ public class CompanyArticleController {
 		article.setArticleStatus(1);
 		companyArticleService.addArticle(article);
 		
-		ModelAndView mView=new ModelAndView("redirect:../../../company/artanddis/");
+		ModelAndView mView=new ModelAndView("company/artanddis/add_companyarticle");
 		return mView;
 	}
 	

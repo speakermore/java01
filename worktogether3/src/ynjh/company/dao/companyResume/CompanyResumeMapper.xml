@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.company.dao.companyResume.CompanyResumeMapper">
 <select id="findAllResume" resultType="CompanyResume" parameterType="Integer">
-	select * from companyResume c,resume r where c.companyId=#{companyId} and c.resumeId=r.id
+	select * from companyResume c,resume r where c.companyRecruitId=#{companyRecruitId} and c.resumeId=r.id
 </select>
 <select id="findById" resultType="CompanyResume" parameterType="Integer">
 	select * from companyResume c,resume r where r.id=#{id}
@@ -24,4 +24,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findProject" parameterType="Integer" resultType="Project">
 	select * from project where resumeId=#{resumeId} and not resumeType=4
 </select>
+
 </mapper>

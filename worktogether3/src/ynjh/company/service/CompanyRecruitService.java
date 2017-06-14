@@ -3,6 +3,8 @@ package ynjh.company.service;
 
 
 import java.util.List;
+
+import ynjh.company.entity.CompanyJob;
 import ynjh.company.entity.CompanyRecruit;
 
 public interface CompanyRecruitService {
@@ -21,5 +23,11 @@ public interface CompanyRecruitService {
 	//招聘信息状态
 	public int updateCmpRecStatus(Integer id,Integer cmpRecStatus);
 	//简历数
-	public int findCount(Integer companyId);
+	public int findCount(Integer companyRecruitId);
+	//查询招聘信息ID
+	public int findCompanyRecruitId();
+	//恢复效果更改状态为未通过
+	public int recover(Integer id);
+	//查询工作
+	public List<CompanyJob> findJobs();
 }

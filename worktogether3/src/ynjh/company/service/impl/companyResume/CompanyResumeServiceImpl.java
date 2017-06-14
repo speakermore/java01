@@ -19,8 +19,8 @@ public class CompanyResumeServiceImpl implements CompanyResumeService {
 	@Resource
 	private CompanyResumeMapper companyResumeMapper;
 	@Override
-	public List<CompanyResume> findAllResume(Integer companyId) {
-		return companyResumeMapper.findAllResume(companyId);
+	public List<CompanyResume> findAllResume(Integer companyRecruitId){
+		return companyResumeMapper.findAllResume(companyRecruitId);
 	}
 	@Override
 	public CompanyResume findById(Integer id){
@@ -42,5 +42,4 @@ public class CompanyResumeServiceImpl implements CompanyResumeService {
 	public List<Education> findEducation(Integer resumeId){
 		return companyResumeMapper.findEducation(resumeId);
 	}
-
 }

@@ -28,13 +28,13 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>招聘标题</th>
+							<th>招聘岗位</th>
 							<th>招聘薪资</th>
 							<th>学历需求</th>
 							<th>需求人数</th>
 							<th>发布时间</th>
 							<th>状态</th>
-							<th>应聘人数</th>
+							<th>未读应聘人数</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -51,12 +51,28 @@
 								<td><fmt:formatDate value="${cmpr.cmpRecTime }"
 										pattern="yyyy年MM月dd日" /></td>
 								<td>${AUDIT_STATUS[cmpr.cmpRecStatus] }</td>
-								<td><a
-								href="company/cmprs/companyResume/findAllResume">${resumeCount }
-								</a></td>
+								<td>
+								<c:if test="${companyRecruitId==cmpr.id }">
+								<a
+								href="company/cmprs/companyResume/findAllResume?companyRecruitId=${cmpr.id }">${resumeCount }
+								</a>
+								</c:if>
+								<c:if test="${companyRecruitId!=cmpr.id }">
+								<a
+								href="company/cmprs/companyResume/findAllResume?companyRecruitId=${cmpr.id }">0
+								</a>
+								
+								</c:if>
+								</td>
 								<td><a
 									href="company/cmprs/companyRecruit/findById?id=${cmpr.id}&toPage=company/cmprs/companyRecruit_edit">编辑</a>
+									<c:if test="${cmpr.cmpRecStatus!=4 }">
 									<a href="company/cmprs/companyRecruit/hidden?id=${cmpr.id }">隐藏</a>
+									</c:if>
+									<c:if test="${cmpr.cmpRecStatus==4 }">
+									<a href="company/cmprs/companyRecruit/recover?id=${cmpr.id }">恢复</a>
+									</c:if>
+									
 								</td>
 							</tr>
 						</c:forEach>

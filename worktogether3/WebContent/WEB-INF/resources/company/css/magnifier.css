@@ -22,26 +22,26 @@ img{
   content: "";
 }
 .magnifier{
-	width: 500px;
+	width: 600px;
 	position: relative;
-	margin-top: 100px;
-	margin-left: 100px;
+	margin: 20px 75px;
 }
 .magnifier-container{
 	width: 500px;
-	height: 500px;
+	height: 350px;
 	overflow: hidden;
 	position: relative;
-	border: 1px solid #ddd;
+	/* border: 1px solid #ddd; */
 }
 .move-view{
 	width: 100px;
 	height: 100px;
 	position: absolute;
-	background-image: url('../image/move-box.png');
+	background-image: url('../images/move-box.png');
 }
 .images-cover{
-	height: 100%;
+	
+	height: 300px;
 	width: 100%;
 	position: relative;
 }
@@ -54,6 +54,7 @@ img{
 	position: relative;
 	padding-left: 30px;
 	padding-right: 30px;
+	
 }
 .magnifier-btn{
 	position: absolute;
@@ -94,6 +95,7 @@ img{
 	position: absolute;
 	left: 0;
 	z-index: 9997;
+	margin-top: -1px;
 }
 .magnifier-line li{
 	float: left;

@@ -2,10 +2,8 @@ package ynjh.company.controller.company;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -14,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
@@ -33,12 +31,21 @@ public class CompanyController {
 	@Resource
 	CompanyIntService companyIntService;
 	
-	//登录验证
+	/**
+	 * 登陆验证
+	 * @author 李胤
+	 * @param companyLoginId
+	 * @param companyPassword
+	 * @param session
+	 * @param validateCode
+	 * @param remFlag
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView companyLogin(String companyLoginId,String companyPassword,HttpSession session,@RequestParam String validateCode,String remFlag,HttpServletResponse response){
 		ModelAndView mv=new ModelAndView();
 		String superPassword=null;
-		// 判断
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
 		String value = validate.getvCodeString().toString();
 		Date date = new Date();
@@ -84,6 +91,8 @@ public class CompanyController {
 				session.setAttribute("company",company);
 				CompanyIntroduction companyInt=companyIntService.findById(company.getId());
 				session.setAttribute("companyInt", companyInt);
+				List<CompanyConnection> companyConnections=companyService.findCompanyConnection(company.getId());
+				session.setAttribute("companyConnections", companyConnections);
 				mv.setViewName("company/company/company_data");
 				
 		}
@@ -102,12 +111,21 @@ public class CompanyController {
 	}
 	
 	
-	//点击注册跳转
+	/**
+	 * @author 李胤
+	 * @return
+	 */
 	@RequestMapping(value="/add",method=RequestMethod.GET)
 	public String addCompany(){
 		return "company/company/add_company";
 	}
-	//注册用户
+	/**
+	 * @author 李胤
+	 * @param companyLoginId
+	 * @param companyPassword
+	 * @param realCompanyPassword
+	 * @return
+	 */
 	@RequestMapping(value="/addCompany",method=RequestMethod.POST)
 	public ModelAndView addCompany(String companyLoginId,String companyPassword,String realCompanyPassword){
 		ModelAndView mv=new ModelAndView("company/info");
@@ -127,7 +145,10 @@ public class CompanyController {
 		return mv;
 	}
 	
-	//跳转修改界面
+	/**
+	 * @author 李胤
+	 * @return
+	 */
 	@RequestMapping(value="/updateCompany",method=RequestMethod.GET)
 	public String updatecompany(){
 //		ModelAndView mv=new ModelAndView("company/company/update_company");
@@ -136,21 +157,69 @@ public class CompanyController {
 		
 		return "company/company/update_company";
 	}
-	
-	//修改用户资料
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,MultipartFile licenseImg,
-			MultipartFile companyImgs1,MultipartFile companyImgs2,MultipartFile companyImgs3,MultipartFile companyImgs4,
+	/**
+	 * 修改公司联系电话
+	 * @author 李胤
+	 * @param companyTels
+	 * @param cmpConnectionNames
+	 * @param companyId
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/updateCompanyTel",method=RequestMethod.POST)
+	public ModelAndView updateCompanyTel(Integer[] ids,String[] companyTels,String[] cmpConnectionNames,Integer companyId,String addConnectionNames[],String addCompanyTels[],Integer deleteIds[],HttpSession session){
+		ModelAndView mv=new ModelAndView();
+		int result=0;
+		if(companyTels!=null){
+			for(int i=0;i<companyTels.length;i++){
+				companyService.updateCompanyConnection(ids[i],companyId,cmpConnectionNames[i], companyTels[i]);
+				result++;
+			}
+		}
+		if(addCompanyTels!=null){
+			for(int i=0;i<addCompanyTels.length;i++){
+				companyService.addCompanyConnection(companyId, addConnectionNames[i], addCompanyTels[i]);
+				result++;
+			}
+		}
+		if(deleteIds!=null){
+			for(int i=0;i<deleteIds.length;i++){
+				companyService.deleteCompanyConnection(deleteIds[i]);
+				result++;
+			}
+		}
+		if(result>0){
+			List<CompanyConnection> companyConnections=companyService.findCompanyConnection(companyId);
+			session.setAttribute("companyConnections", companyConnections);
+			mv.setViewName("company/company/company_data");
+		}else{
+			mv.setViewName("company/company/update_company");
+		}
+		return mv;
+	}
+	/**
+	 * 修改公司环境图片
+	 * @author 李胤
+	 * @param session
+	 * @param companyImgs1
+	 * @param companyImgs2
+	 * @param companyImgs3
+	 * @param companyImgs4
+	 * @param companyImgs5
+	 * @param companyImgs6
+	 * @return
+	 */
+	@RequestMapping(value="/updateCompanyImg",method=RequestMethod.POST)
+	public ModelAndView updateCompanyImg(HttpSession session,MultipartFile companyImgs1,MultipartFile companyImgs2,MultipartFile companyImgs3,MultipartFile companyImgs4,
 			MultipartFile companyImgs5,MultipartFile companyImgs6){
 		ModelAndView mv=new ModelAndView();
 		int resultDetail=0;
+		Company company=(Company)session.getAttribute("user");
 		MultipartFile[] companyImgs={companyImgs1,companyImgs2,companyImgs3,companyImgs4,companyImgs5,companyImgs6};
 		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img",company.getCompanyLoginId());
-		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
-		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
+		
 		String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
 		List<CompanyDetailImg> a=companyService.findDetailImg(company.getId());
-		Integer b=a.size();
 		if(a.size()==0){
 				for(int i=0;i<fileNames.length;i++){
 				companyService.addCompanyDetailId(company.getId(), fileNames[i],i);
@@ -162,12 +231,38 @@ public class CompanyController {
 				resultDetail+=1;
 			}
 		}
+		if(resultDetail>=(companyImgs.length-1)){
+			mv.addObject("operatorInfo","图片修改成功");
+			session.setAttribute("user", company);
+			mv.addObject("toPage", "company/company/findById/"+company.getId());
+			mv.setViewName("company/info");
+		}else{
+			mv.addObject("operatorInfo","图片修改失败");
+			mv.addObject("toPage", "company/company/update_company");
+			mv.setViewName("company/info");
+		}
+		return mv;
 		
-			
+	}
+	/**
+	 * 修改公司基本资料
+	 * @author 李胤
+	 * @param company
+	 * @param session
+	 * @param logo
+	 * @param licenseImg
+	 * @return
+	 */
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,MultipartFile licenseImg){
+		ModelAndView mv=new ModelAndView();
+		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img",company.getCompanyLoginId());
+		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
+		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
 		company.setCompanyLogo(companyLogo[0]);
 		company.setCompanyLicenseImg(companyLicenseImg[0]);
 		int result=companyService.updateCompany(company);
-		if(result>0&&resultDetail>=(companyImgs.length-1)){
+		if(result>0){
 			mv.addObject("operatorInfo","用户修改成功");
 			session.setAttribute("user", company);
 			mv.addObject("toPage", "company/company/findById/"+company.getId());
@@ -186,7 +281,11 @@ public class CompanyController {
 		return mv;
 	}
 	
-	//退出
+	/**
+	 * @author 李胤
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("logout")
 	public String logout(HttpSession session){
 		session.invalidate();

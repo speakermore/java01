@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.service.CompanyResumeService;
 import ynjh.personal.entity.Education;
@@ -25,9 +26,8 @@ public class CompanyResumeController {
 		return "company/cmprs/companyResume";
 	}
 	@RequestMapping(value="/companyResume/findAllResume")
-	public ModelAndView findAllResume(Integer companyId,HttpSession session){
-		companyId=((Company)session.getAttribute("user")).getId();
-		List<CompanyResume> companyResumes=companyResumeService.findAllResume(companyId);
+	public ModelAndView findAllResume(Integer companyRecruitId,HttpSession session){
+		List<CompanyResume> companyResumes=companyResumeService.findAllResume(companyRecruitId);
 		ModelAndView mv=new ModelAndView("company/cmprs/companyResume_index");
 		session.setAttribute("companyResumes", companyResumes);
 		return mv;
@@ -36,28 +36,28 @@ public class CompanyResumeController {
 	public ModelAndView findById(Integer id,String toPage,HttpSession session){
 		int result=companyResumeService.updateCmpResumeStatus(id, 4);
 		CompanyResume companyResume=companyResumeService.findById(id);
-		ModelAndView mv=new ModelAndView("company/cmprs/companyResumeInfomation");
+		List<Education> edus = companyResumeService.findEducation(companyResume.getResumeId());
+		session.setAttribute("edus", edus);
+		List<Project> projs=companyResumeService.findProject(companyResume.getResumeId());
+		session.setAttribute("projs", projs);
+		List<Work> works=companyResumeService.findWork(companyResume.getResumeId());
+		session.setAttribute("works", works);
+		ModelAndView mv=new ModelAndView("company/cmprs/companyResumesdetail");
 		session.setAttribute("cmprs", companyResume);
 		mv.setViewName(toPage);
 		return mv;
 	}
 /*	@RequestMapping(value="/companyResume/findEducation")
 	public String findEducation(Integer resumeId,HttpSession session){
-		List<Education> edus = companyResumeService.findEducation(resumeId);
-		session.setAttribute("edus", edus);
-		return "company/cmprs/companyResumeInfomation";
-	}
-	@RequestMapping(value="/companyResume/findProject")
+				return "company/cmprs/companyResumesdetail";
+	}*/
+/*	@RequestMapping(value="/companyResume/findProject")
 	public String findProject(Integer resumeId,HttpSession session){
-		List<Project> projs=companyResumeService.findProject(resumeId);
-		session.setAttribute("projs", projs);
-		return "company/cmprs/companyResumeInfomation";
+		return "company/cmprs/companyResumesdetail";
 	}
 	@RequestMapping(value="/companyResume/findWork")
 	public String findWork(Integer resumeId,HttpSession session){
-		List<Work> works=companyResumeService.findWork(resumeId);
-		session.setAttribute("works", works);
-		return "company/cmprs/companyResumeInfomation";
-	}
-*/
+		return "company/cmprs/companyResumesdetail";
+	}*/
+
 }

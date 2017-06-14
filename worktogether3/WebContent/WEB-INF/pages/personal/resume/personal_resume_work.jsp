@@ -28,7 +28,7 @@
 			<div class="col-md-offset-10 column">
 				<a id="modal-work" href="#modal-container-work${work.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
-					href="personal/resume/deleteResumeWork?id=${work.id}"><span
+					href="javascript:ajaxDeleteWork('personal/user/personal_index_myResume',${work.id})"><span
 					class="glyphicon glyphicon-trash"></span></a>
 
 
@@ -74,7 +74,7 @@
 										<label class="col-md-3 control-label">工作时间：</label>
 										<div class="col-md-4 column">
 											<input name="workBeginTime" size="30" type="text"
-												id="datetimeStart" readonly
+												id="datetimeStart1" readonly
 												value="<fmt:formatDate
 						value="${work.workBeginTime}" pattern="yyyy-MM-dd" />"
 												class="form_datetime form-control" placeholder="请选择日期">
@@ -83,7 +83,7 @@
 											<input name="workEndTime" size="30" type="text"
 												value="<fmt:formatDate
 						value="${work.workEndTime}" pattern="yyyy-MM-dd" />"
-												id="datetimeEnd" readonly class="form_datetime form-control"
+												id="datetimeEnd1" readonly class="form_datetime form-control"
 												placeholder="请选择日期">
 										</div>
 										<%-- <fmt:formatDate value="${pro.projectBeginTime }"
@@ -117,7 +117,6 @@
 </div>
 <script type="text/javascript">
 	var updateWorkFormAjax = function(page, id) {
-		//$("#modal-container-work"+id).modal('hide');
 		var updateWorkForm = new FormData(document
 				.getElementById("updateWorkForm"+id));
 		$.ajax({
@@ -128,8 +127,6 @@
 			processData : false,
 			contentType : false,
 			success : function(data) {
-				/* $("#modal-container-project").modal('hide');
-				$("#modal-container-project").remove(); */
 				alert("修改成功！");
 				$("#workFresh").html(data);
 			},

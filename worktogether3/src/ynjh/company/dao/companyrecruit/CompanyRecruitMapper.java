@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 
+import ynjh.company.entity.CompanyJob;
 import ynjh.company.entity.CompanyRecruit;
 
 
@@ -17,11 +18,15 @@ public interface CompanyRecruitMapper {
 	//根据id修改招聘信息状态
 	public Integer updateCmpRecStatus(@Param("cmpRecStatus")Integer cmpRecStatus,@Param("id")Integer id);
 	//根据id修改招聘信息
-	public Integer updateCmpRecruit(CompanyRecruit companyRecruit );
+	public Integer updateCmpRecruit(CompanyRecruit companyRecruit);
 	//根据id查询到招聘信息
 	public CompanyRecruit findById(Integer id);
 	//得到最大页码数
 	public int getMaxRecordCount();
 	//得到未阅读简历个数
-	public int getResumeCount(Integer companyId);
+	public int getResumeCount(Integer companyRecruitId);
+	//查询招聘信息id
+	public int findCompanyRecruitId();
+	//查询工作表
+	public List<CompanyJob> findJobs();
 }

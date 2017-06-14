@@ -27,7 +27,7 @@
 				<a id="modal-education${edu.id}"
 					href="#modal-container-education${edu.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
-					href="personal/resume/deleteResumeEducation?id=${edu.id}"><span
+					href="javascript:ajaxDeleteEducation('personal/user/personal_index_myResume',${edu.id})"><span
 					class="glyphicon glyphicon-trash"></span></a>
 				<!-- 模态框 -->
 				<div class="modal fade" id="modal-container-education${edu.id}"

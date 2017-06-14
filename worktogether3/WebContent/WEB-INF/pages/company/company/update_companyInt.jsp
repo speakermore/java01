@@ -53,7 +53,7 @@
 						<div class="col-sm-3">公司福利:</div>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								name="cmpIntComforts" value=${companyInt.cmpIntComforts } />
+								name="cmpIntComforts" value=${companyInt.cmpIntComforts }>
 						</div>
 					</div>
 
@@ -62,7 +62,7 @@
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
 								name="cmpIntRest"
-								value=${companyInt.cmpIntRest } />
+								value=${companyInt.cmpIntRest }>
 						</div>
 					</div>
 
@@ -71,7 +71,7 @@
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
 								name="cmpIntInsurance"
-								value=${companyInt.cmpIntInsurance } />
+								value=${companyInt.cmpIntInsurance }>
 						</div>
 					</div>
 					
@@ -80,13 +80,13 @@
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
 								name="cmpIntWage"
-								value=${companyInt.cmpIntWage } />
+								value=${companyInt.cmpIntWage }>
 						</div>
 					</div>
 					
 					<div class="form-group">
 					 	<div class="col-sm-3">公司地址：</div>
-					 <div class="col-sm-9"><input type="text" class="form-control" value=${user.companyAddress } name="companyAddress"/>
+					 <div class="col-sm-9"><input type="text" class="form-control" name="companyAddress" value=${user.companyAddress } >
 					</div>
 					</div>
 					
@@ -95,7 +95,7 @@
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
 								name="cmpIntroduction"
-								value=${companyInt.cmpIntroduction } />
+								value=${companyInt.cmpIntroduction }>
 						</div>
 					</div>
 					

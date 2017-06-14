@@ -259,8 +259,9 @@ a:focus {
 	<div class="panel-group" id="panel-work-main">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="glyphicon glyphicon-list-alt"></span>工作经验 <a
-					class="panel-title col-md-offset-8	" data-toggle="collapse"
+				<span class="glyphicon glyphicon-list-alt"></span>工作经验
+				<!-- 新增工作 -->
+				<a class="panel-title col-md-offset-8" data-toggle="collapse"
 					data-parent="#panel-work-main" href="#panel-element-work"
 					id="hiddenWork"><span class="glyphicon glyphicon-plus"></span>新增工作</a>
 			</div>
@@ -268,9 +269,9 @@ a:focus {
 			<div id="panel-element-work" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-md-12">
-						<form action="personal/resume/CreateWork" class="form-horizontal"
-							method="post" id="workForm">
+						<form  class="form-horizontal" id="workForm">
 							<input type="hidden" name="resumeId" value="${resume.id }" /><br />
+							<input type="hidden" name="createWorkpage" value="personal/user/personal_index_myResume" /><br />
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="workFirmName" class="col-md-3 control-label">企业名称：</label>
@@ -307,7 +308,7 @@ a:focus {
 								</div>
 							</div>
 							<div class="col-md-offset-5">
-								<button type="submit" class="btn btn-success">保存</button>
+								<button  onclick="ajaxCreateWork()" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-work-main" href="#panel-element-work-show"
 									id="showWork">关闭</a>
@@ -335,8 +336,9 @@ a:focus {
 	<div class="panel-group" id="panel-project-main">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="glyphicon glyphicon-signal"></span>项目经验 <a
-					class="panel-title col-md-offset-8" data-toggle="collapse"
+				<span class="glyphicon glyphicon-signal"></span>项目经验
+				<!-- 添加项目 -->
+				<a class="panel-title col-md-offset-8" data-toggle="collapse"
 					data-parent="#panel-project-main" href="#panel-element-project"
 					id="hiddenProject"><span class="glyphicon glyphicon-plus"></span>新增项目</a>
 			</div>
@@ -344,9 +346,9 @@ a:focus {
 			<div id="panel-element-project" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-md-12">
-						<form action="personal/resume/CreateProject"
-							class="form-horizontal" method="post" id="projectForm">
+						<form class="form-horizontal"  id="projectForm">
 							<input type="hidden" name="resumeId" value="${resume.id }" /><br />
+							<input type="hidden" name="createProjectpage" value="personal/user/personal_index_myResume" /><br />
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="projectName" class="col-md-3 control-label">项目名称：</label>
@@ -383,7 +385,7 @@ a:focus {
 								</div>
 							</div>
 							<div class="col-md-offset-5">
-								<button type="submit" class="btn btn-success">保存</button>
+								<button onclick="ajaxCreateProject()" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-project-main"
 									href="#panel-element-project-show" id="showProject">关闭</a>
@@ -412,8 +414,9 @@ a:focus {
 	<div class="panel-group" id="panel-education-main">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="glyphicon glyphicon-book"></span>教育经历 <a
-					class="panel-title col-md-offset-8" data-toggle="collapse"
+				<span class="glyphicon glyphicon-book"></span>教育经历 
+				<!-- 添加教育 -->
+				<a class="panel-title col-md-offset-8" data-toggle="collapse"
 					data-parent="#panel-education-main" href="#panel-element-education"
 					id="hiddenEducation"><span class="glyphicon glyphicon-plus"></span>新增教育</a>
 			</div>
@@ -421,9 +424,9 @@ a:focus {
 			<div id="panel-element-education" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-md-12">
-						<form class="form-horizontal" method="post"
-							action="personal/resume/CreateEducation" id="educationForm">
+						<form class="form-horizontal" id="educationForm">
 							<input type="hidden" name="resumeId" value="${resume.id }" /><br />
+							<input type="hidden" name="createEducationpage" value="personal/user/personal_index_myResume" /><br />
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="educationSchool" class="col-md-3 control-label">学校名称：</label>
@@ -455,7 +458,7 @@ a:focus {
 								</div>
 							</div>
 							<div class="col-md-offset-5">
-								<button type="submit" class="btn btn-success">保存</button>
+								<button onclick="ajaxCreateEducation()" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-education-main"
 									href="#panel-element-education-show" id="showEducation">关闭</a>
@@ -761,6 +764,7 @@ a:focus {
 			}
 		});
 	});
+	/* ajxa修改 */
 	var ajaxPageById = function(page, id) {
 		$.ajax({
 			url : "personal/resume/updateResumeById",
@@ -772,4 +776,86 @@ a:focus {
 			}
 		});
 	}
+	
+	/* ajxa添加 */
+	var ajaxCreateWork=function(){
+		var workForm=new FormData(document.getElementById("workForm"));
+		$.ajax({
+			url:"personal/resume/CreateWork",
+			type:"POST",
+			data:workForm,
+			dataType:"html",
+			processData : false,
+			contentType : false,
+			success:function(data){
+				alert("添加成功！");
+				$("#my-content").html(data);
+			}
+		});
+	}
+	var ajaxCreateProject=function(){
+		var projectForm=new FormData(document.getElementById("projectForm"));
+		$.ajax({
+			url:"personal/resume/CreateProject",
+			type:"POST",
+			data:projectForm,
+			dataType:"html",
+			processData : false,
+			contentType : false,
+			success:function(data){
+				alert("添加成功！");
+				$("#my-content").html(data);
+			}
+		});
+	}
+	var ajaxCreateEducation=function(){
+		var educationForm=new FormData(document.getElementById("educationForm"));
+		$.ajax({
+			url:"personal/resume/CreateEducation",
+			type:"POST",
+			data:educationForm,
+			dataType:"html",
+			processData : false,
+			contentType : false,
+			success:function(data){
+				alert("添加成功！");
+				$("#my-content").html(data);
+			}
+		});
+	}
+	/* ajax删除 */
+	var ajaxDeleteWork=function(page,id){
+		$.ajax({
+			url:"personal/resume/deleteResumeWork?id="+id+"&page="+page,
+			type:"Get",
+			dataType:"",
+			success:function(data){
+				alert("删除成功！");
+				$("#my-content").html(data);
+			}
+		});
+	}
+	var ajaxDeleteEducation=function(page,id){
+		$.ajax({
+			url:"personal/resume/deleteResumeEducation?id="+id+"&page="+page,
+			type:"Get",
+			dataType:"",
+			success:function(data){
+				alert("删除成功！");
+				$("#my-content").html(data);
+			}
+		});
+	}
+	var ajaxDeleteProject=function(page,id){
+		$.ajax({
+			url:"personal/resume/deleteResumeProject?id="+id+"&page="+page,
+			type:"Get",
+			dataType:"",
+			success:function(data){
+				alert("删除成功！");
+				$("#my-content").html(data);
+			}
+		});
+	}
+	
 </script>

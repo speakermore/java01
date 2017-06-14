@@ -29,7 +29,7 @@
 				<a id="modal-project${pro.id}"
 					href="#modal-container-project${pro.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
-					href="personal/resume/deleteResumeProject?id=${pro.id}"><span
+					href="javascript:ajaxDeleteProject('personal/user/personal_index_myResume',${pro.id})"><span
 					class="glyphicon glyphicon-trash"></span></a>
 				<!-- 模态框 -->
 				<div class="modal fade" id="modal-container-project${pro.id}"
@@ -74,7 +74,7 @@
 										<label class="col-md-3 control-label">项目时间：</label>
 										<div class="col-md-4 column">
 											<input name="projectBeginTime" size="30" type="text"
-												id="datetimeStart" readonly
+												id="datetimeStart2" readonly
 												value="<fmt:formatDate
 						value="${pro.projectBeginTime}" pattern="yyyy-MM-dd" />"
 												class="form_datetime form-control" placeholder="请选择日期">
@@ -83,14 +83,9 @@
 											<input name="projectEndTime" size="30" type="text"
 												value="<fmt:formatDate
 						value="${pro.projectEndTime}" pattern="yyyy-MM-dd" />"
-												id="datetimeEnd" readonly class="form_datetime form-control"
+												id="datetimeEnd2" readonly class="form_datetime form-control"
 												placeholder="请选择日期">
 										</div>
-										<%-- <fmt:formatDate value="${pro.projectBeginTime }"
-														pattern="yyyy-MM-dd" />
-													到
-													<fmt:formatDate value="${pro.projectEndTime }"
-														pattern="yyyy-MM-dd" /> --%>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">关闭</button>
 										<button id="closeUpdateProject${pro.id}"
@@ -119,11 +114,6 @@
 	</c:if>
 </div>
 <script type="text/javascript">
-/* $('#myModal').on('hidden.bs.modal', function() {
-			
-			}); */
-			
-	
 	var updateProjectFormAjax = function(id) {
 		/* $("#modal-container-project"+id).modal('toggle'); */
 		var updateProjectForm = new FormData(document

@@ -10,7 +10,7 @@ import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Work;
 
 public interface CompanyResumeMapper {
-	public List<CompanyResume> findAllResume(@Param("companyId")Integer companyId);
+	public List<CompanyResume> findAllResume(@Param("companyRecruitId")Integer companyRecruitId);
 	public CompanyResume findById(Integer id);
 	public Integer updateCmpResumeStatus(@Param("id")Integer id,@Param("cmprAction")Integer cmprAction);
 	public List<Project> findProject(Integer resumeId);
