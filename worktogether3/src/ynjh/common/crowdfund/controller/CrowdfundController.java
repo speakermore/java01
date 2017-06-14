@@ -3,14 +3,11 @@ package ynjh.common.crowdfund.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -486,7 +483,6 @@ public class CrowdfundController {
 		Integer userId=null;
 		User user=null;
 		Company company=null;
-		List<Crowdfund> listCf = null;
 		List<CrowdfundUser> cfUserList = null;
 		try{
 			user = (User)session.getAttribute("user");
