@@ -1062,6 +1062,16 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return list;
 	}
+
+	/**
+	 * 新增管理员日志
+	 * @author 朱吉
+	 * @param adminLog 管理员日志实体类
+	 */
+	@Override
+	public void addAdminLog(AdminLog adminLog) {
+		adminMapper.addAdminLog(adminLog);
+	}
 	
 	
 
