@@ -192,7 +192,8 @@ public interface AdminService {
 	public Integer personalMag(Integer[] ids, Integer userStatus);
 	//查找带有作者的系统消息
 	public List<SysMessageWithAuthor> findSysMsgWithAuth();
+	//新增管理员日志
+	public void addAdminLog(AdminLog adminLog);
 
-    
 }	
 

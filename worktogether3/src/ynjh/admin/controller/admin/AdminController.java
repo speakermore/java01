@@ -242,7 +242,7 @@ public class AdminController {
 	 */
 			@RequestMapping(value="/adminLogAllList",method=RequestMethod.GET) // 
 			public ModelAndView findAdminLogAll() {					
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
 				return mv;
 			}
 			
@@ -255,20 +255,20 @@ public class AdminController {
 			@RequestMapping(value="/adminLogAllList",method=RequestMethod.POST) 
 			public ModelAndView findAdminLogAll(Integer page) {
 				List<AdminLog> adminLogs = adminService.findAdminLogAll(page);
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
 				mv.addObject("adminLogs", adminLogs);
 				return mv;
 			}
 			
 			@RequestMapping(value="/adminLog",method=RequestMethod.GET) // 访问管理员日志
 			public ModelAndView findAdminLogByTimeAndDoAndId() {
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
 				return mv;
 			}
 			@RequestMapping(value="/adminLog",method=RequestMethod.POST) // 访问管理员日志
 			public ModelAndView findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime, String endTime,Integer page) {
 				List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginTime, endTime,page);
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
+				ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
 				mv.addObject("adminLogs", adminLogs);
 				return mv;
 			}
@@ -291,7 +291,7 @@ public class AdminController {
 	public ModelAndView findBestArticle() {
 		// 企业热门文章 List<Article> companyBestArticle = adminService.findCompanyBestArticle();
 		List<AuditArticle> personBestArticle = adminService.findPersonBestArticle();// 个人热门文章
-		ModelAndView mv = new ModelAndView("admin/findBestArticle");
+		ModelAndView mv = new ModelAndView("admin/managment/findBestArticle");
 		// 企业热门文章 mv.addObject("companyBestArticle", companyBestArticle);
 		mv.addObject("personBestArticle", personBestArticle);
 		return mv;
@@ -466,7 +466,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("resume", resumes);
 		mv.addObject("page", page);
-		mv.setViewName("admin/auditResume");
+		mv.setViewName("admin/audit/auditResume");
 		return mv;
 	}
 
@@ -487,24 +487,24 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("article", articles);
 		mv.addObject("page", page);
-		mv.setViewName("admin/auditArticle");
+		mv.setViewName("admin/audit/auditArticle");
 		return mv;
 	}
 
 	/**
 	 * 查询审核企业资质
-	 * 
+	 * 暂时停止该路径的使用
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditCompany")
+	/*@RequestMapping("/findAuditCompany")
 	public ModelAndView findAuditCompany(Integer page) {
 		List<Company> company = adminService.findAuditCompany(page);
 		ModelAndView mv = new ModelAndView("admin/auditCompany");
 		mv.addObject("company", company);
 		mv.setViewName("admin/auditCompany");
 		return mv;
-	}
+	}*/
 
 	/**
 	 * 查询审核个人企业互评论
@@ -583,9 +583,9 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		if (result >0) {
 			mv.addObject("result", result);
-			mv.setViewName("admin/auditResume");
+			mv.setViewName("admin/audit/auditResume");
 		} else {
-			mv.setViewName("admin/auditResume");
+			mv.setViewName("admin/audit/auditResume");
 		}
 		return mv;
 	}
@@ -606,7 +606,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			if(articleUsersType==2){
-				mv.setViewName("admin/auditArticle");
+				mv.setViewName("admin/audit/auditArticle");
 			}else if(articleUsersType==1){
 				mv.setViewName("admin/audit/auditComArticle");
 			}else{
@@ -614,7 +614,7 @@ public class AdminController {
 			}
 		} else {
 			mv.addObject("info", "审核失败,未能找到审核文章");
-			mv.setViewName("admin/auditArticle");
+			mv.setViewName("admin/audit/auditArticle");
 		}
 		return mv;
 	}
@@ -1143,7 +1143,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/bestCompany") // 查询最佳企业
 	public ModelAndView findBestCompany() {
-		ModelAndView mv = new ModelAndView("admin/bestCompany");
+		ModelAndView mv = new ModelAndView("admin/managment/bestCompany");
 		List<Company> bestCompanyList = (List<Company>) adminService.findBestCompany();
 		mv.addObject("bestCompanyList", bestCompanyList);
 		return mv;
@@ -1173,10 +1173,10 @@ public class AdminController {
 		ModelAndView mv=new ModelAndView();
 		if (result>0) {
 			mv.addObject("result", result);
-			mv.setViewName("admin/adminAddMessage");
+			mv.setViewName("admin/managment/adminAddMessage");
 		}else{
 			mv.addObject("result",result);
-			mv.setViewName("admin/adminAddMessage");
+			mv.setViewName("admin/managment/adminAddMessage");
 		}
 		return mv;
 	}
@@ -1193,7 +1193,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/addMessage")
 	public String addMessage(){
-		return "admin/adminAddMessage";
+		return "admin/managment/adminAddMessage";
 	}
 	/**
 	 * 审核简历查找工作经历

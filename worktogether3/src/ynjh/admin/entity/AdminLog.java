@@ -10,15 +10,15 @@ import java.util.Date;
  */
 public class AdminLog implements Serializable{
 	private Integer id;
-	private Integer adminLoginId;//管理员登录名
+	private String adminLoginId;//管理员登录名
 	private Integer adminDo;//操作类型：1:审核2:禁用3：密码重置4信息维护，5登录退出
 	private Integer adminTargetType;//对象类型：1：个人用户2：企业用户3：招聘信息4：文章5：新闻6：企业offer 7:评论8：点赞9：简历
 	private Integer adminAid;//操作对象ID
 	private Timestamp adminTime;//操作时间
-	public int getAdminLoginId() {
+	public String getAdminLoginId() {
 		return adminLoginId;
 	}
-	public void setAdminLoginId(int adminLoginId) {
+	public void setAdminLoginId(String adminLoginId) {
 		this.adminLoginId = adminLoginId;
 	}
 	public int getAdminDo() {
