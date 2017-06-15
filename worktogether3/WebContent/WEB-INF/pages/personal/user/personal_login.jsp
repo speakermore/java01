@@ -14,6 +14,7 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/login.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" />
 <!--<link href="css/main.css" rel="stylesheet" />-->
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

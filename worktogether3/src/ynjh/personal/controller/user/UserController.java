@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
+
 import ynjh.common.util.GetAge;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
@@ -139,7 +142,9 @@ public class UserController {
 	 * 		String
 	 */
 	@RequestMapping("/login")
-	public String login() {
+	public String login(HttpSession session) {
+		//牟勇：为防止错误的显示个人信息，在跳转登录页面时清空session
+		session.invalidate();
 		return "personal/user/personal_login";
 	}
 

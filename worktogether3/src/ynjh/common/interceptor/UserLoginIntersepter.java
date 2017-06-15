@@ -1,5 +1,8 @@
 package ynjh.common.interceptor;
 
+import java.sql.Connection;
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,7 +15,7 @@ import ynjh.personal.entity.User;
 
 /**
  * 检查用户是否登录的拦截器
- * @author mouyong
+ * @author 牟勇
  *
  */
 public class UserLoginIntersepter extends HandlerInterceptorAdapter {
@@ -20,10 +23,15 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String[] ignorePathes={"thirdpart","fonts","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+		//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
+		String[] ignorePathes={"thirdpart","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
 		HttpSession session=request.getSession();
 		//获得请求路径
 		StringBuffer path=request.getRequestURL();
+		//如果最后结尾是一个斜杠，则忽略该路径(理论上，结尾是斜杠的情况只能是访问首页的链接)
+		if(path.lastIndexOf("/")==path.length()-1){
+			return true;
+		}
 		//忽略登录路径
 		for(String ignorePath:ignorePathes){
 			if(path.indexOf(ignorePath)!=-1){

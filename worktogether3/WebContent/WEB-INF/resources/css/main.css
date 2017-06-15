@@ -104,3 +104,8 @@ ul.work-together-nav>li>a:hover{
 	padding: 30px;
 }
 
+/* 牟勇：解决各大浏览器可以拖动textarea的问题 */
+textarea{
+	resize: none;
+}
+

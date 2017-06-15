@@ -62,8 +62,7 @@
 					<div class="caption" id="userImgHiddenText">
 						<p>
 							<a id="modal-headImg" href="#modal-container-headImg"
-								role="button" class="btn" data-toggle="modal">修改 </a><a href="#"
-								class="btn" role="button">删除</a>
+								role="button" class="btn" data-toggle="modal">修改 </a>
 						</p>
 					</div>
 

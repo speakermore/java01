@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 /**
  * 
- * @author 何爽
+ * @author 刘志浩
  *
  */
 public class GetAge {

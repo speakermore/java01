@@ -1,20 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<style>
+				h5 a{
+					color:#fff;
+				}
+			</style>
 <nav class="navbar navbar-default navbar-fixed-top"
 	role="navigation">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-8 work-together-background">
-				<h6 style="color:#888">相.<em><small>取人才</small></em>，职.<em><small>载未来</small></em>，网.<em><small>聚英才</small></em></h6>
-			</div>
-			<div class="col-sm-4 work-together-background">
-			<style>
-				h6 a{
-					color:#fff;
-				}
-			</style>
-			<h6 class="col-sm-offset-3">
+			<div class="col-xs-12 work-together-background">
+				<h5 style="color:#fff;float:left;">相职网&nbsp;&nbsp;<em><small>专业提供软件人力资源解决方案</small></em></h5>
+			<h5 class="col-xs-offset-9">
 		<!-- 判断是否登录开始 -->
 		<c:if test="${user==null }">
 			<a href="personal/user/login"
@@ -32,7 +30,7 @@
 			<a href="personal/user/logout"
 				class="hidden-xs">退出</a>
 		</c:if>
-		</h6>
+		</h5>
 		<!-- 判断是否登录结束 -->
 		</div>
 		</div>

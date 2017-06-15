@@ -75,24 +75,7 @@
 				todayHighlight : true,
 				minView : "month"
 			});
-
-			/* 	$("#time").blur(function() {
-					alert(typeof ("#time"))
-				}); */
-			/* $('input')
-					.each(
-							function() {
-								var self = $(this), label = self.next(), label_text = label
-										.text();
-								label.remove();
-								self
-										.iCheck({
-											checkboxClass : 'icheckbox_line-orange',
-											radioClass : 'iradio_line-orange',
-											insert : '<div class="icheck_line-icon"></div>'
-													+ label_text
-										});
-							}); */
+			//创建简历的验证
 			$("#resumeForm").bootstrapValidator({
 				message : '这个值不能通过验证！！',
 				feedbackIcons : {

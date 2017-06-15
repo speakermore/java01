@@ -79,11 +79,6 @@ public class CommonController {
 	@RequestMapping("/initIndex")
 	public ModelAndView initIndex(Integer toPage, Integer userId, HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		// 简历未删除
-		List<Resume> resumes = rService.findResumeUserId(toPage, userId);
-		int maxResumePage = rService.getMaxResumeById(userId);
-		session.setAttribute("resumes", resumes);
-		session.setAttribute("maxResumePage", maxResumePage);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		// 我投递过的简历
@@ -103,11 +98,6 @@ public class CommonController {
 		} else {
 			session.setAttribute("personal_offers_list", null);
 		}
-		/*
-		 * List<Offer> offers = rService.findMyReceiveOffer(userId); if
-		 * (offers.size() > 0) { session.setAttribute("offers", offers); } else
-		 * { session.setAttribute("offers", null); }
-		 */
 
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
@@ -140,6 +130,8 @@ public class CommonController {
 			} else {
 				session.setAttribute("projs", null);
 			}
+		}else{
+			session.setAttribute("resume", null);
 		}
 		/*
 		 * 最新动态

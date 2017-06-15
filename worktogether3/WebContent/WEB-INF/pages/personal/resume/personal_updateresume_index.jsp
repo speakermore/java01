@@ -10,17 +10,9 @@
 			<img src="img/head.gif" class="center-block" width="100" height="120" />
 		</div>
 		<div class="col-md-5 column">
-			<%-- <div class="form-group">
-				<label for="resumeTitle" class="col-md-4 control-label">简历标题</label>
-				<div class="col-md-8">
-					<input value="${resume_update.resumeTitle }" class="form-control"
-						name="resumeTitle" id="resumeTitle" />
-				</div>
-			</div> --%>
 			<div class="form-group">
 				<label for="resumeName" class="col-md-4 control-label">姓名</label>
 				<div class="col-md-8">
-					<!-- value="${resume_update.resumeName}" -->
 					<input class="form-control" name="resumeName" id="resumeName" value="${resume_update.resumeName}" />
 				</div>
 			</div>
@@ -53,30 +45,19 @@
 			<div class="form-group">
 				<label for="resumeGender" class="col-md-4 control-label">性别</label>
 				<div class="col-md-8">
-					<c:if test="${resume_update.resumeGender==1 }">
+					
 						<div class="col-md-6 radio">
 							<input type="radio" name="resumeGender" id="resumeGender"
-								value="1" checked="checked"> <label>男</label>
+								value="1" ${resume_update.resumeGender==1?"checked=\"checked\"":"" }> <label>男</label>
 						</div>
 						<div class="col-md-6 radio">
-							<input type="radio" name="resumeGender" id="resumeGender"
-								value="0"> <label>女</label>
+							<input type="radio" name="resumeGender" id="resumeGender" 
+								value="0" ${resume_update.resumeGender==0?"checked=\"checked\"":"" }> <label>女</label>
 						</div>
-					</c:if>
-					<c:if test="${resume_update.resumeGender==0 }">
-						<div class="col-md-6 radio">
-							<input type="radio" name="resumeGender" id="resumeGender"
-								value="1"> <label>男</label>
-						</div>
-						<div class="col-md-6 radio">
-							<input type="radio" name="resumeGender" id="resumeGender"
-								value="0" checked="checked"> <label>女</label>
-						</div>
-					</c:if>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeWorks" class="col-md-4 control-label">开始工作</label>
+				<label for="resumeWorks" class="col-md-4 control-label">开始工作时间</label>
 				<div class="col-md-8">
 					<input
 						value="<fmt:formatDate
@@ -94,7 +75,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="resumeJor" class="col-md-4 control-label">求职意向</label>
+				<label for="resumeJor" class="col-md-4 control-label">目前岗位</label>
 				<div class="col-md-8">
 					<input value="${resume_update.resumeJor }" class="form-control"
 						name="resumeJor" id="resumeJor" />

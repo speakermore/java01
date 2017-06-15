@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!--左侧状态栏位-->
 <article
-	class="col-md-12  alert-danger work-together-shadow work-together-shallow">
+	class="col-md-12  work-together-shadow work-together-shallow">
 	<!--发表状态小节-->
 	<section class="panel">
 		<!-- 简历基本信息开始 -->
@@ -73,7 +73,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeJor" class="col-md-4 control-label">求职意向</label>
+						<label for="resumeJor" class="col-md-4 control-label">目前职位</label>
 						<div class="col-md-8">
 							<input class="form-control" id="resumeJor" name="resumeJor"
 								type="text" />
@@ -156,14 +156,14 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeSelfEvaluation"
-										class="col-md-4 control-label">自我评价</label>
+									<label for="resumeHeight" class="col-md-4 control-label">身高(厘米)</label>
 									<div class="col-md-8">
-										<textarea class="form-control" id="resumeSelfEvaluation"
-											name="resumeSelfEvaluation"></textarea>
+										<input class="form-control" name="resumeHeight"
+											id="resumeHeight" />
 									</div>
 								</div>
 							</div>
+							<!-- 展开更多右侧 -->
 							<div class="col-md-5 column">
 								<div class="form-group">
 									<label for="resumeEducation" class="col-md-4 control-label">学历</label>
@@ -238,17 +238,21 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeHeight" class="col-md-4 control-label">身高(厘米)</label>
-									<div class="col-md-8">
-										<input class="form-control" name="resumeHeight"
-											id="resumeHeight" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="resumeWeight" class="col-md-4 control-label">体重(斤)</label>
+									<label for="resumeWeight" class="col-md-4 control-label">体重(公斤)</label>
 									<div class="col-md-8">
 										<input class="form-control" name="resumeWeight"
 											id="resumeWeight" />
+									</div>
+								</div>
+							</div>
+							<!-- 展开更多右侧结束 -->
+							<div class="col-md-11">
+								<div class="form-group">
+									<label for="resumeSelfEvaluation"
+										class="col-md-3 control-label">自我评价</label>
+									<div class="col-md-9">
+										<textarea style="resize: none;" class="form-control" id="resumeSelfEvaluation"
+											name="resumeSelfEvaluation"></textarea>
 									</div>
 								</div>
 							</div>

@@ -17,14 +17,9 @@
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<link rel="stylesheet" href="thirdpart/qqFace/css/reset.css">
-<link href="css/login.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" />
-<link rel="styleheet" href="personal/css/register.css" type="text/css">
-<link rel="stylesheet" type="text/css" href="personal/css/personal_common.css" />
-<link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="thirdpart/dist/css/bootstrapValidator.min.css">
-<link rel="stylesheet" type="text/css" href="thirdpart/fileupload/css/fileinput.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 	<%@include file="WEB-INF/pages/nav.jsp" %>

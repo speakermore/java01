@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadFile {
 
 	/**
+	 * @author 刘志浩
 	 * 上传文件公共类
 	 * @param userPath:图片保存的文件夹路径
 	 * @param files
