@@ -14,6 +14,7 @@ import ynjh.personal.entity.Work;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
+import ynjh.admin.entity.AdminLog;
 import ynjh.admin.entity.AuditArticle;
 import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.AuditOffer;
@@ -462,4 +463,11 @@ public interface AdminMapper {
 	 * @return
 	 */
 	public List<SysMessageWithAuthor> findSysMsgWithAuth();
+	
+	/**
+	 * 新增管理员日志
+	 * @author 朱吉
+	 * @param adminLog 管理员日志实体类
+	 */
+	public void addAdminLog(AdminLog adminLog);
 }

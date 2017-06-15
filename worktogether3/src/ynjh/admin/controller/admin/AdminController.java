@@ -120,7 +120,7 @@ public class AdminController {
 		} else {
 			Admin admin = adminService.findLoginByAdminLoginId(adminLoginId);
 			if (admin != null) {
-				
+
 			} else {
 				mv.setViewName("admin/resetpwd");
 			}
@@ -142,8 +142,7 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value = "/adminlogin", method = RequestMethod.POST)
-	public ModelAndView findLogin(String adminLoginId, String adminPassword, String validateCode,
-			HttpSession session) {
+	public ModelAndView findLogin(String adminLoginId, String adminPassword, String validateCode, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		ValidateCode validate = (ValidateCode) session.getAttribute("codeValidate");
 		String value = null;
@@ -177,7 +176,7 @@ public class AdminController {
 			}
 			Admin admin = adminService.findLogin(adminLoginId, pass);
 			if (admin != null) {
-				if(admin.getAdminStatus()==0){
+				if (admin.getAdminStatus() == 0) {
 					mv.addObject("adminLoginId", adminLoginId);
 					mv.setViewName("admin/login");
 					mv.addObject("operatorInfo", "你已被禁用,请联系超级管理员！！！");
@@ -185,10 +184,10 @@ public class AdminController {
 				}
 				mv.addObject("admin", admin);
 				session.setAttribute("admin", admin);
-				if(admin.getAdminStatus()==2){
+				if (admin.getAdminStatus() == 2) {
 					mv.setViewName("admin/superadmin/findAll");
-				}else{	
-				mv.setViewName("admin/index");
+				} else {
+					mv.setViewName("admin/index");
 				}
 			} else {
 				mv.addObject("adminLoginId", adminLoginId);
@@ -226,52 +225,60 @@ public class AdminController {
 
 	/**
 	 * 查询管理员日志-查询类型选择页面
+	 * 
 	 * @author 张宇
 	 *
 	 * @return
 	 */
 	@RequestMapping("/adminLog")
-	public ModelAndView selectAdminLog(){
-		ModelAndView mv=new ModelAndView("admin/adminLog");
+	public ModelAndView selectAdminLog() {
+		ModelAndView mv = new ModelAndView("admin/adminLog");
 		return mv;
 	}
+
 	/**
 	 * 访问管理员日志
+	 * 
 	 * @author 张宇
 	 * @return
 	 */
-			@RequestMapping(value="/adminLogAllList",method=RequestMethod.GET) // 
-			public ModelAndView findAdminLogAll() {					
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
-				return mv;
-			}
-			
-			/**
-			 * 访问管理员日志
-			 * @author 张宇
-			 * @param page 分页条数
-			 * @return
-			 */
-			@RequestMapping(value="/adminLogAllList",method=RequestMethod.POST) 
-			public ModelAndView findAdminLogAll(Integer page) {
-				List<AdminLog> adminLogs = adminService.findAdminLogAll(page);
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
-				mv.addObject("adminLogs", adminLogs);
-				return mv;
-			}
-			
-			@RequestMapping(value="/adminLog",method=RequestMethod.GET) // 访问管理员日志
-			public ModelAndView findAdminLogByTimeAndDoAndId() {
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
-				return mv;
-			}
-			@RequestMapping(value="/adminLog",method=RequestMethod.POST) // 访问管理员日志
-			public ModelAndView findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime, String endTime,Integer page) {
-				List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginTime, endTime,page);
-				ModelAndView mv = new ModelAndView("admin/adminLogList");
-				mv.addObject("adminLogs", adminLogs);
-				return mv;
-			}
+	@RequestMapping(value = "/adminLogAllList", method = RequestMethod.GET) //
+	public ModelAndView findAdminLogAll() {
+		ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
+		return mv;
+	}
+
+	/**
+	 * 访问管理员日志
+	 * 
+	 * @author 张宇
+	 * @param page
+	 *            分页条数
+	 * @return
+	 */
+	@RequestMapping(value = "/adminLogAllList", method = RequestMethod.POST)
+	public ModelAndView findAdminLogAll(Integer page) {
+		List<AdminLog> adminLogs = adminService.findAdminLogAll(page);
+		ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
+		mv.addObject("adminLogs", adminLogs);
+		return mv;
+	}
+
+	@RequestMapping(value = "/adminLog", method = RequestMethod.GET) // 访问管理员日志
+	public ModelAndView findAdminLogByTimeAndDoAndId() {
+		ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
+		return mv;
+	}
+
+	@RequestMapping(value = "/adminLog", method = RequestMethod.POST) // 访问管理员日志
+	public ModelAndView findAdminLogByTimeAndDoAndId(Integer adminDo, Integer userLoginId, String beginTime,
+			String endTime, Integer page) {
+		List<AdminLog> adminLogs = adminService.findAdminLogByTimeAndDoAndId(adminDo, userLoginId, beginTime, endTime,
+				page);
+		ModelAndView mv = new ModelAndView("admin/managment/adminLogList");
+		mv.addObject("adminLogs", adminLogs);
+		return mv;
+	}
 
 	/**
 	 * 热门文章查询
@@ -289,9 +296,10 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/findBestArticle", method = RequestMethod.GET) // 热门文章查询
 	public ModelAndView findBestArticle() {
-		// 企业热门文章 List<Article> companyBestArticle = adminService.findCompanyBestArticle();
+		// 企业热门文章 List<Article> companyBestArticle =
+		// adminService.findCompanyBestArticle();
 		List<AuditArticle> personBestArticle = adminService.findPersonBestArticle();// 个人热门文章
-		ModelAndView mv = new ModelAndView("admin/findBestArticle");
+		ModelAndView mv = new ModelAndView("admin/managment/findBestArticle");
 		// 企业热门文章 mv.addObject("companyBestArticle", companyBestArticle);
 		mv.addObject("personBestArticle", personBestArticle);
 		return mv;
@@ -389,18 +397,19 @@ public class AdminController {
 
 	/**
 	 * 访问管理员的信息维护界面
+	 * 
 	 * @author 朱吉
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value="/maIntegerainAdmin",method=RequestMethod.GET)
-	public ModelAndView maIntegerainAdmin(HttpSession session){
-		Admin admin=(Admin)session.getAttribute("admin");
-		ModelAndView mv=new ModelAndView("admin/update/adminUpdate");
-		mv.addObject("admin",admin);
+	@RequestMapping(value = "/maIntegerainAdmin", method = RequestMethod.GET)
+	public ModelAndView maIntegerainAdmin(HttpSession session) {
+		Admin admin = (Admin) session.getAttribute("admin");
+		ModelAndView mv = new ModelAndView("admin/update/adminUpdate");
+		mv.addObject("admin", admin);
 		return mv;
 	}
-	
+
 	/**
 	 * 登录的管理员，自我信息修改
 	 * 
@@ -414,10 +423,10 @@ public class AdminController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value="/maIntegerainAdmin",method=RequestMethod.POST)
+	@RequestMapping(value = "/maIntegerainAdmin", method = RequestMethod.POST)
 	public ModelAndView maIntegerainAdmin(String adminName, String adminTel, String adminEmail, HttpSession session) {
 		Admin admin = (Admin) session.getAttribute("admin");
-		Admin adminFalse=admin;
+		Admin adminFalse = admin;
 		admin.setAdminName(adminName);
 		admin.setAdminEmail(adminEmail);
 		admin.setAdminTel(adminTel);
@@ -466,7 +475,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("resume", resumes);
 		mv.addObject("page", page);
-		mv.setViewName("admin/auditResume");
+		mv.setViewName("admin/audit/auditResume");
 		return mv;
 	}
 
@@ -487,24 +496,23 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("article", articles);
 		mv.addObject("page", page);
-		mv.setViewName("admin/auditArticle");
+		mv.setViewName("admin/audit/auditArticle");
 		return mv;
 	}
 
 	/**
-	 * 查询审核企业资质
+	 * 查询审核企业资质 暂时停止该路径的使用
 	 * 
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditCompany")
-	public ModelAndView findAuditCompany(Integer page) {
-		List<Company> company = adminService.findAuditCompany(page);
-		ModelAndView mv = new ModelAndView("admin/auditCompany");
-		mv.addObject("company", company);
-		mv.setViewName("admin/auditCompany");
-		return mv;
-	}
+	/*
+	 * @RequestMapping("/findAuditCompany") public ModelAndView
+	 * findAuditCompany(Integer page) { List<Company> company =
+	 * adminService.findAuditCompany(page); ModelAndView mv = new
+	 * ModelAndView("admin/auditCompany"); mv.addObject("company", company);
+	 * mv.setViewName("admin/auditCompany"); return mv; }
+	 */
 
 	/**
 	 * 查询审核个人企业互评论
@@ -578,14 +586,14 @@ public class AdminController {
 	 * @Return: ModelAndView
 	 */
 	@RequestMapping("/auditResume/{id}/{resumeStatusThree}")
-	public ModelAndView auditResume(@PathVariable Integer id,@PathVariable Integer resumeStatusThree) {
+	public ModelAndView auditResume(@PathVariable Integer id, @PathVariable Integer resumeStatusThree) {
 		int result = adminService.auditResume(id, resumeStatusThree);
 		ModelAndView mv = new ModelAndView();
-		if (result >0) {
+		if (result > 0) {
 			mv.addObject("result", result);
-			mv.setViewName("admin/auditResume");
+			mv.setViewName("admin/audit/auditResume");
 		} else {
-			mv.setViewName("admin/auditResume");
+			mv.setViewName("admin/audit/auditResume");
 		}
 		return mv;
 	}
@@ -601,20 +609,21 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/auditArticle/{articleId}/{articleStatus}/{articleUsersType}")
-	public ModelAndView auditArticle(@PathVariable Integer articleId,@PathVariable Integer articleStatus,@PathVariable Integer articleUsersType) {
+	public ModelAndView auditArticle(@PathVariable Integer articleId, @PathVariable Integer articleStatus,
+			@PathVariable Integer articleUsersType) {
 		int result = adminService.auditArticle(articleId, articleStatus);
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			if(articleUsersType==2){
-				mv.setViewName("admin/auditArticle");
+				mv.setViewName("admin/audit/auditArticle");
 			}else if(articleUsersType==1){
 				mv.setViewName("admin/audit/auditComArticle");
-			}else{
+			} else {
 				mv.setViewName("admin/index");
 			}
 		} else {
 			mv.addObject("info", "审核失败,未能找到审核文章");
-			mv.setViewName("admin/auditArticle");
+			mv.setViewName("admin/audit/auditArticle");
 		}
 		return mv;
 	}
@@ -634,11 +643,11 @@ public class AdminController {
 	@ResponseBody
 	public String auditCommentsArticle(Integer[] id, Integer commentArticleStatus) {
 		int result = adminService.auditCommentsArticle(id, commentArticleStatus);
-		String commentResult="";
+		String commentResult = "";
 		if (result > 0) {
-			commentResult="true";
+			commentResult = "true";
 		} else {
-			commentResult="false";
+			commentResult = "false";
 		}
 		return commentResult;
 	}
@@ -655,7 +664,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/auditCompany/{id}/{companyStatus}")
 	@ResponseBody
-	public String auditCompany(@PathVariable Integer id,@PathVariable Integer companyStatus) {
+	public String auditCompany(@PathVariable Integer id, @PathVariable Integer companyStatus) {
 		int result = adminService.auditCompany(id, companyStatus);
 		if (result > 0) {
 			return "true";
@@ -721,7 +730,7 @@ public class AdminController {
 	@RequestMapping("/auditOffer") // 审核offer
 	@ResponseBody
 	public String auditOffer(Integer[] ids, Integer offerStatus) {
-		
+
 		int result = adminService.auditOffer(ids, offerStatus);
 		if (result > 0) {
 			return "true";
@@ -743,9 +752,9 @@ public class AdminController {
 	@ResponseBody
 	public String auditRecruitment(Integer[] id, Integer recruitStatus) {
 		int result = adminService.auditRecruitment(id, recruitStatus);
-		if(result>0){
+		if (result > 0) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
 	}
@@ -998,12 +1007,12 @@ public class AdminController {
 	@RequestMapping("/findAuditResumeById")
 	public ModelAndView findAuditResumeById(int id) {
 		Resume resume = adminService.findAuditResumeById(id);
-		User user=new User();
-		if(resume!=null){
-			user=adminService.findUserById(resume.getUserId());
+		User user = new User();
+		if (resume != null) {
+			user = adminService.findUserById(resume.getUserId());
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("resumeOwner",user);
+		mv.addObject("resumeOwner", user);
 		mv.addObject("resume", resume);
 		mv.setViewName("admin/auditing/auditingResume");
 		return mv;
@@ -1125,12 +1134,12 @@ public class AdminController {
 	@RequestMapping("/findAuditRecruitmentById/{id}")
 	public ModelAndView findAuditRecruitmentById(@PathVariable Integer id) {
 		CompanyRecruit companyRecruit = adminService.findAuditRecruitmentById(id);
-		Company company=new Company();
-		if(companyRecruit!=null){
-			company=adminService.findAuditCompanyById(companyRecruit.getCompanyId());
+		Company company = new Company();
+		if (companyRecruit != null) {
+			company = adminService.findAuditCompanyById(companyRecruit.getCompanyId());
 		}
 		ModelAndView mv = new ModelAndView("admin/auditing/auditingRecruit");
-		mv.addObject("company",company);
+		mv.addObject("company", company);
 		mv.addObject("companyRecruit", companyRecruit);
 		return mv;
 	}
@@ -1143,162 +1152,175 @@ public class AdminController {
 	 */
 	@RequestMapping("/bestCompany") // 查询最佳企业
 	public ModelAndView findBestCompany() {
-		ModelAndView mv = new ModelAndView("admin/bestCompany");
+		ModelAndView mv = new ModelAndView("admin/managment/bestCompany");
 		List<Company> bestCompanyList = (List<Company>) adminService.findBestCompany();
 		mv.addObject("bestCompanyList", bestCompanyList);
 		return mv;
 
 	}
+
 	/**
 	 * 
-	   * @Name: messagePush
-	   * @Description: @param id 消息ID
-	   * @Description: @param sysmContent 消息内容
-	   * @Description: @param sysmCreateTime 时间
-	   * @Description: @param systmScope 工作范围
-	   * @Description: @return
-	   * @Author: 曾瑞（作者）
-	   * @Version: V1.00 （版本号）
-	   * @Create Date: 2017年4月26日上午11:09:17
-	   * @Parameters: AdminController
-	   * @Return: ModelAndView
+	 * @Name: messagePush
+	 * @Description: @param id 消息ID
+	 * @Description: @param sysmContent 消息内容
+	 * @Description: @param sysmCreateTime 时间
+	 * @Description: @param systmScope 工作范围
+	 * @Description: @return
+	 * @Author: 曾瑞（作者）
+	 * @Version: V1.00 （版本号）
+	 * @Create Date: 2017年4月26日上午11:09:17
+	 * @Parameters: AdminController
+	 * @Return: ModelAndView
 	 */
-	@RequestMapping(value="/messagePush",method=RequestMethod.POST)
-	public ModelAndView messagePush(SystemMessage systemMessage,HttpSession session){
-		Admin admin=(Admin)session.getAttribute("admin");
+	@RequestMapping(value = "/messagePush", method = RequestMethod.POST)
+	public ModelAndView messagePush(SystemMessage systemMessage, HttpSession session) {
+		Admin admin = (Admin) session.getAttribute("admin");
 		systemMessage.setAdminId(admin.getId());
 		systemMessage.setSysmCreateTime(new Timestamp(System.currentTimeMillis()));
 		systemMessage.setSysmContent(systemMessage.getSysmContent().trim());
-		int result= adminService.addMessage(systemMessage);
-		ModelAndView mv=new ModelAndView();
-		if (result>0) {
+		int result = adminService.addMessage(systemMessage);
+		ModelAndView mv = new ModelAndView();
+		if (result > 0) {
 			mv.addObject("result", result);
-			mv.setViewName("admin/adminAddMessage");
+			mv.setViewName("admin/managment/adminAddMessage");
 		}else{
 			mv.addObject("result",result);
-			mv.setViewName("admin/adminAddMessage");
+			mv.setViewName("admin/managment/adminAddMessage");
 		}
 		return mv;
 	}
-	
+
 	/**
 	 * 
-	   * @Name: addMessage
-	   * @Description: @return 消息页面跳转
-	   * @Author: 曾瑞（作者）
-	   * @Version: V1.00 （版本号）
-	   * @Create Date: 2017年4月26日下午2:01:08
-	   * @Parameters: AdminController
-	   * @Return: String
+	 * @Name: addMessage
+	 * @Description: @return 消息页面跳转
+	 * @Author: 曾瑞（作者）
+	 * @Version: V1.00 （版本号）
+	 * @Create Date: 2017年4月26日下午2:01:08
+	 * @Parameters: AdminController
+	 * @Return: String
 	 */
 	@RequestMapping("/addMessage")
 	public String addMessage(){
-		return "admin/adminAddMessage";
+		return "admin/managment/adminAddMessage";
+
 	}
+
 	/**
 	 * 审核简历查找工作经历
+	 * 
 	 * @author 朱吉
-	 * @param resumeId 简历表id
+	 * @param resumeId
+	 *            简历表id
 	 * @return
 	 */
 	@RequestMapping("/work")
-	public ModelAndView showWork(String resumeId){
-		List<Work> works=adminService.findResumeWork(resumeId);
-		ModelAndView mv=new ModelAndView();
+	public ModelAndView showWork(String resumeId) {
+		List<Work> works = adminService.findResumeWork(resumeId);
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("works", works);
 		mv.setViewName("admin/auditing/auditingResume");
 		return mv;
 	}
-	
+
 	/**
 	 * 查找项目经历
+	 * 
 	 * @author 朱吉
-	 * @param resumeId 简历id
+	 * @param resumeId
+	 *            简历id
 	 * @return
 	 */
 	@RequestMapping("/project")
-	public ModelAndView showProject(String resumeId){
-		List<Project> projects=adminService.findResumeProject(resumeId);
-		ModelAndView mv=new ModelAndView();
+	public ModelAndView showProject(String resumeId) {
+		List<Project> projects = adminService.findResumeProject(resumeId);
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("projects", projects);
 		mv.setViewName("admin/auditing/auditingResume");
-		return mv;	
+		return mv;
 	}
-	
+
 	/**
 	 * 查找简历培训经历
+	 * 
 	 * @author 朱吉
 	 * @param resumeId
 	 * @return
 	 */
 	@RequestMapping("/edu")
-	public ModelAndView showEducation(String resumeId){
-		List<Education> edus=adminService.findResumeEducation(resumeId);
-		ModelAndView mv=new ModelAndView();
-		if(edus==null){
-			edus=new ArrayList<Education>();
+	public ModelAndView showEducation(String resumeId) {
+		List<Education> edus = adminService.findResumeEducation(resumeId);
+		ModelAndView mv = new ModelAndView();
+		if (edus == null) {
+			edus = new ArrayList<Education>();
 		}
-		mv.addObject("edus",edus);
+		mv.addObject("edus", edus);
 		mv.setViewName("admin/auditing/auditingResume");
 		return mv;
 	}
-	
+
 	/**
 	 * 查找审核企业
+	 * 
 	 * @author 朱吉
-	 * @param page 偏移量
+	 * @param page
+	 *            偏移量
 	 */
 	@RequestMapping("/findCompanyIntro/{page}")
-	public ModelAndView findCompanyIntro(@PathVariable Integer page){
-		List<AuditComIntro> companyIntro=adminService.findCompanyIntro(page);
-		ModelAndView mv=new ModelAndView();
-		if(companyIntro!=null){		
+	public ModelAndView findCompanyIntro(@PathVariable Integer page) {
+		List<AuditComIntro> companyIntro = adminService.findCompanyIntro(page);
+		ModelAndView mv = new ModelAndView();
+		if (companyIntro != null) {
 			mv.addObject("companyIntro", companyIntro);
 			mv.setViewName("admin/audit/auditComIntro");
-		}else{
+		} else {
 			mv.addObject("companyIntro", null);
 			mv.setViewName("admin/audit/auditComIntro");
 		}
 		return mv;
 	}
-	
+
 	/**
 	 * 通过id找到企业审核
+	 * 
 	 * @author 朱吉
 	 * 
 	 */
 	@RequestMapping("/findAuditComById/{id}")
-	public ModelAndView findAuditComById(@PathVariable Integer id){
-		AuditComIntro auditComIntro=adminService.findAuditComById(id);
-		ModelAndView mv=new ModelAndView("admin/auditing/auditingCompany");
-		if(auditComIntro!=null){
-			Integer CompanyId=auditComIntro.getId();
-			List<CompanyDetailImg> detailImgs=adminService.findCompanyImgById(CompanyId);
+	public ModelAndView findAuditComById(@PathVariable Integer id) {
+		AuditComIntro auditComIntro = adminService.findAuditComById(id);
+		ModelAndView mv = new ModelAndView("admin/auditing/auditingCompany");
+		if (auditComIntro != null) {
+			Integer CompanyId = auditComIntro.getId();
+			List<CompanyDetailImg> detailImgs = adminService.findCompanyImgById(CompanyId);
 			mv.addObject("auditComIntro", auditComIntro);
 			mv.addObject("detailImgs", detailImgs);
-		}else{
+		} else {
 			mv.addObject("auditComIntro", null);
 		}
 		return mv;
 	}
-	
+
 	/**
 	 * 审核企业基本信息
+	 * 
 	 * @author 朱吉
-	 * @param companyId 企业表中的id号
-	 * @param cmpIntStatus 企业基本信息的审核状态
+	 * @param companyId
+	 *            企业表中的id号
+	 * @param cmpIntStatus
+	 *            企业基本信息的审核状态
 	 */
 	@RequestMapping("/auditCompanyInfo/{companyid}/{cmpIntStatus}")
 	@ResponseBody
-	public String auditCompanyInfo(@PathVariable Integer companyId,@PathVariable Integer cmpIntStatus){
-		Integer result=adminService.auditCompanyInfo(companyId,cmpIntStatus);
-		if(result!=null&&result>0){
+	public String auditCompanyInfo(@PathVariable Integer companyId, @PathVariable Integer cmpIntStatus) {
+		Integer result = adminService.auditCompanyInfo(companyId, cmpIntStatus);
+		if (result != null && result > 0) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
 	}
-	
 
 	/**
 	 * 获取验证码

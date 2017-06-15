@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateUserVisitCount" parameterType="UserVisitCount">
 		update userVisitCount set userCommentCount=#{userCommentCount},userArticleCount=#{userArticleCount} where userYear=#{userYear} and userMonth=#{userMonth} and userDay=#{userDay}
 	</update>
-	<select id="findAll" resultType="UserVisitCount">
+	<select id="findAll"  resultType="UserVisitCount">
 		select userYear,userMonth,userDay,userCommentCount,userArticleCount,userId from userVisitCount
 	</select>
 	<select id="findCount" resultType="UserVisitCount">

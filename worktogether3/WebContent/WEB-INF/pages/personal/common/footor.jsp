@@ -3,6 +3,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script type="text/javascript " src="personal/js/jquery-3.1.1.min.js "></script>
 <script type="text/javascript" src="js/bootstrap.min.js "></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript"

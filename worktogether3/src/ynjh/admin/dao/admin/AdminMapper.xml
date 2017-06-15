@@ -11,6 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addMessage" parameterType="SystemMessage">	
 		insert into systemMessage(sysmContent,sysmCreateTime,sysmScope,adminId) values(#{sysmContent},#{sysmCreateTime},#{sysmScope},#{adminId}) 
 	</insert>
+	<!-- 新增管理员日志 -->
+	<insert id="addAdminLog" parameterType="AdminLog">
+		insert into adminLog(adminLoginId,adminDo,adminTargetType,adminAid,adminTime) values(#{adminLoginId},#{adminDo},#{adminTargetType},#{adminAid},#{adminTime})
+	</insert>
 	<!--禁用普通用户  -->
 	<update id="disableUser">
 		update user set userStatus=#{userStatus} where id=#{userId}
