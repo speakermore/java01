@@ -120,4 +120,9 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		return companyMapper.updateCompanyConnection(id, companyId, cmpConnectionName, cmpConnection);
 	}
+
+	@Override
+	public Company verificationCompanyLoginId(String companyLoginId) {
+		return companyMapper.verificationCompanyLoginId(companyLoginId);
+	}
 }

@@ -1,7 +1,10 @@
 package ynjh.company.controller.company;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ynjh.common.util.MD5Util;
@@ -21,6 +25,7 @@ import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyService;
+import ynjh.personal.entity.User;
 
 @Controller
 @RequestMapping(value="/company/company")
@@ -299,5 +304,21 @@ public class CompanyController {
 	@RequestMapping("/company_data")
 	public String companyData(){
 		return "company/company/company_data";
+	}
+	
+	/**
+	 * 刘志浩：验证用户名是否重复
+	 */
+	@RequestMapping("/verificationCompanyLoginId")
+	@ResponseBody
+	public Map<String, Boolean> verificationUserLoginId(String companyLoginId){
+		Map<String, Boolean> map=new HashMap<String, Boolean>();
+		Company company =companyService.verificationCompanyLoginId(companyLoginId);
+		if (company!=null) {//(重复)
+			map.put("valid",false);
+		}else {//(不重复)
+			map.put("valid", true);
+		}	
+		return map;
 	}
 }

@@ -33,4 +33,6 @@ public interface CompanyService {
 	public List<CompanyConnection> findCompanyConnection(Integer companyId);
 	//删除公司联系方式
 	public Integer deleteCompanyConnection(Integer id);
+	//匹配用户名是否重复
+	public Company verificationCompanyLoginId(String companyLoginId);
 }

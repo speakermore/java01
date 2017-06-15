@@ -56,4 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findCompanyConnection" parameterType="Integer" resultType="CompanyConnection">
 		select * from companyconnection where companyId=#{companyId}
 	</select>
+	<select id="verificationCompanyLoginId" resultType="Company" parameterType="String">
+	select companyLoginId from company where companyLoginId=#{companyLoginId}
+	</select>
 </mapper>

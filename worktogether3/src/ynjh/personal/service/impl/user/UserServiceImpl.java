@@ -208,6 +208,9 @@ public class UserServiceImpl implements UserService {
 			return (userMapper.getMaxUserListForOther() + 20 - 1) / 20;
 		}
 	}
+	/**
+	 * 匹配软件人才
+	 */
 	@Override
 	public User verificationUserLoginId(String userLoginId) {
 		return userMapper.verificationUserLoginId(userLoginId);

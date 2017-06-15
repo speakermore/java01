@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
+import ynjh.personal.entity.User;
 
 public interface CompanyMapper {
 	//注册公司
@@ -32,4 +33,6 @@ public interface CompanyMapper {
 	public List<CompanyConnection> findCompanyConnection(Integer companyId);
 	//删除公司联系电话
 	public Integer deleteCompanyConnection(Integer id);
+	//匹配用户名是否重复
+	public Company verificationCompanyLoginId(String companyLoginId);
 }

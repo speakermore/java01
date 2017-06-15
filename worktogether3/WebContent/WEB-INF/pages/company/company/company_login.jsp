@@ -237,6 +237,12 @@
 										regexp : { //匹配规则
 											regexp : /^0?(13[0-9]|15[012356789]|18[0-9]|17[0-9])[0-9]{8}$/,
 											message : '请输入有效的手机号码'
+										},
+										remote: {
+											url:"company/company/verificationCompanyLoginId",
+											message: '用户名已被注册',
+											delay: 5000,
+											type : 'post'
 										}
 									}
 								},
