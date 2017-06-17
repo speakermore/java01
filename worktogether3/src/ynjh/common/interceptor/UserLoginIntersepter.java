@@ -24,7 +24,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
-		String[] ignorePathes={"thirdpart","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+		String[] ignorePathes={"thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
 		HttpSession session=request.getSession();
 		//获得请求路径
 		StringBuffer path=request.getRequestURL();
@@ -38,7 +38,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 				return true;
 			}
 		}
-		request.setAttribute("errorInfo", "您尚未登录，请先登录");
+		request.setAttribute("errorInfo", "<center>您尚未登录，请先登录:<a href='personal/user/login'>个人登录</a>|<a href='company/company_login'>企业登录</a></center>");
 		if(session.getAttribute("admin")!=null){
 			//如果是管理员登录，则只能访问管理员的页面
 			Admin admin=(Admin)session.getAttribute("admin");
@@ -50,8 +50,17 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 			//如果是用户登录，则只能访问用户相关的页面
 			Object user=session.getAttribute("user");
 			if(user instanceof User){//个人用户
+				
+				
 				if(path.indexOf("personal")!=-1){
 					return true;
+				}
+				//允许个人用户访问的路径
+				String[] allowPages={"findAllNationName"};
+				for(String allow:allowPages){
+					if(path.indexOf(allow)!=-1){
+						return true;
+					}
 				}
 				request.setAttribute("errorInfo", "您是个人用户，不能访问别的页面");
 			}else if(user instanceof Company){//企业用户

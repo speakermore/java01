@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 
 import ynjh.common.service.NationService;
+import ynjh.common.service.ProvinceService;
 
 @Controller
 /**
@@ -27,6 +28,8 @@ public class MyCommonController {
 	
 	@Resource
 	private NationService nationService;
+	@Resource
+	private ProvinceService provinceService;
 	/**
 	 * 首页的跳转
 	 * @return
@@ -39,16 +42,21 @@ public class MyCommonController {
 	/**
 	 * ajax的方式向JSP页面传递民族的名字，
 	 * 只能使用POST方式获取
-	 * @param session
-	 * @param request
 	 * @return ajax对象，民族的名称
 	 *
 	 */
 	@RequestMapping(value="/findAllNationName",method=RequestMethod.POST)
 	@ResponseBody
-	public Object findAllNationName(HttpSession session,HttpServletRequest request){
+	public Object findAllNationName(){
 		List<String> strNationNames=nationService.findAllNationName();
 		Object jsonNation=JSON.toJSON(strNationNames);
 		return jsonNation;
+	}
+	@RequestMapping(value="/findAllProvinceName",method=RequestMethod.POST)
+	@ResponseBody
+	public Object findAllProvinceName(){
+		List<String> strProvinceName=provinceService.findAllProvinceName();
+		Object jsonProvince=JSON.toJSON(strProvinceName);
+		return jsonProvince;
 	}
 }

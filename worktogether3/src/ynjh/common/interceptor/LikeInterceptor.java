@@ -12,7 +12,12 @@ import ynjh.company.entity.LikeNum;
 import ynjh.company.service.LikeNumService;
 import ynjh.personal.entity.User;
 
-
+/**
+ * 
+ * @author 黄冰雁
+ * 企业动态的点赞数拦截
+ *
+ */
 public class LikeInterceptor extends HandlerInterceptorAdapter{
 	
 	@Resource

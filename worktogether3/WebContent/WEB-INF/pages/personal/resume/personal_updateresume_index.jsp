@@ -45,7 +45,6 @@
 			<div class="form-group">
 				<label for="resumeGender" class="col-md-4 control-label">性别</label>
 				<div class="col-md-8">
-					
 						<div class="col-md-6 radio">
 							<input type="radio" name="resumeGender" id="resumeGender"
 								value="1" ${resume_update.resumeGender==1?"checked=\"checked\"":"" }> <label>男</label>

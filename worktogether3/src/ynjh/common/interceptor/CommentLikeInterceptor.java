@@ -9,11 +9,15 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ynjh.company.entity.Company;
 import ynjh.company.entity.LikeNum;
-import ynjh.company.service.CompanyArticleService;
 import ynjh.company.service.LikeNumService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.User;
-
+/**
+ * 
+ * @author 黄冰雁
+ * 评论企业动态的点赞数拦截
+ *
+ */
 public class CommentLikeInterceptor extends HandlerInterceptorAdapter{
 
 	@Resource
@@ -24,12 +28,11 @@ public class CommentLikeInterceptor extends HandlerInterceptorAdapter{
 	            ) throws Exception { 
 		String id=request.getParameter("id");
 		HttpSession session=request.getSession();
-		Article article=(Article) session.getAttribute("art");
 		Object user=session.getAttribute("user");
+		Article article=(Article) session.getAttribute("art");
 		LikeNum likeNum=null;
 		if (user instanceof Company) {
 			likeNum=likeService.findByCommentArt(new Integer(id), ((Company) user).getId());
-			
 		}else if (user instanceof User) {
 			likeNum=likeService.findByCommentArt(new Integer(id), ((User) user).getId());
 		}

@@ -27,6 +27,7 @@ public class NationServiceImpl implements NationService {
 	 */
 	public List<String> findAllNationName() {
 		List<Nation> nations=nationMapper.findAll();
+		
 		//牟勇：使用流技术，将实体类中的民族名称转换为一个字符串集合，方便页面操作
 		//第一步：获得Stream对象，这里是调用集合提供的stream()方法来完成
 		//第二步：调用中继方法，这里是调用map方法，指定调用getNationName()方法来获得所有的民族名称

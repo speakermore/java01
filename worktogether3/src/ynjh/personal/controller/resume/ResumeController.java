@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.crowdfund.entity.Job;
+import ynjh.common.crowdfund.service.JobService;
+import ynjh.common.exception.ResumeExistsException;
+import ynjh.common.util.CommonStatus;
 import ynjh.common.util.GetAge;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
@@ -32,16 +37,23 @@ import ynjh.personal.service.ResumeService;
 public class ResumeController {
 	@Resource
 	private ResumeService rService;
-
+	@Resource//牟勇：添加岗位的查询业务，以便在createResume中使用
+	private JobService jobService;
 	/**
 	 * 跳转新建简历
-	 * 
+	 * @param session 牟勇：添加session，为了在岗位集合不存在的情况下进行集合准备
 	 * @return
 	 * 
 	 * 		String
 	 */
 	@RequestMapping(value = "/createResume", method = RequestMethod.GET)
-	public String createResume() {
+	public String createResume(HttpSession session) {
+		//牟勇：为了在页面上添加简历标题，备选内容为一级岗位名称而增加的判断，如果没有一级岗位的集合存在，则将它添加到session中
+		List<Job> job1=(List<Job>)session.getAttribute("myJobs1");
+		if(session.getAttribute("myJobs1")==null){
+			List<Job> myJobs=jobService.findJob1();
+			session.setAttribute("myJobs1", myJobs);
+		}
 		return "personal/resume/personal_createresume";
 	}
 
@@ -59,54 +71,65 @@ public class ResumeController {
 	public ModelAndView createResume(Resume resume, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		resume.setResumeCreateDate(new Timestamp(System.currentTimeMillis()));
-		if (resume.getResumePlace().equals("")) {
+		//牟勇：
+		//1.简历属性更改为空是否有必要？
+		//2.民族更改两遍，导致在第二次更改时报空指针
+		//3.调用equals方法进行比较时，最好调用常量的equals方法，这样可以避免空指针
+		if ("".equals(resume.getResumePlace())) {
 			resume.setResumePlace(null);
 		}
-		if (resume.getResumeNation().equals("")) {
+		if ("".equals(resume.getResumeNation())) {
 			resume.setResumeNation(null);
 		}
-		if (resume.getResumeQQ().equals("")) {
+		if ("".equals(resume.getResumeQQ())) {
 			resume.setResumeQQ(null);
 		}
-		if (resume.getResumeEducation().equals("")) {
+		if ("".equals(resume.getResumeEducation())) {
 			resume.setResumeEducation(null);
 		}
-		if (resume.getResumeMajor().equals("")) {
+		if ("".equals(resume.getResumeMajor())) {
 			resume.setResumeMajor(null);
 		}
-		if (resume.getResumeGraduationSchool().equals("")) {
+		if ("".equals(resume.getResumeGraduationSchool())) {
 			resume.setResumeGraduationSchool(null);
 		}
-		if (resume.getResumeGraduationTime().equals("")) {
+		if ("".equals(resume.getResumeGraduationTime())) {
 			resume.setResumeGraduationTime(null);
 		}
-		if (resume.getResumeSelfEvaluation().equals("")) {
+		if ("".equals(resume.getResumeSelfEvaluation())) {
 			resume.setResumeSelfEvaluation(null);
 		}
-		if (resume.getResumeHouseAddress().equals("")) {
+		if ("".equals(resume.getResumeHouseAddress())) {
 			resume.setResumeHouseAddress(null);
 		}
-		if (resume.getResumeNation().equals("")) {
-			resume.setResumeNation(null);
-		}
+		
 		User user = (User) session.getAttribute("user");
 		resume.setUserId(user.getId());
-		resume.setResumeTitle("我的简历");
-		/*
-		 * resume.setResumeHeadImg(UploadFile.uploadFile(
-		 * UploadFile.getUserImgPath("/WEB-INF/resources/img/peraonal",
-		 * user.getUserLoginId()), new MultipartFile[] { resumeFile },
-		 * session)[0]);
-		 */
-		int result = rService.addResume(resume);
-		if (result > 0) {
-			mv.addObject("resume", resume);
-			mv.addObject("operatorInfo", "创建简历成功");
-			mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
-		} else {
-			mv.addObject("operatorInfo", "创建简历失败");
-			mv.setViewName("personal/resume/personal_createresume");
+		//牟勇：在页面上增加了标题的下拉框，这句代码不再需要了。
+		//resume.setResumeTitle("我的简历");
+		
+		
+		
+		try {
+			//牟勇：检查简历是否重复（因为只允许写一份简历）
+			Resume oldResume=rService.findResumeByOneUserId(user.getId());
+			if(oldResume!=null){
+				throw new ResumeExistsException();
+			}
+			int result = rService.addResume(resume);
+			if (result > 0) {
+				mv.addObject("resume", resume);
+				mv.addObject("operatorInfo", "创建简历成功");
+				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
+			} else {
+				mv.addObject("operatorInfo", "创建简历失败");
+				mv.setViewName("personal/resume/personal_createresume");
+			}
+		} catch (ResumeExistsException e) {
+			mv.addObject("errorInfo", e.toString());
+			mv.setViewName("/notlogin");
 		}
+		
 		return mv;
 	}
 
@@ -134,15 +157,7 @@ public class ResumeController {
 					+ "</a></td>");
 			sb.append("<td>" + resume.getResumeJor() + "</td>");
 			sb.append("<td>" + sdf.format(resume.getResumeCreateDate()) + "</td>");
-			if (resume.getResumeStatusThree() == 1) {
-				sb.append("<th>待审核</th>");
-			} else if (resume.getResumeStatusThree() == 2) {
-				sb.append("<th>正常</th>");
-			} else if (resume.getResumeStatusThree() == 3) {
-				sb.append("<th>审核未通过</th>");
-			} else if (resume.getResumeStatusThree() == 4) {
-				sb.append("<th>已被删除</th>");
-			}
+			sb.append("<th>"+CommonStatus.AUDIT_STATUS[resume.getResumeStatusThree()]+"</th>");
 			sb.append("<td>");
 			if (resume.getResumeStatusThree() == 4) {
 				sb.append(
@@ -256,30 +271,10 @@ public class ResumeController {
 			session.setAttribute("resume", resume);
 			mv.setViewName(page);
 		}
-		/*
-		 * if (result>0) {
-		 * 
-		 * }else { mv.addObject("operatorInfo","修改简历失败！");
-		 * mv.setViewName("personal/resume/personal_updateresume"); }
-		 */
+		
 		return mv;
 	}
-	/**
-	 * 修改简历头像
-	 * 
-	 */
-	/*
-	 * @RequestMapping(value = "/ajaxUpdateResumeHeadImg", method =
-	 * RequestMethod.GET) public String ajaxUpdateResumeHeadImg(Integer
-	 * resumeId,MultipartFile resumeHeadImg,HttpSession session){ User user
-	 * =(User) session.getAttribute("user"); String
-	 * uploadImgNewFileName=UploadFile.uploadFile(
-	 * UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal",
-	 * user.getUserLoginId()), new MultipartFile[] { resumeHeadImg },
-	 * session)[0]; Integer result=rService.changeResumeHeadImg(resumeId,
-	 * uploadImgNewFileName); if (result>0) { return uploadImgNewFileName; }else
-	 * { return null; } }
-	 */
+	
 
 	/**
 	 * 删除简历 跳转主页
@@ -332,16 +327,6 @@ public class ResumeController {
 		}
 		return mv;
 	}
-
-	/* 教育、工作、项目记录增加 */
-	/*
-	 * 跳转
-	 * 
-	 * @RequestMapping(value = "/gotoCreateEducation", method =
-	 * RequestMethod.GET) public String gotoCreateEducation(Integer resumeId,
-	 * HttpSession session) { session.setAttribute("resumeId", resumeId); return
-	 * "personal/resume/personal_resume_education"; }
-	 */
 
 	/**
 	 * 跳转新建工作记录
@@ -475,24 +460,7 @@ public class ResumeController {
 
 	}
 
-	/*
-	 * @RequestMapping("/ajaxlookResumeEdus")
-	 * 
-	 * @ResponseBody public Object ajaxlookResumeEducation(Integer resumeId) {
-	 * StringBuffer sb = new StringBuffer(); List<Education> edus =
-	 * rService.findEducation(resumeId); SimpleDateFormat sdf=new
-	 * SimpleDateFormat("yyyy-MM-dd"); for(Education edu:edus){
-	 * sb.append("<tr><td>学校名称：</td>");
-	 * sb.append("<td>"+edu.getEducationSchool()+"</td></tr>");
-	 * sb.append("<tr><td>教育描述：</td>");
-	 * sb.append("<td><p>"+edu.getEducationContent()+"</p></td></tr>");
-	 * sb.append("<tr><td>教育时间：</td>");
-	 * sb.append("<td>"+sdf.format(edu.getEducationBeginTime()));
-	 * sb.append("到"+sdf.format(edu.getEducationEndTime())+"</td></tr>");
-	 * sb.append(
-	 * "<tr><td></td><td class=\"text-right\"><a href=\"#\">编辑</a>|<a href=\"personal/resume/deleteResumeEducation?id=${edu.id }\">删除</a></td></tr>"
-	 * ); } return sb; }
-	 */
+	
 
 	/**
 	 * 查看工作记录列表

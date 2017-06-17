@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--左侧状态栏位-->
 <article
 	class="col-md-12  work-together-shadow work-together-shallow">
@@ -7,13 +8,31 @@
 	<section class="panel">
 		<!-- 简历基本信息开始 -->
 		<div class="panel panel-default">
-			<form class="form-horizontal" action="personal/resume/createResume"
+			<form role="form" class="form-horizontal" action="personal/resume/createResume"
 				method="post" id="resumeForm"
-				style="margin-left: 35px; margin-top: 35px;">
-				<div class="col-md-1 column">
+				style="margin-top: 35px;">
+					<div class="row">
+					<div class="col-md-12 column">
+						<div class="form-group">
+							<label class="control-label col-md-2" for="resumeTitle">简历标题</label>
+							<div class="col-md-8">
+							<select class="form-control" name="resumeTitle">
+							<!-- 牟勇：动态添加一级岗位名称 -->
+								<c:forEach items="${myJobs1 }" var="job1">
+									<option value="${job1.jobName }">${job1.jobName }</option>
+								</c:forEach>
+							</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<!-- 牟勇：一个不知所云的头像 -->
+				<!-- <div class="col-md-1 column">
 					<img src="img/head.gif" class="center-block" width="100"
 						height="120" />
-				</div>
+				</div> -->
+				<!-- 简历基本信息左侧 -->
 				<div class="col-md-5 column">
 					<div class="form-group">
 						<label for="resumeName" class="col-md-4 control-label">姓名</label>
@@ -44,6 +63,8 @@
 						</div>
 					</div>
 				</div>
+				<!-- 简历基本信息左侧结束 -->
+				<!-- 简历基本信息右侧 -->
 				<div class="col-md-5 column">
 					<div class="form-group">
 						<label for="resumeGender" class="col-md-4 control-label">性别</label>
@@ -80,6 +101,10 @@
 						</div>
 					</div>
 				</div>
+				<!-- 简历基本信息右侧结束 -->
+				</div><!-- .row end -->
+				<div class="row">
+				<div class="col-md-12">
 				<div class="panel-group">
 					<div class="panel-heading">
 						<a class="panel-title col-md-offset-10" data-toggle="collapse"
@@ -88,7 +113,9 @@
 					</div>
 					<div id="panel-element-more" class="panel-collapse collapse">
 						<div class="panel-body">
-							<div class="col-md-6 column">
+							<div class="row">
+							<!-- 展开更多左侧 -->
+							<div class="col-md-5 column">
 								<div class="form-group">
 									<label for="resumeQQ" class="col-md-4 control-label">QQ/微信</label>
 									<div class="col-md-8">
@@ -96,55 +123,71 @@
 											type="text" />
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<label for="resumeNation" class="col-md-4 control-label">民族</label>
 									<div class="col-md-8">
-										<input class="form-control" name="resumeNation"
+										<input class="form-control" data-provide="typeahead" data-items="4" autocomplete="off" name="resumeNation"
 											id="resumeNation" type="text" />
 									</div>
 								</div>
+								<script type="text/javascript">
+								//民族的自动完成特效
+								$.post('findAllNationName', function(data) {
+									$('#resumeNation').typeahead({
+										source : JSON.parse(data),
+										minLength:0,
+										showHintOnFocus:true,
+										fitToElement:true});
+								});
+								</script>
 								<div class="form-group">
 									<label for="resumePlace" class="col-md-4 control-label">籍贯</label>
 									<div class="col-md-8">
-										<input class="form-control" id="resumePlace"
+										<input class="form-control" id="resumePlace" data-provide="typeahead" autocomplete="off"
 											name="resumePlace" type="text" />
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="resumeEnglishGrade" class="col-md-4 control-label">英语等级</label>
-									<div class="col-md-8">
-										<select name="resumeEnglishGrade" id="resumeEnglishGrade"
-											class="form-control">
-											<option value="0" selected="selected">--未选择--</option>
-											<option value="1">国家英语考试3级</option>
-											<option value="2">国家英语考试4级</option>
-											<option value="3">国家英语考试6级</option>
-											<option value="4">专业4级</option>
-											<option value="5">专业8级</option>
-											<option value="6">未参加</option>
-											<option value="7">未通过</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="resumeComputerAbility"
-										class="col-md-4 control-label">计算机水平</label>
-									<div class="col-md-8">
-										<select name="resumeComputerAbility"
-											id="resumeComputerAbility" class="form-control">
-											<option value="0" selected="selected">--未选择--</option>
-											<option value="1">入门</option>
-											<option value="2">一般</option>
-											<option value="3">熟练</option>
-											<option value="4">精通</option>
-										</select>
-									</div>
-								</div>
+								<script type="text/javascript">
+								//省份的自动完成特效
+								$.post('findAllProvinceName', function(data) {
+									$('#resumePlace').typeahead({
+										source : JSON.parse(data),
+										minLength:0,
+										showHintOnFocus:true,
+										fitToElement:true});
+								});
+								</script>
 								<div class="form-group">
 									<label for="resumeHouseAddress" class="col-md-4 control-label">家庭地址</label>
 									<div class="col-md-8">
 										<input class="form-control" name="resumeHouseAddress"
 											id="resumeHouseAddress" type="text" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="resumeFLType" class="col-md-4 control-label">外语类型</label>
+									<div class="col-md-8">
+										<select name="resumeFLType" id="resumeFLType"
+											class="form-control">
+											<option value="0" selected="selected">--未选择--</option>
+											<option value="1">英语</option>
+											<option value="2">日语</option>
+											<option value="3">德语</option>
+											<option value="4">法语</option>
+											<option value="5">俄语</option>
+											<option value="6">西班牙语</option>
+											<option value="7">丹麦语</option>
+											<option value="8">其他</option>
+										</select>
+									</div>
+								</div>
+								<div style="margin-bottom:13px">
+									<label for="resumeHeight" class="col-md-4 control-label">身高</label>
+									<div class="col-md-8 input-group">
+										<input class="form-control" name="resumeHeight"
+											id="resumeHeight" />
+										<span class="input-group-addon">（厘米）</span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -155,21 +198,23 @@
 											name="resumeGraduationSchool" type="text" />
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="resumeHeight" class="col-md-4 control-label">身高(厘米)</label>
-									<div class="col-md-8">
-										<input class="form-control" name="resumeHeight"
-											id="resumeHeight" />
-									</div>
-								</div>
+								
 							</div>
+							<!-- 展开更多左侧结束 -->
 							<!-- 展开更多右侧 -->
 							<div class="col-md-5 column">
 								<div class="form-group">
 									<label for="resumeEducation" class="col-md-4 control-label">学历</label>
 									<div class="col-md-8">
-										<input class="form-control" id="resumeEducation"
-											name="resumeEducation" type="text" />
+										<select class="form-control" id="resumeEducation" name="resumeEducation">
+											<option value="大学本科">大学本科</option>
+											<option value="博士后">博士后</option>
+											<option value="博士">博士</option>
+											<option value="硕士">硕士</option>
+											<option value="大学专科">大学专科</option>
+											<option value="高中">高中</option>
+											<option value="其他">其他</option>
+										</select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -196,22 +241,6 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeFLType" class="col-md-4 control-label">外语类型</label>
-									<div class="col-md-8">
-										<select name="resumeFLType" id="resumeFLType"
-											class="form-control">
-											<option value="0" selected="selected">--未选择--</option>
-											<option value="1">英语</option>
-											<option value="2">日语</option>
-											<option value="3">德语</option>
-											<option value="4">法语</option>
-											<option value="5">俄语</option>
-											<option value="6">西班牙语</option>
-											<option value="7">丹麦语</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
 									<label for="resumeFLAbility" class="col-md-4 control-label">外语水平</label>
 									<div class="col-md-8">
 										<select name="resumeFLAbility" id="resumeFLAbility"
@@ -222,6 +251,14 @@
 											<option value="3">熟练</option>
 											<option value="4">精通</option>
 										</select>
+									</div>
+								</div>
+								<div style="margin-bottom:13px">
+									<label for="resumeWeight" class="col-md-4 control-label">体重</label>
+									<div class="col-md-8 input-group">
+										<input class="form-control" name="resumeWeight"
+											id="resumeWeight" />
+											<span class="input-group-addon">（公斤）</span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -237,27 +274,27 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="resumeWeight" class="col-md-4 control-label">体重(公斤)</label>
-									<div class="col-md-8">
-										<input class="form-control" name="resumeWeight"
-											id="resumeWeight" />
-									</div>
-								</div>
 							</div>
 							<!-- 展开更多右侧结束 -->
-							<div class="col-md-11">
+							</div><!-- row end -->
+							<div class="row">
+							<!-- 自我评价 -->
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="resumeSelfEvaluation"
-										class="col-md-3 control-label">自我评价</label>
-									<div class="col-md-9">
-										<textarea style="resize: none;" class="form-control" id="resumeSelfEvaluation"
+										class="col-md-1 control-label">自我评价</label>
+									<div class="col-md-10">
+										<textarea rows="5" style="resize: none;" class="form-control" id="resumeSelfEvaluation"
 											name="resumeSelfEvaluation"></textarea>
 									</div>
 								</div>
 							</div>
+							<!-- 自我评价结束 -->
+							</div><!-- .row end  -->
 						</div>
 					</div>
+				</div><!-- 展开更多panel结束 -->
+				</div>
 				</div>
 				<div class="form-group">
 					<div class="col-md-offset-5 col-md-12">

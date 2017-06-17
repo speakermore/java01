@@ -17,6 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ynjh.company.entity.Company;
 import ynjh.personal.entity.User;
+/**
+ * 
+ * @author 黄冰雁
+ * Ckediter的图片上传
+ *
+ */
 @Controller
 public class UpImgController {
 	@RequestMapping("/upload")	
