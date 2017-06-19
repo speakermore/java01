@@ -201,33 +201,8 @@ a:focus {
 								</label>
 							</div>
 						</c:if>
-						<c:if test="${resume.resumeEnglishGrade!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">英语等级：</label><label
-									class="control-label"> <c:if
-										test="${resume.resumeEnglishGrade==1 }">国家英语考试3级
-									</c:if> <c:if test="${resume.resumeEnglishGrade==2 }">国家英语考试4级
-									</c:if> <c:if test="${resume.resumeEnglishGrade==3 }">国家英语考试6级
-									</c:if> <c:if test="${resume.resumeEnglishGrade==4 }">专业4级
-									</c:if> <c:if test="${resume.resumeEnglishGrade==5 }">专业8级
-									</c:if> <c:if test="${resume.resumeEnglishGrade==6 }">未参加
-									</c:if> <c:if test="${resume.resumeEnglishGrade==7 }">未通过
-									</c:if>
-								</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeComputerAbility!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">计算机水平：</label><label
-									class="control-label"> <c:if
-										test="${resume.resumeComputerAbility==1 }">入门
-									</c:if> <c:if test="${resume.resumeComputerAbility==2 }">一般
-									</c:if> <c:if test="${resume.resumeComputerAbility==3 }">熟练
-									</c:if> <c:if test="${resume.resumeComputerAbility==4 }">精通
-									</c:if>
-								</label>
-							</div>
-						</c:if>
+						
+						
 						<c:if test="${resume.resumeHeight!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">身高：</label> <label

@@ -107,9 +107,6 @@ public class ResumeController {
 		resume.setUserId(user.getId());
 		//牟勇：在页面上增加了标题的下拉框，这句代码不再需要了。
 		//resume.setResumeTitle("我的简历");
-		
-		
-		
 		try {
 			//牟勇：检查简历是否重复（因为只允许写一份简历）
 			Resume oldResume=rService.findResumeByOneUserId(user.getId());
@@ -126,6 +123,7 @@ public class ResumeController {
 				mv.setViewName("personal/resume/personal_createresume");
 			}
 		} catch (ResumeExistsException e) {
+			//牟勇：发现简历有重复，进这里，保存错误信息，并在错误页面上显示
 			mv.addObject("errorInfo", e.toString());
 			mv.setViewName("/notlogin");
 		}

@@ -18,3 +18,4 @@
 <script type="text/javascript" src="thirdpart/fileupload/language/zh.js"></script>
 <script type="text/javascript" src="js/bootstrap-typeahead.js"
 		charset="UTF-8"></script>
+<script type="text/javascript" src="js/main.js" charset="UTF-8"></script>

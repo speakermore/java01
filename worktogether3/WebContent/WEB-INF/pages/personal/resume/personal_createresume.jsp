@@ -51,7 +51,11 @@
 					function() {
 						$("#resumeBirthday").datetimepicker("setEndDate",
 								$("#resumeWorks").val())
-					});
+					}).on('hide',function(e) {  
+		                $('#resumeForm').data('bootstrapValidator')  
+	                    .updateStatus('resumeBirthday', 'NOT_VALIDATED',null)  
+	                    .validateField('resumeBirthday');  
+	            });
 
 			$("#resumeWorks").datetimepicker({
 				format : 'yyyy-mm-dd',
@@ -65,7 +69,11 @@
 					function() {
 						$("#resumeWorks").datetimepicker("setStartDate",
 								$("#resumeBirthday").val())
-					});
+				}).on('hide',function(e) {  
+		            $('#resumeForm').data('bootstrapValidator')  
+	                .updateStatus('resumeWorks', 'NOT_VALIDATED',null)  
+	                .validateField('resumeWorks');  
+	            });
 
 			$("#resumeGraduationTime").datetimepicker({
 				format : 'yyyy-mm-dd',
@@ -74,7 +82,11 @@
 				autoclose : true,
 				todayHighlight : true,
 				minView : "month"
-			});
+			}).on('hide',function(e) {  
+                $('#resumeForm').data('bootstrapValidator')  
+                .updateStatus('resumeGraduationTime', 'NOT_VALIDATED',null)  
+                .validateField('resumeGraduationTime');  
+        });
 			//创建简历的验证
 			$("#resumeForm").bootstrapValidator({
 				message : '这个值不能通过验证！！',
@@ -116,19 +128,19 @@
 						validators : {
 							regexp : {
 								regexp : /^[0-9]+$/,
-								message : '请输入正确的薪资'
+								message : '薪资只能是数字'
 							}
 						}
 					},
 					resumeJor : {
 						validators : {
 							notEmpty : {
-								message : '意向不能为空'
+								message : '目前职位不能为空'
 							},
 							stringLength : {
 								min : 2,
 								max : 8,
-								message : '请输入正确的意向'
+								message : '目前职位只能在2到8个字符之间'
 							}
 						}
 					},
@@ -137,7 +149,7 @@
 							stringLength : {
 								min : 0,
 								max : 10,
-								message : '请输入正确的民族'
+								message : '请输入正确的民族名称'
 							}
 						}
 					},
@@ -146,7 +158,7 @@
 							stringLength : {
 								min : 0,
 								max : 50,
-								message : '请输入正确籍贯'
+								message : '请输入正确籍贯省份'
 							}
 						}
 					},
@@ -210,7 +222,7 @@
 							},
 							regexp : {
 								regexp : /^[a-zA-Z0-9_-]+$/,
-								message : '请输入正确的QQ或微信'
+								message : 'QQ/微信中似乎不应包括特殊字符'
 							}
 
 						}
@@ -220,11 +232,11 @@
 							stringLength : {
 								min : 2,
 								max : 3,
-								message : '请输入正确的身高数'
+								message : '身高应该在10-999厘米之间'
 							},
 							regexp : {
 								regexp : /^[0-9]+$/,
-								message : '请输入正确的身高数！'
+								message : '身高应该是数字！'
 							}
 
 						}
@@ -234,11 +246,11 @@
 							stringLength : {
 								min : 2,
 								max : 3,
-								message : '请输入正确的体重数'
+								message : '体重应该在10-999公斤以内'
 							},
 							regexp : {
 								regexp : /^[0-9]+$/,
-								message : '请输入正确的体重数'
+								message : '体重应该是数字'
 							}
 
 						}

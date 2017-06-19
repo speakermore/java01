@@ -35,28 +35,28 @@
 				<!-- 简历基本信息左侧 -->
 				<div class="col-md-5 column">
 					<div class="form-group">
-						<label for="resumeName" class="col-md-4 control-label">姓名</label>
+						<label for="resumeName" class="col-md-4 control-label">姓名：</label>
 						<div class="col-md-8">
 							<input class="form-control" name="resumeName" id="resumeName"
 								type="text" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeBirthday" class="col-md-4 control-label">出生日期</label>
+						<label for="resumeBirthday" class="col-md-4 control-label">出生日期：</label>
 						<div class="col-md-8">
 							<input class="form-control form_datetime" id="resumeBirthday"
 								name="resumeBirthday" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumePhone" class="col-md-4 control-label">手机</label>
+						<label for="resumePhone" class="col-md-4 control-label">手机：</label>
 						<div class="col-md-8">
 							<input class="form-control" id="resumePhone" type="text"
 								name="resumePhone" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeEmail" class="col-md-4 control-label">邮箱</label>
+						<label for="resumeEmail" class="col-md-4 control-label">邮箱：</label>
 						<div class="col-md-8">
 							<input class="form-control" id="resumeEmail" type="text"
 								name="resumeEmail" />
@@ -67,7 +67,7 @@
 				<!-- 简历基本信息右侧 -->
 				<div class="col-md-5 column">
 					<div class="form-group">
-						<label for="resumeGender" class="col-md-4 control-label">性别</label>
+						<label for="resumeGender" class="col-md-4 control-label">性别：</label>
 						<div class="col-md-8">
 							<div class="col-md-6">
 								<input type="radio" name="resumeGender" id="resumeGender"
@@ -80,21 +80,21 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeWorks" class="col-md-4 control-label">开始工作年月</label>
+						<label for="resumeWorks" class="col-md-4 control-label">开始工作时间：</label>
 						<div class="col-md-8">
 							<input class="form-control form_datetime" id="resumeWorks"
 								name="resumeWorks" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeNowResidence" class="col-md-4 control-label">目前居住地</label>
+						<label for="resumeNowResidence" class="col-md-4 control-label">居住地：</label>
 						<div class="col-md-8">
 							<input class="form-control" id="resumeNowResidence"
 								name="resumeNowResidence" type="text" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeJor" class="col-md-4 control-label">目前职位</label>
+						<label for="resumeJor" class="col-md-4 control-label">目前职位：</label>
 						<div class="col-md-8">
 							<input class="form-control" id="resumeJor" name="resumeJor"
 								type="text" />
@@ -117,7 +117,7 @@
 							<!-- 展开更多左侧 -->
 							<div class="col-md-5 column">
 								<div class="form-group">
-									<label for="resumeQQ" class="col-md-4 control-label">QQ/微信</label>
+									<label for="resumeQQ" class="col-md-4 control-label">QQ/微信：</label>
 									<div class="col-md-8">
 										<input class="form-control" name="resumeQQ" id="resumeQQ"
 											type="text" />
@@ -125,7 +125,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label for="resumeNation" class="col-md-4 control-label">民族</label>
+									<label for="resumeNation" class="col-md-4 control-label">民族：</label>
 									<div class="col-md-8">
 										<input class="form-control" data-provide="typeahead" data-items="4" autocomplete="off" name="resumeNation"
 											id="resumeNation" type="text" />
@@ -133,16 +133,10 @@
 								</div>
 								<script type="text/javascript">
 								//民族的自动完成特效
-								$.post('findAllNationName', function(data) {
-									$('#resumeNation').typeahead({
-										source : JSON.parse(data),
-										minLength:0,
-										showHintOnFocus:true,
-										fitToElement:true});
-								});
+								myAutoComplete('findAllNationName','#resumeNation');
 								</script>
 								<div class="form-group">
-									<label for="resumePlace" class="col-md-4 control-label">籍贯</label>
+									<label for="resumePlace" class="col-md-4 control-label">籍贯：</label>
 									<div class="col-md-8">
 										<input class="form-control" id="resumePlace" data-provide="typeahead" autocomplete="off"
 											name="resumePlace" type="text" />
@@ -150,23 +144,17 @@
 								</div>
 								<script type="text/javascript">
 								//省份的自动完成特效
-								$.post('findAllProvinceName', function(data) {
-									$('#resumePlace').typeahead({
-										source : JSON.parse(data),
-										minLength:0,
-										showHintOnFocus:true,
-										fitToElement:true});
-								});
+								myAutoComplete('findAllProvinceName','#resumePlace');
 								</script>
 								<div class="form-group">
-									<label for="resumeHouseAddress" class="col-md-4 control-label">家庭地址</label>
+									<label for="resumeHouseAddress" class="col-md-4 control-label">住址：</label>
 									<div class="col-md-8">
 										<input class="form-control" name="resumeHouseAddress"
 											id="resumeHouseAddress" type="text" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeFLType" class="col-md-4 control-label">外语类型</label>
+									<label for="resumeFLType" class="col-md-4 control-label">外语类型：</label>
 									<div class="col-md-8">
 										<select name="resumeFLType" id="resumeFLType"
 											class="form-control">
@@ -183,7 +171,7 @@
 									</div>
 								</div>
 								<div style="margin-bottom:13px">
-									<label for="resumeHeight" class="col-md-4 control-label">身高</label>
+									<label for="resumeHeight" class="col-md-4 control-label">身高：</label>
 									<div class="col-md-8 input-group">
 										<input class="form-control" name="resumeHeight"
 											id="resumeHeight" />
@@ -192,7 +180,7 @@
 								</div>
 								<div class="form-group">
 									<label for="resumeGraduationSchool"
-										class="col-md-4 control-label">毕业学校</label>
+										class="col-md-4 control-label">毕业学校：</label>
 									<div class="col-md-8">
 										<input class="form-control" id="resumeGraduationSchool"
 											name="resumeGraduationSchool" type="text" />
@@ -204,7 +192,7 @@
 							<!-- 展开更多右侧 -->
 							<div class="col-md-5 column">
 								<div class="form-group">
-									<label for="resumeEducation" class="col-md-4 control-label">学历</label>
+									<label for="resumeEducation" class="col-md-4 control-label">最高学历：</label>
 									<div class="col-md-8">
 										<select class="form-control" id="resumeEducation" name="resumeEducation">
 											<option value="大学本科">大学本科</option>
@@ -218,14 +206,14 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeWages" class="col-md-4 control-label">期待薪资</label>
+									<label for="resumeWages" class="col-md-4 control-label">期望薪资：</label>
 									<div class="col-md-8">
 										<input class="form-control" name="resumeWages"
 											id="resumeWages" type="text" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeMajor" class="col-md-4 control-label">专业</label>
+									<label for="resumeMajor" class="col-md-4 control-label">专业：</label>
 									<div class="col-md-8">
 										<input class="form-control" id="resumeMajor"
 											name="resumeMajor" type="text" />
@@ -233,7 +221,7 @@
 								</div>
 								<div class="form-group">
 									<label for="resumeGraduationTime"
-										class="col-md-4 control-label">毕业时间</label>
+										class="col-md-4 control-label">毕业时间：</label>
 									<div class="col-md-8">
 										<input class="form-control form_datetime" value="2016-1-1"
 											id="resumeGraduationTime" name="resumeGraduationTime"
@@ -241,7 +229,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeFLAbility" class="col-md-4 control-label">外语水平</label>
+									<label for="resumeFLAbility" class="col-md-4 control-label">外语水平：</label>
 									<div class="col-md-8">
 										<select name="resumeFLAbility" id="resumeFLAbility"
 											class="form-control">
@@ -254,7 +242,7 @@
 									</div>
 								</div>
 								<div style="margin-bottom:13px">
-									<label for="resumeWeight" class="col-md-4 control-label">体重</label>
+									<label for="resumeWeight" class="col-md-4 control-label">体重：</label>
 									<div class="col-md-8 input-group">
 										<input class="form-control" name="resumeWeight"
 											id="resumeWeight" />
@@ -262,7 +250,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeMarriage" class="col-md-4 control-label">婚姻状况</label>
+									<label for="resumeMarriage" class="col-md-4 control-label">婚姻状况：</label>
 									<div class="col-md-8">
 										<div class="col-md-6">
 											<input type="radio" name="resumeMarriage" id="resumeMarriage"
@@ -282,7 +270,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="resumeSelfEvaluation"
-										class="col-md-1 control-label">自我评价</label>
+										class="col-md-1 control-label">自我评价：</label>
 									<div class="col-md-10">
 										<textarea rows="5" style="resize: none;" class="form-control" id="resumeSelfEvaluation"
 											name="resumeSelfEvaluation"></textarea>

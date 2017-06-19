@@ -48,15 +48,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addUserCharge" parameterType="UserCharge">
 		insert into usercharge(userId,userChargeTime,userChargeMoney,userChargeType,userChargeContent) value(#{userId},#{userChargeTime},#{userChargeMoney},#{userChargeType},#{userChargeContent})
 	</insert>
-	<!-- 人才信息列表 -->
+	<!-- 人才信息列表(牟勇：不包含登录人自己) -->
 	<select id="findUserList" resultType="UserAndResume">
-		select r.resumeJor,r.resumeWorks,r.resumeEducation,u.* from resume r,user u where r.userId=u.id and not userLoginId=#{userLoginId}
+		select r.resumeJor,r.resumeWorks,r.resumeEducation,u.* from resume r,user u where r.userId=u.id and userLoginId &lt;&gt; #{userLoginId}
 		<if test="page!=null">
 			limit #{page},20
 		</if>
 	</select>
 	<select id="getMaxUserList" resultType="Integer" parameterType="String">
-		select count(*) from resume r,user u where r.userId=u.id and not userLoginId=#{userLoginId}
+		<![CDATA[select count(*) from resume r,user u where r.userId=u.id and not userLoginId <> #{userLoginId}]]>  
 	</select>
 	<!-- 人才信息列表2 -->
 	<select id="findUserListForOther" resultType="UserAndResume" parameterType="Integer">

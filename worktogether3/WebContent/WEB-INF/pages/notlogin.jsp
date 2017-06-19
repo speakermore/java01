@@ -18,12 +18,12 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
+<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 	<%@include file="nav.jsp" %>
-	<p><center><img src="img/notlog_error.png" /></center></p>
+	<p style="text-align: center;"><img src="img/notlog_error.png" /></p>
 	<h1><span  class="alert alert-warning">${errorInfo }</span><a href="javascript:history.back()">返回</a></h1>
 	
 </body>

@@ -12,7 +12,7 @@ public class CommonStatus {
 	//用户类型
 	public static final String[] USER_TYPE={"","企业","个人"};
 	//婚配
-	public static final String[] MARRY={"已婚","未婚"};
+	public static final String[] MARRY={"未婚","已婚"};
 	//婚姻状况2
 	public static final String[] MARRIAGE={"未婚","已婚"};
 	//企业类型
