@@ -232,18 +232,17 @@
 						<div class="form-group">
 							<label for="resumeMarriage" class="col-md-4 control-label">婚姻状况：</label>
 							<div class="col-md-8">
-
-								<div class="col-md-6 radio">
-									<input type="radio" name="resumeMarriage" id="resumeMarriage"
-										value="1"
-										${resume_update.resumeMarriage==1?"checked=\"checked\"":"" }>
-									<label>已婚</label>
-								</div>
 								<div class="col-md-6 radio">
 									<input type="radio" name="resumeMarriage" id="resumeMarriage"
 										value="0"
 										${resume_update.resumeMarriage==0?"checked=\"checked\"":"" }>
 									<label>未婚</label>
+								</div>
+								<div class="col-md-6 radio">
+									<input type="radio" name="resumeMarriage" id="resumeMarriage"
+										value="1"
+										${resume_update.resumeMarriage==1?"checked=\"checked\"":"" }>
+									<label>已婚</label>
 								</div>
 							</div>
 						</div>
@@ -331,6 +330,7 @@
 			}
 		});
 	}
+	//牟勇：js的初始化
 	$(function() {
 		//牟勇：为下拉列表框填充默认值（是个聪明的办法,否则要写一大堆判断语句）
 		$("#resumeFLAbility").val("${resume_update.resumeFLAbility}");
@@ -388,7 +388,7 @@
             .validateField('resumeGraduationTime');  
     });
 
-		$("#resumeForm").bootstrapValidator({
+		$("#resumeForms").bootstrapValidator({
 			message : '这个值不能通过验证！！',
 			feedbackIcons : {
 				valid : 'glyphicon glyphicon-ok',

@@ -11,11 +11,11 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>热门文章</title>
 
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 </head>
 <body>
 	<div class="container-fluid">
-		<div><%@include file="menu.jsp"%></div>
+		<div><%@include file="../menu.jsp"%></div>
 		<div class="col-md-offset-2">
 			<div class="row">
 				<div class="col-sm-10">
@@ -57,6 +57,6 @@
 		</div>
 	</div>
 	<!-- end of container-fluid -->
-	<div><%@include file="footer.jsp"%></div>
+	<div><%@include file="../footer.jsp"%></div>
 </body>
 </html>

@@ -27,10 +27,10 @@
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap -->
-<%@include file="../admin/header.jsp"%>
+<%@include file="../header.jsp"%>
 </head>
 <body>
-	<div><%@include file="../admin/menu.jsp"%></div>
+	<div><%@include file="../menu.jsp"%></div>
 	<div class="col-sm-offset-1">
 	<a style="font-weight: bold; font-size: 25px;">管理员访问操作记录表:</a>
 	<form action="admin/adminLog" method="post">
@@ -131,6 +131,6 @@
 							$("#datetimeStart".val()))
 				});
 	</script>
-	<div><%@include file="../admin/footer.jsp"%></div>
+	<div><%@include file="../footer.jsp"%></div>
 </body>
 </html>

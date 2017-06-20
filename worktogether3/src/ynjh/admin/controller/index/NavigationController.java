@@ -19,6 +19,7 @@ import ynjh.personal.entity.Resume;
  *
  */
 @Controller
+@RequestMapping("/admin")
 public class NavigationController {
 	
 	@Resource

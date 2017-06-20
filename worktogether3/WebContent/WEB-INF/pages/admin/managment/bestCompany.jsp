@@ -13,12 +13,13 @@
 <title>最佳企业</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="js/bootstrap.js" ></script>
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 </head>
 <body>
-<div><%@include file="menu.jsp"%></div>
+<div><%@include file="../menu.jsp"%></div>
+<a style="font-weight:bold; font-size:25px ;">管理员访问操作记录表:</a><br/><br/>
 <table class="table table-striped">
-	<a style="font-weight:bold; font-size:25px ;">管理员访问操作记录表:</a><br/><br/>
+	
 	<thead>
 		<tr>
 			<th>最佳企业</th>

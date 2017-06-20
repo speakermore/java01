@@ -12,11 +12,11 @@ import org.springframework.core.convert.converter.Converter;
  *
  */
 public class StringToDateConvertor implements Converter<String, Timestamp> {
-	private String datePattner;
+	private String[] datePattners;
 	
 	
-	public StringToDateConvertor(String datePattner) {
-		this.datePattner = datePattner;
+	public StringToDateConvertor(String[] datePattners) {
+		this.datePattners = datePattners;
 	}
 
 
@@ -24,11 +24,14 @@ public class StringToDateConvertor implements Converter<String, Timestamp> {
 	public Timestamp convert(String stringDate) {
 		
 		try {
-			return new Timestamp(new SimpleDateFormat(datePattner).parse(stringDate).getTime());
+			for(String datePattner:datePattners){
+				return new Timestamp(new SimpleDateFormat(datePattner).parse(stringDate).getTime());
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 			throw new RuntimeException("日期字符串的格式不对"+stringDate);
 		}
+		return new Timestamp(System.currentTimeMillis());
 	}
 
 }

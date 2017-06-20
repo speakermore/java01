@@ -22,7 +22,7 @@ public class CommonStatus {
 	//外语水平
 	public static final String[] FL_ABILITY={"","入门","一般","熟练","精通"};
 	//外语类型
-	public static final String[] FL_TYPE={"","英语","日语","德语","......"};
+	public static final String[] FL_TYPE={"","英语","日语","德语","法语","俄语","西班牙语","丹麦语","其他"};
 	//外语等级
 	public static final String[] ENGLISH_GRADE={"","国家英语考试3级","国家英语考试4级","国家英语考试6级","专业4级","专业8级","未参加","未通过"};
 	//计算机水平

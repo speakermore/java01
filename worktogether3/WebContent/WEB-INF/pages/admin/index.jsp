@@ -27,7 +27,7 @@
 						<section class="panel">
 							<blockquote>最新待审核简历:</blockquote>
 							<c:if test="${resumeList5==null}">
-								<jsp:forward page="/indexResume" />
+								<jsp:forward page="/admin/indexResume" />
 							</c:if>
 							<table class="table table-hover table-striped">
 								<thead>
@@ -78,7 +78,7 @@
 						<section class="panel">
 							<blockquote>最新待审核文章:</blockquote>
 							<c:if test="${articleList5==null}">
-								<jsp:forward page="/indexArticle" />
+								<jsp:forward page="/admin/indexArticle" />
 							</c:if>
 							<table class="table table-hover table-striped">
 								<thead>
@@ -117,7 +117,7 @@
 								</tbody>
 							</table>
 							<div class="col-md-offset-11">
-								<a href="admin/findAuditResume/0">更多...</a>
+								<a href="/admin/findAuditResume/0">更多...</a>
 							</div>
 						</section>
 					</div>
@@ -129,7 +129,7 @@
 						<blockquote>最新待审核用户评价:</blockquote>
 						<section class="panel">
 							<c:if test="${discussList5==null}">
-								<jsp:forward page="/indexDiscuss" />
+								<jsp:forward page="/admin/indexDiscuss" />
 							</c:if>
 							<table class="table table-hover table-striped">
 								<thead>

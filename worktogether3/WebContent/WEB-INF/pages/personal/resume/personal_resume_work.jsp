@@ -33,7 +33,7 @@
 
 
 				<!-- 模态框 -->
-				<div class="modal fade" id="modal-container-work${work.id}" role="dialog"
+				<div onclick="" class="modal fade" id="modal-container-work${work.id}" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true"
 					data-backdrop="static">
 					<div class="modal-dialog">
@@ -86,11 +86,6 @@
 												id="datetimeEnd1" readonly class="form_datetime form-control"
 												placeholder="请选择日期">
 										</div>
-										<%-- <fmt:formatDate value="${pro.projectBeginTime }"
-														pattern="yyyy-MM-dd" />
-													到
-													<fmt:formatDate value="${pro.projectEndTime }"
-														pattern="yyyy-MM-dd" /> --%>
 									</div>
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
@@ -101,7 +96,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- 模态框关闭 -->
+				<!-- 模态框结束 -->
 			</div>
 		</div>
 	</c:forEach>
@@ -117,6 +112,7 @@
 </div>
 <script type="text/javascript">
 	var updateWorkFormAjax = function(page, id) {
+		$('#modal-container-work'+id).modal('hide');
 		var updateWorkForm = new FormData(document
 				.getElementById("updateWorkForm"+id));
 		$.ajax({
@@ -125,13 +121,11 @@
 			dataType : "html",
 			type : "post",
 			processData : false,
-			contentType : false,
 			success : function(data) {
-				alert("修改成功！");
 				$("#workFresh").html(data);
 			},
 			error:function(){
-				alert("修改失败！");
+				alert("error:修改失败！");
 			}
 		});
 	}

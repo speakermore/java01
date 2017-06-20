@@ -16,7 +16,12 @@
         	<property name="converters">
         		<list>
         			<bean class="ynjh.common.convertor.StringToDateConvertor">
-        				<constructor-arg type="java.lang.String" value="yyyy-MM-dd"></constructor-arg>
+        				<constructor-arg>
+        					<array>
+        						<value>yyyy-MM-dd</value>
+        						<value>yyyy-MM-dd HH:mm:ss</value>
+        					</array>
+        				</constructor-arg>
         			</bean>
         		</list>
         	</property>

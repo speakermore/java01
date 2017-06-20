@@ -254,11 +254,11 @@
 									<div class="col-md-8">
 										<div class="col-md-6">
 											<input type="radio" name="resumeMarriage" id="resumeMarriage"
-												value="1" checked="checked"> <label>已婚</label>
+												value="0"> <label>未婚</label>
 										</div>
 										<div class="col-md-6">
 											<input type="radio" name="resumeMarriage" id="resumeMarriage"
-												value="0"> <label>未婚</label>
+												value="1" checked="checked"> <label>已婚</label>
 										</div>
 									</div>
 								</div>

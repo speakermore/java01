@@ -5,6 +5,8 @@
 <c:set var="MARRY" value="${CommonStatus.MARRY }"></c:set>
 <c:set var="SEX" value="${CommonStatus.SEX }"></c:set>
 <c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
+<c:set var="FL_ABILITY" value="${CommonStatus.FL_ABILITY }"></c:set>
+<c:set var="FL_TYPE" value="${CommonStatus.FL_TYPE }"></c:set>
 <style type="text/css">
 .test {
 	outline: 1px solid #E5E5E5;
@@ -127,7 +129,7 @@ a:focus {
 						</c:if>
 						<c:if test="${resume.resumeJor!=null}">
 							<div class="col-md-6 column">
-								<label class="control-label">求职意向：</label> <label
+								<label class="control-label">目前职位：</label> <label
 									class="control-label">${resume.resumeJor}</label>
 							</div>
 						</c:if>
@@ -176,28 +178,15 @@ a:focus {
 						</c:if>
 						<c:if test="${resume.resumeFLAbility!=null }">
 							<div class="col-md-6 column">
-								<label class="control-label">外语水平：</label><label
-									class="control-label"> <c:if
-										test="${resume.resumeFLAbility==1 }">入门
-									</c:if> <c:if test="${resume.resumeFLAbility==2 }">一般
-									</c:if> <c:if test="${resume.resumeFLAbility==3 }">熟练
-									</c:if> <c:if test="${resume.resumeFLAbility==4 }">精通
-									</c:if>
-								</label>
+								<label class="control-label">外语水平：</label>
+								<label	class="control-label">${FL_ABILITY[resume.resumeFLAbility]}</label>
 							</div>
 						</c:if>
 						<c:if test="${resume.resumeFLType!=null }">
 							<div class="col-md-6 column">
-								<label class="control-label">外语类型：</label><label
-									class="control-label"> <c:if
-										test="${resume.resumeFLType==1 }">英语
-									</c:if> <c:if test="${resume.resumeFLType==2 }">日语
-									</c:if> <c:if test="${resume.resumeFLType==3 }">德语
-									</c:if> <c:if test="${resume.resumeFLType==4 }">法语
-									</c:if> <c:if test="${resume.resumeFLType==5 }">俄语
-									</c:if> <c:if test="${resume.resumeFLType==6 }">西班牙语
-									</c:if> <c:if test="${resume.resumeFLType==7 }">丹麦语
-									</c:if>
+								<label class="control-label">外语类型：</label>
+								<label class="control-label">
+									${FL_TYPE[resume.resumeFLType] } 
 								</label>
 							</div>
 						</c:if>
@@ -206,13 +195,13 @@ a:focus {
 						<c:if test="${resume.resumeHeight!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">身高：</label> <label
-									class="control-label">${resume.resumeHeight }</label>(厘米)
+									class="control-label">${resume.resumeHeight }</label>厘米
 							</div>
 						</c:if>
 						<c:if test="${resume.resumeWeight!=null }">
 							<div class="col-md-6 column">
 								<label class="control-label">体重：</label> <label
-									class="control-label">${resume.resumeWeight }</label>(公斤)
+									class="control-label">${resume.resumeWeight }</label>公斤
 							</div>
 						</c:if>
 						<c:if test="${resume.resumeSelfEvaluation!=null }">
@@ -264,8 +253,8 @@ a:focus {
 								<div class="form-group">
 									<label for="workDescription" class="col-md-3 control-label">工作描述：</label>
 									<div class="col-md-8">
-										<input class="form-control" name="workDescription"
-											id="workDescription" />
+										<textarea class="form-control" name="workDescription"
+											id="workDescription" ></textarea>
 									</div>
 								</div>
 								<div class="form-group">

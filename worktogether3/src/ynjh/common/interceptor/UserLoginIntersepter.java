@@ -42,7 +42,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 		if(session.getAttribute("admin")!=null){
 			//如果是管理员登录，则只能访问管理员的页面
 			Admin admin=(Admin)session.getAttribute("admin");
-			if(path.indexOf("admin")!=-1){
+			if(path.indexOf("admin")!=-1||path.indexOf("superAdmin")!=-1){
 				return true;
 			}
 			request.setAttribute("errorInfo", "您是管理员，不能访问别的页面");
