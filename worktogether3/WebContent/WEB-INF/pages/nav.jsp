@@ -12,8 +12,8 @@
 		<div class="row">
 			<div class="col-xs-12 work-together-background">
 				<h5 style="color:#fff;float:left;">相职网&nbsp;&nbsp;<em><small>专业提供软件人力资源解决方案</small></em></h5>
+				<!-- 判断是否登录开始 -->
 			<h5 class="col-xs-offset-9">
-		<!-- 判断是否登录开始 -->
 		<c:if test="${user==null }">
 			<a href="personal/user/login"
 				class="hidden-xs">个人用户入口</a>|
@@ -32,7 +32,7 @@
 		</c:if>
 		</h5>
 		<!-- 判断是否登录结束 -->
-		</div>
+			</div>
 		</div>
 		<div class="row">
 		<div class="navbar-header">
@@ -57,6 +57,9 @@
 				<li><a href="#">关于我们</a></li>
 			</ul>
 		</div>
+		
+		
+		
 	</div>
 	</div>
 </nav>
