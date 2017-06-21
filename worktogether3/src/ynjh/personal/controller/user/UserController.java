@@ -122,7 +122,7 @@ public class UserController {
 
 	/**
 	 * 退出 跳转登录 取消会话信息
-	 * 
+	 * 牟勇：无论是个人用户还是企业用户，退出后均跳转到首页
 	 * @param session
 	 * @return
 	 * 
@@ -131,7 +131,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "personal/user/personal_login";
+		return "redirect:/";
 	}
 
 	/**
