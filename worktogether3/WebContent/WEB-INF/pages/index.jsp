@@ -83,7 +83,7 @@
   		}
   	</style>
   	<style>
-		/* banner的样式 */
+		/* 右侧banner的样式 */
 		
 		/* Carousel base class */
 		.carousel {
