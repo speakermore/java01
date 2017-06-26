@@ -81,7 +81,7 @@ public class CkediterController {
 			// 创建File,并且服务器上创建实际存在的文件
 			File newupload = new File(path + "/" + newFileName);
 			if (!newupload.exists()) {
-				System.out.println(newupload.mkdirs());
+				newupload.mkdirs();
 			}
 
 			// 将imgpath写到磁盘上
