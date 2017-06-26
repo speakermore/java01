@@ -33,4 +33,6 @@ public class CommonStatus {
 	public static final String[] ADMIN_STATUS={"已禁用","正常"};
 	//管理员在线状态
 	public static final String[] ADMIN_STATUS_NOW={"下线","在线"};
+	//新闻资讯状态
+	public static final String[] NEWS_STATUS={"","","禁用","","","","","","","正常","置顶"};
 }

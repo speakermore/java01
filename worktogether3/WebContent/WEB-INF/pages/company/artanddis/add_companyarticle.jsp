@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<br />
 		    	<textarea name="articleContent" rows="10" cols="100"></textarea><br />
-		  		<input type="submit" value="发表" class="btn btn-warning" />
+		  		<input type="submit" value="发表" class="btn btn-success" />
 		  		<div class=" col-sm-11 column"></div>
    			</form>
    			
@@ -81,7 +81,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="thirdpart/dist/js/language/zh_CN.js"></script>
   	<script type="text/javascript">
 	    $(document).ready(function(){  
-	    	CKEDITOR.replace('articleContent'); 
+	    	CKEDITOR.replace('articleContent',{
+    		    filebrowserImageUploadUrl: '../../ckeditor/upload?Type=Images'
+    		}); 
 	    });  
     </script>
    

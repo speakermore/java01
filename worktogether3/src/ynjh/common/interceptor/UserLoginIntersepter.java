@@ -1,7 +1,5 @@
 package ynjh.common.interceptor;
 
-import java.sql.Connection;
-import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +22,9 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
-		String[] ignorePathes={"thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+		String[] ignorePathes={"admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+		//登录之后，不作处理的公共路径
+		String[] commonPathes={"ckeditor/upload","findAllNationName"};
 		HttpSession session=request.getSession();
 		//获得请求路径
 		StringBuffer path=request.getRequestURL();
@@ -32,16 +32,30 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 		if(path.lastIndexOf("/")==path.length()-1){
 			return true;
 		}
-		//忽略登录路径
+		//查找不登录也允许访问的路径
 		for(String ignorePath:ignorePathes){
 			if(path.indexOf(ignorePath)!=-1){
 				return true;
 			}
 		}
-		request.setAttribute("errorInfo", "<center>您尚未登录，请先登录:<a href='personal/user/login'>个人登录</a>|<a href='company/company_login'>企业登录</a></center>");
+		
+		//判断用户如果没登录，则保存
+		if(session.getAttribute("admin")==null&&session.getAttribute("user")==null){
+			request.setAttribute("errorInfo", "<center>您尚未登录，请先登录:<a href='personal/user/login'>个人登录</a>|<a href='company/company/company_login'>企业登录</a></center>");
+		}else{
+			//查找登录之后就可以允许访问的通用路径
+			for(String ignorePath:commonPathes){
+				if(path.indexOf(ignorePath)!=-1){
+					return true;
+				}
+			}
+		}
+		
+		
+		
 		if(session.getAttribute("admin")!=null){
 			//如果是管理员登录，则只能访问管理员的页面
-			Admin admin=(Admin)session.getAttribute("admin");
+			//Admin admin=(Admin)session.getAttribute("admin");
 			if(path.indexOf("admin")!=-1||path.indexOf("superAdmin")!=-1){
 				return true;
 			}
@@ -55,13 +69,6 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 				if(path.indexOf("personal")!=-1){
 					return true;
 				}
-				//允许个人用户访问的路径
-				String[] allowPages={"findAllNationName"};
-				for(String allow:allowPages){
-					if(path.indexOf(allow)!=-1){
-						return true;
-					}
-				}
 				request.setAttribute("errorInfo", "您是个人用户，不能访问别的页面");
 			}else if(user instanceof Company){//企业用户
 				if(path.indexOf("company")!=-1){
@@ -73,5 +80,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 		request.getRequestDispatcher("/notlogin.jsp").forward(request, response);
 		return false;
 	}
+	
+	
 	
 }

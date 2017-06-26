@@ -35,6 +35,7 @@
     <div class="nav-slide-o">
     	<ul>
     		<li><a href=""><span>功能类别</span></a></li>
+    		<li><a href="admin/news/add"><span>添加资讯</span></a></li>
     		<li><a href="admin/maIntegerainAdmin"><span>信息维护</span></a></li>
     		<li><a href="admin/userMag" class="contact"><span>禁用用户</span></a></li>
     		<li><a href="admin/adminLog" class="news"><span>管理员日志</span></a></li>

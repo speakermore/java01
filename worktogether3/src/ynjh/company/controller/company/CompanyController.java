@@ -111,7 +111,8 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value={"/company_login","/"})
-	public String index(){
+	public String index(HttpSession session){
+		session.invalidate();
 		return "company/company/company_login";
 	}
 	

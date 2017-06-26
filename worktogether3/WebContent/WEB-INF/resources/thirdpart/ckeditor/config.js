@@ -40,6 +40,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbarCanCollapse = true
 	config.height = 'auto';
 	config.resize_enabled = false;
-	config.image_previewText=' '; //预览区域显示内容
-	config.filebrowserImageUploadUrl = "upload";//上传图片
+	config.image_previewText='  '; //预览区域显示内容
+	config.filebrowserUploadUrl = "/ckeditor/upload";//上传图片
+	config.filebrowserImageUploadUrl="/ckeditor/upload";
 };

@@ -15,8 +15,9 @@ public class News implements Serializable {
 	private Timestamp newsDate;//资讯创建时间
 	private int adminId;//发表资讯的管理员id
 	private int newsStatus;//资讯的状态：1.正常，2禁用
-	private int newsClickNum;
-	private int newsLikeNum;
+	private int newsClickNum;//点击数
+	private int newsLikeNum;//点赞数
+	private String adminName;//管理员的姓名
 	public News() {
 		super();
 	}
@@ -78,6 +79,13 @@ public class News implements Serializable {
 	}
 	public void setNewsLikeNum(int newsLikeNum) {
 		this.newsLikeNum = newsLikeNum;
+	}
+	
+	public String getAdminName() {
+		return adminName;
+	}
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
 	}
 	@Override
 	public String toString() {

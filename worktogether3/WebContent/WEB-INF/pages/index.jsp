@@ -119,19 +119,16 @@
 				<!-- 最新资讯 -->
 				<div class="work-together-title">
 					<span>最新资讯</span>
+					<c:if test="${newses10==null }">
+						<!-- 查询最新前10篇资讯 -->
+						<jsp:forward page="/admin/news/find_news_10"></jsp:forward>
+					</c:if>
 				</div>
 				<div class="panel">
 					<ol class="panel-body">
-						<li><a href="">面试中5个核心问题我们该如何回答</a></li>
-						<li><a href="">结束面试谈话技巧分享</a></li>
-						<li><a href="">什么样的猎头顾问不靠谱</a></li>
-						<li><a href="">面试缺席率高怎么办</a></li>
-						<li><a href="">面试礼仪与求职技巧</a></li>
-						<li><a href="">HR更相信自己通过简历看到的事实</a></li>
-						<li><a href="">5句话帮你面试成功</a></li>
-						<li><a href="">为什么企业会对猎头公司产生误解</a></li>
-						<li><a href="">如何提高企业现场招聘工作的效果</a></li>
-						<li><a href="">哪些技巧能通过简历获得面试的机会</a></li>
+						<c:forEach items="${newses10 }" var="news">
+							<li><a href="admin/news/news/${news.id }">${news.newsTitle.length()>13?news.newsTitle.substring(0,12).concat("..."):news.newsTitle }</a></li>
+						</c:forEach>
 					</ol>
 				</div>
 				<!-- 最新资讯结束 -->
