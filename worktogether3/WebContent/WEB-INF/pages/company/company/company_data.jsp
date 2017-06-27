@@ -52,10 +52,10 @@
 <c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
 <div class="container">
 	<div class="row clearfix">
-		<div class="col-sm-2 column">
+		<div class="col-sm-4 column">
 		<%@include file="/WEB-INF/pages/company/menu.jsp" %>
 		</div>
-		<div class="col-sm-7 column wt-hby-top">
+		<div class="col-sm-8 column wt-hby-top">
 			<div class="panel-group" id="accordion" >
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -229,9 +229,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-3 column">
-			广告位招租
 		</div>
 	</div>
 </div>

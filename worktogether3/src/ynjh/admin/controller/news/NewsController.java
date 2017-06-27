@@ -3,6 +3,7 @@ package ynjh.admin.controller.news;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.prism.paint.Stop;
-
+import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.News;
 import ynjh.admin.service.news.NewsService;
 
@@ -33,11 +33,14 @@ public class NewsController {
 	 * @return 成功跳转新闻资讯列表，失败跳转新闻添加页面
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public ModelAndView addNews(News news){
+	public ModelAndView addNews(News news,HttpSession session){
 		ModelAndView mv=new ModelAndView("redirect:/admin/news/find_all");
+		Admin admin=(Admin)session.getAttribute("admin");
+		//传递管理员的id给news
+		news.setAdminId(admin.getId());
 		int result=newsService.addNews(news);
 		if(result>0){
-			
+			//这里啥都没做
 		}else{
 			//向页面传递新闻资讯对象，以便表单回显数据
 			mv.addObject("news",news);
@@ -83,7 +86,7 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/stick/{id}")
 	public String stick(@PathVariable Integer id){
-		int result=newsService.stick(id,10);
+		newsService.stick(id,10);
 		return "redirect:/admin/news/find_all";
 	}
 	/**
@@ -93,7 +96,7 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/unstick/{id}")
 	public String unstick(@PathVariable Integer id){
-		int result=newsService.stick(id,9);
+		newsService.stick(id,9);
 		return "redirect:/admin/news/find_all";
 	}
 	/**
@@ -103,7 +106,7 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/stop/{id}")
 	public String stop(@PathVariable Integer id){
-		int result=newsService.stick(id,2);
+		newsService.stick(id,2);
 		return "redirect:/admin/news/find_all";
 	}
 	/**
@@ -113,7 +116,7 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/normal/{id}")
 	public String normal(@PathVariable Integer id){
-		int result=newsService.stick(id,9);
+		newsService.stick(id,9);
 		return "redirect:/admin/news/find_all";
 	}
 	

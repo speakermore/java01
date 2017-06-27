@@ -3,6 +3,7 @@ package ynjh.common.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
+import ynjh.admin.entity.News;
+import ynjh.admin.service.news.NewsService;
 import ynjh.common.service.NationService;
 import ynjh.common.service.ProvinceService;
 
@@ -28,12 +31,16 @@ public class MyCommonController {
 	private NationService nationService;
 	@Resource
 	private ProvinceService provinceService;
+	@Resource
+	private NewsService newsService;
 	/**
 	 * 首页的跳转
 	 * @return
 	 */
 	@RequestMapping(value={"/","/index","/index.html"})
-	public String index(){
+	public String index(HttpSession session){
+		List<News> newses10=newsService.findTop10ByCreateDate();
+		session.setAttribute("newses10", newses10);
 		return "index";
 	}
 	
@@ -50,6 +57,11 @@ public class MyCommonController {
 		Object jsonNation=JSON.toJSON(strNationNames);
 		return jsonNation;
 	}
+	/**
+	 * ajax的方式向JSP页面传递省的名字，
+	 * 只能使用POST方式获取
+	 * @return ajax对象，省的名称
+	 */
 	@RequestMapping(value="/findAllProvinceName",method=RequestMethod.POST)
 	@ResponseBody
 	public Object findAllProvinceName(){

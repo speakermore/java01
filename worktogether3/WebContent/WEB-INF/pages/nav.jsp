@@ -57,9 +57,6 @@ h5 a {
 					</c:if>
 				</ul>
 			</div>
-
-
-
 		</div>
 	</div>
 </nav>

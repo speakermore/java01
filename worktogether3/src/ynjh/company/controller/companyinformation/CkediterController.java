@@ -90,7 +90,6 @@ public class CkediterController {
 			out.println("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'"
 					+path.substring(path.indexOf("/img/")) + "/" + newFileName + "','')");
 			out.println("</script>");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
