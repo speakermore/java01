@@ -13,15 +13,16 @@ public class CompanyRecruit implements Serializable{
 	private Integer cmpRecPeople;//需求人数
 	private Timestamp cmpRecTime;//发布时间
 	private Integer cmpRecStatus;//发表招聘信息状态1:待审 2：审核通过 3：审核不通过
+	private String cmpRecCity;
+	
 	public CompanyRecruit(){
 		
 	}
 	
-	public CompanyRecruit(Integer id, Integer companyId, String cmpRecTitle,
+	public CompanyRecruit(Integer companyId, String cmpRecTitle,
 			String cmpRecWage, String cmpRecEducation, String cmpRecExperience,
 			Integer cmpRecPeople, Timestamp cmpRecTime, Integer cmpRecStatus) {
-		super();
-		this.id = id;
+		
 		this.companyId = companyId;
 		this.cmpRecTitle = cmpRecTitle;
 		this.cmpRecWage = cmpRecWage;
@@ -30,6 +31,14 @@ public class CompanyRecruit implements Serializable{
 		this.cmpRecPeople = cmpRecPeople;
 		this.cmpRecTime = cmpRecTime;
 		this.cmpRecStatus = cmpRecStatus;
+	}
+	
+	public String getCmpRecCity() {
+		return cmpRecCity;
+	}
+
+	public void setCmpRecCity(String cmpRecCity) {
+		this.cmpRecCity = cmpRecCity;
 	}
 
 	public Integer getId() {
@@ -93,7 +102,7 @@ public class CompanyRecruit implements Serializable{
 				+ ", cmpRecEducation=" + cmpRecEducation
 				+ ", cmpRecExperience=" + cmpRecExperience + ", cmpRecPeople="
 				+ cmpRecPeople + ", cmpRecTime=" + cmpRecTime
-				+ ", cmpRecStatus=" + cmpRecStatus + "]";
+				+ ", cmpRecStatus=" + cmpRecStatus +",cmpRecCity="+cmpRecCity+ "]";
 	}
 	
 }

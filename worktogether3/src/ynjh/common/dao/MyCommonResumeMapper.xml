@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 牟勇：首页分类查询的映射类 -->
+<mapper namespace="ynjh.common.dao.MyCommonResumeMapper">
+<!-- 根据岗位名称查简历，获得符合条件的简历集合 -->
+<select id="findByResumeTitle" resultType="map">
+	select u.userName,r.resumeEducation,r.resumeJor,r.resumeWorks from resume r,user u 
+	where u.id=r.userid and (r.resumeTitle like #{resumeTitle} or resumeJor like #{resumeTitle}) and resumeStatusThree=2 
+	order by resumeCreateDate desc
+	<if test="startRecord lt 0 or pageSize lte 0">
+		limit #{startRecord},#{pageSize}
+	</if>
+</select>
+<!-- 统计符合简历条件的人数 -->
+<select id="countByResumeTitle" resultType="Integer">
+	select count(*) from resume 
+	where  (resumeTitle like #{resumeTitle} or resumeJor like #{resumeTitle}) and resumeStatusThree =2
+</select>
+<!-- 根据岗位名称查企业招聘工作城市，招聘岗位，需求人数，模糊查询 -->
+<select id="findBycmpRecTitle" resultType="map">
+	select cmpRecCity,cmpRecTitle,cmpRecPeople from companyrecruit 
+	where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
+	<if test="startRecord lt 0 or pageSize lte 0">
+		limit #{startRecord},#{pageSize}
+	</if>
+</select>
+<!-- 统计符合招聘的条数 -->
+<select id="countBycmpRecTitle" resultType="Integer">
+	select count(*) from companyrecruit 
+	where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
+</select>
+</mapper>

@@ -7,11 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
-import ynjh.company.entity.CompanyIntroduction;
+
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.Work;
-
-import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.AdminLog;
@@ -20,7 +18,6 @@ import ynjh.admin.entity.AuditComIntro;
 import ynjh.admin.entity.AuditOffer;
 import ynjh.admin.entity.SysMessageWithAuthor;
 import ynjh.admin.entity.SystemMessage;
-import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;

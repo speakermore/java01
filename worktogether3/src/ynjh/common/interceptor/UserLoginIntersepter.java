@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import ynjh.admin.entity.Admin;
 import ynjh.company.entity.Company;
 import ynjh.personal.entity.User;
 

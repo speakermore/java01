@@ -27,7 +27,6 @@ import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
-import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;
@@ -418,7 +417,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Company> findBestCompany() { 
 		List<Integer> list=adminMapper.findCompanyId();//找到最佳企业id
-		List<Company> listCompany=new ArrayList();
+		List<Company> listCompany=new ArrayList<Company>();
 		if(list!=null&&list.size()>0){
 			for(int i=0;i<list.size();i++){
 				Company company=adminMapper.findCompanyById(list.get(i));
@@ -867,7 +866,7 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public List<Work> findResumeWork(String resumeId) {
-		if(resumeId!=null||!(resumeId.equals(""))){
+		if(resumeId!=null||!("".equals(resumeId))){
 			return adminMapper.findResumeWork(resumeId);
 		}else{
 			return null;
@@ -882,7 +881,7 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public List<Project> findResumeProject(String resumeId) {
-		if(resumeId!=null||!(resumeId.equals(""))){
+		if(resumeId!=null||!("".equals(resumeId))){
 			return adminMapper.findResumeProject(resumeId);
 		}else{
 			return null;
@@ -892,7 +891,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public List<Education> findResumeEducation(String resumeId) {
-		if(resumeId!=null||!(resumeId.equals(""))){
+		if(resumeId!=null||!("".equals(resumeId))){
 			return adminMapper.findResumeEducation(resumeId);
 		}else{
 			return null;

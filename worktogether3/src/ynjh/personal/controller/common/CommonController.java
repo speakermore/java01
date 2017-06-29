@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.GetAge;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyIntroduction;
@@ -106,6 +108,8 @@ public class CommonController {
 				resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
 				resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
 			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (AgeOverFlowException e) {
 				e.printStackTrace();
 			}
 			session.setAttribute("resume", resume);

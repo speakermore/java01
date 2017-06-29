@@ -116,110 +116,7 @@
 		<div class="row">
 			<!--左侧分类栏-->
 			<div class="col-sm-3">
-				<!-- 最新资讯 -->
-				<div class="work-together-title">
-					<span>最新资讯</span>
-					<c:if test="${newses10==null }">
-						<!-- 查询最新前10篇资讯 -->
-						<jsp:forward page="/admin/news/find_news_10"></jsp:forward>
-					</c:if>
-				</div>
-				<div class="panel">
-					<ol class="panel-body">
-						<c:forEach items="${newses10 }" var="news">
-							<li><a href="admin/news/news/${news.id }">${news.newsTitle.length()>13?news.newsTitle.substring(0,12).concat("..."):news.newsTitle }</a></li>
-						</c:forEach>
-					</ol>
-				</div>
-				<!-- 最新资讯结束 -->
-				<!--职位分类开始-->
-				<div class="work-together-title">
-					<span>职位分类</span>
-				</div>
-				<div class="panel">
-					<div class="panel-title">
-						<h4>软件开发类</h4>
-					</div>
-					<ul class="panel-body list-inline">
-						<li><a href="#">技术总监</a></li>
-						<li><a href="#">项目经理</a></li>
-						<li><a href="#">工程师</a></li>
-						<li><a href="#">程序员</a></li>
-					</ul>
-				</div>
-				<div class="panel">
-					<div class="panel-title">
-						<h4>软件测试类</h4>
-					</div>
-					<ul class="panel-body list-inline">
-						<li><a href="#">测试工程师</a></li>
-						<li><a href="#">测试员</a></li>
-					</ul>
-				</div>
-				<div class="panel">
-					<div class="panel-title">
-						<h4>页面设计类</h4>
-					</div>
-					<ul class="panel-body list-inline">
-						<li><a href="#">美工</a></li>
-						<li><a href="#">UI设计师</a></li>
-						<li><a href="#">Web前端工程师</a></li>
-					</ul>
-				</div>
-				<!--职位分类结束-->
-				<!--明星企业展示-->
-				<div class="work-together-title">
-					<span>明星企业</span>
-				</div>
-				<div class="panel">
-					<div class="panel-title text-right">
-						<div class="work-together-company-img"><img width="160" height="40" src="img/zgyt_logo.png" /></div>
-						<a class="work-together-more" href="">更多>></a>
-					</div>
-					<ul type="square" class="panel-body list-unstyled" style="clear:both">
-						<li class="text-right"><a href="">
-							<span style="float:left;">Java软件工程师</span>
-							<span>昆明</span>
-						</a></li>
-						<li class="text-right"><a href="">
-							<span style="float:left;">UI设计师/美工</span>
-							<span>昆明</span>
-						</a></li>
-					</ul>
-				</div>
-				<div class="panel">
-					<div class="panel-title text-right">
-						<div class="work-together-company-img"><img width="160" height="40" src="img/jdy_logo.png" /></div>
-						<a class="work-together-more" href="">更多>></a>
-					</div>
-					<ul type="square" class="panel-body list-unstyled" style="clear:both">
-						<li class="text-right"><a href="">
-							<span style="float:left;">Java技术总监/Java前端开发</span>
-							<span>昆明</span>
-						</a></li>
-						<li class="text-right"><a href="">
-							<span style="float:left;">测试项目经理/测试工程师</span>
-							<span>昆明</span>
-						</a></li>
-					</ul>
-				</div>
-				<div class="panel">
-					<div class="panel-title text-right">
-						<div class="work-together-company-img"><img width="160" height="40" src="img/nskj_logo.png" /></div>
-						<a class="work-together-more" href="">更多>></a>
-					</div>
-					<ul type="square" class="panel-body list-unstyled" style="clear:both">
-						<li class="text-right"><a href="">
-							<span style="float:left;">销售总监/销售经理/销售助理</span>
-							<span>昆明</span>
-						</a></li>
-						<li class="text-right"><a href="">
-							<span style="float:left;">大客户经理/培训工程师/培训师</span>
-							<span>昆明</span>
-						</a></li>
-					</ul>
-				</div>
-				<!--明星企业展示结束-->
+				<%@include file="common/index/index_left.jsp" %>
 			</div><!--左侧分类栏结束-->
 			<!--右侧分类栏-->
 			<div class="col-sm-9">
@@ -313,30 +210,27 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								技术人才（<b>3762</b>人）
+								技术人才（<b>${countMasterResume}</b>人）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
-								<li class="row"><a href=""><span class="col-sm-3">招财猫</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">10年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">向*飞</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">张*</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+							<c:forEach items="${masterResume }" var="mr">
+								<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${GetAge.getAgeTools(mr.resumeWorks) }年</span></a></li>
+							</c:forEach>
 							</ul>
 						</div>
 					</article>
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								管理人才（<b>3762</b>人）
+								管理人才（<b>${countMangeResume }</b>人）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
-								<li class="row"><a href=""><span class="col-sm-3">招财猫</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">10年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">向*飞</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">张*</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">王*天</span><span class="col-sm-2">本科</span><b class="col-sm-5">软件工程师</b><span class="col-sm-2">1年</span></a></li>
+								<c:forEach items="${manageResume }" var="mr">
+									<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${GetAge.getAgeTools(mr.resumeWorks) }年</span></a></li>
+								</c:forEach>
+								
 							</ul>
 						</div>
 					</article>
@@ -354,29 +248,25 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								软件企业（<b>26547</b>职位）
+								管理人才招聘（<b>${countManageRecuite }</b>职位）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<!-- 工作地点，公司名称，招聘岗位，人数 -->
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">2人</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">3人</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10人</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">景洪</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">1人</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5人</span></a></li>
+								<c:forEach items="${manageRecuite }" var="mr">
+									<li class="row"><a href=""><span class="col-sm-3">${mr.cmpRecCity }</span><b class="col-sm-7">${mr.cmpRecTitle }</b><span class="col-sm-2">${mr.cmpRecPeople }人</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</article>
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								非软件企业（<b>26547</b>职位）
+								技术人才招聘（<b>${countMasterReciute }</b>职位）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">玉溪</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">昆明</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">曲靖</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5k</span></a></li>
+								<c:forEach items="${masterRecuite }" var="mr">
+									<li class="row"><a href=""><span class="col-sm-3">${mr.cmpRecCity }</span><b class="col-sm-7">${mr.cmpRecTitle }</b><span class="col-sm-2">${mr.cmpRecPeople }人</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</article>

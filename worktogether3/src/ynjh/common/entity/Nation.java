@@ -8,6 +8,10 @@ import java.io.Serializable;
  *
  */
 public class Nation implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2033613622706028743L;
 	private Integer id;
 	private String nationName;
 	public Nation() {

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
+import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.exception.ResumeExistsException;
 import ynjh.common.util.CommonStatus;
 import ynjh.common.util.GetAge;
@@ -49,7 +50,6 @@ public class ResumeController {
 	@RequestMapping(value = "/createResume", method = RequestMethod.GET)
 	public String createResume(HttpSession session) {
 		//牟勇：为了在页面上添加简历标题，备选内容为一级岗位名称而增加的判断，如果没有一级岗位的集合存在，则将它添加到session中
-		List<Job> job1=(List<Job>)session.getAttribute("myJobs1");
 		if(session.getAttribute("myJobs1")==null){
 			List<Job> myJobs=jobService.findJob1();
 			session.setAttribute("myJobs1", myJobs);
@@ -262,6 +262,9 @@ public class ResumeController {
 			resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
 			resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
 		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (AgeOverFlowException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int result = rService.updateResume(resume);

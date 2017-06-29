@@ -203,4 +203,16 @@ public class User implements Serializable{
 	public void setUserLevel(Integer userLevel) {
 		this.userLevel = userLevel;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userLoginId=" + userLoginId + ", userPassword=" + userPassword + ", userName="
+				+ userName + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userStatus=" + userStatus
+				+ ", userRealName=" + userRealName + ", userIDCard=" + userIDCard + ", userIDImgFace=" + userIDImgFace
+				+ ", userIDImgCon=" + userIDImgCon + ", userCreateDate=" + userCreateDate + ", userHeadImgPath="
+				+ userHeadImgPath + ", userMoney=" + userMoney + ", userBirthday=" + userBirthday + ", userLevel="
+				+ userLevel + "]";
+	}
+	
+	
 }

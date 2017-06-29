@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class Province implements Serializable {
+	private static final long serialVersionUID = -2784449342355441304L;
 	private int id;
 	private String name;//省的名称
 	public Province() {

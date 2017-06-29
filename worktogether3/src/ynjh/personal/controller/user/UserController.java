@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
-
+import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.GetAge;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
@@ -248,6 +247,9 @@ public class UserController {
 					userAndResume.setWorks(
 							GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
 				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (AgeOverFlowException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				userAndResume.setIsFoucse(false);

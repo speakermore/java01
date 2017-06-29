@@ -39,10 +39,10 @@ import ynjh.common.util.MD5Util;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
-import ynjh.company.entity.CompanyIntroduction;
+
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
-import ynjh.personal.entity.Article;
+
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Discuss;
 import ynjh.personal.entity.Education;

@@ -1,13 +1,9 @@
 package ynjh.common.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
 import ynjh.common.dao.NationMapper;
 import ynjh.common.entity.Nation;
 import ynjh.common.service.NationService;
