@@ -7,6 +7,8 @@ import java.io.Serializable;
  *
  */
 public class UserVisitCount implements Serializable {
+	
+	private static final long serialVersionUID = -5421949067193503930L;
 	private Integer id;
 	private Integer userYear;//年
 	private Integer userMonth;//月
@@ -52,6 +54,12 @@ public class UserVisitCount implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "UserVisitCount [id=" + id + ", userYear=" + userYear + ", userMonth=" + userMonth + ", userDay="
+				+ userDay + ", userCommentCount=" + userCommentCount + ", userArticleCount=" + userArticleCount
+				+ ", userId=" + userId + "]";
 	}
 	
 

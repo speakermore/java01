@@ -8,6 +8,8 @@ import java.sql.Timestamp;
  *
  */
 public class SystemMessage implements Serializable {
+	
+	private static final long serialVersionUID = 6105382378370712160L;
 	private Integer id;
 	private String sysmContent;
 	private Timestamp sysmCreateTime;

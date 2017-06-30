@@ -9,6 +9,7 @@ import java.util.Date;
  *
  */
 public class AdminLog implements Serializable{
+	private static final long serialVersionUID = 6071381736805745588L;
 	private Integer id;
 	private String adminLoginId;//管理员登录名
 	private Integer adminDo;//操作类型：1:审核2:禁用3：密码重置4信息维护，5登录退出
@@ -50,7 +51,6 @@ public class AdminLog implements Serializable{
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return this.getAdminLoginId()+"--"+this.getAdminDo();
 	}
 	

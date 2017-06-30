@@ -9,6 +9,7 @@ import java.sql.Timestamp;
  * 
  */
 public class AuditOffer implements Serializable {
+	private static final long serialVersionUID = 3655559501044371390L;
 	private Integer id; //offer表id
 	private Integer userId; //offer表中的user表id
 	private Integer companyId;	//offer表中的company表id 
@@ -107,6 +108,14 @@ public class AuditOffer implements Serializable {
 	}
 	public void setUserRealName(String userRealName) {
 		this.userRealName = userRealName;
+	}
+	@Override
+	public String toString() {
+		return "AuditOffer [id=" + id + ", userId=" + userId + ", companyId=" + companyId + ", offerJob=" + offerJob
+				+ ", offerContent=" + offerContent + ", offerInvitationTime=" + offerInvitationTime + ", offerSendTime="
+				+ offerSendTime + ", offerStatus=" + offerStatus + ", companyName=" + companyName + ", companyStatus="
+				+ companyStatus + ", userName=" + userName + ", userEmail=" + userEmail + ", userStatus=" + userStatus
+				+ ", userRealName=" + userRealName + "]";
 	}
 	
 	

@@ -2,13 +2,14 @@ package ynjh.admin.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 /**
  * 用户操作日志 
  * @author 朱吉
  *
  */
 public class UserLog implements Serializable{
+	
+	private static final long serialVersionUID = 8602961827396215712L;
 	private Integer id;
 	private Integer userId;	//用户id
 	private Integer userDo; //1:登录2：退出3：点赞4：评论 5：发表文章6：发表简历7：查看8：企业发表新闻9：企业发表招聘信息10：企业推送offer11：密码重置
@@ -47,6 +48,11 @@ public class UserLog implements Serializable{
 	}
 	public Integer getId() {
 		return id;
+	}
+	@Override
+	public String toString() {
+		return "UserLog [id=" + id + ", userId=" + userId + ", userDo=" + userDo + ", userTargetType=" + userTargetType
+				+ ", userAid=" + userAid + ", userTime=" + userTime + "]";
 	}
 	
 	

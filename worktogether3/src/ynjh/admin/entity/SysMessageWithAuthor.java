@@ -9,6 +9,8 @@ import java.sql.Timestamp;
  *
  */
 public class SysMessageWithAuthor implements Serializable {
+	
+	private static final long serialVersionUID = 1687728987853937107L;
 	private Integer id;
 	private String sysmContent;//消息内容
 	private Timestamp sysmCreateTime;//消息发送时间
@@ -50,6 +52,11 @@ public class SysMessageWithAuthor implements Serializable {
 	}
 	public void setAdminLoginId(String adminLoginId) {
 		this.adminLoginId = adminLoginId;
+	}
+	@Override
+	public String toString() {
+		return "SysMessageWithAuthor [id=" + id + ", sysmContent=" + sysmContent + ", sysmCreateTime=" + sysmCreateTime
+				+ ", sysmScope=" + sysmScope + ", adminId=" + adminId + ", adminLoginId=" + adminLoginId + "]";
 	}
 	
 	

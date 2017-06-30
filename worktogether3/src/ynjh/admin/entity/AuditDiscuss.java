@@ -8,6 +8,8 @@ import java.sql.Timestamp;
  *
  */
 public class AuditDiscuss implements Serializable {
+		
+	private static final long serialVersionUID = -418676895836568236L;
 		// id
 		private Integer id;
 		//发送者 1：企业id 2：个人用户id

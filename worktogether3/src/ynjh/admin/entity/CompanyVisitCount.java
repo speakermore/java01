@@ -7,6 +7,7 @@ import java.io.Serializable;
  *
  */
 public class CompanyVisitCount implements Serializable{
+	private static final long serialVersionUID = -7095080096792928044L;
 	private Integer id;
 	private Integer companyYear;
 	private Integer companyMonth;
@@ -55,7 +56,6 @@ public class CompanyVisitCount implements Serializable{
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return this.getId()+"--"+this.getCompanyId().toString()+"--"+this.getCompanyYear()+"--"+this.getCompanyMonth()+"--"+this.getCompanyDay();
 	}
 	

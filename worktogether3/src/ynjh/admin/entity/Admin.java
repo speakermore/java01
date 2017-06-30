@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class Admin implements Serializable{
+	private static final long serialVersionUID = -4942322496227225518L;
 	private Integer id;
 	private String adminLoginId;//管理员登录id
 	private String adminPassword;//管理员登录密码
@@ -66,7 +67,6 @@ public class Admin implements Serializable{
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return this.getId().toString()+"--"+this.getAdminLoginId().toString()+"--"+this.getAdminName().toString()+"--"+this.getAdminEmail()+"--"+this.getAdminPassword();
 	}
 	

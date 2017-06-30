@@ -3,6 +3,8 @@ package ynjh.admin.entity;
 import java.io.Serializable;
 
 public class AuditComIntro implements Serializable {
+
+	private static final long serialVersionUID = -5125311686029094907L;
 	private Integer id;
 	private String companyLoginId;
 	private String companyName;
@@ -144,6 +146,17 @@ public class AuditComIntro implements Serializable {
 	}
 	public void setCmpIntStatus(Integer cmpIntStatus) {
 		this.cmpIntStatus = cmpIntStatus;
+	}
+	@Override
+	public String toString() {
+		return "AuditComIntro [id=" + id + ", companyLoginId=" + companyLoginId + ", companyName=" + companyName
+				+ ", companySimpleName=" + companySimpleName + ", companyLogo=" + companyLogo + ", companyLicenseImg="
+				+ companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo + ", companyCorporator="
+				+ companyCorporator + ", companyTel=" + companyTel + ", companyEmail=" + companyEmail
+				+ ", companyAddress=" + companyAddress + ", companyStatus=" + companyStatus + ", cmpIntroduction="
+				+ cmpIntroduction + ", cmpIntQuality=" + cmpIntQuality + ", cmpIntPeopleNum=" + cmpIntPeopleNum
+				+ ", cmpIntComforts=" + cmpIntComforts + ", cmpIntRest=" + cmpIntRest + ", cmpIntInsurance="
+				+ cmpIntInsurance + ", cmpIntWage=" + cmpIntWage + ", cmpIntStatus=" + cmpIntStatus + "]";
 	}
 	
 	

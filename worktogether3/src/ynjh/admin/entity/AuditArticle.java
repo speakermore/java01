@@ -10,6 +10,7 @@ import java.sql.Timestamp;
  *
  */
 public class AuditArticle implements Serializable {
+	private static final long serialVersionUID = -7380530599051858522L;
 	private Integer id;// 文章id
 	private Integer usersId;// 用户名
 	private String userName;// 昵称
