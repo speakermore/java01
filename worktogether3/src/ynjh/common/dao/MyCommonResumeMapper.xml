@@ -4,31 +4,100 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 牟勇：首页分类查询的映射类 -->
 <mapper namespace="ynjh.common.dao.MyCommonResumeMapper">
-<!-- 根据岗位名称查简历，获得符合条件的简历集合 -->
-<select id="findByResumeTitle" resultType="map">
-	select u.userName,r.resumeEducation,r.resumeJor,r.resumeWorks from resume r,user u 
-	where u.id=r.userid and (r.resumeTitle like #{resumeTitle} or resumeJor like #{resumeTitle}) and resumeStatusThree=2 
-	order by resumeCreateDate desc
-	<if test="startRecord lt 0 or pageSize lte 0">
-		limit #{startRecord},#{pageSize}
-	</if>
-</select>
-<!-- 统计符合简历条件的人数 -->
-<select id="countByResumeTitle" resultType="Integer">
-	select count(*) from resume 
-	where  (resumeTitle like #{resumeTitle} or resumeJor like #{resumeTitle}) and resumeStatusThree =2
-</select>
-<!-- 根据岗位名称查企业招聘工作城市，招聘岗位，需求人数，模糊查询 -->
-<select id="findBycmpRecTitle" resultType="map">
-	select cmpRecCity,cmpRecTitle,cmpRecPeople from companyrecruit 
-	where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
-	<if test="startRecord lt 0 or pageSize lte 0">
-		limit #{startRecord},#{pageSize}
-	</if>
-</select>
-<!-- 统计符合招聘的条数 -->
-<select id="countBycmpRecTitle" resultType="Integer">
-	select count(*) from companyrecruit 
-	where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
-</select>
+	<!-- 根据岗位名称查简历，获得符合条件的简历集合 -->
+	<select id="findByResumeTitle" resultType="map">
+		select u.userName,r.resumeEducation,r.resumeJor,r.resumeWorks from
+		resume r,user u
+		where u.id=r.userid and (r.resumeTitle like #{resumeTitle} or resumeJor
+		like #{resumeTitle}) and resumeStatusThree=2
+		order by resumeCreateDate desc
+		<if test="startRecord gte 0 or pageSize gt 0">
+			limit #{startRecord},#{pageSize}
+		</if>
+	</select>
+	<!-- 统计符合简历条件的人数 -->
+	<select id="countByResumeTitle" resultType="Integer">
+		select count(*) from resume
+		where (resumeTitle like #{resumeTitle} or resumeJor like #{resumeTitle})
+		and resumeStatusThree =2
+	</select>
+	<!-- 根据岗位名称查企业招聘工作城市，招聘岗位，需求人数，模糊查询 -->
+	<select id="findBycmpRecTitle" resultType="map">
+		select cmpRecCity,cmpRecTitle,cmpRecPeople from companyrecruit
+		where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
+		<if test="startRecord gte 0 or pageSize gt 0">
+			limit #{startRecord},#{pageSize}
+		</if>
+	</select>
+	<!-- 统计符合招聘的条数 -->
+	<select id="countBycmpRecTitle" resultType="Integer">
+		select count(*) from companyrecruit
+		where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
+	</select>
+	<!-- 根据发布者Id查询众筹信息:众筹名称，众筹项目价值，发布者 -->
+	<select id="findByPublisherIdType" parameterType="Integer"
+		resultType="map">
+		select crowdfundProjectName,crowdfundProjectMoney,
+		<choose>
+			<when test="publisherId lt 1234567890">
+				companyName from crowdfund c,company cmp where c.publisherId=cmp.id
+			</when>
+			<otherwise>
+				userName from crowdfund c,`user` u where c.publisherId=u.id
+			</otherwise>
+		</choose>
+		and CURRENT_TIMESTAMP &lt; crowdfundProjectEndDate
+		and crowdfundProjectCheckState = 2
+		order by crowdfundProjectStartDate desc
+		<if test="startRecord gte 0 or pageSize gt 0">
+			limit #{startRecord},#{pageSize}
+		</if>
+	</select>
+	<!-- 根据发布者Id类型（大于等于1234567890为个人，否则为企业）统计众筹信息的条数 -->
+	<select id="countByPublisherIdType" resultType="Integer">
+		select count(*)
+		<choose>
+			<when test="publisherId lt 1234567890">
+				from crowdfund c,company cmp where c.publisherId=cmp.id
+			</when>
+			<otherwise>
+				from crowdfund c,`user` u where c.publisherId=u.id
+			</otherwise>
+		</choose>
+		and CURRENT_TIMESTAMP &lt; crowdfundProjectEndDate
+		and crowdfundProjectCheckState = 2
+	</select>
+	<!-- * 按用户类型查询文章，可分页
+	 * 文章信息显示：企业文章：企业名称，文章名称，点击数，点赞数
+	 * 个人文章：昵称，文章名称，点击数，点赞数
+	 * 按点赞数，点击数降序排序 -->
+	<select id="findByArticleType" resultType="Map">
+		select articleLikeNum,articleReadNum,articleTitle,
+		<choose>
+			<when test="userIdType lt 1234567890">
+				companyName from article a,company c where a.usersId=c.id 
+			</when>
+			<otherwise>
+				userName from article a,user u where a.usersId=u.id 
+			</otherwise>
+		</choose>
+		and articleStatus=2 
+		order by articleLikeNum desc,articleReadNum desc
+		<if test="startRecord gte 0 and pageSize gt 0">
+			limit #{startRecord},#{pageSize}
+		</if>
+	</select>
+	<!-- 根据用户ID类型统计文章的数量 -->
+	<select id="countByArticleType" resultType="Integer">
+		select count(*) 
+		<choose>
+			<when test="userIdType lt 1234567890">
+				from article a,company c where a.usersId=c.id 
+			</when>
+			<otherwise>
+				from article a,user u where a.usersId=u.id 
+			</otherwise>
+		</choose>
+		and articleStatus=2 
+	</select>
 </mapper>

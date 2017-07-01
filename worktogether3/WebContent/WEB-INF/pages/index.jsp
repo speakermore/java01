@@ -284,28 +284,25 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								企业众筹（<b>367</b>项目）
+								企业众筹（<b>${countCompanyCrowdfund }</b>项目）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">众筹859</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹356</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">15w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹211</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">10w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹899</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹78</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+							<!-- 众筹名称，众筹项目价值，发布者 -->
+								<c:forEach items="${companyCrowdfund }" var="cc">
+									<li class="row"><a href=""><span class="col-sm-3">${cc.crowdfundProjectName }</span><b class="col-sm-5">${cc.companyName }</b><span class="col-sm-4"><fmt:formatNumber value="${cc.crowdfundProjectMoney/10000.0 }" pattern="##,###,###.00"/>万元</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</article>
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								个人众筹（<b>367</b>项目）
+								个人众筹（<b>${countPersonalCrowdfund }</b>项目）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">众筹112</span><b class="col-sm-7">前端工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹423</span><b class="col-sm-7">UI工程师</b><span class="col-sm-2">15w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹67</span><b class="col-sm-7">测试工程师</b><span class="col-sm-2">10w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹123</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">众筹77</span><b class="col-sm-7">软件工程师</b><span class="col-sm-2">5w</span></a></li>
+								<c:forEach items="${personalCrowdfund }" var="cc">
+									<li class="row"><a href=""><span class="col-sm-3">${cc.crowdfundProjectName}</span><b class="col-sm-5">${cc.userName }</b><span class="col-sm-4"><fmt:formatNumber value="${cc.crowdfundProjectMoney/10000.0 }" pattern="##,###,###.00"/>万元</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</article>
@@ -323,28 +320,24 @@
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								企业文章（<b>367</b>项目）
+								企业文章（<b>${countCompanyArticle }</b>篇）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">让青春之花，舞动人间真情</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">让青春与企业共成长</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">从《水浒》看企业管理经验</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">公司管理不善的12个通病</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">某企业</span><b class="col-sm-7">企业家自我修养</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<c:forEach items="${companyArticle }" var="ca">
+									<li class="row"><a href=""><span class="col-sm-3">${ca.companyName }</span><b class="col-sm-5">${ca.articleTitle }</b><span class="col-sm-4"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</article>
 					<article class="panel col-sm-6 work-together-subtitle">
 						<div class="panel-body">
 							<div class="work-together-title">
-								个人文章（<b>367</b>项目）
+								个人文章（<b>${countPersonalArticle }</b>篇）
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
-								<li class="row"><a href=""><span class="col-sm-3">招财猫</span><b class="col-sm-7">怎么写出一本程序员风格的修真小说？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">溜狗狗</span><b class="col-sm-7">编程到底难在哪里？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">西瓜</span><b class="col-sm-7">什么样的 BUG 会让你目瞪口呆？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">百浪</span><b class="col-sm-7">王小波的计算机水平到底有多好？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
-								<li class="row"><a href=""><span class="col-sm-3">无印良吕</span><b class="col-sm-7">程序员很闷骚么？</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>20<i class="glyphicon glyphicon-user"></i>25</span></a></li>
+								<c:forEach items="${personalArticle }" var="pa">
+									<li class="row"><a href=""><span class="col-sm-3">${pa.userName }</span><b class="col-sm-5">${pa.articleTitle }</b><span class="col-sm-4"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</article>

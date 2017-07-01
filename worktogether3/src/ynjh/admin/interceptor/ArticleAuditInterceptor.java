@@ -1,6 +1,5 @@
 package ynjh.admin.interceptor;
 
-import java.io.File;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ynjh.admin.entity.Admin;

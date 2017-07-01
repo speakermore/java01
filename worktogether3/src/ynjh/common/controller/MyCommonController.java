@@ -56,7 +56,18 @@ public class MyCommonController {
 		//名企招聘----技术人才
 		List<Map<String, Object>> masterRecuite=myCommonResumeService.findBycmpRecTitle5("师");
 		Integer countMasterReciute=myCommonResumeService.countBycmpRecTitle("师");
-		
+		//技术众筹---个人众筹
+		List<Map<String, Object>> personalCrowdfund=myCommonResumeService.findByCrowdfundPerson5();
+		Integer countPersonalCrowdfund=myCommonResumeService.countCrowdfundPersonal();
+		//技术众筹---企业众筹
+		List<Map<String, Object>> companyCrowdfund=myCommonResumeService.findByCrowdfundCompany5();
+		Integer countCompanyCrowdfund=myCommonResumeService.countCrowdfundCompany();
+		//精品文章---企业文章
+		List<Map<String, Object>> companyArticle=myCommonResumeService.findByCompanyArticle5();
+		Integer countCompanyArticle=myCommonResumeService.countCompanyArticle();
+		//精品文章---个人文章
+		List<Map<String, Object>> personalArticle=myCommonResumeService.findByPersonalArticle5();
+		Integer countPersonalArticle=myCommonResumeService.countPersonalArticle();
 		session.setAttribute("countMangeResume", countMangeResume);
 		session.setAttribute("manageResume", manageResume);
 		session.setAttribute("countMasterResume", countMasterResume);
@@ -65,6 +76,14 @@ public class MyCommonController {
 		session.setAttribute("manageRecuite", manageRecuite);
 		session.setAttribute("countMasterReciute", countMasterReciute);
 		session.setAttribute("masterRecuite", masterRecuite);
+		session.setAttribute("personalCrowdfund", personalCrowdfund);
+		session.setAttribute("countPersonalCrowdfund", countPersonalCrowdfund);
+		session.setAttribute("companyCrowdfund", companyCrowdfund);
+		session.setAttribute("countCompanyCrowdfund", countCompanyCrowdfund);
+		session.setAttribute("companyArticle", companyArticle);
+		session.setAttribute("countCompanyArticle", countCompanyArticle);
+		session.setAttribute("personalArticle", personalArticle);
+		session.setAttribute("countPersonalArticle", countPersonalArticle);
 		session.setAttribute("newses10", newses10);
 		return "index";
 	}

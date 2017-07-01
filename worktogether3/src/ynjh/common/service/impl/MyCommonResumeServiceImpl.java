@@ -33,4 +33,49 @@ public class MyCommonResumeServiceImpl implements MyCommonResumeService {
 		return myCommonResumeMapper.countBycmpRecTitle("%"+cmpRecTitle+"%");
 	}
 
+	@Override
+	public List<Map<String, Object>> findByCrowdfundCompany5() {
+		return myCommonResumeMapper.findByPublisherIdType(1, 0, 5);
+	}
+
+	@Override
+	public List<Map<String, Object>> findByCrowdfundPerson5() {
+		return myCommonResumeMapper.findByPublisherIdType(1234567891, 0, 5);
+	}
+
+	@Override
+	public Integer countCrowdfundCompany() {
+		
+		return myCommonResumeMapper.countByPublisherIdType(1);
+	}
+
+	@Override
+	public Integer countCrowdfundPersonal() {
+		
+		return myCommonResumeMapper.countByPublisherIdType(1234567891);
+	}
+
+	@Override
+	public List<Map<String, Object>> findByCompanyArticle5() {
+		
+		return myCommonResumeMapper.findByArticleType(1, 0, 5);
+	}
+
+	@Override
+	public Integer countCompanyArticle() {
+		return myCommonResumeMapper.countByArticleType(1);
+	}
+
+	@Override
+	public List<Map<String, Object>> findByPersonalArticle5() {
+		
+		return myCommonResumeMapper.findByArticleType(1234567891, 0, 5);
+	}
+
+	@Override
+	public Integer countPersonalArticle() {
+		
+		return myCommonResumeMapper.countByArticleType(1234567891);
+	}
+
 }

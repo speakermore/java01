@@ -41,4 +41,46 @@ public interface MyCommonResumeService {
 	 * @return 符合岗位名称的招聘信息条数
 	 */
 	public Integer countBycmpRecTitle(String cmpRecTitle);
+	/**
+	 * 查询公司发布的众筹项目前5名
+	 * @return 按时间排序的前5名公司发布的众筹项目
+	 */
+	public List<Map<String, Object>> findByCrowdfundCompany5();
+	/**
+	 * 查询个人发布的众筹项目前5名
+	 * @return 按时间排序的前5名个人发布的众筹项目
+	 */
+	public List<Map<String, Object>> findByCrowdfundPerson5();
+	/**
+	 * 统计公司发布的众筹项目数量
+	 * @return 公司发布的众筹项目数量
+	 */
+	public Integer countCrowdfundCompany();
+	/**
+	 * 统计个人发布的众筹项目数量
+	 * @return 个人发布的众筹项目数量
+	 */
+	public Integer countCrowdfundPersonal();
+	/**
+	 * 查询企业文章前5名，按点赞数第一位排序，点击数第二位排序
+	 * 文章必须通过审核
+	 * @return 符合条件的前5篇企业文章
+	 */
+	public List<Map<String, Object>> findByCompanyArticle5();
+	/**
+	 * 统计企业文章的数量，文章必须是通过审核的
+	 * @return 通过审核的企业文章总数
+	 */
+	public Integer countCompanyArticle();
+	/**
+	 * 查询个人文章前5，按点赞数第一位排序，点击数第二位排序
+	 * 文章必须通过审核
+	 * @return 符合条件的前5篇个人文章
+	 */
+	public List<Map<String, Object>> findByPersonalArticle5();
+	/**
+	 * 查询个人文章的总数量
+	 * @return 个人文章的篇数
+	 */
+	public Integer countPersonalArticle();
 }
