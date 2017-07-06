@@ -70,7 +70,7 @@
 					<div class="col-md-8">
 						<input
 							value="<fmt:formatDate
-						value="${resume_update.resumeWorks }" pattern="yyyy-MM-dd" />"
+						value="${resume_update.resumeWorks }" pattern="yyyy-MM" />"
 							placeholder="请选择日期" class="form-control" name="resumeWorks"
 							id="resumeWorks" readonly />
 					</div>
@@ -358,12 +358,13 @@
             });
 
 		$("#resumeWorks").datetimepicker({
-			format : 'yyyy-mm-dd',
+			format : 'yyyy-mm',
 			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
+			startDate : '1900-01', //选择器的开始日期
 			autoclose : true,
 			todayHighlight : true,
-			minView : "month"
+			minView : 3,
+			startView:3
 		}).on(
 				"click",
 				function() {
@@ -376,12 +377,13 @@
             });
 
 		$("#resumeGraduationTime").datetimepicker({
-			format : 'yyyy-mm-dd',
+			format : 'yyyy-mm',
 			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
+			startDate : '1900-01', //选择器的开始日期
 			autoclose : true,
 			todayHighlight : true,
-			minView : "month"
+			minView : 3,
+			startView:3
 		}).on('hide',function(e) {  
             $('#resumeForms').data('bootstrapValidator')  
             .updateStatus('resumeGraduationTime', 'NOT_VALIDATED',null)  
@@ -401,7 +403,7 @@
 						stringLength : {
 							min : 0,
 							max : 50,
-							message : '请正确输入的标题'
+							message : '标题不能超过50个字符'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),
@@ -419,7 +421,7 @@
 						stringLength : {
 							min : 2,
 							max : 10,
-							message : '请输入正确的名字'
+							message : '名字长度应该在2-10个字符之间'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),
@@ -435,7 +437,7 @@
 						},
 						regexp : {
 							regexp : /^[0-9]+$/,
-							message : '请输入正确的工作年限'
+							message : '工作年限应该是整数'
 						}
 					}
 				},
@@ -443,19 +445,14 @@
 					validators : {
 						regexp : {
 							regexp : /^[0-9]+$/,
-							message : '请输入正确的薪资'
+							message : '薪水应该是整数，不要有小数点'
 						}
 					}
 				},
 				resumeJor : {
 					validators : {
 						notEmpty : {
-							message : '意向不能为空'
-						},
-						stringLength : {
-							min : 2,
-							max : 8,
-							message : '请输入正确的意向'
+							message : '目前岗位不能为空'
 						}
 					}
 				},
@@ -464,11 +461,11 @@
 						stringLength : {
 							min : 0,
 							max : 10,
-							message : '请输入正确的民族'
+							message : '请选择计算机提供的民族选项'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),
-							message : "请输入正确的民族"
+							message : "请选择计算机提供的民族选项"
 						}
 
 					}
@@ -478,7 +475,7 @@
 						stringLength : {
 							min : 0,
 							max : 50,
-							message : '请输入正确籍贯'
+							message : '籍贯长度不应超过50个字符'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),
@@ -494,26 +491,12 @@
 						}
 					}
 				},
-				resumeEducation : {
-					validators : {
-						stringLength : {
-							min : 0,
-							max : 20,
-							message : '请正确的输入学历'
-						},
-						regexp : {
-							regexp : (/[\u4e00-\u9fa5]/),
-							message : "请正确的输入学历"
-						}
-
-					}
-				},
 				resumeGraduationSchool : {
 					validators : {
 						stringLength : {
 							min : 0,
 							max : 50,
-							message : '请正确的输入毕业学校'
+							message : '毕业学校名称不要超过50个字符，可尝试简称'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),
@@ -527,7 +510,7 @@
 						stringLength : {
 							min : 0,
 							max : 20,
-							message : '请正确的输入专业'
+							message : '专业名称不要超过20个字符，可尝试简称'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),
@@ -544,11 +527,11 @@
 						stringLength : {
 							min : 7,
 							max : 11,
-							message : '请输入正确的电话号码'
+							message : '电话号码不应短于7位，不要超过11位'
 						},
 						regexp : {
 							regexp : /^[0-9]+$/,
-							message : '请输入正确的电话号码'
+							message : '电话号码应全是数字'
 						}
 
 					}
@@ -557,8 +540,7 @@
 					validators : {
 						stringLength : {
 							min : 6,
-							max : 20,
-							message : '请输入正确的QQ或微信'
+							message : 'QQ或微信应不短于6个字符'
 						},
 						regexp : {
 							regexp : /^[a-zA-Z0-9_-]+$/,
@@ -572,7 +554,7 @@
 						stringLength : {
 							min : 2,
 							max : 3,
-							message : '请输入正确的身高数'
+							message : '请输入正确的身高，以厘米为单位'
 						},
 						regexp : {
 							regexp : /^[0-9]+$/,
@@ -586,11 +568,11 @@
 						stringLength : {
 							min : 2,
 							max : 3,
-							message : '请输入正确的体重数'
+							message : '请输入正确的体重，以公斤为单位'
 						},
 						regexp : {
 							regexp : /^[0-9]+$/,
-							message : '请输入正确的体重数'
+							message : '体重应该是整数'
 						}
 
 					}
@@ -652,11 +634,6 @@
 							max : 200,
 							message : '请选择正确的家庭地址'
 						}
-					}
-				},
-				resumeMarriage : {
-					validators : {
-						message : '请选择婚姻状况'
 					}
 				}
 			}

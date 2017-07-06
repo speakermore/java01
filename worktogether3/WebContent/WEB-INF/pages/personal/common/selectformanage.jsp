@@ -9,25 +9,14 @@
 				<!-- 牟勇：个人中心 -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						 <a class="panel-title" data-parent="#myMenu" href="javascript:ajaxPage('personal/user/personal_index_myNewly')">个人中心</a>
-					</div>
-				</div>
-				<!-- 牟勇：个人中心结束 -->
-				<!-- 牟勇：我的简历 -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title" data-parent="#myMenu" href="javascript:ajaxPage('personal/user/personal_index_myResume')">我的简历</a>
-					</div>
-				</div>
-				<!-- 牟勇：我的简历结束 -->
-				<!-- 牟勇：我的信息 -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title" data-toggle="collapse" data-parent="#myMenu" href="#my_info">我的信息</a>
+						 <a class="panel-title" data-toggle="collapse" data-parent="#myMenu" href="#my_info">个人中心</a>
 					</div>
 					<div id="my_info" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav">
+								<li>
+									<a href="javascript:ajaxPage('personal/user/personal_index_myNewly')">我的首页</a>
+								</li>
 								<li>
 									<a
 									href="javascript:ajaxPage('personal/user/personal_register_real')">实名认证</a>
@@ -42,7 +31,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- 牟勇：我的信息结束 -->
+				<!-- 牟勇：个人中心结束 -->
 				<!-- 牟勇：隐私设置 -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -56,6 +45,9 @@
 								</li>
 								<li><a
 									href="javascript:ajaxPage('#')">我屏蔽的企业</a>
+								</li>
+								<li><a
+									href="javascript:ajaxPage('#')">我的额度</a>
 								</li>
 							</ul>
 						</div>
@@ -153,33 +145,7 @@
 			</div>
 		</div>
 	</div>
-<div class="tabbable" id="tabs">
-	<ul class="nav">
-		<li class="active"><a
-			href="javascript:ajaxPage('personal/user/personal_index_myNewly')">我的首页</a>
-		</li>
-		
-		<c:if test="${user.userRealName=='无' }">
-			<li>
-				<a
-				href="javascript:ajaxPage('personal/user/personal_register_real')">实名认证</a>
-			</li>
-		</c:if>
-		<c:if test="${user.userName=='无' }">
-			<li>
-				<a
-				href="javascript:ajaxPage('personal/user/personal_register_other')">完善信息</a>
-			</li>
-		</c:if>
-		<li><a
-			href="javascript:ajaxPage('personal/user/personal_update_user')">修改用户信息</a></li>
-		<li><a
-			href="javascript:deleteRecord('personal/user/personal_delete')">查看删除记录</a></li>
-		<li><a
-			href="javascript:ajaxPage('personal/user/personal_index_myPassword')">我的密码</a></li>
-		<li><a href="#panel-myEvaluate">我的评价</a></li>
-	</ul>
-</div>
+
 
 <script type="text/javascript">
 	var ajaxPage = function(page) {

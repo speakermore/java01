@@ -23,15 +23,17 @@ public class StringToDateConvertor implements Converter<String, Timestamp> {
 	@Override
 	public Timestamp convert(String stringDate) {
 		
-		try {
+		
 			for(String datePattner:datePattners){
-				return new Timestamp(new SimpleDateFormat(datePattner).parse(stringDate).getTime());
+				//如果不能转，则尝试使用下一个。
+				try {
+					return new Timestamp(new SimpleDateFormat(datePattner).parse(stringDate).getTime());
+				} catch (ParseException e) {
+					
+				}
 			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-			throw new RuntimeException("日期字符串的格式不对"+stringDate);
-		}
-		return new Timestamp(System.currentTimeMillis());
+		//如果所有格式都不能转，则返回一个null
+		return null;
 	}
 
 }

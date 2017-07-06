@@ -215,7 +215,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
 							<c:forEach items="${masterResume }" var="mr">
-								<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${GetAge.getAgeTools(mr.resumeWorks) }年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
 							</c:forEach>
 							</ul>
 						</div>
@@ -228,7 +228,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
 								<c:forEach items="${manageResume }" var="mr">
-									<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${GetAge.getAgeTools(mr.resumeWorks) }年</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
 								</c:forEach>
 								
 							</ul>

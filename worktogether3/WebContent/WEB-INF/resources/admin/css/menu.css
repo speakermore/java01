@@ -130,7 +130,10 @@ body{ font-size: 14px; font-family: "黑体-简","黑体","微软雅黑", Arial,
 	-webkit-transition: all .5s;
 	-o-transition: all .5s;
 }
-.nav-ul li a:hover{background: #fe6000}
+.nav-ul ul li a:hover{background: #fe6000}
+.nav-slide-o ul li a span:hover{
+	color:#fff;
+}
 /*一级菜单渐变色*/
 .nav-ul li a:hover:before{left: -30px;}
 .nav-ul li a:after{

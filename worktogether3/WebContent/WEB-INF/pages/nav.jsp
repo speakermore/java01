@@ -22,8 +22,10 @@ h5 a {
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#work_together_nav">
-					<span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
+					<span class="sr-only">切换导航</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#"><img style="margin-left: 10px"
 					src="img/21495074072_.pic.png" width="28" height="30" /></a>

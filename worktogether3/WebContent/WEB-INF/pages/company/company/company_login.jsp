@@ -29,16 +29,16 @@
 					<div class="tab-content">
 					<!-- 用户登录 -->
 						<div class="tab-pane active" id="panel-login">
-							<form class="form-horizontal" action="company/company/login"
+							<form autocomplete="off" class="form-horizontal" action="company/company/login"
 								method="post" id="login">
 								<h3 class="form-signin-heading">欢迎企业用户登录</h3>
 								<div class="form-group">
-									<input type="text" id="companyLoginId" class="form-control"
+									<input autocomplete="off" type="text" id="companyLoginId" class="form-control"
 										name="companyLoginId" required placeholder="手机号" value="${companyLoginId }">
 								</div>
 								<div class="form-group">
 									<input type="password" id="companyPassword"
-										class="form-control" name="companyPassword" placeholder="密码"
+										autocomplete="off" class="form-control" name="companyPassword" placeholder="密码"
 										required>
 								</div>
 
@@ -67,23 +67,23 @@
 						<!-- 用户登录结束 -->
 						<!-- 用户注册 -->
 						<div class="tab-pane" id="panel-register">
-							<form class="form-horizontal" role="form"
+							<form autocomplete="off" class="form-horizontal" role="form"
 								action="company/company/addCompany" method="post"
 								id="addCompany">
 								<h3 class="form-signin-heading">欢迎企业用户注册</h3>
 								<div class="form-group">
-									<input placeholder="请输入联系人手机号（即以后的登录账号）" type="text"
+									<input autocomplete="off" placeholder="请输入联系人手机号（即以后的登录账号）" type="text"
 										class="form-control" id="exampleInputPassword1"
 										name="companyLoginId" autocomplete="off" />
 								</div>
 
 								<div class="form-group">
-									<input placeholder="请输入密码" type="password" class="form-control"
+									<input autocomplete="off" placeholder="请输入密码" type="password" class="form-control"
 										id="exampleInputPassword1" name="companyPassword"
 										autocomplete="off" />
 								</div>
 								<div class="form-group">
-									<input placeholder="确认密码" type="password" class="form-control"
+									<input autocomplete="off" placeholder="确认密码" type="password" class="form-control"
 										id="exampleInputPassword1" name="realCompanyPassword"
 										autocomplete="off" />
 								</div>

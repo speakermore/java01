@@ -21,9 +21,9 @@
 			</div>
 			<div class="col-md-12 column">
 				<label class="control-label">工作时间：</label>
-				<fmt:formatDate value="${work.workBeginTime}" pattern="yyyy-MM-dd" />
+				<fmt:formatDate value="${work.workBeginTime}" pattern="yyyy-MM" />
 				到
-				<fmt:formatDate value="${work.workEndTime}" pattern="yyyy-MM-dd" />
+				<fmt:formatDate value="${work.workEndTime}" pattern="yyyy-MM" />
 			</div>
 			<div class="col-md-offset-10 column">
 				<a id="modal-work" href="#modal-container-work${work.id}" role="button"
@@ -33,7 +33,7 @@
 
 
 				<!-- 模态框 -->
-				<div onclick="" class="modal fade" id="modal-container-work${work.id}" role="dialog"
+				<div  class="modal fade" id="modal-container-work${work.id}" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true"
 					data-backdrop="static">
 					<div class="modal-dialog">
@@ -72,19 +72,19 @@
 									</div>
 									<div class="col-md-12 column margin_bottom_AND_margin_top">
 										<label class="col-md-3 control-label">工作时间：</label>
-										<div class="col-md-4 column">
+										<div class="col-md-4 workStart">
 											<input name="workBeginTime" size="30" type="text"
-												id="datetimeStart1" readonly
+												id="workStart" readonly
 												value="<fmt:formatDate
-						value="${work.workBeginTime}" pattern="yyyy-MM-dd" />"
-												class="form_datetime form-control" placeholder="请选择日期">
+						value="${work.workBeginTime}" pattern="yyyy-MM" />"
+												class="form_datetime form-control" placeholder="请选择开始工作年月">
 										</div>
 										<div class="col-md-4 column ">
 											<input name="workEndTime" size="30" type="text"
 												value="<fmt:formatDate
-						value="${work.workEndTime}" pattern="yyyy-MM-dd" />"
-												id="datetimeEnd1" readonly class="form_datetime form-control"
-												placeholder="请选择日期">
+						value="${work.workEndTime}" pattern="yyyy-MM" />"
+												id="workEnd" readonly class="form_datetime form-control"
+												placeholder="请选择结束工作年月">
 										</div>
 									</div>
 									<button type="button" class="btn btn-default"

@@ -14,7 +14,7 @@
 					<div class="row">
 					<div class="col-md-12 column">
 						<div class="form-group">
-							<label class="control-label col-md-2" for="resumeTitle">简历标题</label>
+							<label class="control-label col-md-2" for="resumeTitle">岗位类别</label>
 							<div class="col-md-8">
 							<select class="form-control" name="resumeTitle">
 							<!-- 牟勇：动态添加一级岗位名称 -->
@@ -223,7 +223,7 @@
 									<label for="resumeGraduationTime"
 										class="col-md-4 control-label">毕业时间：</label>
 									<div class="col-md-8">
-										<input class="form-control form_datetime" value="2016-1-1"
+										<input class="form-control form_datetime" value="2016-1"
 											id="resumeGraduationTime" name="resumeGraduationTime"
 											readonly="readonly" placeholder="请选择日期" />
 									</div>

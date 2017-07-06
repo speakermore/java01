@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+<!--
+	a:hover{
+		color:#fff;
+	}
+-->
+</style>
 <div class="nav-main">
 <nav class="navbar navbar-inverse navbar-fixed-top work-together-background">
         <div class="navbar-header">
@@ -35,7 +42,7 @@
     <div class="nav-slide-o">
     	<ul>
     		<li><a href=""><span>功能类别</span></a></li>
-    		<li><a href="admin/news/add"><span>添加资讯</span></a></li>
+    		<li><a href="admin/news/find_all"><span>最新资讯列表</span></a></li>
     		<li><a href="admin/maIntegerainAdmin"><span>信息维护</span></a></li>
     		<li><a href="admin/userMag" class="contact"><span>禁用用户</span></a></li>
     		<li><a href="admin/adminLog" class="news"><span>管理员日志</span></a></li>

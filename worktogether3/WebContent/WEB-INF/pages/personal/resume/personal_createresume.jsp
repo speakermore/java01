@@ -39,6 +39,7 @@
 			'previewFileType' : 'any'
 		});
 		$(function() {
+			//生日
 			$("#resumeBirthday").datetimepicker({
 				format : 'yyyy-mm-dd',
 				language : 'zh-CN',
@@ -56,14 +57,16 @@
 	                    .updateStatus('resumeBirthday', 'NOT_VALIDATED',null)  
 	                    .validateField('resumeBirthday');  
 	            });
-
+			//开始工作日期
 			$("#resumeWorks").datetimepicker({
-				format : 'yyyy-mm-dd',
+				format : 'yyyy-mm',
 				language : 'zh-CN',
-				startDate : '1900-01-01', //选择器的开始日期
+				startDate : '1900-01', //选择器的开始日期
 				autoclose : true,
 				todayHighlight : true,
-				minView : "month"
+				minView : 3,
+				startView:3
+				
 			}).on(
 					"click",
 					function() {
@@ -74,14 +77,15 @@
 	                .updateStatus('resumeWorks', 'NOT_VALIDATED',null)  
 	                .validateField('resumeWorks');  
 	            });
-
+			//毕业时间
 			$("#resumeGraduationTime").datetimepicker({
-				format : 'yyyy-mm-dd',
+				format : 'yyyy-mm',
 				language : 'zh-CN',
-				startDate : '1900-01-01', //选择器的开始日期
+				startDate : '1900-01', //选择器的开始日期
 				autoclose : true,
 				todayHighlight : true,
-				minView : "month"
+				minView : 3,
+				startView:3
 			}).on('hide',function(e) {  
                 $('#resumeForm').data('bootstrapValidator')  
                 .updateStatus('resumeGraduationTime', 'NOT_VALIDATED',null)  

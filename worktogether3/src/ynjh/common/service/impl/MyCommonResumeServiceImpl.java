@@ -1,11 +1,16 @@
 package ynjh.common.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-import com.sun.javafx.collections.MappingChange.Map;
+
 import ynjh.common.dao.MyCommonResumeMapper;
+import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.service.MyCommonResumeService;
+import ynjh.common.util.GetAge;
 
 @Service
 public class MyCommonResumeServiceImpl implements MyCommonResumeService {
@@ -15,7 +20,16 @@ public class MyCommonResumeServiceImpl implements MyCommonResumeService {
 	
 	@Override
 	public List<Map<String, Object>> findByResumeTitle5(String resumeTitle) {
-		return myCommonResumeMapper.findByResumeTitle("%"+resumeTitle+"%", 0, 5);
+		List<Map<String, Object>> list= myCommonResumeMapper.findByResumeTitle("%"+resumeTitle+"%", 0, 5);
+		//将Timestamp的工作时间转换为工作的年限
+		list.stream().forEach(m->{
+			try {
+				m.put("resumeWorks",GetAge.getAgeTools((Timestamp)m.get("resumeWorks")));
+			} catch (AgeOverFlowException e) {
+				e.printStackTrace();
+			}
+		});
+		return list;
 	}
 
 	@Override

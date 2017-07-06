@@ -46,16 +46,16 @@
 					<div class="tab-content">
 						<!-- 用户登录 -->
 						<div class="tab-pane active" id="panel-login">
-							<form class="form-horizontal" method="post"
+							<form autocomplete="off" class="form-horizontal" method="post"
 								action="personal/user/login" id="loginForm">
 								<h3 class="form-signin-heading">欢迎个人用户登录</h3>
 								<div class="form-group">
-									<input type="text" id="userLoginId" class="form-control"
+									<input autocomplete="off" type="text" id="userLoginId" class="form-control"
 										name="userLoginId" required placeholder="手机号">
 								</div>
 
 								<div class="form-group">
-									<input type="password" id="userPassword" class="form-control "
+									<input autocomplete="off" type="password" id="userPassword" class="form-control "
 										name="userPassword" placeholder="密码" required>
 									<c:if test="${errorInfo!=null }">
 										<div id="validateCodeToolTip">${errorInfo }</div>
@@ -87,20 +87,20 @@
 						<!-- 用户登录结束 -->
 						<!-- 用户注册 -->
 						<div class="tab-pane" id="panel-register">
-							<form class="form-horizontal" method="post"
+							<form autocomplete="off" class="form-horizontal" method="post"
 								action="personal/user/addUser" id="registerForm">
 								<h3 class="form-signin-heading">欢迎个人用户注册</h3>
 								<div class="form-group">
-									<input type="text" id="userLoginId" class="form-control"
+									<input autocomplete="off" type="text" id="userLoginId" class="form-control"
 										name="userLoginId" placeholder="请输入常用手机号" required autofocus>
 								</div>
 								<div class="form-group">
 									<label for="userPassword" class="sr-only">密码</label> <input
-										type="password" id="userPassword" class="form-control"
+										autocomplete="off" type="password" id="userPassword" class="form-control"
 										name="userPassword" placeholder="请输入密码" required>
 								</div>
 								<div class="form-group">
-									<input type="password" id="confirmPassword"
+									<input autocomplete="off" type="password" id="confirmPassword"
 										class="form-control" name="confirmPassword" placeholder="请再次输入密码"
 										required>
 								</div>

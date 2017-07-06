@@ -20,12 +20,12 @@
 				<h3>企业用户注册</h3>
 				<hr />
 
-				<form class="form-horizontal" role="form"
+				<form autocomplete="off" class="form-horizontal" role="form"
 					action="company/company/addCompany" method="post" id="addCompany">
 					<div class="form-group">
 						<div class="col-sm-3">公司手机:</div>
 						<div class="col-sm-7">
-							<input type="text" class="form-control"
+							<input type="text"  class="form-control"
 								id="exampleInputPassword1" name="companyLoginId"
 								autocomplete="off" />
 						</div>
@@ -48,24 +48,6 @@
 								autocomplete="off" />
 						</div>
 					</div>
-
-
-
-					<!-- <form action="company/company/addCompany" method="post">
-			<input type="text" name="companyLoginId"><br/>
-			密码:<input type="password" name="companyPassword"><br/>
-			确认密码:<input type="password" name="realCompanyPassword"><br/> -->
-					<!-- 公司名称:<input type="text" name="companyName"><br/>
-			公司简称:<input type="text" name="companySimpleName"><br/>
-			公司logo:<input type="text" name="companyLogo"><br/>
-			公司营业执照:<input type="text" name="companyLicenseImg"><br/>
-			公司营业执照码:<input type="text" name="companyLicenseNo"><br/>
-			公司法人:<input type="text" name="companyCorporator"><br/>
-			公司电话:<input type="text" name="companyTel"><br/>
-			公司电子邮件:<input type="text" name="companyEmail"><br/>
-			公司地址:<input type="text" name="companyAddress"><br/>
-			公司环境照片:<input type="text" name="companyDetailImg"><br/>
-			公司状态:<input type="text" name="companyStatus">	<br/> -->
 					<div class="col-sm-3">
 						<button type="submit" class="form-control btn btn-success"
 							style="color: black;">注册</button>

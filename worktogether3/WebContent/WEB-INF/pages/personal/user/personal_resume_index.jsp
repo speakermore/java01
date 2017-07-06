@@ -19,7 +19,7 @@
 					<thead>
 						<tr>
 							<th>简历标题</th>
-							<th>简历意向</th>
+							<th>目前岗位</th>
 							<th>创建日期</th>
 							<th>状态</th>
 							<th>操作</th>

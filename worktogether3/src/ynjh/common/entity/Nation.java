@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class Nation implements Serializable {
+	
 	/**
 	 * 
 	 */

@@ -57,7 +57,7 @@ hr{
 }
 body{
 	padding-top:100px ;
-} 
+}
 /*
  * 指定导航栏上的字体颜色为白色
  */
@@ -107,5 +107,9 @@ ul.work-together-nav>li>a:hover{
 /* 牟勇：解决各大浏览器可以拖动textarea的问题 */
 textarea{
 	resize: none;
+}
+
+.tab-pane form .form-group{
+	margin-bottom:25px;
 }
 

@@ -245,7 +245,7 @@ a:focus {
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="workUnit" class="col-md-3 control-label">工作岗位：</label>
+									<label for="workUnit" class="col-md-3 control-label">主要工作岗位：</label>
 									<div class="col-md-8">
 										<input class="form-control" name="workUnit" id="workUnit" />
 									</div>
@@ -260,13 +260,13 @@ a:focus {
 								<div class="form-group">
 									<label class="col-md-3 control-label">日期：</label>
 									<div class="col-md-4">
-										<input class="form-control" name="workBeginTime" size="30"
-											type="text" id="datetimeStart1" readonly
+										<input class="form-control form_datetime" name="workBeginTime" size="30"
+											type="text" id="workStart" readonly
 											class="form_datetime" placeholder="选择起始日期">
 									</div>
 									<div class="col-md-4">
-										<input class="form-control" name="workEndTime" size="30"
-											type="text" id="datetimeEnd1" readonly class="form_datetime"
+										<input class="form-control form_datetime" name="workEndTime" size="30"
+											type="text" id="workEnd" readonly
 											placeholder="选择结束日期">
 									</div>
 								</div>
@@ -337,13 +337,13 @@ a:focus {
 								<div class="form-group">
 									<label class="col-md-3 control-label">日期：</label>
 									<div class="col-md-4">
-										<input class="form-control" name="projectBeginTime" size="30"
-											type="text" id="datetimeStart2" readonly
-											class="form_datetime" placeholder="选择起始日期" />
+										<input class="form-control form_datetime" name="projectBeginTime" size="30"
+											type="text" id="projectStart" readonly
+											 placeholder="选择起始日期" />
 									</div>
 									<div class="col-md-4">
-										<input class="form-control" name="projectEndTime" size="30"
-											type="text" id="datetimeEnd2" readonly class="form_datetime"
+										<input class="form-control form_datetime" name="projectEndTime" size="30"
+											type="text" id="projectEnd" readonly
 											placeholder="选择结束日期" />
 									</div>
 								</div>
@@ -410,13 +410,13 @@ a:focus {
 								<div class="form-group">
 									<label class="col-md-3 control-label">日期：</label>
 									<div class="col-md-4">
-										<input class="form-control" name="educationBeginTime"
-											size="30" type="text" id="datetimeStart" readonly
-											class="form_datetime" placeholder="选择起始日期">
+										<input class="form-control form_datetime" name="educationBeginTime"
+											size="30" type="text" id="educationStart" readonly
+											 placeholder="选择起始日期">
 									</div>
 									<div class="col-md-4">
-										<input class="form-control" name="educationEndTime" size="30"
-											type="text" id="datetimeEnd" readonly class="form_datetime"
+										<input class="form-control form_datetime" name="educationEndTime" size="30"
+											type="text" id="educationEnd" readonly
 											placeholder="选择结束日期">
 									</div>
 								</div>
@@ -468,90 +468,120 @@ a:focus {
 		});
 	});
 	$(function() {
-		/* 项目 */
-		$("#datetimeStart").datetimepicker({
-			format : 'yyyy-mm-dd',
-			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : "month"
-		}).on(
-				"click",
-				function() {
-					$("#datetimeStart").datetimepicker("setEndDate",
-							$("#datetimeEnd").val())
-				});
-
-		$("#datetimeEnd").datetimepicker({
-			format : 'yyyy-mm-dd',
-			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : "month"
-		}).on(
-				"click",
-				function() {
-					$("#datetimeEnd").datetimepicker("setStartDate",
-							$("#datetimeStart").val())
-				});
-		/* 工作 */
-		$("#datetimeStart1").datetimepicker({
-			format : 'yyyy-mm-dd',
-			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : "month"
-		}).on(
-				"click",
-				function() {
-					$("#datetimeStart1").datetimepicker("setEndDate",
-							$("#datetimeEnd1").val());
-				});
-
-		$("#datetimeEnd1").datetimepicker({
-			format : 'yyyy-mm-dd',
-			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : "month"
-		}).on(
-				"click",
-				function() {
-					$("#datetimeEnd1").datetimepicker("setStartDate",
-							$("#datetimeStart1").val())
-				});
 		/* 教育 */
-		$("#datetimeStart2").datetimepicker({
-			format : 'yyyy-mm-dd',
+		/* $("#educationStart").datetimepicker({
+			format : 'yyyy-mm',
 			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
+			startDate : '1900-01', //选择器的开始日期
 			autoclose : true,
 			todayHighlight : true,
-			minView : "month"
+			minView : 3,
+			startView:3
 		}).on(
 				"click",
 				function() {
-					$("#datetimeStart2").datetimepicker("setEndDate",
-							$("#datetimeEnd2").val())
-				});
+					$("#educationStart").datetimepicker("setEndDate",
+							$("#educationEnd").val())
+				}).on('hide',function(e) {  
+	                $('#educationForm').data('bootstrapValidator')  
+	                .updateStatus('educationBeginTime', 'NOT_VALIDATED',null)  
+	                .validateField('educationBeginTime');  
+	        });
 
-		$("#datetimeEnd2").datetimepicker({
-			format : 'yyyy-mm-dd',
+		$("#educationEnd").datetimepicker({
+			format : 'yyyy-mm',
 			language : 'zh-CN',
-			startDate : '1900-01-01', //选择器的开始日期
+			startDate : '1900-01', //选择器的开始日期
 			autoclose : true,
 			todayHighlight : true,
-			minView : "month"
+			minView : 3,
+			startView:3
 		}).on(
 				"click",
 				function() {
-					$("#datetimeEnd2").datetimepicker("setStartDate",
-							$("#datetimeStart2").val())
-				});
+					$("#educationEnd").datetimepicker("setStartDate",
+							$("#educationStart").val())
+				}).on('hide',function(e) {  
+	                $('#educationForm').data('bootstrapValidator')  
+	                .updateStatus('educationEndTime', 'NOT_VALIDATED',null)  
+	                .validateField('educationEndTime');  
+	        }); */
+		/* 工作 */
+		$(".form_datetime").datetimepicker({
+			format : 'yyyy-mm',
+			language : 'zh-CN',
+			startDate : '1900-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : 3,
+			startView:3
+		}).on(
+				"click",
+				function() {
+					$("#workStart").datetimepicker("setEndDate",
+							$("#workEnd").val());
+				}).on('hide',function(e) {  
+	                $('#workForm').data('bootstrapValidator')  
+	                .updateStatus('workStart', 'NOT_VALIDATED',null)  
+	                .validateField('workStart');  
+	        });
+
+		/* $("#workEnd").datetimepicker({
+			format : 'yyyy-mm',
+			language : 'zh-CN',
+			startDate : '1900-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : 3,
+			startView:3
+		}).on(
+				"click",
+				function() {
+					$("#workEnd").datetimepicker("setStartDate",
+							$("#workStart").val())
+				}).on('hide',function(e) {  
+	                $('#resumeForm').data('bootstrapValidator')  
+	                .updateStatus('workEnd', 'NOT_VALIDATED',null)  
+	                .validateField('workEnd');  
+	        }); */
+		/* 项目 */
+		/* $("#projectStart").datetimepicker({
+			format : 'yyyy-mm',
+			language : 'zh-CN',
+			startDate : '1900-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : 3,
+			startView:3
+		}).on(
+				"click",
+				function() {
+					$("#projectStart").datetimepicker("setEndDate",
+							$("#projectEnd").val())
+				}).on('hide',function(e) {  
+	                $('#projectForm').data('bootstrapValidator')  
+	                .updateStatus('projectBeginTime', 'NOT_VALIDATED',null)  
+	                .validateField('projectBeginTime');  
+	        });
+
+		$("#projectEnd").datetimepicker({
+			format : 'yyyy-mm',
+			language : 'zh-CN',
+			startDate : '1900-01', //选择器的开始日期
+			autoclose : true,
+			todayHighlight : true,
+			minView : 3,
+			startView:3
+		}).on(
+				"click",
+				function() {
+					$("#projectEnd").datetimepicker("setStartDate",
+							$("#projectStart").val())
+				}).on('hide',function(e) {  
+	                $('#projectForm').data('bootstrapValidator')  
+	                .updateStatus('projectEndTime', 'NOT_VALIDATED',null)  
+	                .validateField('projectEndTime');  
+	        }); */
 	});
 
 	$(function() {

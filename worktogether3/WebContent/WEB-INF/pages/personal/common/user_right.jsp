@@ -169,11 +169,6 @@
 				<div class="panel-body">
 					<!--我的信息左边文字结束-->
 					<div class="col-sm-12">
-						<%-- <c:if test="${fn:length(mood.moodContent)>48 }">  
-                         			${fn:substring(mood.moodContent, 0, 48)}...  
-                   				</c:if> <c:if test="${fn:length(mood.moodContent)<=48 }">  
-                         			 ${mood.moodContent } 
-                  			 	</c:if> --%>
 						${mood.moodContent }
 					</div>
 				</div>
@@ -207,28 +202,6 @@
 		<%@include file="/WEB-INF/pages/personal/common/selectformanage.jsp"%>
 	</section>
 	<!--我的信息列表结束-->
-	<section class="panel">
-		<div class="panel-title">手机App下载</div>
-		<div class="panel-body">
-			<img src="" width="100" height="100" alt="Android下载" /> <img src=""
-				width="100" height="100" alt="iOS下载" />
-		</div>
-	</section>
-	<section class="panel">
-		<div class="panel-body">广告招租位1</div>
-	</section>
-	<section class="panel">
-		<div class="panel-body">广告招租位2</div>
-	</section>
-	<section class="panel">
-		<div class="panel-body">广告招租位3</div>
-	</section>
-	<section class="panel">
-		<div class="panel-body">广告招租位4</div>
-	</section>
-	<section class="panel">
-		<div class="panel-body">广告招租位5</div>
-	</section>
 	<section class="panel">
 		<div class="panel-title">职业档案人气</div>
 		<div class="panel-body">
