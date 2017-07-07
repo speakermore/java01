@@ -27,7 +27,7 @@
 				<a id="modal-education${edu.id}"
 					href="#modal-container-education${edu.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
-					href="javascript:ajaxDeleteEducation('personal/user/personal_index_myResume',${edu.id})"><span
+					href="javascript:ajaxDelete('personal/resume/deleteResumeEducation',${edu.id})"><span
 					class="glyphicon glyphicon-trash"></span></a>
 				<!-- 模态框 -->
 				<div class="modal fade" id="modal-container-education${edu.id}"
@@ -107,21 +107,16 @@
 <script type="text/javascript">
 	
 	var updateEducationFormAjax = function(id) {
-		/* $("#modal-container-project"+id).modal('toggle'); */
-		var updateEducationForm = new FormData(document
-				.getElementById("updateEducationForm" + id));
+		
+		var updateEducationForm = $("#updateEducationForm" + id).serialize();
 		$.ajax({
 			url : "personal/resume/updateEducation",
 			data : updateEducationForm, //传递的参数
 			dataType : "html", //返回值类型
 			type : "post",
-			 processData : false, //ajax提交表单必须写
-			contentType : false, //ajax提交表单必须写 
 			success : function(data) {
-				/* $("#modal-container-project"+id).modal('hide'); */
-				alert("修改成功！");
-				//$("#modal-container-project").remove(); 
-				$("#educationFresh").html(data);
+				alert(data);
+				ajaxPage("personal/user/personal_index_myResume");
 			},
 			error:function(){
 				alert("修改失败！");

@@ -2,7 +2,6 @@ package ynjh.personal.controller.resume;
 
 import java.util.List;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -257,15 +256,8 @@ public class ResumeController {
 		resume.setResumeStatusOne(oldResume.getResumeStatusOne());
 		resume.setResumeStatusThree(1);
 		resume.setResumeHeadImg(oldResume.getResumeHeadImg());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
-			resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (AgeOverFlowException e) {
-			e.printStackTrace();
-		}
+		
+		
 		int result = rService.updateResume(resume);
 		if (result > 0) {
 			session.setAttribute("resume", resume);
@@ -494,92 +486,69 @@ public class ResumeController {
 
 	/**
 	 * 删除教育记录
-	 * 
 	 * @param id
 	 * @param session
 	 * @return
 	 * 
 	 * 		ModelAndView
 	 */
-	@RequestMapping(value = "/deleteResumeEducation", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteResumeEducation", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView deleteResumeEducation(Integer id,String page,HttpSession session) {
-		ModelAndView mv = new ModelAndView();
+	public String deleteResumeEducation(Integer id,String page,HttpSession session) {
 		int result = rService.deleteEducation(id);
+		String callBackString="删除教育经历失败";
 		if (result > 0) {
 			Resume resume = (Resume) session.getAttribute("resume");
 			List<Education> edus = rService.findEducation(resume.getId());
-			if (edus.size()>0) {
-				session.setAttribute("edus", edus);
-			}else {
-				session.setAttribute("edus", null);
-			}
-			session.setAttribute("resume", resume);
-			mv.setViewName(page);
-		}else {
-			mv.setViewName("error");
+			session.setAttribute("edus", edus);
+			callBackString="删除教育经历成功";
 		}
-		return mv;
+		return callBackString;
 	}
 
 	/**
-	 * 删除工作记录
+	 * 牟勇：删除工作记录
+	 * @param id 工作经验表的主键id
+	 * @param session 用来取简历id以便获得对应工作经验信息更新
+	 * @return 删除的结果字符串（仅提供“成功”或者是“失败”字样的信息输出）
 	 * 
-	 * @param id
-	 * @param session
-	 * @return
-	 * 
-	 * 		ModelAndView
+	 * 		
 	 */
-	@RequestMapping(value = "/deleteResumeWork", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteResumeWork", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView deleteResumeWork(Integer id,String page, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
+	public String deleteResumeWork(Integer id, HttpSession session) {
+		String callBackString="删除工作经验失败";
 		int result = rService.deleteWork(id);
 		if (result > 0) {
 			Resume resume = (Resume) session.getAttribute("resume");
 			List<Work> works = rService.findWork(resume.getId());
-			if (works.size()>0) {
-				session.setAttribute("works", works);
-			}else {
-				session.setAttribute("works", null);
-			}
-			session.setAttribute("resume", resume);
-			mv.setViewName(page);
-		}else {
-			mv.setViewName("error");
+			session.setAttribute("works", works);
+			callBackString="删除工作经验成功";
 		}
-		return mv;
+		return callBackString;
 	}
 
 	/**
-	 * 删除项目记录
+	 * 牟勇：删除项目经验记录
 	 * 
-	 * @param id
-	 * @param session
-	 * @return
+	 * @param id 被删除项目的主键id
+	 * @param session 用来取简历id以便获得对应项目经验信息更新
+	 * @return 删除的结果字符串（仅提供“成功”或者是“失败”字样的信息输出）
 	 * 
-	 * 		ModelAndView
+	 * 		
 	 */
-	@RequestMapping(value = "/deleteResumeProject", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteResumeProject", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView deleteResumeProject(Integer id,String page, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
+	public String deleteResumeProject(Integer id, HttpSession session) {
+		String callBackString="删除项目经验失败";
 		int result = rService.deleteProject(id);
 		if (result > 0) {
 			Resume resume = (Resume) session.getAttribute("resume");
 			List<Project> projs = rService.findProject(resume.getId());
-			if (projs.size()>0) {
-				session.setAttribute("projs", projs);
-			}else {
-				session.setAttribute("projs", null);
-			}
-			session.setAttribute("resume", resume);
-			mv.setViewName(page);
-		}else {
-			mv.setViewName("error");
+			session.setAttribute("projs", projs);
+			callBackString="删除项目经验成功";
 		}
-		return mv;
+		return callBackString;
 	}
 
 	/**
@@ -821,15 +790,14 @@ public class ResumeController {
 	 */
 	@RequestMapping(value = "/updateWork", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView updateWork(Work work, Integer id, String page, HttpSession session) {
-		ModelAndView mv = new ModelAndView(page);
+	public String updateWork(Work work, Integer id, String page, HttpSession session) {
 		Resume oldResume = (Resume) session.getAttribute("resume");
 		User oldUser = (User) session.getAttribute("user");
 		work.setUserId(oldUser.getId());
 		work.setResumeId(oldResume.getId());
-		work.setResumeType(1);
+		work.setResumeType(1);//设置审核状态为未审核
 		int result=rService.updateWork(work, id);
-		if (result>0) {
+		if (result>=0) {
 			List<Work> works = rService.findWork(oldResume.getId());
 			if (works.size() > 0) {
 				session.setAttribute("works", works);
@@ -837,7 +805,7 @@ public class ResumeController {
 				session.setAttribute("works", null);
 			}
 		}
-		return mv;
+		return "修改工作经验成功！";
 	}
 
 	/**

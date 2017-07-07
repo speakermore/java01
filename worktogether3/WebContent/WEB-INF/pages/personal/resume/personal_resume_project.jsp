@@ -29,7 +29,7 @@
 				<a id="modal-project${pro.id}"
 					href="#modal-container-project${pro.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
-					href="javascript:ajaxDeleteProject('personal/user/personal_index_myResume',${pro.id})"><span
+					href="javascript:ajaxDelete('personal/resume/deleteResumeProject',${pro.id})"><span
 					class="glyphicon glyphicon-trash"></span></a>
 				<!-- 模态框 -->
 				<div class="modal fade" id="modal-container-project${pro.id}"
@@ -115,21 +115,15 @@
 </div>
 <script type="text/javascript">
 	var updateProjectFormAjax = function(id) {
-		/* $("#modal-container-project"+id).modal('toggle'); */
-		var updateProjectForm = new FormData(document
-				.getElementById("updateProjectForm" + id));
+		var updateProjectForm = $("#updateProjectForm"+id).serialize();
 		$.ajax({
 			url : "personal/resume/updateProject",
 			data : updateProjectForm, //传递的参数
 			dataType : "html", //返回值类型
-			type : "post",
-			 processData : false, //ajax提交表单必须写
-			contentType : false, //ajax提交表单必须写 
+			type : "post", 
 			success : function(data) {
-				/* $("#modal-container-project"+id).modal('hide'); */
-				alert("修改成功！");
-				//$("#modal-container-project").remove(); 
-				$("#projectFresh").html(data);
+				alert('修改项目经验成功！');
+				ajaxPage("personal/user/personal_index_myResume");
 			},
 			error:function(){
 				alert("修改失败！");

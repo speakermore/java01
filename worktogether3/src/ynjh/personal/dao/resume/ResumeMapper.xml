@@ -206,9 +206,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 我发过的简历 -->
 	<select id="findMySendResume" resultType="MySendResume"
 		parameterType="Integer">
+		<!-- companyresume：投递简历表，companyrecruit：公司招聘表 -->
 		select * from companyresume cre,company
-		c,companyrecruit
-		crt
+		c,companyrecruit crt
 		where cre.companyId=c.id
 		and cre.companyrecruitId=crt.id
 		and

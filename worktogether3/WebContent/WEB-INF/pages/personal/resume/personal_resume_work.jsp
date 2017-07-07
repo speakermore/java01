@@ -28,7 +28,7 @@
 			<div class="col-md-offset-10 column">
 				<a id="modal-work" href="#modal-container-work${work.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
-					href="javascript:ajaxDeleteWork('personal/user/personal_index_myResume',${work.id})"><span
+					href="javascript:ajaxDelete('personal/resume/deleteResumeWork',${work.id})"><span
 					class="glyphicon glyphicon-trash"></span></a>
 
 
@@ -109,23 +109,22 @@
 			完善工作经验，展现工作内容及能力，让HR更了解你！
 		</div>
 	</c:if>
-</div>
+</div>  
 <script type="text/javascript">
 	var updateWorkFormAjax = function(page, id) {
-		$('#modal-container-work'+id).modal('hide');
-		var updateWorkForm = new FormData(document
-				.getElementById("updateWorkForm"+id));
+		
+		var updateWorkForm = $("#updateWorkForm"+id).serialize();
 		$.ajax({
 			url : "personal/resume/updateWork",
 			data : updateWorkForm,
 			dataType : "html",
 			type : "post",
-			processData : false,
 			success : function(data) {
-				$("#workFresh").html(data);
+				alert(data);
+				ajaxPage("personal/user/personal_index_myResume");
 			},
 			error:function(){
-				alert("error:修改失败！");
+				alert("error:修改工作经验失败！");
 			}
 		});
 	}

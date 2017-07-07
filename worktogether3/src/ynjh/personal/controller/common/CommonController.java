@@ -81,8 +81,10 @@ public class CommonController {
 	@RequestMapping("/initIndex")
 	public ModelAndView initIndex(Integer toPage, Integer userId, HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if(toPage==null||userId==null){
+			return mv;
+		}
+		
 		// 我投递过的简历
 		List<MySendResume> mySendResumes = rService.findMySendResume(userId);
 		if (mySendResumes.size() > 0) {
@@ -104,14 +106,6 @@ public class CommonController {
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
 		if (resume != null) {
-			try {
-				resume.setAge(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeBirthday()))));
-				resume.setWorks(GetAge.getAgeTools(sdf.parse(sdf.format(resume.getResumeWorks()))));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} catch (AgeOverFlowException e) {
-				e.printStackTrace();
-			}
 			session.setAttribute("resume", resume);
 			// 获取教育
 			List<Education> edus = rService.findEducation(resume.getId());

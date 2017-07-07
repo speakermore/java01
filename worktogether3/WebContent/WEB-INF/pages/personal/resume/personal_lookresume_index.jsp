@@ -283,14 +283,14 @@ a:focus {
 			</div>
 			<!--mian-->
 		</div>
-		<!--2+-->
-		<!-- 局部刷新开始 -->
+		
+		<!--牟勇： 已有工作经验列表 -->
 		<div class="panel panel-default" id="workFresh">
 			<%@include
 				file="/WEB-INF/pages/personal/resume/personal_resume_work.jsp"%>
 		</div>
-		<!-- 局部刷新结束 -->
-		<!--2-->
+		<!--牟勇： 已有工作经验列表结束 -->
+		
 	</div>
 	<!--
 		作者：18213026337@163.com
@@ -360,14 +360,14 @@ a:focus {
 			</div>
 			<!--mian-->
 		</div>
-		<!--2+-->
-		<!-- 局部刷新开始 -->
+		
+		<!-- 项目经验开始 -->
 		<div class="panel panel-default" id="projectFresh">
 			<%@include
 				file="/WEB-INF/pages/personal/resume/personal_resume_project.jsp"%>
 		</div>
-		<!-- 局部刷新结束 -->
-		<!--2-->
+		<!-- 项目经验结束 -->
+		
 	</div>
 
 	<!--
@@ -817,39 +817,22 @@ a:focus {
 			}
 		});
 	}
-	/* ajax删除 */
-	var ajaxDeleteWork=function(page,id){
-		$.ajax({
-			url:"personal/resume/deleteResumeWork?id="+id+"&page="+page,
-			type:"Get",
-			dataType:"",
-			success:function(data){
-				alert("删除成功！");
-				$("#my-content").html(data);
-			}
-		});
-	}
-	var ajaxDeleteEducation=function(page,id){
-		$.ajax({
-			url:"personal/resume/deleteResumeEducation?id="+id+"&page="+page,
-			type:"Get",
-			dataType:"",
-			success:function(data){
-				alert("删除成功！");
-				$("#my-content").html(data);
-			}
-		});
-	}
-	var ajaxDeleteProject=function(page,id){
-		$.ajax({
-			url:"personal/resume/deleteResumeProject?id="+id+"&page="+page,
-			type:"Get",
-			dataType:"",
-			success:function(data){
-				alert("删除成功！");
-				$("#my-content").html(data);
-			}
-		});
+	
+	
+	/* 牟勇：ajax的各种删除，page为执行删除的控制器方法url，id为要删除记录的主键id */
+	var ajaxDelete=function(page,id){
+		if(confirm('你确认真的要删除吗？')){
+			$.ajax({
+				url:page,
+				type:"POST",
+				data:{id:id},
+				dataType:"text",
+				success:function(data){
+					alert(data);
+					ajaxPage("personal/user/personal_index_myResume");
+				}
+			});
+		}
 	}
 	
 </script>

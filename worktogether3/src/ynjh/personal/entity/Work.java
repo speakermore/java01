@@ -102,4 +102,13 @@ public class Work implements Serializable{
 		this.workDescription = workDescription;
 	}
 
+	@Override
+	public String toString() {
+		return "Work [id=" + id + ", userId=" + userId + ", workBeginTime=" + workBeginTime + ", workEndTime="
+				+ workEndTime + ", workFirmName=" + workFirmName + ", workUnit=" + workUnit + ", workDescription="
+				+ workDescription + ", resumeId=" + resumeId + ", resumeType=" + resumeType + "]";
+	}
+	
+	
+
 }

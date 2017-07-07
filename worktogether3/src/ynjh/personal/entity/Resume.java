@@ -2,6 +2,10 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
+import ynjh.common.exception.AgeOverFlowException;
+import ynjh.common.util.GetAge;
 /**
  * 
  * @author 刘志浩
@@ -74,24 +78,22 @@ public class Resume implements Serializable{
 	private String resumeNowResidence;
 	//邮箱地址
 	private String resumeEmail;
-	//年龄
+	//年龄。
+	//牟勇：将年龄更改为只读属性
 	private Integer age;
 	//工作年限
+	//牟勇：将工作年限更改为只读属性
 	private Integer works;
 	
 	
 	public Integer getAge() {
 		return age;
 	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+	
 	public Integer getWorks() {
 		return works;
 	}
-	public void setWorks(Integer works) {
-		this.works = works;
-	}
+	
 	public String getResumeNowResidence() {
 		return resumeNowResidence;
 	}
@@ -115,8 +117,14 @@ public class Resume implements Serializable{
 	public Timestamp getResumeWorks() {
 		return resumeWorks;
 	}
+	//牟勇：在设置工作时间的时候，对工作年限进行一次计算
 	public void setResumeWorks(Timestamp resumeWorks) {
 		this.resumeWorks = resumeWorks;
+		try {
+			works=GetAge.getAgeTools(resumeWorks);
+		} catch (AgeOverFlowException e) {
+			e.printStackTrace();
+		}
 	}
 	public String getResumeHeadImg() {
 		return resumeHeadImg;
@@ -205,9 +213,14 @@ public class Resume implements Serializable{
 	public Timestamp getResumeBirthday() {
 		return resumeBirthday;
 	}
-
+	//牟勇：在设置生日的同时，对年龄进行了一次计算
 	public void setResumeBirthday(Timestamp resumeBirthday) {
 		this.resumeBirthday = resumeBirthday;
+		try {
+			age=GetAge.getAgeTools(resumeBirthday);
+		} catch (AgeOverFlowException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Integer getResumeMarriage() {
