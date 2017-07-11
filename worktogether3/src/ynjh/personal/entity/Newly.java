@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  */
 public class Newly implements Serializable {
-
+	private static final long serialVersionUID = 1897439642850006801L;
 	private String companyId; // 公司名字
 	private String userId; // 用户id
 	private String companyRecruitTitle; // 发布的招聘职位

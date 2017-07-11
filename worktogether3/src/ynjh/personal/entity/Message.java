@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  * 信息表，与message表对应
  */
 public class Message implements Serializable {
+	private static final long serialVersionUID = 2865018412730784571L;
 	// id
 	private Integer id;
 	// 接收者id
@@ -92,6 +93,15 @@ public class Message implements Serializable {
 
 	public void setMessageSendStatus(Integer messageSendStatus) {
 		this.messageSendStatus = messageSendStatus;
+	}
+	
+
+	public Integer getMessageStatus() {
+		return messageStatus;
+	}
+
+	public void setMessageStatus(Integer messageStatus) {
+		this.messageStatus = messageStatus;
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  * @author 胡林飞 关注表，与follow表对应
  */
 public class Follow implements Serializable {
+	private static final long serialVersionUID = 2634128412121305060L;
 	// id
 	private Integer id;
 	// 关注者id(用户或企业id)

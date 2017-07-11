@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import ynjh.company.entity.Company;
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserAndResume;

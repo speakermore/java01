@@ -8,6 +8,7 @@ import java.io.Serializable;
  * 简历操作表 与resumeStatusTwo表对应 、是resume的子表
  */
 public class ResumeStatusTwo implements Serializable {
+	private static final long serialVersionUID = 3333093574529708297L;
 	//状态id
 	private Integer id;
 	// 简历Id
@@ -48,6 +49,9 @@ public class ResumeStatusTwo implements Serializable {
 	public void setResumeStatusTwo(Integer resumeStatusTwo) {
 		this.resumeStatusTwo = resumeStatusTwo;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "ResumeStatusTwo [id=" + id + ", resumeId=" + resumeId + ", userId=" + userId + ", companyId="
+				+ companyId + ", resumeStatusTwo=" + resumeStatusTwo + "]";
+	}
 }

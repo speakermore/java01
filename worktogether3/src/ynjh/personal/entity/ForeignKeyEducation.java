@@ -7,6 +7,7 @@ import java.io.Serializable;
  *
  */
 public class ForeignKeyEducation extends Education implements Serializable{
+	private static final long serialVersionUID = 922436020141943884L;
 	//简历标题
 	private String resumeTitle;
 
@@ -17,4 +18,11 @@ public class ForeignKeyEducation extends Education implements Serializable{
 	public void setResumeTitle(String resumeTitle) {
 		this.resumeTitle = resumeTitle;
 	}
+
+	@Override
+	public String toString() {
+		return "ForeignKeyEducation [resumeTitle=" + resumeTitle + "]";
+	}
+	
+	
 }

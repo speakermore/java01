@@ -10,6 +10,7 @@ import ynjh.common.util.MD5Util;
  * 用户表，对应user表
  */
 public class User implements Serializable{
+	private static final long serialVersionUID = 8206488828632325782L;
 	//用户id
 	private Integer id;
 	// 用户名
@@ -44,7 +45,6 @@ public class User implements Serializable{
 	private Integer userLevel;
 	
 	public User() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(String userLoginId, String userPassword, String userName,

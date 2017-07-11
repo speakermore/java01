@@ -9,6 +9,8 @@ import java.sql.Timestamp;
  *
  */
 public class UserCharge implements Serializable {
+	
+	private static final long serialVersionUID = -486680971103086559L;
 	// id
 	private Integer id;
 	// 用户id

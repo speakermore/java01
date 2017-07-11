@@ -39,8 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUserOffersRecord" parameterType="int" resultType="int">
 		select count(*) from offer where userId=#{userId} and offerStatus=2
 	</select>
-	<!-- 查找当前用户收到的所有offer -->
-	<select id="findUserOffers" parameterType="int" resultType="Offer">
+	<!-- 查找当前用户收到的offer -->
+	<select id="findUserOffers" resultType="Offer">
 		<!-- 查询offer表和company表中的companySimpleName字段 -->
 		select o.*,c.companySimpleName from offer as o,company as c
 		where o.userId=#{userId} and o.companyId=c.id and o.offerStatus=2

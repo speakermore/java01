@@ -74,9 +74,9 @@ public class CommonController {
 	 * 主页对象获取中转
 	 * 
 	 * @param toPage
-	 * @param userId
+	 * @param userId 登录用户的主键
 	 * @return
-	 * @author 刘志浩 ModelAndView
+	 * @author 刘志浩 
 	 */
 	@RequestMapping("/initIndex")
 	public ModelAndView initIndex(Integer toPage, Integer userId, HttpSession session) {
@@ -87,11 +87,8 @@ public class CommonController {
 		
 		// 我投递过的简历
 		List<MySendResume> mySendResumes = rService.findMySendResume(userId);
-		if (mySendResumes.size() > 0) {
-			session.setAttribute("mySendResumes", mySendResumes);
-		} else {
-			session.setAttribute("mySendResumes", null);
-		}
+		session.setAttribute("mySendResumes", mySendResumes);
+		
 
 		// 我收到的面试邀请
 		List<Offer> offers = companyOfferService.findUserOffers(userId, toPage);
@@ -144,11 +141,7 @@ public class CommonController {
 
 		// 获取最新动态评论消息
 		List<CommentArticle> articleByComments = nService.findNewlyCommentArticleByUserId(userId,userId);
-		if (articleByComments.size()>0) {
-			session.setAttribute("personal_articleByComments", articleByComments);
-		}else {
-			articleByComments=null;
-		}
+		session.setAttribute("personal_articleByComments", articleByComments);
 		
 		
 		/*

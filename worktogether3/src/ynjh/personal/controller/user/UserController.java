@@ -92,11 +92,6 @@ public class UserController {
 				mv.setViewName("personal/user/personal_login");
 			} else {
 				if ("1".equals(re_remember)) { // "1"表示用户勾选记住密码
-					/*
-					 * String cookieUserName = Utils.encrypt(name); String
-					 * cookiePwd = Utils.encrypt(passWord); String loginInfo =
-					 * cookieUserName+","+cookiePwd;
-					 */
 					String loginInfo = userLoginId + "," + userPassword;
 					Cookie userCookie = new Cookie("loginInfo", loginInfo);
 
@@ -106,7 +101,6 @@ public class UserController {
 					response.addCookie(userCookie);
 				}
 				session.setAttribute("user", user);
-				/* mv.setViewName("personal/user/personal_index"); */
 				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 			}
 		}
@@ -249,7 +243,6 @@ public class UserController {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				} catch (AgeOverFlowException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				userAndResume.setIsFoucse(false);

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -25,9 +25,7 @@
 						<%@include
 							file="/WEB-INF/pages/personal/resume/personal_lookresume_index.jsp"%>
 					</div>
-					<%-- <div class="col-md-4 column ">
-						<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
-					</div> --%>
+					
 					<div class="col-md-1 column"></div>
 				</div>
 			</div>

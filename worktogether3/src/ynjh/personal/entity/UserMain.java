@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class UserMain extends Resume implements Serializable {
+	private static final long serialVersionUID = 2924622295200845777L;
 	// 用户id
 	private Integer id;
 	// 用户名

@@ -9,6 +9,7 @@ import java.sql.Timestamp;
  *
  */
 public class Work implements Serializable{
+	private static final long serialVersionUID = -5951948817175505170L;
 	// 工作经历ID
 	private Integer id;
 	// 用户ID

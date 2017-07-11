@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  *
  */
 public class UserAndResume implements Serializable{
+	private static final long serialVersionUID = -8983388725408458462L;
 		//用户id
 		private Integer id;
 		//用户名

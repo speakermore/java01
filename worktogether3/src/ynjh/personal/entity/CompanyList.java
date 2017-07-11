@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class CompanyList implements Serializable{
+	private static final long serialVersionUID = -446480471591159865L;
 	private Integer id;
 	private String companyLoginId;
 	private String companyName;
@@ -149,7 +150,15 @@ public class CompanyList implements Serializable{
 	public void setCmpIntWage(String cmpIntWage) {
 		this.cmpIntWage = cmpIntWage;
 	}
-	
-	
-	
+	@Override
+	public String toString() {
+		return "CompanyList [id=" + id + ", companyLoginId=" + companyLoginId + ", companyName=" + companyName
+				+ ", companySimpleName=" + companySimpleName + ", companyLogo=" + companyLogo + ", companyLicenseImg="
+				+ companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo + ", companyCorporator="
+				+ companyCorporator + ", companyTel=" + companyTel + ", companyEmail=" + companyEmail
+				+ ", companyAddress=" + companyAddress + ", companyId=" + companyId + ", cmpIntroduction="
+				+ cmpIntroduction + ", cmpIntQuality=" + cmpIntQuality + ", cmpIntPeopleNum=" + cmpIntPeopleNum
+				+ ", cmpIntComforts=" + cmpIntComforts + ", cmpIntRest=" + cmpIntRest + ", cmpIntInsurance="
+				+ cmpIntInsurance + ", cmpIntWage=" + cmpIntWage + ", isFoucse=" + isFoucse + "]";
+	}
 }

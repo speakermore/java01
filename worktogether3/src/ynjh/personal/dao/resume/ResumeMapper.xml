@@ -206,13 +206,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 我发过的简历 -->
 	<select id="findMySendResume" resultType="MySendResume"
 		parameterType="Integer">
-		<!-- companyresume：投递简历表，companyrecruit：公司招聘表 -->
-		select * from companyresume cre,company
+		<!-- 牟勇：companyresume：投递简历表，companyrecruit：公司招聘表 -->
+		select companyName,cmpRecTitle,cmprAction,cmprTime from companyresume cre,company
 		c,companyrecruit crt
 		where cre.companyId=c.id
 		and cre.companyrecruitId=crt.id
-		and
-		cre.companyResumeId=#{userId}
+		and cre.companyResumeId=#{userId}
+		order by cmprTime desc
 	</select>
 	<!-- 我收到的面试邀请 -->
 	<select id="findMyReceiveOffer" resultType="Offer"

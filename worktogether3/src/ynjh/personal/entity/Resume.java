@@ -2,7 +2,6 @@ package ynjh.personal.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.GetAge;
@@ -12,6 +11,7 @@ import ynjh.common.util.GetAge;
  * 简历表，对应resume表
  */
 public class Resume implements Serializable{
+	private static final long serialVersionUID = -4884902658909887024L;
 	// 简历ID
 	private Integer id;
 	// 用户ID

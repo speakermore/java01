@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Discuss implements Serializable {
+	private static final long serialVersionUID = -1135982522248411023L;
 	// id
 	private Integer id;
 	//发送者 1：企业id 2：个人用户id

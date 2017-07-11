@@ -38,7 +38,7 @@ h5 a {
 					<li><a href="personal/user/gotoCompany">名企招聘</a></li>
 					<li><a href="crowdfund/crowdfundAllList?page=1">技术众筹</a></li>
 					<li><a href="#">认证培训</a></li>
-					<li><a href="#">自主创业</a></li>
+					<li><a href="#">合伙创业</a></li>
 					<li><a href="#">咨询服务</a></li>
 					<li><a href="#">直播</a></li>
 					<li><a href="#">关于我们</a></li>

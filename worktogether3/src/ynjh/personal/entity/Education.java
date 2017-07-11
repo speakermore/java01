@@ -3,9 +3,8 @@ package ynjh.personal.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class Education implements Serializable{
+	private static final long serialVersionUID = 1743112432356820626L;
 	private Integer id;//ID
 	private Integer userId;//用户ID
 	private Timestamp educationBeginTime;//培训开始时间
@@ -82,5 +81,10 @@ public class Education implements Serializable{
 		this.educationBeginTime = educationBeginTime;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Education [id=" + id + ", userId=" + userId + ", educationBeginTime=" + educationBeginTime
+				+ ", educationEndTime=" + educationEndTime + ", educationSchool=" + educationSchool + ", resumeId="
+				+ resumeId + ", resumeType=" + resumeType + ", educationContent=" + educationContent + "]";
+	}
 }

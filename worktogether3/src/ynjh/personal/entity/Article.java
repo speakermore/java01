@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Article implements Serializable{
+	private static final long serialVersionUID = 475326667608010825L;
 	//id
 	private Integer id;
 	//用户名

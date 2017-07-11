@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class CommentArticle implements Serializable {
+	private static final long serialVersionUID = -8635474830098731685L;
 	// id
 	private Integer id;
 	// 文章ID
@@ -137,7 +138,4 @@ public class CommentArticle implements Serializable {
 				+ ", commentArticleUsersType=" + commentArticleUsersType + ", userName=" + userName + ", userLoginId="
 				+ userLoginId + ", userHeadImgPath=" + userHeadImgPath + ", articleTitle=" + articleTitle + "]";
 	}
-
-	
-
 }

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="ynjh.common.util.CommonStatus" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--左侧状态栏位-->
 <article id="my-content"
 	class="col-md-12  work-together-shadow work-together-shallow">
@@ -30,9 +30,25 @@
 				<!--//发表状态 -->
 				<!--最新状态信息组-->
 				<div class="row">
-					<section class="panel">
-						<div class="panel-title">最新动态</div>
+					<section class="panel panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">最新动态</div>
+						</div>
+						<div class="panel-body">
+							<div class="panel">
+								<h5 class="panel-title">我的应聘</h5>
+								<div class="panel-body">
+									<ul>
+										<c:set var="RESUME_STATUS" value="${CommonStatus.RESUME_STATUS }"></c:set>
+										<c:forEach items="${mySendResumes}" var="mySend">
+										<li>我<fmt:formatDate value="${mySend.cmprTime }" pattern="yyyy年MM月dd日"/>发给${mySend.companyName}关于${mySend.cmpRecTitle}的简历,目前${RESUME_STATUS[mySend.cmprAction] }</li>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</section>
+					
 					<!-- 面试邀请开始 -->
 					<c:if test="${personal_offer!=null }">
 						<section class="panel">
@@ -75,22 +91,8 @@
 					</c:forEach>
 					</c:if>
 					<!-- 最新评论结束 -->
-					<section class="panel">
-						<div class="panel-body">
-							@xxx3回复了@xxx2对<<<a href="#">我的一天</a>>>的评论
-						</div>
-						<div class="panel-footer work-together-right">
-							1分钟前.<a href="#">更多....</a>
-						</div>
-					</section>
-					<section class="panel">
-						<div class="panel-body">
-							@xxx4赞了<<<a href="#">我的一天</a>>><span class="">(共10赞)</span>
-						</div>
-						<div class="panel-footer work-together-right">
-							1分钟前.<a href="#">更多....</a>
-						</div>
-					</section>
+					
+					
 				</div>
 			</div>
 		</div>

@@ -1,13 +1,15 @@
 package ynjh.personal.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 /**
  * @author 胡林飞
  * 心情表与mood表对应
  */
-import java.sql.Timestamp;
+
 
 public class Mood implements Serializable{
+	private static final long serialVersionUID = 266213850789455854L;
 	//id
 	private Integer id;
 	//用户ID

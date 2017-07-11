@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  *
  */
 public class ArticleByComment extends User implements Serializable{
+	private static final long serialVersionUID = -748763666186818454L;
 		//id
 		private Integer id;
 		//文章标题

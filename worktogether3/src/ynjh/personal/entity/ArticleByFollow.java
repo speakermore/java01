@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class ArticleByFollow implements Serializable {
+	private static final long serialVersionUID = -4729832154796619747L;
 	// 用户id
 	private Integer id;
 	// 昵称
