@@ -16,10 +16,12 @@ import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.GetAge;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyIntroduction;
+import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
 import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyOfferService;
+import ynjh.company.service.CompanyRecruitService;
 import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.ArticleByFollow;
@@ -69,6 +71,8 @@ public class CommonController {
 	private CompanyIntService companyIntService;
 	@Resource
 	private CompanyOfferService companyOfferService;
+	@Resource
+	private CompanyRecruitService companyRecruitService;
 
 	/**
 	 * 主页对象获取中转
@@ -84,6 +88,9 @@ public class CommonController {
 		if(toPage==null||userId==null){
 			return mv;
 		}
+		//我感兴趣的招聘信息（时间是6个月以内）
+		List<CompanyRecruit> companyRecruits=companyRecruitService.findMyIntrestRecruit(userId);
+		session.setAttribute("comanyRecruits", companyRecruits);
 		
 		// 我投递过的简历
 		List<MySendResume> mySendResumes = rService.findMySendResume(userId);

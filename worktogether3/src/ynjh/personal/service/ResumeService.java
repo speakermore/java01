@@ -2,7 +2,6 @@ package ynjh.personal.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
@@ -25,7 +24,14 @@ public interface ResumeService {
 	public Integer addResume(Resume resume);	
 	// 修改简历
 	public Integer updateResume(Resume resume);	
-	// 根据id查询简历（审查接口）(所有)
+	// 
+	/**
+	 * 根据useId查询简历（审查接口）(所有)
+	 * 牟勇：如果page为-1，则不进行分页查询
+	 * @param page 页码应该从1开始，如果为-1则不进行分页查询
+	 * @param userId
+	 * @return
+	 */
 	public List<Resume> findResumeUserId(Integer page,Integer userId);	
 	// 根据id查询简历（审查接口）详细
 	public Resume findResumeById(Integer id);

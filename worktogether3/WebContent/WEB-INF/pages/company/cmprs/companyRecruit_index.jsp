@@ -44,7 +44,7 @@
 					<tbody>
 						<c:forEach items="${companyRecruits }" var="cmpr">
 							<tr>
-								<td>${cmpr.cmpRecTitle}</td>
+								<td><a href="company/cmprs/companyRecruit/findById?id=${cmpr.id }&toPage=company/cmprs/companyRecruit_detail">${cmpr.cmpRecTitle}</a></td>
 								<td>${cmpr.cmpRecWage }</td>
 								<td>${cmpr.cmpRecEducation }</td>
 								<td>${cmpr.cmpRecPeople }人</td>

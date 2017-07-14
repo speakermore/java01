@@ -25,9 +25,17 @@ public interface CompanyRecruitService {
 	//简历数
 	public int findCount(Integer companyRecruitId);
 	//查询招聘信息ID
-	public int findCompanyRecruitId();
+	public Integer findCompanyRecruitId();
 	//恢复效果更改状态为未通过
 	public int recover(Integer id);
 	//查询工作
 	public List<CompanyJob> findJobs();
+	/**
+	 * 模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
+	 * 招聘信息必须是通过审核的
+	 * 按招聘信息的发表时间排序
+	 * @param userId 个人用户id
+	 * @return 符合个人用户简历岗位信息的招聘信息集合
+	 */
+	public List<CompanyRecruit> findMyIntrestRecruit(Integer userId);
 }

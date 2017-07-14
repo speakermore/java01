@@ -26,7 +26,15 @@ public interface CompanyRecruitMapper {
 	//得到未阅读简历个数
 	public int getResumeCount(Integer companyRecruitId);
 	//查询招聘信息id
-	public int findCompanyRecruitId();
+	public Integer findCompanyRecruitId();
 	//查询工作表
 	public List<CompanyJob> findJobs();
+	/**
+	 * 牟勇：根据招聘岗位名称进行查询招聘信息，支持模糊查询。
+	 * 查询距今天6个月以内的招聘信息
+	 * 返回值包括公司全称，公司简称，岗位名称，学历，工作经验要求等companyRecruit表中的全部信息
+	 * @param cmpRecTitle 对应岗位表中的标准岗位名称
+	 * @return 匹配岗位名称的公司招聘信息
+	 */
+	public List<CompanyRecruit> findByCmpRecTitle(String cmpRecTitle);
 }

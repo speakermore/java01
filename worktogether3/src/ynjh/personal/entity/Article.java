@@ -33,6 +33,13 @@ public class Article implements Serializable{
 	public Article(){
 		
 	}
+	/**
+	 * 牟勇：测试用构造方法
+	 * @param id
+	 */
+	public Article(Integer id){
+		this.id=id;
+	}
 
 	public Article(Integer usersId, String articleTitle, Integer articleLikeNum, Integer articleReadNum,
 			Timestamp articleTime, Integer articleStatus, String articleKey, String articleContent, Integer articleUsersType) {
@@ -132,10 +139,20 @@ public class Article implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Article [usersId=" + usersId + ", articleTitle=" + articleTitle
-				+ ", articleLikeNum=" + articleLikeNum + ", articleReadNum=" + articleReadNum + ", articleTime="
-				+ articleTime + ", articleStatus=" + articleStatus + ", articleKey=" + articleKey + ", articleContent="
-				+ articleContent + ", articleUsersType=" + articleUsersType + "]";
+		return "Article [id=" + id +"]";
 	}
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Article)){
+			return false;
+		}
+		return ((Article)obj).getId()==id;
+	}
+	
+	
 	
 }

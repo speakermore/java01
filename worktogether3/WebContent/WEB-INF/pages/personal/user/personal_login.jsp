@@ -199,7 +199,7 @@
 							stringLength : {
 								min : 6,
 								max : 50,
-								message : '用户名长度必须在6到50位之间'
+								message : '用户名长度必须在{min}到{max}位之间'
 							}
 						}
 					},

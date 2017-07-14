@@ -26,7 +26,11 @@ public interface ResumeMapper {
 	 */
 	public Integer updateResume(Resume resume);	
 	/**
-	 * 根据Userid查询简历(多个)
+	 * 牟勇：根据userId查询简历(多个)
+	 * 简历必须是审核通过的
+	 * @param page 页面如果为null，则不进行分页查询
+	 * @param userId
+	 * @return 
 	 */
 	public List<Resume> findResumeByUserId(@Param("page")Integer page,@Param("userId")Integer userId);
 	/**
@@ -42,13 +46,13 @@ public interface ResumeMapper {
 	 */
 	public Resume findNewlyResumeByUserId(Integer userId);
 	
-	/***
+	/**
 	 * 删除简历
 	 */
 	public Integer deleteResumeById(Integer id);
 	
 	
-	/***
+	/**
 	 * 恢复简历
 	 */
 	public Integer renewResumeById(Integer id);
@@ -173,4 +177,6 @@ public interface ResumeMapper {
 	 * 我收到的面试邀请
 	 */
 	public List<Offer> findMyReceiveOffer(Integer userId);
+	
+	
 }

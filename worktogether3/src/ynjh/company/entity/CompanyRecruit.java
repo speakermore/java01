@@ -4,16 +4,19 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class CompanyRecruit implements Serializable{
+	private static final long serialVersionUID = -5386760989108354885L;
 	private Integer id;//主键
 	private Integer companyId;//公司编号
-	private String cmpRecTitle;//工作标题
+	private String companyName;//公司全称
+	private String companySimpleName;//公司简称
+	private String cmpRecTitle;//招聘岗位
 	private String cmpRecWage;//公司薪资
 	private String cmpRecEducation;//公司学历需求
 	private String cmpRecExperience;//工作所需技能及水平描述
 	private Integer cmpRecPeople;//需求人数
 	private Timestamp cmpRecTime;//发布时间
 	private Integer cmpRecStatus;//发表招聘信息状态1:待审 2：审核通过 3：审核不通过
-	private String cmpRecCity;
+	private String cmpRecCity;//招聘城市
 	
 	public CompanyRecruit(){
 		
@@ -33,6 +36,22 @@ public class CompanyRecruit implements Serializable{
 		this.cmpRecStatus = cmpRecStatus;
 	}
 	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanySimpleName() {
+		return companySimpleName;
+	}
+
+	public void setCompanySimpleName(String companySimpleName) {
+		this.companySimpleName = companySimpleName;
+	}
+
 	public String getCmpRecCity() {
 		return cmpRecCity;
 	}

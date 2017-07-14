@@ -13,10 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
-import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.exception.ResumeExistsException;
 import ynjh.common.util.CommonStatus;
-import ynjh.common.util.GetAge;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import ynjh.personal.entity.Resume;
 
 public class CompanyResume extends Resume implements Serializable{
+	private static final long serialVersionUID = 2079298070187296489L;
 	private Integer id;//主键
 	private Integer companyId;//公司ID
 	private Integer resumeId;//简历ID
@@ -18,17 +19,6 @@ public class CompanyResume extends Resume implements Serializable{
 
 	public CompanyResume(){
 		
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "CompanyResume [id=" + id + ", companyId=" + companyId
-				+ ", resumeId=" + resumeId + ", cmprTime=" + cmprTime
-				+ ", cmprStatus=" + cmprStatus + ", companyResumeId="
-				+ companyResumeId + ", cmprAction=" + cmprAction
-				+ ", companyRecruitId=" + companyRecruitId + "]";
 	}
 
 
@@ -126,6 +116,14 @@ public class CompanyResume extends Resume implements Serializable{
 	public void setCompanyRecruitId(Integer companyRecruitId) {
 		this.companyRecruitId = companyRecruitId;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "CompanyResume [id=" + id + ", companyId=" + companyId
+				+ ", resumeId=" + resumeId + ", cmprTime=" + cmprTime
+				+ ", cmprStatus=" + cmprStatus + ", companyResumeId="
+				+ companyResumeId + ", cmprAction=" + cmprAction
+				+ ", companyRecruitId=" + companyRecruitId + "]";
+	}
 
 }

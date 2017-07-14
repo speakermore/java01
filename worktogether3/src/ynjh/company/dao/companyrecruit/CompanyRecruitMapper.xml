@@ -35,4 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findJobs" resultType="CompanyJob">
 	select * from job
 </select>
+<!-- 牟勇：根据招聘岗位名称进行查询招聘信息。包括公司全称，公司简称，岗位名称，学历，工作经验要求等companyRecruit表中的全部信息 -->
+<select id="findByCmpRecTitle" resultType="CompanyRecruit">
+	select companyName,companySimpleName,cr.* 
+	from CompanyRecruit cr,company c 
+	where cmpRecTitle like #{cmpRecTitle} 
+	and cmpRecStatus=2 
+	and TIMESTAMPDIFF('MONTH',cmpRecTime,now()) &lt;= 6 
+	order by cmpRecTime desc
+</select>
 </mapper>

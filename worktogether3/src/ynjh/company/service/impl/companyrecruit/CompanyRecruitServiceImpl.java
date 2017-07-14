@@ -1,6 +1,8 @@
 package ynjh.company.service.impl.companyrecruit;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -11,11 +13,15 @@ import ynjh.company.dao.companyrecruit.CompanyRecruitMapper;
 import ynjh.company.entity.CompanyJob;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
+import ynjh.personal.entity.Resume;
+import ynjh.personal.service.ResumeService;
 @Service
 public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	private Logger logger=Logger.getLogger(this.getClass());
 	@Resource
 	private CompanyRecruitMapper companyRecruitMapper;
+	@Resource
+	private ResumeService resumeService;
 	@Override
 	public int addCompanyRecruit(CompanyRecruit companyRecruit) {
 		int result=-1;
@@ -72,15 +78,32 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		return companyRecruitMapper.getResumeCount(companyRecruitId);
 	}
 	@Override
-	public int findCompanyRecruitId(){
+	public Integer findCompanyRecruitId(){
 		return companyRecruitMapper.findCompanyRecruitId();
 	}
 	@Override
 	public int recover(Integer id){
-		return companyRecruitMapper.updateCmpRecStatus(3, id);
+		return companyRecruitMapper.updateCmpRecStatus(1, id);
 	}
 	@Override
 	public List<CompanyJob> findJobs(){
 		return companyRecruitMapper.findJobs();
+	}
+	//模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
+	@Override
+	public List<CompanyRecruit> findMyIntrestRecruit(Integer userId) {
+		//查找用户拥有的全部简历集合
+		List<Resume> resumes=resumeService.findResumeUserId(-1, userId);
+		//提取出简历的岗位名称
+		List<String> resumeTitles=resumes.stream().map(r->r.getResumeTitle()).collect(Collectors.toList());
+		List<List<CompanyRecruit>> originCompanyRecruits=new ArrayList<List<CompanyRecruit>>();
+		//循环所有岗位名称，查出所有符合条件的集合
+		for(String resume:resumeTitles){
+			originCompanyRecruits.add(companyRecruitMapper.findByCmpRecTitle(resume));
+			
+		}
+		//扁平化处理，把多个集合中的招聘信息实体类合并到同一个集合中
+		List<CompanyRecruit> companyRecruits=originCompanyRecruits.stream().flatMap(childList->childList.stream()).distinct().collect(Collectors.toList());
+		return companyRecruits;
 	}
 }

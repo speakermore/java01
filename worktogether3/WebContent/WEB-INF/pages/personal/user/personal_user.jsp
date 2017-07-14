@@ -35,6 +35,19 @@
 							<div class="panel-title">最新动态</div>
 						</div>
 						<div class="panel-body">
+							<!-- 我的应聘 -->
+							<div class="panel">
+								<h5 class="panel-title">我感兴趣的招聘</h5>
+								<div class="panel-body">
+									<ul>
+										<c:forEach items="${comanyRecruits}" var="myIntrestCompany">
+											<li>${myIntrestCompany.companySimpleName }于<fmt:formatDate value="${myIntrestCompany.cmpRecTime }" pattern="yyyy年MM月dd日"/>发布${myIntrestCompany.cmpRecTitle}岗位的招聘信息，<a href="">快去看看吧</a>。</li>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+							<!-- 我的应聘结束 -->
+							<!-- 我的应聘 -->
 							<div class="panel">
 								<h5 class="panel-title">我的应聘</h5>
 								<div class="panel-body">
@@ -46,6 +59,7 @@
 									</ul>
 								</div>
 							</div>
+							<!-- 我的应聘结束 -->
 						</div>
 					</section>
 					

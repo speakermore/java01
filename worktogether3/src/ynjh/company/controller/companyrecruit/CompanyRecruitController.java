@@ -36,7 +36,6 @@ public class CompanyRecruitController {
 	//添加招聘信息并默认信息状态为待审
 	@RequestMapping(value="/companyRecruit/add_companyRecruit", method=RequestMethod.POST)
 	public ModelAndView addCompanyRecruit(CompanyRecruit companyRecruit,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
 		companyRecruit.setCmpRecStatus(1);
 		companyRecruit.setCmpRecTime(new Timestamp(System.currentTimeMillis()));
 		Integer companyId=((Company)session.getAttribute("user")).getId();
@@ -141,6 +140,10 @@ public class CompanyRecruitController {
 			 mv.setViewName("company/cmprs/companyRecruit_info");
 		 }
 		 return mv;
+	 }
+	 @RequestMapping("/companyRecruit_detail")
+	 public String companyRecruitDetail(Integer id){
+		 return "company/cmpr/companyRecruit_detail";
 	 }
 }
 

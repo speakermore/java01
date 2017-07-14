@@ -60,6 +60,10 @@ public class ResumeServiceImpl implements ResumeService {
 	 */
 	@Override
 	public List<Resume> findResumeUserId(Integer page, Integer userId) {
+		//牟勇：如果page为-1，则不进行分页查询
+		if(page==-1){
+			return resumeMapper.findResumeByUserId(null, userId);
+		}
 		if (page == null) {
 			page = 1;
 		}

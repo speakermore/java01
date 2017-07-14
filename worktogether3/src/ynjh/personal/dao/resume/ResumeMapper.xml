@@ -32,7 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 查询简历(所有) -->
 	<select id="findResumeByUserId" resultType="Resume">
-		select * from resume where userId=#{userId}
+		select * from resume where userId=#{userId} 
+		and resumeStatusThree = 2 
 		<if test="page!=null">
 			limit #{page},5
 		</if>
