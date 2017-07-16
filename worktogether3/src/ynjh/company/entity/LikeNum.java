@@ -1,7 +1,14 @@
 package ynjh.company.entity;
 
-public class LikeNum {
-	
+import java.io.Serializable;
+
+/**
+ * 点赞记录
+ * @author 牟勇
+ *
+ */
+public class LikeNum implements Serializable {
+	private static final long serialVersionUID = -3347779861329324081L;
 	private Integer articleId=null;//文章id
 	private Integer usersId;//用户id
 	private Integer commentArticleId=null;//评论文章id

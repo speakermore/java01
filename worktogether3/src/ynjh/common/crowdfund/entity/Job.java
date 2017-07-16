@@ -14,7 +14,7 @@ public class Job implements Serializable {
 	private Integer id;
 	private String jobType;//岗位类型
 	private String jobName;//岗位名称
-	private Integer jobParantId;//技术方向
+	private Integer jobParentId;//技术方向（牟勇：父级id,如果是顶级，则为null）
 	public Integer getId() {
 		return id;
 	}
@@ -33,15 +33,15 @@ public class Job implements Serializable {
 	public void setJobName(String jobName) {
 		this.jobName = jobName;
 	}
-	public Integer getJobParantId() {
-		return jobParantId;
+	public Integer getJobParentId() {
+		return jobParentId;
 	}
-	public void setJobParantId(Integer jobParantId) {
-		this.jobParantId = jobParantId;
+	public void setJobParentId(Integer jobParentId) {
+		this.jobParentId = jobParentId;
 	}
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", jobType=" + jobType + ", jobName=" + jobName + ", jobParantId=" + jobParantId + "]";
+		return "Job [id=" + id + ", jobType=" + jobType + ", jobName=" + jobName + ", jobParantId=" + jobParentId + "]";
 	}
 	
 	

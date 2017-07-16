@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>编辑资料</title>
 <%@include file="/WEB-INF/pages/company/header.jsp"%>
+<title>企业用户-编辑资料</title>
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
 <style>
 #file {
@@ -27,100 +26,83 @@
 			<div class="col-sm-3">
 				<%@include file="/WEB-INF/pages/company/menu.jsp"%>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-9">
 				<h3>基本资料修改</h3>
 				<hr />
-
-
-
-				<div class="panel-group" id="panel-199314">
+				<div class="panel-group" id="hby-modify-base">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#panel-199314" href="#panel-element-571190">基本资料</a>
+								data-parent="#hby-modify-base" href="#base-information">基本资料</a>
 						</div>
-						<div id="panel-element-571190" class="panel-collapse collapse in">
+						<div id="base-information" class="panel-collapse collapse in">
 							<div class="panel-body">
 								<!--  -->
-								<form class="form-horizontal" role="form"
-									action="company/company/update" method="post"
-									enctype="multipart/form-data" id="updateCompany">
-									<input type="hidden" value=${user.id } name="id"> <input
-										type="hidden" value=${user.companyLoginId }
-										name="companyLoginId"> <input type="hidden"
-										value=${user.companyPassword } name="companyPassword">
-									<input type="hidden" value=${user.companyStatus }
-										name="companyStatus">
+								<form class="form-horizontal" role="form" action="company/company/update" method="post" enctype="multipart/form-data" id="updateCompany">
+									<input type="hidden" value="${user.id }" name="id" /> 
+									<input type="hidden" value="${user.companyLoginId }" name="companyLoginId" />
+									<input type="hidden" value="${user.companyPassword }" name="companyPassword" />
+									<input type="hidden" value="${user.companyStatus }" name="companyStatus" />
 									<div class="form-group">
-										<div class="col-sm-3">公司全称：</div>
+										<label class="control-label col-sm-3">公司全称：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control disabled"
-												name="companyName" value=${user.companyName }>
+											<input type="text" class="form-control disabled" name="companyName" value="${user.companyName }" />
 										</div>
 									</div>
 
 									<div class="form-group">
-										<div class="col-sm-3">公司简称：</div>
+										<label class="control-label col-sm-3">公司简称：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control disabled" id=""
-												name="companySimpleName" value=${user.companySimpleName }>
+											<input type="text" class="form-control disabled" id="" name="companySimpleName" value="${user.companySimpleName }" />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-3">公司Logo：</div>
+										<label class="control-label col-sm-3">公司Logo：</label>
 										<div class="col-sm-9">
-											<input id="logo" name="logo" multiple type="file"
-												class="form-control file">
+											<input id="logo" name="logo" multiple type="file" class="form-control file" />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-3">组织机构代码：</div>
+										<label class="control-label col-sm-3">组织机构代码：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control disabled"
-												name="companyLicenseNo" value=${user.companyLicenseNo }>
+											<input type="text" class="form-control disabled" name="companyLicenseNo" value="${user.companyLicenseNo }" />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-3">营业执照：</div>
+										<label class="control-label col-sm-3">营业执照：</label>
 										<div class="col-sm-9">
-											<input id="companyLicense" name="licenseImg" multiple
-												type="file" class="form-control file">
+											<input id="companyLicense" name="licenseImg" multiple type="file" class="form-control file" />
 										</div>
 									</div>
 
 									<div class="form-group">
-										<div class="col-sm-3">公司法人：</div>
+										<label class="control-label col-sm-3">公司法人：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control"
-												name="companyCorporator" value=${user.companyCorporator }>
+											<input type="text" class="form-control" name="companyCorporator" value="${user.companyCorporator }" />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-3">公司电话：</div>
+										<label class="control-label col-sm-3">公司电话：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control" name="companyTel"
-												value=${user.companyTel }>
+											<input type="text" class="form-control" name="companyTel" value="${user.companyTel }" />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-3">Email：</div>
+										<label class="control-label col-sm-3">Email：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control" name="companyEmail"
-												value=${user.companyEmail }>
+											<input type="text" class="form-control" name="companyEmail" value="${user.companyEmail }" />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-3">公司地址：</div>
+										<label class="control-label col-sm-3">公司地址：</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control" name="companyAddress"
-												value=${user.companyAddress }>
+											<input type="text" class="form-control" name="companyAddress" value="${user.companyAddress }" />
 										</div>
 									</div>
-									<input type="hidden" name="companyStatus"
-										value=${companyStatus } id="companyStatus">
+									<input type="hidden" name="companyStatus" value="${companyStatus }" id="companyStatus" />
 									<div class="form-group">
 										<div class="col-sm-3">
-											<button type="submit" class="form-control btn btn-success">修改</button>
+											<button type="submit" class="form-control btn btn-success">保存</button>
 										</div>
 									</div>
 								</form>
@@ -129,43 +111,36 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel-group" id="panel-199314">
+				<div class="panel-group" id="hby-modify-environment">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#panel-199314" href="#panel-element-484510">公司环境图片</a>
+								data-parent="#hby-modify-environment" href="#modify-environment">公司环境图片</a>
 						</div>
-						<div id="panel-element-484510" class="panel-collapse collapse">
+						<div id="modify-environment" class="panel-collapse collapse">
 							<div class="panel-body">
 								<!--  -->
-								<form action="company/company/updateCompanyImg" method="post"
-									enctype="multipart/form-data">
+								<form action="company/company/updateCompanyImg" method="post" enctype="multipart/form-data">
 									<div class="form-group">
-										<div class="col-sm-3">公司环境：</div>
+										<label class="control-label col-sm-3">公司环境：</label>
 										<div class="col-sm-9">
-											<span class="label label-default">大门</span><input
-												id="companyImg1" name="companyImgs1" multiple type="file"
-												class="form-control file"> <span
-												class="label label-default">前台</span><input id="companyImg2"
-												name="companyImgs2" multiple type="file"
-												class="form-control file"> <span
-												class="label label-default">办公区</span><input
-												id="companyImg3" name="companyImgs3" multiple type="file"
-												class="form-control file"> <span
-												class="label label-default">会议室</span><input
-												id="companyImg4" name="companyImgs4" multiple type="file"
-												class="form-control file"> <span
-												class="label label-default">休息区</span><input
-												id="companyImg5" name="companyImgs5" multiple type="file"
-												class="form-control file"> <span
-												class="label label-default">其他</span><input id="companyImg6"
-												name="companyImgs6" multiple type="file"
-												class="form-control file">
+											<span class="label label-default">大门</span>
+											<input id="companyImg1" name="companyImgs1" multiple type="file" class="form-control file" />
+											<span class="label label-default">前台</span>
+											<input id="companyImg2" name="companyImgs2" multiple type="file" class="form-control file" />
+											<span class="label label-default">办公区</span>
+											<input id="companyImg3" name="companyImgs3" multiple type="file" class="form-control file" />
+											<span class="label label-default">会议室</span>
+											<input id="companyImg4" name="companyImgs4" multiple type="file" class="form-control file" /> 
+											<span class="label label-default">休息区</span>
+											<input id="companyImg5" name="companyImgs5" multiple type="file" class="form-control file" /> 
+											<span class="label label-default">其他</span>
+											<input id="companyImg6" name="companyImgs6" multiple type="file" class="form-control file" />
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-sm-3">
-											<button type="submit" class="form-control btn btn-success">修改</button>
+											<button type="submit" class="form-control btn btn-success">保存</button>
 										</div>
 									</div>
 								</form>
@@ -177,13 +152,13 @@
 					</div>
 				</div>
 
-				<div class="panel-group" id="panel-199314">
+				<div class="panel-group" id="hby-modify-contact">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 
 
 							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#panel-199314" href="#companyConnection">公司联系电话</a>
+								data-parent="#hby-modify-contact" href="#companyConnection">公司联系电话</a>
 
 
 						</div>
@@ -263,7 +238,7 @@
 									</div>
 									<div class="form-group">
 										<div class="col-sm-3">
-											<button type="submit" class="form-control btn btn-success">修改</button>
+											<button type="submit" class="form-control btn btn-success">保存</button>
 										</div>
 									</div>
 
@@ -277,22 +252,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3 column">日常广告位</div>
+		
 	</div>
-	<input type="hidden" id="connectionIndex"
-		value="${companyConnections.size() }" />
-</body>
-<script type="text/javascript" src="company/js/addTel.js"></script>
-<!-- <script>
-$("#logo").fileinput({	
-	 'language': 'zh',
-	'showUpload':false,
-	'showRemove':false,
-	allowedFileExtensions:["jpg", "png", "gif"]
-	});
-</script> -->
-<script type="text/javascript">
+	<input type="hidden" id="connectionIndex" value="${companyConnections.size() }" />
 
+<script type="text/javascript" src="company/js/addTel.js"></script>
+<script type="text/javascript">
 	 $("#logo").fileinput({
 	 'uploadAsync' : false,
 	 'language' : 'zh',
@@ -358,19 +323,6 @@ $("#logo").fileinput({
 		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[5]}"/>'],
 		 'previewFileType' : 'any'
 		 }); 
-	/* var fileupdateTest = function(id, src) {
-		$("#" + id + "").fileinput({
-			'uploadAsync' : false,
-			'language' : 'zh',
-			'showUpload' : false,
-			'initialPreview' : [ "<img src="+src+"/>" ],
-			'previewFileType' : 'any'
-		});
-	} */
-	/* window.onload = function() {
-		fileupdateTest("logo", "img/head.gif");
-		fileupdateTest("companyImg1", "img/head.gif");
-	} */
 	$(document)
 			.ready(
 					function() {
@@ -498,8 +450,7 @@ $("#logo").fileinput({
 
 <script type="text/javascript">
 $(document).ready(function(){
-	/* var i=$("#companyStatus").value();
-	alert(i); */
+	
 	if(${user.companyStatus}==2){
 		$(".disabled").attr("readonly",true);
 	}
@@ -507,5 +458,5 @@ $(document).ready(function(){
 });
 
 </script>
-
+</body>
 </html>

@@ -5,15 +5,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<base
-	href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-
-<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>企业用户-首页</title>
 <%@include file="/WEB-INF/pages/company/header.jsp"%>
+<title>企业用户-首页</title>
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
 </head>
 <body>
@@ -73,18 +66,18 @@
 								<h3 class="form-signin-heading">欢迎企业用户注册</h3>
 								<div class="form-group">
 									<input autocomplete="off" placeholder="请输入联系人手机号（即以后的登录账号）" type="text"
-										class="form-control" id="exampleInputPassword1"
+										class="form-control" id="companyLoginId"
 										name="companyLoginId" autocomplete="off" />
 								</div>
 
 								<div class="form-group">
 									<input autocomplete="off" placeholder="请输入密码" type="password" class="form-control"
-										id="exampleInputPassword1" name="companyPassword"
+										id="companyPassword" name="companyPassword"
 										autocomplete="off" />
 								</div>
 								<div class="form-group">
 									<input autocomplete="off" placeholder="确认密码" type="password" class="form-control"
-										id="exampleInputPassword1" name="realCompanyPassword"
+										id="realCompanyPassword" name="realCompanyPassword"
 										autocomplete="off" />
 								</div>
 								<div class="form-group">
@@ -217,35 +210,32 @@
 				$('#addCompany')
 					.bootstrapValidator(
 						{
-							message : 'This value is not valid',
+							message : '请填写正确的信息',
 							feedbackIcons : { /*输入框不同状态，显示图片的样式*/
 								valid : 'glyphicon glyphicon-ok',
 								invalid : 'glyphicon glyphicon-remove',
 								validating : 'glyphicon glyphicon-refresh'
 							},
 							fields : { /*验证*/
-								companyLoginId : { /*键名username和input name值对应*/
+								 companyLoginId : { /* 键名username和input name值对应 */
 									validators : {
-										notEmpty : { /*非空提示*/
+										notEmpty : { /* 非空提示 */
 											message : '手机号码不能为空'
 										},
-										stringLength : { /*长度提示*/
+										stringLength : { /* 长度提示 */
 											min : 6,
 											max : 30,
 											message : '用户名长度必须在6到30之间'
-										}, /*最后一个没有逗号*/
-										regexp : { //匹配规则
-											regexp : /^0?(13[0-9]|15[012356789]|18[0-9]|17[0-9])[0-9]{8}$/,
-											message : '请输入有效的手机号码'
-										},
-										remote: {
+										} /* 最后一个没有逗号 */
+										
+										 /* remote: {
 											url:"company/company/verificationCompanyLoginId",
 											message: '用户名已被注册',
 											delay: 5000,
 											type : 'post'
-										}
+										} */ 
 									}
-								},
+								}, 
 
 								companyPassword : {
 									validators : {

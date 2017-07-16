@@ -6,7 +6,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <base href="<%=basePath%>">
@@ -48,6 +48,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<%@include file="/WEB-INF/pages/nav.jsp" %>
 	<div class="container">
+		<div class="row">
+		<div class="col-sm-3">
+			<c:if test="${user.id<1234567890 }">
+				<%@include file="/WEB-INF/pages/company/menu.jsp" %>
+			</c:if>
+		</div>
 		<div class="col-sm-9 column wt-hby-left">
 			<div class="row clearfix">
 				<div class="col-sm-12 column">
@@ -71,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table">
 						<tr>
 							<th>
-								<i class="glyphicon glyphicon-time"></i>&nbsp;<fmt:formatDate value="${art.articleTime }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;
+								<i class="glyphicon glyphicon-time"></i>&nbsp;<fmt:formatDate value="${cmpr.cmpRecTime }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;
 								<a href="company/artanddis/company_index">
 									<em class="glyphicon glyphicon-send"> 返回企业首页</em>
 								</a>
@@ -84,6 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				<div class=" col-sm-5 column"></div>
    				<a href="#" class="cd-top">返回顶部</a>
    			</div>
+		</div>
 		</div>
 	</div>
 	

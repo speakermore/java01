@@ -53,5 +53,10 @@ public class JobServiceImpl implements JobService {
 		
 		return jobMapper.findJob2(jobType);
 	}
+	@Override
+	public List<Job> findByParentId(Integer parentId) {
+		
+		return jobMapper.findByParentId(parentId);
+	}
 
 }

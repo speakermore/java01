@@ -1,8 +1,6 @@
 package ynjh.personal.controller.common;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -100,12 +98,9 @@ public class CommonController {
 		// 我收到的面试邀请
 		List<Offer> offers = companyOfferService.findUserOffers(userId, toPage);
 		int maxPage = companyOfferService.findUserOffersPage(userId);
-		if (offers.size() > 0) {
-			session.setAttribute("personal_offers_list", offers);
-			session.setAttribute("maxPage", maxPage);
-		} else {
-			session.setAttribute("personal_offers_list", null);
-		}
+		session.setAttribute("personal_offers_list", offers);
+		session.setAttribute("maxPage", maxPage);
+		
 
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
@@ -113,27 +108,17 @@ public class CommonController {
 			session.setAttribute("resume", resume);
 			// 获取教育
 			List<Education> edus = rService.findEducation(resume.getId());
-			if (edus.size() > 0) {
-				session.setAttribute("edus", edus);
-			} else {
-				session.setAttribute("edus", null);
-			}
+			
+			session.setAttribute("edus", edus);
+			
 			// 获取工作
 			List<Work> works = rService.findWork(resume.getId());
-			if (works.size() > 0) {
-				session.setAttribute("works", works);
-			} else {
-				session.setAttribute("works", null);
-			}
+			session.setAttribute("works", works);
+			
 			// 获取项目
 			List<Project> projs = rService.findProject(resume.getId());
-			if (projs.size() > 0) {
-				session.setAttribute("projs", projs);
-			} else {
-				session.setAttribute("projs", null);
-			}
-		}else{
-			session.setAttribute("resume", null);
+			session.setAttribute("projs", projs);
+			
 		}
 		/*
 		 * 最新动态

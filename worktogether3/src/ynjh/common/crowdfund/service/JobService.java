@@ -18,4 +18,11 @@ public interface JobService {
 	List<Job> findJob1();
 	//根据一级岗位信息查询二级岗位
 	List<Job> findJob2(String jobType);
+	/**
+	 * 牟勇：根据一级岗位id查询二级岗位
+	 * @param parentId 一级岗位的id
+	 * @return 符合条件的所有二级岗位信息
+	 */
+	public List<Job> findByParentId(Integer parentId);
+	
 }

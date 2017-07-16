@@ -12,13 +12,27 @@ import ynjh.common.crowdfund.entity.Job;
  */
 public interface JobMapper {
 	//添加岗位信息
-	int addJob(Job job);
+	public int addJob(Job job);
 	//修改岗位信息
-	int updateJob(Job job);
+	public int updateJob(Job job);
 	//删除岗位信息
-	int deleteJob(@Param("id") Integer id);
-	//查询一级岗位信息
-	List<Job> findJob1();
-	//根据一级岗位信息查询二级岗位
-	List<Job> findJob2(@Param("jobType") String jobType);
+	public int deleteJob(@Param("id") Integer id);
+	/**
+	 * 牟勇：查询一级岗位信息，所有的一级岗位信息，parentId的值均为null
+	 * @return 一级岗位信息集合
+	 */
+	public List<Job> findJob1();
+	
+	/**
+	 * 牟勇：根据一级岗位名称查询二级岗位
+	 * @param jobType 一级岗位的名称
+	 * @return 符合条件的所有二级岗位信息
+	 */
+	public List<Job> findJob2(@Param("jobType") String jobType);
+	/**
+	 * 牟勇：根据一级岗位id查询二级岗位
+	 * @param parentId 一级岗位的id
+	 * @return 符合条件的所有二级岗位信息
+	 */
+	public List<Job> findByParentId(@Param("parentId")Integer parentId);
 }

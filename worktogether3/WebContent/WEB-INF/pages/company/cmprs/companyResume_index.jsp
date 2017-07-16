@@ -6,13 +6,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<title>简历信息列表</title>
+
 <head>
 <base href="<%=basePath %>" />
 <%@include file="/WEB-INF/pages/company/header.jsp" %>
 <%@include file="/WEB-INF/pages/company/footer.jsp" %>
+<title>简历信息列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>

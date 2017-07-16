@@ -5,14 +5,10 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/thirdpart/ckeditor/ckeditor.js"></script>
-<title>用户前台-发表招聘信息</title>
-<base
-	href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <%@include file="/WEB-INF/pages/company/header.jsp"%>
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
+<title>企业用户-发布招聘信息</title>
+<script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
@@ -22,63 +18,84 @@
 				<%@include file="/WEB-INF/pages/company/menu.jsp"%>
 			</div>
 			<div class="col-sm-9 column">
-				<form method="post"
-					action="company/cmprs/companyRecruit/add_companyRecruit" id="addCompanyRecruit">
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>招聘工作</th>
-								<th>招聘薪资</th> 
-								<th>学历需求</th>
-								<th>需求人数</th>
-							</tr>
-						</thead>
-						<tr>
-							<td><div class="form-group">
-								<select name="cmpRecTitle">
-								<c:forEach items="${jobNames }" var="jns">
-									<option value="${jns.jobName}">
-										${jns.jobName}
-									</option>
-									</c:forEach>
-								</select>
-							</div>
-						    </td>  
-							<td><div class="form-group">
-							<input type="text" class="form-control"
-								name="cmpRecWage" value="${cmpr.cmpRecWage} " maxlength="20"/>
-							</div></td>
-							<td><div class="form-group">
-							<input type="text" class="form-control"
-								name="cmpRecEducation" value="${cmpr.cmpRecEducation}" maxlength="10"/>
-							</div></td>
-							<td><div class="form-group">
-							<input type="text" class="form-control"
-								name="cmpRecPeople" value="${cmpr.cmpRecPeople}" maxlength="11"/>
-							</div></td>
-						</tr>
-					</table>
-					
-					<table class="table table-striped table-hover">
-						<tr>
-								<th>工作所需技能及水平描述</th>
-						</tr>
-						<tr>
-						<td><div class="form-group">
-						<textarea class="ckeditor" name="cmpRecExperience"
-									value="${cmpRecExperience}" cols="20" rows="2"
-									maxlength="500">
-								</textarea> 
-								</div>
-								<script type="text/javascript">
-									CKEDITOR.replace('cmpRecExperience');
-								</script>
-							</td>
-						</tr>
-					</table>
+				<form role="form" class="form-horizontal" method="post" action="company/cmprs/companyRecruit/add_companyRecruit" id="addCompanyRecruit">
+					<!-- 岗位选择 -->
+					<div class="form-group">
+						<label class="control-label col-sm-2">岗位类别:</label>
+						<div class="col-sm-4">
+						<select onchange="findJob2(this.value)" id="job1" class="form-control">
+							<option value="-1">请选择</option>
+							 <c:forEach items="${jobs1}" var="b1">
+								<option value="${b1.id}">${b1.jobName }</option>
+							</c:forEach>
+						</select>
+						</div>
+						<label class="control-label col-sm-2">招聘岗位:</label>
+						<div class="col-sm-4">
+						<select class="form-control" id="job2" name="cmpRecTitle">
+							<option>请首先选择岗位类别</option>
+						</select>
+						<script>
+							/* 牟勇：完成当用户选择一级岗位类别之后，ajax查询二级岗位类别 */
+							var findJob2=function(parentId){
+								$.ajax({
+									url:"findJobs2/"+parentId,
+									type:"POST",
+									dataType:"text",
+									success:function(data){
+										$("#job2").html(data);
+									}
+								});
+							}
+						</script>
+						</div>
+					</div>
+					<!-- 岗位选择结束 -->
+					<!-- 招聘薪资和学历要求 -->
+					<div class="form-group">
+						<label class="control-label col-sm-2">招聘薪资:</label>
+						<div class="col-sm-4">
+							<input class="form-control" name="cmpRecWage" />
+						</div>
+						<label class="control-label col-sm-2">学历要求:</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="cmpRecEducation">
+								<option value="">请选择</option>
+								<option value="本科">本科</option>
+								<option value="博士后">博士后</option>
+								<option value="博士">博士</option>
+								<option value="大专">大专</option>
+								<option value="其他">其他</option>
+							</select>
+						</div>
+					</div>
+					<!-- 招聘薪资和学历要求结束 -->
+					<!-- 需求人数 -->
+					<div class="form-group">
+						<label class="control-label col-sm-2">需求人数:</label>
+						<div class="col-sm-4">
+							<input name="cmpRecPeople" class="form-control" />
+						</div>
+						<label class="control-label col-sm-2">工作城市</label>
+						<div class="col-sm-4">
+							<input name="cmpRecCity" class="form-control" />
+						</div>
+					</div>
+					<!-- 需求人数结束 -->
+					<!-- 工作所需技能及水平描述 -->
+					<div class="form-group">
+						<label class="control-label col-sm-3">工作所需技能及水平描述:</label>
+						<div class="col-sm-12">
+							<textarea class="ckeditor form-control" name="cmpRecExperience" cols="20" rows="2" maxlength="500">${cmpRecExperience}</textarea>
+						</div>
+						<script type="text/javascript">
+						CKEDITOR.replace('cmpRecExperience');
+						</script>
+					</div>
+					<!-- 工作所需技能及水平描述结束 -->
 					<div class="form-group">
 						<div class="col-sm-9 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">提交添加</button>
+							<button type="submit" class="btn btn-primary">提交招聘信息</button>
 						</div>
 					</div>
 				</form>
@@ -89,7 +106,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#addCompanyRecruit').bootstrapValidator({
-			message: 'This value is not valid',
+			message: '这个值不可用',
             feedbackIcons: {/*输入框不同状态，显示图片的样式*/
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',

@@ -5,13 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-<title>企业资料</title>
-<link rel="stylesheet" type="text/css" href="company/css/magnifier.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet" />
+<%@include file="/WEB-INF/pages/company/header.jsp"%>
+<title>企业用户-企业信息</title>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="company/js/magnifier.js"></script>
@@ -52,10 +47,10 @@
 <c:set var="AUDIT_STATUS" value="${CommonStatus.AUDIT_STATUS }"></c:set>
 <div class="container">
 	<div class="row clearfix">
-		<div class="col-sm-4 column">
+		<div class="col-sm-3 column">
 		<%@include file="/WEB-INF/pages/company/menu.jsp" %>
 		</div>
-		<div class="col-sm-8 column wt-hby-top">
+		<div class="col-sm-9 column wt-hby-top">
 			<div class="panel-group" id="accordion" >
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -87,7 +82,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>公司营业执照码：</td>
+											<td>社会信用统一代码：</td>
 											<td>${user.companyLicenseNo}</td>
 										</tr>
 										<tr>
@@ -182,7 +177,7 @@
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						   <h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">公司基本资料</a></h4>
+						   <h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">公司详细资料</a></h4>
 					</div>
 					<div id="collapseThree" class="panel-collapse collapse in">
 						<div class="tab-content">

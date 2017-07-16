@@ -3,11 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>企业注册</title>
-<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <%@include file="/WEB-INF/pages/company/header.jsp"%>
+<title>企业注册</title>
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
 
 </head>
@@ -18,7 +15,7 @@
 			<div class="col-sm-3 column">
 				<%@include file="/WEB-INF/pages/company/menu.jsp"%>
 			</div>
-			<div class="col-sm-6 column">
+			<div class="col-sm-9 column">
 			<h3>详细资料修改</h3>
 			<hr/>
 				<form action="company/company/updateInt" method="post"
@@ -101,12 +98,12 @@
 					
 					<div class="col-sm-3">
 						<button type="submit" class="form-control btn btn-success"
-							style="color: black;">修改</button>
+							style="color: black;">保存</button>
 					</div>
 
 				</form>
 			</div>
-			<div class="col-sm-3"></div>
+			
 		</div>
 	</div>
 </body>

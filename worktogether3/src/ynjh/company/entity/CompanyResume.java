@@ -5,7 +5,11 @@ import java.sql.Timestamp;
 
 
 import ynjh.personal.entity.Resume;
-
+/**
+ * 企业收到的简历
+ * @author 牟勇
+ *
+ */
 public class CompanyResume extends Resume implements Serializable{
 	private static final long serialVersionUID = 2079298070187296489L;
 	private Integer id;//主键

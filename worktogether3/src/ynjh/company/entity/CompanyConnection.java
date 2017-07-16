@@ -3,6 +3,7 @@ package ynjh.company.entity;
 import java.io.Serializable;
 
 public class CompanyConnection implements Serializable{
+	private static final long serialVersionUID = 2703810307795445891L;
 	private Integer id;
 	private Integer companyId;
 	private String cmpConnection;

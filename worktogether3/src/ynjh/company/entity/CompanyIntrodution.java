@@ -3,6 +3,7 @@ package ynjh.company.entity;
 import java.io.Serializable;
 
 public class CompanyIntrodution implements Serializable{
+	private static final long serialVersionUID = -4019160162807023223L;
 	private Integer companyId;//公司id
 	private String cmpIntroduction="";//公司简介
 	private Integer cmpIntQuality;//公司性质

@@ -4,7 +4,8 @@ package ynjh.company.service;
 
 import java.util.List;
 
-import ynjh.company.entity.CompanyJob;
+import ynjh.common.crowdfund.entity.Job;
+
 import ynjh.company.entity.CompanyRecruit;
 
 public interface CompanyRecruitService {
@@ -28,8 +29,11 @@ public interface CompanyRecruitService {
 	public Integer findCompanyRecruitId();
 	//恢复效果更改状态为未通过
 	public int recover(Integer id);
-	//查询工作
-	public List<CompanyJob> findJobs();
+	/**
+	 * 牟勇：查询一级岗位
+	 * @return
+	 */
+	public List<Job> findJobs1();
 	/**
 	 * 模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
 	 * 招聘信息必须是通过审核的

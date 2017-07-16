@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 // 对应数据库offer表
 public class Offer implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8535725032528744867L;
 	private Integer id;
 	private Integer companyId;
 	private Integer userId;

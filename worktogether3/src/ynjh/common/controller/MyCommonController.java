@@ -1,6 +1,5 @@
 package ynjh.common.controller;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,11 +17,13 @@ import com.alibaba.fastjson.JSON;
 
 import ynjh.admin.entity.News;
 import ynjh.admin.service.news.NewsService;
-import ynjh.common.exception.AgeOverFlowException;
+import ynjh.common.crowdfund.entity.Job;
+import ynjh.common.crowdfund.service.JobService;
+
 import ynjh.common.service.MyCommonResumeService;
 import ynjh.common.service.NationService;
 import ynjh.common.service.ProvinceService;
-import ynjh.common.util.GetAge;
+
 
 @Controller
 /**
@@ -40,6 +42,8 @@ public class MyCommonController {
 	private NewsService newsService;
 	@Resource
 	private MyCommonResumeService myCommonResumeService;
+	@Resource
+	private JobService jobService;
 	/**
 	 * 首页的跳转
 	 * @return
@@ -115,5 +119,23 @@ public class MyCommonController {
 		List<String> strProvinceName=provinceService.findAllProvinceName();
 		Object jsonProvince=JSON.toJSON(strProvinceName);
 		return jsonProvince;
+	}
+	
+	/**
+	 * ajax方法请求二级岗位
+	 * 只能通过POST方式提交
+	 * @param parentId 一级岗位id
+	 * @return 字符串，select框中的option标签的html
+	 */
+	@RequestMapping(value="/findJobs2/{parentId}",method=RequestMethod.POST)
+	@ResponseBody
+	public Object findJobs2(@PathVariable Integer parentId){
+		List<Job> jobs2=jobService.findByParentId(parentId);
+		StringBuffer html=new StringBuffer();
+		//循环得到select框中选项的html
+		for(Job job:jobs2){
+			html.append("<option value='"+job.getJobName()+"'>"+job.getJobName()+"</option>");
+		}
+		return html.toString();
 	}
 }

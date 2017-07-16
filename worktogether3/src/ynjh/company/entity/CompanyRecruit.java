@@ -2,7 +2,11 @@ package ynjh.company.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+/**
+ * 企业发布的招聘信息
+ * @author 牟勇
+ *
+ */
 public class CompanyRecruit implements Serializable{
 	private static final long serialVersionUID = -5386760989108354885L;
 	private Integer id;//主键

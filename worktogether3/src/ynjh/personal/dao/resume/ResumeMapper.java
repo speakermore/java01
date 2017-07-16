@@ -28,7 +28,7 @@ public interface ResumeMapper {
 	/**
 	 * 牟勇：根据userId查询简历(多个)
 	 * 简历必须是审核通过的
-	 * @param page 页面如果为null，则不进行分页查询
+	 * @param page 页码，如果为null，则不进行分页查询
 	 * @param userId
 	 * @return 
 	 */

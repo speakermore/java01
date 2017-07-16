@@ -4,9 +4,6 @@ package ynjh.company.dao.companyrecruit;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
-
-import ynjh.company.entity.CompanyJob;
 import ynjh.company.entity.CompanyRecruit;
 
 
@@ -27,8 +24,7 @@ public interface CompanyRecruitMapper {
 	public int getResumeCount(Integer companyRecruitId);
 	//查询招聘信息id
 	public Integer findCompanyRecruitId();
-	//查询工作表
-	public List<CompanyJob> findJobs();
+	
 	/**
 	 * 牟勇：根据招聘岗位名称进行查询招聘信息，支持模糊查询。
 	 * 查询距今天6个月以内的招聘信息

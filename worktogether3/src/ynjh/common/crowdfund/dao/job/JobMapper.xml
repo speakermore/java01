@@ -32,10 +32,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findJob1" resultType="Job">
 	SELECT * FROM job WHERE jobParentId IS NULL
 </select>
-<!-- 根据一级岗位查二级岗位 -->
+<!-- 根据一级岗位名称查二级岗位 -->
 <select id="findJob2" resultType="Job">
 	SELECT j2.id AS id,j1.jobName AS jobType,j2.jobName AS jobName FROM job j1 
 	INNER JOIN job j2 
 		WHERE j2.jobParentId=j1.id AND j1.jobName=#{jobType}
+</select>
+<!-- 牟勇：根据一级岗位的id查询二级岗位 -->
+<select id="findByParentId" resultType="Job">
+	select * from job where jobParentId=#{parentId}
 </select>
 </mapper>

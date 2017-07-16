@@ -5,7 +5,7 @@ import java.io.Serializable;
 import ynjh.common.util.MD5Util;
 
 public class Company implements Serializable {
-	
+	private static final long serialVersionUID = 8788521794169964118L;
 	private Integer id;
 	private String companyLoginId;
 	private String companyPassword;

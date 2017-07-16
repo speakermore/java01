@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ynjh.common.crowdfund.entity.Job;
 import ynjh.company.entity.Company;
-import ynjh.company.entity.CompanyJob;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
 
@@ -29,8 +29,8 @@ public class CompanyRecruitController {
 	}
 	@RequestMapping(value="/companyRecruit/add_companyRecruit", method=RequestMethod.GET)
 	public String addCompanyRecuit(HttpSession session){
-		List<CompanyJob> jobNames=companyRecruitService.findJobs();
-		session.setAttribute("jobNames", jobNames);
+		List<Job> jobs1=companyRecruitService.findJobs1();
+		session.setAttribute("jobs1", jobs1);
 		return "company/cmprs/add_companyRecruit";
 	}
 	//添加招聘信息并默认信息状态为待审
