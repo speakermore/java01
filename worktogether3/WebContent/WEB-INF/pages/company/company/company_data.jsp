@@ -51,6 +51,7 @@
 		<%@include file="/WEB-INF/pages/company/menu.jsp" %>
 		</div>
 		<div class="col-sm-9 column wt-hby-top">
+			<!-- 企业基本资料 -->
 			<div class="panel-group" id="accordion" >
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -72,13 +73,13 @@
 										<tr>
 											<td>公司logo：</td>
 											<td>
-												<img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${user.companyLogo}" />
+												<img src="company/img/${user.companyLoginId }/${user.companyLogo}" />
 											</td>
 										</tr>
 										<tr>
 											<td>公司营业执照（图）:</td>
 											<td>
-												<img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${user.companyLicenseImg}" />
+												<img src="company/img/${user.companyLoginId }/${user.companyLicenseImg}" />
 											</td>
 										</tr>
 										<tr>
@@ -128,12 +129,14 @@
 					</div>
 				</div>
 			</div>
+			<!-- 企业基本资料结束 -->
+			<!-- 企业环境图片 -->
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default" style="border-top:0px;">
 					<div class="panel-heading">
-						   <h4 class="panel-title"><a data-toggle="collapse" href="#collapseTwo">公司详细图片</a></h4>
+						   <h4 class="panel-title"><a data-toggle="collapse" href="#envirment-pic">公司环境图片</a></h4>
 					</div>
-					<div id="collapseTwo" class="panel-collapse collapse">
+					<div id="envirment-pic" class="panel-collapse collapse">
 						<div class="tab-content">
 							<div class="tab-pane active" id="companySource">
 								<div class="magnifier" id="magnifier1">
@@ -154,11 +157,10 @@
 											 <c:forEach items="${detailImgs }" var="imgs">
 												<li>
 													<div class="small-img">
-														<img src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
+														<img src="company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
 													</div>
 												</li>
 											</c:forEach>
-												
 											</ul>
 										</div>
 										<!--缩略图-->
@@ -174,6 +176,8 @@
 					</div>
 				</div>
 			</div>	
+			<!-- 企业环境图片结束 -->
+			<!-- 企业详细资料 -->
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -224,10 +228,12 @@
 					</div>
 				</div>
 			</div>
+			<!-- 企业详细资料结束 -->
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
+/* 牟勇：环境图片特效的代码 */
 $(function() {
 	
 	var magnifierConfig = {
@@ -239,15 +245,6 @@ $(function() {
 	};
 
 	var _magnifier = magnifier(magnifierConfig);
-
-	/*magnifier的内置函数调用*/
-	/*
-		//设置magnifier函数的index属性
-		_magnifier.setIndex(1);
-
-		//重新载入主图,根据magnifier函数的index属性
-		_magnifier.eqImg();
-	*/
 });
 </script>
 </body>

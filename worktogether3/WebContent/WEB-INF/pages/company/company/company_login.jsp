@@ -26,33 +26,21 @@
 								method="post" id="login">
 								<h3 class="form-signin-heading">欢迎企业用户登录</h3>
 								<div class="form-group">
-									<input autocomplete="off" type="text" id="companyLoginId" class="form-control"
-										name="companyLoginId" required placeholder="手机号" value="${companyLoginId }">
+									<input type="text" id="companyLoginId" class="form-control" name="companyLoginId" required placeholder="手机号" value="${companyLoginId }">
 								</div>
 								<div class="form-group">
-									<input type="password" id="companyPassword"
-										autocomplete="off" class="form-control" name="companyPassword" placeholder="密码"
-										required>
+									<input type="password" id="companyPassword" class="form-control" name="companyPassword" placeholder="密码" required>
 								</div>
-
 								<div class="form-group">
 									<!--请求验证码---->
-									<input type="text" id="validateCode" class="form-control"
-										name="validateCode" placeholder="请输入验证码" required
-										autocomplete="off" />
+									<input type="text" id="validateCode" class="form-control" name="validateCode" placeholder="请输入验证码" required autocomplete="off" />
 									<c:if test="${operatorInfo!=null }">
 										<div id="validateCodeToolTip">${operatorInfo }</div>
 									</c:if>
 								</div>
-								<img id="validateCode" alt="validateCode "
-									src="admin/codeValidate?time=<%=new Date().getTime()%>" /> <a
-									class="btn btn-default" href="javascript:void(0)" role="button"
-									class="btn btn-primary btn-sm">看不清，换一张</a>
-
-
+								<img id="validateCode" alt="validateCode " src="admin/codeValidate?time=<%=new Date().getTime()%>" /> <a class="btn btn-default" href="javascript:void(0)" role="button" class="btn btn-primary btn-sm">看不清，换一张</a>
 								<div class="checkbox col-md-12">
-									<input name="remFlag" type="checkbox" onclick="remember();"
-										id="remFlag">记住密码 <a href="#" class="col-md-offset-6">忘记密码？</a>
+									<input name="remFlag" type="checkbox" onclick="remember();" id="remFlag">记住密码 <a href="#" class="col-md-offset-6">忘记密码？</a>
 								</div>
 								<button class="btn btn-lg btn-success btn-block" type="submit">立即登录</button>
 							</form>
@@ -60,30 +48,21 @@
 						<!-- 用户登录结束 -->
 						<!-- 用户注册 -->
 						<div class="tab-pane" id="panel-register">
-							<form autocomplete="off" class="form-horizontal" role="form"
-								action="company/company/addCompany" method="post"
-								id="addCompany">
+							<form autocomplete="off" class="form-horizontal" role="form" action="company/company/addCompany" method="post" id="addCompany">
 								<h3 class="form-signin-heading">欢迎企业用户注册</h3>
 								<div class="form-group">
-									<input autocomplete="off" placeholder="请输入联系人手机号（即以后的登录账号）" type="text"
-										class="form-control" id="companyLoginId"
-										name="companyLoginId" autocomplete="off" />
+									<input autocomplete="off" placeholder="请输入联系人手机号（即以后的登录账号）" type="text" class="form-control" id="companyLoginId" name="companyLoginId" autocomplete="off" />
 								</div>
 
 								<div class="form-group">
-									<input autocomplete="off" placeholder="请输入密码" type="password" class="form-control"
-										id="companyPassword" name="companyPassword"
-										autocomplete="off" />
+									<input  placeholder="请输入密码" type="password" class="form-control" id="companyPassword" name="companyPassword" autocomplete="off" />
 								</div>
 								<div class="form-group">
-									<input autocomplete="off" placeholder="确认密码" type="password" class="form-control"
-										id="realCompanyPassword" name="realCompanyPassword"
-										autocomplete="off" />
+									<input  placeholder="确认密码" type="password" class="form-control" id="realCompanyPassword" name="realCompanyPassword" autocomplete="off" />
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-lg btn-success btn-block">注册</button>
 								</div>
-
 							</form>
 						</div>
 						<!-- 用户注册结束 -->

@@ -60,10 +60,11 @@
 										<label class="control-label col-sm-3">公司Logo：</label>
 										<div class="col-sm-9">
 											<input id="logo" name="logo" multiple type="file" class="form-control file" />
+											<input id="companyLogo" name="companyLogo" type="hidden" value="${user.companyLogo}" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-3">组织机构代码：</label>
+										<label class="control-label col-sm-3">社会信用统一代码：</label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control disabled" name="companyLicenseNo" value="${user.companyLicenseNo }" />
 										</div>
@@ -72,6 +73,7 @@
 										<label class="control-label col-sm-3">营业执照：</label>
 										<div class="col-sm-9">
 											<input id="companyLicense" name="licenseImg" multiple type="file" class="form-control file" />
+											<input id="companyLicenseImg" name="companyLicenseImg" type="hidden" value="${user.companyLicenseImg}" />
 										</div>
 									</div>
 
@@ -106,7 +108,6 @@
 										</div>
 									</div>
 								</form>
-								<!--  -->
 							</div>
 						</div>
 					</div>
@@ -115,7 +116,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#hby-modify-environment" href="#modify-environment">公司环境图片</a>
+								data-parent="#hby-modify-environment" href="#modify-environment">公司环境</a>
 						</div>
 						<div id="modify-environment" class="panel-collapse collapse">
 							<div class="panel-body">
@@ -124,18 +125,24 @@
 									<div class="form-group">
 										<label class="control-label col-sm-3">公司环境：</label>
 										<div class="col-sm-9">
-											<span class="label label-default">大门</span>
+											<span class="label label-default">员工</span>
 											<input id="companyImg1" name="companyImgs1" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs1" name="companyImgs" value="${detailImgs[0]}" />
 											<span class="label label-default">前台</span>
 											<input id="companyImg2" name="companyImgs2" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs2" name="companyImgs" value="${detailImgs[1]}" />
 											<span class="label label-default">办公区</span>
 											<input id="companyImg3" name="companyImgs3" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs3" name="companyImgs" value="${detailImgs[2]}" />
 											<span class="label label-default">会议室</span>
-											<input id="companyImg4" name="companyImgs4" multiple type="file" class="form-control file" /> 
+											<input id="companyImg4" name="companyImgs4" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs4" name="companyImgs" value="${detailImgs[3]}" /> 
 											<span class="label label-default">休息区</span>
-											<input id="companyImg5" name="companyImgs5" multiple type="file" class="form-control file" /> 
+											<input id="companyImg5" name="companyImgs5" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs5" name="companyImgs" value="${detailImgs[4]}" /> 
 											<span class="label label-default">其他</span>
 											<input id="companyImg6" name="companyImgs6" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs6" name="companyImgs" value="${detailImgs[5]}" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -144,9 +151,6 @@
 										</div>
 									</div>
 								</form>
-
-								<!--  -->
-
 							</div>
 						</div>
 					</div>
@@ -263,24 +267,30 @@
 	 'language' : 'zh',
 	 'showUpload' : false,
 	 'initialPreview' : [
-	 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${user.companyLogo}"/>'],
+	 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${user.companyLogo}"/>'],
 	 'previewFileType' : 'any'
+	 }).on('change', function(event) {
+		  $('#companyLogo').val(this.value);
 	 });
 	 $("#companyLicense").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${user.companyLicenseImg}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${user.companyLicenseImg}"/>'],
 		 'previewFileType' : 'any'
+		 }).on('change', function(event) {
+			  $('#"companyLicenseImg"').val(this.value);
 		 });
 	$("#companyImg1").fileinput({
 		'uploadAsync' : false,
 		'language' : 'zh',
 		'showUpload' : false,
 		'initialPreview' : [
-		'<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[0]}"/>'],
+		'<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[0]}"/>'],
 		'previewFileType' : 'any'
+	 }).on('change', function(event) {
+		  $('#imgs1').val(this.value);
 	 });
 	
 	$("#companyImg2").fileinput({
@@ -288,40 +298,50 @@
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[1]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[1]}"/>'],
 		 'previewFileType' : 'any'
+		 }).on('change', function(event) {
+			  $('#imgs2').val(this.value);
 		 });
 	 $("#companyImg3").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[2]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[2]}"/>'],
 		 'previewFileType' : 'any'
+		 }).on('change', function(event) {
+			  $('#imgs3').val(this.value);
 		 });
 	 $("#companyImg4").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[3]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[3]}"/>'],
 		 'previewFileType' : 'any'
+		 }).on('change', function(event) {
+			  $('#imgs4').val(this.value);
 		 });
 	 $("#companyImg5").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[4]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[4]}"/>'],
 		 'previewFileType' : 'any'
+		 }).on('change', function(event) {
+			  $('#imgs5').val(this.value);
 		 });
 	 $("#companyImg6").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${detailImgs[5]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[5]}"/>'],
 		 'previewFileType' : 'any'
+		 }).on('change', function(event) {
+			  $('#imgs6').val(this.value);
 		 }); 
 	$(document)
 			.ready(
@@ -365,24 +385,10 @@
 														}
 													}
 												},
-												logo : {
-													validators : {
-														notEmpty : {/*非空提示*/
-															message : '公司logo不能为空'
-														}
-													}
-												},
 												companyLicenseNo : {
 													validators : {
 														notEmpty : {/*非空提示*/
 															message : '组织机构代码不能为空'
-														}
-													}
-												},
-												licenseImg : {
-													validators : {
-														notEmpty : {
-															message : '营业执照不能为空'
 														}
 													}
 												},

@@ -25,7 +25,6 @@ import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyService;
-import ynjh.personal.entity.User;
 
 @Controller
 @RequestMapping(value="/company/company")
@@ -93,11 +92,15 @@ public class CompanyController {
 	             response.addCookie(userCookie); 
 	         }
 				session.setAttribute("user",company);
-				session.setAttribute("company",company);
+				//企业详细资料
 				CompanyIntroduction companyInt=companyIntService.findById(company.getId());
 				session.setAttribute("companyInt", companyInt);
+				//企业联系人
 				List<CompanyConnection> companyConnections=companyService.findCompanyConnection(company.getId());
 				session.setAttribute("companyConnections", companyConnections);
+				//企业环境图片
+				List<CompanyDetailImg> detailImgs=companyService.findDetailImg(company.getId());
+				session.setAttribute("detailImgs", detailImgs);
 				mv.setViewName("company/company/company_data");
 				
 		}
@@ -109,7 +112,12 @@ public class CompanyController {
 		return "company/artanddis/company_index";
 		
 	}
-	
+	/**
+	 * 登录
+	 * 牟勇：为了保证登录数据不出现混乱，所以在跳转登录时对session进行了一次清除
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value={"/company_login","/"})
 	public String index(HttpSession session){
 		session.invalidate();
@@ -157,9 +165,6 @@ public class CompanyController {
 	 */
 	@RequestMapping(value="/updateCompany",method=RequestMethod.GET)
 	public String updatecompany(){
-//		ModelAndView mv=new ModelAndView("company/company/update_company");
-//		Company company=(Company)session.getAttribute("company");
-//		mv.addObject("company", company);
 		
 		return "company/company/update_company";
 	}
@@ -205,18 +210,20 @@ public class CompanyController {
 	}
 	/**
 	 * 修改公司环境图片
+	 * 牟勇：添加字符串数组imgs，以保存页面传过来的文件名，方便进行对比
 	 * @author 李胤
+	 * @param imgs 保存页面传过来的文件名，以搞清图片文件是否做过修改
 	 * @param session
-	 * @param companyImgs1
-	 * @param companyImgs2
-	 * @param companyImgs3
-	 * @param companyImgs4
-	 * @param companyImgs5
-	 * @param companyImgs6
+	 * @param companyImgs1 员工
+	 * @param companyImgs2 前台
+	 * @param companyImgs3 办公区
+	 * @param companyImgs4 会议室
+	 * @param companyImgs5 休息区
+	 * @param companyImgs6 其他
 	 * @return
 	 */
 	@RequestMapping(value="/updateCompanyImg",method=RequestMethod.POST)
-	public ModelAndView updateCompanyImg(HttpSession session,MultipartFile companyImgs1,MultipartFile companyImgs2,MultipartFile companyImgs3,MultipartFile companyImgs4,
+	public ModelAndView updateCompanyImg(String[] imgs,HttpSession session,MultipartFile companyImgs1,MultipartFile companyImgs2,MultipartFile companyImgs3,MultipartFile companyImgs4,
 			MultipartFile companyImgs5,MultipartFile companyImgs6){
 		ModelAndView mv=new ModelAndView();
 		int resultDetail=0;
@@ -227,7 +234,7 @@ public class CompanyController {
 		String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
 		List<CompanyDetailImg> a=companyService.findDetailImg(company.getId());
 		if(a.size()==0){
-				for(int i=0;i<fileNames.length;i++){
+			for(int i=0;i<fileNames.length;i++){
 				companyService.addCompanyDetailId(company.getId(), fileNames[i],i);
 				resultDetail+=1;
 			}
@@ -263,19 +270,25 @@ public class CompanyController {
 	public ModelAndView updateCompany(Company company,HttpSession session,MultipartFile logo,MultipartFile licenseImg){
 		ModelAndView mv=new ModelAndView();
 		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img",company.getCompanyLoginId());
-		String[] companyLogo=UploadFile.uploadFile(userPath,new MultipartFile[]{logo}, session);
-		String[] companyLicenseImg=UploadFile.uploadFile(userPath, new MultipartFile[]{licenseImg}, session);
-		company.setCompanyLogo(companyLogo[0]);
-		company.setCompanyLicenseImg(companyLicenseImg[0]);
+		
+		String[] companyPic=UploadFile.uploadFile(userPath,new MultipartFile[]{logo,licenseImg}, session);
+		//牟勇：如果logo上传了，就改变路径
+		if(companyPic[0]!=null){
+			company.setCompanyLogo(companyPic[0]);
+		}
+		//牟勇：如果营业执照上传了，就改变路径
+		if(companyPic[1]!=null){
+			company.setCompanyLicenseImg(companyPic[1]);
+		}
 		int result=companyService.updateCompany(company);
 		if(result>0){
 			mv.addObject("operatorInfo","用户修改成功");
 			session.setAttribute("user", company);
-			mv.addObject("toPage", "company/company/findById/"+company.getId());
+			mv.addObject("toPage","company/company/findById/"+company.getId());
 			mv.setViewName("company/info");
 		}else{
 			mv.addObject("operatorInfo","用户修改失败");
-			mv.addObject("toPage", "company/company/update_company");
+			mv.addObject("toPage","company/company/update_company");
 			mv.setViewName("company/info");
 		}
 		return mv;

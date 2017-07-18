@@ -16,7 +16,7 @@ import ynjh.personal.entity.User;
  *
  */
 public class UserLoginIntersepter extends HandlerInterceptorAdapter {
-
+	private static StringBuffer basePath=null;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -27,8 +27,16 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 		HttpSession session=request.getSession();
 		//获得请求路径
 		StringBuffer path=request.getRequestURL();
-		//如果最后结尾是一个斜杠，则忽略该路径(理论上，结尾是斜杠的情况只能是访问首页的链接)
-		if(path.lastIndexOf("/")==path.length()-1){
+		//如果是首页，则允许访问
+		if(basePath==null){
+			basePath=new StringBuffer(request.getScheme()+"://");
+			basePath.append(request.getServerName());
+			if(request.getServerPort()!=80){
+				basePath.append(":"+request.getServerPort());
+			}
+			basePath.append(request.getContextPath()+"/");
+		}
+		if(path.toString().equals(basePath.toString())){
 			return true;
 		}
 		//查找不登录也允许访问的路径

@@ -242,14 +242,14 @@
 							},
 							regexp : {
 								regexp : '^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$',
-								message : '请输入正确的用户名'
-							},
+								message : '用户名应该是一个手机号码'
+							}/* ,
 							remote : {
 								url : "personal/user/verificationUserLoginId",
 								message : '用户名已被注册',
 								delay : 5000,
 								type : 'post'
-							}
+							} */
 						}
 					},
 					userPassword : {
