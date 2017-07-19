@@ -1,5 +1,7 @@
 package ynjh.company.controller.company;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyConnection;
+import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
 
@@ -51,13 +55,5 @@ public class CompanyIntController {
 		return mv;
 	}
 	
-	//跳转用户资料页面
-	@RequestMapping(value="/findById/{companyId}",method=RequestMethod.GET)
-	public ModelAndView companyIntShow(@PathVariable Integer companyId,HttpSession session){
-		ModelAndView mv=new ModelAndView();
-//		CompanyIntroduction companyInt=companyIntService.findById(companyId);
-//		session.setAttribute("companyInt", companyInt);
-		mv.setViewName("company/company/company_data");
-		return mv;
-	}
+	
 }

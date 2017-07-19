@@ -36,34 +36,19 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 
 	@Override
-	public Integer addCompanyDetailId(Integer companyId, String companyDetailImg,Integer companyDetailDiscInt) {
-		String companyDetailDisc="";
-		switch(companyDetailDiscInt){
-		case 0:companyDetailDisc="大门";
-			break;
-		case 1:
-			companyDetailDisc="前台";
-			break;
-		case 2:
-			companyDetailDisc="办公区";
-			break;
-		case 3:
-			companyDetailDisc="会议室";
-			break;
-		case 4:
-			companyDetailDisc="休息区";
-			break;
-		case 5:companyDetailDisc="其他";
-			break;
-		default:
+	public Integer addCompanyDetailImg(Integer companyId, String companyDetailImg,Integer index,Integer id) {
+		//查询环境图片存在不存在，如果返回0，则表示不存在。
+		int result=companyMapper.findByEnvirmentImgId(id);
+		if(result>0){
+			companyMapper.updateImg(id, companyDetailImg);
+		}else{
+			companyMapper.addCompanyDetailImg(companyId, companyDetailImg,CompanyService.COMPANY_POSITION[index]);
 		}
-		
-		return companyMapper.addCompanyDetailImg(companyId, companyDetailImg,companyDetailDisc);
+		return 1;
 	}
 
 	@Override
 	public List<CompanyDetailImg> findDetailImg(Integer companyId) {
-		
 		return companyMapper.findDetailImg(companyId);
 	}
 
@@ -74,28 +59,8 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 
 	@Override
-	public Integer updateImg(Integer id, String companyDetailImg,Integer companyDetailDiscInt) {
-		String companyDetailDisc="";
-		switch(companyDetailDiscInt){
-		case 0:companyDetailDisc="大门";
-			break;
-		case 1:
-			companyDetailDisc="前台";
-			break;
-		case 2:
-			companyDetailDisc="办公区";
-			break;
-		case 3:
-			companyDetailDisc="会议室";
-			break;
-		case 4:
-			companyDetailDisc="休息区";
-			break;
-		case 5:companyDetailDisc="其他";
-			break;
-		default:
-		}
-		return companyMapper.updateImg(id, companyDetailImg,companyDetailDisc);
+	public Integer updateImg(Integer id, String companyDetailImg) {
+		return companyMapper.updateImg(id, companyDetailImg);
 	}
 
 	

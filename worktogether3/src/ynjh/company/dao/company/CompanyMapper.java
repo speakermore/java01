@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
-import ynjh.personal.entity.User;
 
 public interface CompanyMapper {
 	//注册公司
@@ -24,7 +23,7 @@ public interface CompanyMapper {
 	//查询公司环境图片
 	public List<CompanyDetailImg> findDetailImg(Integer companyId);
 	//修改公司环境图片
-	public Integer updateImg(@Param("id")Integer id,@Param("companyDetailImg") String companyDetailImg,@Param("companyDetailDisc")String companyDetailDisc);
+	public Integer updateImg(@Param("id")Integer id,@Param("companyDetailImg") String companyDetailImg);
 	//增加公司联系电话
 	public Integer addCompanyConnection(@Param("companyId")Integer companyId,@Param("cmpConnectionName")String cmpConnectionName,@Param("cmpConnection")String cmpConnection);
 	//修改公司联系电话
@@ -35,4 +34,17 @@ public interface CompanyMapper {
 	public Integer deleteCompanyConnection(Integer id);
 	//匹配用户名是否重复
 	public Company verificationCompanyLoginId(String companyLoginId);
+	/**
+	 * 牟勇：删除公司环境图片
+	 * @param id 环境图片id
+	 * @return 受影响的行数
+	 */
+	public Integer deleteCompanyEnvirmentImg(Integer id);
+	/**
+	 * 牟勇：根据环境图片id查询这张图片是否存在
+	 * 
+	 * @param id 环境图片id
+	 * @return 如果返回0则表示没有查到图片，如果是大于0的数字则表示查到了一张图片
+	 */
+	public Integer findByEnvirmentImgId(Integer id);
 }

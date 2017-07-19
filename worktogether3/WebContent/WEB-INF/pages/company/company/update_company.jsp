@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -39,7 +38,7 @@
 							<div class="panel-body">
 								<!--  -->
 								<form class="form-horizontal" role="form" action="company/company/update" method="post" enctype="multipart/form-data" id="updateCompany">
-									<input type="hidden" value="${user.id }" name="id" /> 
+									<input type="hidden"  value="${user.id }" name="id" /> 
 									<input type="hidden" value="${user.companyLoginId }" name="companyLoginId" />
 									<input type="hidden" value="${user.companyPassword }" name="companyPassword" />
 									<input type="hidden" value="${user.companyStatus }" name="companyStatus" />
@@ -126,23 +125,23 @@
 										<label class="control-label col-sm-3">公司环境：</label>
 										<div class="col-sm-9">
 											<span class="label label-default">员工</span>
-											<input id="companyImg1" name="companyImgs1" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs1" name="companyImgs" value="${detailImgs[0]}" />
+											<input id="companyImg1" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs1" name="imgsId" value="${detailImgs[0].id}" />
 											<span class="label label-default">前台</span>
-											<input id="companyImg2" name="companyImgs2" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs2" name="companyImgs" value="${detailImgs[1]}" />
+											<input id="companyImg2" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs2" name="imgsId" value="${detailImgs[1].id}" />
 											<span class="label label-default">办公区</span>
-											<input id="companyImg3" name="companyImgs3" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs3" name="companyImgs" value="${detailImgs[2]}" />
+											<input id="companyImg3" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs3" name="imgsId" value="${detailImgs[2].id}" />
 											<span class="label label-default">会议室</span>
-											<input id="companyImg4" name="companyImgs4" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs4" name="companyImgs" value="${detailImgs[3]}" /> 
+											<input id="companyImg4" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs4" name="imgsId" value="${detailImgs[3].id}" /> 
 											<span class="label label-default">休息区</span>
-											<input id="companyImg5" name="companyImgs5" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs5" name="companyImgs" value="${detailImgs[4]}" /> 
+											<input id="companyImg5" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs5" name="imgsId" value="${detailImgs[4].id}" /> 
 											<span class="label label-default">其他</span>
-											<input id="companyImg6" name="companyImgs6" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs6" name="companyImgs" value="${detailImgs[5]}" />
+											<input id="companyImg6" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs6" name="imgsId" value="${detailImgs[5].id}" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -287,10 +286,8 @@
 		'language' : 'zh',
 		'showUpload' : false,
 		'initialPreview' : [
-		'<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[0]}"/>'],
+		'<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[0].companyDetailImg}"/>'],
 		'previewFileType' : 'any'
-	 }).on('change', function(event) {
-		  $('#imgs1').val(this.value);
 	 });
 	
 	$("#companyImg2").fileinput({
@@ -298,50 +295,40 @@
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[1]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[1].companyDetailImg}"/>'],
 		 'previewFileType' : 'any'
-		 }).on('change', function(event) {
-			  $('#imgs2').val(this.value);
 		 });
 	 $("#companyImg3").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[2]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[2].companyDetailImg}"/>'],
 		 'previewFileType' : 'any'
-		 }).on('change', function(event) {
-			  $('#imgs3').val(this.value);
 		 });
 	 $("#companyImg4").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[3]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[3].companyDetailImg}"/>'],
 		 'previewFileType' : 'any'
-		 }).on('change', function(event) {
-			  $('#imgs4').val(this.value);
 		 });
 	 $("#companyImg5").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[4]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[4].companyDetailImg}"/>'],
 		 'previewFileType' : 'any'
-		 }).on('change', function(event) {
-			  $('#imgs5').val(this.value);
 		 });
 	 $("#companyImg6").fileinput({
 		 'uploadAsync' : false,
 		 'language' : 'zh',
 		 'showUpload' : false,
 		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[5]}"/>'],
+		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[5].companyDetailImg}"/>'],
 		 'previewFileType' : 'any'
-		 }).on('change', function(event) {
-			  $('#imgs6').val(this.value);
 		 }); 
 	$(document)
 			.ready(

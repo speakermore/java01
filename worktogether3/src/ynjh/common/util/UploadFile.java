@@ -53,6 +53,8 @@ public class UploadFile {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}else{
+				newFileNames[i]=null;//牟勇：如果没有文件上传，就把文件名置null
 			}
 		}
 		return newFileNames;

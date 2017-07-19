@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,9 +82,7 @@ public class CompanyController {
 			mv.addObject("companyLoginId",companyLoginId);
 		}else{
 	         if("1".equals(remFlag)){ //"1"表示用户勾选记住密码
-	             /*String cookieUserName = Utils.encrypt(name);
-	             String cookiePwd = Utils.encrypt(passWord);
-	             String loginInfo = cookieUserName+","+cookiePwd;*/
+	             
 	             String loginInfo = companyLoginId+","+companyPassword;
 	             Cookie userCookie=new Cookie("loginInfo",loginInfo); 
 
@@ -92,18 +91,31 @@ public class CompanyController {
 	             response.addCookie(userCookie); 
 	         }
 				session.setAttribute("user",company);
-				//企业详细资料
-				CompanyIntroduction companyInt=companyIntService.findById(company.getId());
-				session.setAttribute("companyInt", companyInt);
-				//企业联系人
-				List<CompanyConnection> companyConnections=companyService.findCompanyConnection(company.getId());
-				session.setAttribute("companyConnections", companyConnections);
-				//企业环境图片
-				List<CompanyDetailImg> detailImgs=companyService.findDetailImg(company.getId());
-				session.setAttribute("detailImgs", detailImgs);
-				mv.setViewName("company/company/company_data");
-				
 		}
+		return companyIntShow(company.getId(),session);
+	}
+	
+	/**
+	 * 跳转企业用户资料页面	
+	 * 查询了企业详细资料companyInt，企业联系人companyConnections，企业环境图片detailImgs
+	 * @param companyId 企业id
+	 * @param session
+	 * @return 
+	 */
+	@RequestMapping(value="/findById/{companyId}",method=RequestMethod.GET)
+	public ModelAndView companyIntShow(@PathVariable Integer companyId,HttpSession session){
+		ModelAndView mv=new ModelAndView();
+		Company company=(Company)session.getAttribute("user");
+		//企业详细资料
+		CompanyIntroduction companyInt=companyIntService.findById(company.getId());
+		session.setAttribute("companyInt", companyInt);
+		//企业联系人
+		List<CompanyConnection> companyConnections=companyService.findCompanyConnection(company.getId());
+		session.setAttribute("companyConnections", companyConnections);
+		//企业环境图片
+		List<CompanyDetailImg> detailImgs=companyService.findDetailImg(company.getId());
+		session.setAttribute("detailImgs", detailImgs);
+		mv.setViewName("company/company/company_data");
 		return mv;
 	}
 	
@@ -223,39 +235,25 @@ public class CompanyController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateCompanyImg",method=RequestMethod.POST)
-	public ModelAndView updateCompanyImg(String[] imgs,HttpSession session,MultipartFile companyImgs1,MultipartFile companyImgs2,MultipartFile companyImgs3,MultipartFile companyImgs4,
-			MultipartFile companyImgs5,MultipartFile companyImgs6){
+	public ModelAndView updateCompanyImg(Integer[] imgsId,HttpSession session,@RequestParam MultipartFile[] companyImgs){
+		
 		ModelAndView mv=new ModelAndView();
-		int resultDetail=0;
 		Company company=(Company)session.getAttribute("user");
-		MultipartFile[] companyImgs={companyImgs1,companyImgs2,companyImgs3,companyImgs4,companyImgs5,companyImgs6};
 		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img",company.getCompanyLoginId());
-		
 		String[] fileNames=UploadFile.uploadFile(userPath,companyImgs, session);
-		List<CompanyDetailImg> a=companyService.findDetailImg(company.getId());
-		if(a.size()==0){
-			for(int i=0;i<fileNames.length;i++){
-				companyService.addCompanyDetailId(company.getId(), fileNames[i],i);
-				resultDetail+=1;
-			}
-		}else{
-			for(int i=0;i<fileNames.length;i++){
-				companyService.updateImg(company.getId(), fileNames[i],i);
-				resultDetail+=1;
+		//根据文件名的返回情况，如果是null，就做添加，否则就做修改
+		for(int i=0;i<fileNames.length;i++){
+			if(fileNames[i]!=null){
+				//如果文件上传了，则删除原图片，添加新图片
+				companyService.addCompanyDetailImg(company.getId(), fileNames[i],i,imgsId[i]);
 			}
 		}
-		if(resultDetail>=(companyImgs.length-1)){
-			mv.addObject("operatorInfo","图片修改成功");
-			session.setAttribute("user", company);
-			mv.addObject("toPage", "company/company/findById/"+company.getId());
-			mv.setViewName("company/info");
-		}else{
-			mv.addObject("operatorInfo","图片修改失败");
-			mv.addObject("toPage", "company/company/update_company");
-			mv.setViewName("company/info");
-		}
-		return mv;
 		
+		mv.addObject("operatorInfo","图片修改成功");
+		session.setAttribute("user", company);
+		mv.addObject("toPage", "company/company/findById/"+company.getId());
+		mv.setViewName("company/info");
+		return mv;
 	}
 	/**
 	 * 修改公司基本资料

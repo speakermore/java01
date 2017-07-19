@@ -35,13 +35,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update company set companyPassword=#{companyPassword} where id=#{id}
 	</update>
 	<update id="updateImg">
-		update companyDetailImg set companyDetailImg=#{companyDetailImg} where id=#{id} and companyDetailDisc=#{companyDetailDisc}
+		update companyDetailImg set companyDetailImg=#{companyDetailImg} where id=#{id}
 	</update>
 	<update id="updateCompanyConnection">
 		update companyconnection set companyId=#{companyId},cmpConnection=#{cmpConnection},cmpConnectionName=#{cmpConnectionName} where id=#{id}
 	</update>
 	<delete id="deleteCompanyConnection" parameterType="Integer">
 		delete from companyconnection where id=#{id}
+	</delete>
+	<!-- 牟勇：删除公司环境图片 -->
+	<delete id="deleteCompanyEnvirmentImg" parameterType="Integer">
+		delete from companydetailimg where id=#{id}
 	</delete>
 	
 	<select id="findByloginIdAndPassword" resultType="Company">
@@ -58,5 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="verificationCompanyLoginId" resultType="Company" parameterType="String">
 	select companyLoginId from company where companyLoginId=#{companyLoginId}
+	</select>
+	<!-- 牟勇：根据环境图片id查询这张图片是否存在 -->
+	<select id="findByEnvirmentImgId" parameterType="Integer" resultType="Integer">
+		select count(*) from companyDetailImg where id=#{id}
 	</select>
 </mapper>
