@@ -1,5 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    import="ynjh.common.util.*" pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" import="ynjh.common.util.*" pageEncoding="UTF-8"%>
+ <%@ page autoFlush="true" buffer="1024kb"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,9 +7,14 @@
 <head>
 <%@include file="/WEB-INF/pages/company/header.jsp"%>
 <title>企业用户-企业信息</title>
+
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="company/js/magnifier.js"></script>
+
+<script type="text/javascript">
+	var evt = new Event();
+    m = new Magnifier(evt);
+</script>
 
 <style type="text/css">
 	td>img{
@@ -39,6 +44,32 @@
 		text-align: right;
 	}
 </style>
+<style>
+		/* 企业环境的样式 */
+		
+		/* Carousel base class */
+		.carousel {
+		  height: 400px;
+		  margin-bottom: 60px;
+		}
+		/* Since positioning the image, we need to help out the caption */
+		.carousel-caption {
+		  z-index: 10;
+		}
+		
+		/* Declare heights because of positioning of img element */
+		.carousel .item {
+		  height: 400px;
+		  background-color: #fff;
+		}
+		.carousel-inner > .item > img {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  min-width: 100%;
+		  height: 400px;
+		}
+		</style>
 </head>
 <body>
 <%@include file="/WEB-INF/pages/nav.jsp" %>
@@ -122,7 +153,7 @@
 									</tbody>
 								</table>
 								<div class="wt-hby-edit">
-									<a href="company/company/updateCompany/" >编辑</a>
+									<a href="company/company/updateCompany/0" >编辑</a>
 								</div>
 							</div>
 						</div>
@@ -139,37 +170,38 @@
 					<div id="envirment-pic" class="panel-collapse collapse">
 						<div class="tab-content">
 							<div class="tab-pane active" id="companySource">
-								<div class="magnifier" id="magnifier1">
-									<div class="magnifier-container">
-										<div class="images-cover"></div>
-										<!--当前图片显示容器-->
-										<div class="move-view"></div>
-										<!--跟随鼠标移动的盒子-->
-									</div>
-									<div class="magnifier-assembly">
-										<div class="magnifier-btn">
-											<span class="magnifier-btn-left">&lt;</span>
-											<span class="magnifier-btn-right">&gt;</span>
-										</div>
-										<!--按钮组-->
-										<div class="magnifier-line">
-											<ul class="clearfix animation03">
-											 <c:forEach items="${detailImgs }" var="imgs">
-												<li>
-													<div class="small-img">
-														<img src="company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
-													</div>
-												</li>
+								<div class="row clearfix">
+								<div class="col-sm-12 column">
+									<!-- 环境图片动画 -->
+									<div class="carousel slide" id="envirment-pic-slide">
+										<ol class="carousel-indicators">
+											<li class="active" data-slide-to="0" data-target="#envirment-pic-slide"></li>
+											<li data-slide-to="1" data-target="#envirment-pic-slide"></li>
+											<li data-slide-to="2" data-target="#envirment-pic-slide"></li>
+											<li data-slide-to="3" data-target="#envirment-pic-slide"></li>
+											<li data-slide-to="4" data-target="#envirment-pic-slide"></li>
+											<li data-slide-to="5" data-target="#envirment-pic-slide"></li>
+										</ol>
+										<div class="carousel-inner">
+											 <c:forEach items="${detailImgs }" var="imgs" varStatus="st">
+											 	<div class="item ${st.index==0?"active":"" }">
+												<img src="company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
+												<div class="carousel-caption">
+													<h4 style="color:#fff">
+														${imgs.companydetailDisc }
+													</h4>
+													<p>
+														<!-- 牟勇：详情描述，目前暂无内容 -->
+													</p>
+												</div>
+											</div>
 											</c:forEach>
-											</ul>
-										</div>
-										<!--缩略图-->
-									</div>
-									<div class="magnifier-view"></div>
-									<!--经过放大的图片显示容器-->
-								</div>	
+										</div> <a class="left carousel-control" href="#envirment-pic-slide" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#envirment-pic-slide" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+									</div><!-- 环境图片动画结束 -->
+								</div><!-- .com-sm-12 end -->
+							</div>
 								<div class="wt-hby-edit">
-									<a href="company/company/updateCompany/" >编辑</a>
+									<a href="company/company/updateCompany/1" >编辑</a>
 								</div>
 							</div>
 						</div>
@@ -183,7 +215,7 @@
 					<div class="panel-heading">
 						   <h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">公司详细资料</a></h4>
 					</div>
-					<div id="collapseThree" class="panel-collapse collapse in">
+					<div id="collapseThree" class="panel-collapse collapse">
 						<div class="tab-content">
 							<div class="tab-pane active" id="companySource">
 								<table class="table ">

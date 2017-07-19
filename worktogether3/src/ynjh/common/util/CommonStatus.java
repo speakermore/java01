@@ -5,7 +5,18 @@ package ynjh.common.util;
  *
  */
 public class CommonStatus {
-	
+	/**
+	 * 0：企业基本信息激活
+	 */
+	public static final Integer EDIT_COMPANY_BASE_INFO=0;
+	/**
+	 * 1：企业环境图片激活
+	 */
+	public static final Integer EDIT_COMPANY_ENVRIMENT_PIC=1;
+	/**
+	 * 2:企业详细资料激活
+	 */
+	public static final Integer EDIT_COMPANY_DETIAL_INFO=2;
 	/**
 	 * 性别
 	 * 0."女",1."男"

@@ -128,7 +128,7 @@
 						stringLength : {
 							min : 0,
 							max : 100,
-							message : '只能在在100个字以内'
+							message : '状态文字只能在100个字以内'
 						}
 					}
 				}

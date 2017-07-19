@@ -85,130 +85,99 @@ a:focus {
 			<!-- 简历基本信息 -->
 			<div class="media-body ">
 				<!-- 修改图标开始 -->
-				<a class="col-md-offset-10"
-					href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span
-					class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
+				<a class="col-md-offset-10" href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<!-- 修改图标结束 -->
-				<h4 class="media-heading col-md-offset-1"
-					style="line-height: 35px; height: 35px; font-size: 20px;">
-					<label class="control-label">${resume.resumeName }</label><small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small><small
-						class="col-md-offset-3">${SEX[resume.resumeGender]}</small>
+				<h4 class="media-heading col-md-offset-1" style="line-height: 35px; height: 35px; font-size: 20px;">
+					<label class="control-label">${resume.resumeName }</label>
+					<small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small>
+					<small class="col-md-offset-3">${SEX[resume.resumeGender]}</small>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
-				<p class="static col-md-offset-1">${resume.resumeNowResidence }&nbsp;|&nbsp;<label>${resume.works }</label>年&nbsp;|&nbsp;&nbsp;|&nbsp;<label>${resume.age}</label>岁(
-					<fmt:formatDate value="${resume.resumeBirthday }"
-						pattern="yyyy/MM/dd" />
-					)&nbsp;|&nbsp;${resume.resumeJor }
+				<p class="static col-md-offset-1">
+					${resume.resumeNowResidence }&nbsp;|&nbsp;
+					<label>${resume.works }</label>
+					年&nbsp;|&nbsp;&nbsp;|&nbsp;
+					<label>${resume.age}</label>岁
+					(<fmt:formatDate value="${resume.resumeBirthday }" pattern="yyyy/MM/dd" />)&nbsp;|&nbsp;${resume.resumeJor }
 				</p>
-				<label class="control-label col-md-offset-1"><span
-					class="glyphicon glyphicon-envelope"></span>${resume.resumeEmail }&nbsp;&nbsp;&nbsp;&nbsp;
-					<span class="glyphicon glyphicon-earphone"></span>${resume.resumePhone }</label>
+				<label class="control-label col-md-offset-1">
+					<span class="glyphicon glyphicon-envelope"></span>${resume.resumeEmail }&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="glyphicon glyphicon-earphone"></span>${resume.resumePhone }
+				</label>
 			</div>
 			<!-- 简历基本信息结束 -->
 		</div>
 		<div class="panel-group">
 			<!-- 展开内容 -->
 			<div class="panel-heading">
-				<a class="panel-title col-md-offset-10" data-toggle="collapse"
-					data-parent="#panel" href="#panel-element-more">更多展开 <span
-					class="glyphicon glyphicon-chevron-down"></span></a>
+				<a class="panel-title col-md-offset-10" data-toggle="collapse" data-parent="#panel" href="#panel-element-more">
+					更多展开 <span class="glyphicon glyphicon-chevron-down"></span>
+				</a>
 			</div>
 			<div id="panel-element-more" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_margin">
 					<div class="panel-body col-md-12 test personal_resume_defualt">
-						<c:if test="${resume.resumePlace!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">籍贯：</label> <label
-									class="control-label">${resume.resumePlace }</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeMarriage!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">婚姻状况：${MARRY[resume.resumeMarriage]}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeJor!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">目前职位：</label> <label
-									class="control-label">${resume.resumeJor}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeWages!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">期待薪资：</label> <label
-									class="control-label">${resume.resumeWages}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeQQ!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">QQ或微信：</label> <label
-									class="control-label">${resume.resumeQQ}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeNation!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">民族：</label> <label
-									class="control-label">${resume.resumeNation}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeGraduationSchool!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">毕业院校：${resume.resumeGraduationSchool}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeGraduationTime!=null}">
-							<div class="col-md-6 column">
-								<label class="control-label">毕业时间：</label><label
-									class="control-label"><fmt:formatDate
-										value="${resume.resumeGraduationTime}" pattern="yyyy/MM/dd" />
-								</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeEducation!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">学历：</label><label
-									class="control-label">${resume.resumeEducation } </label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeMajor!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">专业：</label><label
-									class="control-label">${resume.resumeMajor } </label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeFLAbility!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">外语水平：</label>
-								<label	class="control-label">${FL_ABILITY[resume.resumeFLAbility]}</label>
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeFLType!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">外语类型：</label>
-								<label class="control-label">
-									${FL_TYPE[resume.resumeFLType] } 
-								</label>
-							</div>
-						</c:if>
-						
-						
-						<c:if test="${resume.resumeHeight!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">身高：</label> <label
-									class="control-label">${resume.resumeHeight }</label>厘米
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeWeight!=null }">
-							<div class="col-md-6 column">
-								<label class="control-label">体重：</label> <label
-									class="control-label">${resume.resumeWeight }</label>公斤
-							</div>
-						</c:if>
-						<c:if test="${resume.resumeSelfEvaluation!=null }">
-							<div class="col-md-12 column">
-								<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label>
-							</div>
-						</c:if>
+						<div class="col-md-6 column">
+							<label class="control-label">籍贯：</label>
+							<label class="control-label">${resume.resumePlace }</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">婚姻状况：${MARRY[resume.resumeMarriage]}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">目前职位：</label>
+							<label class="control-label">${resume.resumeJor}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">期待月薪：</label> <label
+								class="control-label">${resume.resumeWages}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">QQ或微信：</label>
+							<label class="control-label">${resume.resumeQQ}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">民族：</label>
+							<label class="control-label">${resume.resumeNation}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">毕业院校：${resume.resumeGraduationSchool}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">毕业时间：</label>
+							<label class="control-label">
+								<fmt:formatDate value="${resume.resumeGraduationTime}" pattern="yyyy/MM/dd" />
+							</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">学历：</label>
+							<label class="control-label">${resume.resumeEducation } </label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">专业：</label>
+							<label class="control-label">${resume.resumeMajor } </label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">外语水平：</label>
+							<label class="control-label">${FL_ABILITY[resume.resumeFLAbility]}</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">外语类型：</label>
+							<label class="control-label">
+								${FL_TYPE[resume.resumeFLType] } 
+							</label>
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">身高：</label>
+							<label class="control-label">${resume.resumeHeight }</label>厘米
+						</div>
+						<div class="col-md-6 column">
+							<label class="control-label">体重：</label>
+							<label class="control-label">${resume.resumeWeight }</label>公斤
+						</div>
+						<div class="col-md-12 column">
+							<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label>
+						</div>
 					</div>
 				</div>
 			</div>

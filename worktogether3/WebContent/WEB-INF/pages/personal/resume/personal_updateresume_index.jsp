@@ -4,8 +4,29 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 简历基本信息开始 -->
 <div class="panel panel-default">
-	<form class="form-horizontal" id="resumeForms"
-		style="margin-top: 35px;">
+	<form class="form-horizontal" id="resumeForms" style="margin-top: 35px;">
+		<div class="row">
+			<div class="col-sm-12 column">
+				<div class="form-group">
+					<label class="control-label col-sm-2">岗位类别:</label>
+					<div class="col-sm-3">
+					<select class="form-control" onchange="findJob2(this.value)">
+						<option>请首先选择岗位类别</option>
+					<!-- 牟勇：动态添加一级岗位名称 -->
+						<c:forEach items="${myJobs1 }" var="job1">
+							<option value="${job1.id }">${job1.jobName }</option>
+						</c:forEach>
+					</select>
+					</div>
+					<label class="control-label col-sm-2">应聘职位:</label>
+				<div class="col-sm-3">
+				<select class="form-control" id="job2" name="resumeTitle">
+					<option value="resume_update.resumeTitle">${resume_update.resumeTitle}</option>
+				</select>
+				</div>
+				</div>
+			</div>
+		</div>
 		<!-- 牟勇：莫名其妙的头像显示 -->
 		<!-- <div class="col-md-2 column">
 			<img src="img/head.gif" class="center-block" width="100" height="120" />
@@ -16,32 +37,25 @@
 				<div class="form-group">
 					<label for="resumeName" class="col-md-4 control-label">姓名：</label>
 					<div class="col-md-8">
-						<input class="form-control" name="resumeName" id="resumeName"
-							value="${resume_update.resumeName}" />
+						<input class="form-control" name="resumeName" id="resumeName" value="${resume_update.resumeName}" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="resumeBirthday" class="col-md-4 control-label">出生日期：</label>
 					<div class="col-md-8">
-						<input
-							value="<fmt:formatDate
-						value="${resume_update.resumeBirthday }" pattern="yyyy-MM-dd" />"
-							class="form-control form_datetime" placeholder="请选择日期"
-							name="resumeBirthday" id="resumeBirthday" readonly />
+						<input value="<fmt:formatDate value="${resume_update.resumeBirthday }" pattern="yyyy-MM-dd" />" class="form-control form_datetime" placeholder="请选择日期" name="resumeBirthday" id="resumeBirthday" readonly />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="resumePhone" class="col-md-4 control-label">手机：</label>
 					<div class="col-md-8">
-						<input value="${resume_update.resumePhone }" class="form-control"
-							name="resumePhone" id="resumePhone" />
+						<input value="${resume_update.resumePhone }" class="form-control" name="resumePhone" id="resumePhone" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="resumeEmail" class="col-md-4 control-label">邮箱：</label>
 					<div class="col-md-8">
-						<input value="${resume_update.resumeEmail }" class="form-control"
-							name="resumeEmail" id="resumeEmail" />
+						<input value="${resume_update.resumeEmail }" class="form-control" name="resumeEmail" id="resumeEmail" />
 					</div>
 				</div>
 			</div>
@@ -52,15 +66,11 @@
 					<label for="resumeGender" class="col-md-4 control-label">性别：</label>
 					<div class="col-md-8">
 						<div class="col-md-6 radio">
-							<input type="radio" name="resumeGender" id="resumeGender"
-								value="1"
-								${resume_update.resumeGender==1?"checked=\"checked\"":"" }>
+							<input type="radio" name="resumeGender" id="resumeGender" value="1" ${resume_update.resumeGender==1?"checked=\"checked\"":"" }>
 							<label>男</label>
 						</div>
 						<div class="col-md-6 radio">
-							<input type="radio" name="resumeGender" id="resumeGender"
-								value="0"
-								${resume_update.resumeGender==0?"checked=\"checked\"":"" }>
+							<input type="radio" name="resumeGender" id="resumeGender" value="0" ${resume_update.resumeGender==0?"checked=\"checked\"":"" }>
 							<label>女</label>
 						</div>
 					</div>
@@ -68,26 +78,19 @@
 				<div class="form-group">
 					<label for="resumeWorks" class="col-md-4 control-label">开始工作时间：</label>
 					<div class="col-md-8">
-						<input
-							value="<fmt:formatDate
-						value="${resume_update.resumeWorks }" pattern="yyyy-MM" />"
-							placeholder="请选择日期" class="form-control" name="resumeWorks"
-							id="resumeWorks" readonly />
+						<input value="<fmt:formatDate value="${resume_update.resumeWorks }" pattern="yyyy-MM" />" placeholder="请选择日期" class="form-control" name="resumeWorks" id="resumeWorks" readonly />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="resumeNowResidence" class="col-md-4 control-label">居住地：</label>
 					<div class="col-md-8">
-						<input value="${resume_update.resumeNowResidence }"
-							class="form-control" name="resumeNowResidence"
-							id="resumeNowResidence" />
+						<input value="${resume_update.resumeNowResidence }" class="form-control" name="resumeNowResidence" id="resumeNowResidence" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="resumeJor" class="col-md-4 control-label">目前岗位：</label>
 					<div class="col-md-8">
-						<input value="${resume_update.resumeJor }" class="form-control"
-							name="resumeJor" id="resumeJor" />
+						<input value="${resume_update.resumeJor }" class="form-control" name="resumeJor" id="resumeJor" />
 					</div>
 				</div>
 
@@ -96,9 +99,9 @@
 		</div>
 		<div class="panel-group">
 			<div class="panel-heading">
-				<a class="panel-title col-md-offset-10" data-toggle="collapse"
-					data-parent="#panel" href="#panel-element-more">更多展开 <span
-					class="glyphicon glyphicon-chevron-down"></span></a>
+				<a class="panel-title col-md-offset-10" data-toggle="collapse" data-parent="#panel" href="#panel-element-more">
+					更多展开 <span class="glyphicon glyphicon-chevron-down"></span>
+				</a>
 			</div>
 			<div id="panel-element-more" class="panel-collapse collapse">
 				<div class="panel-body">
@@ -106,16 +109,13 @@
 						<div class="form-group">
 							<label for="resumeQQ" class="col-md-4 control-label">QQ/微信：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumeQQ }" class="form-control"
-									name="resumeQQ" id="resumeQQ" />
+								<input value="${resume_update.resumeQQ }" class="form-control" name="resumeQQ" id="resumeQQ" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="resumeNation" class="col-md-4 control-label">民族：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumeNation }"
-									class="form-control" name="resumeNation" id="resumeNation"
-									data-provide="typeahead" autocomplete="off" />
+								<input value="${resume_update.resumeNation }" class="form-control" name="resumeNation" id="resumeNation" data-provide="typeahead" autocomplete="off" />
 							</div>
 						</div>
 						<script type="text/javascript">
@@ -125,9 +125,7 @@
 						<div class="form-group">
 							<label for="resumePlace" class="col-md-4 control-label">籍贯：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumePlace }"
-									class="form-control" name="resumePlace" id="resumePlace"
-									data-provide="typeahead" autocomplete="off" />
+								<input value="${resume_update.resumePlace }" class="form-control" name="resumePlace" id="resumePlace" data-provide="typeahead" autocomplete="off" />
 							</div>
 						</div>
 						<script type="text/javascript">
@@ -137,16 +135,13 @@
 						<div class="form-group">
 							<label for="resumeHouseAddress" class="col-md-4 control-label">住址：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumeHouseAddress }"
-									class="form-control" name="resumeHouseAddress"
-									id="resumeHouseAddress" />
+								<input value="${resume_update.resumeHouseAddress }" class="form-control" name="resumeHouseAddress" id="resumeHouseAddress" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="resumeFLType" class="col-md-4 control-label">外语类型：</label>
 							<div class="col-md-8">
-								<select name="resumeFLType" id="resumeFLType"
-									class="form-control">
+								<select name="resumeFLType" id="resumeFLType" class="form-control">
 									<option value="0" selected="selected">--未选择--</option>
 									<option value="1">英语</option>
 									<option value="2">日语</option>
@@ -159,19 +154,15 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="resumeGraduationSchool"
-								class="col-md-4 control-label">毕业学校：</label>
+							<label for="resumeGraduationSchool" class="col-md-4 control-label">毕业学校：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumeGraduationSchool }"
-									class="form-control" name="resumeGraduationSchool"
-									id="resumeGraduationSchool" />
+								<input value="${resume_update.resumeGraduationSchool }" class="form-control" name="resumeGraduationSchool" id="resumeGraduationSchool" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="resumeHeight" class="col-md-4 control-label">身高</label>
 							<div class="col-md-7 input-group">
-								<input value="${resume_update.resumeHeight }"
-									class="form-control" name="resumeHeight" id="resumeHeight" />
+								<input value="${resume_update.resumeHeight }" class="form-control" name="resumeHeight" id="resumeHeight" />
 								<span class="input-group-addon">（厘米）</span>
 							</div>
 						</div>
@@ -180,8 +171,7 @@
 						<div class="form-group">
 							<label for="resumeEducation" class="col-md-4 control-label">最高学历：</label>
 							<div class="col-md-8">
-								<select class="form-control" id="resumeEducation"
-									name="resumeEducation">
+								<select class="form-control" id="resumeEducation" name="resumeEducation">
 									<option value="博士后">博士后</option>
 									<option value="博士">博士</option>
 									<option value="硕士">硕士</option>
@@ -193,34 +183,27 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="resumeWages" class="col-md-4 control-label">期望薪资：</label>
+							<label for="resumeWages" class="col-md-4 control-label">期望月薪：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumeWages }"
-									class="form-control" name="resumeWages" id="resumeWages" />
+								<input value="${resume_update.resumeWages }" class="form-control" name="resumeWages" id="resumeWages" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="resumeMajor" class="col-md-4 control-label">专业：</label>
 							<div class="col-md-8">
-								<input value="${resume_update.resumeMajor }"
-									class="form-control" name="resumeMajor" id="resumeMajor" />
+								<input value="${resume_update.resumeMajor }" class="form-control" name="resumeMajor" id="resumeMajor" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="resumeGraduationTime" class="col-md-4 control-label">毕业时间：</label>
 							<div class="col-md-8">
-								<input
-									value="<fmt:formatDate
-						value="${resume_update.resumeGraduationTime}" pattern="yyyy-MM-dd" />"
-									class="form-control form_datetime" placeholder="请选择日期"
-									name="resumeGraduationTime" id="resumeGraduationTime" readonly />
+								<input value="<fmt:formatDate value="${resume_update.resumeGraduationTime}" pattern="yyyy-MM-dd" />" class="form-control form_datetime" placeholder="请选择日期" name="resumeGraduationTime" id="resumeGraduationTime" readonly />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="resumeFLAbility" class="col-md-4 control-label">外语水平：</label>
 							<div class="col-md-8">
-								<select name="resumeFLAbility" id="resumeFLAbility"
-									class="form-control">
+								<select name="resumeFLAbility" id="resumeFLAbility" class="form-control">
 									<option value="0" selected="selected">--未选择--</option>
 									<option value="1">入门</option>
 									<option value="2">一般</option>
@@ -233,15 +216,11 @@
 							<label for="resumeMarriage" class="col-md-4 control-label">婚姻状况：</label>
 							<div class="col-md-8">
 								<div class="col-md-6 radio">
-									<input type="radio" name="resumeMarriage" id="resumeMarriage"
-										value="0"
-										${resume_update.resumeMarriage==0?"checked=\"checked\"":"" }>
+									<input type="radio" name="resumeMarriage" id="resumeMarriage" value="0" ${resume_update.resumeMarriage==0?"checked=\"checked\"":"" } >
 									<label>未婚</label>
 								</div>
 								<div class="col-md-6 radio">
-									<input type="radio" name="resumeMarriage" id="resumeMarriage"
-										value="1"
-										${resume_update.resumeMarriage==1?"checked=\"checked\"":"" }>
+									<input type="radio" name="resumeMarriage" id="resumeMarriage" value="1" ${resume_update.resumeMarriage==1?"checked=\"checked\"":"" } >
 									<label>已婚</label>
 								</div>
 							</div>
@@ -256,14 +235,21 @@
 						</div>
 					</div>
 				</div>
-				<!-- 自我评价 -->
+				<!-- 个人评价 -->
 				<div class="col-md-12 column">
 					<div class="form-group">
-						<label for="resumeSelfEvaluation" class="col-md-2 control-label">自我评价</label>
+						<label for="resumeSelfEvaluation" class="col-md-2 control-label">个人评价</label>
 						<div class="col-md-10">
 							<textarea style="resize: none;" class="form-control"
 								name="resumeSelfEvaluation" id="resumeSelfEvaluation">${resume_update.resumeSelfEvaluation }</textarea>
 						</div>
+						<script type="text/javascript">
+						    $(document).ready(function(){  
+						    		CKEDITOR.replace('resumeSelfEvaluation',{
+						    		    filebrowserImageUploadUrl: '../../ckeditor/upload?Type=Images'
+						    		}); 
+						    });
+					    </script>
 					</div>
 				</div>
 			</div>
@@ -276,42 +262,7 @@
 			</div>
 		</div>
 	</form>
-
 	<div class="panel-footer"></div>
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<span class="glyphicon glyphicon-list-alt"></span> 工作经验 <label
-				class="panel-title col-md-offset-9"><span
-				class="glyphicon glyphicon-plus"></span> 新增工作</label>
-		</h3>
-	</div>
-	<div class="panel-body col-md-offset-3">
-		<span class="glyphicon glyphicon-list-alt"></span>
-		完善工作经验，展现工作内容及能力，让HR更了解你！
-	</div>
-	<div class="panel-footer"></div>
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<span class="glyphicon glyphicon-signal"></span> 项目经验 <label
-				class="panel-title col-md-offset-9"><span
-				class="glyphicon glyphicon-plus"></span> 新增项目</label>
-		</h3>
-	</div>
-	<div class="panel-body col-md-offset-3">
-		<span class="glyphicon glyphicon-signal"></span>
-		完善项目经验，展现社会工作能力，让HR更了解你！
-	</div>
-	<div class="panel-footer"></div>
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<span class="glyphicon glyphicon-book"></span> 教育经历 <label
-				class="panel-title col-md-offset-9"><span
-				class="glyphicon glyphicon-plus"></span>新增教育</label>
-		</h3>
-	</div>
-	<div class="panel-body col-md-offset-3">
-		<span class="glyphicon glyphicon-book"></span> 完善教育经历，展现专业能力，让HR更了解你！
-	</div>
 </div>
 <!-- 简历基本信息结束 -->
 <script type="text/javascript">

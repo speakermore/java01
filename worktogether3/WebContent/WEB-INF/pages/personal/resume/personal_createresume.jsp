@@ -6,7 +6,6 @@
 <title>个人用户-首页</title>
 <%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
 <%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
-
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
@@ -22,8 +21,7 @@
 						简历写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
 							class="alert-link">返回首页</a>
 					</div>
-					<%@include
-						file="/WEB-INF/pages/personal/resume/personal_createresume_index.jsp"%>
+					<%@include file="/WEB-INF/pages/personal/resume/personal_createresume_index.jsp"%>
 				</div>
 				<%-- <div class="col-md-4 column ">
 					<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
@@ -32,6 +30,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 		$("#resumeHeadImg").fileinput({
 			'language' : 'zh',

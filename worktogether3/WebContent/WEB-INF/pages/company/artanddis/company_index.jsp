@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<!-- Bootstrap -->
-	<link rel="stylesheet" type="text/css" href="company/css/magnifier.css">
+	<link rel="stylesheet" type="text/css" href="company/css/Magnifier.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet" />
 	<link href="css/lrtk.css" rel="stylesheet" type="text/css" />
@@ -58,6 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			padding-top:7px;
 		}
     </style>
+    
   </head>
   
   <body>

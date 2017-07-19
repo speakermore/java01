@@ -3,7 +3,6 @@ package ynjh.company.dao.companyinformation;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.junit.runners.Parameterized.Parameters;
 
 import ynjh.personal.entity.Article;
 

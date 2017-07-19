@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import ynjh.common.crowdfund.entity.Job;
+import ynjh.common.crowdfund.service.JobService;
 import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.GetAge;
 import ynjh.common.util.MD5Util;
@@ -45,7 +47,8 @@ public class UserController {
 	private UserService uService;
 	@Resource
 	private FollowService fService;
-
+	@Resource
+	private JobService jobService;
 	/**
 	 * 登录（检测验证码、加密密码） 跳转主页
 	 * 
@@ -534,7 +537,11 @@ public class UserController {
 	 */
 	@RequestMapping("/ajax")
 	@ResponseBody
-	public ModelAndView ajax(String page) {
+	public ModelAndView ajax(String page,HttpSession session) {
+		if(session.getAttribute("myJobs1")==null){
+			List<Job> myJobs=jobService.findJob1();
+			session.setAttribute("myJobs1", myJobs);
+		}
 		return new ModelAndView(page);
 	}
 	

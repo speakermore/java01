@@ -7,6 +7,7 @@ public class CompanyDetailImg implements Serializable{
 	private Integer id;
 	private Integer companyId;
 	private String companyDetailImg;
+	private String companydetailDisc;
 	
 	public CompanyDetailImg(){}
 
@@ -23,6 +24,14 @@ public class CompanyDetailImg implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getCompanydetailDisc() {
+		return companydetailDisc;
+	}
+
+	public void setCompanydetailDisc(String companydetailDisc) {
+		this.companydetailDisc = companydetailDisc;
 	}
 
 	public Integer getCompanyId() {

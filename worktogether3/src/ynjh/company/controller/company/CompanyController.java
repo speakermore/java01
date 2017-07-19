@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.util.CommonStatus;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
@@ -172,13 +175,18 @@ public class CompanyController {
 	}
 	
 	/**
+	 * 牟勇：activePanel：用来标识编辑企业页面上三个面板，哪个被激活
+	 * 0：基本资料，1：环境图片，2：详细资料
 	 * @author 李胤
-	 * @return
+	 * @return 跳转到update_company.jsp页面
 	 */
-	@RequestMapping(value="/updateCompany",method=RequestMethod.GET)
-	public String updatecompany(){
-		
-		return "company/company/update_company";
+	@RequestMapping(value="/updateCompany/{activePanel}",method=RequestMethod.GET)
+	public ModelAndView updatecompany(@PathVariable Integer activePanel){
+		ModelAndView mv=new ModelAndView("company/company/update_company");
+		//牟勇：activePanel：用来标识编辑企业页面上三个面板，哪个被激活
+		//0：基本资料，1：环境图片，2：详细资料
+		mv.addObject("activePanel",activePanel);
+		return mv;
 	}
 	/**
 	 * 修改公司联系电话

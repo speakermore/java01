@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="ynjh.common.util.CommonStatus" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -28,15 +28,15 @@
 			<div class="col-sm-9">
 				<h3>基本资料修改</h3>
 				<hr />
+				<!-- 基本资料修改 -->
 				<div class="panel-group" id="hby-modify-base">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<a class="panel-title collapsed" data-toggle="collapse"
 								data-parent="#hby-modify-base" href="#base-information">基本资料</a>
 						</div>
-						<div id="base-information" class="panel-collapse collapse in">
+						<div id="base-information" class="panel-collapse ${activePanel==CommonStatus.EDIT_COMPANY_BASE_INFO?"collapse in":"collapse" }">
 							<div class="panel-body">
-								<!--  -->
 								<form class="form-horizontal" role="form" action="company/company/update" method="post" enctype="multipart/form-data" id="updateCompany">
 									<input type="hidden"  value="${user.id }" name="id" /> 
 									<input type="hidden" value="${user.companyLoginId }" name="companyLoginId" />
@@ -111,71 +111,24 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel-group" id="hby-modify-environment">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#hby-modify-environment" href="#modify-environment">公司环境</a>
-						</div>
-						<div id="modify-environment" class="panel-collapse collapse">
-							<div class="panel-body">
-								<!--  -->
-								<form action="company/company/updateCompanyImg" method="post" enctype="multipart/form-data">
-									<div class="form-group">
-										<label class="control-label col-sm-3">公司环境：</label>
-										<div class="col-sm-9">
-											<span class="label label-default">员工</span>
-											<input id="companyImg1" name="companyImgs" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs1" name="imgsId" value="${detailImgs[0].id}" />
-											<span class="label label-default">前台</span>
-											<input id="companyImg2" name="companyImgs" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs2" name="imgsId" value="${detailImgs[1].id}" />
-											<span class="label label-default">办公区</span>
-											<input id="companyImg3" name="companyImgs" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs3" name="imgsId" value="${detailImgs[2].id}" />
-											<span class="label label-default">会议室</span>
-											<input id="companyImg4" name="companyImgs" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs4" name="imgsId" value="${detailImgs[3].id}" /> 
-											<span class="label label-default">休息区</span>
-											<input id="companyImg5" name="companyImgs" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs5" name="imgsId" value="${detailImgs[4].id}" /> 
-											<span class="label label-default">其他</span>
-											<input id="companyImg6" name="companyImgs" multiple type="file" class="form-control file" />
-											<input type="hidden" id="imgs6" name="imgsId" value="${detailImgs[5].id}" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-sm-3">
-											<button type="submit" class="form-control btn btn-success">保存</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-
+				<!-- 基本资料修改结束 -->
+				<!-- 联系人电话 -->
 				<div class="panel-group" id="hby-modify-contact">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-
-
-							<a class="panel-title collapsed" data-toggle="collapse"
-								data-parent="#hby-modify-contact" href="#companyConnection">公司联系电话</a>
-
-
+							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#hby-modify-contact" href="#companyConnection">公司联系电话</a>
 						</div>
-						<div id="companyConnection" class="panel-collapse collapse">
+						<div id="companyConnection" class="panel-collapse ${activePanel==CommonStatus.EDIT_COMPANY_BASE_INFO?"collapse in":"collapse" }">
 							<div class="panel-body">
 								<!--  -->
 								<div class="col-sm-offset-10">
 									<div class="col-sm-5">
-										<a id="addTel" title="新增岗位" href="javascript:void(0)"> <span
+										<a id="addTel" title="新增电话" href="javascript:void(0)"> <span
 											class="glyphicon glyphicon-plus"></span>
 										</a>
 									</div>
 									<div class="col-sm-5">
-										<a id="deleteTel" title="删除最后一个岗位" style="display: none;">
+										<a id="deleteTel" title="删除最后一个电话" style="display: none;">
 											<span class="glyphicon glyphicon-minus "></span>
 										</a>
 									</div>
@@ -214,27 +167,20 @@
 										<div class="companyTel">
 											<div class="form-group">
 												<div class="col-sm-5">
-												
 													<span class="label label-default">昵称</span> 
 													<input type="hidden" class="ids" value="${connection.id }" name="ids">
-													<input
-														type="text" class="form-control connectionName" 
-														name="cmpConnectionNames"
-														value="${connection.cmpConnectionName }">
+													<input type="text" class="form-control connectionName" name="cmpConnectionNames" value="${connection.cmpConnectionName }">
 												</div>
 												<div class="col-sm-7">
-													<span class="label label-default">电话</span> <input
-														type="text" class="form-control companyTels"
-														name="companyTels" value="${connection.cmpConnection }">
-													<a  title="删除电话" href="javascript:void(0)" onclick="deletePhonefunction($(this).parent().parent().parent())"
-														style="color: red;" id="deleteConnection"> <span
-														class="glyphicon glyphicon-minus"></span>
+													<span class="label label-default">电话</span> 
+													<input type="text" class="form-control companyTels" name="companyTels" value="${connection.cmpConnection }">
+													<a  title="删除电话" href="javascript:void(0)" onclick="deletePhonefunction($(this).parent().parent().parent())" style="color: red;" id="deleteConnection">
+													 <span class="glyphicon glyphicon-minus"></span>
 													</a>
 												</div>
 											</div>
 										</div>
 									</c:forEach>
-
 									<!-- 点击加号添加内容完 -->
 									<div id="addInput">
 										<div class="newTel"></div>
@@ -244,15 +190,56 @@
 											<button type="submit" class="form-control btn btn-success">保存</button>
 										</div>
 									</div>
-
-
 								</form>
 							</div>
-							<!--  -->
-
 						</div>
 					</div>
 				</div>
+				<!-- 联系人电话结束 -->
+				<!-- 企业环境图片 -->
+				<div class="panel-group" id="hby-modify-environment">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#hby-modify-environment" href="#modify-environment">公司环境</a>
+						</div>
+						<div id="modify-environment" class="panel-collapse ${activePanel==CommonStatus.EDIT_COMPANY_ENVRIMENT_PIC?"collapse in":"collapse" }">
+							<div class="panel-body">
+								<!--  -->
+								<form action="company/company/updateCompanyImg" method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="control-label col-sm-3">公司环境：</label>
+										<div class="col-sm-9">
+											<span class="label label-default">员工</span>
+											<input id="companyImg1" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs1" name="imgsId" value="${detailImgs[0].id}" />
+											<span class="label label-default">前台</span>
+											<input id="companyImg2" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs2" name="imgsId" value="${detailImgs[1].id}" />
+											<span class="label label-default">办公区</span>
+											<input id="companyImg3" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs3" name="imgsId" value="${detailImgs[2].id}" />
+											<span class="label label-default">会议室</span>
+											<input id="companyImg4" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs4" name="imgsId" value="${detailImgs[3].id}" /> 
+											<span class="label label-default">休息区</span>
+											<input id="companyImg5" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs5" name="imgsId" value="${detailImgs[4].id}" /> 
+											<span class="label label-default">其他</span>
+											<input id="companyImg6" name="companyImgs" multiple type="file" class="form-control file" />
+											<input type="hidden" id="imgs6" name="imgsId" value="${detailImgs[5].id}" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-3">
+											<button type="submit" class="form-control btn btn-success">保存</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 企业环境图片 -->
 			</div>
 		</div>
 		

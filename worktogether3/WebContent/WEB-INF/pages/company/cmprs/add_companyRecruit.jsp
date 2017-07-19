@@ -9,6 +9,7 @@
 <%@include file="/WEB-INF/pages/company/footer.jsp"%>
 <title>企业用户-发布招聘信息</title>
 <script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
@@ -35,25 +36,12 @@
 						<select class="form-control" id="job2" name="cmpRecTitle">
 							<option>请首先选择岗位类别</option>
 						</select>
-						<script>
-							/* 牟勇：完成当用户选择一级岗位类别之后，ajax查询二级岗位类别 */
-							var findJob2=function(parentId){
-								$.ajax({
-									url:"findJobs2/"+parentId,
-									type:"POST",
-									dataType:"text",
-									success:function(data){
-										$("#job2").html(data);
-									}
-								});
-							}
-						</script>
 						</div>
 					</div>
 					<!-- 岗位选择结束 -->
 					<!-- 招聘薪资和学历要求 -->
 					<div class="form-group">
-						<label class="control-label col-sm-2">招聘薪资:</label>
+						<label class="control-label col-sm-2">月薪:</label>
 						<div class="col-sm-4">
 							<input class="form-control" name="cmpRecWage" />
 						</div>

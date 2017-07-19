@@ -2,112 +2,109 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--左侧状态栏位-->
-<article
-	class="col-md-12  work-together-shadow work-together-shallow">
+<article class="col-sm-12  work-together-shadow work-together-shallow">
 	<!--发表状态小节-->
 	<section class="panel">
 		<!-- 简历基本信息开始 -->
 		<div class="panel panel-default">
-			<form role="form" class="form-horizontal" action="personal/resume/createResume"
-				method="post" id="resumeForm"
-				style="margin-top: 35px;">
+			<form role="form" class="form-horizontal" action="personal/resume/createResume" method="post" id="resumeForm" style="margin-top: 35px;">
 					<div class="row">
-					<div class="col-md-12 column">
+					<div class="col-sm-12 column">
 						<div class="form-group">
-							<label class="control-label col-md-2" for="resumeTitle">岗位类别</label>
-							<div class="col-md-8">
-							<select class="form-control" name="resumeTitle">
+							<label class="control-label col-sm-2">岗位类别:</label>
+							<div class="col-sm-3">
+							<select class="form-control" onchange="findJob2(this.value)">
+							<option>请首先选择岗位类别</option>
 							<!-- 牟勇：动态添加一级岗位名称 -->
 								<c:forEach items="${myJobs1 }" var="job1">
-									<option value="${job1.jobName }">${job1.jobName }</option>
+									<option value="${job1.id }">${job1.jobName }</option>
 								</c:forEach>
 							</select>
 							</div>
+							<label class="control-label col-sm-2">应聘职位:</label>
+						<div class="col-sm-3">
+						<select class="form-control" id="job2" name="resumeTitle">
+							<option>请首先选择岗位类别</option>
+						</select>
+						</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 				<!-- 牟勇：一个不知所云的头像 -->
-				<!-- <div class="col-md-1 column">
+				<!-- <div class="col-sm-1 column">
 					<img src="img/head.gif" class="center-block" width="100"
 						height="120" />
 				</div> -->
 				<!-- 简历基本信息左侧 -->
-				<div class="col-md-5 column">
+				<div class="col-sm-5 column">
 					<div class="form-group">
-						<label for="resumeName" class="col-md-4 control-label">姓名：</label>
-						<div class="col-md-8">
-							<input class="form-control" name="resumeName" id="resumeName"
-								type="text" />
+						<label for="resumeName" class="col-sm-4 control-label">姓名：</label>
+						<div class="col-sm-8">
+							<input class="form-control" name="resumeName" id="resumeName" type="text" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeBirthday" class="col-md-4 control-label">出生日期：</label>
-						<div class="col-md-8">
-							<input class="form-control form_datetime" id="resumeBirthday"
-								name="resumeBirthday" readonly="readonly" placeholder="请选择日期" />
+						<label for="resumeBirthday" class="col-sm-4 control-label">出生日期：</label>
+						<div class="col-sm-8">
+							<input class="form-control form_datetime" id="resumeBirthday" name="resumeBirthday" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumePhone" class="col-md-4 control-label">手机：</label>
-						<div class="col-md-8">
-							<input class="form-control" id="resumePhone" type="text"
-								name="resumePhone" />
+						<label for="resumePhone" class="col-sm-4 control-label">手机：</label>
+						<div class="col-sm-8">
+							<input class="form-control" id="resumePhone" type="text" name="resumePhone" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeEmail" class="col-md-4 control-label">邮箱：</label>
-						<div class="col-md-8">
-							<input class="form-control" id="resumeEmail" type="text"
-								name="resumeEmail" />
+						<label for="resumeEmail" class="col-sm-4 control-label">邮箱：</label>
+						<div class="col-sm-8">
+							<input class="form-control" id="resumeEmail" type="text" name="resumeEmail" />
 						</div>
 					</div>
 				</div>
 				<!-- 简历基本信息左侧结束 -->
 				<!-- 简历基本信息右侧 -->
-				<div class="col-md-5 column">
+				<div class="col-sm-5 column">
 					<div class="form-group">
-						<label for="resumeGender" class="col-md-4 control-label">性别：</label>
-						<div class="col-md-8">
-							<div class="col-md-6">
-								<input type="radio" name="resumeGender" id="resumeGender"
-									value="1" checked="checked"> <label>男</label>
+						<label for="resumeGender" class="col-sm-4 control-label">性别：</label>
+						<div class="col-sm-8">
+							<label class="col-sm-2 control-label">男</label>
+							<div class="col-sm-4">
+								<input type="radio" class="form-control" name="resumeGender" id="resumeGender" value="1" checked="checked">
 							</div>
-							<div class="col-md-6">
-								<input type="radio" name="resumeGender" id="resumeGender"
-									value="0"> <label>女</label>
+							<label  class="col-sm-2 control-label">女</label>
+							<div class="col-sm-4">
+								<input type="radio" class="form-control" name="resumeGender" id="resumeGender" value="0"> 
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeWorks" class="col-md-4 control-label">开始工作时间：</label>
-						<div class="col-md-8">
-							<input class="form-control form_datetime" id="resumeWorks"
-								name="resumeWorks" readonly="readonly" placeholder="请选择日期" />
+						<label for="resumeWorks" class="col-sm-4 control-label">开始工作时间：</label>
+						<div class="col-sm-8">
+							<input class="form-control form_datetime" id="resumeWorks" name="resumeWorks" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeNowResidence" class="col-md-4 control-label">居住地：</label>
-						<div class="col-md-8">
-							<input class="form-control" id="resumeNowResidence"
-								name="resumeNowResidence" type="text" />
+						<label for="resumeNowResidence" class="col-sm-4 control-label">居住地：</label>
+						<div class="col-sm-8">
+							<input class="form-control" id="resumeNowResidence" name="resumeNowResidence" type="text" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeJor" class="col-md-4 control-label">目前职位：</label>
-						<div class="col-md-8">
-							<input class="form-control" id="resumeJor" name="resumeJor"
-								type="text" />
+						<label for="resumeJor" class="col-sm-4 control-label">目前职位：</label>
+						<div class="col-sm-8">
+							<input class="form-control" id="resumeJor" name="resumeJor" type="text" />
 						</div>
 					</div>
 				</div>
 				<!-- 简历基本信息右侧结束 -->
 				</div><!-- .row end -->
 				<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 				<div class="panel-group">
 					<div class="panel-heading">
-						<a class="panel-title col-md-offset-10" data-toggle="collapse"
+						<a class="panel-title col-sm-offset-10" data-toggle="collapse"
 							data-parent="#panel" href="#panel-element-more">更多展开 <span
 							class="glyphicon glyphicon-chevron-down"></span></a>
 					</div>
@@ -115,20 +112,18 @@
 						<div class="panel-body">
 							<div class="row">
 							<!-- 展开更多左侧 -->
-							<div class="col-md-5 column">
+							<div class="col-sm-5 column">
 								<div class="form-group">
-									<label for="resumeQQ" class="col-md-4 control-label">QQ/微信：</label>
-									<div class="col-md-8">
-										<input class="form-control" name="resumeQQ" id="resumeQQ"
-											type="text" />
+									<label for="resumeQQ" class="col-sm-4 control-label">QQ/微信：</label>
+									<div class="col-sm-8">
+										<input class="form-control" name="resumeQQ" id="resumeQQ" type="text" />
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label for="resumeNation" class="col-md-4 control-label">民族：</label>
-									<div class="col-md-8">
-										<input class="form-control" data-provide="typeahead" data-items="4" autocomplete="off" name="resumeNation"
-											id="resumeNation" type="text" />
+									<label for="resumeNation" class="col-sm-4 control-label">民族：</label>
+									<div class="col-sm-8">
+										<input class="form-control" data-provide="typeahead" data-items="4" autocomplete="off" name="resumeNation" id="resumeNation" type="text" />
 									</div>
 								</div>
 								<script type="text/javascript">
@@ -136,10 +131,9 @@
 								myAutoComplete('findAllNationName','#resumeNation');
 								</script>
 								<div class="form-group">
-									<label for="resumePlace" class="col-md-4 control-label">籍贯：</label>
-									<div class="col-md-8">
-										<input class="form-control" id="resumePlace" data-provide="typeahead" autocomplete="off"
-											name="resumePlace" type="text" />
+									<label for="resumePlace" class="col-sm-4 control-label">籍贯：</label>
+									<div class="col-sm-8">
+										<input class="form-control" id="resumePlace" data-provide="typeahead" autocomplete="off" name="resumePlace" type="text" />
 									</div>
 								</div>
 								<script type="text/javascript">
@@ -147,18 +141,17 @@
 								myAutoComplete('findAllProvinceName','#resumePlace');
 								</script>
 								<div class="form-group">
-									<label for="resumeHouseAddress" class="col-md-4 control-label">住址：</label>
-									<div class="col-md-8">
-										<input class="form-control" name="resumeHouseAddress"
-											id="resumeHouseAddress" type="text" />
+									<label for="resumeHouseAddress" class="col-sm-4 control-label">住址：</label>
+									<div class="col-sm-8">
+										<input class="form-control" name="resumeHouseAddress" id="resumeHouseAddress" type="text" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeFLType" class="col-md-4 control-label">外语类型：</label>
-									<div class="col-md-8">
+									<label for="resumeFLType" class="col-sm-4 control-label">外语类型：</label>
+									<div class="col-sm-8">
 										<select name="resumeFLType" id="resumeFLType"
 											class="form-control">
-											<option value="0" selected="selected">--未选择--</option>
+											<option value="0" selected="selected">--请选择--</option>
 											<option value="1">英语</option>
 											<option value="2">日语</option>
 											<option value="3">德语</option>
@@ -171,29 +164,26 @@
 									</div>
 								</div>
 								<div style="margin-bottom:13px">
-									<label for="resumeHeight" class="col-md-4 control-label">身高：</label>
-									<div class="col-md-8 input-group">
-										<input class="form-control" name="resumeHeight"
-											id="resumeHeight" />
+									<label for="resumeHeight" class="col-sm-4 control-label">身高：</label>
+									<div class="col-sm-8 input-group">
+										<input class="form-control" name="resumeHeight" id="resumeHeight" />
 										<span class="input-group-addon">（厘米）</span>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeGraduationSchool"
-										class="col-md-4 control-label">毕业学校：</label>
-									<div class="col-md-8">
-										<input class="form-control" id="resumeGraduationSchool"
-											name="resumeGraduationSchool" type="text" />
+									<label for="resumeGraduationSchool" class="col-sm-4 control-label">毕业学校：</label>
+									<div class="col-sm-8">
+										<input class="form-control" id="resumeGraduationSchool" name="resumeGraduationSchool" type="text" />
 									</div>
 								</div>
 								
 							</div>
 							<!-- 展开更多左侧结束 -->
 							<!-- 展开更多右侧 -->
-							<div class="col-md-5 column">
+							<div class="col-sm-5 column">
 								<div class="form-group">
-									<label for="resumeEducation" class="col-md-4 control-label">最高学历：</label>
-									<div class="col-md-8">
+									<label for="resumeEducation" class="col-sm-4 control-label">最高学历：</label>
+									<div class="col-sm-8">
 										<select class="form-control" id="resumeEducation" name="resumeEducation">
 											<option value="大学本科">大学本科</option>
 											<option value="博士后">博士后</option>
@@ -206,34 +196,29 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeWages" class="col-md-4 control-label">期望薪资：</label>
-									<div class="col-md-8">
-										<input class="form-control" name="resumeWages"
-											id="resumeWages" type="text" />
+									<label for="resumeWages" class="col-sm-4 control-label">期望月薪：</label>
+									<div class="col-sm-8">
+										<input class="form-control" name="resumeWages" id="resumeWages" type="text" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeMajor" class="col-md-4 control-label">专业：</label>
-									<div class="col-md-8">
-										<input class="form-control" id="resumeMajor"
-											name="resumeMajor" type="text" />
+									<label for="resumeMajor" class="col-sm-4 control-label">专业：</label>
+									<div class="col-sm-8">
+										<input class="form-control" id="resumeMajor" name="resumeMajor" type="text" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="resumeGraduationTime"
-										class="col-md-4 control-label">毕业时间：</label>
-									<div class="col-md-8">
-										<input class="form-control form_datetime" value="2016-1"
-											id="resumeGraduationTime" name="resumeGraduationTime"
-											readonly="readonly" placeholder="请选择日期" />
+										class="col-sm-4 control-label">毕业时间：</label>
+									<div class="col-sm-8">
+										<input class="form-control form_datetime" value="2016-1" id="resumeGraduationTime" name="resumeGraduationTime" readonly="readonly" placeholder="请选择日期" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeFLAbility" class="col-md-4 control-label">外语水平：</label>
-									<div class="col-md-8">
-										<select name="resumeFLAbility" id="resumeFLAbility"
-											class="form-control">
-											<option value="0" selected="selected">--未选择--</option>
+									<label for="resumeFLAbility" class="col-sm-4 control-label">外语水平：</label>
+									<div class="col-sm-8">
+										<select name="resumeFLAbility" id="resumeFLAbility" class="form-control">
+											<option value="0" selected="selected">--请选择--</option>
 											<option value="1">入门</option>
 											<option value="2">一般</option>
 											<option value="3">熟练</option>
@@ -242,23 +227,20 @@
 									</div>
 								</div>
 								<div style="margin-bottom:13px">
-									<label for="resumeWeight" class="col-md-4 control-label">体重：</label>
-									<div class="col-md-8 input-group">
-										<input class="form-control" name="resumeWeight"
-											id="resumeWeight" />
+									<label for="resumeWeight" class="col-sm-4 control-label">体重：</label>
+									<div class="col-sm-8 input-group">
+										<input class="form-control" name="resumeWeight" id="resumeWeight" />
 											<span class="input-group-addon">（公斤）</span>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="resumeMarriage" class="col-md-4 control-label">婚姻状况：</label>
-									<div class="col-md-8">
-										<div class="col-md-6">
-											<input type="radio" name="resumeMarriage" id="resumeMarriage"
-												value="0"> <label>未婚</label>
+									<label for="resumeMarriage" class="col-sm-4 control-label">婚姻状况：</label>
+									<div class="col-sm-8">
+										<div class="col-sm-6">
+											<input type="radio" name="resumeMarriage" id="resumeMarriage" value="0"> <label>未婚</label>
 										</div>
-										<div class="col-md-6">
-											<input type="radio" name="resumeMarriage" id="resumeMarriage"
-												value="1" checked="checked"> <label>已婚</label>
+										<div class="col-sm-6">
+											<input type="radio" name="resumeMarriage" id="resumeMarriage" value="1" checked="checked"> <label>已婚</label>
 										</div>
 									</div>
 								</div>
@@ -266,15 +248,33 @@
 							<!-- 展开更多右侧结束 -->
 							</div><!-- row end -->
 							<div class="row">
-							<!-- 自我评价 -->
-							<div class="col-md-12">
+							<!-- 自我评价: -->
+							<div class="col-sm-12">
 								<div class="form-group">
-									<label for="resumeSelfEvaluation"
-										class="col-md-1 control-label">自我评价：</label>
-									<div class="col-md-10">
-										<textarea rows="5" style="resize: none;" class="form-control" id="resumeSelfEvaluation"
-											name="resumeSelfEvaluation"></textarea>
+									<label for="resumeSelfEvaluation" class="col-sm-2 control-label">个人评价：</label>
+									<div class="col-sm-10">
+										<textarea style="resize:none;" class="form-control" id="resumeSelfEvaluation" name="resumeSelfEvaluation">
+											<p><b>性格特征：</b></p>
+											<br />
+											<br />
+											<br />
+											<p><b>职业规划：</b></p>
+											<br />
+											<br />
+											<br />
+											<p><b>技能经验:</b></p>
+											<br />
+											<br />
+											<br />
+										</textarea>
 									</div>
+									<script type="text/javascript">
+									    $(document).ready(function(){  
+									    		CKEDITOR.replace('resumeSelfEvaluation',{
+									    		    filebrowserImageUploadUrl: '../../ckeditor/upload?Type=Images'
+									    		}); 
+									    });
+								    </script>
 								</div>
 							</div>
 							<!-- 自我评价结束 -->
@@ -285,48 +285,13 @@
 				</div>
 				</div>
 				<div class="form-group">
-					<div class="col-md-offset-5 col-md-12">
+					<div class="col-sm-offset-5 col-sm-12">
 						<input type="submit" class="btn btn-success" value="保存" />
 					</div>
 				</div>
 			</form>
 
 			<div class="panel-footer"></div>
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<span class="glyphicon glyphicon-list-alt"></span> 工作经验 <label
-						class="panel-title col-md-offset-9"><span
-						class="glyphicon glyphicon-plus"></span> 新增工作</label>
-				</h3>
-			</div>
-			<div class="panel-body col-md-offset-3">
-				<span class="glyphicon glyphicon-list-alt"></span>
-				完善工作经验，展现工作内容及能力，让HR更了解你！
-			</div>
-			<div class="panel-footer"></div>
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<span class="glyphicon glyphicon-signal"></span> 项目经验 <label
-						class="panel-title col-md-offset-9"><span
-						class="glyphicon glyphicon-plus"></span> 新增项目</label>
-				</h3>
-			</div>
-			<div class="panel-body col-md-offset-3">
-				<span class="glyphicon glyphicon-signal"></span>
-				完善项目经验，展现社会工作能力，让HR更了解你！
-			</div>
-			<div class="panel-footer"></div>
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<span class="glyphicon glyphicon-book"></span> 教育经历 <label
-						class="panel-title col-md-offset-9"><span
-						class="glyphicon glyphicon-plus"></span>新增教育</label>
-				</h3>
-			</div>
-			<div class="panel-body col-md-offset-3">
-				<span class="glyphicon glyphicon-book"></span>
-				完善教育经历，展现专业能力，让HR更了解你！
-			</div>
 		</div>
 		<!-- 简历基本信息结束 -->
 	</section>
