@@ -39,8 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	<!-- 查询简历(一人只有一份简历时使用) -->
-	<select id="findResumeByOneUserId" resultType="Resume"
-		parameterType="Integer">
+	<select id="findResumeByOneUserId" resultType="Resume" parameterType="Integer">
 		select * from resume where userId=#{userId}
 	</select>
 	<!-- 查询简历(详细) -->
@@ -102,17 +101,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 查看教育经历 -->
 	<select id="findEducation" parameterType="Integer" resultType="Education">
-		select * from education where resumeId=#{resumeId} and not
-		resumeType=4
+		select * from education where resumeId=#{resumeId} and  resumeType!=4
 	</select>
 	<!-- 查看工作经历 -->
 	<select id="findWork" parameterType="Integer" resultType="Work">
-		select
-		* from work where resumeId=#{resumeId} and not resumeType=4
+		select * from work where resumeId=#{resumeId} and resumeType!=4
 	</select>
 	<!-- 查看项目经历 -->
 	<select id="findProject" parameterType="Integer" resultType="Project">
-		select * from project where resumeId=#{resumeId} and not resumeType=4
+		select * from project where resumeId=#{resumeId} and resumeType!=4
 	</select>
 
 	<!-- 删除 -->
@@ -204,15 +201,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update resume set resumeHeadImg=#{resumeHeadImg}
 		where id=#{resumeId}
 	</update>
-	<!-- 我发过的简历 -->
-	<select id="findMySendResume" resultType="MySendResume"
-		parameterType="Integer">
-		<!-- 牟勇：companyresume：投递简历表，companyrecruit：公司招聘表 -->
-		select companyName,cmpRecTitle,cmprAction,cmprTime from companyresume cre,company
-		c,companyrecruit crt
-		where cre.companyId=c.id
-		and cre.companyrecruitId=crt.id
-		and cre.companyResumeId=#{userId}
+	<!-- 牟勇：我发过的简历，时间在6个月以内,必须通过审核 -->
+	<select id="findMySendResume" resultType="MySendResume" parameterType="Integer">
+		<!-- 牟勇：companyresume：投递简历表，companyrecruit：公司招聘表,
+		 -->
+		select companyName,cmpRecTitle,cmprAction,cmprTime from companyresume cre,company 
+		c,companyrecruit crt 
+		where cre.companyId=c.id 
+		and cre.companyrecruitId=crt.id 
+		and cre.companyResumeId=#{userId} 
+		and TIMESTAMPDIFF(MONTH,cmprTime,now())&lt;=6 
+		and cmprStatus=2 
 		order by cmprTime desc
 	</select>
 	<!-- 我收到的面试邀请 -->

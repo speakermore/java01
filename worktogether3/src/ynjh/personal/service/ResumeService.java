@@ -100,7 +100,9 @@ public interface ResumeService {
 	 */
 	public Integer sendResumeToCompany(CompanyResume companyresume);
 	/**
-	 * 我发送过的简历
+	 * 牟勇：我投递过的简历，时间在6个月以内,必须通过审核
+	 * @param userId 用户id，主键
+	 * @return 符合条件的投递简历信息
 	 */
 	public List<MySendResume> findMySendResume(Integer userId);
 	/**

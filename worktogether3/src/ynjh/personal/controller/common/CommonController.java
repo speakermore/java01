@@ -2,6 +2,8 @@ package ynjh.personal.controller.common;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ynjh.common.exception.AgeOverFlowException;
-import ynjh.common.util.GetAge;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
@@ -21,9 +21,8 @@ import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyRecruitService;
 import ynjh.company.service.CompanyService;
-import ynjh.personal.entity.Article;
+
 import ynjh.personal.entity.ArticleByFollow;
-import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -74,97 +73,55 @@ public class CommonController {
 
 	/**
 	 * 主页对象获取中转
-	 * 
-	 * @param toPage
+	 * 牟勇：获得“我感兴趣的招聘信息”，“我投递过的简历”，“我收到的面试邀请（offer）”，
+	 * 简历信息，教育经验，工作经验，项目经验，
+	 * 发表的文章，对文章的回复，关注的数量，被关注的数量，关注企业等数据供页面显示
 	 * @param userId 登录用户的主键
-	 * @return
+	 * @return 跳转到personal/user/personal_index
 	 * @author 刘志浩 
 	 */
 	@RequestMapping("/initIndex")
-	public ModelAndView initIndex(Integer toPage, Integer userId, HttpSession session) {
+	public ModelAndView initIndex(Integer userId, HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		if(toPage==null||userId==null){
-			return mv;
-		}
-		//我感兴趣的招聘信息（时间是6个月以内）
+		//牟勇：我感兴趣的招聘信息（时间是6个月以内，必须通过审核）
 		List<CompanyRecruit> companyRecruits=companyRecruitService.findMyIntrestRecruit(userId);
 		session.setAttribute("comanyRecruits", companyRecruits);
-		
-		// 我投递过的简历
+		// 牟勇：我投递过的简历（时间是6个月以内，必须通过审核）
 		List<MySendResume> mySendResumes = rService.findMySendResume(userId);
 		session.setAttribute("mySendResumes", mySendResumes);
-		
-
-		// 我收到的面试邀请
-		List<Offer> offers = companyOfferService.findUserOffers(userId, toPage);
-		int maxPage = companyOfferService.findUserOffersPage(userId);
+		// 牟勇：我收到的面试邀请（时间是6个月以内，必须通过审核）
+		List<Offer> offers = companyOfferService.findUserOffers(userId);
 		session.setAttribute("personal_offers_list", offers);
-		session.setAttribute("maxPage", maxPage);
-		
-
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
 		if (resume != null) {
 			session.setAttribute("resume", resume);
 			// 获取教育
 			List<Education> edus = rService.findEducation(resume.getId());
-			
 			session.setAttribute("edus", edus);
-			
 			// 获取工作
 			List<Work> works = rService.findWork(resume.getId());
 			session.setAttribute("works", works);
-			
 			// 获取项目
 			List<Project> projs = rService.findProject(resume.getId());
 			session.setAttribute("projs", projs);
-			
 		}
-		/*
-		 * 最新动态
-		 */
-		// 获取最新动态关注者的最新文章消息
+		// 牟勇：获取最新关注者的文章发表日期不超过二周的文章消息,必须通过审核
 		List<ArticleByFollow> articleByFollows = nService.findNewlyArticleByFollow(userId);
 		session.setAttribute("articleByFollows", articleByFollows);
-
-		// 获取最新动态面试消息
-		Offer offer = nService.findNewlyFaceByUserId(userId);
-		session.setAttribute("personal_offer", offer);
-
-		// 获取最新动态评论消息
-		List<CommentArticle> articleByComments = nService.findNewlyCommentArticleByUserId(userId,userId);
-		session.setAttribute("personal_articleByComments", articleByComments);
-		
-		
-		/*
-		 * 最新动态结束
-		 */
-		// 最新发布文章
-		Article articleNewly = aService.findNewlyArticleByUserId(userId);
-		session.setAttribute("articleNewly", articleNewly);
-
-		// 最近发布的简历
-		Resume resumeNewly = rService.findNewlyResumeByUserId(userId);
-		session.setAttribute("resumeNewly", resumeNewly);
-
-		// 文章未删除
-		List<Article> articles = aService.findUserArticle(toPage, userId);
-		if (articles.size() > 0) {
-			int maxArticlePage = aService.getMaxArticleById(userId);
-			session.setAttribute("personal_article_list", articles);
-			session.setAttribute("maxArticlePage", maxArticlePage);
-		} else {
-			session.setAttribute("personal_article_list", null);
-		}
-
-		// 获取评论内容
+		// 获取最新面试消息。牟勇：这里就是未阅读的面试消息
+		List<Offer> newlyOffers = nService.findNewlyFaceByUserId(userId);
+		session.setAttribute("personal_offer", newlyOffers);
+		// 牟勇：查询个人用户对我的文章的评论
+		Map<String, Object> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
+		session.setAttribute("personal_comments", articleByComments);
+		// 获取心情对象
 		Mood mood = mService.selectMoodById(userId);
 		session.setAttribute("mood", mood);
-
-		// 查看关注的人数
+		// 查看我关注的人数统计
 		int follows = fService.selectUserFollowCount(userId);
 		session.setAttribute("follows", follows);
-		// 查看被关注的人数
+		// 查看关注我的人数统计
 		int byFollows = fService.selectUserByFollowCount(userId);
 		session.setAttribute("byFollows", byFollows);
 
@@ -174,8 +131,6 @@ public class CommonController {
 		// 获取已经关注的企业
 		List<Follow> CompanyFollows = fService.selectCompanyFollow(userId);
 		session.setAttribute("CompanyFollows", CompanyFollows);
-
-		mv.addObject("curPage", toPage);
 		return mv;
 	}
 

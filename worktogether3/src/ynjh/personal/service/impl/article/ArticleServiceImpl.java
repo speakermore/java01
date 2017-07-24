@@ -48,24 +48,25 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.deleteUserArticle(id);
 	}
 	/**
-	 * 个人文章列表
-	 * @return  List<Article>返回文章列表
-	 * @param page 页数
-	 * @param id 用户ID 
+	 * 牟勇：个人文章列表
+	 * 
+	 * @param page 页数,如果不分页可以设置为null
+	 * @param userId 用户ID 
+	 * @return 符合条件的Article实体集合
 	 */
 	@Override
 	public List<Article> findUserArticle(Integer page,Integer userId) {
-		if (page==null) {
-			page=1;
+		if(page !=null){
+			if(page<1){
+				page=1;
+			}
+			int maxPage=getMaxArticleById(userId);
+			if(page>maxPage){
+				page=maxPage;
+			}
+			page=(page-1)*20;
 		}
-		if(page<1){
-			page=1;
-		}
-		int maxPage=getMaxArticleById(userId);
-		if(page>maxPage){
-			page=maxPage;
-		}
-		return articleMapper.selectUserArticle((page-1)*5,userId);
+		return articleMapper.selectUserArticle(page,userId);
 	}
 	/**
 	 * 修改文章内容

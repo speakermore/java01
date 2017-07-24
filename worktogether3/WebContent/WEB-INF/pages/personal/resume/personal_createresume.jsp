@@ -33,9 +33,11 @@
 	
 	<script type="text/javascript">
 		$("#resumeHeadImg").fileinput({
-			'language' : 'zh',
-			'showUpload' : false,
-			'previewFileType' : 'any'
+			language : 'zh',
+			showUpload : false,
+			previewFileType : 'image',
+			showUploadedThumbs:false,
+			fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 		});
 		$(function() {
 			//生日

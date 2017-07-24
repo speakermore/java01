@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.Offer;
 import ynjh.company.service.CompanyOfferService;
-import ynjh.personal.entity.User;
 
 @Controller
 @RequestMapping("/offer")
@@ -79,7 +78,7 @@ public class CompanyOfferController {
 	// 查找当前公司发出的所有offer
 	@RequestMapping(value="/company_offer_list/{page}", method=RequestMethod.GET)
 	public ModelAndView findCompanyOffers(@PathVariable Integer page,HttpSession session){
-		Company company=(Company) session.getAttribute("company");
+		Company company=(Company) session.getAttribute("user");
 		int companyId=company.getId();
 		//int companyId=113;
 		List<Offer> offer=companyOfferService.findCompanyOffers(companyId,page);
@@ -105,10 +104,9 @@ public class CompanyOfferController {
 	// 查找当前用户收到的所有offer
 	@RequestMapping(value="/user_offer_list/{page}", method=RequestMethod.GET)
 	public ModelAndView findUserOffers(@PathVariable Integer page,HttpSession session){
-		/*User user=(User) session.getAttribute("user");
-		int userId=user.getId();*/
+		//userId是写死的，需要全部重新写。
 		int userId=1234567896;
-		List<Offer> offer=companyOfferService.findUserOffers(userId,page);
+		List<Offer> offer=companyOfferService.findUserOffers(userId);
 		int maxPage=companyOfferService.findUserOffersPage(userId);
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("offer", offer);

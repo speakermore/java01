@@ -58,7 +58,7 @@
 									<div class="form-group">
 										<label class="control-label col-sm-3">公司Logo：</label>
 										<div class="col-sm-9">
-											<input id="logo" name="logo" multiple type="file" class="form-control file" />
+											<input id="logo" name="logo" type="file" class="form-control file" />
 											<input id="companyLogo" name="companyLogo" type="hidden" value="${user.companyLogo}" />
 										</div>
 									</div>
@@ -71,7 +71,7 @@
 									<div class="form-group">
 										<label class="control-label col-sm-3">营业执照：</label>
 										<div class="col-sm-9">
-											<input id="companyLicense" name="licenseImg" multiple type="file" class="form-control file" />
+											<input id="companyLicense" name="licenseImg" type="file" class="form-control file" />
 											<input id="companyLicenseImg" name="companyLicenseImg" type="hidden" value="${user.companyLicenseImg}" />
 										</div>
 									</div>
@@ -210,22 +210,22 @@
 										<label class="control-label col-sm-3">公司环境：</label>
 										<div class="col-sm-9">
 											<span class="label label-default">员工</span>
-											<input id="companyImg1" name="companyImgs" multiple type="file" class="form-control file" />
+											<input id="companyImg1" name="companyImgs" type="file" class="form-control file" />
 											<input type="hidden" id="imgs1" name="imgsId" value="${detailImgs[0].id}" />
 											<span class="label label-default">前台</span>
-											<input id="companyImg2" name="companyImgs" multiple type="file" class="form-control file" />
+											<input id="companyImg2" name="companyImgs" type="file" class="form-control file" />
 											<input type="hidden" id="imgs2" name="imgsId" value="${detailImgs[1].id}" />
 											<span class="label label-default">办公区</span>
-											<input id="companyImg3" name="companyImgs" multiple type="file" class="form-control file" />
+											<input id="companyImg3" name="companyImgs" type="file" class="form-control file" />
 											<input type="hidden" id="imgs3" name="imgsId" value="${detailImgs[2].id}" />
 											<span class="label label-default">会议室</span>
-											<input id="companyImg4" name="companyImgs" multiple type="file" class="form-control file" />
+											<input id="companyImg4" name="companyImgs" type="file" class="form-control file" />
 											<input type="hidden" id="imgs4" name="imgsId" value="${detailImgs[3].id}" /> 
 											<span class="label label-default">休息区</span>
-											<input id="companyImg5" name="companyImgs" multiple type="file" class="form-control file" />
+											<input id="companyImg5" name="companyImgs" type="file" class="form-control file" />
 											<input type="hidden" id="imgs5" name="imgsId" value="${detailImgs[4].id}" /> 
 											<span class="label label-default">其他</span>
-											<input id="companyImg6" name="companyImgs" multiple type="file" class="form-control file" />
+											<input id="companyImg6" name="companyImgs" type="file" class="form-control file" />
 											<input type="hidden" id="imgs6" name="imgsId" value="${detailImgs[5].id}" />
 										</div>
 									</div>
@@ -249,73 +249,75 @@
 <script type="text/javascript" src="company/js/addTel.js"></script>
 <script type="text/javascript">
 	 $("#logo").fileinput({
-	 'uploadAsync' : false,
-	 'language' : 'zh',
-	 'showUpload' : false,
-	 'initialPreview' : [
-	 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${user.companyLogo}"/>'],
-	 'previewFileType' : 'any'
+	 	language : 'zh',
+	 	showUpload : false,
+	 	initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${user.companyLogo}"/>'],
+	 	previewFileType : 'image',
+		showUploadedThumbs:false,
+		fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 	 }).on('change', function(event) {
 		  $('#companyLogo').val(this.value);
 	 });
+	 
 	 $("#companyLicense").fileinput({
-		 'uploadAsync' : false,
-		 'language' : 'zh',
-		 'showUpload' : false,
-		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${user.companyLicenseImg}"/>'],
-		 'previewFileType' : 'any'
-		 }).on('change', function(event) {
+		 language : 'zh',
+		 showUpload : false,
+		 initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${user.companyLicenseImg}"/>'],
+		 previewFileType : 'image',
+		 showUploadedThumbs:false,
+		 fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
+	}).on('change', function(event) {
 			  $('#"companyLicenseImg"').val(this.value);
-		 });
+	});
+	 
 	$("#companyImg1").fileinput({
-		'uploadAsync' : false,
-		'language' : 'zh',
-		'showUpload' : false,
-		'initialPreview' : [
-		'<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[0].companyDetailImg}"/>'],
-		'previewFileType' : 'any'
+		language : 'zh',
+		showUpload : false,
+		initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[0].companyDetailImg}"/>'],
+		previewFileType : 'image',
+		showUploadedThumbs:false,
+		fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 	 });
 	
 	$("#companyImg2").fileinput({
-		 'uploadAsync' : false,
-		 'language' : 'zh',
-		 'showUpload' : false,
-		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[1].companyDetailImg}"/>'],
-		 'previewFileType' : 'any'
+		 language : 'zh',
+		 showUpload : false,
+		 initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[1].companyDetailImg}"/>'],
+		 previewFileType : 'image',
+		 showUploadedThumbs:false,
+		 fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 		 });
 	 $("#companyImg3").fileinput({
-		 'uploadAsync' : false,
-		 'language' : 'zh',
-		 'showUpload' : false,
-		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[2].companyDetailImg}"/>'],
-		 'previewFileType' : 'any'
+		 language : 'zh',
+		 showUpload : false,
+		 initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[2].companyDetailImg}"/>'],
+		 previewFileType : 'image',
+		 showUploadedThumbs:false,
+		 fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 		 });
 	 $("#companyImg4").fileinput({
-		 'uploadAsync' : false,
-		 'language' : 'zh',
-		 'showUpload' : false,
-		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[3].companyDetailImg}"/>'],
-		 'previewFileType' : 'any'
+		 language : 'zh',
+		 showUpload : false,
+		 initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[3].companyDetailImg}"/>'],
+		 previewFileType : 'image',
+		 showUploadedThumbs:false,
+		 fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 		 });
 	 $("#companyImg5").fileinput({
-		 'uploadAsync' : false,
-		 'language' : 'zh',
-		 'showUpload' : false,
-		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[4].companyDetailImg}"/>'],
-		 'previewFileType' : 'any'
+		 language : 'zh',
+		 showUpload : false,
+		 initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[4].companyDetailImg}"/>'],
+		 previewFileType : 'image',
+		 showUploadedThumbs:false,
+		 fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 		 });
 	 $("#companyImg6").fileinput({
-		 'uploadAsync' : false,
-		 'language' : 'zh',
-		 'showUpload' : false,
-		 'initialPreview' : [
-		 '<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[5].companyDetailImg}"/>'],
-		 'previewFileType' : 'any'
+		 language : 'zh',
+		 showUpload : false,
+		 initialPreview : ['<img width="160" height="200" src="company/img/${user.companyLoginId }/${detailImgs[5].companyDetailImg}"/>'],
+		 previewFileType : 'image',
+		 showUploadedThumbs:false,
+		 fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 		 }); 
 	$(document)
 			.ready(

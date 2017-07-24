@@ -59,8 +59,8 @@ public class CompanyOfferServiceImpl implements CompanyOfferService {
 	}
 	// 查找当前用户收到的所有offer
 	@Override
-	public List<Offer> findUserOffers(Integer userId, Integer page) {
-		return companyOfferMapper.findUserOffers(userId,(page-1)*10);
+	public List<Offer> findUserOffers(Integer userId) {
+		return companyOfferMapper.findUserOffers(userId);
 	}
 	// 查找当前用户收到的某条offer（根据id查询）
 	@Override

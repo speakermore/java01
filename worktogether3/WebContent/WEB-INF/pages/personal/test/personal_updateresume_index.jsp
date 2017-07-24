@@ -286,14 +286,15 @@
 	</section>
 </article>
 <script type="text/javascript">
-	$("#resumeHeadImg")
-			.fileinput(
+	$("#resumeHeadImg").fileinput(
 					{
-						'language' : 'zh',
-						'uploadAsync' : false,
-						'showUpload' : false,
-						'initialPreview' : [ '<img src="img/upload/personal/${user.userLoginId}/${resume.resumeHeadImg}"/>' ],
-						'previewFileType' : 'any'
+						language : 'zh',
+						uploadAsync : false,
+						showUpload : false,
+						initialPreview : [ '<img src="img/upload/personal/${user.userLoginId}/${resume.resumeHeadImg}"/>' ],
+						previewFileType : 'image',
+						showUploadedThumbs:false,
+						fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 					});
 	$(function() {
 		var resumeFLAbility = $("#HresumeFLAbility").val();

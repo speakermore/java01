@@ -34,13 +34,18 @@ public interface FollowMapper {
 	 */
 	public List<Follow> selectCompanyFollow(Integer followId);
 	/**
-	 * 查看关注者人数
+	 * 
 	 * @param followId
 	 * @return
 	 * @author  刘志浩
 	 * Integer
 	 */
-	
+	/**
+	 * 查看我关注的人有多少
+	 * @param followId 关注者
+	 * @return 我关注的人数统计
+	 * @author  刘志浩
+	 */
 	public Integer selectUserFollowCount(Integer followId);
 	/**
 	 * 查看被关注者人数

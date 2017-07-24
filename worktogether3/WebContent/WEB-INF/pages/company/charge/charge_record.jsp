@@ -10,10 +10,8 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <link href="css/main.css" rel="stylesheet" />
-<link href="thirdpart/fileupload/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script src="thirdpart/fileupload/js/fileinput.min.js"></script>
-<script src="thirdpart/fileupload/language/zh.js"></script>
 
 </head>
 <body>

@@ -37,9 +37,14 @@
 						<div class="panel-body">
 							<!-- 我的应聘 -->
 							<div class="panel">
-								<h5 class="panel-title">我感兴趣的招聘</h5>
+								<div class="panel-heading">
+								<h5 class="panel-title">我感兴趣的招聘信息</h5>
+								</div>
 								<div class="panel-body">
-									<ul>
+									<ul class="list-unstyled">
+										<c:if test="${comanyRecruits.size()==0 }">
+											<li>暂无新消息</li>
+										</c:if>
 										<c:forEach items="${comanyRecruits}" var="myIntrestCompany">
 											<li>${myIntrestCompany.companySimpleName }于<fmt:formatDate value="${myIntrestCompany.cmpRecTime }" pattern="yyyy年MM月dd日"/>发布${myIntrestCompany.cmpRecTitle}岗位的招聘信息，<a href="company/cmprs/findById?id=${myIntrestCompany.id }&toPage=company/cmprs/companyRecruit_detail">快去看看吧</a>。</li>
 										</c:forEach>
@@ -49,9 +54,14 @@
 							<!-- 我的应聘结束 -->
 							<!-- 我的应聘 -->
 							<div class="panel">
-								<h5 class="panel-title">我的应聘</h5>
+								<div class="panel-heading">
+									<h5 class="panel-title">我的应聘反馈</h5>
+								</div>
 								<div class="panel-body">
-									<ul>
+									<ul class="list-unstyled">
+										<c:if test="${mySendResumes.size()==0 }">
+											<li>暂无消息</li>
+										</c:if>
 										<c:set var="RESUME_STATUS" value="${CommonStatus.RESUME_STATUS }"></c:set>
 										<c:forEach items="${mySendResumes}" var="mySend">
 										<li>我<fmt:formatDate value="${mySend.cmprTime }" pattern="yyyy年MM月dd日"/>发给${mySend.companyName}关于${mySend.cmpRecTitle}的简历,目前${RESUME_STATUS[mySend.cmprAction] }</li>
@@ -60,53 +70,77 @@
 								</div>
 							</div>
 							<!-- 我的应聘结束 -->
-						</div>
-					</section>
+						
 					
 					<!-- 面试邀请开始 -->
-					<c:if test="${personal_offer!=null }">
+
 						<section class="panel">
+							<div class="panel-heading">
+								<h5 class="panel-title">我收到的面试邀请</h5>
+							</div>
 							<div class="panel-body">
-								你收到@<a
-									href="personal/common/gotoCompanyById?id=${personal_offer.companyId}">${personal_offer.companyName }</a>的职位邀请<<<a
-									href="#">${personal_offer.offerJob }</a>>>
+							<ul class="list-unstyled">
+							<c:if test="${personal_offer.size()==0 }">
+								<li>暂无消息</li>
+							</c:if>
+							<c:forEach items="${personal_offer}" var="myOffer">
+								<li>
+									收到@<a href="personal/common/gotoCompanyById?id=${myOffer.companyId}">${myOffer.companyName }</a>的职位邀请
+									<a href="#">${myOffer.offerJob }</a>
+									快去看看吧！
+								</li>
+							</c:forEach>
+							</ul>
 							</div>
-							<div class="panel-footer work-together-right">
-								1分钟前.<a href="#">更多....</a>
-							</div>
+							
 						</section>
-					</c:if>
 					<!-- 面试邀请结束-->
 					<!-- 文章信息开始 -->
-					<c:if test="${articleByFollows!=null}">
-						<c:forEach items="${articleByFollows}" var="abf">
+					
+						
 							<section class="panel">
+								<div class="panel-heading">
+									<h5 class="panel-title">我感兴趣的文章</h5>
+								 </div>
 								<div class="panel-body">
-									@<a href="#">${abf.userName}</a>发表了<<<a href="personal/article/lookArticleById?id=${abf.articleId}">${abf.articleTitle}</a>>>
-								</div>
-								<div class="panel-footer work-together-right">
-									1分钟前.<a href="#">更多....</a>
+									<ul class="list-unstyled">
+									<c:if test="${articleByFollows.size()==0 }">
+										<li>暂无消息</li>
+									</c:if>
+									<c:forEach items="${articleByFollows}" var="abf">
+										<li>
+											@<a href="#">${abf.userName}</a>发表了&lt;&lt;<a href="personal/article/lookArticleById?id=${abf.articleId}">${abf.articleTitle}</a>&gt;&gt;
+										</li>
+									</c:forEach>
+									</ul>
 								</div>
 							</section>
-						</c:forEach>
-					</c:if>
+						
+					
 					<!-- 文章信息结束 -->
 					<!-- 最新评论开始 -->
-					<c:if test="${personal_articleByComments!=null }">
-					<c:forEach items="${personal_articleByComments}" var="articleByComment">
 					<section class="panel">
-						<div class="panel-body">
-							@<a href="#">${articleByComment.userName}</a>评论了<<<a href="personal/article/lookArticleById?id=${articleByComment.articleId}">${articleByComment.articleTitle }</a>>>
+						<div class="panel-heading">
+							<h5 class="panel-title">别人对我的文章的评论</h5>
 						</div>
-						<div class="panel-footer work-together-right">
-							1分钟前.<a href="#">更多....</a>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+							<c:if test="${personal_comments==null }">
+								<li>暂无消息</li>
+							</c:if>
+							<c:forEach items="${personal_comments}" var="articleByComment">
+								<li>
+									@<a href="#">${articleByComment.userName}</a>评论了&lt;&lt;<a href="personal/article/lookArticleById?id=${articleByComment.articleId}">${articleByComment.articleTitle }</a>&gt;&gt;
+								</li>
+							</c:forEach>
+							</ul>
 						</div>
 					</section>
-					</c:forEach>
-					</c:if>
+					
 					<!-- 最新评论结束 -->
 					
-					
+					</div>
+					</section>
 				</div>
 			</div>
 		</div>

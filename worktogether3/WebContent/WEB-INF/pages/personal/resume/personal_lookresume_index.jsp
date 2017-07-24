@@ -71,8 +71,7 @@ a:focus {
 			<!-- 头像 -->
 			<div class="resumeheadImg col-md-offset-1" style="margin-top: 35px;">
 				<c:if test="${resume.resumeHeadImg==null }">
-					<img class="pull-left updateHeadImg media-object "
-						src="personal/img/head.gif" alt='我的头像' width="100" height="120" />
+					<img class="pull-left updateHeadImg media-object " src="personal/img/head.gif" alt='我的头像' width="100" height="120" />
 
 				</c:if>
 				<c:if test="${resume.resumeHeadImg!=null }">

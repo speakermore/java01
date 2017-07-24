@@ -1,15 +1,16 @@
 package ynjh.personal.service.impl.newly;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+
 import ynjh.company.entity.Offer;
 import ynjh.personal.dao.newly.NewlyMapper;
 import ynjh.personal.entity.ArticleByFollow;
-import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.service.NewlyService;
 
 /**
@@ -29,24 +30,14 @@ public class NewlyServiceImpl implements NewlyService {
 	 * @author 刘志浩
 	 */
 	@Override
-	public Offer findNewlyFaceByUserId(Integer userId) {
+	public List<Offer> findNewlyFaceByUserId(Integer userId) {
 		return newlyMapper.findNewlyFaceByUserId(userId);
 	}
 
-	/**
-	 * 查看关注者最新发布文章消息
-	 * 
-	 * @author 刘志浩
-	 */
+	
 	@Override
 	public List<ArticleByFollow> findNewlyArticleByFollow(Integer userId) {
-		int maxNum = getByFollowIdCount(userId);
-		if (maxNum > 0) {
-			return newlyMapper.findNewlyArticleByFollow(maxNum, userId);
-		} else {
-			return null;
-		}
-
+		return newlyMapper.findNewlyArticleByFollow(userId);
 	}
 
 	/**
@@ -62,8 +53,8 @@ public class NewlyServiceImpl implements NewlyService {
 	 * 查看最新评论
 	 */
 	@Override
-	public List<CommentArticle> findNewlyCommentArticleByUserId(Integer userId, Integer notUserId) {
-		return newlyMapper.findNewlyCommentArticleByUserId(userId,notUserId);
+	public Map<String, Object> findNewlyCommentArticleByUserId(Integer userId) {
+		return newlyMapper.findNewlyCommentArticleByUserId(userId);
 	}
 	
 }

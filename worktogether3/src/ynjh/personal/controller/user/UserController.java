@@ -104,7 +104,7 @@ public class UserController {
 					response.addCookie(userCookie);
 				}
 				session.setAttribute("user", user);
-				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
+				mv.setViewName("redirect:../common/initIndex?userId=" + user.getId());
 			}
 		}
 		return mv;

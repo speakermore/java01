@@ -13,7 +13,13 @@ public interface ArticleService {
 	public Integer writeUserArticle(Article article);
 	//删除文章
 	public Integer deleteUserArticle(Integer id);
-	//查看文章
+	/**
+	 * 牟勇：个人文章列表
+	 * 
+	 * @param page 页数,如果不分页可以设置为null
+	 * @param userId 用户ID 
+	 * @return 符合条件的Article实体集合
+	 */
 	public List<Article> findUserArticle(Integer page,Integer id);
 	//查看文章
 	public Article findArticleById(Integer id);

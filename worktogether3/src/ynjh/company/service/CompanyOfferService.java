@@ -19,8 +19,13 @@ public interface CompanyOfferService {
 
 	// 计算当前用户收到的所有offer所占页数
 	public int findUserOffersPage(Integer userId);
-	// 查找当前用户收到的所有offer
-	public List<Offer> findUserOffers(Integer userId,Integer page);
+	/**
+	 * 牟勇：查找当前用户收到的所有offer
+	 * 取消原来的分页，现在不分页了
+	 * @param userId 用户的id
+	 * @return 所有的offer
+	 */
+	public List<Offer> findUserOffers(Integer userId);
 	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
 }

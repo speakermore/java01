@@ -3,24 +3,23 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.personal.dao.newly.NewlyMapper">
-	<!-- 查看最新发布面试消息 -->
-	<select id="findNewlyFaceByUserId" resultType="Offer"
-		parameterType="Integer">
-		select c.companyName,o.* from offer o,company c where
-		o.companyId=c.id and
-		o.userId=#{userId} and o.offerStatus=2 order by
-		o.offerSendTime desc
-		limit 1
+	<!-- 查看最新发布面试消息
+	最新： offerAction=1-->
+	<select id="findNewlyFaceByUserId" resultType="Offer" parameterType="Integer">
+		select c.companyName,o.* from offer o,company c where 
+		o.companyId=c.id 
+		and o.userId=#{userId} and o.offerStatus=2 
+		and offerAction=1 
+		order by o.offerSendTime desc
 	</select>
-	<!-- 查看关注者最新发布文章消息 -->
-	<select id="findNewlyArticleByFollow" resultType="ArticleByFollow">
-		<!-- select * from follow f,article a,user u where f.followId=#{userId} 
-			and f.byFollowId=u.id and u.id=a.usersId -->
-		select max(u.userName) userName,max(a.articleTitle)
-		articleTitle,max(a.id) articleId from (select * from article order by
-		articleTime desc limit #{maxNum} )a,user u,follow f where
-		u.id=a.usersId and u.id=f.byFollowId and f.followId=#{userId} group by
-		a.usersId
+	<!-- 牟勇：查看用户关注的个人用户最新发布的文章消息,
+	文章必须是通过审核的,文章发表日期不超过二周
+	返回文章标题，文章id，发表时间，被关注者id -->
+	<select id="findNewlyArticleByFollow" resultType="map">
+		select a.articleTitle,a.id,a.articleTime,a.usersId,u.userName 
+		from article a,user u 
+		where a.usersId=u.id and a.articleStatus=2 and TIMESTAMPDIFF(WEEK,articleTime,now()) &lt;=2 
+		and a.usersId in (select byFollowId from follow where followId=#{userId})
 	</select>
 	<!-- 查看被关注者发布文章消息的数量 -->
 	<select id="getByFollowIdCount" resultType="Integer"
@@ -29,18 +28,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		f.followId=#{userId} and u.id=a.usersId and u.id=f.byFollowId order by
 		a.articleTime desc
 	</select>
-	<!-- 查看最新评论（先按照时间算出最新的-排序、然后根据文章id分组保留最新的一个、最后在进行一次时间排序） -->
-	<select id="findNewlyCommentArticleByUserId" resultType="CommentArticle">
-		select max(ca.articleId) articleId,max(ca.usersId)
-		usersId,max(ca.commentArticleTime)
-		commentArticleTime,max(a.articleTitle) articleTitle,max(u.userName)
-		userName,max(ca.commentArticleContent) commentArticleContent
-		from (select * from commentarticle order by commentArticleTime desc)
-		ca,article a,user u
-		where a.usersId=${userId} and not ca.usersId=${notUserId} and
-		a.id=ca.articleId and ca.usersId=u.id group by ca.articleId order by
-		commentArticleTime desc;
-
-
+	<!-- 牟勇：查看两周内对我的文章的评论,
+	按评论发表时间排序
+	评论必须审核通过
+	只查询用户对我的文章的评论
+	返回文章标题(articleTitle)，文章id(artid),评论者id（cid），评论者昵称（userName）
+	无结果返回null -->
+	<select id="findNewlyCommentArticleByUserId" resultType="map">
+			select a.articleTitle,a.id artid,c.usersId cid,u.userName 
+			from article a,user u,commentarticle c 
+			where c.usersId=u.id and c.articleId=a.id 
+			and commentArticleStatus=2 and a.usersId=#{userId}
+			order by c.commentArticleTime desc
+		
 	</select>
 </mapper>

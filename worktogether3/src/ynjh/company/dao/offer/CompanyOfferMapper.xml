@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findCompanyOffers" parameterType="int" resultType="Offer">
 		<!-- 查询offer表和user表中的userName字段 -->
 		select o.*,u.userName from offer as o,user as u
-		where o.companyId=#{companyId} and o.userId=u.id and o.offerStatus=2
+		where o.companyId=#{companyId} and o.userId=u.id and o.offerStatus=2 
 		<!-- 根据发送时间倒序排列 -->
 		order by offerSendTime DESC
 		<!-- 从start开始算本页的第一条，每页10条 -->
@@ -39,15 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUserOffersRecord" parameterType="int" resultType="int">
 		select count(*) from offer where userId=#{userId} and offerStatus=2
 	</select>
-	<!-- 查找当前用户收到的offer -->
+	<!-- 查找当前用户收到的offer，收到的offer必须是已经通过审核的,offer必须是6个月内发出的 -->
 	<select id="findUserOffers" resultType="Offer">
 		<!-- 查询offer表和company表中的companySimpleName字段 -->
 		select o.*,c.companySimpleName from offer as o,company as c
 		where o.userId=#{userId} and o.companyId=c.id and o.offerStatus=2
+		and TIMESTAMPDIFF(month,o.offerSendTime,now())&lt;=6 
 		<!-- 根据发送时间倒序排列 -->
 		order by offerSendTime DESC
-		<!-- 从start开始算本页的第一条，每页10条 -->
-		limit #{start},10
 	</select>
 	<!-- 查找当前用户收到的某条offer（根据id查询） -->
 	<select id="findUserOffer" parameterType="int" resultType="Offer">

@@ -15,7 +15,7 @@
 						<div class="panel-body">
 							<ul class="nav">
 								<li>
-									<a href="javascript:ajaxPage('personal/user/personal_index_myNewly')">我的首页</a>
+									<a href="personal/common/initIndex?userId=${user.id }" >我的首页</a>
 								</li>
 								<li>
 									<a href="javascript:ajaxPage('personal/user/personal_register_real')">实名认证</a>

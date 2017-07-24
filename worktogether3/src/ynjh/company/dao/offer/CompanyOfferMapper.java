@@ -21,8 +21,14 @@ public interface CompanyOfferMapper {
 
 	// 计算当前用户收到的所有offer共有几条
 	public Integer getUserOffersRecord(Integer userId);
-	// 查找当前用户收到的所有offer
-	public List<Offer> findUserOffers(@Param("userId")Integer userId,@Param("start")Integer start);
+	/**
+	 * 牟勇：查找当前用户收到的所有offer
+	 * 收到的offer必须是已经通过审核的
+	 * offer必须是6个月内发出的
+	 * @param userId 用户的id
+	 * @return 所有收到的offer
+	 */
+	public List<Offer> findUserOffers(@Param("userId")Integer userId);
 	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
 }

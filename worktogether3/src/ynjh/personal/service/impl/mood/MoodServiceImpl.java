@@ -1,7 +1,7 @@
 package ynjh.personal.service.impl.mood;
 /**
  * @author 胡林飞
- *操作心情
+ * 心情业务类
  */
 import javax.annotation.Resource;
 
@@ -22,14 +22,10 @@ public class MoodServiceImpl implements MoodService {
 	public Integer addMood(Mood mood) {
 		return moodMapper.addMood(mood);
 	}
-	/**
-	 * 查看心情
-	 * @return Integer
-	 * @param id 
-	 */
+	
 	@Override
 	public Mood selectMoodById(Integer id) {
-		return moodMapper.selectMoodByid(id);
+		return moodMapper.selectMoodById(id);
 	}
 
 }

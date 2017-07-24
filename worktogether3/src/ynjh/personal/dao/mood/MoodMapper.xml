@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			value(#{userId},#{moodContent},#{moodTime})
 	</insert>
 <!-- 查看心情 -->
-	<select id="selectMoodByid" parameterType="int" resultType="Mood">
+	<select id="selectMoodById" parameterType="int" resultType="Mood">
 	select * from mood where userId=#{userId} order by moodTime desc limit 1
 	</select>
 
