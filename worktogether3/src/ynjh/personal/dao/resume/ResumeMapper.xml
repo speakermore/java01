@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resumeEducation=#{resumeEducation},resumeMajor=#{resumeMajor},resumeWages=#{resumeWages},resumePhone=#{resumePhone},resumeQQ=#{resumeQQ},resumePersonality=#{resumePersonality},
 		resumeSelfEvaluation=#{resumeSelfEvaluation},resumeHeight=#{resumeHeight},resumeWeight=#{resumeWeight},resumeWorks=#{resumeWorks},
 		resumeHouseAddress=#{resumeHouseAddress},resumeNowResidence=#{resumeNowResidence},resumeEmail=#{resumeEmail},resumeEnglishGrade=#{resumeEnglishGrade},resumeComputerAbility=#{resumeComputerAbility},
-		resumeFLAbility=#{resumeFLAbility},resumeFLType=#{resumeFLType}
+		resumeFLAbility=#{resumeFLAbility},resumeFLType=#{resumeFLType},resumeHeadImg=#{resumeHeadImg}
 		where id=#{id}
 	</update>
 	<!-- 查询简历(所有) -->

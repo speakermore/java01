@@ -108,18 +108,21 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public List<UserAndResume> findUserList(Integer page,String userLoginId) {
-		if (page == null) {
-			page = 1;
-		}
-		if (page < 1) {
-			page = 1;
-		}
-		int maxPage = getMaxUserList(userLoginId);
+		
+		if(page!=null){
+			
+			if (page < 1) {
+				page = 1;
+			}
+			int maxPage = getMaxUserList(userLoginId);
 
-		if (page > maxPage) {
-			page = maxPage;
+			if (page > maxPage) {
+				page = maxPage;
+			}
+			page=(page-1)*20;
 		}
-		return userMapper.findUserList((page - 1) * 20,userLoginId);
+		//如果page==null，则不进行分页
+		return userMapper.findUserList(page,userLoginId);
 	}
 	/**
 	 * 软件人才列表总数据

@@ -1,13 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--左侧状态栏位-->
 <article class="col-sm-12  work-together-shadow work-together-shallow">
+	<!-- 头像图片上传 -->
+	<div class="modal fade" id="modal-container-headImg" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title" id="myModalLabel">证件照</h4>
+								</div>
+								<!-- 修改头像的表单 -->
+								<form id="upload_head_img_form" action="personal/user/updateUserHeadImgPathById" enctype="multipart/form-data" class="form-horizontal" role="form" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="userHeadImgPath" class="col-md-3 control-label">给你的简历配一个合适的头像：</label>
+											<div class="col-md-8">
+												<input class="form-control file" name="headImg" type="file" id="userHeadImgPathIndex" data-min-file-count="1" />
+											</div>
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<input type="button" class="btn btn-primary" value="上传" onclick="ajaxUploadHeadImg()" />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- 头像图片上传结束 -->
+					<script type="text/javascript">
+					//牟勇：头像上传框的样式
+					$("#userHeadImgPathIndex").fileinput({
+						language : 'zh',
+						previewFileType : 'image',
+						showUploadedThumbs:false,
+						fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
+					});
+					//牟勇：ajax文件上传
+					var ajaxUploadHeadImg=function(){
+						var fd=new FormData($('#upload_head_img_form')[0]);
+						$.ajax({
+							contentType:false,
+							type:'post',
+							url:'personal/resume/ajaxUploadHeadImg',
+							processData:false,
+							data:fd,
+							async: false,
+					        cache: false,
+							dataType:'text',
+							success:function(data){
+								$('#resumeHeadImg').val(data);
+								$('#head_img').attr('src','img/upload/personal/${user.userLoginId}/'+data);
+								alert('上传成功，图片信息将在您保存简历时一并保存，记得点保存哦');
+								$('#modal-container-headImg').modal('hide');
+							}
+						});
+					}
+					</script>
 	<!--发表状态小节-->
 	<section class="panel">
 		<!-- 简历基本信息开始 -->
 		<div class="panel panel-default">
 			<form role="form" class="form-horizontal" action="personal/resume/createResume" method="post" id="resumeForm" style="margin-top: 35px;">
+					<input type="hidden" id="resumeHeadImg" name="resumeHeadImg" value="${user.userHeadImgPath}" />
 					<div class="row">
 					<div class="col-sm-12 column">
 						<div class="form-group">
@@ -31,35 +90,35 @@
 					</div>
 				</div>
 				<div class="row">
-				<!-- 牟勇：一个不知所云的头像 -->
-				<!-- <div class="col-sm-1 column">
-					<img src="img/head.gif" class="center-block" width="100"
-						height="120" />
-				</div> -->
+				<!-- 牟勇：已增加文件上传功能 -->
+				<div class="col-sm-2 column">
+					<a title="单击上传头像" data-toggle="modal" href="#modal-container-headImg" class="thumbnail"><img onerror="javascript:this.src='img/head.gif'" src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" id="head_img" width="100" height="120" /></a>
+				</div> 
+				
 				<!-- 简历基本信息左侧 -->
 				<div class="col-sm-5 column">
 					<div class="form-group">
 						<label for="resumeName" class="col-sm-4 control-label">姓名：</label>
 						<div class="col-sm-8">
-							<input class="form-control" name="resumeName" id="resumeName" type="text" />
+							<input class="form-control" value="${user.userRealName }" name="resumeName" id="resumeName" type="text" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="resumeBirthday" class="col-sm-4 control-label">出生日期：</label>
 						<div class="col-sm-8">
-							<input class="form-control form_datetime" id="resumeBirthday" name="resumeBirthday" readonly="readonly" placeholder="请选择日期" />
+							<input value="<fmt:formatDate value="${user.userBirthday }" pattern="yyyy-MM-dd"/>" class="form-control form_datetime" id="resumeBirthday" name="resumeBirthday" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="resumePhone" class="col-sm-4 control-label">手机：</label>
 						<div class="col-sm-8">
-							<input class="form-control" id="resumePhone" type="text" name="resumePhone" />
+							<input class="form-control" value="${user.userLoginId }" id="resumePhone" type="text" name="resumePhone" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="resumeEmail" class="col-sm-4 control-label">邮箱：</label>
 						<div class="col-sm-8">
-							<input class="form-control" id="resumeEmail" type="text" name="resumeEmail" />
+							<input class="form-control" value="${user.userEmail }" id="resumeEmail" type="text" name="resumeEmail" />
 						</div>
 					</div>
 				</div>
@@ -71,11 +130,11 @@
 						<div class="col-sm-8">
 							<label class="col-sm-2 control-label">男</label>
 							<div class="col-sm-4">
-								<input type="radio" class="form-control" name="resumeGender" id="resumeGender" value="1" checked="checked">
+								<input type="radio" class="form-control radio" name="resumeGender" id="resumeGender" value="1" checked="checked">
 							</div>
 							<label  class="col-sm-2 control-label">女</label>
 							<div class="col-sm-4">
-								<input type="radio" class="form-control" name="resumeGender" id="resumeGender" value="0"> 
+								<input type="radio" class="form-control radio" name="resumeGender" id="resumeGender" value="0"> 
 							</div>
 						</div>
 					</div>
@@ -85,12 +144,12 @@
 							<input class="form-control form_datetime" id="resumeWorks" name="resumeWorks" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="resumeNowResidence" class="col-sm-4 control-label">居住地：</label>
+					<!-- <div class="form-group">
+						<label for="resumeNowResidence" class="col-sm-4 control-label">户籍地：</label>
 						<div class="col-sm-8">
 							<input class="form-control" id="resumeNowResidence" name="resumeNowResidence" type="text" />
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label for="resumeJor" class="col-sm-4 control-label">目前职位：</label>
 						<div class="col-sm-8">
@@ -125,7 +184,7 @@
 									<div class="col-sm-8">
 										<input class="form-control" data-provide="typeahead" data-items="4" autocomplete="off" name="resumeNation" id="resumeNation" type="text" />
 									</div>
-								</div>
+								</div> 
 								<script type="text/javascript">
 								//民族的自动完成特效
 								myAutoComplete('findAllNationName','#resumeNation');
@@ -141,7 +200,7 @@
 								myAutoComplete('findAllProvinceName','#resumePlace');
 								</script>
 								<div class="form-group">
-									<label for="resumeHouseAddress" class="col-sm-4 control-label">住址：</label>
+									<label for="resumeHouseAddress" class="col-sm-4 control-label">现住址：</label>
 									<div class="col-sm-8">
 										<input class="form-control" name="resumeHouseAddress" id="resumeHouseAddress" type="text" />
 									</div>

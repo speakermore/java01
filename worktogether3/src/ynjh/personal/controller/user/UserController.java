@@ -212,12 +212,11 @@ public class UserController {
 		User user = null;
 		Company company = null;
 		List<UserAndResume> userAndResumes = null;
+		//判断用户是否登录
 		try {
 			user = (User) session.getAttribute("user");
-			userAndResumes = uService.findUserList(1, user.getUserLoginId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			user = null;
 		}
 		if (user == null) {
 			try {
@@ -227,6 +226,8 @@ public class UserController {
 				e.printStackTrace();
 				company = null;
 			}
+		}else{
+			userAndResumes = uService.findUserList(1, user.getUserLoginId());
 		}
 		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		for (UserAndResume userAndResume : userAndResumes) {

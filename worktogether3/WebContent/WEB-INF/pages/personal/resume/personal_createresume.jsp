@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>个人用户-首页</title>
+<title>个人用户-新建简历</title>
 <%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
 <%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </head>
@@ -23,9 +23,6 @@
 					</div>
 					<%@include file="/WEB-INF/pages/personal/resume/personal_createresume_index.jsp"%>
 				</div>
-				<%-- <div class="col-md-4 column ">
-					<%@include file="/WEB-INF/pages/personal/common/user_right.jsp"%>
-				</div> --%>
 				<div class="col-md-1 column"></div>
 			</div>
 		</div>

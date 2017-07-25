@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ynjh.company.entity.Company;
@@ -16,6 +17,7 @@ import ynjh.personal.entity.User;
  *
  */
 public class UserLoginIntersepter extends HandlerInterceptorAdapter {
+	Logger logger=Logger.getLogger(UserLoginIntersepter.class);
 	private static StringBuffer basePath=null;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -35,7 +37,11 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 				basePath.append(":"+request.getServerPort());
 			}
 			basePath.append(request.getContextPath()+"/");
+			
 		}
+		
+		logger.debug("拦截器BasePath："+basePath);
+		logger.debug("Path:"+path);
 		if(path.toString().equals(basePath.toString())){
 			return true;
 		}

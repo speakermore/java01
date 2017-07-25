@@ -47,15 +47,8 @@
 		<section class="panel">
 			<div class="panel-title">我的信息</div>
 			<div class="panel-body">
-				<div id="personal_headImg_border"
-					class="col-md-12 padding_head padding_head_img">
-					<c:if test="${user.userHeadImgPath=='无'}">
-						<img id="headPhoto" class="img-thumbnail" onerror="javascript:this.src='img/head.gif'" style="display:none" onload="this.style.display=''" src="personal/img/head.gif" title="我的头像" alt="我的头像" />
-
-					</c:if>
-					<c:if test="${user.userHeadImgPath!='无' }">
-						<img id="headPhoto" class="img-thumbnail" onerror="javascript:this.src='img/head.gif'" style="display:none" onload="this.style.display=''" src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" title="我的头像" alt="我的头像" />
-					</c:if>
+				<div id="personal_headImg_border" class="col-md-12 padding_head padding_head_img">
+					<img id="headPhoto" class="img-thumbnail" onerror="javascript:this.src='img/head.gif'" src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" title="我的头像" alt="我的头像" />
 					<div class="caption" id="userImgHiddenText">
 						<p>
 							<a id="modal-headImg" href="#modal-container-headImg" role="button" class="btn" data-toggle="modal">修改 </a>

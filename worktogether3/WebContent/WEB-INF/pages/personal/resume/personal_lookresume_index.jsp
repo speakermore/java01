@@ -70,15 +70,10 @@ a:focus {
 		<div class="media">
 			<!-- 头像 -->
 			<div class="resumeheadImg col-md-offset-1" style="margin-top: 35px;">
-				<c:if test="${resume.resumeHeadImg==null }">
-					<img class="pull-left updateHeadImg media-object " src="personal/img/head.gif" alt='我的头像' width="100" height="120" />
-
-				</c:if>
-				<c:if test="${resume.resumeHeadImg!=null }">
-					<img class="pull-left updateHeadImg media-object "
-						src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}"
-						alt='我的头像' width="100" height="120" />
-				</c:if>
+				
+				
+				<img  onerror="javascript:this.src='img/head.gif'" class="pull-left updateHeadImg media-object " src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}" alt='我的头像' width="100" height="120" />
+				
 			</div>
 			<!-- 头像结束 -->
 			<!-- 简历基本信息 -->

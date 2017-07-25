@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
 import ynjh.common.exception.ResumeExistsException;
 import ynjh.common.util.CommonStatus;
+import ynjh.common.util.UploadFile;
 import ynjh.company.entity.CompanyResume;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -253,7 +255,6 @@ public class ResumeController {
 		resume.setResumePersonality(oldResume.getResumePersonality());
 		resume.setResumeStatusOne(oldResume.getResumeStatusOne());
 		resume.setResumeStatusThree(1);
-		resume.setResumeHeadImg(oldResume.getResumeHeadImg());
 		
 		
 		int result = rService.updateResume(resume);
@@ -835,5 +836,20 @@ public class ResumeController {
 			}
 		}
 		return mv;
+	}
+	/**
+	 * 牟勇：简历的照片上传
+	 * @param headImg 简历的头像照片数据
+	 * @param session 用来获得用户的登录账号，作为图片路径的一部分。也用来获得服务器上保存图片的绝对路径
+	 * @return 保存到数据库中的照片路径
+	 */
+	@RequestMapping("/ajaxUploadHeadImg")
+	@ResponseBody
+	public Object ajaxUploadHeadImg(MultipartFile headImg,HttpSession session){
+		User user=(User)session.getAttribute("user");
+		String uploadFilePath=UploadFile.uploadFile(
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				new MultipartFile[] { headImg }, session)[0];
+		return uploadFilePath;
 	}
 }
