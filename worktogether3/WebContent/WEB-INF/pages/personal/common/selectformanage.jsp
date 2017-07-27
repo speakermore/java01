@@ -24,10 +24,8 @@
 									<a href="javascript:ajaxPage('personal/user/personal_register_other')">完善信息</a>
 								</li>
 								<li><a href="javascript:ajaxPage('personal/user/personal_index_myResume')">我的简历</a></li>
-								<li><a href="javascript:ajaxPage('personal/user/personal_index_myPassword')">修改密码</a>
-								</li>
-								<li><a href="javascript:ajaxPage('#')">我屏蔽的企业</a>
-								</li>
+								<li><a href="javascript:ajaxPage('personal/user/personal_index_myPassword')">修改密码</a></li>
+								<li><a href="javascript:ajaxPage('#')">我屏蔽的企业</a></li>
 								<li><a href="javascript:ajaxPage('#')">我的额度</a>
 								</li>
 							</ul>
@@ -35,7 +33,6 @@
 					</div>
 				</div>
 				<!-- 牟勇：个人中心结束 -->
-				
 				<!-- 牟勇：我的关注 -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -57,7 +54,7 @@
 				<!-- 牟勇：我的关注结束 -->
 				<!-- 牟勇：我的应聘 -->
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="my-recruid" class="panel-heading">
 						 <a class="panel-title" data-toggle="collapse" data-parent="#myMenu" href="#my_offer">我的应聘</a>
 					</div>
 					<div id="my_offer" class="panel-collapse collapse">
@@ -76,7 +73,7 @@
 				<!-- 牟勇：我的应聘结束 -->
 				<!-- 牟勇：我的众筹 -->
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="my-crowdfund" class="panel-heading">
 						 <a class="panel-title" data-toggle="collapse" data-parent="#myMenu" href="#my_rowdfund">我的众筹</a>
 					</div>
 					<div id="my_rowdfund" class="panel-collapse collapse">
@@ -95,8 +92,8 @@
 				<!-- 牟勇：我的众筹结束 -->
 				<!-- 牟勇：我的创业 -->
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title" data-toggle="collapse" data-parent="#myMenu" href="#my_idea">我的创业</a>
+					<div id="my-partner" class="panel-heading">
+						<a class="panel-title" data-toggle="collapse" data-parent="#myMenu" href="#my_idea">我的创业</a>
 					</div>
 					<div id="my_idea" class="panel-collapse collapse">
 						<div class="panel-body">

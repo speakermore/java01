@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="ynjh.common.util.CommonStatus" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
@@ -41,13 +40,15 @@
 } */
 </style>
 
-<article class="col-md-12   work-together-shadow work-together-deep">
+<article class="row">
 	<c:if test="${user!=null }">
 		<!--我的信息-->
-		<section class="panel">
+		<section class="panel panel-default">
+			<div class="panel-heading">
 			<div class="panel-title">我的信息</div>
+			</div>
 			<div class="panel-body">
-				<div id="personal_headImg_border" class="col-md-12 padding_head padding_head_img">
+				<div id="personal_headImg_border" class="col-sm-12 padding_head padding_head_img">
 					<img id="headPhoto" class="img-thumbnail" onerror="javascript:this.src='img/head.gif'" src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" title="我的头像" alt="我的头像" />
 					<div class="caption" id="userImgHiddenText">
 						<p>
@@ -66,12 +67,11 @@
 								<form action="personal/user/updateUserHeadImgPathById" enctype="multipart/form-data" class="form-horizontal" role="form" method="post">
 									<div class="modal-body">
 										<div class="form-group">
-											<label for="userHeadImgPath" class="col-md-3 control-label">请在你的电脑上选择一个合适的头像：</label>
-											<div class="col-md-8">
+											<label for="userHeadImgPath" class="col-sm-3 control-label">请在你的电脑上选择一个合适的头像：</label>
+											<div class="col-sm-8">
 												<input class="form-control file" name="fileHeadImg" type="file" id="userHeadImgPathIndex" data-min-file-count="1" />
 											</div>
 										</div>
-
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -82,11 +82,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12 padding_head">
+				<div class="col-sm-12 padding_head">
 					<!--我的信息左边文字-->
 					<c:if test="${user.userRealName!='无' }">
 						<div class="row">
-							<p class="col-md-12 em">
+							<p class="col-sm-12">
 								<em>姓名： 
 								<c:if test="${fn:length(user.userRealName)>6 }">  
                          		${fn:substring(user.userRealName, 0, 6)}...  
@@ -99,49 +99,68 @@
 					</c:if>
 					<c:if test="${user.userRealName=='无' }">
 						<div class="row">
-							<p class="col-md-12">
+							<p class="col-sm-12">
 								请<a href="javascript:ajaxTest('personal/user/personal_register_real')">实名认证</a>
 							</p>
 						</div>
 					</c:if>
 					<c:if test="${user.userName!='无' }">
 						<div class="row">
-							<p class="col-md-12">
-								<em class="em">昵称： 
-								<c:if test="${fn:length(user.userName)>5 }">  
-                         			${fn:substring(user.userName, 0, 5)}...  
-                   				</c:if> 
-                   				<c:if test="${fn:length(user.userName)<=5 }">  
-                         			${user.userName }  
-                  			 	</c:if>
-								</em>
+							<p class="col-sm-12">
+								<em class="em">昵称：${user.userName }</em>
 							</p>
 						</div>
 					</c:if>
 					<c:if test="${user.userName=='无' }">
 						<div class="row">
-							<p class="col-md-12">
+							<p class="col-sm-12">
 								请<a href="javascript:ajaxTest('personal/user/personal_register_other')">完善信息</a>
 							</p>
 						</div>
 					</c:if>
 					<c:if test="${resume!=null }">
-						<div class="row em">
-							<p class="col-md-12">
-								<em>职位： 
-								<c:if test="${fn:length(resume.resumeJor)>6 }">  
-                         			${fn:substring(resume.resumeJor, 0, 6)}...  
-                   				</c:if> 
-                   				<c:if test="${fn:length(resume.resumeJor)<=6 }">  
-                         			${resume.resumeJor }  
-                  			 	</c:if>
-                  			 	</em>
+						<div class="row">
+							<p class="col-sm-12">
+								<em>职位：${resume.resumeJor }</em>
 							</p>
 						</div>
+						<c:set var="RECRUIT_STATUS" value="${CommonStatus.USER_RECRUIT_STATUS }"></c:set>
+						<c:set var="CROWDFUND_STATUS" value="${CommonStatus.USER_CROWDFUND_STATUS }"></c:set>
+						<c:set var="PARTNER_STATUS" value="${CommonStatus.USER_PARTNER_STATUS }"></c:set>
+						
+						<p class="row">
+							
+								<em class="col-sm-7 text-left" id="recruit-status">应聘状态：${RECRUIT_STATUS[user.userIsRecruit] }</em>
+								<c:if test="${user.userIsRecruit==0 }">
+									<span class="col-sm-5 text-right"><a id="i_want_recruit" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsRecruit',1,1,'recruit-status',${user.id})">我要应聘</a></span>
+								</c:if>
+								<c:if test="${user.userIsRecruit==1 }">
+									<span class="col-sm-5 text-right"><a id="i_want_recruit" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsRecruit',0,1,'recruit-status',${user.id})">结束应聘</a></span>
+								</c:if>
+							
+						</p>
+						<p class="row">
+								<em class="col-sm-7 text-left" id="crowdfund-status" >众筹状态：${CROWDFUND_STATUS[user.userIsCrowdFund] }</em>
+								<c:if test="${user.userIsCrowdFund==0 }">
+								<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',1,10,'crowdfund-status',${user.id})">我要众筹</a></span>
+								</c:if>
+								<c:if test="${user.userIsCrowdFund==1 }">
+								<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',0,10,'crowdfund-status',${user.id})">众筹结束</a></span>
+								</c:if>
+						</p>
+						<p class="row">
+								<em class="col-sm-7 text-left" id="partner-status">合伙状态：${PARTNER_STATUS[user.userIsPartner] }</em>
+								<c:if test="${user.userIsPartner==0 }">
+								<span class="col-sm-5 text-right"><a id="i_want_partner" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsPartner',1,10,'partner-status',${user.id})">我要合伙</a></span>
+								</c:if>
+								<c:if test="${user.userIsPartner==1 }">
+								<span class="col-sm-5 text-right"><a id="i_want_partner" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsPartner',0,10,'partner-status',${user.id})">合伙结束</a></span>
+								</c:if>
+						</p>
 					</c:if>
 					<c:if test="${resume==null }">
 						<div class="row">
-							<p class="col-md-12">
+							<p class="col-sm-12">
 								请<a href="personal/resume/createResume">创建简历</a>
 							</p>
 						</div>
@@ -174,7 +193,6 @@
 			</div>
 		</section>
 	</c:if>
-	
 	<!--我的信息结束-->
 	<!--我的信息列表开始-->
 	<section class="panel">

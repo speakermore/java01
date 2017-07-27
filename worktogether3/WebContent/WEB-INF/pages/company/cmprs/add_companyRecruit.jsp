@@ -39,25 +39,6 @@
 						</div>
 					</div>
 					<!-- 岗位选择结束 -->
-					<!-- 招聘薪资和学历要求 -->
-					<div class="form-group">
-						<label class="control-label col-sm-2">月薪:</label>
-						<div class="col-sm-4">
-							<input class="form-control" name="cmpRecWage" />
-						</div>
-						<label class="control-label col-sm-2">学历要求:</label>
-						<div class="col-sm-4">
-							<select class="form-control" name="cmpRecEducation">
-								<option value="">请选择</option>
-								<option value="本科">本科</option>
-								<option value="博士后">博士后</option>
-								<option value="博士">博士</option>
-								<option value="大专">大专</option>
-								<option value="其他">其他</option>
-							</select>
-						</div>
-					</div>
-					<!-- 招聘薪资和学历要求结束 -->
 					<!-- 需求人数 -->
 					<div class="form-group">
 						<label class="control-label col-sm-2">需求人数:</label>
@@ -70,11 +51,28 @@
 						</div>
 					</div>
 					<!-- 需求人数结束 -->
+					<!-- 招聘薪资和学历要求 -->
+					<div class="form-group">
+						<label class="control-label col-sm-2">月薪:</label>
+						<div class="col-sm-10">
+							<input class="form-control" name="cmpRecWage" />
+						</div>
+					</div>
+					<!-- 招聘薪资和学历要求结束 -->
 					<!-- 工作所需技能及水平描述 -->
 					<div class="form-group">
-						<label class="control-label col-sm-3">工作所需技能及水平描述:</label>
+						<label class="control-label col-sm-3">岗位职责及技能要求描述:</label>
 						<div class="col-sm-12">
-							<textarea class="ckeditor form-control" name="cmpRecExperience" cols="20" rows="2" maxlength="500">${cmpRecExperience}</textarea>
+							<textarea class="ckeditor form-control" name="cmpRecExperience" cols="20" rows="2" maxlength="500">
+								<p><b>岗位职责：</b></p>
+								<br />
+								<br />
+								<br />
+								<p><b>技能要求：</b></p>
+								<br />
+								<br />
+								<br />
+							</textarea>
 						</div>
 						<script type="text/javascript">
 						CKEDITOR.replace('cmpRecExperience');

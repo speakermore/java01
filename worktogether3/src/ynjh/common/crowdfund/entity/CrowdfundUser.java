@@ -12,7 +12,7 @@ public class CrowdfundUser implements Serializable{
 	
 	private Integer id;
 	private Integer crowdfundId;//项目众筹表ID
-	private String demandJobName;//岗位名称
+	private Integer demandJobId;//岗位名称
 	private Integer userId;//用户表ID
 	private Integer checkStatus;//众筹录用状态
 	//附加项（mybatis导入联表查询数据）
@@ -33,11 +33,11 @@ public class CrowdfundUser implements Serializable{
 	public void setCrowdfundId(Integer crowdfundId) {
 		this.crowdfundId = crowdfundId;
 	}
-	public String getDemandJobName() {
-		return demandJobName;
+	public Integer getDemandJobId() {
+		return demandJobId;
 	}
-	public void setDemandJobName(String demandJobName) {
-		this.demandJobName = demandJobName;
+	public void setDemandJobId(Integer demandJobId) {
+		this.demandJobId = demandJobId;
 	}
 	public Integer getUserId() {
 		return userId;

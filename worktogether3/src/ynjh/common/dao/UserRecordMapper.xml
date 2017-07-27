@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 牟勇：用户状态记录的映射类 -->
+<mapper namespace="ynjh.common.dao.UserRecordMapper">
+	<!-- 添加用户记录 -->
+	<insert id="addUserRecord" parameterType="UserRecord">
+		INSERT INTO userrecord(userId,userrOperator,userrTime,userrOpType,userrMoney,userrMem)
+		VALUES(#{userId},#{userrOperator},#{userrTime},#{userrOpType},#{userrMoney},#{userrMem})
+	</insert>
+	<!-- 根据用户id和操作，查找最近的一次开始（userrMoney=0）的时间 -->
+	<select id="findUserrTimeByUserIdAndUserrOperator" resultType="java.sql.Timestamp">
+		select max(userrTime) from userrecord where 
+		userId=#{userId} and userrOperator=#{userrOperator} and userrMoney=0
+	</select>
+</mapper>

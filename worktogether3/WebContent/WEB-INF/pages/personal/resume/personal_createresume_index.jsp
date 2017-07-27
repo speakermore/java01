@@ -91,68 +91,62 @@
 				</div>
 				<div class="row">
 				<!-- 牟勇：已增加文件上传功能 -->
-				<div class="col-sm-2 column">
+				<div class="col-sm-2">
 					<a title="单击上传头像" data-toggle="modal" href="#modal-container-headImg" class="thumbnail"><img onerror="javascript:this.src='img/head.gif'" src="img/upload/personal/${user.userLoginId }/${user.userHeadImgPath}" id="head_img" width="100" height="120" /></a>
 				</div> 
 				
 				<!-- 简历基本信息左侧 -->
-				<div class="col-sm-5 column">
+				<div class="col-sm-5">
 					<div class="form-group">
-						<label for="resumeName" class="col-sm-4 control-label">姓名：</label>
-						<div class="col-sm-8">
+						<label for="resumeName" class="col-sm-5 control-label">姓名：</label>
+						<div class="col-sm-7">
 							<input class="form-control" value="${user.userRealName }" name="resumeName" id="resumeName" type="text" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeBirthday" class="col-sm-4 control-label">出生日期：</label>
-						<div class="col-sm-8">
+						<label for="resumeBirthday" class="col-sm-5 control-label">出生日期：</label>
+						<div class="col-sm-7">
 							<input value="<fmt:formatDate value="${user.userBirthday }" pattern="yyyy-MM-dd"/>" class="form-control form_datetime" id="resumeBirthday" name="resumeBirthday" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumePhone" class="col-sm-4 control-label">手机：</label>
-						<div class="col-sm-8">
+						<label for="resumePhone" class="col-sm-5 control-label">手机：</label>
+						<div class="col-sm-7">
 							<input class="form-control" value="${user.userLoginId }" id="resumePhone" type="text" name="resumePhone" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeEmail" class="col-sm-4 control-label">邮箱：</label>
-						<div class="col-sm-8">
+						<label for="resumeEmail" class="col-sm-5 control-label">邮箱：</label>
+						<div class="col-sm-7">
 							<input class="form-control" value="${user.userEmail }" id="resumeEmail" type="text" name="resumeEmail" />
 						</div>
 					</div>
 				</div>
 				<!-- 简历基本信息左侧结束 -->
 				<!-- 简历基本信息右侧 -->
-				<div class="col-sm-5 column">
+				<div class="col-sm-5">
 					<div class="form-group">
-						<label for="resumeGender" class="col-sm-4 control-label">性别：</label>
-						<div class="col-sm-8">
+						<label for="resumeGender" class="col-sm-5 control-label">性别：</label>
+						<div class="col-sm-7">
 							<label class="col-sm-2 control-label">男</label>
 							<div class="col-sm-4">
-								<input type="radio" class="form-control radio" name="resumeGender" id="resumeGender" value="1" checked="checked">
+								<input type="radio" class="radio" name="resumeGender" id="resumeGender" value="1" checked="checked">
 							</div>
 							<label  class="col-sm-2 control-label">女</label>
 							<div class="col-sm-4">
-								<input type="radio" class="form-control radio" name="resumeGender" id="resumeGender" value="0"> 
+								<input type="radio" class="radio" name="resumeGender" id="resumeGender" value="0"> 
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="resumeWorks" class="col-sm-4 control-label">开始工作时间：</label>
-						<div class="col-sm-8">
+						<label for="resumeWorks" class="col-sm-5 control-label">开始工作时间：</label>
+						<div class="col-sm-7">
 							<input class="form-control form_datetime" id="resumeWorks" name="resumeWorks" readonly="readonly" placeholder="请选择日期" />
 						</div>
 					</div>
-					<!-- <div class="form-group">
-						<label for="resumeNowResidence" class="col-sm-4 control-label">户籍地：</label>
-						<div class="col-sm-8">
-							<input class="form-control" id="resumeNowResidence" name="resumeNowResidence" type="text" />
-						</div>
-					</div> -->
 					<div class="form-group">
-						<label for="resumeJor" class="col-sm-4 control-label">目前职位：</label>
-						<div class="col-sm-8">
+						<label for="resumeJor" class="col-sm-5 control-label">目前职位：</label>
+						<div class="col-sm-7">
 							<input class="form-control" id="resumeJor" name="resumeJor" type="text" />
 						</div>
 					</div>
@@ -244,11 +238,11 @@
 									<label for="resumeEducation" class="col-sm-4 control-label">最高学历：</label>
 									<div class="col-sm-8">
 										<select class="form-control" id="resumeEducation" name="resumeEducation">
-											<option value="大学本科">大学本科</option>
+											<option value="本科">本科</option>
 											<option value="博士后">博士后</option>
 											<option value="博士">博士</option>
 											<option value="硕士">硕士</option>
-											<option value="大学专科">大学专科</option>
+											<option value="专科">专科</option>
 											<option value="高中">高中</option>
 											<option value="其他">其他</option>
 										</select>

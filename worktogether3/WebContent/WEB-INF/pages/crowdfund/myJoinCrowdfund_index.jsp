@@ -30,6 +30,7 @@ td a:hover {
 	vertical-align: middle !important;
 }
 </style>
+
 <table class="table table-hover table-striped">
 	<tr>
 		<th>参与项目</th>
@@ -39,7 +40,7 @@ td a:hover {
 		<th>申请进度</th>
 	</tr>
 	<%--众筹推荐列表 --%>
-	<c:if test="${cfUserList!=null}">
+	<c:if test="${user.userIsRecruit==1}">
 		<c:forEach items="${cfUserList}" var="cfu">
 			<tr>
 				<td><a href="crowdfund/crowdfundOnlyInfo?id=${cfu.id}">${cfu.crowdfundProjectName}</a></td>
@@ -57,6 +58,7 @@ td a:hover {
 			</tr>
 		</c:forEach>
 	</c:if>
+	
 </table>
 <%--无众筹 --%>
 <div id="showTips" style="display: none;">
@@ -66,6 +68,11 @@ td a:hover {
 		Tips:亲！您还没有参与的众筹项目，快去技术众筹大厅看看吧！
 	</div>
 </div>
+<c:if test="${user.userIsRecruit==0 }">
+<div class="col-sm-12 alert alert-danger alert-dismissable fade in">
+	需要开启“我要应聘”，才能参与技术众筹<a href="" class="close" data-dismiss="alert" aria-label="关闭"><span aria-hidden="true">&times;</span></a>
+</div>
+</c:if>
 <script type="text/javascript">
 	$(function() {
 		if ($("table tr td:first").text().length === 0) {

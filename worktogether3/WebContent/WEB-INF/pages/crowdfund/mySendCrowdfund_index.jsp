@@ -81,6 +81,11 @@
 		Tips:亲！你还没有发布过众筹信息！
 	</div>
 </div>
+<c:if test="${user.userIsRecruit==0 }">
+	<div class="col-sm-12 alert alert-danger alert-dismissable fade in">
+		需要开启“我要众筹”按钮，才能发布众筹信息<a href="" class="close" data-dismiss="alert" aria-label="关闭"><span aria-hidden="true">&times;</span></a>
+	</div>
+</c:if>
 <!-- 模态框提示 -->
 <input type="hidden" id="info" value="${info}">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"

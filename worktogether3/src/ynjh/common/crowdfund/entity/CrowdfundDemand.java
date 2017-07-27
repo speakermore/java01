@@ -13,38 +13,36 @@ public class CrowdfundDemand implements Serializable{
 	
 	private Integer id;
 	private Integer crowdfundId;//项目众筹ID
-	private String demandJobName;//需求岗位表ID
+	private Integer demandJobId;//需求岗位表ID
+	private Integer jobParentId;//父级岗位ID
 	private String demandSummary;//需求描述
 	private Integer demandPeopleCount;//需求人数
-	
+	private String jobType;//岗位类别（一级）
+	private String jobName;//岗位职称（二级）
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public Integer getCrowdfundId() {
 		return crowdfundId;
 	}
 
-
 	public void setCrowdfundId(Integer crowdfundId) {
 		this.crowdfundId = crowdfundId;
 	}
-
-
-	public String getDemandJobName() {
-		return demandJobName;
+	
+	public Integer getDemandJobId() {
+		return demandJobId;
 	}
 
 
-	public void setDemandJobName(String demandJobName) {
-		this.demandJobName = demandJobName;
+	public void setDemandJobId(Integer demandJobId) {
+		this.demandJobId = demandJobId;
 	}
 
 
@@ -67,12 +65,36 @@ public class CrowdfundDemand implements Serializable{
 		this.demandPeopleCount = demandPeopleCount;
 	}
 
+	public Integer getJobParentId() {
+		return jobParentId;
+	}
+
+	public void setJobParentId(Integer jobParentId) {
+		this.jobParentId = jobParentId;
+	}
+
+	public String getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(String jobType) {
+		this.jobType = jobType;
+	}
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
 
 	@Override
 	public String toString() {
-		return "CrowdfundDemand [id=" + id + ", crowdfundId=" + crowdfundId + ", demandJobName=" + demandJobName + ", demandSummary="
-				+ demandSummary + ", demandPeopleCount=" + demandPeopleCount + "]";
+		return "CrowdfundDemand [id=" + id + ", crowdfundId=" + crowdfundId + ", demandJobId=" + demandJobId
+				+ ", jobParentId=" + jobParentId + ", demandSummary=" + demandSummary + ", demandPeopleCount="
+				+ demandPeopleCount + ", jobType=" + jobType + ", jobName=" + jobName + "]";
 	}
-	
+
 	
 }

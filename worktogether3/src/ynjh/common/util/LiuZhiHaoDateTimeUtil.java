@@ -9,7 +9,7 @@ import ynjh.common.exception.AgeOverFlowException;
  * @author 刘志浩
  *
  */
-public class GetAge {
+public class LiuZhiHaoDateTimeUtil {
 	/**
 	 * 牟勇：让一个日期换算为到今天为止的年份
 	 * @param dateOfBirth 传入的一个日期
@@ -40,4 +40,14 @@ public class GetAge {
         }
         return age;
     }
+	/**
+	 * 牟勇：计算两个日期之间相隔几天，不足一天部分会被舍去。<br />
+	 * <strong>注意，如果startDate大于endDate，会返回负天数</strong>
+	 * @param startDate 开始的时间
+	 * @param endDate 结束的时间
+	 * @return 相隔的天数
+	 */
+	public static long getDays(Date startDate,Date endDate){
+		return (endDate.getTime()-startDate.getTime())/1000/3600/24;
+	}
 }

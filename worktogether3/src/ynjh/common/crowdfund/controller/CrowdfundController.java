@@ -1,10 +1,8 @@
 package ynjh.common.crowdfund.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-
 import java.util.List;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -171,7 +169,7 @@ public class CrowdfundController {
 	@RequestMapping(value="addCrowdfund",method=RequestMethod.POST)
 	public String addCrowdfund(@RequestParam String crowdfundProjectName,@RequestParam String crowdfundProjectMoney,@RequestParam String crowdfundProjectCycle,
 			@RequestParam String crowdfundProjectEndDate,@RequestParam String crowdfundProjectSummary,@RequestParam String crowdfundProjectMethod,
-			@RequestParam String[] job1,@RequestParam String[] job2,@RequestParam String[] demandPeopleCount,@RequestParam String[] demandSummary,
+			@RequestParam Integer[] job1,@RequestParam Integer[] job2,@RequestParam Integer[] demandPeopleCount,@RequestParam String[] demandSummary,
 			HttpSession session,RedirectAttributes red,Model model){
 		String info="";
 		//众筹信息添加
@@ -183,7 +181,7 @@ public class CrowdfundController {
 		//项目周期
 		addCf.setCrowdfundProjectCycle(crowdfundProjectCycle);
 		//开始时间
-		addCf.setCrowdfundProjectStartDate(new Timestamp(new Date().getTime()));
+		addCf.setCrowdfundProjectStartDate(new Timestamp(System.currentTimeMillis()));
 		//结束时间
 		addCf.setCrowdfundProjectEndDate(Timestamp.valueOf(crowdfundProjectEndDate));
 		//项目简介
@@ -226,14 +224,14 @@ public class CrowdfundController {
 			for(int i=0;i<job1.length;i++){
 				CrowdfundDemand cfd=new CrowdfundDemand();
 				cfd.setCrowdfundId(cfId);
-				String jobName="";
-				if(job2[i]!=null){
-					jobName=job1[i]+job2[i];
+				Integer jobId;
+				if(job2[i]!=-1){
+					jobId=job2[i];
 				}else{
-					jobName=job1[i];
+					jobId=job1[i];
 				}
-				cfd.setDemandJobName(jobName);
-				cfd.setDemandPeopleCount(Integer.parseInt(demandPeopleCount[i]));
+				cfd.setDemandJobId(jobId);
+				cfd.setDemandPeopleCount(demandPeopleCount[i]);
 				cfd.setDemandSummary(demandSummary[i]);
 				int demandStatus = cfDemandService.addCrowdfundDemand(cfd);
 				if(demandStatus<0){
@@ -245,9 +243,6 @@ public class CrowdfundController {
 					info ="noJob";
 					model.addAttribute("info", info);
 					return "crowdfund/addcrowdfund";
-				}else{
-					info="yesJob";
-					red.addFlashAttribute("info", info);
 				}
 			}
 		}else{
@@ -255,34 +250,30 @@ public class CrowdfundController {
 			model.addAttribute("info", info);
 			return "crowdfund/addcrowdfund";
 		}
+		info="yesJob";
+		red.addFlashAttribute("info", info);
 		return "redirect:toAddcrowdfund";
 	}
 	
 	//ajax异步调用二级标题
 	@RequestMapping("job1")
 	@ResponseBody
-	public Object job1(@RequestParam String jobName){
+	public Object job1(@RequestParam String jobParentId){
 		List<Job> listjob2=null;
-		List<String> listName = new ArrayList<String>();
-		if(jobName!=null||"".equals(jobName)){
-			listjob2 = jobService.findJob2(jobName.trim());
-			if(listjob2!=null){
-				for(Job jb:listjob2){
-					String name = jb.getJobName();
-					listName.add(name);
-				}
-			}else{
-				listName.add(null);
-			}
+		if(jobParentId!=null||"".equals(jobParentId)){
+			listjob2 = jobService.findJob2(Integer.parseInt(jobParentId.trim()));
 		}
-		return JSON.toJSONString(listName);
+		if(listjob2.size()<=0||"".equals(listjob2)){
+			return JSON.toJSONString(0);
+		}
+			return JSON.toJSONString(listjob2);
+		
 		}
 	//我参与的众筹()
 	
 	//我发布的众筹(查看，管理修改)
 	@RequestMapping("mySendCrowdfund")
 	public String mySendCrowdfund(Model model,HttpSession session){
-		
 		//根据个人ID查询发布信息
 		Integer publisherId=null;
 		User user=null;
@@ -327,7 +318,7 @@ public class CrowdfundController {
 	@RequestMapping(value="/updateCrowdfundOK",method=RequestMethod.POST)
 	public String updateCrowdfundOK(@RequestParam Integer cfId,@RequestParam String crowdfundProjectName,@RequestParam String crowdfundProjectMoney,@RequestParam String crowdfundProjectCycle,
 			@RequestParam String crowdfundProjectEndDate,@RequestParam String crowdfundProjectSummary,@RequestParam String crowdfundProjectMethod,
-			@RequestParam String[] job1,@RequestParam String[] job2,@RequestParam String[] demandPeopleCount,@RequestParam String[] demandSummary,@RequestParam Integer[] jobIds,
+			@RequestParam Integer[] job1,@RequestParam Integer[] job2,@RequestParam String[] demandPeopleCount,@RequestParam String[] demandSummary,@RequestParam Integer[] jobIds,
 			HttpSession session,RedirectAttributes red,Model model){
 		String info="";
 		//众筹信息添加
@@ -356,19 +347,19 @@ public class CrowdfundController {
 			/**当有岗位新增加时，你是没办法获取到该修改岗位ID的。
 			*这时你就要判断有几个岗位需要修改，有几个岗位是新增的，有没有多余删除的岗位，阿西吧！
 			*思路，先判断不存在删除和添加的情况，这无疑是最好的。**/
-			//走起
+			
 			if(job1.length>=jobIds.length){
 				for(int i=0;i<jobIds.length;i++){
 					CrowdfundDemand cfd=new CrowdfundDemand();
 					int demandStatus=-1;//岗位修改状态
 					cfd.setId(jobIds[i]);
-					String jobName="";
-					if(job2[i]!=null){
-						jobName=job1[i]+job2[i];
+					Integer jobId;
+					if(job2[i]!=null&&job2[i]>0){
+						jobId=job2[i];
 					}else{
-						jobName=job1[i];
+						jobId=job1[i];
 					}
-					cfd.setDemandJobName(jobName);
+					cfd.setDemandJobId(jobId);
 					cfd.setDemandPeopleCount(Integer.parseInt(demandPeopleCount[i]));
 					cfd.setDemandSummary(demandSummary[i]);
 					demandStatus = cfDemandService.updateCrowdfundDemand(cfd);
@@ -384,20 +375,20 @@ public class CrowdfundController {
 						return "crowdfund/updateCrowdfund";
 					}else{
 						info="yesJob";
-						red.addFlashAttribute("info", info);
+						
 					}
 				}
 				if(job1.length>jobIds.length){
 					for(int j=jobIds.length;j<job1.length;j++){
 						CrowdfundDemand cfd=new CrowdfundDemand();
 						cfd.setCrowdfundId(cfId);
-						String jobName="";
-						if(job2[j]!=null){
-							jobName=job1[j]+job2[j];
+						Integer jobId;
+						if(job2[j]!=null&&job2[j]>0){
+							jobId=job2[j];
 						}else{
-							jobName=job1[j];
+							jobId=job1[j];
 						}
-						cfd.setDemandJobName(jobName);
+						cfd.setDemandJobId(jobId);
 						cfd.setDemandPeopleCount(Integer.parseInt(demandPeopleCount[j]));
 						cfd.setDemandSummary(demandSummary[j]);
 						cfDemandService.addCrowdfundDemand(cfd);
@@ -411,43 +402,45 @@ public class CrowdfundController {
 			model.addAttribute("info", info);
 			return "";
 		}
+		red.addFlashAttribute("info", info);
 		return "redirect:mySendCrowdfund";
 		
 	}
 	//删除岗位
 	@RequestMapping("deleteJob")
+	@ResponseBody
 	public Object deleteJob(@RequestParam String jobId){
 		CrowdfundDemand cfd = new CrowdfundDemand();
 		cfd.setId(Integer.parseInt(jobId));
 		cfDemandService.deleteCrowdfundDemand(cfd);
-		return JSON.toJSONString(null);
+		return JSON.toJSONString("ok");
 	}
 	
-	//删除撤回众筹信息
+	//删除撤回众筹信息(不做真删除)
 	@RequestMapping("deleteCrowdfund")
 	public String deleteCf(@RequestParam Integer id,RedirectAttributes red){
 		//删除众筹信息前先判断有没有岗位需求
 		String info ="N";
 		Boolean flag = false;
-		CrowdfundDemand cfd = new CrowdfundDemand();
+		//CrowdfundDemand cfd = new CrowdfundDemand();
 		//查询岗位存不存在
-		List<CrowdfundDemand> cfdlist = cfDemandService.listCrowdfundDemand(id);
+		//List<CrowdfundDemand> cfdlist = cfDemandService.listCrowdfundDemand(id);
 		//有则先删除岗位表信息，再删众筹信息
-		if(cfdlist!=null&&cfdlist.size()>0){
-			cfd.setCrowdfundId(id);
-			int s = cfDemandService.deleteCrowdfundDemand(cfd);
-			if(s>0){
+		//if(cfdlist!=null&&cfdlist.size()>0){
+			//cfd.setCrowdfundId(id);
+			//int s = cfDemandService.deleteCrowdfundDemand(cfd);
+			//if(s>0){
 				int cf = cfService.deleteCrowdfund(id);
 				if(cf>0){
 					flag=true;
 				}
-			}
-		}else{
-			int cf = cfService.deleteCrowdfund(id);
-			if(cf>0){
-				flag=true;
-			}
-		}
+		//	}
+		//}else{
+		//	int cf = cfService.deleteCrowdfund(id);
+		//	if(cf>0){
+		//		flag=true;
+		//	}
+		//}
 		if(flag){
 			info="Y";
 		}

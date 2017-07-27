@@ -130,7 +130,7 @@ public class MyCommonController {
 	@RequestMapping(value="/findJobs2/{parentId}",method=RequestMethod.POST)
 	@ResponseBody
 	public Object findJobs2(@PathVariable Integer parentId){
-		List<Job> jobs2=jobService.findByParentId(parentId);
+		List<Job> jobs2=jobService.findJob2(parentId);
 		StringBuffer html=new StringBuffer();
 		//循环得到select框中选项的html
 		for(Job job:jobs2){

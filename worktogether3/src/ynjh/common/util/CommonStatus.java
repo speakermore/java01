@@ -1,4 +1,8 @@
 package ynjh.common.util;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 各种状态值常量数组,用于在页面显示状态的内容，省去判断语句
  * @author 牟勇
@@ -6,15 +10,15 @@ package ynjh.common.util;
  */
 public class CommonStatus {
 	/**
-	 * 0：企业基本信息激活
+	 * 0：企业基本信息激活，用于页面手风琴切换时，哪一栏设置active的标志
 	 */
 	public static final Integer EDIT_COMPANY_BASE_INFO=0;
 	/**
-	 * 1：企业环境图片激活
+	 * 1：企业环境图片激活，用于页面手风琴切换时，哪一栏设置active的标志
 	 */
 	public static final Integer EDIT_COMPANY_ENVRIMENT_PIC=1;
 	/**
-	 * 2:企业详细资料激活
+	 * 2:企业详细资料激活,用于页面手风琴切换时，哪一栏设置active的标志
 	 */
 	public static final Integer EDIT_COMPANY_DETIAL_INFO=2;
 	/**
@@ -78,4 +82,62 @@ public class CommonStatus {
 	 * 1.尚未阅读 2.接受简历 3.拒绝简历 4.已阅读
 	 */
 	public static final String[] RESUME_STATUS={"","尚未阅读","接受简历","拒绝简历","已阅读"};
+	/**
+	 * 应聘状态：{"未应聘","应聘中"}
+	 */
+	public static final String[] USER_RECRUIT_STATUS={"未应聘","应聘中"};
+	/**
+	 * 众筹状态：{"未众筹","发布众筹中"}
+	 */
+	public static final String[] USER_CROWDFUND_STATUS={"未众筹","众筹中"};
+	/**
+	 * 合伙状态：{"未合伙","发布合伙中"}
+	 */
+	public static final String[] USER_PARTNER_STATUS={"未合伙","合伙中"};
+	
+	/**
+	 * 字段名称转说明文字：开始状态
+	 */
+	public static final Map<String,String> USER_START_STATUS_DISCRIPTION=new HashMap<String,String>();
+	/**
+	 * 字段名称转说明文字：状态名称
+	 */
+	public static final Map<String, String> USER_STATUS_DISCRIPTION=new HashMap<String,String>();
+	/**
+	 * 字段名称转说明文字：结束状态
+	 */
+	public static final Map<String, String> USER_END_STATUS_DISCRIPTION=new HashMap<String,String>();
+	/**
+	 * 计算规则：每种扣费的基本额度，按天计费
+	 */
+	public static final Map<String, Integer> EXPENSES_CALC_BASE_MONEY=new HashMap<String,Integer>();
+	/**
+	 * 操作类型：两个操作类型，参与：1，发布：0
+	 */
+	public static final Map<String, Integer> USER_OP_TYPE=new HashMap<String,Integer>();
+	
+	
+	static{
+		USER_STATUS_DISCRIPTION.put("userIsRecruit", "应聘");
+		USER_STATUS_DISCRIPTION.put("userIsCrowdFund", "众筹");
+		USER_STATUS_DISCRIPTION.put("userIsPartner", "合伙");
+		
+		USER_START_STATUS_DISCRIPTION.put("userIsRecruit", "开始应聘");
+		USER_START_STATUS_DISCRIPTION.put("userIsCrowdFund", "开始发布众筹");
+		USER_START_STATUS_DISCRIPTION.put("userIsPartner", "开始发布合伙");
+		
+		USER_END_STATUS_DISCRIPTION.put("userIsRecruit", "结束应聘");
+		USER_END_STATUS_DISCRIPTION.put("userIsCrowdFund", "结束发布众筹");
+		USER_END_STATUS_DISCRIPTION.put("userIsPartner", "结束发布合伙");
+		
+		EXPENSES_CALC_BASE_MONEY.put("userIsRecruit", 1);
+		EXPENSES_CALC_BASE_MONEY.put("userIsCrowdFund", 10);
+		EXPENSES_CALC_BASE_MONEY.put("userIsPartner", 10);
+		
+		USER_OP_TYPE.put("userIsRecruit", 1);
+		USER_OP_TYPE.put("userIsCrowdFund", 0);
+		USER_OP_TYPE.put("userIsPartner", 0);
+		
+		
+	}
 }

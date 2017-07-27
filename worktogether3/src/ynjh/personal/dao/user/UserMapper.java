@@ -53,7 +53,14 @@ public interface UserMapper {
 	public User selectUserById(Integer id);
 
 	/**
-	 * 充值
+	 * 牟勇：完成对用户余额的更新<br/>
+	 * 这里是直接更新了余额字段，并没有做任何的计算<br />
+	 * 余额理论上是大于等于0的，但本方法并未做相应的判断<br />
+	 * 如果你要计算余额，可以先调用findUserMoneyByUserId方法获得余额，计算完毕之后再调用此方法，完成用户余额的修改<br />
+	 * <strong>注意：余额是必须进行计算后的数额，不能直接把增加或减少的额度传进来</strong>
+	 * @param money 用户的实际余额
+	 * @param id 用户的主键id
+	 * @return 大于0表示成功，否则表示失败
 	 */
 	public Integer updateMoney(@Param("userMoney") Double money, @Param("id") Integer id);
 
@@ -101,4 +108,18 @@ public interface UserMapper {
 	 * 匹配用户名是否重复
 	 */
 	public User verificationUserLoginId(String userLoginId);
+	/**
+	 * 牟勇：根据指定的主键id，修改用户表中某个指定的属性
+	 * @param column 字段名
+	 * @param value 字段值
+	 * @param id 用户的主键id
+	 * @return 成功应该返回大于0的整数，否则为失败
+	 */
+	public Integer updateUserProperty(@Param("column")String column,@Param("value")String value,@Param("id")Integer id);
+	/**
+	 * 牟勇：根据用户id查询用户的余额
+	 * @param id 用户id
+	 * @return 用户余额
+	 */
+	public Integer findUserMoneyByUserId(Integer id);
 }

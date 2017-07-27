@@ -49,14 +49,9 @@ public class JobServiceImpl implements JobService {
 	 * 根据一级岗位名称查询二级岗位
 	 */
 	@Override
-	public List<Job> findJob2(String jobType) {
+	public List<Job> findJob2(Integer jobParentId) {
 		
-		return jobMapper.findJob2(jobType);
-	}
-	@Override
-	public List<Job> findByParentId(Integer parentId) {
-		
-		return jobMapper.findByParentId(parentId);
+		return jobMapper.findJob2(jobParentId);
 	}
 
 }

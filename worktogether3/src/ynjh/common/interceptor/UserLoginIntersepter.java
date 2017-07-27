@@ -23,9 +23,9 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
-		String[] ignorePathes={"admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+		String[] ignorePathes={"crowdfundAllList","admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
 		//登录之后，不作处理的公共路径
-		String[] commonPathes={"findJobs2","ckeditor/upload","findAllNationName"};
+		String[] commonPathes={"expenses","findJobs2","ckeditor/upload","findAllNationName"};
 		HttpSession session=request.getSession();
 		//获得请求路径
 		StringBuffer path=request.getRequestURL();

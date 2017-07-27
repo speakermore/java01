@@ -43,7 +43,12 @@ public class User implements Serializable{
 	private Timestamp userBirthday;
 	// 用户等级
 	private Integer userLevel;
-	
+	//是否应聘中，0.在职中，1.应聘中
+	private Integer userIsRecruit;
+	//是否众筹中，0.未众筹，2.发布众筹中
+	private Integer userIsCrowdFund;
+	//是否合伙创业中，0.未合伙创业，2.发布合伙创业中
+	private Integer userIsPartner;
 	public User() {
 	}
 
@@ -53,7 +58,6 @@ public class User implements Serializable{
 			String userIDImgCon, Timestamp userCreateDate,
 			String userHeadImgPath, Double userMoney, Timestamp userBirthday,
 			Integer userLevel) {
-		super();
 		this.userLoginId = userLoginId;
 		this.userPassword = userPassword;
 		this.userName = userName;
@@ -69,6 +73,31 @@ public class User implements Serializable{
 		this.userMoney = userMoney;
 		this.userBirthday = userBirthday;
 		this.userLevel = userLevel;
+	}
+	
+	
+	public Integer getUserIsRecruit() {
+		return userIsRecruit;
+	}
+
+	public void setUserIsRecruit(Integer userIsRecruit) {
+		this.userIsRecruit = userIsRecruit;
+	}
+
+	public Integer getUserIsCrowdFund() {
+		return userIsCrowdFund;
+	}
+
+	public void setUserIsCrowdFund(Integer userIsCrowdFund) {
+		this.userIsCrowdFund = userIsCrowdFund;
+	}
+
+	public Integer getUserIsPartner() {
+		return userIsPartner;
+	}
+
+	public void setUserIsPartner(Integer userIsPartner) {
+		this.userIsPartner = userIsPartner;
 	}
 
 	public Integer getId() {

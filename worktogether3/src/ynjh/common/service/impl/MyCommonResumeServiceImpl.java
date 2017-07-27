@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ynjh.common.dao.MyCommonResumeMapper;
 import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.service.MyCommonResumeService;
-import ynjh.common.util.GetAge;
+import ynjh.common.util.LiuZhiHaoDateTimeUtil;
 
 @Service
 public class MyCommonResumeServiceImpl implements MyCommonResumeService {
@@ -24,7 +24,7 @@ public class MyCommonResumeServiceImpl implements MyCommonResumeService {
 		//将Timestamp的工作时间转换为工作的年限
 		list.stream().forEach(m->{
 			try {
-				m.put("resumeWorks",GetAge.getAgeTools((Timestamp)m.get("resumeWorks")));
+				m.put("resumeWorks",LiuZhiHaoDateTimeUtil.getAgeTools((Timestamp)m.get("resumeWorks")));
 			} catch (AgeOverFlowException e) {
 				e.printStackTrace();
 			}

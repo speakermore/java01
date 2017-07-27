@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 何爽 用户加入众筹操作 -->
 <!-- 申请参与众筹-->
 <insert id="addCrowdfundUser" parameterType="CrowdfundUser">
-	insert into crowdfunduser(crowdfundId,demandJobName,userId,checkStatus)
-	values(#{crowdfundId},#{demandJobName},#{userId},#{checkStatus})
+	insert into crowdfunduser(crowdfundId,demandJobId,userId,checkStatus)
+	values(#{crowdfundId},#{demandJobId},#{userId},#{checkStatus})
 </insert>
 
 <!-- 修改参与者状态 -->
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT cf.*,cfu.checkStatus FROM crowdfund AS cf 
 		INNER JOIN crowdfunduser AS cfu 
 			WHERE cf.id=cfu.crowdfundId AND cf.crowdfundProjectCheckState=2 
-				AND cfu.userId=#{id}
+				AND cfu.userId=#{id} 
 </select>
 
 

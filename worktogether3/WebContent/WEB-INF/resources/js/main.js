@@ -38,5 +38,39 @@ var findJob2=function(parentId){
 		}
 	});
 };
+/**
+ * 牟勇：修改扣费状态的函数
+ * btn：点击的按钮（不一定是button，也可以是a，input等等标签）
+ * column:要修改状态的字段名，userIsRecruit/userIscrowdFun/userIspartner之一
+ * value:1表示开始，0表示结束
+ * baseMoney：应聘是1额度/天，发布众筹和发布合伙创业是10额度/天
+ * emId:是修改我的头像下面的状态文字的标签id，recruit-status/crowdfund-status/partner-status之一
+ * userId:登录用户的主键id
+ */
+var ajaxStatus=function(btn,column,value,baseMoney,emId,userId){
+	if(value==0||confirm('将从你的账户中扣除'+baseMoney+'额度/天,确定么？')){
+		$.ajax({
+			url:'common/expenses/charging',
+			data:{'column':column,'value':value,'userId':userId},
+			type:'POST',
+			dataType:'json',
+			success:function(data){
+				if(data.success){
+					$(btn).html(data.status);
+					//更换触发函数的值,不知道什么原因，不能成功
+//					$(btn).unbind('click');//先移除原先的click事件
+//					$(btn).bind('click',function(){ajaxStatus(btn,column,value==1?0:1,baseMoney,emId);});
+					$(btn).removeClass(data.btnRemoveClass);
+					$(btn).addClass(data.btnAddClass);
+					//更新用户头像下方的状态信息
+					$('#'+emId).html(data.emStatus);
+				}
+				alert(data.info);
+				//因为不能成功更换函数的参数值，只好直接刷新页面了
+				location.href='personal/common/initIndex?userId='+userId
+			}
+		});
+	}
+};
 
 

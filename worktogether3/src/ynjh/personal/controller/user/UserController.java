@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
 import ynjh.common.exception.AgeOverFlowException;
-import ynjh.common.util.GetAge;
+import ynjh.common.util.LiuZhiHaoDateTimeUtil;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
@@ -241,9 +241,9 @@ public class UserController {
 			if (follow == null) {
 				try {
 					userAndResume.setAge(
-							GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
+							LiuZhiHaoDateTimeUtil.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getUserBirthday()))));
 					userAndResume.setWorks(
-							GetAge.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
+							LiuZhiHaoDateTimeUtil.getAgeTools(myFormatter.parse(myFormatter.format(userAndResume.getResumeWorks()))));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				} catch (AgeOverFlowException e) {

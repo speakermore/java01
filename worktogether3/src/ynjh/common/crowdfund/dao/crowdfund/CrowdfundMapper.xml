@@ -33,7 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 项目删除 -->
 	<delete id="deleteCrowdfund">
-		delete from crowdfund where id=#{id}
+		<!-- delete from crowdfund where id=#{id} -->
+		update crowdfund set crowdfundProjectCheckState=4 where id=#{id}
 	</delete>
 	
 	<!-- 全部众筹项目信息查看 (审核通过的)-->
@@ -72,11 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 获取个人发布的众筹信息 -->
 	<select id="findMyCrowdfundOnly" resultType="Crowdfund">
-		select * from crowdfund where publisherId = #{publisherId} 
+		select * from crowdfund where publisherId = #{publisherId} and crowdfundProjectCheckState!=4 order by crowdfundProjectStartDate desc
 	</select>
 	<!-- 获取众筹总数量 审核通过的 -->
 	<select id="crowdfundCount" resultType="int">
-		select count(*) from crowdfund where crowdfundProjectCheckState=2
+		select count(*) from crowdfund where crowdfundProjectCheckState=2 order by crowdfundProjectStartDate desc
 	</select>
 	<!-- 获取用户匹配的众筹数量 审核通过-->
 	<select id="crowdfundCountJob">
@@ -95,6 +96,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 查询未审核众筹项目 -->
 	<select id="checkCrowdfund" resultType="Crowdfund">
-		SELECT * FROM crowdfund WHERE crowdfundProjectCheckState=1
+		SELECT * FROM crowdfund WHERE crowdfundProjectCheckState=1 order by crowdfundProjectStartDate desc
 	</select>
 </mapper>

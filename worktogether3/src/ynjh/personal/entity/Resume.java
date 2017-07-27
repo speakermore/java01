@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import ynjh.common.exception.AgeOverFlowException;
-import ynjh.common.util.GetAge;
+import ynjh.common.util.LiuZhiHaoDateTimeUtil;
 /**
  * 
  * @author 刘志浩
@@ -121,7 +121,7 @@ public class Resume implements Serializable{
 	public void setResumeWorks(Timestamp resumeWorks) {
 		this.resumeWorks = resumeWorks;
 		try {
-			works=GetAge.getAgeTools(resumeWorks);
+			works=LiuZhiHaoDateTimeUtil.getAgeTools(resumeWorks);
 		} catch (AgeOverFlowException e) {
 			e.printStackTrace();
 		}
@@ -217,7 +217,7 @@ public class Resume implements Serializable{
 	public void setResumeBirthday(Timestamp resumeBirthday) {
 		this.resumeBirthday = resumeBirthday;
 		try {
-			age=GetAge.getAgeTools(resumeBirthday);
+			age=LiuZhiHaoDateTimeUtil.getAgeTools(resumeBirthday);
 		} catch (AgeOverFlowException e) {
 			e.printStackTrace();
 		}

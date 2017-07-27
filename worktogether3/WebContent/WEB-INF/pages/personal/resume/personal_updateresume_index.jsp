@@ -80,7 +80,7 @@ var ajaxUploadHeadImg=function(){
 					<label class="control-label col-sm-2">应聘职位:</label>
 				<div class="col-sm-3">
 				<select class="form-control" id="job2" name="resumeTitle">
-					<option value="resume_update.resumeTitle">${resume_update.resumeTitle}</option>
+					<option value="${resume_update.resumeTitle}">${resume_update.resumeTitle}</option>
 				</select>
 				</div>
 				</div>
@@ -88,68 +88,67 @@ var ajaxUploadHeadImg=function(){
 		</div>
 		<div class="row">
 		<!-- 牟勇：头像上传已添加 -->
-		 <div class="col-sm-2 column">
+		 <div class="col-sm-2">
 			<a title="单击上传头像" href="#resume-head-img" data-toggle="modal"><img id="head_img" onerror="javascript:this.src='img/head.gif'" style="margin-left:3px" src="img/upload/personal/${user.userLoginId }/${resume_update.resumeHeadImg}" class="thumbnail" width="100" height="120" /></a>
 		</div> 
 		
 			<!-- 基本信息左侧 -->
 			<div class="col-sm-5">
 				<div class="form-group">
-					<label for="resumeName" class="col-sm-4 control-label">姓名：</label>
-					<div class="col-sm-8">
+					<label for="resumeName" class="col-sm-5 control-label">姓名：</label>
+					<div class="col-sm-7">
 						<input class="form-control" name="resumeName" id="resumeName" value="${resume_update.resumeName}" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="resumeBirthday" class="col-sm-4 control-label">出生日期：</label>
-					<div class="col-sm-8">
+					<label for="resumeBirthday" class="col-sm-5 control-label">出生日期：</label>
+					<div class="col-sm-7">
 						<input value="<fmt:formatDate value="${resume_update.resumeBirthday }" pattern="yyyy-MM-dd" />" class="form-control form_datetime" placeholder="请选择日期" name="resumeBirthday" id="resumeBirthday" readonly />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="resumePhone" class="col-sm-4 control-label">手机：</label>
-					<div class="col-sm-8">
+					<label for="resumePhone" class="col-sm-5 control-label">手机：</label>
+					<div class="col-sm-7">
 						<input value="${resume_update.resumePhone }" class="form-control" name="resumePhone" id="resumePhone" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="resumeEmail" class="col-sm-4 control-label">邮箱：</label>
-					<div class="col-sm-8">
+					<label for="resumeEmail" class="col-sm-5 control-label">邮箱：</label>
+					<div class="col-sm-7">
 						<input value="${resume_update.resumeEmail }" class="form-control" name="resumeEmail" id="resumeEmail" />
 					</div>
 				</div>
 			</div>
 			<!-- 基本信息左侧结束 -->
 			<!-- 基本信息右侧 -->
-			<div class="col-sm-4 column">
+			<div class="col-sm-5">
 				<div class="form-group">
-					<label for="resumeGender" class="col-sm-4 control-label">性别：</label>
-					<div class="col-sm-8">
-						<div class="col-sm-6 radio">
+					<label for="resumeGender" class="col-sm-5 control-label">性别：</label>
+					<div class="col-sm-7">
+						
 							<input type="radio" name="resumeGender" id="resumeGender" value="1" ${resume_update.resumeGender==1?"checked=\"checked\"":"" }>
-							<label>男</label>
-						</div>
-						<div class="col-sm-6 radio">
+							男
+						
 							<input type="radio" name="resumeGender" id="resumeGender" value="0" ${resume_update.resumeGender==0?"checked=\"checked\"":"" }>
-							<label>女</label>
-						</div>
+							女
+						
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="resumeWorks" class="col-sm-4 control-label">开始工作时间：</label>
-					<div class="col-sm-8">
+					<label for="resumeWorks" class="col-sm-5 control-label">开始工作时间：</label>
+					<div class="col-sm-7">
 						<input value="<fmt:formatDate value="${resume_update.resumeWorks }" pattern="yyyy-MM" />" placeholder="请选择日期" class="form-control" name="resumeWorks" id="resumeWorks" readonly />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="resumeNowResidence" class="col-sm-4 control-label">户籍地：</label>
-					<div class="col-sm-8">
+					<label for="resumeNowResidence" class="col-sm-5 control-label">户籍地：</label>
+					<div class="col-sm-7">
 						<input value="${resume_update.resumeNowResidence }" class="form-control" name="resumeNowResidence" id="resumeNowResidence" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="resumeJor" class="col-sm-4 control-label">目前岗位：</label>
-					<div class="col-sm-8">
+					<label for="resumeJor" class="col-sm-5 control-label">目前岗位：</label>
+					<div class="col-sm-7">
 						<input value="${resume_update.resumeJor }" class="form-control" name="resumeJor" id="resumeJor" />
 					</div>
 				</div>
@@ -235,8 +234,8 @@ var ajaxUploadHeadImg=function(){
 									<option value="博士后">博士后</option>
 									<option value="博士">博士</option>
 									<option value="硕士">硕士</option>
-									<option value="大学本科">大学本科</option>
-									<option value="大学专科">大学专科</option>
+									<option value="本科">本科</option>
+									<option value="专科">专科</option>
 									<option value="高中">高中</option>
 									<option value="其他">其他</option>
 								</select>
@@ -357,12 +356,7 @@ var ajaxUploadHeadImg=function(){
 			autoclose : true,
 			todayHighlight : true,
 			minView : "month"
-		}).on(
-				"click",
-				function() {
-					$("#resumeBirthday").datetimepicker("setEndDate",
-							$("#resumeWorks").val())
-				}).on('hide',function(e) {  
+		}).on('hide',function(e) {  
 	                $('#resumeForms').data('bootstrapValidator')  
                     .updateStatus('resumeBirthday', 'NOT_VALIDATED',null)  
                     .validateField('resumeBirthday');  
@@ -376,12 +370,7 @@ var ajaxUploadHeadImg=function(){
 			todayHighlight : true,
 			minView : 3,
 			startView:3
-		}).on(
-				"click",
-				function() {
-					$("#resumeWorks").datetimepicker("setStartDate",
-							$("#resumeBirthday").val())
-				}).on('hide',function(e) {  
+		}).on('hide',function(e) {  
 	                $('#resumeForms').data('bootstrapValidator')  
                     .updateStatus('resumeWorks', 'NOT_VALIDATED',null)  
                     .validateField('resumeWorks');  

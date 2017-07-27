@@ -112,4 +112,17 @@ textarea{
 .tab-pane form .form-group{
 	margin-bottom:25px;
 }
+/* 牟勇：实现我要应聘，我要众筹，我要合伙等用户状态的样式
+	btn-charging是状态处于扣费时的样式
+ */
+.btn-charging{
+	background-color:#337ab7;
+	border-color:#337ab7;
+	color:#fff;
+}
+.btn-charging:hover,.btn-charging:active,.btn-charging:focus{
+	background-color:#337ab7;
+	border-color:#337ab7;
+	color:#fff;
+}
 

@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="dist/css/bootstrapValidator.min.css">
 <link rel="shortcut icon" href="img/21495074072_.pic.png" href="img/21495074072_.pic.png" type="image/x-icon" >
 
-<title>发布众筹</title>
+<title>我的众筹-发布众筹</title>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
