@@ -46,4 +46,23 @@ public interface CompanyService {
 	public Integer deleteCompanyConnection(Integer id);
 	//匹配用户名是否重复
 	public Company verificationCompanyLoginId(String companyLoginId);
+	/**
+	 * 牟勇：查询所有的企业信息，为后台企业管理做准备
+	 * @return 所有的企业信息
+	 */
+	public List<Company> findAllCompany();
+	/**
+	 * 牟勇：根据企业用户id查询余额
+	 * @param companyId 企业用户的主键
+	 * @return 余额
+	 */
+	public Integer findCompanyMoneyById(Integer companyId);
+	/**
+	 * 牟勇：充值。根据企业主键完成对企业的充值计算<br />
+	 * <strong>注意：本方法中完成了余额的累加计算，只需要传入实际充入的金额即可</strong>
+	 * @param money 充值金额
+	 * @param companyId 企业用户主键
+	 * @return 大于0表示成功，否则表示失败
+	 */
+	public Integer updateCompanyMoney(Integer money,Integer companyId);
 }

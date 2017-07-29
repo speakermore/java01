@@ -15,4 +15,5 @@ public interface CompanyChargeService {
 	public Integer consumeMoney(CompanyCharge chargeConsume);
 	//记录数
 	public Integer getMaxPage(Integer companyId);
+	
 }

@@ -2,8 +2,6 @@ package ynjh.admin.service;
 
 	import java.util.List;
 
-	import org.apache.ibatis.annotations.Param;
-
 	import ynjh.admin.entity.Admin;
 
 	public interface SuperAdminService {

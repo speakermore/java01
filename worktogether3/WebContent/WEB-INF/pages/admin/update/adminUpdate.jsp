@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,24 +28,24 @@
 	<%@include file="../menu.jsp"%>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-1">
 					&nbsp;
 				</div>	
-			<div id="left_part" class="col-md-7">
-				<div class="col-md-12">
+			<div id="left_part" class="col-sm-6">
+				<div class="col-sm-12">
 					<p class="text-muted">你好，${admin.adminLoginId}</p>
 				</div>
-				<div id="enlightenment" class="col-md-7" >
+				<div id="enlightenment" class="col-sm-7" >
 					<p class="text-danger"><strong><h3>修改信息前，请务必确认输入的邮箱地址为真实有效邮箱，否则有可能造成密码无法重置</h3></strong></p>
 				</div>
-				<div id="adin_info" class="col-md-5">
+				<div id="adin_info" class="col-sm-5">
 					<p style="color:red;">${operatorInfo}</p>
 					<p class="text-info">管理员姓名：${admin.adminName}</p>
 					<p class="text-info">管理员手机：${admin.adminTel}</p>
 					<p class="text-info">管理员邮箱：${admin.adminEmail}</p>
 				</div>
 			</div>
-			<div id="maintenance"   class="col-md-5">
+			<div id="maintenance"   class="col-sm-5">
 				<form action="admin/maIntegerainAdmin" method="post" id="form_maintenance">
 				  <div class="form-group">
 				    <label for="real_name">新的管理员姓名</label>
@@ -60,7 +59,7 @@
 				    <label for="email_address">新的Email</label>
 				    <input type="text" class="form-control" id="admin_email"  name="adminEmail" placeholder="请输入真实有效的Email地址">
 				  </div>
-				  <div class="col-md-offset-9">
+				  <div class="col-sm-offset-9">
 				  	<button type="submit" class="btn btn-default" >确定</button>
 				  </div>
 				  

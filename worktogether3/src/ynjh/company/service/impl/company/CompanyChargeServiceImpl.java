@@ -28,20 +28,13 @@ public class CompanyChargeServiceImpl implements CompanyChargeService {
 	public Integer consumeMoney(CompanyCharge cmpChargeConsume) {
 		return companyChargeMapper.consumeMoney(cmpChargeConsume);
 	}
-
-
 	@Override
 	public List<CompanyCharge> findAllById(Integer companyId) {
 	
 		return companyChargeMapper.findAllById(companyId);
 	}
-
 	@Override
 	public Integer getMaxPage(Integer companyId) {
 		return (companyChargeMapper.getMaxRecordCount(companyId)+4)/5;
 	}
-
-
-
-
 }

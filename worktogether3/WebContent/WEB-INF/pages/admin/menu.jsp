@@ -44,10 +44,11 @@
     		<li><a href=""><span>功能类别</span></a></li>
     		<li><a href="admin/news/find_all"><span>最新资讯列表</span></a></li>
     		<li><a href="admin/maIntegerainAdmin"><span>信息维护</span></a></li>
+    		<li><a href="admin/cmp/find_all"><span>企业管理</span></a></li>
     		<li><a href="admin/userMag" class="contact"><span>禁用用户</span></a></li>
     		<li><a href="admin/adminLog" class="news"><span>管理员日志</span></a></li>
-  			<li><a href="#" class="contact"><span>访问量统计</span></a></li>
-  			<li><a href="admin/addMessage" ><span>系统消息</span></a></li>
+		<li><a href="#" class="contact"><span>访问量统计</span></a></li>
+		<li><a href="admin/addMessage" ><span>系统消息</span></a></li>
     	</ul>
     </div>
     <div class="nav-slide-o">

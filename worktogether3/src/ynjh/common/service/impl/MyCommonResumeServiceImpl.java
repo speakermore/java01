@@ -1,9 +1,9 @@
 package ynjh.common.service.impl;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,8 @@ public class MyCommonResumeServiceImpl implements MyCommonResumeService {
 	
 	@Override
 	public List<Map<String, Object>> findByResumeTitle5(String resumeTitle) {
-		List<Map<String, Object>> list= myCommonResumeMapper.findByResumeTitle("%"+resumeTitle+"%", 0, 5);
+		String[] reTitles=Arrays.stream(resumeTitle.split(",")).map(title->"%"+title+"%").toArray(size -> new String[size]);
+		List<Map<String, Object>> list= myCommonResumeMapper.findByResumeTitle((String[])reTitles, 0, 5);
 		//将Timestamp的工作时间转换为工作的年限
 		list.stream().forEach(m->{
 			try {
@@ -34,7 +35,8 @@ public class MyCommonResumeServiceImpl implements MyCommonResumeService {
 
 	@Override
 	public Integer countByResumeTitle(String resumeTitle) {
-		return myCommonResumeMapper.countByResumeTitle("%"+resumeTitle+"%");
+		String[] reTitles=Arrays.stream(resumeTitle.split(",")).map(title->"%"+title+"%").toArray(size -> new String[size]);
+		return myCommonResumeMapper.countByResumeTitle(reTitles);
 	}
 
 	@Override

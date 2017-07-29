@@ -131,7 +131,7 @@ public class MyCommonController {
 	@ResponseBody
 	public Object findJobs2(@PathVariable Integer parentId){
 		List<Job> jobs2=jobService.findJob2(parentId);
-		StringBuffer html=new StringBuffer();
+		StringBuffer html=new StringBuffer("<option disable value=\"啥也没选\">请选择职位</option>");
 		//循环得到select框中选项的html
 		for(Job job:jobs2){
 			html.append("<option value='"+job.getJobName()+"'>"+job.getJobName()+"</option>");

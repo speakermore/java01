@@ -23,13 +23,13 @@
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
-		<div class="row clearfix">
-			<div class="col-md-2 column">
+		<div class="row">
+			<div class="col-sm-2">
 				<img alt="头像"
 					src="img/personal/user/${usermg.userLoginId}/${usermg.userHeadImgPath}"
 					class="img-circle" width="140px" height="140" />
 			</div>
-			<div class="col-md-6 column">
+			<div class="col-sm-6">
 				<div class="page-header">
 					<h1>${usermg.userRealName}<br /> <small>性别：<c:if
 								test="${usermg.userGender==0 }">男</c:if> <c:if
@@ -37,8 +37,8 @@
 					</h1>
 				</div>
 			</div>
-			<div class="col-md-4 column">
-				<div class="col-md-12 column">
+			<div class="col-sm-4">
+				<div class="col-sm-12">
 					<div class="btn-group btn-group-lg">
 						<a class="btn btn-default" type="button btn-primary"> <em
 							class="glyphicon glyphicon-align-left"></em> 关注
@@ -49,10 +49,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<div class="row clearfix">
-					<div class="col-md-12 column">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="list-group">
 							<a href="#" class="list-group-item active">基本资料</a>
 							<div class="box">
@@ -126,9 +126,9 @@
 								<span>他的发布</span> <a href="#" class="more">更多...</a>
 							</div>
 							<div class="box">
-								<div class="col-md-12 column">
+								<div class="col-sm-12">
 									<div class="row">
-										<div class="col-md-4">
+										<div class="col-sm-4">
 											<div class="thumbnail">
 												<div class="caption">
 													<h3>${usermg.articleTitle}</h3>
@@ -139,7 +139,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4">
+										<div class="col-sm-4">
 											<div class="thumbnail">
 												<div class="caption">
 													<h3>${usermg.articleTitle}</h3>
@@ -150,7 +150,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4">
+										<div class="col-sm-4">
 											<div class="thumbnail">
 												<div class="caption">
 													<h3>${usermg.articleTitle}</h3>

@@ -19,6 +19,9 @@ public class Company implements Serializable {
 	private String companyEmail;
 	private String companyAddress;
 	private Integer companyStatus;	
+	private Double companyMoney;
+	private Integer userIsRecruit;
+	private Integer userIsCrowdFund;
 	
 	
 	public Company(){
@@ -45,7 +48,31 @@ public class Company implements Serializable {
 		this.companyStatus = companyStatus;
 	}
 
+	
 
+	public Double getCompanyMoney() {
+		return companyMoney;
+	}
+
+	public void setCompanyMoney(Double companyMoney) {
+		this.companyMoney = companyMoney;
+	}
+
+	public Integer getUserIsRecruit() {
+		return userIsRecruit;
+	}
+
+	public void setUserIsRecruit(Integer userIsRecruit) {
+		this.userIsRecruit = userIsRecruit;
+	}
+
+	public Integer getUserIsCrowdFund() {
+		return userIsCrowdFund;
+	}
+
+	public void setUserIsCrowdFund(Integer userIsCrowdFund) {
+		this.userIsCrowdFund = userIsCrowdFund;
+	}
 
 	public Integer getId() {
 		return id;
@@ -182,16 +209,14 @@ public class Company implements Serializable {
 		this.companyStatus = companyStatus;
 	}
 
-
-
-
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", companyLoginId=" + companyLoginId + ", companyPassword=" + companyPassword
 				+ ", companyName=" + companyName + ", companySimpleName=" + companySimpleName + ", companyLogo="
 				+ companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
 				+ ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel + ", companyEmail="
-				+ companyEmail + ", companyAddress=" + companyAddress + ", companyStatus=" + companyStatus +"]";
+				+ companyEmail + ", companyAddress=" + companyAddress + ", companyStatus=" + companyStatus
+				+ ", companyMoney=" + companyMoney + ", userIsRecruit=" + userIsRecruit + ", userIsCrowdFund="
+				+ userIsCrowdFund + "]";
 	}
-	
 }

@@ -87,6 +87,10 @@ public class CommonStatus {
 	 */
 	public static final String[] USER_RECRUIT_STATUS={"未应聘","应聘中"};
 	/**
+	 * 招聘状态：{"未招聘","招聘中"}
+	 */
+	public static final String[] COMPANY_RECRUIT_STATUS={"未招聘","招聘中"};
+	/**
 	 * 众筹状态：{"未众筹","发布众筹中"}
 	 */
 	public static final String[] USER_CROWDFUND_STATUS={"未众筹","众筹中"};

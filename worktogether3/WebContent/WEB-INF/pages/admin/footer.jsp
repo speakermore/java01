@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="admin/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">				
 	$(function(){
 	var thisTime;
@@ -37,7 +38,7 @@
 
 })
 </script>
-<div class="navi_head" style="text-align:center;margin:50px 0; font:normal 14px/20px 'MicroSoft YaHei';">
+<!-- <div class="navi_head" style="text-align:center;margin:50px 0; font:normal 14px/20px 'MicroSoft YaHei';">
 	<p>欢迎使用管理员系统，有任何疑问欢迎致电：400-1234-1234,本系统所有解释权由本公司所有！</p>
 	<p>来源：<a href="http://sc.chinaz.com/" target="_blank">由Zzzz团队创作</a></p>
-</div>
+</div> -->

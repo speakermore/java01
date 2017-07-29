@@ -82,12 +82,28 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public Integer updateCompanyConnection(Integer id, Integer companyId, String cmpConnectionName,
 			String cmpConnection) {
-		
 		return companyMapper.updateCompanyConnection(id, companyId, cmpConnectionName, cmpConnection);
 	}
 
 	@Override
 	public Company verificationCompanyLoginId(String companyLoginId) {
 		return companyMapper.verificationCompanyLoginId(companyLoginId);
+	}
+
+	@Override
+	public List<Company> findAllCompany() {
+		return companyMapper.findCompanyForCharge();
+	}
+
+	@Override
+	public Integer findCompanyMoneyById(Integer companyId) {
+		return companyMapper.findCompanyMoneyById(companyId);
+	}
+
+	@Override
+	public Integer updateCompanyMoney(Integer money, Integer companyId) {
+		//查出余额，进行累加计算
+		Integer balance=companyMapper.findCompanyMoneyById(companyId);
+		return companyMapper.updateCompanyProperty("companyMoney", ""+(balance+money), companyId);
 	}
 }

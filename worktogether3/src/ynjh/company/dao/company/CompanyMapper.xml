@@ -40,6 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCompanyConnection">
 		update companyconnection set companyId=#{companyId},cmpConnection=#{cmpConnection},cmpConnectionName=#{cmpConnectionName} where id=#{id}
 	</update>
+	<!-- 牟勇：根据企业id更改指定的属性值 -->
+	<update id="updateCompanyProperty">
+		update company set ${column}=#{value} where id=#{companyId}
+	</update>
 	<delete id="deleteCompanyConnection" parameterType="Integer">
 		delete from companyconnection where id=#{id}
 	</delete>
@@ -47,7 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteCompanyEnvirmentImg" parameterType="Integer">
 		delete from companydetailimg where id=#{id}
 	</delete>
-	
+	<!-- 牟勇： 查询到所有的企业 -->
+	<select id="findCompanyForCharge" resultType="Company">
+		select * from company
+	</select>
 	<select id="findByloginIdAndPassword" resultType="Company">
 		select * from company where companyLoginId=#{companyLoginId} and companyPassword=#{companyPassword}
 	</select>
@@ -66,5 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 牟勇：根据环境图片id查询这张图片是否存在 -->
 	<select id="findByEnvirmentImgId" parameterType="Integer" resultType="Integer">
 		select count(*) from companyDetailImg where id=#{id}
+	</select>
+	<!-- 牟勇：查询指定企业的余额 -->
+	<select id="findCompanyMoneyById" parameterType="Integer" resultType="Integer">
+		select companyMoney from company where id=#{companyId}
 	</select>
 </mapper>

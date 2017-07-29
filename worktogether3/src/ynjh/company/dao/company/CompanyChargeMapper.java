@@ -2,6 +2,8 @@ package ynjh.company.dao.company;
 
 
 import java.util.List;
+
+import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyCharge;
 
 public interface CompanyChargeMapper {

@@ -13,7 +13,8 @@ public interface MyCommonResumeService {
 	 * 根据简历的标题或目前职位进行岗位的模糊查询，只显示前5条
 	 * 显示用户昵称，学历，目前岗位，工作时间
 	 * 简历必须通过审核的简历
-	 * @param ResumeTitle 岗位名称的模糊查询条件
+	 * 职位名称无论是单个还是多个均不需要添加模糊匹配的字符，方法实现会帮助进行添加，查询条件是“包含”（即前后均添加%）
+	 * @param ResumeTitle 职位名称的模糊查询条件，多个职位名称以逗号进行分隔
 	 * @param startRecord 开始的记录下标，小于0表示不分页
 	 * @param pageSize 一次查询返回的记录总条数，小于等于0表示不分页
 	 * @return
@@ -21,7 +22,8 @@ public interface MyCommonResumeService {
 	public List<Map<String, Object>> findByResumeTitle5(String resumeTitle);
 	/**
 	 * 统计符合岗位条件的人数
-	 * @param resumeTitle 岗位名称的模糊查询
+	 * 职位名称无论是单个还是多个均不需要添加模糊匹配的字符，方法实现会帮助进行添加，查询条件是“包含”（即前后均添加%）
+	 * @param resumeTitle 职位名称的模糊查询，多个职位名称以逗号进行分隔
 	 * @return 符合岗位条件的总人数
 	 */
 	public Integer countByResumeTitle(String resumeTitle);

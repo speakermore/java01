@@ -3,17 +3,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>个人用户-新建简历</title>
+<title>个人用户-创建简历</title>
 <%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
 <%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
 </head>
 <body>
 	<%@include file="/WEB-INF/pages/nav.jsp"%>
 	<div class="container">
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<div class="col-md-1 column"></div>
-				<div class="col-md-10 column ">
+		<div class="row">
+			<div class="col-sm-12">
 					<div class="alert alert-success alert-dismissable">
 						<button type="button" class="close" data-dismiss="alert"
 							aria-hidden="true">×</button>
@@ -22,8 +20,6 @@
 							class="alert-link">返回首页</a>
 					</div>
 					<%@include file="/WEB-INF/pages/personal/resume/personal_createresume_index.jsp"%>
-				</div>
-				<div class="col-md-1 column"></div>
 			</div>
 		</div>
 	</div>

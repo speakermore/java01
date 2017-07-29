@@ -65,36 +65,33 @@ a:focus {
 		});
 	});
 </script>
-<div class="panel panel-default">
+<div class="panel">
 	<div id="personal_border">
 		<div class="media">
 			<!-- 头像 -->
-			<div class="resumeheadImg col-md-offset-1" style="margin-top: 35px;">
-				
-				
+			<div class="resumeheadImg col-sm-offset-1" style="margin-top: 35px;">
 				<img  onerror="javascript:this.src='img/head.gif'" class="pull-left updateHeadImg media-object " src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}" alt='我的头像' width="100" height="120" />
-				
 			</div>
 			<!-- 头像结束 -->
 			<!-- 简历基本信息 -->
 			<div class="media-body ">
 				<!-- 修改图标开始 -->
-				<a class="col-md-offset-10" href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
+				<a class="col-sm-offset-10" href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<!-- 修改图标结束 -->
-				<h4 class="media-heading col-md-offset-1" style="line-height: 35px; height: 35px; font-size: 20px;">
+				<h4 class="media-heading col-sm-offset-1" style="line-height: 35px; height: 35px; font-size: 20px;">
 					<label class="control-label">${resume.resumeName }</label>
 					<small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small>
-					<small class="col-md-offset-3">${SEX[resume.resumeGender]}</small>
+					<small class="col-sm-offset-3">${SEX[resume.resumeGender]}</small>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
-				<p class="static col-md-offset-1">
+				<p class="static col-sm-offset-1">
 					${resume.resumeNowResidence }&nbsp;|&nbsp;
 					<label>${resume.works }</label>
 					年&nbsp;|&nbsp;&nbsp;|&nbsp;
 					<label>${resume.age}</label>岁
 					(<fmt:formatDate value="${resume.resumeBirthday }" pattern="yyyy/MM/dd" />)&nbsp;|&nbsp;${resume.resumeJor }
 				</p>
-				<label class="control-label col-md-offset-1">
+				<label class="control-label col-sm-offset-1">
 					<span class="glyphicon glyphicon-envelope"></span>${resume.resumeEmail }&nbsp;&nbsp;&nbsp;&nbsp;
 					<span class="glyphicon glyphicon-earphone"></span>${resume.resumePhone }
 				</label>
@@ -104,72 +101,72 @@ a:focus {
 		<div class="panel-group">
 			<!-- 展开内容 -->
 			<div class="panel-heading">
-				<a class="panel-title col-md-offset-10" data-toggle="collapse" data-parent="#panel" href="#panel-element-more">
+				<a class="panel-title col-sm-offset-10" data-toggle="collapse" data-parent="#panel" href="#panel-element-more">
 					更多展开 <span class="glyphicon glyphicon-chevron-down"></span>
 				</a>
 			</div>
 			<div id="panel-element-more" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_margin">
-					<div class="panel-body col-md-12 test personal_resume_defualt">
-						<div class="col-md-6 column">
+					<div class="panel-body col-sm-12 test personal_resume_defualt">
+						<div class="col-sm-6 column">
 							<label class="control-label">籍贯：</label>
 							<label class="control-label">${resume.resumePlace }</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">婚姻状况：${MARRY[resume.resumeMarriage]}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">目前职位：</label>
 							<label class="control-label">${resume.resumeJor}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">期待月薪：</label> <label
 								class="control-label">${resume.resumeWages}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">QQ或微信：</label>
 							<label class="control-label">${resume.resumeQQ}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">民族：</label>
 							<label class="control-label">${resume.resumeNation}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">毕业院校：${resume.resumeGraduationSchool}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">毕业时间：</label>
 							<label class="control-label">
 								<fmt:formatDate value="${resume.resumeGraduationTime}" pattern="yyyy/MM/dd" />
 							</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">学历：</label>
 							<label class="control-label">${resume.resumeEducation } </label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">专业：</label>
 							<label class="control-label">${resume.resumeMajor } </label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">外语水平：</label>
 							<label class="control-label">${FL_ABILITY[resume.resumeFLAbility]}</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">外语类型：</label>
 							<label class="control-label">
 								${FL_TYPE[resume.resumeFLType] } 
 							</label>
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">身高：</label>
 							<label class="control-label">${resume.resumeHeight }</label>厘米
 						</div>
-						<div class="col-md-6 column">
+						<div class="col-sm-6 column">
 							<label class="control-label">体重：</label>
 							<label class="control-label">${resume.resumeWeight }</label>公斤
 						</div>
-						<div class="col-md-12 column">
+						<div class="col-sm-12 column">
 							<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label>
 						</div>
 					</div>
@@ -188,53 +185,53 @@ a:focus {
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-list-alt"></span>工作经验
 				<!-- 新增工作 -->
-				<a class="panel-title col-md-offset-8" data-toggle="collapse"
+				<a class="panel-title col-sm-offset-8" data-toggle="collapse"
 					data-parent="#panel-work-main" href="#panel-element-work"
 					id="hiddenWork"><span class="glyphicon glyphicon-plus"></span>新增工作</a>
 			</div>
-			<!--mian+-->
+			<!--新增工作表单-->
 			<div id="panel-element-work" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
-					<div class="panel-body col-md-12">
+					<div class="panel-body col-sm-12">
 						<form  class="form-horizontal" id="workForm">
 							<input type="hidden" name="resumeId" value="${resume.id }" /><br />
 							<input type="hidden" name="createWorkpage" value="personal/user/personal_index_myResume" /><br />
 							<div class="modal-body">
 								<div class="form-group">
-									<label for="workFirmName" class="col-md-3 control-label">企业名称：</label>
-									<div class="col-md-8">
+									<label for="workFirmName" class="col-sm-3 control-label">企业名称：</label>
+									<div class="col-sm-8">
 										<input class="form-control" name="workFirmName"
 											id="workFirmName" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="workUnit" class="col-md-3 control-label">主要工作岗位：</label>
-									<div class="col-md-8">
+									<label for="workUnit" class="col-sm-3 control-label">主要工作岗位：</label>
+									<div class="col-sm-8">
 										<input class="form-control" name="workUnit" id="workUnit" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="workDescription" class="col-md-3 control-label">工作描述：</label>
-									<div class="col-md-8">
+									<label for="workDescription" class="col-sm-3 control-label">工作描述：</label>
+									<div class="col-sm-8">
 										<textarea class="form-control" name="workDescription"
 											id="workDescription" ></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">日期：</label>
-									<div class="col-md-4">
+									<label class="col-sm-3 control-label">日期：</label>
+									<div class="col-sm-4">
 										<input class="form-control form_datetime" name="workBeginTime" size="30"
 											type="text" id="workStart" readonly
 											class="form_datetime" placeholder="选择起始日期">
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-4">
 										<input class="form-control form_datetime" name="workEndTime" size="30"
 											type="text" id="workEnd" readonly
 											placeholder="选择结束日期">
 									</div>
 								</div>
 							</div>
-							<div class="col-md-offset-5">
+							<div class="col-sm-offset-5">
 								<button  onclick="ajaxCreateWork()" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-work-main" href="#panel-element-work-show"
@@ -249,8 +246,7 @@ a:focus {
 		
 		<!--牟勇： 已有工作经验列表 -->
 		<div class="panel panel-default" id="workFresh">
-			<%@include
-				file="/WEB-INF/pages/personal/resume/personal_resume_work.jsp"%>
+			<%@include file="/WEB-INF/pages/personal/resume/personal_resume_work.jsp"%>
 		</div>
 		<!--牟勇： 已有工作经验列表结束 -->
 		
@@ -265,53 +261,53 @@ a:focus {
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-signal"></span>项目经验
 				<!-- 添加项目 -->
-				<a class="panel-title col-md-offset-8" data-toggle="collapse"
+				<a class="panel-title col-sm-offset-8" data-toggle="collapse"
 					data-parent="#panel-project-main" href="#panel-element-project"
 					id="hiddenProject"><span class="glyphicon glyphicon-plus"></span>新增项目</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-project" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
-					<div class="panel-body col-md-12">
+					<div class="panel-body col-sm-12">
 						<form class="form-horizontal"  id="projectForm">
 							<input type="hidden" name="resumeId" value="${resume.id }" /><br />
 							<input type="hidden" name="createProjectpage" value="personal/user/personal_index_myResume" /><br />
 							<div class="modal-body">
 								<div class="form-group">
-									<label for="projectName" class="col-md-3 control-label">项目名称：</label>
-									<div class="col-md-8">
+									<label for="projectName" class="col-sm-3 control-label">项目名称：</label>
+									<div class="col-sm-8">
 										<input class="form-control" name="projectName"
 											id="projectName" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="projectJob" class="col-md-3 control-label">项目岗位：</label>
-									<div class="col-md-8">
+									<label for="projectJob" class="col-sm-3 control-label">项目岗位：</label>
+									<div class="col-sm-8">
 										<input class="form-control" name="projectJob" id="projectJob" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="projectDescription" class="col-md-3 control-label">项目描述：</label>
-									<div class="col-md-8">
+									<label for="projectDescription" class="col-sm-3 control-label">项目描述：</label>
+									<div class="col-sm-8">
 										<textarea class="form-control" name="projectDescription"
 											id="projectDescription" /></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">日期：</label>
-									<div class="col-md-4">
+									<label class="col-sm-3 control-label">日期：</label>
+									<div class="col-sm-4">
 										<input class="form-control form_datetime" name="projectBeginTime" size="30"
 											type="text" id="projectStart" readonly
 											 placeholder="选择起始日期" />
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-4">
 										<input class="form-control form_datetime" name="projectEndTime" size="30"
 											type="text" id="projectEnd" readonly
 											placeholder="选择结束日期" />
 									</div>
 								</div>
 							</div>
-							<div class="col-md-offset-5">
+							<div class="col-sm-offset-5">
 								<button onclick="ajaxCreateProject()" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-project-main"
@@ -343,48 +339,48 @@ a:focus {
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-book"></span>教育经历 
 				<!-- 添加教育 -->
-				<a class="panel-title col-md-offset-8" data-toggle="collapse"
+				<a class="panel-title col-sm-offset-8" data-toggle="collapse"
 					data-parent="#panel-education-main" href="#panel-element-education"
 					id="hiddenEducation"><span class="glyphicon glyphicon-plus"></span>新增教育</a>
 			</div>
 			<!--mian+-->
 			<div id="panel-element-education" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
-					<div class="panel-body col-md-12">
+					<div class="panel-body col-sm-12">
 						<form class="form-horizontal" id="educationForm">
 							<input type="hidden" name="resumeId" value="${resume.id }" /><br />
 							<input type="hidden" name="createEducationpage" value="personal/user/personal_index_myResume" /><br />
 							<div class="modal-body">
 								<div class="form-group">
-									<label for="educationSchool" class="col-md-3 control-label">学校名称：</label>
-									<div class="col-md-8">
+									<label for="educationSchool" class="col-sm-3 control-label">学校名称：</label>
+									<div class="col-sm-8">
 										<input class="form-control" name="educationSchool"
 											id="educationSchool" />
 									</div>
 								</div>
 								<br />
 								<div class="form-group">
-									<label for="educationContent" class="col-md-3 control-label">专业：</label>
-									<div class="col-md-8">
+									<label for="educationContent" class="col-sm-3 control-label">专业：</label>
+									<div class="col-sm-8">
 										<input class="form-control" name="educationContent"
 											id="educationContent" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">日期：</label>
-									<div class="col-md-4">
+									<label class="col-sm-3 control-label">日期：</label>
+									<div class="col-sm-4">
 										<input class="form-control form_datetime" name="educationBeginTime"
 											size="30" type="text" id="educationStart" readonly
 											 placeholder="选择起始日期">
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-4">
 										<input class="form-control form_datetime" name="educationEndTime" size="30"
 											type="text" id="educationEnd" readonly
 											placeholder="选择结束日期">
 									</div>
 								</div>
 							</div>
-							<div class="col-md-offset-5">
+							<div class="col-sm-offset-5">
 								<button onclick="ajaxCreateEducation()" class="btn btn-success">保存</button>
 								<a class="btn btn-default" data-toggle="collapse"
 									data-parent="#panel-education-main"

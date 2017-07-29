@@ -18,7 +18,6 @@ import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
-import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Article;

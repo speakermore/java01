@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!--左侧状态栏位-->
 <article
-	class="col-md-12  alert-danger work-together-shadow work-together-shallow">
+	class="col-md-12  alert-danger">
 	<div class="row">
 		<section class="panel">
 			<div class="row">

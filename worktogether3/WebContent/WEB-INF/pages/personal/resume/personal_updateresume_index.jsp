@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<!-- 简历基本信息开始 -->
+<article class="col-sm-12">
 <!-- 头像图片上传 -->
 <div class="modal fade" id="resume-head-img" role="dialog" aria-labelledby="myHeadImgLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -19,13 +23,12 @@
 						<input class="form-control file" name="headImg" type="file" id="resumeImgPathIndex" data-min-file-count="1" />
 					</div>
 				</div>
-
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				<input type="button" class="btn btn-primary" value="上传" onclick="ajaxUploadHeadImg()" />
 			</div>
-			</form>
+		</form>
 		</div>
 	</div>
 </div>
@@ -59,18 +62,24 @@ var ajaxUploadHeadImg=function(){
 	});
 }
 </script>
-<!-- 简历基本信息开始 -->
-<div class="panel panel-default">
-
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">简历修改</div>
+	</div>
+	<div class="panel-body">
 	<form class="form-horizontal" id="resumeForms" style="margin-top: 35px;">
 		<input type="hidden" id="resumeHeadImg" name="resumeHeadImg" value="${resume_update.resumeHeadImg }" />
-		<div class="row">
-			<div class="col-sm-12 column">
-				<div class="form-group">
-					<label class="control-label col-sm-2">岗位类别:</label>
+		<!-- 职位候选 -->
+		<section class="panel panel-success">
+			<div class="panel-heading">
+				<h5 class="panel-title">候选职位修改</h5>
+			</div>
+			<div class="panel-body">
+				<div class="form-group" style="margin-top:10px">
+					<label class="control-label col-sm-2">职位类别:</label>
 					<div class="col-sm-3">
 					<select class="form-control" onchange="findJob2(this.value)">
-						<option>请首先选择岗位类别</option>
+						<option>请首先选择职位类别</option>
 					<!-- 牟勇：动态添加一级岗位名称 -->
 						<c:forEach items="${myJobs1 }" var="job1">
 							<option value="${job1.id }">${job1.jobName }</option>
@@ -78,16 +87,71 @@ var ajaxUploadHeadImg=function(){
 					</select>
 					</div>
 					<label class="control-label col-sm-2">应聘职位:</label>
-				<div class="col-sm-3">
-				<select class="form-control" id="job2" name="resumeTitle">
-					<option value="${resume_update.resumeTitle}">${resume_update.resumeTitle}</option>
-				</select>
+					<div class="col-sm-3">
+					<select class="form-control" id="job2" onchange="selectJob(this)">
+						<option value="没有选择职位">请首先选择职位类别</option>
+					</select>
+					<input id="resumeTitle" type="hidden" name="resumeTitle" value="${resume_update.resumeTitle}" />
+					<script type="text/javascript">
+					$(function(){
+						var selectedJob='${resume_update.resumeTitle}';
+						selectedJob=selectedJob.split(',');
+						for(var i=0;i<selectedJob.length;i++){
+							$('#selected-job').html($('#selected-job').html()+'<label class="col-sm-2 btn btn-success" onclick="delJob(this)" style="margin-left:3px">'+selectedJob[i]+'</label>');
+							jobNumber++;
+						}
+					});
+					var jobNumber=0;//选择岗位计数
+					var selectJob=function(job2){
+						if(jobNumber==3){
+							alert('候选职位已满，不能再添加候选职位了');
+							return;
+						}
+						if(jobNumber<3&&$("#resumeTitle").val().indexOf($(job2).val())==-1){
+							if($('#resumeTitle').val()=='null'){
+								$('#resumeTitle').val($(job2).val());//放第一个工作，前面不加逗号
+							}else{
+								$('#resumeTitle').val($('#resumeTitle').val()+','+$(job2).val());
+							}
+							$('#selected-job').html($('#selected-job').html()+'<label class="col-sm-2 btn btn-success" onclick="delJob(this)" style="margin-left:3px">'+$(job2).val()+'</label>');
+							
+							jobNumber++;
+						}
+					};
+					var delJob=function(job){
+						//删除两个位置的逗号
+						var originLength=$('#resumeTitle').val().length;
+						//删除带后置逗号的候选职位
+						$("#resumeTitle").val($('#resumeTitle').val().replace($(job).html()+',',''));
+						if($('#resumeTitle').val().length==originLength){
+							//删除带前置逗号的候选职位
+							$("#resumeTitle").val($('#resumeTitle').val().replace(','+$(job).html(),''));
+						}
+						if($('#resumeTitle').val().length==originLength){
+							//删除最后一个候选职位
+							$("#resumeTitle").val($('#resumeTitle').val().replace($(job).html(),''));
+						}
+						if($("#resumeTitle").val()==''){
+							$("#resumeTitle").val('null');
+						}
+						$(job).remove();
+						jobNumber--;
+					}
+				</script>
+					</div>
 				</div>
+				<div id="selected-job" class="form-group">
+					<label class="col-sm-3 control-label">可以选择三个候选职位哦：</label>
 				</div>
 			</div>
-		</div>
-		<div class="row">
+		</section>
+		<!-- 职位候选结束 -->
+		<section class="panel panel-success">
+			<div class="panel-heading">
+				<h5 class="panel-title">基本资料修改</h5>
+			</div>
 		<!-- 牟勇：头像上传已添加 -->
+		<div class="panel-body" style="margin-top:10px">
 		 <div class="col-sm-2">
 			<a title="单击上传头像" href="#resume-head-img" data-toggle="modal"><img id="head_img" onerror="javascript:this.src='img/head.gif'" style="margin-left:3px" src="img/upload/personal/${user.userLoginId }/${resume_update.resumeHeadImg}" class="thumbnail" width="100" height="120" /></a>
 		</div> 
@@ -155,10 +219,12 @@ var ajaxUploadHeadImg=function(){
 
 			</div>
 			<!-- 基本信息右侧结束 -->
-		</div>
-		<div class="panel-group">
+			</div>
+		</section>
+		<div class="panel-group panel-success">
 			<div class="panel-heading">
-				<a class="panel-title col-sm-offset-10" data-toggle="collapse" data-parent="#panel" href="#panel-element-more">
+				<h5 class="panel-title">更多资料修改</h5>
+				<a class="col-sm-offset-10" data-toggle="collapse" data-parent="#panel" href="#panel-element-more">
 					更多展开 <span class="glyphicon glyphicon-chevron-down"></span>
 				</a>
 			</div>
@@ -321,8 +387,10 @@ var ajaxUploadHeadImg=function(){
 			</div>
 		</div>
 	</form>
+	</div>
 	<div class="panel-footer"></div>
-</div>
+	</div>
+</article>
 <!-- 简历基本信息结束 -->
 <script type="text/javascript">
 	//ajax提交表单

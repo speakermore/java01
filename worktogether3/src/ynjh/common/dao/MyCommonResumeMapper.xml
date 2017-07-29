@@ -8,8 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findByResumeTitle" resultType="map">
 		select u.userName,r.resumeEducation,r.resumeJor,r.resumeWorks from
 		resume r,user u
-		where u.id=r.userid and (r.resumeTitle like #{resumeTitle} or resumeJor
-		like #{resumeTitle}) and resumeStatusThree=2
+		where u.id=r.userid and (
+		<foreach collection="resumeTitle" item="item" separator="or">
+		concat(r.resumeTitle,resumeJor) like #{item} 
+		</foreach> ) and resumeStatusThree=2
 		order by resumeCreateDate desc
 		<if test="startRecord gte 0 or pageSize gt 0">
 			limit #{startRecord},#{pageSize}
@@ -18,7 +20,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 统计符合简历条件的人数 -->
 	<select id="countByResumeTitle" resultType="Integer">
 		select count(*) from resume
-		where (resumeTitle like #{resumeTitle} or resumeJor like #{resumeTitle})
+		where (<foreach collection="resumeTitle" item="item" separator="or">
+		concat(resumeTitle,resumeJor) like #{item} 
+		</foreach>)
 		and resumeStatusThree =2
 	</select>
 	<!-- 根据岗位名称查企业招聘工作城市，招聘岗位，需求人数，模糊查询 -->

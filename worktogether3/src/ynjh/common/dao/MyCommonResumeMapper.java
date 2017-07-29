@@ -14,21 +14,21 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface MyCommonResumeMapper {
 	/**
-	 * 根据简历的标题或目前职位进行岗位的模糊查询，可用于分页或限制查询结果的条数
+	 * 根据简历的标题或目前职位进行多个岗位的模糊查询，可用于分页或限制查询结果的条数
 	 * 显示用户昵称，学历，目前岗位，工作时间
 	 * 简历必须通过审核的简历
-	 * @param ResumeTitle 岗位名称的模糊查询条件
+	 * @param ResumeTitle 岗位名称的模糊查询条件，多个职位条件以数组方式传入，每个值均应该带有模糊匹配的字符（%或_之类）
 	 * @param startRecord 开始的记录下标，小于0表示不分页
 	 * @param pageSize 一次查询返回的记录总条数，小于等于0表示不分页
 	 * @return
 	 */
-	public List<Map<String, Object>> findByResumeTitle(@Param("resumeTitle")String resumeTitle,@Param("startRecord")Integer startRecord,@Param("pageSize")Integer pageSize);
+	public List<Map<String, Object>> findByResumeTitle(@Param("resumeTitle")String[] resumeTitle,@Param("startRecord")Integer startRecord,@Param("pageSize")Integer pageSize);
 	/**
 	 * 统计符合岗位条件的人数
-	 * @param resumeTitle 岗位名称的模糊查询
+	 * @param resumeTitle 岗位名称的模糊查询,多个职位条件以数组方式传入，每个值均应该带有模糊匹配的字符（%或_之类）
 	 * @return 符合岗位条件的总人数
 	 */
-	public Integer countByResumeTitle(String resumeTitle);
+	public Integer countByResumeTitle(@Param("resumeTitle")String[] resumeTitle);
 	
 	/**
 	 * 根据企业招聘岗位进行模糊查询，可用于分页或限制查询结果的条数

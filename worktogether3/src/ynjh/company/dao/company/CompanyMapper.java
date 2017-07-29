@@ -47,4 +47,23 @@ public interface CompanyMapper {
 	 * @return 如果返回0则表示没有查到图片，如果是大于0的数字则表示查到了一张图片
 	 */
 	public Integer findByEnvirmentImgId(Integer id);
+	/**
+	 * 牟勇：查询所有的企业信息，为后台企业信息管理准备数据
+	 * @return 全部的企业信息
+	 */
+	public List<Company> findCompanyForCharge();
+	/**
+	 * 牟勇：根据企业id修改企业的某个列值
+	 * @param column 列名
+	 * @param value 列值，以字符串形式传入
+	 * @param companyId 企业Id，主键
+	 * @return 影响的行数，通常大于0表示成功，否则表示失败
+	 */
+	public Integer updateCompanyProperty(@Param("column")String column,@Param("value")String value,@Param("companyId")Integer companyId);
+	/**
+	 * 牟勇：根据企业主键查询企业余额
+	 * @param companyId 企业用户主键
+	 * @return 企业用户的余额
+	 */
+	public Integer findCompanyMoneyById(@Param("companyId")Integer companyId);
 }
