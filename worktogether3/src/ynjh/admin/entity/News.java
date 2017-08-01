@@ -19,11 +19,11 @@ public class News implements Serializable {
 	private int newsClickNum;//点击数
 	private int newsLikeNum;//点赞数
 	private String adminName;//管理员的姓名
+	private String newsType;
+	
 	public News() {
-		super();
 	}
 	public News(String newsTitle, String newsContent, Timestamp newsDate, int adminId, int newsStatus) {
-		super();
 		this.newsTitle = newsTitle;
 		this.newsContent = newsContent;
 		this.newsDate = newsDate;
@@ -35,6 +35,12 @@ public class News implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getNewsType() {
+		return newsType;
+	}
+	public void setNewsType(String newsType) {
+		this.newsType = newsType;
 	}
 	public String getNewsTitle() {
 		return newsTitle;
@@ -90,9 +96,8 @@ public class News implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "News [id=" + id + ", newsTitle=" + newsTitle + ", newsContent=" + newsContent + ", newsDate="
-				+ newsDate + ", adminId=" + adminId + ", newsStatus=" + newsStatus + "]";
+		return "News [id=" + id + ", newsTitle=" + newsTitle + ", newsContent=" + newsContent + ", newsDate=" + newsDate
+				+ ", adminId=" + adminId + ", newsStatus=" + newsStatus + ", newsClickNum=" + newsClickNum
+				+ ", newsLikeNum=" + newsLikeNum + ", adminName=" + adminName + ", newsType=" + newsType + "]";
 	}
-	
-	
 }

@@ -29,14 +29,22 @@
 		<form id="add-admin" role="form" class="form-horizontal"
 			action="admin/news/add" method="post">
 			<div class="form-group">
+				<label class="col-sm-2 control-label">资讯类型:</label>
+				<div class="col-sm-3">
+					<select class="form-control" name="newsType">
+						<c:forEach items="${newsTypesForAdmin }" var="nt">
+							<option value="${nt.articleTypeName }">${nt.articleTypeName }</option>
+						</c:forEach>
+					</select>
+				</div>
 				<label for="newsTitle" class="col-sm-2 control-label">资讯标题：</label>
-				<div class="col-sm-8">
+				<div class="col-sm-3">
 					<input id="userName" class="form-control" name="newsTitle"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="newsContent" class="col-sm-2 control-label">资讯内容：</label>
-				<div class="col-sm-8">
+				<div class="col-sm-10">
 						<textarea class="form-control" name="newsContent" rows="15" cols="100"></textarea>
 				</div>
 			</div>

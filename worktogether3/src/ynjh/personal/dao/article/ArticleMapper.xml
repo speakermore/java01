@@ -5,12 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.personal.dao.article.ArticleMapper">
 	<!-- 写文章 -->
 	<insert id="addUserArticle" parameterType="Article">
-		insert into article(usersId,articleTitle,articleTime,articleKey,articleContent,articleUsersType,articleStatus)
-			value(#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent},#{articleUsersType},#{articleStatus})
+		insert into article(usersId,articleTitle,articleTime,articleKey,articleContent,articleUsersType,articleStatus,articleType)
+			value(#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent},#{articleUsersType},#{articleStatus},#{articleType})
 	</insert>
 	<!-- 修改文章内容 -->
 	<update id="updateArticleContent" parameterType="Article">
-	update article set articleContent=#{articleContent},articleTitle=#{articleTitle},articleKey=#{articleKey} where id=#{id}
+	update article set articleContent=#{articleContent},articleTitle=#{articleTitle},articleKey=#{articleKey},articleType=#{articleType} where id=#{id}
 	</update>
 	<!--阅读数  -->
 	<update id="updateReadNum" >
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 查看文章(所有) -->
-	<select id="selectUserArticle" resultType="Article">
+	<select id="findUserArticle" resultType="Article">
 	select * from article where usersId=#{usersId}
 	<if test="page!=null">
 		limit #{page},20

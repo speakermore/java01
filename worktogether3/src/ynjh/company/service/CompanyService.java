@@ -58,11 +58,13 @@ public interface CompanyService {
 	 */
 	public Integer findCompanyMoneyById(Integer companyId);
 	/**
-	 * 牟勇：充值。根据企业主键完成对企业的充值计算<br />
+	 * 牟勇：充值。根据企业主键完成对企业的充值计算，并进行记录<br />
 	 * <strong>注意：本方法中完成了余额的累加计算，只需要传入实际充入的金额即可</strong>
+	 * 
 	 * @param money 充值金额
 	 * @param companyId 企业用户主键
+	 * @param adminId 做此操作的管理员id
 	 * @return 大于0表示成功，否则表示失败
 	 */
-	public Integer updateCompanyMoney(Integer money,Integer companyId);
+	public Integer updateCompanyMoney(Integer money,Integer companyId,Integer adminId);
 }

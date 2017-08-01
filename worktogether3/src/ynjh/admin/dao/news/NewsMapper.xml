@@ -6,20 +6,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.admin.dao.news.NewsMapper">
 	<!-- 添加新闻 -->
 	<insert id="addNews" parameterType="News">
-		insert into news(newsTitle,newsContent,newsDate,adminId,newsStatus)
-		values(#{newsTitle},#{newsContent},#{newsDate},#{adminId},#{newsStatus})
+		insert into news(newsTitle,newsContent,newsDate,adminId,newsStatus,newsType)
+		values(#{newsTitle},#{newsContent},#{newsDate},#{adminId},#{newsStatus},#{newsType})
 	</insert>
 	<!-- 更新新闻 -->
 	<update id="updateNews" parameterType="News">
 		update news set newsTitle=#{newsTitle},newsContent=#{newsContent},
-			newsDate=#{newsDate} where id=#{id}
+			newsDate=#{newsDate},newsType=#{newsType} where id=#{id}
 	</update>
+	<!-- 计算点击数 -->
 	<update id="addClick" parameterType="Integer">
 		update news set newsClickNum=newsClickNum+1
 	</update>
+	<!-- 计算点赞数 -->
 	<update id="addLike" parameterType="Integer">
 		update news set newsLikeNum=newsLikeNum+1
 	</update>
+	<!-- 资讯状态 -->
 	<update id="updateStatus">
 		update news set newsStatus=#{status} where id=#{id}
 	</update>

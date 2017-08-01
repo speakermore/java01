@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -182,7 +181,7 @@ public class CompanyController {
 	 */
 	@RequestMapping(value="/updateCompany/{activePanel}",method=RequestMethod.GET)
 	public ModelAndView updatecompany(@PathVariable Integer activePanel){
-		ModelAndView mv=new ModelAndView("company/company/update_company");
+		ModelAndView mv=new ModelAndView("company/company/update_company_index");
 		//牟勇：activePanel：用来标识编辑企业页面上三个面板，哪个被激活
 		//0：基本资料，1：环境图片，2：详细资料
 		mv.addObject("activePanel",activePanel);

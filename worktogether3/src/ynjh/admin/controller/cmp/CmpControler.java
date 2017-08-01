@@ -39,12 +39,13 @@ public class CmpControler {
 	 * 完成充值的计算
 	 * @param money 需要充值的金额
 	 * @param companyId 企业用户的主键
+	 * @param adminId 做此操作的管理员主键
 	 * @return 跳转页面
 	 */
 	@RequestMapping(value="/charge")
 	@ResponseBody
-	public String charge(Integer money,Integer companyId){
-		Integer result=companyService.updateCompanyMoney(money, companyId);
+	public String charge(Integer money,Integer companyId,Integer adminId){
+		Integer result=companyService.updateCompanyMoney(money, companyId,adminId);
 		StringBuffer info=new StringBuffer();
 		if(result>0){
 			info.append("充值"+money+"成功！请用户检查余额");

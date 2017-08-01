@@ -2,10 +2,11 @@ package ynjh.common.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 /**
  * 为了完成扣费，设计的用户记录实体类<br />
  * 这个表将记录个人用户和企业用户关于招应聘，技术众筹，合伙创业的操作信息<br />
- * 操作类型分为发布（0）和参与（1）<br />
+ * 操作类型分为发布（0）和参与（1）还有管理员充值(2)<br />
  * 操作对象ID可能是三张表的主键，如果是招应聘，则是companyrecruit的id，<br />
  * 技术众筹是crowdfund的id<br />
  * 合伙创业是partner的id<br />
@@ -82,6 +83,13 @@ public class UserRecord implements Serializable {
 	}
 	public void setUserrMem(String userrMem) {
 		this.userrMem = userrMem;
+	}
+	/**
+	 * 按yyyy-MM-dd HH时mm分ss秒格式返回的时间
+	 * @return 指定格式的用户操作时间
+	 */
+	public String getTextedUserrTime(){
+		return new SimpleDateFormat("yyyy-MM-dd HH时mm分ss秒").format(userrTime);
 	}
 	@Override
 	public String toString() {

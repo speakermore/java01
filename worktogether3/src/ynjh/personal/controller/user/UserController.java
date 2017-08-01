@@ -154,7 +154,7 @@ public class UserController {
 	@RequestMapping(value = "/gotoIndex", method = RequestMethod.GET)
 	public String gotoIndex(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		return "redirect:../common/initIndex?toPage=1&userId=" + user.getId();
+		return "redirect:../common/initIndex?userId=" + user.getId();
 	}
 
 	/**
@@ -527,26 +527,6 @@ public class UserController {
 	public String test() {
 		return "personal/user/personal_companylist";
 	}
-
-	/**
-	 * 主页的ajax显示
-	 * 
-	 * @param page
-	 * @return
-	 * 
-	 * 		ModelAndView
-	 */
-	@RequestMapping("/ajax")
-	@ResponseBody
-	public ModelAndView ajax(String page,HttpSession session) {
-		if(session.getAttribute("myJobs1")==null){
-			List<Job> myJobs=jobService.findJob1();
-			session.setAttribute("myJobs1", myJobs);
-		}
-		return new ModelAndView(page);
-	}
-	
-	
 	/**
 	 * 验证用户名是否重复
 	 */

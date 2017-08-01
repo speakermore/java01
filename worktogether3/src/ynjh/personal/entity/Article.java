@@ -29,7 +29,8 @@ public class Article implements Serializable{
 	private String articleContent;
 	//用户状态1：企业 2：个人
 	private Integer articleUsersType;
-	
+	//文章类型
+	private String articleType;
 	public Article(){
 		
 	}
@@ -65,6 +66,12 @@ public class Article implements Serializable{
 		this.id = id;
 	}
 
+	public String getArticleType() {
+		return articleType;
+	}
+	public void setArticleType(String articleType) {
+		this.articleType = articleType;
+	}
 	public Integer getUsersId() {
 		return usersId;
 	}
@@ -137,9 +144,13 @@ public class Article implements Serializable{
 		this.articleUsersType = articleUsersType;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Article [id=" + id +"]";
+		return "Article [id=" + id + ", usersId=" + usersId + ", articleTitle=" + articleTitle + ", articleLikeNum="
+				+ articleLikeNum + ", articleReadNum=" + articleReadNum + ", articleTime=" + articleTime
+				+ ", articleStatus=" + articleStatus + ", articleKey=" + articleKey + ", articleContent="
+				+ articleContent + ", articleUsersType=" + articleUsersType + ", articleType=" + articleType + "]";
 	}
 	@Override
 	public int hashCode() {

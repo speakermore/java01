@@ -9,22 +9,49 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
-	config.toolbarGroups = [
-		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-		{ name: 'links' },
-		{ name: 'insert' },
-		{ name: 'forms' },
-		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-		{ name: 'others' },
-		'/',
-		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-		{ name: 'styles' },
-		{ name: 'colors' },
-		{ name: 'about' }
-	];
+//	config.toolbar = [
+//	    ['Source', '-', 'Bold', 'Italic'], ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'], '/',
+//	    ['Checkbox', 'Radio', 'TextField', 'Textarea', 'Select','Button']
+//	    ];
+//
+//	config.toolbar = 'Basic';
+//	config.toolbar_Basic =[
+//	    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink', '-', 'About']
+//	    ];
+//
+//	config.toolbarGroups = [
+//	    { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
+//	    { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+//	    { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+//	    { name: 'forms' },
+//	    '/',
+//	    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+//	    { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+//	    { name: 'links' },
+//	    { name: 'insert' },
+//	    '/',
+//	    { name: 'styles' },
+//	    { name: 'colors' },
+//	    { name: 'tools' },
+//	    { name: 'others' },
+//	    { name: 'about' }
+//	];
+//	config.toolbarGroups = [
+//		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+//		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+//		{ name: 'links' },
+//		{ name: 'insert' },
+//		{ name: 'forms' },
+//		{ name: 'tools' },
+//		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+//		{ name: 'others' },
+//		'/',
+//		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+//		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+//		{ name: 'styles',groups:['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+//		{ name: 'colors' },
+//		{ name: 'about' }
+//	];
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
@@ -42,5 +69,5 @@ CKEDITOR.editorConfig = function( config ) {
 	config.resize_enabled = false;
 	config.image_previewText='  '; //预览区域显示内容
 	config.filebrowserUploadUrl = "/ckeditor/upload";//上传图片
-	config.filebrowserImageUploadUrl="/ckeditor/upload";
+	config.filebrowserImageUploadUrl="/ckeditor/upload"; 
 };

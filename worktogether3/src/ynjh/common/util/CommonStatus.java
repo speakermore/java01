@@ -116,11 +116,9 @@ public class CommonStatus {
 	 */
 	public static final Map<String, Integer> EXPENSES_CALC_BASE_MONEY=new HashMap<String,Integer>();
 	/**
-	 * 操作类型：两个操作类型，参与：1，发布：0
+	 * 操作类型：两个操作类型，0.发布，1.参与，2.充值
 	 */
 	public static final Map<String, Integer> USER_OP_TYPE=new HashMap<String,Integer>();
-	
-	
 	static{
 		USER_STATUS_DISCRIPTION.put("userIsRecruit", "应聘");
 		USER_STATUS_DISCRIPTION.put("userIsCrowdFund", "众筹");
@@ -141,6 +139,7 @@ public class CommonStatus {
 		USER_OP_TYPE.put("userIsRecruit", 1);
 		USER_OP_TYPE.put("userIsCrowdFund", 0);
 		USER_OP_TYPE.put("userIsPartner", 0);
+		USER_OP_TYPE.put("管理员充值", 2);
 		
 		
 	}

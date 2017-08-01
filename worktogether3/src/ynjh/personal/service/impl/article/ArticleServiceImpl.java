@@ -19,7 +19,6 @@ import ynjh.personal.service.ArticleService;
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
-	private Logger logger=Logger.getLogger(this.getClass());
 	@Resource
 	private ArticleMapper articleMapper;
 	@Override
@@ -34,7 +33,6 @@ public class ArticleServiceImpl implements ArticleService {
 			result=articleMapper.addUserArticle(article);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.warn("gggggggggggg");
 		}
 		return result;
 	}
@@ -66,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 			page=(page-1)*20;
 		}
-		return articleMapper.selectUserArticle(page,userId);
+		return articleMapper.findUserArticle(page,userId);
 	}
 	/**
 	 * 修改文章内容

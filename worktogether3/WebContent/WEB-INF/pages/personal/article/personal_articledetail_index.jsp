@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
@@ -7,15 +6,13 @@
 	padding: 0 20px;
 }
 </style>
-<article
-	class="col-md-12  work-together-shadow work-together-deep">
-	<!--我的信息-->
+<article class="col-sm-12">
+	<!--文章内容-->
 	<section class="panel">
-			<div class="col-md-12 column">
+			<div class="col-sm-12 column">
 				<h3 align="center">${article.articleTitle}</h3>
 				<div align="right">
-					<fmt:formatDate value="${article.articleTime}"
-						pattern="yyyy-MM-dd mm:hh" />
+					<fmt:formatDate value="${article.articleTime}" pattern="yyyy-MM-dd mm:hh" />
 				</div>
 				<hr />
 			</div>
@@ -73,8 +70,7 @@
 				</div>
 			</div>
 			<div class="panel-footer work-together-right">
-				<fmt:formatDate value="${comArt.commentArticleTime }"
-						pattern="yyyy-MM-dd HH:mm" /><a href="#">更多....</a>
+				<fmt:formatDate value="${comArt.commentArticleTime }" pattern="yyyy-MM-dd HH:mm" /><a href="#">更多....</a>
 			</div>
 		</section>
 		</c:forEach>

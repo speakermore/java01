@@ -10,9 +10,9 @@ h5 a {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 work-together-background">
-				<h5 style="color: #fff; float: left;">
+				<h3 style="color: #fff; float: left;">
 					相职网&nbsp;&nbsp;<em><small>专业提供软件人力资源解决方案</small></em>
-				</h5>
+				</h3>
 				<!-- 判断是否登录开始 -->
 				<h5 class="col-xs-offset-9"></h5>
 				<!-- 判断是否登录结束 -->

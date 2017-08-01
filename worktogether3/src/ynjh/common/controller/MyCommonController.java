@@ -6,12 +6,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 
@@ -19,21 +20,26 @@ import ynjh.admin.entity.News;
 import ynjh.admin.service.news.NewsService;
 import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
-
+import ynjh.common.entity.ArticleType;
+import ynjh.common.service.ArticleTypeService;
 import ynjh.common.service.MyCommonResumeService;
 import ynjh.common.service.NationService;
 import ynjh.common.service.ProvinceService;
+import ynjh.company.entity.Company;
+import ynjh.personal.entity.Article;
+import ynjh.personal.entity.User;
+import ynjh.personal.service.ArticleService;
 
 
-@Controller
+
 /**
  * 通用的控制跳转
  * @author 牟勇
  *
  */
-@Service
+@Controller
 public class MyCommonController {
-	
+	Logger logger=Logger.getLogger(MyCommonController.class);
 	@Resource
 	private NationService nationService;
 	@Resource
@@ -43,13 +49,18 @@ public class MyCommonController {
 	@Resource
 	private MyCommonResumeService myCommonResumeService;
 	@Resource
+	private ArticleService articleService;
+	@Resource
 	private JobService jobService;
+	@Resource
+	private ArticleTypeService articleTypeService;
 	/**
 	 * 首页的跳转
 	 * @return
 	 */
 	@RequestMapping(value={"/","/index","/index.html"})
 	public String index(HttpSession session){
+		
 		List<News> newses10=newsService.findTop10ByCreateDate();
 		//软件人才---管理人才
 		List<Map<String, Object>> manageResume=myCommonResumeService.findByResumeTitle5("经理");
@@ -137,5 +148,52 @@ public class MyCommonController {
 			html.append("<option value='"+job.getJobName()+"'>"+job.getJobName()+"</option>");
 		}
 		return html.toString();
+	}
+	
+	/**
+	 * 主页的ajax显示
+	 * 牟勇：为了让企业和个人用户的页面跳转显示得比较顺滑，也为了让菜单很方便的处于它应该在的位置<br />
+	 * 特别写了这个方法，把跳转的页面用于刷新个人中心和企业中心的右侧，而不是刷新整个页面，以提升客户体验
+	 * @param page 右侧需要加载的页面
+	 * @return
+	 */
+	@RequestMapping("/ajax")
+	@ResponseBody
+	public ModelAndView ajax(String page,HttpSession session) {
+		ModelAndView mv=new ModelAndView(page);
+		//加载需要保存到session的对象
+		addSessionVar(session);
+		//加载一级岗位
+		if(session.getAttribute("myJobs1")==null){
+			List<Job> myJobs=jobService.findJob1();
+			session.setAttribute("myJobs1", myJobs);
+		}
+		
+		//加载文章
+		try{
+			User user=(User)session.getAttribute("user");
+			List<Article> articles=articleService.findUserArticle(null, user.getId());
+			mv.addObject("articles", articles);
+		}catch(Exception ex){
+			logger.debug("此用户不是个人用户");
+		}
+		try {
+			Company user=(Company)session.getAttribute("user");
+			List<Article> articles=articleService.findUserArticle(null, user.getId());
+			mv.addObject("articles", articles);
+		} catch (Exception e) {
+			logger.debug("此用户不是企业用户");
+		}
+		return mv;
+	}
+	/**
+	 * 检查session中是否缺少需要的对象，如果没有就添加
+	 * @param session
+	 */
+	private void addSessionVar(HttpSession session){
+		if(session.getAttribute("")==null){
+			List<ArticleType> articleTypesForPersonal=articleTypeService.findArticleTypeForPersonal();
+			session.setAttribute("articleTypesForPersonal", articleTypesForPersonal);
+		}
 	}
 }

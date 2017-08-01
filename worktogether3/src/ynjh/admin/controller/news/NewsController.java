@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ynjh.admin.entity.Admin;
 import ynjh.admin.entity.News;
 import ynjh.admin.service.news.NewsService;
+import ynjh.common.entity.ArticleType;
+import ynjh.common.service.ArticleTypeService;
 
 /**
  * 新闻资讯处理的控制器
@@ -26,7 +28,8 @@ import ynjh.admin.service.news.NewsService;
 public class NewsController {
 	@Resource
 	NewsService newsService;
-	
+	@Resource
+	ArticleTypeService articleTypeService;
 	/**
 	 * 添加新闻资讯
 	 * @param news 新闻资讯实体类
@@ -151,7 +154,8 @@ public class NewsController {
 	 * @return 添加新闻资讯页面路径
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.GET)
-	public String add(){
+	public String add(HttpSession session){
+		addSessionVar(session);
 		return "admin/news/add_news";
 	}
 	/**
@@ -160,9 +164,22 @@ public class NewsController {
 	 * @return 跳转修改资讯的页面
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.GET)
-	public String update(@PathVariable Integer id,Model model){
+	public String update(@PathVariable Integer id,Model model,HttpSession session){
+		addSessionVar(session);
 		News news=newsService.findById(id);
 		model.addAttribute("news", news);
 		return "admin/news/update_news";
+	}
+	/**
+	 * 检查session中缺少的对象，如果没有就添加。
+	 * 目前添加了资讯类型
+	 * @param session web中的session对象
+	 */
+	private void addSessionVar(HttpSession session){
+		//添加资讯类型对象
+		if(session.getAttribute("newsTypesForAdmin")==null){
+			List<ArticleType> newsTypesForAdmin=articleTypeService.findNewsTypeForAdmin();
+			session.setAttribute("newsTypesForAdmin", newsTypesForAdmin);
+		}
 	}
 }

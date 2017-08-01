@@ -5,6 +5,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js "></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js" charset="UTF-8"></script>
+<script type="text/javascript" src="thirdpart/ckeditor/config.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript"
 	src="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>

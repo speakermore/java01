@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.service.ArticleTypeService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
@@ -22,14 +24,15 @@ import ynjh.personal.service.ArticleService;
 public class ArticleController {
 	@Resource
 	private ArticleService articleService;
-
+	@Resource
+	private ArticleTypeService articleTypeService;
 	/**
 	 * 跳转页面
 	 * 
 	 * @return 跳转到personal_addarticle页面
 	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.GET)
-	public String addArticle() {
+	public String addArticle(HttpSession session) {
 		return "personal/article/personal_addarticle";
 	}
 
@@ -103,24 +106,6 @@ public class ArticleController {
 				sb.append("</tr>");
 		
 		}
-		/*for (Article article : articles) {
-			sb.append("<tr>");
-			sb.append("<td><a href=\"personal/article/lookArticleById?id=" + article.getId() + "\">"
-					+ article.getArticleTitle() + "</a></td>");
-			sb.append("<td>" + sdf.format(article.getArticleTime()) + "</td>");
-			if (article.getArticleStatus() == 1) {
-				sb.append("<th>待审核</th>");
-			} else if (article.getArticleStatus() == 2) {
-				sb.append("<th>正常</th>");
-			} else if (article.getArticleStatus() == 3) {
-				sb.append("<th>审核未通过</th>");
-			} else if (article.getArticleStatus() == 4) {
-				sb.append("<th>已被删除</th>");
-			}
-			sb.append(
-					"<td><a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a></td>");
-			sb.append("</tr>");
-		}*/
 		sb.append("---" + toPage + "---" + maxPage);
 		return sb.toString();
 	}
@@ -192,7 +177,7 @@ public class ArticleController {
 		Article article = articleService.findArticleById(id);
 		if (article != null) {
 			mv.addObject("article", article);
-			mv.setViewName("personal/article/personal_articleedit");
+			mv.setViewName("personal/article/personal_articleedit_index");
 		}
 		return mv;
 	}
@@ -211,7 +196,7 @@ public class ArticleController {
 		ModelAndView mv = new ModelAndView();
 		if (result > 0) {
 			mv.addObject("operatorInfo", "修改文章内容成功！");
-			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+oldUser.getId());
+			mv.setViewName("redirect:../common/initIndex?userId="+oldUser.getId());
 		} else {
 			mv.addObject("operatorInfo", "修改文章内容失败，请联系管理员");
 			mv.setViewName("personal/user/personal_index");
@@ -267,4 +252,5 @@ public class ArticleController {
 	public String test() {
 		return "personal/article/test";
 	}
+	
 }

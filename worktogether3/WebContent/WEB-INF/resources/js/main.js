@@ -72,5 +72,18 @@ var ajaxStatus=function(btn,column,value,baseMoney,emId,userId){
 		});
 	}
 };
-
-
+/**
+ * 牟勇：刘志浩写的ajax跳转页面的方法，这样可以不用刷新整个页面，把右侧的内容给刷新了。
+ * 觉得挺好，就拿过来用喽。
+ */
+var ajaxPage = function(page) {
+	$.ajax({
+		url : "ajax",
+		data : "page=" + page,
+		type : "POST",
+		dataType : "html",
+		success : function(data) {
+			$("#my-content").html(data);
+		}
+	});
+}

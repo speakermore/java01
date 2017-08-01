@@ -31,6 +31,7 @@
 					<label class="alert alert-warning col-sm-12" id="charge-tip"></label>
 					<form id="charge-form" action="admin/cmp/charge" class="form-horizontal" role="form" method="post">
 						<input type="hidden" id="companyId" name="companyId" />
+						<input type="hidden" name="adminId" value="${admin.id }" />
 						<div class="form-group">
 							<div class="col-sm-12">
 								<div class="radio">

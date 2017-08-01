@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 牟勇：省份的映射类 -->
+<mapper namespace="ynjh.common.dao.ArticleTypeMapper">
+<!-- 查询管理员可以使用的资讯分类名称 -->
+<select id="findNewsTypeForAdmin" resultType="ArticleType">
+	select * from articleType where articleTypeOwner between 4 and 7
+</select>
+<!-- 查询个人用户可以使用的资讯分类名称 -->
+<select id="findArticleTypeForPersonal" resultType="ArticleType">
+	select * from articleType where articleTypeOwner in(1,3,5,7)
+</select>
+</mapper>

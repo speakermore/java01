@@ -13,7 +13,7 @@
 				<div class="panel">
 					<ol class="panel-body">
 						<c:forEach items="${newses10 }" var="news">
-							<li><a href="admin/news/news/${news.id }">${news.newsTitle.length()>13?news.newsTitle.substring(0,12).concat("..."):news.newsTitle }</a></li>
+							<li><a href="admin/news/news/${news.id }">${news.newsType} ${news.newsTitle.length()>13?news.newsTitle.substring(0,12).concat("..."):news.newsTitle }</a></li>
 						</c:forEach>
 					</ol>
 				</div>

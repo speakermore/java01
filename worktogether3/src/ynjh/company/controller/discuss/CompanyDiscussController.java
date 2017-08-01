@@ -90,14 +90,8 @@ public class CompanyDiscussController {
 	 */
 	@RequestMapping("/discuss/finddiscuss")
 	public ModelAndView finddiscuss(Discuss disc,HttpSession session){
-		Company company=(Company)session.getAttribute("company");
-//		User user=();
-//		session.setAttribute("user", user);
-//		session.setAttribute("company", company);
-//		company.setId(1);
-//		user.setId(1);
+		Company company=(Company)session.getAttribute("user");
 		List<Discuss> discuss=companyDiscussService.findAll(company.getId());
-//		session.setAttribute("disUserId", company.getId());
 		ModelAndView mView=new ModelAndView("company/artanddis/company_index");
 		mView.addObject("discusses", discuss);
 		return mView;

@@ -20,7 +20,7 @@ public interface ArticleMapper {
 	/**
 	 * 查看文章(所有)
 	 */
-	public List<Article> selectUserArticle(@Param("page")Integer page,@Param("usersId")Integer usersId);
+	public List<Article> findUserArticle(@Param("page")Integer page,@Param("usersId")Integer usersId);
 	/**
 	 * 查看文章(详细)
 	 */

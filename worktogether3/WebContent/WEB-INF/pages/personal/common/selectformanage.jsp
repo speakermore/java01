@@ -127,17 +127,6 @@
 
 
 <script type="text/javascript">
-	var ajaxPage = function(page) {
-		$.ajax({
-			url : "personal/user/ajax",
-			data : "page=" + page,
-			type : "POST",
-			dataType : "html",
-			success : function(data) {
-				$("#my-content").html(data);
-			}
-		});
-	}
 	var deleteRecord = function(page) {
 		$.ajax({
 			url : "personal/common/deleteRecord",

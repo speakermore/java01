@@ -26,18 +26,30 @@
 	<%@include file="../menu.jsp"%>
 	<div class="container">
 		<h3 class="col-md-offset-2">请修改资讯信息|（<a href="admin/news/find_all">返回资讯列表</a>）</h3>
-		<form id="add-admin" role="form" class="form-horizontal"
-			action="admin/news/update" method="post">
+		<form id="add-admin" role="form" class="form-horizontal" action="admin/news/update" method="post">
 			<input type="hidden" value="${news.id }" name="id" />
 			<div class="form-group">
+				<label class="col-sm-2 control-label">资讯类型:</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="newsType">
+						<c:forEach items="${newsTypesForAdmin }" var="nt">
+							<c:if test="${nt.articleTypeName==news.newsType }">
+							<option value="${nt.articleTypeName }" selected="selected">${nt.articleTypeName }</option>
+							</c:if>
+							<c:if test="${nt.articleTypeName!=news.newsType }">
+							<option value="${nt.articleTypeName }">${nt.articleTypeName }</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</div>
 				<label for="newsTitle" class="col-sm-2 control-label">资讯标题：</label>
-				<div class="col-sm-8">
+				<div class="col-sm-4">
 					<input id="userName" class="form-control" value="${news.newsTitle }" name="newsTitle"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="newsContent" class="col-sm-2 control-label">资讯内容：</label>
-				<div class="col-sm-8">
+				<div class="col-sm-10">
 						<textarea class="form-control"  name="newsContent" rows="15" cols="100">${news.newsContent}</textarea>
 				</div>
 			</div>

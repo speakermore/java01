@@ -13,7 +13,7 @@ $(function(){
 				$("#addInput").find(".companyTel:last").find(":input").val("");
 			}
 		}else{
-			alert("您的权限最多只能添加"+(maxjob+1)+"个联系电话");
+			alert("您最多只能添加"+(maxjob+1)+"个联系电话");
 		}
 		//清空clone内容的value值
 		
@@ -25,7 +25,7 @@ $(function(){
 	//删除最后一个电话
 	$("#deleteTel").click(function(){
 		if($(".companyTel").length>1){
-			if(window.confirm("确定要删 除最后一个电话?")){
+			if(window.confirm("确定要删除最后一个电话?")){
 				$(".companyTel:last").remove();
 				index--;
 			}

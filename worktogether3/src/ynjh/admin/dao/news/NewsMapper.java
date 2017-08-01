@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.admin.entity.News;
+import ynjh.common.entity.ArticleType;
 
 /**
  * 新闻资讯的Dao接口
