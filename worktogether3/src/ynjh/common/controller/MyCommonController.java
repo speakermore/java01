@@ -21,14 +21,21 @@ import ynjh.admin.service.news.NewsService;
 import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
 import ynjh.common.entity.ArticleType;
+import ynjh.common.entity.MyUser;
 import ynjh.common.service.ArticleTypeService;
 import ynjh.common.service.MyCommonResumeService;
 import ynjh.common.service.NationService;
 import ynjh.common.service.ProvinceService;
 import ynjh.company.entity.Company;
+import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
+import ynjh.personal.entity.Follow;
+import ynjh.personal.entity.Mood;
 import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
+import ynjh.personal.service.FollowService;
+import ynjh.personal.service.MoodService;
+import ynjh.personal.service.UserService;
 
 
 
@@ -54,6 +61,14 @@ public class MyCommonController {
 	private JobService jobService;
 	@Resource
 	private ArticleTypeService articleTypeService;
+	@Resource
+	private UserService userService;
+	@Resource
+	private CompanyService companyService;
+	@Resource
+	private MoodService moodService;
+	@Resource
+	private FollowService followService;
 	/**
 	 * 首页的跳转
 	 * @return
@@ -151,49 +166,73 @@ public class MyCommonController {
 	}
 	
 	/**
-	 * 主页的ajax显示
+	 * 主页的ajax显示<br />
+	 * <h3>特别感谢刘志浩</h3>
 	 * 牟勇：为了让企业和个人用户的页面跳转显示得比较顺滑，也为了让菜单很方便的处于它应该在的位置<br />
 	 * 特别写了这个方法，把跳转的页面用于刷新个人中心和企业中心的右侧，而不是刷新整个页面，以提升客户体验
 	 * @param page 右侧需要加载的页面
-	 * @return
+	 * @return 用户指定的右侧需要加载的页面，如果是另一个控制，需要加redirect前缀
 	 */
 	@RequestMapping("/ajax")
 	@ResponseBody
 	public ModelAndView ajax(String page,HttpSession session) {
 		ModelAndView mv=new ModelAndView(page);
 		//加载需要保存到session的对象
-		addSessionVar(session);
-		//加载一级岗位
-		if(session.getAttribute("myJobs1")==null){
-			List<Job> myJobs=jobService.findJob1();
-			session.setAttribute("myJobs1", myJobs);
-		}
-		
-		//加载文章
-		try{
-			User user=(User)session.getAttribute("user");
+		addSessionVar(session);		
+		//如果是点击跳转我的文章页面，则加载文章
+		if("personal/user/personal_index_myArticle".equals(page)){
+			MyUser user=(MyUser)session.getAttribute("user");
 			List<Article> articles=articleService.findUserArticle(null, user.getId());
 			mv.addObject("articles", articles);
-		}catch(Exception ex){
-			logger.debug("此用户不是个人用户");
-		}
-		try {
-			Company user=(Company)session.getAttribute("user");
-			List<Article> articles=articleService.findUserArticle(null, user.getId());
-			mv.addObject("articles", articles);
-		} catch (Exception e) {
-			logger.debug("此用户不是企业用户");
 		}
 		return mv;
 	}
 	/**
-	 * 检查session中是否缺少需要的对象，如果没有就添加
+	 * 检查session中是否缺少需要的对象集合，如果没有就添加<br />
+	 * session中的对象应该是那种基本不会更新的<br />
+	 * 目前有个人用户会用到的所有文章分类，一级职位分类
 	 * @param session
 	 */
 	private void addSessionVar(HttpSession session){
+		//个人用户会用到的所有文章分类
 		if(session.getAttribute("")==null){
 			List<ArticleType> articleTypesForPersonal=articleTypeService.findArticleTypeForPersonal();
 			session.setAttribute("articleTypesForPersonal", articleTypesForPersonal);
 		}
+		
+		//加载一级岗位，即岗位种类
+		if(session.getAttribute("myJobs1")==null){
+			List<Job> myJobs=jobService.findJob1();
+			session.setAttribute("myJobs1", myJobs);
+		}
+	}
+	
+	/**
+	 * 牟勇：查询用户相关更多信息，包括用户的基本信息，用户所发表的文章
+	 * 用于在用户中心，点击用户名时，查看用户更多信息并加关注
+	 * @param userId 用户主键
+	 * @return 跳转到/personal/user/personal_index_myArticle
+	 */
+	@RequestMapping("/userMoreInfo/{userId}")
+	public ModelAndView userMoreInfo(@PathVariable Integer userId,HttpSession session){
+		ModelAndView mv=new ModelAndView("/personal/user/personal_index_myArticle");
+		List<Article> articles=articleService.findUserArticle(null, userId);
+		//判断被查看信息的用户是个人还是企业
+		if(userId>=1234567890){
+			User user=userService.findUserById(userId);
+			Mood mood=moodService.findLastestMoodByUserId(userId);
+			mv.addObject("userMoreInfo", user);
+			//个人用户才有心情文字，企业用户没有
+			mv.addObject("moreInfoMood", mood);
+		}else{
+			Company user=companyService.findCompanyById(userId);
+			mv.addObject("userMoreInfo", user);
+		}
+		//判断被查看信息的用户以前是否已被关注过
+		MyUser user=(MyUser)session.getAttribute("user");
+		Follow follow=followService.findIsFollowByFollowIdAndFollowId(user.getId(), userId);
+		mv.addObject("moreInfoIsFollow", follow);
+		mv.addObject("articles", articles);
+		return mv;
 	}
 }

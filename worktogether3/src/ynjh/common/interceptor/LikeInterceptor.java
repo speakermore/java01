@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ynjh.company.entity.Company;
-import ynjh.company.entity.LikeNum;
 import ynjh.company.service.LikeNumService;
 import ynjh.personal.entity.User;
 
@@ -29,14 +28,13 @@ public class LikeInterceptor extends HandlerInterceptorAdapter{
 		String id=request.getParameter("id");
 		HttpSession session=request.getSession();
 		Object user=session.getAttribute("user");
-		LikeNum likeNum=null;
+		Integer likeNum=null;
 		if (user instanceof Company) {
-			likeNum=likeService.findByArt(new Integer(id), ((Company) user).getId());
+			likeNum=likeService.islikeNum(new Integer(id), ((Company) user).getId());
 		}else if (user instanceof User) {
-			likeNum=likeService.findByArt(new Integer(id), ((User) user).getId());
+			likeNum=likeService.islikeNum(new Integer(id), ((User) user).getId());
 		}
-		if(likeNum==null){
-			
+		if(likeNum==0){
 			return true;
 		}else{
 			request.getRequestDispatcher("/company/artanddis/article/findid?id="+new Integer(id)+"&toPage=company/artanddis/companyart_detail").forward(request, response);

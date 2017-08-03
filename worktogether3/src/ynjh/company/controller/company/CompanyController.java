@@ -277,11 +277,11 @@ public class CompanyController {
 		String userPath=UploadFile.getUserImgPath("/WEB-INF/resources/company/img",company.getCompanyLoginId());
 		
 		String[] companyPic=UploadFile.uploadFile(userPath,new MultipartFile[]{logo,licenseImg}, session);
-		//牟勇：如果logo上传了，就改变路径
+		//牟勇：如果logo上传了，就保存路径
 		if(companyPic[0]!=null){
 			company.setCompanyLogo(companyPic[0]);
 		}
-		//牟勇：如果营业执照上传了，就改变路径
+		//牟勇：如果营业执照上传了，就保存路径
 		if(companyPic[1]!=null){
 			company.setCompanyLicenseImg(companyPic[1]);
 		}

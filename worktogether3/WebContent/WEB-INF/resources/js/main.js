@@ -86,4 +86,38 @@ var ajaxPage = function(page) {
 			$("#my-content").html(data);
 		}
 	});
+};
+/**
+ * 牟勇：添加关注
+ * 添加关注之后，跳转到个人中心首页
+ * byFollowId 被关注者的主键id
+ * userId 登录用户的主键id
+ */
+var addfollow=function(byFollowId,userId){
+	$.ajax({
+		url:'personal/follow/addFollow/'+byFollowId,
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+			alert(data.info);
+			location.href='personal/common/initIndex?userId='+userId;
+		}
+	});
+};
+/**
+ * 牟勇：取消关注
+ * 取消之后，跳转个人用户中心页面
+ * byFollowId 被关注者的主键id
+ * userId 登录用户的主键id
+ */
+var cancelfollow=function(byFollowId,userId){
+	$.ajax({
+		url:'personal/follow/cancelFollow/'+byFollowId,
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+			alert(data.info);
+			location.href='personal/common/initIndex?userId='+userId;
+		}
+	});
 }

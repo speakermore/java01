@@ -22,5 +22,6 @@
 				</div>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/pages/copyright.jsp" %>
 </body>
 </html>

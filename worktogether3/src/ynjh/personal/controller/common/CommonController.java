@@ -113,24 +113,24 @@ public class CommonController {
 		List<Offer> newlyOffers = nService.findNewlyFaceByUserId(userId);
 		session.setAttribute("personal_offer", newlyOffers);
 		// 牟勇：查询个人用户对我的文章的评论
-		Map<String, Object> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
+		List<Map<String, Object>> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
 		session.setAttribute("personal_comments", articleByComments);
 		// 获取心情对象
-		Mood mood = mService.selectMoodById(userId);
+		Mood mood = mService.findLastestMoodByUserId(userId);
 		session.setAttribute("mood", mood);
 		// 查看我关注的人数统计
-		int follows = fService.selectUserFollowCount(userId);
+		int follows = fService.countFollow(userId);
 		session.setAttribute("follows", follows);
 		// 查看关注我的人数统计
-		int byFollows = fService.selectUserByFollowCount(userId);
+		int byFollows = fService.countByFollow(userId);
 		session.setAttribute("byFollows", byFollows);
 
-		// 获取已经关注的对象
-		List<Follow> UserFollows = fService.selectUserFollow(userId);
-		session.setAttribute("UserFollows", UserFollows);
+		// 获取已经关注的个人用户
+		List<Follow> UserFollows = fService.findUserFollow(userId);
+		session.setAttribute("userFollows", UserFollows);
 		// 获取已经关注的企业
-		List<Follow> CompanyFollows = fService.selectCompanyFollow(userId);
-		session.setAttribute("CompanyFollows", CompanyFollows);
+		List<Follow> CompanyFollows = fService.findCompanyFollow(userId);
+		session.setAttribute("companyFollows", CompanyFollows);
 		return mv;
 	}
 
@@ -144,9 +144,8 @@ public class CommonController {
 	@RequestMapping(value = "gotoCompanyById", method = RequestMethod.GET)
 	public ModelAndView gotoCompanyById(Integer id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		Company company = companyService.findCompany(id);
+		Company company = companyService.findCompanyById(id);
 		CompanyIntroduction companyInt = companyIntService.findById(company.getId());
-
 		session.setAttribute("company", company);
 		session.setAttribute("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");

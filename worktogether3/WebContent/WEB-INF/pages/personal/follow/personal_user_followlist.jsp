@@ -1,86 +1,79 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="ynjh.common.util.CommonStatus" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<%@include file="/WEB-INF/pages/personal/common/header.jsp"%>
-<%@include file="/WEB-INF/pages/personal/common/footor.jsp"%>
-<title>我的关注</title>
-</head>
-<body>
-	<%@include file="/WEB-INF/pages/nav.jsp"%>
-	<div class="container">
-		<div class="row clearfix">
-			<div class="col-md-1 column"></div>
-			<div class="col-md-10 column">
-				<div class="tabbable" id="tabs-userList">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#panel-user" data-toggle="tab">我关注的用户</a></li>
-						<li><a href="#panel-company" data-toggle="tab">我关注的企业</a></li>
-					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="panel-user">
-							<table class="table">
-								<colgroup>
-									<col style="width: 30%">
-									<col style="width: 10%">
-									<col style="width: 10%">
-									<col style="width: 10%">
-									<col style="width: 20%">
-									<col style="width: 10%">
-									<col style="width: 10%">
-								</colgroup>
-								<thead>
-									<tr>
-										<th>求职意向</th>
-										<th>姓名</th>
-										<th>性别</th>
-										<th>年龄</th>
-										<th>工作经验</th>
-										<th>学历</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody id="personal_follow_list">
-									<c:forEach items="${UserFollows }" var="fol">
-										<tr>
-											<td><a href="#">${fol.resumeJor }</a></td>
-											<td>${fol.userRealName }</td>
-											<td>${SEX[fol.userGender] }</td>
-											<td><fmt:formatDate value="${fol.userBirthday }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-											<td>${fol.resumeWorks }</td>
-											<td>${fol.resumeEducation }</td>
-											<td><a href="javascript:ajaxDeleteFollow(${fol.id })">取消关注</a>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-						<div class="tab-pane" id="panel-company">
-							<p>
-								<%@include
-									file="/WEB-INF/pages/personal/follow/personal_company_followlist.jsp"%>
-							</p>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set value="${CommonStatus.SEX }" var="SEX"></c:set>
+<c:set var="COMPANY_SIZE" value="${CommonStatus.COMPANY_SIZE }"></c:set>
+<style type="text/css">
+img {
+	padding: 10px;
+	padding-right: 20px;
+}
+
+.media {
+	border-radius: 5px;
+	border: 2px solid #E7E7E7;
+	box-shadow: 0 2px 0 #F3F3F3;
+}
+
+.userlist_top {
+	padding: 20px;
+}
+
+.userlist_botten {
+	height: 48px;
+	border-top: 1px solid #E7E7E7;
+	line-height: 22px;
+	padding-top: 5px;
+	color: #999;
+	overflow: hidden;
+}
+.media-body{
+	padding-left:10px;
+}
+
+.userlist_space {
+	margin-bottom: 10px;
+}
+.tab-pane{
+	margin-top:10px;
+}
+</style>
+<div class="col-sm-12">
+	<div class="tabbable" id="tabs-userList">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#panel-person" data-toggle="tab">我关注的个人</a></li>
+			<li><a href="#panel-company" data-toggle="tab">我关注的企业</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="panel-person">
+					<c:forEach items="${userFollows }" var="fol">
+					<div class="col-sm-6 userlist_space">
+						<div class="media">
+							<div class="userlist_top">
+								<div class="pull-left">
+									<img onerror="javascript:this.src='img/head.gif'" src="img/upload/personal/${fol.userLoginId }/${fol.userHeadImgPath}" width="105" height="105" class="img-thumbnail img-circle" />
+								</div>
+								<div class="media-body">
+									<h4>${fol.userName }</h4>
+									<p>${SEX[fol.userGender] },${fol.age }岁,${fol.resumeJor }</p>
+									<p>工作经验${fol.workAge }年</p>
+									<div class="btn-group">
+										<%-- <a href="personal/common/gotoCompanyById?id=${cf.byFollowId }" class="btn btn-default" type="button">
+										<span class="glyphicon glyphicon-align-left"></span>进入
+										</a> --%>
+										<a class="btn btn-default" role="button" href="javascript:cancelfollow(${fol.byFollowId },${user.id })">
+										<span class="glyphicon glyphicon-minus"></span>取消关注
+										</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-1 column"></div>
+					</c:forEach>
+		</div>
+		<div class="tab-pane" id="panel-company">
+			<%@include file="/WEB-INF/pages/personal/follow/personal_company_followlist.jsp" %>
+		</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		var ajaxDeleteFollow = function(id) {
-			$.ajax({
-				url : "personal/follow/cancelUserFollow?byFollowId=" + id,
-				dataType : "json",
-				success : function(data) {
-					alert(data.operatorInfo);
-					$("#personal_follow_list").html(data.UserFollows);
-				}
-			});
-		}
-	</script>
-</body>
-</html>
+</div>

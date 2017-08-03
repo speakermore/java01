@@ -16,6 +16,17 @@ hr{
 .work-together-red{
 	color:#fa941b;
 }
+/* 牟勇：一个自动截断超过长度字符的样式，
+但是发现如果要显示省略号，会把有序列表的前面数字一并隐藏了 */
+.work-together-cut-text {
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap; 
+}
+/* 牟勇：为每个无样式列表添加一个间隔 */
+ul.list-unstyled li{
+	padding:10px;
+}
 /* 登录/注册表单最外边的边框线样式 */
 .wrok-together-login-border{
 	border: 1px dotted #fa941b;

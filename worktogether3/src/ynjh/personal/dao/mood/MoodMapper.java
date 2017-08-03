@@ -13,7 +13,7 @@ public interface MoodMapper {
 	 * @param userId 个人用户主键id
 	 * @return 符合要求的一个Mood对象
 	 */
-	public Mood selectMoodById(Integer userId);
+	public Mood findLastestMoodByUserId(Integer userId);
 	
 	
 }

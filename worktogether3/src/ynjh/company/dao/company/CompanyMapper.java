@@ -19,6 +19,11 @@ public interface CompanyMapper {
 	//登录
 	public Company findByloginIdAndPassword(@Param("companyLoginId")String companyLoginId,@Param("companyPassword")String companyPassword);
 	//查询公司信息
+	/**
+	 * 根据企业主键查询企业信息
+	 * @param id 企业主键
+	 * @return 企业实体类对象
+	 */
 	public Company findById(Integer id);
 	//查询公司环境图片
 	public List<CompanyDetailImg> findDetailImg(Integer companyId);

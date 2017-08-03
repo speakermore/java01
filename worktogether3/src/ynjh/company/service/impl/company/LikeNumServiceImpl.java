@@ -13,8 +13,8 @@ public class LikeNumServiceImpl implements LikeNumService {
 	@Resource
 	private LikeNumMapper likeMapper;
 	@Override
-	public LikeNum findByArt(Integer articleId, Integer usersId) {
-		return likeMapper.findByArticle(articleId, usersId);
+	public Integer islikeNum(Integer articleId, Integer usersId) {
+		return likeMapper.countLikeNumByUserIdAndArticleId(articleId, usersId);
 	}
 
 	@Override

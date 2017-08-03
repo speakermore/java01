@@ -1,17 +1,15 @@
 package ynjh.personal.service.impl.article;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-
 import javax.annotation.Resource;
-
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import ynjh.company.dao.company.LikeNumMapper;
+import ynjh.company.entity.LikeNum;
 import ynjh.personal.dao.article.ArticleMapper;
 import ynjh.personal.entity.Article;
-import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
 /**
  * @author 胡林飞
@@ -21,6 +19,8 @@ import ynjh.personal.service.ArticleService;
 public class ArticleServiceImpl implements ArticleService {
 	@Resource
 	private ArticleMapper articleMapper;
+	@Resource
+	private LikeNumMapper likeNumMapper;
 	@Override
 	/**
 	 * 写文章
@@ -84,14 +84,18 @@ public class ArticleServiceImpl implements ArticleService {
 	public Integer updateReadNum(Integer id) {
 		return articleMapper.updateReadNum(id);
 	}
-	/**
-	 * 点赞数
-	 * @return Integer 返回点赞数
-	 * @param id 文章id
-	 */
+	
 	@Override
-	public Integer updateLikeNum(Integer id) {
-		return articleMapper.updateLikeNum(id);
+	public Integer updateLikeNum(Integer articleId,Integer usersId) {
+		
+		int result= articleMapper.updateLikeNum(articleId);
+		//牟勇：对点赞进行记录
+		LikeNum likeNum=new LikeNum();
+		likeNum.setArticleId(articleId);
+		likeNum.setUsersId(usersId);
+		//牟勇：将点赞保存到likeNum表
+		likeNumMapper.addLikeNum(likeNum);
+		return result;
 	}
 	/**
 	 * 获得最大记录数
@@ -113,7 +117,7 @@ public class ArticleServiceImpl implements ArticleService {
 	 */
 	@Override
 	public Article findArticleById(Integer id) {
-		return articleMapper.selectArticleById(id);
+		return articleMapper.findArticleById(id);
 	}
 	
 	/**
@@ -131,6 +135,16 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article findNewlyArticleByUserId(Integer userId) {
 		return articleMapper.findNewlyArticleByUserId(userId);
+	}
+	@Override
+	public Integer findLikeNumByArticleId(Integer articleId) {
+		
+		return articleMapper.findLikeNumByArticleId(articleId);
+	}
+	@Override
+	public Integer cancelLikeNum(Integer articleId, Integer userId) {
+		articleMapper.updateLikeNumMinus(articleId);
+		return likeNumMapper.deleteLikeNum(articleId,userId);
 	}
 	
 }

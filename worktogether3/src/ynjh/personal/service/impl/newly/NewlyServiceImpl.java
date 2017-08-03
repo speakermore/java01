@@ -53,7 +53,7 @@ public class NewlyServiceImpl implements NewlyService {
 	 * 查看最新评论
 	 */
 	@Override
-	public Map<String, Object> findNewlyCommentArticleByUserId(Integer userId) {
+	public List<Map<String, Object>> findNewlyCommentArticleByUserId(Integer userId) {
 		return newlyMapper.findNewlyCommentArticleByUserId(userId);
 	}
 	

@@ -73,6 +73,7 @@
 	</div>
 
 	<%@include file="../footer.jsp"%>
+	<%@include file="/WEB-INF/pages/copyright.jsp" %>
 </body>
 <script type="text/javascript">
 	$("#validateCode+a")

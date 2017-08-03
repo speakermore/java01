@@ -10,36 +10,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		value(#{followId},#{byFollowId},#{followDate},#{followStartType},#{followType})
 	</insert>
 	<!--取消关注 -->
-	<delete id="deleteUserFollow">
-		delete from follow where id=#{id}
+	<delete id="deleteFollow">
+		delete from follow where followId=#{followId} and byFollowId=#{byFollowId}
 	</delete>
 	<!--查看关注（个人用户） -->
-	<select id="selectUserFollow" parameterType="Integer"
-		resultType="Follow">
-		select
-		f.*,r.resumeJor,r.resumeWorks,r.resumeEducation,u.userRealName,u.userGender,u.userBirthday
-		from follow f,resume r,user u
-		where f.followId=#{followId}
-		and u.id=r.userId
-		and u.id=f.byFollowId
+	<select id="findUserFollow" parameterType="Integer" resultType="Follow">
+		select f.*,r.resumeJor,r.resumeWorks,r.resumeEducation,u.userLoginId,u.userHeadImgPath,u.userRealName,u.userName,u.userGender,u.userBirthday 
+		from follow f,resume r,user u 
+		where f.followId=#{followId} 
+		and u.id=r.userId 
+		and u.id=f.byFollowId 
 		and f.followStartType=2
 	</select>
 	<!-- 查看关注（企业用户） -->
-	<select id="selectCompanyFollow" parameterType="Integer"
-		resultType="Follow">
+	<select id="findCompanyFollow" parameterType="Integer" resultType="Follow">
 		select * from follow f,company c,companyintroduction ci
-		where f.followId=#{userId}
+		where f.followId=#{followId}
 		and f.byFollowId=c.id
 		and c.id=ci.companyId
 		and f.followStartType=1
 	</select>
 	<!--查看我关注的人数统计 -->
-	<select id="selectUserFollowCount" parameterType="Integer"
-		resultType="Integer">
+	<select id="countFollow" parameterType="Integer" resultType="Integer">
 		select count(*) from follow where followId=#{followId}
 	</select>
 	<!--查看被关注的人数统计 -->
-	<select id="selectUserByFollowCount" parameterType="Integer"
+	<select id="countByFollow" parameterType="Integer"
 		resultType="Integer">
 		select count(*) from follow where byFollowId=#{byFollowId}
 	</select>

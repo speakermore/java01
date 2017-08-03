@@ -16,7 +16,7 @@ public interface ArticleTypeService {
 	 */
 	public List<ArticleType> findNewsTypeForAdmin();
 	/**
-	 * 查询个人用户使用的资讯类型
+	 * 查询个人用户使用的文章类型
 	 * @return
 	 */
 	public List<ArticleType> findArticleTypeForPersonal();

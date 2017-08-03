@@ -1,18 +1,16 @@
 package ynjh.personal.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
+import ynjh.common.entity.MyUser;
 import ynjh.common.util.MD5Util;
 /**
  * 
  * @author 刘志浩
  * 用户表，对应user表
  */
-public class User implements Serializable{
-	private static final long serialVersionUID = 8206488828632325782L;
-	//用户id
-	private Integer id;
+public class User extends MyUser{
+	private static final long serialVersionUID = 780075079053933472L;
 	// 用户名
 	private String userLoginId;
 	// 密码
@@ -98,14 +96,6 @@ public class User implements Serializable{
 
 	public void setUserIsPartner(Integer userIsPartner) {
 		this.userIsPartner = userIsPartner;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getUserLoginId() {
@@ -235,7 +225,7 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userLoginId=" + userLoginId + ", userPassword=" + userPassword + ", userName="
+		return "User [id=" + getId() + ", userLoginId=" + userLoginId + ", userPassword=" + userPassword + ", userName="
 				+ userName + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userStatus=" + userStatus
 				+ ", userRealName=" + userRealName + ", userIDCard=" + userIDCard + ", userIDImgFace=" + userIDImgFace
 				+ ", userIDImgCon=" + userIDImgCon + ", userCreateDate=" + userCreateDate + ", userHeadImgPath="

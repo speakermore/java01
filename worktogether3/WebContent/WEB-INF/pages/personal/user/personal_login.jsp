@@ -23,8 +23,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<link rel="stylesheet"
-	href="thirdpart/dist/css/bootstrapValidator.min.css" />
+<link rel="stylesheet" href="thirdpart/dist/css/bootstrapValidator.min.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <style type="text/css">
 #validateCodeToolTip {
@@ -303,5 +302,6 @@
 			});
 		});
 	</script>
+	<%@include file="/WEB-INF/pages/copyright.jsp" %>
 </body>
 </html>

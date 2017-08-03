@@ -149,11 +149,11 @@ public class CrowdfundController {
 		//获取发布者信息（姓名、单位、联系人）
 		//企业信息
 		if(crowdfund.getPublisherId()<1234567891){
-			Company company = companyService.findCompany(crowdfund.getPublisherId());
+			Company company = companyService.findCompanyById(crowdfund.getPublisherId());
 			model.addAttribute("userorcom", company.getCompanyName());
 		}else if(crowdfund.getPublisherId()>1234567890){
 			//个人信息
-			User user = userService.selectUserById(crowdfund.getPublisherId());
+			User user = userService.findUserById(crowdfund.getPublisherId());
 			model.addAttribute("userorcom", user.getUserName());
 		}
 		return "crowdfund/crowdfundOnlyInfo";

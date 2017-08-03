@@ -118,7 +118,7 @@
     });
 	</script>
 	<%@include file="../footer.jsp"%>
-	
+	<%@include file="/WEB-INF/pages/copyright.jsp" %>
 	<script type="text/javascript" src="admin/dist/js/bootstrapValidator.min.js" ></script>
 	</body>
 </html>

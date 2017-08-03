@@ -1,12 +1,11 @@
 package ynjh.company.entity;
 
-import java.io.Serializable;
 
+import ynjh.common.entity.MyUser;
 import ynjh.common.util.MD5Util;
 
-public class Company implements Serializable {
+public class Company extends MyUser {
 	private static final long serialVersionUID = 8788521794169964118L;
-	private Integer id;
 	private String companyLoginId;
 	private String companyPassword;
 	private String companyName;
@@ -28,12 +27,10 @@ public class Company implements Serializable {
 		
 	}
 
-	public Company(Integer id, String companyLoginId, String companyPassword, String companyName,
+	public Company(String companyLoginId, String companyPassword, String companyName,
 			String companySimpleName, String companyLogo, String companyLicenseImg, String companyLicenseNo,
 			String companyCorporator, String companyTel, String companyEmail, String companyAddress,
 			Integer companyStatus, String companyConnection) {
-		super();
-		this.id = id;
 		this.companyLoginId = companyLoginId;
 		this.companyPassword = companyPassword;
 		this.companyName = companyName;
@@ -73,16 +70,6 @@ public class Company implements Serializable {
 	public void setUserIsCrowdFund(Integer userIsCrowdFund) {
 		this.userIsCrowdFund = userIsCrowdFund;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-	
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 
 	public String getCompanyLoginId() {
 		return companyLoginId;
@@ -211,7 +198,7 @@ public class Company implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Company [id=" + id + ", companyLoginId=" + companyLoginId + ", companyPassword=" + companyPassword
+		return "Company [id=" + getId() + ", companyLoginId=" + companyLoginId + ", companyPassword=" + companyPassword
 				+ ", companyName=" + companyName + ", companySimpleName=" + companySimpleName + ", companyLogo="
 				+ companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
 				+ ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel + ", companyEmail="

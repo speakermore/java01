@@ -10,6 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="相职网,招聘网,招聘,软件开发,软件人才,软件公司,Java,网络招聘" />
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -25,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link rel="stylesheet" type="text/css" href="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" />
 <link rel="styleheet" href="personal/css/register.css" type="text/css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link href="personal/css/personal_detail.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="thirdpart/fileupload/css/fileinput.min.css">
 <link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" />

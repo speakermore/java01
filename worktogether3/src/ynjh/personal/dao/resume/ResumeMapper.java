@@ -156,10 +156,6 @@ public interface ResumeMapper {
 	public Integer getMaxProjectDeleteById(Integer userId);
 	
 	/**
-	 * 结束
-	 */
-	
-	/**
 	 * 更换头像
 	 */
 	public Integer changeResumeHeadImg(@Param("resumeId")Integer resumeId,@Param("resumeHeadImg")String resumeHeadImg);
@@ -179,6 +175,5 @@ public interface ResumeMapper {
 	 * 我收到的面试邀请
 	 */
 	public List<Offer> findMyReceiveOffer(Integer userId);
-	
 	
 }

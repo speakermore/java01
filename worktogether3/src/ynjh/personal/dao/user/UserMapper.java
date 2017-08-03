@@ -50,7 +50,7 @@ public interface UserMapper {
 	/**
 	 * 根据id查询用户（显示用户信息）
 	 */
-	public User selectUserById(Integer id);
+	public User findUserById(Integer id);
 
 	/**
 	 * 牟勇：完成对用户余额的更新<br/>

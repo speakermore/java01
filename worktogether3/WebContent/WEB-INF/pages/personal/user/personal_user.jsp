@@ -121,7 +121,7 @@
 					</c:if>
 					<c:forEach items="${articleByFollows}" var="abf">
 						<li>
-							@<a href="#">${abf.userName}</a>发表了&lt;&lt;<a href="personal/article/lookArticleById?id=${abf.articleId}">${abf.articleTitle}</a>&gt;&gt;
+							@<a href="javascript:userMoreInfo(${abf.usersId })"  title="点击查看该用户更多信息">${abf.userName}</a>于<time><fmt:formatDate pattern="M月d日 EEEE H时m分" value="${abf.articleTime }"/></time>发表了&lt;&lt;<a href="javascript:ajaxPage('redirect:personal/article/findArticleById/${abf.articleId}')">${abf.articleTitle}</a>&gt;&gt;
 						</li>
 					</c:forEach>
 					</ul>
@@ -139,11 +139,31 @@
 				<li>暂无消息</li>
 			</c:if>
 			<c:forEach items="${personal_comments}" var="articleByComment">
-				<li>
-					@<a href="#">${articleByComment.userName}</a>评论了&lt;&lt;<a href="personal/article/lookArticleById?id=${articleByComment.articleId}">${articleByComment.articleTitle }</a>&gt;&gt;
+				<li class="work-together-cut-text">
+					<c:if test="${user.id!= articleByComment.cid}">
+					@<a href="javascript:userMoreInfo(${articleByComment.cid })" title="点击查看该用户更多信息">${articleByComment.userName}</a>于<time><fmt:formatDate pattern="M月d日 H时m分" value="${articleByComment.commentArticleTime }"/></time>评论了&lt;&lt;<a href="javascript:ajaxPage('redirect:personal/article/findArticleById/${articleByComment.artid}')">${articleByComment.articleTitle }</a>&gt;&gt;
+					<blockquote>他说：“${articleByComment.commentContent }”</blockquote>
+					</c:if>
+					<c:if test="${user.id== articleByComment.cid}">
+					我于<time><fmt:formatDate pattern="M月d日 EEEE H时m分" value="${articleByComment.commentArticleTime }"/></time>评论了自己的文章&lt;&lt;<a href="javascript:ajaxPage('redirect:personal/article/findArticleById/${articleByComment.artid}')">${articleByComment.articleTitle }</a>&gt;&gt;
+					<blockquote>我说：“${articleByComment.commentContent }”</blockquote>
+					</c:if>
 				</li>
+				
 			</c:forEach>
 			</ul>
+			<script type="text/javascript">
+				var userMoreInfo=function(userId){
+					$.ajax({
+						url:'userMoreInfo/'+userId,
+						type:'GET',
+						dataType:'html',
+						success:function(data){
+							$('#my-content').html(data);
+						}
+					});
+				};
+			</script>
 		</div>
 	</section>
 	<!-- 最新评论结束 -->

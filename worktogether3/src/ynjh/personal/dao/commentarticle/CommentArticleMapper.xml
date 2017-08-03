@@ -12,8 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <delete id="deleteUserCommentArticle" parameterType="Integer">
 	delete from commentarticle where id=#{id}
 	</delete>
-	<!-- 查看评论(文章) -->
-	<select id="selectUserCommentArticle" resultType="CommentArticle" parameterType="Integer">
-	select * from commentarticle c,user u where articleId=#{articleId} and u.id=c.usersId
+	<!-- 查看评论，评论要通过审核，按时间降序排列 -->
+	<select id="findCommentByArticleId" resultType="CommentArticle" parameterType="Integer">
+	select * from commentarticle c,user u 
+	where articleId=#{articleId} and u.id=c.usersId and c.commentArticleStatus=2
+	order by commentArticleTime desc
 	</select>
 </mapper>

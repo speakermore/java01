@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import ynjh.common.crowdfund.entity.Job;
 import ynjh.common.crowdfund.service.JobService;
 import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.LiuZhiHaoDateTimeUtil;
@@ -320,7 +319,7 @@ public class UserController {
 	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User sUser = (User) session.getAttribute("user");
-		User oldUser = uService.selectUserById(sUser.getId());
+		User oldUser = uService.findUserById(sUser.getId());
 		user.setId(oldUser.getId());
 		user.setUserRealName(oldUser.getUserRealName());
 		user.setUserHeadImgPath(UploadFile.uploadFile(
@@ -351,7 +350,7 @@ public class UserController {
 	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User sessionUser = (User) session.getAttribute("user");
-		User oldUser = uService.selectUserById(sessionUser.getId());
+		User oldUser = uService.findUserById(sessionUser.getId());
 		user.setUserName(oldUser.getUserName());
 		user.setId(oldUser.getId());
 		user.setUserIDImgFace(UploadFile.uploadFile(
@@ -384,7 +383,7 @@ public class UserController {
 	@RequestMapping(value = "/findById", method = RequestMethod.GET)
 	public ModelAndView findById(Integer id) {
 		ModelAndView mv = new ModelAndView();
-		User user = uService.selectUserById(id);
+		User user = uService.findUserById(id);
 		mv.setViewName("personal/user/personal_update_user");
 		mv.addObject("user", user);
 		return mv;
@@ -393,11 +392,8 @@ public class UserController {
 	/**
 	 * 修改用户信息 跳转主页
 	 * 
-	 * @param user
-	 *            用户修改对象
-	 * @return
-	 * 
-	 * 		ModelAndView
+	 * @param user 用户修改对象
+	 * @return 
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateUser(User user, HttpSession session) {
@@ -421,16 +417,13 @@ public class UserController {
 	/**
 	 * 跳转到充值界面
 	 * 
-	 * @param id
-	 *            用户id
-	 * @return
-	 * 
-	 * 		ModelAndView
+	 * @param id 用户id
+	 * @return 
 	 */
 	@RequestMapping(value = "/chargeById", method = RequestMethod.GET)
 	public ModelAndView chargeById(Integer id) {
 		ModelAndView mv = new ModelAndView();
-		User user = uService.selectUserById(id);
+		User user = uService.findUserById(id);
 		mv.setViewName("personal/user/personal_chargemoney");
 		mv.addObject("user", user);
 		return mv;
@@ -439,19 +432,15 @@ public class UserController {
 	/**
 	 * 充值+充值记录 跳蛛主页
 	 * 
-	 * @param userMoney
-	 *            充值的金额
-	 * @param id
-	 *            用户id
-	 * @return
-	 * 
-	 * 		ModelAndView
+	 * @param userMoney 充值的金额
+	 * @param id 用户id
+	 * @return 
 	 */
 	@RequestMapping(value = "/chargeMoney", method = RequestMethod.POST)
 	public ModelAndView chargeMonety(Double userMoney, Integer id) {
 		ModelAndView mv = new ModelAndView();
 		int result = uService.chargeMoney(userMoney, id);
-		User user = uService.selectUserById(id);
+		User user = uService.findUserById(id);
 		UserCharge userCharge = new UserCharge();
 		userCharge.setUserChargeType(1);
 		userCharge.setUserId(id);
@@ -519,9 +508,7 @@ public class UserController {
 	/**
 	 * 跳转测试页面
 	 * 
-	 * @return
-	 * 
-	 * 		String
+	 * @return 
 	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {

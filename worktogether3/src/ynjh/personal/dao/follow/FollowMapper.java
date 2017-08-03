@@ -18,21 +18,23 @@ public interface FollowMapper {
 	public Integer addUserFollow(Follow follow);
 
 	/**
-	 * 删除关注
-	 * @author 胡林飞
+	 * 牟勇：根据关注者和被关注者，删除关注
+	 * @param byFollowId 被关注者id
+	 * @param followId 关注者id
+	 * @return 大于0表示成功，否则表示失败
 	 */
-	public Integer deleteUserFollow(Integer id);
+	public Integer deleteFollow(@Param("byFollowId")Integer byFollowId,@Param("followId")Integer followId);
 	
 	/**
-	 * 查看关注(用户)
+	 * 查看关注(个人用户)
 	 * @author 刘志浩
 	 */
-	public List<Follow> selectUserFollow(Integer followId);
+	public List<Follow> findUserFollow(Integer followId);
 	/**
 	 * 查看关注(企业)
 	 * @author 刘志浩
 	 */
-	public List<Follow> selectCompanyFollow(Integer followId);
+	public List<Follow> findCompanyFollow(Integer followId);
 	/**
 	 * 
 	 * @param followId
@@ -46,7 +48,7 @@ public interface FollowMapper {
 	 * @return 我关注的人数统计
 	 * @author  刘志浩
 	 */
-	public Integer selectUserFollowCount(Integer followId);
+	public Integer countFollow(Integer followId);
 	/**
 	 * 查看被关注者人数
 	 * @param byFollowId
@@ -54,7 +56,7 @@ public interface FollowMapper {
 	 * @author 刘志浩
 	 * Integer
 	 */
-	public Integer selectUserByFollowCount(Integer byFollowId);
+	public Integer countByFollow(Integer byFollowId);
 	/**
 	 *  判断是否关注 
 	 *  @author 刘志浩

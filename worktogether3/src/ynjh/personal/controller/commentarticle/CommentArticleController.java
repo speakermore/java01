@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ynjh.personal.entity.CommentArticle;
 import ynjh.personal.entity.User;
@@ -30,42 +31,28 @@ public class CommentArticleController {
 	@RequestMapping("/findcommentarticle")
 	public ModelAndView findCommentArticle(Integer articleId) {
 		ModelAndView mv = new ModelAndView();
-		List<CommentArticle> commentArticles = commentArticleService.findUserCommentArticle(articleId);
+		List<CommentArticle> commentArticles = commentArticleService.findCommentByArticleId(articleId);
 		mv.addObject("commentArticles", commentArticles);
 		mv.setViewName("personal/article/personal_articledetail");
 		return mv;
 	}
-//	/**
-//	 * 跳转评论页面
-//	 * @return 跳转评论页面
-//	 */
-//	@RequestMapping(value = "/addcommentarticle", method = RequestMethod.GET)
-//	public String gotoCreateCommentArticle(){
-//		return "personal/commentarticle/personal_createcomment";
-//	}
+
 	/**
-	 * 写文章评论
+	 * 添加文章评论
 	 * @param commentArticle 评论文章对象
 	 * @param session
 	 * @return 评论已提交，提示请等待审核，评论提交失败，跳转personal_articledetail页面
 	 */
-	@RequestMapping("/addcommentarticle")
+	@RequestMapping(value="/addcommentarticle",method=RequestMethod.POST)
 	public ModelAndView writeUserCommentArticle(CommentArticle commentArticle, HttpSession session) {
-		ModelAndView mv = new ModelAndView("personal/info");
+		ModelAndView mv = new ModelAndView("redirect:/personal/article/findArticleById/"+commentArticle.getArticleId());
 		User user = (User) session.getAttribute("user");
 		Integer userId = user.getId();
 		commentArticle.setCommentArticleTime(new Timestamp(System.currentTimeMillis()));
 		commentArticle.setUsersId(userId);
 		commentArticle.setCommentArticleUsersType(2);
 		commentArticle.setCommentArticleStatus(1);
-		int result = commentArticleService.writeUserCommentArticle(commentArticle);
-		if (result>0) {
-			mv.addObject("operatorInfo", "评论已提交，请等待审核！");
-			mv.addObject("toPage", "personal/article/lookArticleById?id="+commentArticle.getArticleId());
-		}else {
-			mv.addObject("operatorInfo", "评论提交失败！");
-			mv.addObject("toPage", "personal/article/personal_articledetail");
-		}
+		commentArticleService.writeUserCommentArticle(commentArticle);
 		return mv;
 
 	}

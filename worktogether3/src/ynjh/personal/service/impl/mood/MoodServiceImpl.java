@@ -24,8 +24,8 @@ public class MoodServiceImpl implements MoodService {
 	}
 	
 	@Override
-	public Mood selectMoodById(Integer id) {
-		return moodMapper.selectMoodById(id);
+	public Mood findLastestMoodByUserId(Integer userId) {
+		return moodMapper.findLastestMoodByUserId(userId);
 	}
 
 }

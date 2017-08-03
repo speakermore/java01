@@ -48,7 +48,6 @@
 				</div>
 				<div class="col-md-2">
 					<input class="btn btn-success" type="submit" value="提交修改" />
-					
 				</div>
 			</div>
 		</form>
@@ -56,13 +55,7 @@
 	</section>
 </article>
 <script>
-CKEDITOR.replace( 'articleContent',
-	    {
-	        toolbar :
-	        [
-	        		['Cut','Copy','Paste','PasteText','-','Undo','Redo'],
-	            ['Styles', 'Format','Image'],
-	            ['Bold', 'Italic', '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
-	        ]
-	    });
+CKEDITOR.replace('articleContent',{
+    filebrowserImageUploadUrl: '../../ckeditor/upload?Type=Images'
+}); 
 </script>

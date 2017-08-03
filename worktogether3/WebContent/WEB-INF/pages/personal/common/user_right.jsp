@@ -87,13 +87,7 @@
 					<c:if test="${user.userRealName!='无' }">
 						<div class="row">
 							<p class="col-sm-12">
-								<em>姓名： 
-								<c:if test="${fn:length(user.userRealName)>6 }">  
-                         		${fn:substring(user.userRealName, 0, 6)}...  
-                   				</c:if> 
-                   				<c:if test="${fn:length(user.userRealName)<=6 }">  
-                         		${user.userRealName }  
-                   				</c:if> </em>
+								<em>姓名：${user.userRealName } </em>
 							</p>
 						</div>
 					</c:if>
@@ -182,23 +176,24 @@
 			<div class="panel-body">
 				<ul class="nav nav-pills ">
 					<li class="active">
-					<a href="personal/follow/gotoFollow?followId=${user.id }">
+					<a href="javascript:ajaxPage('redirect:personal/follow/gotoFollow/${user.id }')">
 					<span class="badge pull-right">${follows }</span>我的关注</a>
 					</li>
 					<li class="active">
 					<a href="#">
 					<span class="badge pull-right">${byFollows }</span>我的粉丝
-					</a></li>
+					</a>
+					</li>
 				</ul>
 			</div>
 		</section>
 	</c:if>
 	<!--我的信息结束-->
-	<!--我的信息列表开始-->
+	<!--我的菜单开始-->
 	<section class="panel">
 		<%@include file="/WEB-INF/pages/personal/common/selectformanage.jsp"%>
 	</section>
-	<!--我的信息列表结束-->
+	<!--我的菜单结束-->
 	<section class="panel">
 		<div class="panel-title">职业档案人气</div>
 		<div class="panel-body">

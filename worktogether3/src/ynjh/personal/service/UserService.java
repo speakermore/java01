@@ -2,20 +2,23 @@ package ynjh.personal.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import ynjh.company.entity.Company;
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.UserAndResume;
 import ynjh.personal.entity.UserCharge;
 
 /**
- * 
- * @author 刘志浩 操作用户信息接口
+ * 用户Service接口
+ * @author 刘志浩 
  */
 public interface UserService {
-	// 登录
+	
+	/**
+	 * 登录
+	 * @param userLoginId 用户登录名，手机
+	 * @param userPassword 用户密码，MD5加密
+	 * @return User对象，为null是表示用户名或密码没有输入正确
+	 */
 	public User login(String userLoginId, String userPassword);
 
 	// 添加用户（注册）
@@ -41,7 +44,8 @@ public interface UserService {
 	public Integer updateUserHeadImgPathById(String userHeadImgPath, Integer userId);
 
 	// 根据id查询用户（显示用户信息）
-	public User selectUserById(Integer id);
+	
+	public User findUserById(Integer id);
 
 	// 充值
 	public Integer chargeMoney(Double money, Integer id);

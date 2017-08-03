@@ -13,6 +13,7 @@
 <title>管理员后台-添加资讯</title>
 
 <%@include file="../header.jsp"%>
+<%@include file="../footer.jsp"%>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <style>
 h3 {
@@ -36,34 +37,31 @@ h3 {
 			<c:if test="${user!=null }">
 				<!-- 个人用户id从1234567890开始编码 -->
 				<c:if test="${user.id>=1234567890 }">
-					<div class="col-md-4 column ">
+					<div class="col-sm-3">
 						<!-- 主页个人信息左边 -->
 						<%@include file="../../personal/common/user_right.jsp"%>
 					</div>
 				</c:if>
 				<!-- 企业用户从1开始编码，到1234567889截止 -->
 				<c:if test="${user.id<1234567890 }">
-					<div class="col-md-4 column ">
+					<div class="col-sm-3">
 						<!-- 主页企业信息左边 -->
 						<%@include file="../../company/menu.jsp"%>
 					</div>
 				</c:if>
 			</c:if>
-			<div class="col-md-8">
+			<div class="col-sm-9">
+				<div id="my-content" class="row">
 				<div class="row">
 					<h3 class="text-center">${news.newsTitle }</h3>
 				</div>
 				<article class="row">
-					<div class="col-md-offset-2">${news.newsContent}</div>
+					<div class="col-sm-offset-2">${news.newsContent}</div>
 				</article>
+				</div>
 			</div>
 		</div>
 	</div><!-- end of container-fluid -->
-
-	<script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js"> </script>
-	<script type="text/javascript" src="thirdpart/ckeditor/config.js"></script>
-	<script type="text/javascript"
-		src="thirdpart/ckeditor/adapters/jquery.js"></script>
-	<%@include file="../footer.jsp"%>
+	<%@include file="/WEB-INF/pages/copyright.jsp" %>
 </body>
 </html>

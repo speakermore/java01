@@ -28,15 +28,10 @@ public class FollowServiceImpl implements FollowService {
 	public Integer addUserFollow(Follow follow) {
 		return followMapper.addUserFollow(follow);
 	}
-	/**
-	 * 取消关注
-	 * @return Integer 成功1 失败2
-	 * @param id 关注ID
-	 * @author 胡林飞
-	 */
+	
 	@Override
-	public Integer deleteUserFollow(Integer id) {
-		return followMapper.deleteUserFollow(id);
+	public Integer cancelFollow(Integer byFollowId,Integer followId) {
+		return followMapper.deleteFollow(byFollowId,followId);
 	}
 	/**
 	 * 查看关注(用户)
@@ -45,24 +40,24 @@ public class FollowServiceImpl implements FollowService {
 	 * @author 刘志浩
 	 */
 	@Override
-	public List<Follow> selectUserFollow(Integer id) {
-		return followMapper.selectUserFollow(id);
+	public List<Follow> findUserFollow(Integer followId) {
+		return followMapper.findUserFollow(followId);
 	}
 	/**
 	 * 查看关注者人数
 	 * @author 刘志浩
 	 */
 	@Override
-	public Integer selectUserFollowCount(Integer followId) {
-		return followMapper.selectUserFollowCount(followId);
+	public Integer countFollow(Integer followId) {
+		return followMapper.countFollow(followId);
 	}
 	/**
 	 * 查看被关注者人数
 	 * @author 刘志浩
 	 */
 	@Override
-	public Integer selectUserByFollowCount(Integer byFollowId) {
-		return followMapper.selectUserByFollowCount(byFollowId);
+	public Integer countByFollow(Integer byFollowId) {
+		return followMapper.countByFollow(byFollowId);
 	}
 	/**
 	 *  判断是否关注 
@@ -77,12 +72,7 @@ public class FollowServiceImpl implements FollowService {
 	 * @author 刘志浩
 	 */
 	@Override
-	public List<Follow> selectCompanyFollow(Integer followId) {
-		return followMapper.selectCompanyFollow(followId);
+	public List<Follow> findCompanyFollow(Integer followId) {
+		return followMapper.findCompanyFollow(followId);
 	}
-
-	
-
-	
-
 }

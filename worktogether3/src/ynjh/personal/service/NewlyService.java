@@ -43,5 +43,5 @@ public interface NewlyService {
 	 * @param userId 文章作者的id
 	 * @return 符合条件的Map集合，如果查不到内容，返回null
 	 */
-	public Map<String, Object>  findNewlyCommentArticleByUserId(Integer userId);
+	public List<Map<String, Object>>  findNewlyCommentArticleByUserId(Integer userId);
 }

@@ -1,10 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="ynjh.common.util.CommonStatus" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="COMPANY_SIZE" value="${CommonStatus.COMPANY_SIZE }"></c:set>
-
-<title>名企招聘</title>
 <style type="text/css">
 img {
 	padding: 10px;
@@ -29,54 +26,40 @@ img {
 	color: #999;
 	overflow: hidden;
 }
+.media-body{
+	padding-left:10px;
+}
 
 .userlist_space {
 	margin-bottom: 10px;
 }
+.tab-pane{
+	margin-top:10px;
+}
 </style>
-<div class="row clearfix">
-	<c:forEach items="${CompanyFollows }" var="cf">
-		<div class="col-md-12 column userlist_space">
-			<div class="media">
-				<div class="userlist_top">
-					<div class="pull-left">
-						<c:if test="${cf.companyLogo=='null' }">
-							<img src="img/head.gif" class="img-circle" width="105"
-								height="105" alt='公司logo' style="display: none"
-								onload="this.style.display=''" />
-						</c:if>
-						<c:if test="${cf.companyLogo!=null }">
-							<img onerror="javascript:this.src='img/head.gif'"
-								src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${cf.companyLoginId }/${cf.companyLogo}"
-								width="105" height="105" style="display: none"
-								onload="this.style.display=''" class="img-circle" alt='公司logo' />
-						</c:if>
-					</div>
-					<div class="media-body">
-						<p class="form-control-static">${cf.companyName }</p>
-						<p class="form-control-static">${COMPANY_SIZE[cf.cmpIntPeopleNum]}</p>
-						<p class="form-control-static">
-							<c:if test="${fn:length(cf.cmpIntroduction)>80 }">  
-                         			${fn:substring(cf.cmpIntroduction, 0, 80)}...  
-                   				</c:if>
-							<c:if test="${fn:length(cf.cmpIntroduction)<=80 }">  
-                         			${cf.cmpIntroduction }  
-                  			 	</c:if>
-						</p>
-						<div class="btn-group">
-							<a href="personal/common/gotoCompanyById?id=${cf.byFollowId }"
-								class="btn btn-default" type="button"> <em
-								class="glyphicon glyphicon-align-left"></em>进入
-							</a>
-							<a class="btn btn-default" type="button">
-								<em class="glyphicon glyphicon-align-right"></em>取消关注
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="userlist_botten"></div>
+<c:forEach items="${companyFollows }" var="cf">
+<div class="col-sm-6 userlist_space">
+	<div class="media">
+		<div class="userlist_top">
+			<div class="pull-left">
+				<img onerror="javascript:this.src='img/head.gif'" src="company/img/${cf.companyLoginId }/${cf.companyLogo}" width="105" height="105"  class="img-thumbnail img-circle" />
 			</div>
+			<div class="media-body">
+				<h4>${cf.companySimpleName }</h4>
+				<p>公司规模：${COMPANY_SIZE[cf.cmpIntPeopleNum]}</p>
+			</div>
+			<p>${cf.cmpIntroduction.substring(0,80) }...</p>
+				<div class="btn-group">
+					<%-- <a href="personal/common/gotoCompanyById?id=${cf.byFollowId }" class="btn btn-default" type="button">
+					<span class="glyphicon glyphicon-align-left"></span>进入
+					</a> --%>
+					<a class="btn btn-default" role="button" href="javascript:cancelfollow(${cf.byFollowId },${user.id })">
+						<span class="glyphicon glyphicon-minus"></span>取消关注
+					</a>
+				</div>
 		</div>
-	</c:forEach>
+	</div>
 </div>
+</c:forEach>	
+
 

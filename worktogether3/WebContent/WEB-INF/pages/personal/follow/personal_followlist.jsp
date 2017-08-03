@@ -24,7 +24,6 @@
 				<td><a href="personal/follow/findFollowFan?id=${follow.id }">${follow.followId }</a></td>
 				<td>${follow.followDate}</td>
 				<td>${follow.followStartType}</td>
-				
 				<td>
 				<a href="personal/???????id=${follow.id }">发送简历</a>|
 				<a href="javascript:if(confirm('确定取消关注吗？')){location.href='personal/follow/deleteFollow?followId=${follow.followId }'}">取消关注</a>

@@ -2,8 +2,6 @@ package ynjh.personal.dao.commentarticle;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import ynjh.personal.entity.CommentArticle;
 
 
@@ -17,8 +15,10 @@ public interface CommentArticleMapper {
 	 */
 	public Integer deleteUserCommentArticle(Integer id);
 	/**
-	 * 查看评价
+	 * 查看指定文章的评论，按时间降序排序
+	 * @param articleId 文章主键id
+	 * @return 符合条件的评论CommentArticle实体类集合
 	 */
-	public List<CommentArticle> selectUserCommentArticle(Integer articleId);
+	public List<CommentArticle> findCommentByArticleId(Integer articleId);
 	
 }

@@ -15,15 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 牟勇：查看用户关注的个人用户最新发布的文章消息,
 	文章必须是通过审核的,文章发表日期不超过二周
 	返回文章标题，文章id，发表时间，被关注者id -->
-	<select id="findNewlyArticleByFollow" resultType="map">
-		select a.articleTitle,a.id,a.articleTime,a.usersId,u.userName 
+	<select id="findNewlyArticleByFollow" resultType="ArticleByFollow">
+		select a.id articleId,a.articleTitle,a.id,a.articleTime,a.usersId,u.userName 
 		from article a,user u 
 		where a.usersId=u.id and a.articleStatus=2 and TIMESTAMPDIFF(WEEK,articleTime,now()) &lt;=2 
 		and a.usersId in (select byFollowId from follow where followId=#{userId})
 	</select>
 	<!-- 查看被关注者发布文章消息的数量 -->
-	<select id="getByFollowIdCount" resultType="Integer"
-		parameterType="Integer">
+	<select id="getByFollowIdCount" resultType="Integer" parameterType="Integer">
 		select count(*) from article a,user u,follow f where
 		f.followId=#{userId} and u.id=a.usersId and u.id=f.byFollowId order by
 		a.articleTime desc
@@ -32,14 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	按评论发表时间排序
 	评论必须审核通过
 	只查询用户对我的文章的评论
-	返回文章标题(articleTitle)，文章id(artid),评论者id（cid），评论者昵称（userName）
+	返回文章标题(articleTitle)，文章id(artid),评论者id（cid），评论者昵称（userName）,评论时间（commentArticleTime），评论内容（commentContent）
 	无结果返回null -->
-	<select id="findNewlyCommentArticleByUserId" resultType="map">
-			select a.articleTitle,a.id artid,c.usersId cid,u.userName 
+	<select id="findNewlyCommentArticleByUserId" parameterType="Integer" resultType="map">
+			select a.articleTitle,a.id artid,c.usersId cid,u.userName,c.commentArticleContent commentContent,commentArticleTime
 			from article a,user u,commentarticle c 
 			where c.usersId=u.id and c.articleId=a.id 
 			and commentArticleStatus=2 and a.usersId=#{userId}
+			and TIMESTAMPDIFF(WEEK,commentArticleTime,now())&lt;=2
 			order by c.commentArticleTime desc
-		
 	</select>
 </mapper>

@@ -3,6 +3,9 @@ package ynjh.personal.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import ynjh.common.exception.AgeOverFlowException;
+import ynjh.common.util.LiuZhiHaoDateTimeUtil;
+
 /**
  * @author 胡林飞 关注表，与follow表对应
  */
@@ -22,6 +25,8 @@ public class Follow implements Serializable {
 	private Integer followStartType;
 	// 姓名
 	private String userRealName;
+	//昵称
+	private String userName;
 	// 性别
 	private Integer userGender;
 	// 年龄
@@ -29,13 +34,15 @@ public class Follow implements Serializable {
 	// 学历
 	private String resumeEducation;
 	// 工作时间
-	private Integer resumeWorks;
+	private Timestamp resumeWorks;
 	// 求职意向
 	private String resumeJor;
-	//企业用户名
+	//企业账号，通常是手机
 	private String companyLoginId;
 	// 企业名字
 	private String companyName;
+	//企业简称
+	private String companySimpleName;
 	// 企业logo
 	private String companyLogo;
 	// 企业简介
@@ -43,7 +50,57 @@ public class Follow implements Serializable {
 	// 企业规模1.20人 2.50人 3.80人4.100人 5.150人 6.200人 7.200人以上
 	private Integer cmpIntPeopleNum;
 	
+	//用户头像
+	private String userHeadImgPath;
+	//用户登录名，通常是手机号
+	private String userLoginId;
 	
+	
+	public String getCompanySimpleName() {
+		return companySimpleName;
+	}
+	public void setCompanySimpleName(String companySimpleName) {
+		this.companySimpleName = companySimpleName;
+	}
+	public String getUserLoginId() {
+		return userLoginId;
+	}
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
+	}
+	public String getUserHeadImgPath() {
+		return userHeadImgPath;
+	}
+	public void setUserHeadImgPath(String userHeadImgPath) {
+		this.userHeadImgPath = userHeadImgPath;
+	}
+	/**
+	 * 通过对生日的计算，返回年龄
+	 * @return 返回年龄
+	 */
+	public Integer getAge(){
+		Integer age=0;
+		try {
+			age=LiuZhiHaoDateTimeUtil.getAgeTools(userBirthday);
+		} catch (AgeOverFlowException e) {
+			e.printStackTrace();
+		}
+		return age;
+	}
+	/**
+	 * 通过对首次工作时间的计算，返回工作的年限
+	 * @return 返回工作的年限 
+	 */
+	public Integer getWorkAge(){
+		Integer worksAge=0;
+		try {
+			worksAge=LiuZhiHaoDateTimeUtil.getAgeTools(resumeWorks);
+		} catch (AgeOverFlowException e) {
+			e.printStackTrace();
+		}
+		return worksAge;
+		
+	}
 
 	public String getCompanyLoginId() {
 		return companyLoginId;
@@ -117,11 +174,11 @@ public class Follow implements Serializable {
 		this.resumeEducation = resumeEducation;
 	}
 
-	public Integer getResumeWorks() {
+	public Timestamp getResumeWorks() {
 		return resumeWorks;
 	}
 
-	public void setResumeWorks(Integer resumeWorks) {
+	public void setResumeWorks(Timestamp resumeWorks) {
 		this.resumeWorks = resumeWorks;
 	}
 
@@ -180,15 +237,23 @@ public class Follow implements Serializable {
 	public void setFollowStartType(Integer followStartType) {
 		this.followStartType = followStartType;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	@Override
 	public String toString() {
-		return "Follow [id=" + id + ", followId=" + followId + ", byFollowId=" + byFollowId + ", followDate="
-				+ followDate + ", followType=" + followType + ", followStartType=" + followStartType + ", userRealName="
-				+ userRealName + ", userGender=" + userGender + ", userBirthday=" + userBirthday + ", resumeEducation="
-				+ resumeEducation + ", resumeWorks=" + resumeWorks + ", resumeJor=" + resumeJor + ", companyName="
-				+ companyName + ", companyLogo=" + companyLogo + ", cmpIntroduction=" + cmpIntroduction
-				+ ", cmpIntPeopleNum=" + cmpIntPeopleNum + "]";
+		return "Follow [id=" + id + ", followDate=" + followDate + ", followType=" + followType + ", followStartType="
+				+ followStartType + ", userRealName=" + userRealName + ", userName=" + userName + ", userGender="
+				+ userGender + ", userBirthday=" + userBirthday + ", resumeEducation=" + resumeEducation
+				+ ", resumeWorks=" + resumeWorks + ", resumeJor=" + resumeJor + ", companyLoginId=" + companyLoginId
+				+ ", companyName=" + companyName + ", companyLogo=" + companyLogo + ", cmpIntroduction="
+				+ cmpIntroduction + ", cmpIntPeopleNum=" + cmpIntPeopleNum + ", userHeadImgPath=" + userHeadImgPath
+				+ "]";
 	}
-	
 }

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.personal.dao.article.ArticleMapper">
 	<!-- 写文章 -->
 	<insert id="addUserArticle" parameterType="Article">
@@ -12,15 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateArticleContent" parameterType="Article">
 	update article set articleContent=#{articleContent},articleTitle=#{articleTitle},articleKey=#{articleKey},articleType=#{articleType} where id=#{id}
 	</update>
-	<!--阅读数  -->
+	<!--阅读数+1  -->
 	<update id="updateReadNum" >
-	update article set articleReadNum=articleReadNum+1 where id=#{id}
+	update article set articleReadNum=articleReadNum+1 where id=#{articleId}
 	</update>
-	<!-- 点赞数 -->
-	<update id="updateLikeNum" >
-	update article set articleLikeNum=articleLikeNum+1 where id=#{id}
+	<!-- 点赞数+1 -->
+	<update id="updateLikeNum" parameterType="int" >
+		update article set articleLikeNum=articleLikeNum+1 where id=#{id}
 	</update>
-	
 	<!-- 删文章 -->
 	<update id="deleteUserArticle" parameterType="Integer">
 	update article set articleStatus=4 where id=#{id} 
@@ -29,11 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="renewArticle" parameterType="Integer">
 	update article set articleStatus=1 where id=#{id} 
 	</update>
+	<!-- 牟勇：取消点赞，赞数减1 -->
+	<update id="updateLikeNumMinus" parameterType="Integer">
+		update article set articleLikeNum=articleLikeNum-1 where id=${articleId}
+	</update>
 	<!-- 查看文章(详细) -->
-	<select id="selectArticleById" parameterType="int" resultType="Article">
+	<select id="findArticleById" parameterType="int" resultType="Article">
 	select * from article where id=#{id}
 	</select>
-	
 	<!-- 查看文章(所有) -->
 	<select id="findUserArticle" resultType="Article">
 	select * from article where usersId=#{usersId}
@@ -41,11 +41,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{page},20
 	</if>
 	</select>
-	<!-- 牟勇：根据用户ID查询所有的文章 -->
+	<!-- 牟勇：根据用户ID查询所有的文章，按时间降序排序 -->
 	<select id="findNewlyArticleByUserId" resultType="Article" parameterType="Integer">
-		select * from article where usersId=#{userId} order by articleTime desc
+		select * from article where usersId=#{userId} and articleStatus=2 order by articleTime desc
 	</select>
-	
+	<!-- 牟勇：根据文章Id查询点赞数 -->
+	<select id="findLikeNumByArticleId" parameterType="Integer" resultType="Integer">
+		select articleLikeNum from article where id=${articleId}
+	</select>
 	<!-- 分页 -->
 	<!-- 未被删除文章总数 -->
 	 <select id="getMaxRecord" resultType="int" parameterType="Integer">

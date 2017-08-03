@@ -72,8 +72,8 @@ public class UserServiceImpl implements UserService {
 	 * @param Integer 用户id
 	 */
 	@Override
-	public User selectUserById(Integer id) {
-		return userMapper.selectUserById(id);
+	public User findUserById(Integer id) {
+		return userMapper.findUserById(id);
 	}
 	/**
 	 * 充值

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ynjh.company.entity.Company;
-import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.service.CompanyResumeService;
 import ynjh.personal.entity.Education;

@@ -38,7 +38,7 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 
 	@Override
-	public Company findCompany(Integer id) {
+	public Company findCompanyById(Integer id) {
 		return companyMapper.findById(id);
 	}
 

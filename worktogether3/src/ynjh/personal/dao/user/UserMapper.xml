@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword}
     </select>
 	<!-- 根据id查询用户（显示用户信息） -->
-	<select id="selectUserById" resultType="User" parameterType="Integer">
+	<select id="findUserById" resultType="User" parameterType="Integer">
 	    select * from `user` where id=#{id}
 	</select>
 	

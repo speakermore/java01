@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import ynjh.common.crowdfund.entity.Crowdfund;
-import ynjh.common.crowdfund.entity.CrowdfundDemand;
 
 /**
  * 项目众筹Mapper接口

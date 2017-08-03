@@ -39,9 +39,9 @@ public interface NewlyMapper {
 	 * 牟勇：查看两周内对我的文章的评论,
 	 * 按评论发表时间排序
 	 * 评论必须审核通过
-	 * 返回文章标题(articleTitle)，文章id(artid),评论者id（cid），评论者昵称（userName）
+	 * 返回文章标题(articleTitle)，文章id(artid),评论者id（cid），评论者昵称（userName），，评论者昵称（userName）,评论时间（commentArticleTime），评论内容（commentContent）
 	 * @param userId 文章作者的id
 	 * @return 符合条件的Map集合，如果查不到内容，返回null
 	 */
-	public Map<String, Object>  findNewlyCommentArticleByUserId(@Param("userId")Integer userId);
+	public List<Map<String, Object>>  findNewlyCommentArticleByUserId(@Param("userId")Integer userId);
 }

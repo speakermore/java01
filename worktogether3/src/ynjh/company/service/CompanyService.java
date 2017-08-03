@@ -14,8 +14,12 @@ public interface CompanyService {
 	public Integer updateCompany(Company company);
 	//登录
 	public Company login(String companyLoginId,String companyPassword);
-	//根据id查询
-	public Company findCompany(Integer id);
+	/**
+	 * 根据id查询企业信息
+	 * @param companyId 企业主键
+	 * @return Company对象
+	 */
+	public Company findCompanyById(Integer companyId);
 	
 	/**
 	 * 牟勇：添加企业环境图片

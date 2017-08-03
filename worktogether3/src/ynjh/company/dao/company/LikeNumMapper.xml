@@ -9,9 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into likeNum(articleId,usersId,commentArticleId)
 			values(#{articleId},#{usersId},#{commentArticleId})
 	</insert>
-	<!-- 查询文章点赞数 -->
-	<select id="findByArticle" parameterType="Integer" resultType="LikeNum">
-		select * from likeNum where articleId=#{articleId} and usersId=#{usersId}
+	<!-- 牟勇：删除指定文章id和用户id的点赞记录 -->
+	<delete id="deleteLikeNum">
+		delete from likenum where articleId=#{articleId} and usersId=#{userId}
+	</delete>
+	<!-- 牟勇：查询指定文章是否被指定用户点赞过-->
+	<select id="countLikeNumByUserIdAndArticleId" resultType="int">
+		select count(*) from likeNum where articleId=#{articleId} and usersId=#{usersId}
 	</select>
 	<!-- 查询文章的评论的点赞数 -->
 	<select id="findByCommentArticle" parameterType="Integer" resultType="LikeNum">
