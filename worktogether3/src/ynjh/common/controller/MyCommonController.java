@@ -180,10 +180,24 @@ public class MyCommonController {
 		//加载需要保存到session的对象
 		addSessionVar(session);		
 		//如果是点击跳转我的文章页面，则加载文章
-		if("personal/user/personal_index_myArticle".equals(page)){
+		if("common/article/common_index_article".equals(page)){
 			MyUser user=(MyUser)session.getAttribute("user");
 			List<Article> articles=articleService.findUserArticle(null, user.getId());
 			mv.addObject("articles", articles);
+		}
+		//如果是跳转添加文章页面，则加载文章类型
+		if("common/article/common_add_article_index".equals(page)){
+			//添加文章类型
+			List<ArticleType> articleTypes=null;
+			MyUser user=(MyUser) session.getAttribute("user");
+			if(user.getId()>=1234567890){
+				//个人用户
+				articleTypes=articleTypeService.findArticleTypeForPersonal();
+			}else{
+				//企业用户
+				articleTypes=articleTypeService.findArticleTypeForCompany();
+			}
+			mv.addObject("articleTypes", articleTypes);
 		}
 		return mv;
 	}
@@ -194,12 +208,6 @@ public class MyCommonController {
 	 * @param session
 	 */
 	private void addSessionVar(HttpSession session){
-		//个人用户会用到的所有文章分类
-		if(session.getAttribute("")==null){
-			List<ArticleType> articleTypesForPersonal=articleTypeService.findArticleTypeForPersonal();
-			session.setAttribute("articleTypesForPersonal", articleTypesForPersonal);
-		}
-		
 		//加载一级岗位，即岗位种类
 		if(session.getAttribute("myJobs1")==null){
 			List<Job> myJobs=jobService.findJob1();
@@ -211,11 +219,11 @@ public class MyCommonController {
 	 * 牟勇：查询用户相关更多信息，包括用户的基本信息，用户所发表的文章
 	 * 用于在用户中心，点击用户名时，查看用户更多信息并加关注
 	 * @param userId 用户主键
-	 * @return 跳转到/personal/user/personal_index_myArticle
+	 * @return 跳转到/common/article/common_index_article
 	 */
 	@RequestMapping("/userMoreInfo/{userId}")
 	public ModelAndView userMoreInfo(@PathVariable Integer userId,HttpSession session){
-		ModelAndView mv=new ModelAndView("/personal/user/personal_index_myArticle");
+		ModelAndView mv=new ModelAndView("/common/article/common_index_article");
 		List<Article> articles=articleService.findUserArticle(null, userId);
 		//判断被查看信息的用户是个人还是企业
 		if(userId>=1234567890){

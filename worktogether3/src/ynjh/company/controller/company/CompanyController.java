@@ -77,10 +77,9 @@ public class CompanyController {
 	
 		Company company=companyService.login(companyLoginId, superPassword);
 		if(company==null){
-			mv.addObject("operatorInfo","登录失败");
+			mv.addObject("operatorInfo","登录失败，请输入正确的手机号和密码");
 			mv.addObject("toPage", "company/company/company_login");
-			mv.setViewName("company/info");
-			//牟勇：保存用户账号，以便纠正在验证码输入错误后返回登录页面时账号被刷新为空的问题
+			mv.setViewName("company/company/company_login");
 			mv.addObject("companyLoginId",companyLoginId);
 		}else{
 	         if("1".equals(remFlag)){ //"1"表示用户勾选记住密码
@@ -93,8 +92,10 @@ public class CompanyController {
 	             response.addCookie(userCookie); 
 	         }
 				session.setAttribute("user",company);
+				mv.setViewName("redirect:findById/"+company.getId());
 		}
-		return companyIntShow(company.getId(),session);
+		
+		return mv;
 	}
 	
 	/**

@@ -1,10 +1,7 @@
-package ynjh.personal.controller.commentarticle;
+package ynjh.common.controller.article;
 
 import java.sql.Timestamp;
-/**
- * @author 胡林飞
- *评论文章功能
- */
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,13 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ynjh.personal.entity.CommentArticle;
-import ynjh.personal.entity.User;
-import ynjh.personal.service.CommentArticleService;
 
+import ynjh.common.entity.MyUser;
+import ynjh.personal.entity.CommentArticle;
+import ynjh.personal.service.CommentArticleService;
+/**
+ * @author 胡林飞
+ *评论文章功能
+ */
 @Controller
-@RequestMapping("/personal/commentarticle")
-public class CommentArticleController {
+@RequestMapping("/common/article/comment")
+public class CommentController {
 	@Resource
 	private CommentArticleService commentArticleService;
 	/**
@@ -43,18 +44,17 @@ public class CommentArticleController {
 	 * @param session
 	 * @return 评论已提交，提示请等待审核，评论提交失败，跳转personal_articledetail页面
 	 */
-	@RequestMapping(value="/addcommentarticle",method=RequestMethod.POST)
-	public ModelAndView writeUserCommentArticle(CommentArticle commentArticle, HttpSession session) {
-		ModelAndView mv = new ModelAndView("redirect:/personal/article/findArticleById/"+commentArticle.getArticleId());
-		User user = (User) session.getAttribute("user");
-		Integer userId = user.getId();
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public ModelAndView addComment(CommentArticle commentArticle, HttpSession session) {
+		ModelAndView mv = new ModelAndView("redirect:/common/article/findArticleById/"+commentArticle.getArticleId());
+		MyUser user = (MyUser) session.getAttribute("user");
 		commentArticle.setCommentArticleTime(new Timestamp(System.currentTimeMillis()));
-		commentArticle.setUsersId(userId);
-		commentArticle.setCommentArticleUsersType(2);
+		commentArticle.setUsersId(user.getId());
+		//判断用户的类型1是企业，2是个人
+		commentArticle.setCommentArticleUsersType(user.getId()>=1234567890?2:1);
 		commentArticle.setCommentArticleStatus(1);
-		commentArticleService.writeUserCommentArticle(commentArticle);
+		commentArticleService.addComment(commentArticle);
 		return mv;
-
 	}
 	/**
 	 * 删除评论

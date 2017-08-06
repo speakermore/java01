@@ -24,7 +24,7 @@
 								class="alert-link">返回首页</a>
 						</div>
 						<%@include
-							file="/WEB-INF/pages/personal/article/personal_addarticle_index.jsp"%>
+							file="/WEB-INF/pages/common/article/common_add_article_index.jsp"%>
 					</div>
 					<div class="col-md-1 column"></div>
 				</div>

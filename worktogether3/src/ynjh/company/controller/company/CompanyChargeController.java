@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import ynjh.common.entity.UserRecord;
+import ynjh.common.service.UserRecordService;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyCharge;
 import ynjh.company.service.CompanyChargeService;
@@ -18,56 +21,13 @@ import ynjh.company.service.CompanyChargeService;
 public class CompanyChargeController {
 	@Resource
 	CompanyChargeService companyChargeService;
+	@Resource
+	UserRecordService userRecordService;
 	
 	//点击充值跳转
 	@RequestMapping(value="charge")
 	public String toCharge(){
 		return "company/charge/add_charge";
-	}
-	
-	
-	
-	//充值成功跳转
-	@RequestMapping("/companyCharge/{companyId}")
-	public ModelAndView toCompanycharge(@PathVariable Integer companyId,HttpSession session){
-		ModelAndView mv=new ModelAndView();
-		CompanyCharge companyCharge=companyChargeService.findById(companyId);
-		session.setAttribute("companyCharge", companyCharge);
-		mv.setViewName("company/charge/company_charge");
-		return mv;
-	}
-	
-	
-	//充值
-	@RequestMapping(value="/addMoney",method=RequestMethod.POST)
-	public ModelAndView addmoney(Double cmpChargeMoney,HttpSession session){
-		ModelAndView mv=new ModelAndView();
-		Integer companyId=((Company)session.getAttribute("user")).getId();
-		CompanyCharge companyCharge=new CompanyCharge();
-		companyCharge.setCompanyId(companyId);
-		companyCharge.setCmpChargeTime(new Timestamp(System.currentTimeMillis()));
-		companyCharge.setCmpChargeConsume(0.0);
-		companyCharge.setCmpChargeMoney(cmpChargeMoney);
-		if(companyChargeService.findById(companyId)==null){
-			companyCharge.setCmpChargeBalance(cmpChargeMoney);
-		}else{
-			companyCharge.setCmpChargeBalance(companyChargeService.findById(companyId).getCmpChargeBalance()+cmpChargeMoney);
-		}
-		
-		int result=companyChargeService.addMoney(companyCharge);
-		if(result>0){
-			mv.addObject("operatorInfo", "充值成功");
-			mv.addObject("toPage", "company/charge/companyCharge/"+companyId);
-			mv.addObject("companyCharge", companyCharge);
-			
-			mv.setViewName("company/info");
-		}else{
-			mv.addObject("operatorInfo", "充值失败");
-			mv.addObject("toPage", "company/charge/companyCharge");
-			mv.setViewName("company/info");
-		}
-		
-		return mv;
 	}
 	
 	//消费
@@ -104,19 +64,18 @@ public class CompanyChargeController {
 		
 	}
 	
-	//显示充值记录
+	/**
+	 * 牟勇：显示企业的消费记录<br />
+	 * 根据企业主键进行查询公司消费记录,目前是查询所有的历史消费记录，未做时间限制<br />
+	 * @param companyId 企业主键
+	 * @return 跳转显示消费记录的页面
+	 */
 	@RequestMapping(value="chargeRecord/{companyId}",method=RequestMethod.GET)
 	public ModelAndView chargeRecord(@PathVariable Integer companyId){
 		ModelAndView mv=new ModelAndView("company/charge/charge_record");
-//		CompanyCharge companyRecord=new CompanyCharge();	
-		List<CompanyCharge> companyRecords=companyChargeService.findAllById(companyId);
-//		companyRecord=companyChargeService.findAllById(companyId);
-		
-//		 companyRecord.getCmpChargeStatus(1);
+		List<UserRecord> companyRecords=userRecordService.findUserRecordById(companyId);
 		mv.addObject("companyRecords",companyRecords);
-		
 		return mv;
-		
 	}
 	/**
 	 * 牟勇：跳转到公司余额页面

@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select userLoginId from user where userLoginId=#{userLoginId}
 	</select>
 	<!-- 牟勇：根据用户id查询用户的余额 -->
-	<select id="findUserMoneyByUserId" parameterType="Integer" resultType="Integer">
+	<select id="findUserMoneyById" parameterType="Integer" resultType="Integer">
 		select userMoney from `user` where id=#{id}
 	</select>
 </mapper>

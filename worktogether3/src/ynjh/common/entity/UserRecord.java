@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
  * 这个表将记录个人用户和企业用户关于招应聘，技术众筹，合伙创业的操作信息<br />
  * 操作类型分为发布（0）和参与（1）还有管理员充值(2)<br />
  * 操作对象ID可能是三张表的主键，如果是招应聘，则是companyrecruit的id，<br />
+ * userId必须是企业和个人用户的id号<br />
  * 技术众筹是crowdfund的id<br />
  * 合伙创业是partner的id<br />
  * @author 牟勇
@@ -16,7 +17,7 @@ import java.text.SimpleDateFormat;
 public class UserRecord implements Serializable {
 	private static final long serialVersionUID = -346471259908126907L;
 	private Integer id;
-	//用户ID，大于1234567890为个人用户，小于则为企业用户
+	//用户ID，大于1234567890为个人用户，小于则为企业用户,只能是个人和企业，不要记录管理员
 	private Integer userId;
 	//用户操作有以下的系统固定字符：开始应聘，开始招聘，结束应聘，结束招聘，开始发布众筹，结束发布众筹，开始发布合伙，结束发布合伙，开始参与众筹，结束参与众筹，开始参与合伙，结束参与众筹
 	private String userrOperator;
@@ -27,7 +28,7 @@ public class UserRecord implements Serializable {
 	private Integer userrOpType;
 	//扣费额度
 	private Integer userrMoney;
-	//用户操作的说明
+	//用户操作的说明，如果有管理员的操作（比如管理员充值），则把管理员的id放到说明中
 	private String userrMem;
 	public UserRecord() {
 		

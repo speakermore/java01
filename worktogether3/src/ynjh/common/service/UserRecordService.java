@@ -1,5 +1,6 @@
 package ynjh.common.service;
 
+import java.util.List;
 import java.util.Map;
 
 import ynjh.common.entity.UserRecord;
@@ -33,4 +34,10 @@ public interface UserRecordService {
 	 * @return 需要送到页面上显示的信息，页面上需要更改的特效
 	 */
 	public Map<String, String> charging(String column,Integer value,UserRecord userRecord,Object user);
+	/**
+	 * 根据用户的id，查询用户的历史消费记录，目前是查询所有的历史消费记录，未做时间限制
+	 * @param userId 用户id，可以是个人用户或企业用户
+	 * @return 指定用户的历史消费记录，UserRecord实体集合
+	 */
+	public List<UserRecord> findUserRecordById(Integer userId);
 }

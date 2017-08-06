@@ -113,7 +113,7 @@
 					<div id="my_article" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav">
-								<li><a href="javascript:ajaxPage('personal/user/personal_index_myArticle')">我发表的文章</a></li>
+								<li><a href="javascript:ajaxPage('common/article/common_index_article')">我发表的文章</a></li>
 								<!-- <li><a href="#panel-myParticipateStartup">我看过的文章</a></li>
 								<li><a href="#panel-myEvaluate">我的评价</a></li> -->
 							</ul>

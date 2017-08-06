@@ -23,8 +23,8 @@ public class CommentArticleServiceImpl implements CommentArticleService {
 	 * @param commentArticle 评论文章对象
 	 */
 	@Override
-	public Integer writeUserCommentArticle(CommentArticle commentArticle) {
-		return commentArticleMapper.addUserCommentArticle(commentArticle);
+	public Integer addComment(CommentArticle commentArticle) {
+		return commentArticleMapper.addComment(commentArticle);
 	}
 /**
  * 删除评论

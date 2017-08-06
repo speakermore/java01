@@ -23,14 +23,15 @@ public class ArticleServiceImpl implements ArticleService {
 	private LikeNumMapper likeNumMapper;
 	@Override
 	/**
-	 * 写文章
-	 * @return Integer
+	 * 添加文章
 	 * @param article 文章对象
+	 * @return Integer 大于0表示成功，否则表示失败
+	 * 
 	 */
-	public Integer writeUserArticle(Article article) {
+	public Integer addArticle(Article article) {
 		int result=-1;
 		try {
-			result=articleMapper.addUserArticle(article);
+			result=articleMapper.addArticle(article);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +49,7 @@ public class ArticleServiceImpl implements ArticleService {
 	/**
 	 * 牟勇：个人文章列表
 	 * 
-	 * @param page 页数,如果不分页可以设置为null
+	 * @param page 当前页码,如果不分页可以设置为null
 	 * @param userId 用户ID 
 	 * @return 符合条件的Article实体集合
 	 */
@@ -64,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 			page=(page-1)*20;
 		}
-		return articleMapper.findUserArticle(page,userId);
+		return articleMapper.findArticleByUsersId(page,userId);
 	}
 	/**
 	 * 修改文章内容

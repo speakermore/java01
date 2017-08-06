@@ -19,18 +19,19 @@ public class Company extends MyUser {
 	private String companyAddress;
 	private Integer companyStatus;	
 	private Double companyMoney;
-	private Integer userIsRecruit;
+	//牟勇：企业是否在招聘（0结束招聘，1开始招聘）
+	private Integer companyIsRecruit;
+	//牟勇：企业是否在发布众筹（0结束招聘，1开始招聘）
 	private Integer userIsCrowdFund;
 	
 	
 	public Company(){
 		
 	}
-
-	public Company(String companyLoginId, String companyPassword, String companyName,
-			String companySimpleName, String companyLogo, String companyLicenseImg, String companyLicenseNo,
-			String companyCorporator, String companyTel, String companyEmail, String companyAddress,
-			Integer companyStatus, String companyConnection) {
+	public Company(String companyLoginId, String companyPassword, String companyName, String companySimpleName,
+			String companyLogo, String companyLicenseImg, String companyLicenseNo, String companyCorporator,
+			String companyTel, String companyEmail, String companyAddress, Integer companyStatus, Double companyMoney,
+			Integer companyIsRecruit, Integer userIsCrowdFund) {
 		this.companyLoginId = companyLoginId;
 		this.companyPassword = companyPassword;
 		this.companyName = companyName;
@@ -43,10 +44,10 @@ public class Company extends MyUser {
 		this.companyEmail = companyEmail;
 		this.companyAddress = companyAddress;
 		this.companyStatus = companyStatus;
+		this.companyMoney = companyMoney;
+		this.companyIsRecruit = companyIsRecruit;
+		this.userIsCrowdFund = userIsCrowdFund;
 	}
-
-	
-
 	public Double getCompanyMoney() {
 		return companyMoney;
 	}
@@ -55,12 +56,12 @@ public class Company extends MyUser {
 		this.companyMoney = companyMoney;
 	}
 
-	public Integer getUserIsRecruit() {
-		return userIsRecruit;
+	public Integer getCompanyIsRecruit() {
+		return companyIsRecruit;
 	}
 
-	public void setUserIsRecruit(Integer userIsRecruit) {
-		this.userIsRecruit = userIsRecruit;
+	public void setCompanyIsRecruit(Integer companyIsRecruit) {
+		this.companyIsRecruit = companyIsRecruit;
 	}
 
 	public Integer getUserIsCrowdFund() {
@@ -96,81 +97,65 @@ public class Company extends MyUser {
 		this.companyPassword = superPassword;
 	}
 
-
 	public String getCompanyName() {
 		return companyName;
 	}
-
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
 
-
 	public String getCompanySimpleName() {
 		return companySimpleName;
 	}
-
 
 	public void setCompanySimpleName(String companySimpleName) {
 		this.companySimpleName = companySimpleName;
 	}
 
-
 	public String getCompanyLogo() {
 		return companyLogo;
 	}
-
 
 	public void setCompanyLogo(String companyLogo) {
 		this.companyLogo = companyLogo;
 	}
 
-
 	public String getCompanyLicenseImg() {
 		return companyLicenseImg;
 	}
-
 
 	public void setCompanyLicenseImg(String companyLicenseImg) {
 		this.companyLicenseImg = companyLicenseImg;
 	}
 
-
 	public String getCompanyLicenseNo() {
 		return companyLicenseNo;
 	}
-
 
 	public void setCompanyLicenseNo(String companyLicenseNo) {
 		this.companyLicenseNo = companyLicenseNo;
 	}
 
-
 	public String getCompanyCorporator() {
 		return companyCorporator;
 	}
-
 
 	public void setCompanyCorporator(String companyCorporator) {
 		this.companyCorporator = companyCorporator;
 	}
 
-
 	public String getCompanyTel() {
 		return companyTel;
 	}
-
 
 	public void setCompanyTel(String companyTel) {
 		this.companyTel = companyTel;
 	}
 
-
 	public String getCompanyEmail() {
 		return companyEmail;
 	}
-
 
 	public void setCompanyEmail(String companyEmail) {
 		this.companyEmail = companyEmail;
@@ -195,15 +180,14 @@ public class Company extends MyUser {
 	public void setCompanyStatus(Integer companyStatus) {
 		this.companyStatus = companyStatus;
 	}
-
 	@Override
 	public String toString() {
-		return "Company [id=" + getId() + ", companyLoginId=" + companyLoginId + ", companyPassword=" + companyPassword
-				+ ", companyName=" + companyName + ", companySimpleName=" + companySimpleName + ", companyLogo="
-				+ companyLogo + ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
+		return "Company [companyLoginId=" + companyLoginId + ", companyPassword=" + companyPassword + ", companyName="
+				+ companyName + ", companySimpleName=" + companySimpleName + ", companyLogo=" + companyLogo
+				+ ", companyLicenseImg=" + companyLicenseImg + ", companyLicenseNo=" + companyLicenseNo
 				+ ", companyCorporator=" + companyCorporator + ", companyTel=" + companyTel + ", companyEmail="
 				+ companyEmail + ", companyAddress=" + companyAddress + ", companyStatus=" + companyStatus
-				+ ", companyMoney=" + companyMoney + ", userIsRecruit=" + userIsRecruit + ", userIsCrowdFund="
+				+ ", companyMoney=" + companyMoney + ", companyIsRecruit=" + companyIsRecruit + ", userIsCrowdFund="
 				+ userIsCrowdFund + "]";
 	}
 }

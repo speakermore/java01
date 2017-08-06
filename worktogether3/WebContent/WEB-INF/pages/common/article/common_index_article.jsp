@@ -6,7 +6,6 @@
 	<c:set var="CROWDFUND_STATUS" value="${CommonStatus.USER_CROWDFUND_STATUS }"></c:set>
 	<c:set var="PARTNER_STATUS" value="${CommonStatus.USER_PARTNER_STATUS }"></c:set>
 	<article class="col-sm-12">
-	<div class="jumbotron">
 		<c:if test="${userMoreInfo!=null }">
 			<div class="row">
 				<div class="col-sm-6">
@@ -66,7 +65,7 @@
 		<!-- 文章内容显示 -->
 			<table class="table table-striped table-hover">
 				<tr>
-					<td>文章类型</td>
+					<td width="13%">文章类型</td>
 					<td>文章标题</td>
 					<td>发表时间</td>
 					<td>状态</td>
@@ -80,7 +79,7 @@
 				<!-- 别的用户通过审核的文章显示出来给用户看 -->
 				<tr>
 					<td>${art.articleType }</td>
-					<td><a href="javascript:ajaxPage('redirect:personal/article/findArticleById/${art.id}')">${art.articleTitle }</a></td>
+					<td ><a title="${art.articleTitle }" href="javascript:ajaxPage('redirect:common/article/findArticleById/${art.id}')">${art.articleTitle }</a></td>
 					<td><fmt:formatDate value="${art.articleTime }"/></td>
 					<td>${AUDIT_STATUS[art.articleStatus]}</td>
 					<td>${art.articleReadNum }</td>
@@ -92,17 +91,17 @@
 				<!-- 只有在查看自己的文章的情况下才能进行删除 -->
 				<tr>
 					<td>${art.articleType }</td>
-					<td><a href="javascript:ajaxPage('redirect:personal/article/findArticleById/${art.id}')">${art.articleTitle }</a></td>
+					<td><a href="javascript:ajaxPage('redirect:common/article/findArticleById/${art.id}')">${art.articleTitle }</a></td>
 					<td><fmt:formatDate value="${art.articleTime }"/></td>
 					<td>${AUDIT_STATUS[art.articleStatus]}</td>
 					<td>${art.articleReadNum }</td>
 					<td>${art.articleLikeNum }</td>
 					<td><c:if test="${art.articleStatus==4}">
-						<a href="javascript:ajaxPage('redirect:personal/article/gotoUpdateArticle?id=${art.id }')">修改</a>|
-						<a href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='personal/article/renewArticle?id=${art.id }'}">恢复</a>
+						<a href="javascript:ajaxPage('redirect:common/article/gotoUpdateArticle?id=${art.id }')">修改</a>|
+						<a href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){ajaxPage('redirect:common/article/renewArticle/${art.id }')}">恢复</a>
 						</c:if> <c:if test="${art.articleStatus==1||art.articleStatus==2||art.articleStatus==3}">
-						<a href="javascript:ajaxPage('redirect:personal/article/gotoUpdateArticle?id=${art.id }')">修改</a>|
-						<a href="javascript:if(confirm('你确定真的要删除这篇文章吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}">删除</a>
+						<a href="javascript:ajaxPage('redirect:common/article/gotoUpdateArticle?id=${art.id }')">修改</a>|
+						<a href="javascript:if(confirm('你确定真的要删除这篇文章吗？')){ajaxPage('redirect:common/article/deleteAricle/${art.id }')}">删除</a>
 						</c:if>
 					</td>
 				</tr>
@@ -113,7 +112,7 @@
 		<c:if test="${userMoreInfo==null }">
 		<!-- 查看自己的文章，显示新建文章按钮 -->
 		<p>
-			<a class="btn btn-primary" href="javascript:ajaxPage('personal/article/personal_addarticle_index')">创建新的文章</a>
+			<a class="btn btn-primary" href="javascript:ajaxPage('common/article/common_add_article_index')">创建新的文章</a>
 		</p>
 		</c:if>
 		<c:if test="${userMoreInfo!=null }">
@@ -122,5 +121,5 @@
 			<a class="btn btn-default" href="personal/common/initIndex?userId=${user.id}">返回</a>
 		</p>
 		</c:if>
-	</div>
+	
 	</article>

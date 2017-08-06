@@ -23,6 +23,11 @@ hr{
 	text-overflow:ellipsis;
 	white-space: nowrap; 
 }
+td{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
 /* 牟勇：为每个无样式列表添加一个间隔 */
 ul.list-unstyled li{
 	padding:10px;

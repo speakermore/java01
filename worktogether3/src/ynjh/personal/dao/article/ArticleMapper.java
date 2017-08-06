@@ -10,17 +10,23 @@ public interface ArticleMapper {
 	/**
 	 * 写文章
 	 */
-	public Integer addUserArticle(Article article);
+	public Integer addArticle(Article article);
 
 	/**
 	 * 删除文章
 	 */
 	public Integer deleteUserArticle(Integer id);
 
+	
 	/**
-	 * 查看文章(所有)
+	 * 根据用户id查看该用户的所有文章<br />
+	 * 如果传入的page为null,不做分页<br />
+	 * 按时间降序排序
+	 * @param page 当前页号，如果为null，表示不分页
+	 * @param usersId 用户主键id，可以是个人用户和企业用户
+	 * @return 符合条件的Article集合
 	 */
-	public List<Article> findUserArticle(@Param("page")Integer page,@Param("usersId")Integer usersId);
+	public List<Article> findArticleByUsersId(@Param("page")Integer page,@Param("usersId")Integer usersId);
 	/**
 	 * 查看文章(详细)
 	 */

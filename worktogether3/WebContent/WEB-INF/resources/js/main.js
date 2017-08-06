@@ -67,7 +67,12 @@ var ajaxStatus=function(btn,column,value,baseMoney,emId,userId){
 				}
 				alert(data.info);
 				//因为不能成功更换函数的参数值，只好直接刷新页面了
-				location.href='personal/common/initIndex?userId='+userId
+				if(userId>=1234567890){
+					location.href='personal/common/initIndex?userId='+userId
+				}else{
+					location.href='company/company/findById/'+userId
+				}
+				
 			}
 		});
 	}

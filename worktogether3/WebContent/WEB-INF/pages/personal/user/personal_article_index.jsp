@@ -33,9 +33,9 @@
 						</p>
 						<p>
 							<a class="btn btn-success "
-								href="personal/article/gotoUpdateArticle?id=${articleNewly.id }">修改</a>
+								href="common/article/gotoUpdateArticle?id=${articleNewly.id }">修改</a>
 							<a class="btn"
-								href="javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='personal/article/deleteUserAricle?id=${articleNewly.id }'}">删除</a>
+								href="javascript:if(confirm('你确定真的要恢复被删的简历吗？')){location.href='common/article/deleteUserAricle?id=${articleNewly.id }'}">删除</a>
 						</p>
 					</div>
 				</div>
@@ -59,17 +59,17 @@
 				<tbody id="ajaxArticlesList">
 					<c:forEach items="${personal_article_list }" var="art">
 						<tr>
-							<td><a href="personal/article/lookArticleById?id=${art.id }">${art.articleTitle }</a></td>
+							<td><a href="common/article/lookArticleById?id=${art.id }">${art.articleTitle }</a></td>
 							<td><fmt:formatDate value="${art.articleTime}"
 									pattern="yyyy-MM-dd" /></td>
 								<td><small >${AUDIT_STATUS[art.articleStatus]}</small></td>
 							<td><c:if test="${art.articleStatus==4}">
-									<a href="personal/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
-										href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='personal/article/renewArticle?id=${art.id }'}">恢复</a>
+									<a href="common/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
+										href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='common/article/renewArticle?id=${art.id }'}">恢复</a>
 								</c:if> <c:if
 									test="${art.articleStatus==1||art.articleStatus==2||art.articleStatus==3}">
-									<a href="personal/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
-										href="javascript:if(confirm('你确定真的要删除这篇文章吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}">删除</a>
+									<a href="common/article/gotoUpdateArticle?id=${art.id }">修改</a>|<a
+										href="javascript:if(confirm('你确定真的要删除这篇文章吗？')){location.href='common/article/deleteUserAricle?id=${art.id }'}">删除</a>
 								</c:if></td>
 						</tr>
 					</c:forEach>
@@ -100,7 +100,7 @@
 	<!-- 文章内容结束 -->
 </div>
 <script type="text/javascript">
-	var articleurl = "personal/article/ajaxLookArticleList?toPage=";
+	var articleurl = "common/article/ajaxLookArticleList?toPage=";
 	var articlechargeId = "#ajaxArticlesList";
 	var articleperId = "#preArticlePage";
 	var articlenextId = "#nextArticlePage";

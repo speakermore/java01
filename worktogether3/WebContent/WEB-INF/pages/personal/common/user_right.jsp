@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="ynjh.common.util.CommonStatus" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
 /* 头像样式  */
 #headPhoto {
@@ -24,20 +23,6 @@
 #userImgHiddenText {
 	visibility: hidden;
 }
-/* 超出的文本用省略号代替:
-	必须定义一个宽度
-	必须将其设置成block
-	强制文本在一行显示
-	超出的文本隐藏显示
-	超出的文本用省略号代替
- */
-/* .em {
-	width: 100px;
-	display: block;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-} */
 </style>
 
 <article class="row">
@@ -123,27 +108,25 @@
 						<c:set var="PARTNER_STATUS" value="${CommonStatus.USER_PARTNER_STATUS }"></c:set>
 						
 						<p class="row">
-							
-								<em class="col-sm-7 text-left" id="recruit-status">应聘状态：${RECRUIT_STATUS[user.userIsRecruit] }</em>
+								<em class="col-sm-7 text-left" id="recruit-status">${RECRUIT_STATUS[user.userIsRecruit] }</em>
 								<c:if test="${user.userIsRecruit==0 }">
 									<span class="col-sm-5 text-right"><a id="i_want_recruit" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsRecruit',1,1,'recruit-status',${user.id})">我要应聘</a></span>
 								</c:if>
 								<c:if test="${user.userIsRecruit==1 }">
 									<span class="col-sm-5 text-right"><a id="i_want_recruit" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsRecruit',0,1,'recruit-status',${user.id})">结束应聘</a></span>
 								</c:if>
-							
 						</p>
 						<p class="row">
-								<em class="col-sm-7 text-left" id="crowdfund-status" >众筹状态：${CROWDFUND_STATUS[user.userIsCrowdFund] }</em>
+								<em class="col-sm-7 text-left" id="crowdfund-status" >${CROWDFUND_STATUS[user.userIsCrowdFund] }</em>
 								<c:if test="${user.userIsCrowdFund==0 }">
 								<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',1,10,'crowdfund-status',${user.id})">我要众筹</a></span>
 								</c:if>
 								<c:if test="${user.userIsCrowdFund==1 }">
-								<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',0,10,'crowdfund-status',${user.id})">众筹结束</a></span>
+								<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',0,10,'crowdfund-status',${user.id})">结束众筹</a></span>
 								</c:if>
 						</p>
 						<p class="row">
-								<em class="col-sm-7 text-left" id="partner-status">合伙状态：${PARTNER_STATUS[user.userIsPartner] }</em>
+								<em class="col-sm-7 text-left" id="partner-status">${PARTNER_STATUS[user.userIsPartner] }</em>
 								<c:if test="${user.userIsPartner==0 }">
 								<span class="col-sm-5 text-right"><a id="i_want_partner" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsPartner',1,10,'partner-status',${user.id})">我要合伙</a></span>
 								</c:if>
@@ -211,17 +194,6 @@ $("#userHeadImgPathIndex").fileinput({
 	showUploadedThumbs:false,
 	fileActionSettings:{showZoom:false,showUpload:false,indicatorNew:' '}
 });
-	var ajaxTest = function(page) {
-		$.ajax({
-			url : "personal/user/ajax",
-			data : "page=" + page,
-			type : "POST",
-			dataType : "html",
-			success : function(data) {
-				$("#my-content").html(data);
-			}
-		});
-	}
 	$(document).ready(function() {
 		$('#personal_headImg_border').mousemove(function() {
 			$("#userImgHiddenText").css("visibility", "visible");

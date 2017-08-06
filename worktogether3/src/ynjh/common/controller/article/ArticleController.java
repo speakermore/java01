@@ -1,7 +1,6 @@
-﻿package ynjh.personal.controller.article;
+﻿package ynjh.common.controller.article;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ynjh.common.entity.ArticleType;
 import ynjh.common.entity.MyUser;
 import ynjh.common.service.ArticleTypeService;
 import ynjh.company.service.LikeNumService;
 import ynjh.personal.entity.Article;
 import ynjh.personal.entity.CommentArticle;
-import ynjh.personal.entity.User;
 import ynjh.personal.service.ArticleService;
 import ynjh.personal.service.CommentArticleService;
 
@@ -25,7 +24,7 @@ import ynjh.personal.service.CommentArticleService;
  * @author 胡林飞 文章控制器
  */
 @Controller
-@RequestMapping("/personal/article")
+@RequestMapping("/common/article")
 public class ArticleController {
 	@Resource
 	private ArticleService articleService;
@@ -40,7 +39,6 @@ public class ArticleController {
 	private LikeNumService likeNumService;
 	/**
 	 * 跳转页面
-	 * 
 	 * @return 跳转到personal_addarticle页面
 	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.GET)
@@ -53,77 +51,33 @@ public class ArticleController {
 	 * 
 	 * @param article 文章对象
 	 * @param session
-	 * @return 成功跳转index 失败跳转addarticle
+	 * @return 成功跳转/common/initIndex 失败跳转common/article/common_add_article_index
 	 */
 	@RequestMapping(value = "/add_article", method = RequestMethod.POST)
 	public ModelAndView addArticle(Article article, HttpSession session) {
-		User user = (User) session.getAttribute("user");
+		MyUser user = (MyUser) session.getAttribute("user");
 		article.setUsersId(user.getId());
 		article.setArticleTime(new Timestamp(System.currentTimeMillis()));
-		article.setArticleUsersType(2);
 		article.setArticleStatus(1);
-		int result = articleService.writeUserArticle(article);
-		ModelAndView mv = new ModelAndView();
-		if (result > 0) {
-			mv.addObject("operatorInfo", "文章添加成功！");
-			mv.setViewName("redirect:../common/initIndex?userId=" + user.getId());
-
-		} else {
-			mv.addObject("operatorInfo", "文章添加失败!");
-			mv.setViewName("personal/article/personal_addarticle_index");
+		//判断用户的类型1是企业，2是个人
+		article.setArticleUsersType(user.getId()>=1234567890?2:1);
+		int result = articleService.addArticle(article);
+		ModelAndView mv = null;
+		if(user.getId()>=1234567890){
+			String toPage="personal/common/initIndex?userId="+user.getId();
+			mv=setInfo("文章添加成功！", "文章添加失败!请稍后再试或联系管理员",toPage , result);
+		}else{
+			String toPage="company/company/findById/"+user.getId();
+			mv=setInfo("文章添加成功！", "文章添加失败!请稍后再试或联系管理员",toPage , result);
 		}
 		return mv;
-	}
-
-	/**
-	 * 查看文章(所有)ajax
-	 * 
-	 * @param toPage 跳转页面
-	 * @param userId 用户ID
-	 * @param session
-	 * @return 页面信息
-	 */
-	@RequestMapping("/ajaxLookArticleList")
-	@ResponseBody
-	public Object ajaxFindAllArticle(Integer toPage, Integer userId) {
-		List<Article> articles = articleService.findUserArticle(toPage, userId);
-		int maxPage = articleService.getMaxArticleById(userId);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		StringBuffer sb = new StringBuffer();
-		
-		for (Article article : articles) {
-			sb.append("<tr>");
-			sb.append("<td><a href='personal/article/lookArticleById?id=" + article.getId() + "' >"
-					+ article.getArticleTitle() + "</a></td>");
-			sb.append("<td>" + sdf.format(article.getArticleTime()) + "</td>");
-			if (article.getArticleStatus() == 1) {
-				sb.append("<th>待审核</th>");
-			} else if (article.getArticleStatus() == 2) {
-				sb.append("<th>正常</th>");
-			} else if (article.getArticleStatus() == 3) {
-				sb.append("<th>审核未通过</th>");
-			} else if (article.getArticleStatus() == 4) {
-				sb.append("<th>已被删除</th>");
-			}
-			sb.append("<td>");
-			if (article.getArticleStatus() == 4) {
-					sb.append("<a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要恢复这篇文章吗？')){location.href='personal/article/renewArticle?id=${art.id }'}\">恢复</a>");
-			}else {
-				sb.append("<a href=\"personal/article/gotoUpdateArticle?id=${art.id }\">修改</a>|<a href=\"javascript:if(confirm('你确定真的要删除这篇文章吗？')){location.href='personal/article/deleteUserAricle?id=${art.id }'}\">删除</a>");
-			}
-				sb.append("</td>");
-				sb.append("</tr>");
-		
-		}
-		sb.append("---" + toPage + "---" + maxPage);
-		return sb.toString();
 	}
 	/**
 	 * 根据文章id查找指定文章，并跳转到显示页面<br />
 	 * 牟勇：对点击数据进行了计数，<br />
 	 * 对点赞也进行了判断,isLike如果为-1则表示用户没有登录，0表示用户没点赞，1表示用户点过赞
 	 * @param id 文章ID         
-	 * @return 返回文章详情查看页
+	 * @return 跳转文章内容显示页面common/article/common_detail_article_index
 	 */
 	@RequestMapping(value = "/findArticleById/{articleId}", method = RequestMethod.GET)
 	public ModelAndView findArticleById(@PathVariable Integer articleId,HttpSession session) {
@@ -142,49 +96,44 @@ public class ArticleController {
 			//牟勇：-1表示用户未登录
 			mv.addObject("isLike",-1);
 		}
+		
 		//牟勇：查询文章评论集合
 		List<CommentArticle> commentArticles = commentArticleService.findCommentByArticleId(articleId);
 		mv.addObject("article", article);
 		mv.addObject("commentArticles", commentArticles);
-		mv.setViewName("personal/article/personal_articledetail_index");
+		mv.setViewName("common/article/common_detail_article_index");
 		return mv;
 	}
 
 	/**
 	 * 删除文章
 	 * 
-	 * @param id
-	 *            文章ID
-	 * @return 删除成功，跳转当前页，删除失败，也是跳转当前页
+	 * @param id 文章ID
+	 * @return 删除成功，跳转common/article/common_index_article，删除失败，也是common/article/common_index_article
 	 */
-	@RequestMapping("/deleteUserAricle")
-	public ModelAndView deleteUserCommentArticle(Integer id,HttpSession session) {
-		int result = articleService.deleteUserArticle(id);
-		ModelAndView mv = new ModelAndView();
-		User user =(User) session.getAttribute("user");
-		if (result > 0) {
-			mv.addObject("operatorInfo", "删除文章成功！");
-			mv.setViewName("redirect:../common/initIndex?toPage=1&userId="+user.getId());
-		} else {
-			mv.addObject("operatorInfo", "删除文章失败！");
-			mv.setViewName("personal/user/personal_index");
-		}
+	@RequestMapping("/deleteAricle/{articleId}")
+	public ModelAndView deleteUserCommentArticle(@PathVariable Integer articleId,HttpSession session) {
+		ModelAndView mv=new ModelAndView("redirect:/ajax?page=common/article/common_index_article");
+		articleService.deleteUserArticle(articleId);
 		return mv;
 	}
 
 	/**
 	 * 跳转修改页
-	 * 
+	 * 牟勇：添加根据用户类型查询不同的文章类型的代码
 	 * @param id 文章ID
 	 * @return 跳转修改页面
 	 */
 	@RequestMapping(value = "/gotoUpdateArticle", method = RequestMethod.GET)
-	public ModelAndView gotoUpdateArticle(Integer id) {
+	public ModelAndView gotoUpdateArticle(Integer id,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		MyUser user=(MyUser)session.getAttribute("user");
+		List<ArticleType> articleTypes=findArticleType(user);
+		//根据用户类型选择不同的文章类型
 		Article article = articleService.findArticleById(id);
 		mv.addObject("article", article);
-		mv.setViewName("personal/article/personal_articleedit_index");
-		
+		mv.addObject("articleTypes",articleTypes);
+		mv.setViewName("common/article/common_edit_article_index");
 		return mv;
 	}
 
@@ -197,14 +146,14 @@ public class ArticleController {
 	@RequestMapping("/updateArticle")
 	public ModelAndView uptateArticleContent(Article article,HttpSession session) {
 		int result = articleService.updateArticleContent(article);
-		User oldUser=(User) session.getAttribute("user");
-		ModelAndView mv = new ModelAndView();
-		if (result > 0) {
-			mv.addObject("operatorInfo", "修改文章内容成功！");
-			mv.setViewName("redirect:../common/initIndex?userId="+oldUser.getId());
-		} else {
-			mv.addObject("operatorInfo", "修改文章内容失败，请联系管理员");
-			mv.setViewName("personal/user/personal_index");
+		MyUser user=(MyUser) session.getAttribute("user");
+		ModelAndView mv = null;
+		if(user.getId()>=1234567890){
+			String toPage="personal/common/initIndex?userId="+user.getId();
+			mv=setInfo("文章修改成功！","文章修改失败，请稍后再试或联系管理员",toPage,result);
+		}else{
+			String toPage="company/company/findById/"+user.getId();
+			mv=setInfo("文章修改成功！","文章修改失败，请稍后再试或联系管理员",toPage,result);
 		}
 		return mv;
 	}
@@ -242,18 +191,44 @@ public class ArticleController {
 	 * @param id 文章ID
 	 * @return 恢复成功失败都跳转index
 	 */
-	@RequestMapping("/renewArticle")
-	public ModelAndView renewArticle(Integer id,HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		int result = articleService.renewArticle(id);
-		User user=(User) session.getAttribute("user");
-		if (result > 0) {
-			mv.addObject("operatorInfo", "恢复文章成功！");
-			mv.setViewName("redirect:../common/initIndex?userId="+user.getId());
-		} else {
-			mv.addObject("operatorInfo", "恢复文章失败！");
-			mv.setViewName("personal/user/personal_index");
+	@RequestMapping("/renewArticle/{articleId}")
+	public ModelAndView renewArticle(@PathVariable Integer articleId,HttpSession session) {
+		ModelAndView mv=new ModelAndView("redirect:/ajax?page=common/article/common_index_article");
+		articleService.renewArticle(articleId);
+		return mv;
+	}
+	/**
+	 * 牟勇：根据用户的id判断用户是个人还是企业，然后返回不同的文章分类
+	 * @param user 已登录的用户实体类型，使用User和Company的共同父类
+	 * @return 符合条件的文章类型实体集合
+	 */
+	private List<ArticleType> findArticleType(MyUser user){
+		List<ArticleType> articleTypes=null;
+		if(user.getId()>=1234567890){
+			//个人用户
+			articleTypes=articleTypeService.findArticleTypeForPersonal();
+		}else{
+			//企业用户
+			articleTypes=articleTypeService.findArticleTypeForCompany();
 		}
+		return articleTypes;
+	}
+	/**
+	 * 牟勇：为跳转信息弹出框而统一设置的方法
+	 * @param successInfo 要在信息正文显示的成功内容
+	 * @param failInfo 要在信息正文显示的失败内容
+	 * @param toPage 在点击信息框的确定按钮之后要跳转的页面
+	 * @param result 判断操作是否成功，大于0表示成功，否则表示失败
+	 * @return 方法跳转的ModelAndView，统一指定到common/info
+	 */
+	private ModelAndView setInfo(String successInfo,String failInfo,String toPage,Integer result){
+		ModelAndView mv=new ModelAndView("common/info");
+		if (result > 0) {
+			mv.addObject("operatorInfo", successInfo);
+		} else {
+			mv.addObject("operatorInfo", failInfo);
+		}
+		mv.addObject("toPage", toPage);
 		return mv;
 	}
 }

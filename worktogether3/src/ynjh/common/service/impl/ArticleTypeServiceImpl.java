@@ -23,4 +23,10 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
 		return articleTypeMapper.findArticleTypeForPersonal();
 	}
 	
+	@Override
+	public List<ArticleType> findArticleTypeForCompany() {
+		
+		return articleTypeMapper.findArticleTypeForCompany();
+	}
+	
 }

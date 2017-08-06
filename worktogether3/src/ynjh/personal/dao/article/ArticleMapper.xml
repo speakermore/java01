@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.personal.dao.article.ArticleMapper">
 	<!-- 写文章 -->
-	<insert id="addUserArticle" parameterType="Article">
+	<insert id="addArticle" parameterType="Article">
 		insert into article(usersId,articleTitle,articleTime,articleKey,articleContent,articleUsersType,articleStatus,articleType)
 			value(#{usersId},#{articleTitle},#{articleTime},#{articleKey},#{articleContent},#{articleUsersType},#{articleStatus},#{articleType})
 	</insert>
@@ -34,12 +34,14 @@
 	<select id="findArticleById" parameterType="int" resultType="Article">
 	select * from article where id=#{id}
 	</select>
-	<!-- 查看文章(所有) -->
-	<select id="findUserArticle" resultType="Article">
+	<!-- 根据用户id查看该用户的所有文章 -->
+	<select id="findArticleByUsersId" resultType="Article">
 	select * from article where usersId=#{usersId}
+	order by articleTime desc
 	<if test="page!=null">
 		limit #{page},20
 	</if>
+	
 	</select>
 	<!-- 牟勇：根据用户ID查询所有的文章，按时间降序排序 -->
 	<select id="findNewlyArticleByUserId" resultType="Article" parameterType="Integer">

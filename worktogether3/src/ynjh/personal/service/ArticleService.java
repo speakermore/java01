@@ -9,8 +9,12 @@ import java.util.List;
 import ynjh.personal.entity.Article;
 
 public interface ArticleService {
-	//写文章
-	public Integer writeUserArticle(Article article);
+	/**
+	 * 添加文章
+	 * @param article 文章对象，可以是个人用户发表的文章，也可以是企业用户发表的文章
+	 * @return Integer,大于0表示成功，否则表示失败
+	 */
+	public Integer addArticle(Article article);
 	//删除文章
 	public Integer deleteUserArticle(Integer id);
 	/**

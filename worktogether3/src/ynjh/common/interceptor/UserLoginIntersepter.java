@@ -12,7 +12,7 @@ import ynjh.company.entity.Company;
 import ynjh.personal.entity.User;
 
 /**
- * 检查用户是否登录的拦截器
+ * 检查用户权限的拦截器
  * @author 牟勇
  *
  */
@@ -25,9 +25,10 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 		//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
 		String[] ignorePathes={"userMoreInfo","crowdfundAllList","admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
 		//登录之后，不作处理的公共路径
-		String[] commonPathes={"ajax","expenses","findJobs2","ckeditor/upload","findAllNationName"};
+		String[] commonPathes={"common","ajax","expenses","findJobs2","ckeditor/upload","findAllNationName"};
 		HttpSession session=request.getSession();
 		//获得请求路径
+		
 		StringBuffer path=request.getRequestURL();
 		//如果是首页，则允许访问
 		if(basePath==null){

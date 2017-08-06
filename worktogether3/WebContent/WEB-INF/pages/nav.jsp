@@ -50,7 +50,7 @@ h5 a {
 					</c:if>
 					<c:if test="${user!=null }">
 						<c:if test="${user.id>=1234567890 }">
-							<li><a href="personal/common/initIndex?toPage=1&userId=${user.id }">个人中心</a></li>
+							<li><a href="personal/common/initIndex?userId=${user.id }">个人中心</a></li>
 						</c:if>
 						<c:if test="${user.id<1234567890 }">
 							<li><a href="company/company/findById/${user.id }">企业中心</a></li>

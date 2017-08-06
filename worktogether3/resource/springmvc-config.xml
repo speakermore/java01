@@ -112,18 +112,15 @@
         </bean>
         <!-- interceptors 拦截 -->
 		<mvc:interceptors>
-			 <mvc:interceptor >
-					<mvc:mapping path="/**"/>
-					<bean class="ynjh.common.interceptor.UserLoginIntersepter" />
-				</mvc:interceptor>
+			<!-- 用户访问日志记录 -->
 			<mvc:interceptor >
-				<!-- 拦截路径指定 -->
-				<mvc:mapping path="/company/artanddis/article/like"/>
-				<bean class="ynjh.common.interceptor.LikeInterceptor" />
+				<mvc:mapping path="/**"/>
+				<bean class="ynjh.common.interceptor.AccessLogInterceptor" />
 			</mvc:interceptor>
-			<mvc:interceptor>
-				<mvc:mapping path="/company/artanddis/comment/likecomment"/>
-				<bean class="ynjh.common.interceptor.CommentLikeInterceptor"/>
+			<!-- 用户登录的权限判定 -->
+			<mvc:interceptor >
+				<mvc:mapping path="/**"/>
+				<bean class="ynjh.common.interceptor.UserLoginIntersepter" />
 			</mvc:interceptor>
 		</mvc:interceptors>
 </beans>

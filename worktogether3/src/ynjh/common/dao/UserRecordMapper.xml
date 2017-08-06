@@ -14,4 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select max(userrTime) from userrecord where 
 		userId=#{userId} and userrOperator=#{userrOperator} and userrMoney=0
 	</select>
+	<!--  -->
+	<select id="findUserRecordById" parameterType="Integer" resultType="UserRecord">
+		select * from userrecord where userid=#{id}
+	</select>
 </mapper>

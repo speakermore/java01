@@ -22,7 +22,7 @@
 							文章写完需要审核通过后才能投递. 
 							<a href="personal/user/gotoIndex" class="alert-link">返回首页</a>
 						</div>
-						<%@include file="/WEB-INF/pages/personal/article/personal_articleedit_index.jsp"%>
+						<%@include file="/WEB-INF/pages/common/article/common_edit_article_index.jsp"%>
 					</div>
 					<div class="col-sm-1 column"></div>
 				</div>

@@ -9,7 +9,7 @@ public interface CommentArticleMapper {
 	/**
 	 * 写文章评论
 	 */
-	public Integer addUserCommentArticle(CommentArticle commentArticle);
+	public Integer addComment(CommentArticle commentArticle);
 	/**
 	 * 删除评价
 	 */

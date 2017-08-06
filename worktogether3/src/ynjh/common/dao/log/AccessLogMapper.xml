@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 牟勇：用户状态记录的映射类 -->
+<mapper namespace="ynjh.common.dao.log.AccessLogMapper">
+	<!-- 添加用户记录 -->
+	<insert id="addAccessLog" parameterType="AccessLog">
+		INSERT INTO accesslog(host,useragent,remoteHost,requestURL,method,protocol,remoteAddr,scheme,remotePort,queryString,localPort,localAddr,localName,accessTime) 
+			VALUES 
+			(#{host},#{useragent},#{remoteHost},#{requestURL},#{method},#{protocol},#{remoteAddr},#{scheme},#{remotePort},#{queryString},#{localPort},#{localAddr},#{localName},#{accessTime});
+		
+	</insert>
+</mapper>

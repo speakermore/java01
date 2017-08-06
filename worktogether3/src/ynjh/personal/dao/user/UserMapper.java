@@ -117,9 +117,9 @@ public interface UserMapper {
 	 */
 	public Integer updateUserProperty(@Param("column")String column,@Param("value")String value,@Param("id")Integer id);
 	/**
-	 * 牟勇：根据用户id查询用户的余额
+	 * 牟勇：根据用户id查询用户的余额<br />
 	 * @param id 用户id
 	 * @return 用户余额
 	 */
-	public Integer findUserMoneyByUserId(Integer id);
+	public Integer findUserMoneyById(Integer id);
 }

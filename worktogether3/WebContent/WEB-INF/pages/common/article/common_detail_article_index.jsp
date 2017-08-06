@@ -7,6 +7,21 @@
 }
 </style>
 <article class="col-sm-12">
+	<c:if test="${user==null||user.id!=article.usersId }">
+	<!-- 如果用户没登录，或者不是本人的文章，则在没有通过审核时，不能看到该文章 -->
+	<c:if test="${article.articleStatus!=2 }">
+		<h1>对不起，因为管理员还未通过审核或作者已删除此文，此文暂时不能查看!</h1>
+		<c:if test="${user.id>=1234567890 }">
+		<a role="button" class="btn btn-default" href="personal/common/initIndex?userId=${user.id }">返回个人中心</a>
+		</c:if>
+		<c:if test="${user.id<1234567890 }">
+		<a role="button" class="btn btn-default" href="company/company/findById/${user.id }">返回企业中心</a>
+		</c:if>
+	</c:if>
+	</c:if>
+	
+	<c:if test="${user!=null && article.usersId==user.id || article.articleStatus==2 }">
+	<!-- 如果用户是作者，则无论文章状态是什么都可以看到这篇文章，如果不是，则必须是审核通过的文章才能看到 -->
 	<!--文章内容-->
 	<section class="row">
 			<!-- 文章内容 -->
@@ -45,7 +60,7 @@
 				//牟勇：点赞
 				var ajaxUpdateLike=function(articleId,userId){
 					$.ajax({
-						url:'personal/article/updateLike/'+articleId+'/'+userId,
+						url:'common/article/updateLike/'+articleId+'/'+userId,
 						type:'GET',
 						dataType:'json',
 						success:function(data){
@@ -57,7 +72,7 @@
 				//牟勇：取消点赞
 				var ajaxCancelLike=function(articleId,userId){
 					$.ajax({
-						url:'personal/article/cancelLike/'+articleId+'/'+userId,
+						url:'common/article/cancelLike/'+articleId+'/'+userId,
 						type:'GET',
 						dataType:'json',
 						success:function(data){
@@ -123,15 +138,18 @@
 		<!--//发表状态结束 -->
 		</div>
 	</div>
+	</c:if>
 </article>
+
 <script type="text/javascript">
 	$("#sendCommentArticle").click(function() {
 		$.ajax({
-			url : 'personal/commentarticle/addcommentarticle',
+			url : 'common/article/comment/add',
 			type:'POST',
 			data:$('#add-comment').serialize(),
 			dataType : "html",
 			success : function(data) {
+				alert("评论成功！等管理员审核通过后，将在文章后面显示出来，谢谢！");
 				$('#my-content').html(data);
 			}
 		});

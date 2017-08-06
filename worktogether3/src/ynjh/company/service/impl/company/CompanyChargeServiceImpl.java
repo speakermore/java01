@@ -30,7 +30,6 @@ public class CompanyChargeServiceImpl implements CompanyChargeService {
 	}
 	@Override
 	public List<CompanyCharge> findAllById(Integer companyId) {
-	
 		return companyChargeMapper.findAllById(companyId);
 	}
 	@Override

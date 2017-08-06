@@ -109,12 +109,12 @@ public class CompanyServiceImpl implements CompanyService{
 
 	@Override
 	public Integer updateCompanyMoney(Integer money, Integer companyId,Integer adminId) {
-		//查出余额，进行累加计算
+		//牟勇：查出余额
 		Integer balance=companyMapper.findCompanyMoneyById(companyId);
-		
+		//牟勇：进行累加计算
 		Integer result=companyMapper.updateCompanyProperty("companyMoney", ""+(balance+money), companyId);
 		if(result>0){
-			//用户操作信息记录
+			//牟勇：用户操作信息记录
 			UserRecord userRecord=new UserRecord(companyId, "管理员充值", new Timestamp(System.currentTimeMillis()), CommonStatus.USER_OP_TYPE.get("管理员充值"));
 			userRecord.setUserrMoney(money);
 			userRecord.setUserrMem("管理员"+adminId+"于"+userRecord.getTextedUserrTime()+"对企业用户"+companyId+"进行充值"+money+"额度，"+"充值后余额为"+(balance+money)+"额度");

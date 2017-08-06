@@ -51,7 +51,7 @@
 							<form autocomplete="off" class="form-horizontal" role="form" action="company/company/addCompany" method="post" id="addCompany">
 								<h3 class="form-signin-heading">欢迎企业用户注册</h3>
 								<div class="form-group">
-									<input autocomplete="off" placeholder="请输入联系人手机号（即以后的登录账号）" type="text" class="form-control" id="companyLoginId" name="companyLoginId" autocomplete="off" />
+									<input value="${companyLoginId }" autocomplete="off" placeholder="请输入联系人手机号（即以后的登录账号）" type="text" class="form-control" id="companyLoginId" name="companyLoginId" autocomplete="off" />
 								</div>
 
 								<div class="form-group">

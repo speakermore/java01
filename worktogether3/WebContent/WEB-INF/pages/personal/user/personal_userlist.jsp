@@ -27,10 +27,10 @@
 				<thead>
 					<tr>
 						<th>
-							求职意向
+							目前岗位
 						</th>
 						<th>
-							姓名
+							昵称
 						</th>
 						<th>
 							性别
@@ -56,14 +56,13 @@
 							<a href="#">${uar.resumeJor }</a>
 						</td>
 						<td>
-							${uar.userRealName }
+							${uar.userName }
 						</td>
 						<td>
 							${SEX[uar.userGender] }
 						</td>
 						<td>
-						<label>${uar.age}</label>岁(<fmt:formatDate value="${uar.userBirthday}" pattern="yyyy/MM/dd" />)
-						
+						<label>${uar.age}</label>岁
 						</td>
 						<td>
 							${uar.works}年

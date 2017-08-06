@@ -25,7 +25,7 @@ public class CmpControler {
 	@Resource
 	private CompanyService companyService;
 	/**
-	 * 公司信息管理页面
+	 * 公司信息管理页面，目前在这个页面可以进行充值
 	 * @param request
 	 * @return
 	 */
@@ -36,11 +36,11 @@ public class CmpControler {
 		return "admin/cmp/company_manage_index";
 	}
 	/**
-	 * 完成充值的计算
+	 * 完成充值的计算，并对用户的充值行为进行了记录
 	 * @param money 需要充值的金额
 	 * @param companyId 企业用户的主键
 	 * @param adminId 做此操作的管理员主键
-	 * @return 跳转页面
+	 * @return ajax方法，提交充值成功与否的提示信息
 	 */
 	@RequestMapping(value="/charge")
 	@ResponseBody

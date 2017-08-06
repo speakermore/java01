@@ -20,4 +20,9 @@ public interface ArticleTypeService {
 	 * @return
 	 */
 	public List<ArticleType> findArticleTypeForPersonal();
+	/**
+	 * 查询企业用户使用的文章类型
+	 * @return
+	 */
+	public List<ArticleType> findArticleTypeForCompany();
 }

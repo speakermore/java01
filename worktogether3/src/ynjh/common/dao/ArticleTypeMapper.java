@@ -20,4 +20,9 @@ public interface ArticleTypeMapper {
 	 * @return 符合条件的ArticleType实体集合
 	 */
 	public List<ArticleType> findArticleTypeForPersonal();
+	/**
+	 * 查询所有企业用户会用到的文章类型
+	 * @return 符合条件的ArticleType实体集合
+	 */
+	public List<ArticleType> findArticleTypeForCompany();
 }

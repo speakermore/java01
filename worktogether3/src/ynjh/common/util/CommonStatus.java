@@ -98,7 +98,10 @@ public class CommonStatus {
 	 * 合伙状态：{"未合伙","发布合伙中"}
 	 */
 	public static final String[] USER_PARTNER_STATUS={"未合伙","合伙中"};
-	
+	/**
+	 * 用于页面显示的操作类型：{"发布","参与","充值"}
+	 */
+	public static final String[] USER_OP_TYPE_FOR_DISPLAY={"发布","参与","充值"};
 	/**
 	 * 字段名称转说明文字：开始状态
 	 */
@@ -119,28 +122,49 @@ public class CommonStatus {
 	 * 操作类型：两个操作类型，0.发布，1.参与，2.充值
 	 */
 	public static final Map<String, Integer> USER_OP_TYPE=new HashMap<String,Integer>();
+	/**
+	 * 信息输出：用户开始招聘应聘，发布众筹，合伙创业时系统发出的提示消息
+	 */
+	public static final Map<String, String> USER_START_STATUS_SAY=new HashMap<String,String>();
+	/**
+	 * 信息输出：用户结事招聘应聘，结束众筹，结束合伙创业时系统发出的提示消息
+	 */
+	public static final Map<String, String> USER_END_STATUS_SAY=new HashMap<String,String>();
 	static{
 		USER_STATUS_DISCRIPTION.put("userIsRecruit", "应聘");
+		USER_STATUS_DISCRIPTION.put("companyIsRecruit", "招聘");
 		USER_STATUS_DISCRIPTION.put("userIsCrowdFund", "众筹");
 		USER_STATUS_DISCRIPTION.put("userIsPartner", "合伙");
 		
 		USER_START_STATUS_DISCRIPTION.put("userIsRecruit", "开始应聘");
+		USER_START_STATUS_DISCRIPTION.put("companyIsRecruit", "开始招聘");
 		USER_START_STATUS_DISCRIPTION.put("userIsCrowdFund", "开始发布众筹");
 		USER_START_STATUS_DISCRIPTION.put("userIsPartner", "开始发布合伙");
 		
 		USER_END_STATUS_DISCRIPTION.put("userIsRecruit", "结束应聘");
+		USER_END_STATUS_DISCRIPTION.put("companyIsRecruit", "结束招聘");
 		USER_END_STATUS_DISCRIPTION.put("userIsCrowdFund", "结束发布众筹");
 		USER_END_STATUS_DISCRIPTION.put("userIsPartner", "结束发布合伙");
 		
 		EXPENSES_CALC_BASE_MONEY.put("userIsRecruit", 1);
+		EXPENSES_CALC_BASE_MONEY.put("companyIsRecruit", 10);
 		EXPENSES_CALC_BASE_MONEY.put("userIsCrowdFund", 10);
 		EXPENSES_CALC_BASE_MONEY.put("userIsPartner", 10);
 		
 		USER_OP_TYPE.put("userIsRecruit", 1);
+		USER_OP_TYPE.put("companyIsRecruit", 0);
 		USER_OP_TYPE.put("userIsCrowdFund", 0);
 		USER_OP_TYPE.put("userIsPartner", 0);
 		USER_OP_TYPE.put("管理员充值", 2);
 		
+		USER_START_STATUS_SAY.put("userIsRecruit", "状态修改成功!抓紧时间开始吧！");
+		USER_START_STATUS_SAY.put("companyIsRecruit", "状态修改成功!抓紧时间开始吧！");
+		USER_START_STATUS_SAY.put("userIsCrowdFund", "状态修改成功!抓紧时间开始吧！");
+		USER_START_STATUS_SAY.put("userIsPartner", "状态修改成功!抓紧时间开始吧！");
 		
+		USER_END_STATUS_SAY.put("userIsRecruit", "\n余额可在“个人中心-我的额度”中查看，\n恭喜你找到了心仪的工作，欢迎再次使用");
+		USER_END_STATUS_SAY.put("companyIsRecruit", "\n余额可在“企业中心-我的额度”中查看，\n恭喜你找到了需要的人才，欢迎再次使用");
+		USER_END_STATUS_SAY.put("userIsCrowdFund", "\n余额可在“我的额度”中查看，\n恭喜你找到了合适的伙伴，欢迎再次使用");
+		USER_END_STATUS_SAY.put("userIsPartner", "\n余额可在“我的额度”中查看，\n恭喜你找到了合适的伙伴，欢迎再次使用");
 	}
 }

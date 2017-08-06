@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import ynjh.common.entity.UserRecord;
 import ynjh.common.service.UserRecordService;
 import ynjh.common.util.CommonStatus;
 import ynjh.common.util.LiuZhiHaoDateTimeUtil;
+import ynjh.company.dao.company.CompanyMapper;
 import ynjh.personal.dao.user.UserMapper;
 
 @Service
@@ -25,6 +27,8 @@ public class UserRecordServiceImpl implements UserRecordService {
 	private UserRecordMapper userRecordMapper;
 	@Resource
 	private UserMapper userMapper;
+	@Resource
+	private CompanyMapper companyMapper;
 	
 	
 	@Override
@@ -32,8 +36,16 @@ public class UserRecordServiceImpl implements UserRecordService {
 		//组装一个到页面上去显示的json
 		Map<String, String> status=new HashMap<String,String>();
 		//获得余额
-		Integer balance=userMapper.findUserMoneyByUserId(userRecord.getUserId());
-		//将要扣除的费用
+		Integer balance=0;
+		//根据用户的id分辨个人还是企业
+		//id>=1234567890的为个人用户，小于的为企业用户
+		//根据id的不同，进行不同的查询
+		if(userRecord.getUserId()>=1234567890){
+			balance=userMapper.findUserMoneyById(userRecord.getUserId());
+		}else{
+			balance=companyMapper.findCompanyMoneyById(userRecord.getUserId());
+		}
+		//将要扣除的费用,case 2//结束中赋值
 		long balanceResult=0;
 		switch(value){
 		//开始时首先要检查余额够不够，如果余额不够，则不能开始。
@@ -55,6 +67,7 @@ public class UserRecordServiceImpl implements UserRecordService {
 			Timestamp startTime=userRecordMapper.findUserrTimeByUserIdAndUserrOperator(userRecord.getUserId(), CommonStatus.USER_START_STATUS_DISCRIPTION.get(column));
 			Timestamp endTime=new Timestamp(System.currentTimeMillis());
 			//- 我要应聘计算公式：(开始时间-结束时间)*1余额/天，默认扣除一天
+			//- 我要招聘计算公式：(开始时间-结束时间)*10余额/天，默认扣除一天
 			//- 我要众筹计算公式：(开始时间-结束时间)*10余额/天，默认扣除一天
 		    //- 我要创业计算公式：(开始时间-结束时间)*10余额/天，默认扣除一天
 			balanceResult=(LiuZhiHaoDateTimeUtil.getDays(startTime, endTime)+1)*CommonStatus.EXPENSES_CALC_BASE_MONEY.get(column);
@@ -76,23 +89,29 @@ public class UserRecordServiceImpl implements UserRecordService {
 		if(status.get("info")==null){
 			//添加记录
 			userRecordMapper.addUserRecord(userRecord);
-			//修改余额
-			userMapper.updateMoney((double)balance, userRecord.getUserId());
-			//修改状态
-			userMapper.updateUserProperty(column, ""+value, userRecord.getUserId());
+			//修改余额修改状态
+			if(userRecord.getUserId()>=1234567890){
+				userMapper.updateMoney((double)balance, userRecord.getUserId());
+				userMapper.updateUserProperty(column, ""+value, userRecord.getUserId());
+			}else{
+				companyMapper.updateCompanyProperty("companyMoney", ""+balance, userRecord.getUserId());
+				companyMapper.updateCompanyProperty(column, ""+value, userRecord.getUserId());
+			}
+			
+			
 			//如果代码能正常执行到这里，则表明扣费操作成功
 			status.put("success", "true");
 			//value为1表示扣费记录开始
 			if(value==1){
-				status.put("info", CommonStatus.USER_START_STATUS_DISCRIPTION.get(column)+"状态修改成功!抓紧时间开始吧！");
+				status.put("info", CommonStatus.USER_START_STATUS_DISCRIPTION.get(column)+CommonStatus.USER_START_STATUS_SAY.get(column));
 				status.put("status", CommonStatus.USER_END_STATUS_DISCRIPTION.get(column).replace("发布", ""));
-				status.put("emStatus", CommonStatus.USER_STATUS_DISCRIPTION.get(column)+"状态："+CommonStatus.USER_STATUS_DISCRIPTION.get(column)+"中");
+				status.put("emStatus", CommonStatus.USER_STATUS_DISCRIPTION.get(column)+"中");
 				status.put("btnRemoveClass", "btn-success");
 				status.put("btnAddClass", "btn-charging");
 			}else if(value==0){//0表示扣费记录结束
-				status.put("info", "结账成功！本次扣费"+balanceResult+"额度，余额"+balance+"\n余额可在“个人中心-我的额度”中查看，\n恭喜你找到了心仪的工作，欢迎再次使用");
+				status.put("info", "结账成功！本次扣费"+balanceResult+"额度，余额"+balance+CommonStatus.USER_END_STATUS_SAY.get(column));
 				status.put("status", CommonStatus.USER_START_STATUS_DISCRIPTION.get(column).replace("发布", ""));
-				status.put("emStatus", CommonStatus.USER_STATUS_DISCRIPTION.get(column)+"状态：未"+CommonStatus.USER_STATUS_DISCRIPTION.get(column));
+				status.put("emStatus", "未"+CommonStatus.USER_STATUS_DISCRIPTION.get(column));
 				status.put("btnRemoveClass", "btn-charging");
 				status.put("btnAddClass", "btn-success");
 			}
@@ -107,5 +126,9 @@ public class UserRecordServiceImpl implements UserRecordService {
 		}
 		
 		return status;
+	}
+	@Override
+	public List<UserRecord> findUserRecordById(Integer userId) {
+		return userRecordMapper.findUserRecordById(userId);
 	}
 }

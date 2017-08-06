@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <link rel="stylesheet" type="text/css" href="company/css/xcConfirm.css"/>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
@@ -12,6 +12,7 @@
 <style type="text/css">
 	.sgBtn{width: 135px; height: 35px; line-height: 35px; margin-left: 10px; margin-top: 10px; text-align: center; background-color: #0095D9; color: #FFFFFF; float: left; border-radius: 5px;}
 </style>
+<title>消息</title>
 </head>
 <body>
 
