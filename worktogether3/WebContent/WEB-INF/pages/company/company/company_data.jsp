@@ -13,12 +13,7 @@
 	td>img{
 		max-height: 200px;
 		max-width: 160px;
-	}
-	.wt-hby-top{
-		margin-top: 30px;
-		border-right: 1px solid #f5f5f5;
-		border-left: 1px solid #f5f5f5;
-	}					
+	}				
 	.wt-hby-edit{
 		text-align: right;
 	}

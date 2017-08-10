@@ -84,7 +84,7 @@ var ajaxStatus=function(btn,column,value,baseMoney,emId,userId){
 var ajaxPage = function(page) {
 	$.ajax({
 		url : "ajax",
-		data : "page=" + page,
+		data : "page="+page,
 		type : "POST",
 		dataType : "html",
 		success : function(data) {

@@ -39,7 +39,12 @@ public interface AdminService {
 	public List<Resume> findAuditResume(@Param("page") Integer page);
 	//审核文章
 	public Integer auditArticle(Integer articleId,Integer articleStatus);
-	//查询审核文章
+	//
+	/**
+	 * 查询审核文章，可分页
+	 * @param page 当前页码，从1开始。如果为null则不分页
+	 * @return 符合条件的AuditArticle实体集合
+	 */
 	public List<AuditArticle> findAuditArticle(@Param("page") Integer page);
 	//审核文章评论
 	public Integer auditCommentsArticle(Integer[] id,Integer commentsArticleStatus);
@@ -61,10 +66,22 @@ public interface AdminService {
 	public Integer auditOffer(Integer[] id,Integer offerStatus);
 	//查询审核offer
 	public List<AuditOffer> findAuditOffer(Integer page);
-	//审核招聘信息
-	public Integer auditRecruitment(Integer[] recruitmentId,Integer cmpRecStatus);
-	//查询审核招聘信息
-	public List<CompanyRecruit> findAuditRecruitment(Integer page);
+	/**
+	 * 牟勇：审核招聘信息，支持批量审核<br />
+	 * 状态值：1."待审核",2."审核通过",3."审核不通过",4."已删除"，5."停止招聘"<br />
+	 * 如果是通过审核，则写入UserRecord表，标志开始招聘时间，开始扣费<br />
+	 * 如果是通过审核，则修改company表，标志开始招聘
+	 * @param recruitId 招聘信息主键
+	 * @param cmpRecStatus 审核状态值
+	 * @return 大于0表示成功，否则表示失败
+	 */
+	public Integer updateAuditRecruit(Integer[] recruitId,Integer cmpRecStatus,Integer adminId);
+	/**
+	 * 牟勇：查询招聘信息，可分页
+	 * @param page 当前页码，如果为null，则不分页
+	 * @return 符合条件的CompanyRecruit实体集合
+	 */
+	public List<CompanyRecruit> findAllRecruit(Integer page);
 	//查询审核简历ById
 	public Resume findAuditResumeById(Integer id);
 	//查询审核文章ById
@@ -79,8 +96,12 @@ public interface AdminService {
 	public Message findAuditInfoById(Integer id);
 	//查询审核offerById
 	public Offer findAuditOfferById(Integer id);
-	//查询审核招聘信息ById
-	public CompanyRecruit findAuditRecruitmentById(Integer id);
+	/**
+	 * 牟勇：根据招聘信息主键查询指定的招聘信息内容，包括企业全称和简称
+	 * @param id 招聘信息主键
+	 * @return 符合条件的CompanyRecruit实体对象
+	 */
+	public CompanyRecruit findCompanyRecruitById(Integer id);
 	//查询工作经历
 	public List<Work> findResumeWork(String resumeId);
 	//查询项目经历

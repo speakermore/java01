@@ -25,6 +25,11 @@ import ynjh.admin.entity.SysMessageWithAuthor;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
+import ynjh.common.dao.UserRecordMapper;
+import ynjh.common.entity.UserRecord;
+import ynjh.common.util.CommonStatus;
+import ynjh.company.dao.company.CompanyMapper;
+import ynjh.company.dao.companyrecruit.CompanyRecruitMapper;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyRecruit;
@@ -49,6 +54,12 @@ public class AdminServiceImpl implements AdminService {
 	private CompanyVisitCountMapper companyVisitCountMapper;
 	@Resource
 	private UserVisitCountMapper userVisitCountMapper;
+	@Resource
+	private CompanyRecruitMapper companyRecruitMapper;
+	@Resource
+	private UserRecordMapper userRecordMapper;
+	@Resource
+	private CompanyMapper companyMapper;
 	
 	/**
 	 * 
@@ -115,8 +126,17 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public List<AuditArticle> findAuditArticle(Integer page) {
-		 
-		return adminMapper.findAuditArticle((page-1)*0);
+		if(page!=null){
+			if(page<1){
+				page=1;
+			}
+			Integer maxPage=(adminMapper.countfindAuditArticle()+19)/20;
+			if(page>maxPage){
+				page=maxPage;
+			}
+			page=(page-1)*20;
+		}
+		return adminMapper.findAuditArticle(page);
 	}
 
 	/**
@@ -283,36 +303,54 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	/**
-	 * 审核招聘信息
-	 * @author 周富强
+	 * 牟勇：审核招聘信息
+	 * 
 	 * @param recruitmentId 招聘信息id
 	 * @param cmpRecStatus 
 	 * @return
 	 */
 	@Override
-	public Integer auditRecruitment(Integer[] recruitmentId, Integer cmpRecStatus) {
-		if(recruitmentId!=null){
-			int result=0;
-			for(int i=0;i<recruitmentId.length;i++){
-				result=adminMapper.auditRecruitment(recruitmentId[i], cmpRecStatus);
-				result++;
+	public Integer updateAuditRecruit(Integer[] recruitId, Integer cmpRecStatus,Integer adminId) {
+		int result=-1;	
+		try {
+			for(int i=0;i<recruitId.length;i++){
+				companyRecruitMapper.updateCmpRecStatus(cmpRecStatus, recruitId[i]);
+				if(cmpRecStatus==2){
+					CompanyRecruit cRecruit=companyRecruitMapper.findById(recruitId[i]);
+					//记录用户行为，并开始扣费
+					UserRecord userRecord=new UserRecord(cRecruit.getCompanyId(),CommonStatus.USER_START_STATUS_DISCRIPTION.get("companyIsRecruit"),recruitId[i],new Timestamp(System.currentTimeMillis()),0,0,"");
+					userRecord.setUserrMem("管理员"+adminId+"于"+userRecord.getTextedUserrTime()+"通过了"+userRecord.getUserId()+"的招聘信息,"+cRecruit.getCmpRecTitle()+"开始招聘。");
+					userRecordMapper.addUserRecord(userRecord);
+					//修改公司招聘状态
+					companyMapper.updateCompanyProperty("companyIsRecruit", "1", cRecruit.getCompanyId());
+				}
 			}
-			return result;
-		}else{
-		return -1;
-		}		
+			result=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	/**
-	 * 查询审核招聘信息
+	 * 查询招聘信息
 	 * @author 周富强
 	 * @param page 偏移量
 	 * @return
 	 */
 	@Override
-	public List<CompanyRecruit> findAuditRecruitment(Integer page) {
-		 
-		return adminMapper.findAuditRecruitment((page-1)*10);
+	public List<CompanyRecruit> findAllRecruit(Integer page) {
+		 if(page!=null){
+			 if(page<1){
+				 page=1;
+			 }
+			 Integer maxPage=(adminMapper.countfindAllRecruit()+19)/20;
+			 if(page>maxPage){
+				 page=maxPage;
+			 }
+			 page=(page-1)*20;
+		 }
+		return adminMapper.findAllRecruit(page);
 	}
 	
 	/**
@@ -782,15 +820,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	/**
-	 * 查询审核招聘信息ById
+	 * 查询招聘信息
 	 * @author 周富强
-	 * @param id 招聘信息的id
+	 * @param id 招聘信息主键
 	 * @return
 	 */
 	@Override
-	public CompanyRecruit findAuditRecruitmentById(Integer id) {
-		 
-		return adminMapper.findAuditRecruitmentById(id);
+	public CompanyRecruit findCompanyRecruitById(Integer id) {
+		return companyRecruitMapper.findById(id);
 	}
 
 	/**
@@ -970,12 +1007,9 @@ public class AdminServiceImpl implements AdminService {
 	 */
 	@Override
 	public Integer auditCompanyInfo(Integer companyId, Integer cmpIntStatus) {
-		if(companyId!=null&&companyId>=0&&cmpIntStatus!=null&&cmpIntStatus>=0){
-			Integer result=adminMapper.auditCompanyNo(companyId, cmpIntStatus);
-		}else{
-			return null;
-		}
-		return -1;
+		
+			return adminMapper.auditCompanyNo(companyId, cmpIntStatus);
+		
 	}
 
 	/**

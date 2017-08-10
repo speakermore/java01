@@ -39,5 +39,5 @@ public interface UserRecordService {
 	 * @param userId 用户id，可以是个人用户或企业用户
 	 * @return 指定用户的历史消费记录，UserRecord实体集合
 	 */
-	public List<UserRecord> findUserRecordById(Integer userId);
+	public List<UserRecord> findUserRecordByUserId(Integer userId);
 }

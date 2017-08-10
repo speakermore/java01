@@ -48,7 +48,6 @@ public class ArticleController {
 
 	/**
 	 * 添加文章
-	 * 
 	 * @param article 文章对象
 	 * @param session
 	 * @return 成功跳转/common/initIndex 失败跳转common/article/common_add_article_index

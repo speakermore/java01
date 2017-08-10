@@ -70,5 +70,5 @@ public interface CompanyService {
 	 * @param adminId 做此操作的管理员id
 	 * @return 大于0表示成功，否则表示失败
 	 */
-	public Integer updateCompanyMoney(Integer money,Integer companyId,Integer adminId);
+	public Integer updateAdminCharging(Integer money,Integer companyId,Integer adminId);
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import ynjh.common.crowdfund.dao.crowdfund.CrowdfundMapper;
 import ynjh.common.crowdfund.entity.Crowdfund;
-import ynjh.common.crowdfund.entity.CrowdfundDemand;
 import ynjh.common.crowdfund.service.CrowdfundService;
 @Service
 public class CrowdfundServiceImpl implements CrowdfundService {

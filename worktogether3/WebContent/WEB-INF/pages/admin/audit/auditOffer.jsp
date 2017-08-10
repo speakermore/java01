@@ -101,7 +101,7 @@
 		var offerStatus=$("#offerStatus").val();
 		$.ajax({
 			type:"POST",
-			url:"admin/auditRecruitment",
+			url:"admin/recruit_audit",
 			data:$("#audit_offer").serialize(),
 			dataType:"json",
 			success:function(data){

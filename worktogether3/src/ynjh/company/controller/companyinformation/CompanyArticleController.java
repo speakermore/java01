@@ -1,26 +1,20 @@
 package ynjh.company.controller.companyinformation;
 
-import java.io.File;
-import java.io.PrintWriter;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import ynjh.common.interceptor.LikeInterceptor;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.LikeNum;

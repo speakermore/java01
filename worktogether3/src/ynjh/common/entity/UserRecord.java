@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
  * 为了完成扣费，设计的用户记录实体类<br />
  * 这个表将记录个人用户和企业用户关于招应聘，技术众筹，合伙创业的操作信息<br />
  * 操作类型分为发布（0）和参与（1）还有管理员充值(2)<br />
- * 操作对象ID可能是三张表的主键，如果是招应聘，则是companyrecruit的id，<br />
+ * recruitId是招聘表的id，用来分岗位记录招聘的开始和结束
  * userId必须是企业和个人用户的id号<br />
  * 技术众筹是crowdfund的id<br />
  * 合伙创业是partner的id<br />
@@ -21,6 +21,8 @@ public class UserRecord implements Serializable {
 	private Integer userId;
 	//用户操作有以下的系统固定字符：开始应聘，开始招聘，结束应聘，结束招聘，开始发布众筹，结束发布众筹，开始发布合伙，结束发布合伙，开始参与众筹，结束参与众筹，开始参与合伙，结束参与众筹
 	private String userrOperator;
+	//招聘信息主键
+	private Integer recruitId;
 	//此操作执行的时间
 	private Timestamp userrTime;
 	
@@ -33,18 +35,30 @@ public class UserRecord implements Serializable {
 	public UserRecord() {
 		
 	}
-	public UserRecord(Integer userId, String userrOperator, Timestamp userrTime, 
-			Integer userrOpType) {
+	
+	public UserRecord(Integer userId, String userrOperator, Integer recruitId, Timestamp userrTime, Integer userrOpType,
+			Integer userrMoney, String userrMem) {
+		super();
 		this.userId = userId;
 		this.userrOperator = userrOperator;
+		this.recruitId = recruitId;
 		this.userrTime = userrTime;
 		this.userrOpType = userrOpType;
+		this.userrMoney = userrMoney;
+		this.userrMem = userrMem;
 	}
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getRecruitId() {
+		return recruitId;
+	}
+	public void setRecruitId(Integer recruitId) {
+		this.recruitId = recruitId;
 	}
 	public Integer getUserId() {
 		return userId;
@@ -94,7 +108,9 @@ public class UserRecord implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "UserRecord [id=" + id + ", userId=" + userId + ", userrOperator=" + userrOperator + ", userrTime="
-				+ userrTime +  ", userrOpType=" + userrOpType + ", userrMoney=" + userrMoney +"]";
+		return "UserRecord [id=" + id + ", userId=" + userId + ", userrOperator=" + userrOperator + ", recruitId="
+				+ recruitId + ", userrTime=" + userrTime + ", userrOpType=" + userrOpType + ", userrMoney=" + userrMoney
+				+ ", userrMem=" + userrMem + "]";
 	}
+	
 }

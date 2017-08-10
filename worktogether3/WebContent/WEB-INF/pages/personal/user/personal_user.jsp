@@ -49,7 +49,7 @@
 						<li>暂无新消息</li>
 					</c:if>
 					<c:forEach items="${comanyRecruits}" var="myIntrestCompany">
-						<li>${myIntrestCompany.companySimpleName }于<fmt:formatDate value="${myIntrestCompany.cmpRecTime }" pattern="yyyy年MM月dd日"/>发布${myIntrestCompany.cmpRecTitle}岗位的招聘信息，<a href="company/cmprs/findById?id=${myIntrestCompany.id }&toPage=company/cmprs/companyRecruit_detail">快去看看吧</a>。</li>
+						<li>${myIntrestCompany.companySimpleName }于<fmt:formatDate value="${myIntrestCompany.cmpRecTime }" pattern="yyyy年MM月dd日"/>发布${myIntrestCompany.cmpRecTitle}岗位的招聘信息，<a href="company/cmprs/findById/${myIntrestCompany.id }/0">快去看看吧</a>。</li>
 					</c:forEach>
 					</c:if>
 				</ul>

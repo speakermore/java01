@@ -128,7 +128,7 @@ public class UserRecordServiceImpl implements UserRecordService {
 		return status;
 	}
 	@Override
-	public List<UserRecord> findUserRecordById(Integer userId) {
-		return userRecordMapper.findUserRecordById(userId);
+	public List<UserRecord> findUserRecordByUserId(Integer userId) {
+		return userRecordMapper.findUserRecordByUserId(userId);
 	}
 }

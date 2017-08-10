@@ -73,7 +73,7 @@ public class CompanyChargeController {
 	@RequestMapping(value="chargeRecord/{companyId}",method=RequestMethod.GET)
 	public ModelAndView chargeRecord(@PathVariable Integer companyId){
 		ModelAndView mv=new ModelAndView("company/charge/charge_record");
-		List<UserRecord> companyRecords=userRecordService.findUserRecordById(companyId);
+		List<UserRecord> companyRecords=userRecordService.findUserRecordByUserId(companyId);
 		mv.addObject("companyRecords",companyRecords);
 		return mv;
 	}
@@ -83,6 +83,7 @@ public class CompanyChargeController {
 	 */
 	@RequestMapping(value="company_charge")
 	public String companyCharge(){
+		
 		return "company/charge/company_charge";
 	}
 

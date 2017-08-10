@@ -164,18 +164,18 @@ public class CommonController {
 			Integer companyrecruitId) {
 		ModelAndView mv = new ModelAndView("personal/info");
 		CompanyResume companyresume = new CompanyResume();
-		companyresume.setCompanyId(companyId);
+		//companyresume.setCompanyId(companyId);
 		companyresume.setResumeId(resumeId);
-		companyresume.setCompanyResumeId(companyResumeId);
-		companyresume.setCompanyRecruitId(companyrecruitId);
+		//companyresume.setCompanyResumeId(companyResumeId);
+		//companyresume.setCompanyRecruitId(companyrecruitId);
 		companyresume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result = rService.sendResumeToCompany(companyresume);
 		if (result > 0) {
 			mv.addObject("operatorInfo", "投递简历成功");
-			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=" + companyresume.getCompanyId());
+			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=");
 		} else {
 			mv.addObject("operatorInfo", "投递简历失败");
-			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=" + companyresume.getCompanyId());
+			mv.addObject("toPage", "redirect:../common/gotoCompanyById?id=");
 		}
 		return mv;
 	}

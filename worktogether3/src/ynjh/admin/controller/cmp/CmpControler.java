@@ -45,7 +45,7 @@ public class CmpControler {
 	@RequestMapping(value="/charge")
 	@ResponseBody
 	public String charge(Integer money,Integer companyId,Integer adminId){
-		Integer result=companyService.updateCompanyMoney(money, companyId,adminId);
+		Integer result=companyService.updateAdminCharging(money, companyId,adminId);
 		StringBuffer info=new StringBuffer();
 		if(result>0){
 			info.append("充值"+money+"成功！请用户检查余额");

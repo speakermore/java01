@@ -1,7 +1,10 @@
 package ynjh.company.service.impl.companyrecruit;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -11,7 +14,13 @@ import org.springframework.stereotype.Service;
 
 import ynjh.common.crowdfund.dao.job.JobMapper;
 import ynjh.common.crowdfund.entity.Job;
+import ynjh.common.dao.UserRecordMapper;
+import ynjh.common.entity.UserRecord;
+import ynjh.common.util.CommonStatus;
+import ynjh.common.util.LiuZhiHaoDateTimeUtil;
+import ynjh.company.dao.company.CompanyMapper;
 import ynjh.company.dao.companyrecruit.CompanyRecruitMapper;
+import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.service.CompanyRecruitService;
 import ynjh.personal.dao.resume.ResumeMapper;
@@ -28,7 +37,10 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	private ResumeMapper resumeMapper;
 	@Resource
 	private JobMapper jobMapper;
-	
+	@Resource
+	private UserRecordMapper userRecordMapper;
+	@Resource
+	private CompanyMapper companyMapper;
 	@Override
 	public int addCompanyRecruit(CompanyRecruit companyRecruit) {
 		int result=-1;
@@ -42,18 +54,18 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	}
 
 	@Override
-	public List<CompanyRecruit> findAll(Integer page,Integer companyId) {
-		if(page==null){
-			page=1;
+	public List<Map<String, Object>> findRecruitBaseInfo(Integer page,Integer companyId) {
+		if(page!=null){
+			if(page<1){
+				page=1;
+			}
+			int maxPage=findMaxPage();
+			if(page>maxPage){
+				page=maxPage;
+			}
+			page=(page-1)*20;
 		}
-		if(page<1){
-			page=1;
-		}
-		int maxPage=findMaxPage();
-		if(page>maxPage){
-			page=maxPage;
-		}
-		return companyRecruitMapper.findAll((page-1)*20,companyId);
+		return companyRecruitMapper.findRecruitInfoByCompanyId(page,companyId);
 	}
 
 	@Override
@@ -61,9 +73,38 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		return companyRecruitMapper.findById(id);
 	}
 	@Override
-	public int hidden(Integer id) {
-		return companyRecruitMapper.updateCmpRecStatus(4,id);
-}
+	public Integer stopRecruit(Integer recruitId,Company user) {
+		//更改招聘信息状态为
+		Integer result=companyRecruitMapper.updateCmpRecStatus(5,recruitId);
+		//扣费计算
+		Timestamp startRecruitTime=userRecordMapper.findUserrTimeByUserIdAndUserrOperatorAndRecruitId(user.getId(), CommonStatus.USER_START_STATUS_DISCRIPTION.get("companyIsRecruit"),recruitId);
+		//扣费计算公式，（今天-开始日期+1）*每日额度（目前是10）
+		Integer userMoney=(int)(LiuZhiHaoDateTimeUtil.getDays(startRecruitTime, new Date())+1)*CommonStatus.EXPENSES_CALC_BASE_MONEY.get("companyIsRecruit");
+		Integer balance=companyMapper.findCompanyMoneyById(user.getId());
+		if(balance-userMoney<0){
+			balance=0;
+		}else{
+			balance-=userMoney;
+		}
+		//更新数据库，扣费
+		companyMapper.updateCompanyProperty("companyMoney", ""+balance, user.getId());
+		//记录用户行为
+		//查询招聘信息，以便用户行为处添加结束的是哪个岗位的招聘
+		CompanyRecruit companyRecruit=companyRecruitMapper.findById(recruitId);
+		UserRecord userRecord=new UserRecord(user.getId(),CommonStatus.USER_END_STATUS_DISCRIPTION.get("companyIsRecruit"),recruitId,new Timestamp(System.currentTimeMillis()),0,userMoney,"");
+		userRecord.setUserrMem("用户"+user.getId()+"于"+userRecord.getTextedUserrTime()+userRecord.getUserrOperator()+companyRecruit.getCmpRecTitle()+"。扣除费用："+userMoney+",余额："+balance);
+		//记录写入数据库
+		userRecordMapper.addUserRecord(userRecord);
+		//更新session对象的用户余额，以便界面上的余额即时更新
+		user.setCompanyMoney(balance.doubleValue());
+		//查询企业是否还有招聘，如果没有，则把企业的招聘状态修改为未招聘
+		Integer countRecruit=companyRecruitMapper.countRecruitByCompanyId(user.getId());
+		if(countRecruit==0){
+			companyMapper.updateCompanyProperty("companyIsRecruit", "0", user.getId());
+			user.setCompanyIsRecruit(0);
+		}
+		return result;
+	}
 
 	@Override
 	public int findMaxPage() {
@@ -71,9 +112,9 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	}
 
 	@Override
-	public int updateCompanyRecruit(CompanyRecruit companyRecruit) {
+	public int updateRecruit(CompanyRecruit companyRecruit) {
 	
-		return (companyRecruitMapper.updateCmpRecruit(companyRecruit));
+		return companyRecruitMapper.updateRecruit(companyRecruit);
 	}
 
 	@Override
@@ -89,8 +130,19 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		return companyRecruitMapper.findCompanyRecruitId();
 	}
 	@Override
-	public int recover(Integer id){
-		return companyRecruitMapper.updateCmpRecStatus(1, id);
+	public UserRecord startRecruit(Integer recruitId,Company user){
+		 // 修改companyrecruit表的状态值为2<br />
+		companyRecruitMapper.updateCmpRecStatus(2, recruitId);
+		CompanyRecruit companyRecruit=companyRecruitMapper.findById(recruitId);
+		 // 修改company表的companyIsRecruit状态为1<br />
+		companyMapper.updateCompanyProperty("companyIsRecruit", "1", user.getId());
+		//更新session中的用户对象状态为开始招聘
+		user.setCompanyIsRecruit(1);
+		 // 记录用户信息
+		UserRecord userRecord=new UserRecord(user.getId(),CommonStatus.USER_START_STATUS_DISCRIPTION.get("companyIsRecruit"),recruitId,new Timestamp(System.currentTimeMillis()),0,0,"");
+		userRecord.setUserrMem("用户"+user.getId()+"于"+userRecord.getTextedUserrTime()+userRecord.getUserrOperator()+companyRecruit.getCmpRecTitle()+"。");
+		userRecordMapper.addUserRecord(userRecord);
+		return userRecord;
 	}
 	@Override
 	public List<Job> findJobs1(){

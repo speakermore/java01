@@ -203,13 +203,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 牟勇：我发过的简历，时间在6个月以内,必须通过审核 -->
 	<select id="findMySendResume" resultType="MySendResume" parameterType="Integer">
-		<!-- 牟勇：companyresume：投递简历表，companyrecruit：公司招聘表,
-		 -->
+		<!-- 牟勇：companyresume：投递简历表，companyrecruit：公司招聘表,-->
 		select companyName,cmpRecTitle,cmprAction,cmprTime from companyresume cre,company 
-		c,companyrecruit crt 
-		where cre.companyId=c.id 
-		and cre.companyrecruitId=crt.id 
-		and cre.companyResumeId=#{userId} 
+		c,companyrecruit crt,resume r,user u 
+		where cre.cmpRecId=crt.id 
+		and crt.companyId=c.id 
+		and cre.resumeId=r.id 
+		and r.userId=u.id 
+		and u.id=#{userId} 
 		and TIMESTAMPDIFF(MONTH,cmprTime,now())&lt;=6 
 		and cmprStatus=2 
 		order by cmprTime desc

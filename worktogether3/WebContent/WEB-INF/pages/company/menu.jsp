@@ -19,22 +19,10 @@
 				<c:set var="PARTNER_STATUS" value="${CommonStatus.USER_PARTNER_STATUS }"></c:set>
 				
 				<p class="row">
-						<em class="col-sm-7 text-left" id="recruit-status">${RECRUIT_STATUS[user.companyIsRecruit] }</em>
-						<c:if test="${user.companyIsRecruit==0 }">
-							<span class="col-sm-5 text-right"><a id="i_want_recruit" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'companyIsRecruit',1,10,'recruit-status',${user.id})">我要招聘</a></span>
-						</c:if>
-						<c:if test="${user.companyIsRecruit==1 }">
-							<span class="col-sm-5 text-right"><a id="i_want_recruit" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'companyIsRecruit',0,10,'recruit-status',${user.id})">结束招聘</a></span>
-						</c:if>
+						<em class="col-sm-12 text-center ${user.companyIsRecruit==0?"alert alert-info":"alert alert-warning"}" id="recruit-status">${RECRUIT_STATUS[user.companyIsRecruit] }</em>
 				</p>
 				<p class="row">
-						<em class="col-sm-7 text-left" id="crowdfund-status" >${CROWDFUND_STATUS[user.userIsCrowdFund] }</em>
-						<c:if test="${user.userIsCrowdFund==0 }">
-						<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-success" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',1,10,'crowdfund-status',${user.id})">我要众筹</a></span>
-						</c:if>
-						<c:if test="${user.userIsCrowdFund==1 }">
-						<span class="col-sm-5 text-right"><a id="i_want_crowdfund" class="btn btn-sm btn-charging" href="javascript:void(0)" onclick="ajaxStatus(this,'userIsCrowdFund',0,10,'crowdfund-status',${user.id})">结束众筹</a></span>
-						</c:if>
+						<em class="col-sm-12 text-center ${user.userIsCrowdFund==0?"alert alert-info":"alert alert-warning"}" id="crowdfund-status" >${CROWDFUND_STATUS[user.userIsCrowdFund] }</em>
 				</p>
 			</div>
 		</article>
@@ -63,7 +51,7 @@
 				<div id="my-news" class="panel-collapse collapse">
 					<div class="panel-body">
 					<ul class="nav">
-						<li><a href="javascript:ajaxPage('common/article/common_index_article')">我发表的文章</a></li>
+						<li><a href="javascript:ajaxPage('common/article/common_index_article')">我的文章列表</a></li>
 					</ul>
 					</div>
 				</div>
@@ -77,9 +65,8 @@
 				<div id="my-recruit" class="panel-collapse collapse">
 					<div class="panel-body">
 					<ul class="nav">
-						<li><a href="company/cmprs/companyRecruit/add_companyRecruit ">添加招聘信息</a></li>
-						<li><a href="company/cmprs/companyRecruit/">招聘信息列表</a></li>
-						<li><a href="offer/company_offer_list/1">发送offer</a></li>
+						<li><a href="javascript:ajaxPage('company/cmprs/recruit_add')">我要招聘</a></li>
+						<li><a href="javascript:ajaxPage('redirect:company/cmprs/find_all/1')">我的招聘列表</a></li>
 					</ul>
 					</div>
 				</div>

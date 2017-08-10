@@ -52,18 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update offer set offerType=#{offerType} where id=#{id}
 	</update>
 	
-	<update id="auditRecruitment"><!-- 招聘信息审核 -->
-		update companyrecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
-	</update>
-	
-	<!-- <select id="findAuditCompany" resultType="Company">查询企业资质审核
-		select * from company where cmpIntStatus=1 
-		<if test="page!=null">
-			limit #{page},10
-		</if>
-		order by companyId
-	</select> -->
-	
 	<update id="maIntegerainAdmin" parameterType="Admin"><!-- 信息维护改 -->
 		update admin set adminName=#{adminEmail},adminTel=#{adminTel},adminEmail=#{adminEmail} where id=#{id}
 	</update>
@@ -96,11 +84,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findAuditResume" resultType="Resume"><!-- 查询简历审核 -->
 		select * from resume order by resumeStatusThree,resumeCreateDate desc
 	</select>
-	
-	<select id="findAuditArticle" resultType="AuditArticle"><!-- 查询文章审核 -->
-		select a.*,u.userLoginId,u.userName from article a,`user` u where a.usersId=u.id order by a.articleTime,a.articleStatus limit #{page},10 
+	<!-- 查询文章 -->
+	<select id="findAuditArticle" resultType="AuditArticle">
+		select a.*,u.userLoginId,u.userName 
+		from article a,`user` u where a.usersId=u.id 
+		order by a.articleTime desc,a.articleStatus 
+		<if test="page!=null">
+		limit #{page},20 
+		</if>
 	</select>
-	
+	<select id="countfindAuditArticle" resultType="Integer">
+		select count(*) 
+		from article a,`user` u where a.usersId=u.id 
+	</select>
 	<select id="findAuditCommentsArticle" resultType="CommentArticle"><!-- 查询文章评论审核 -->
 		select * from commentArticle order by commentArticleStatus,commentArticleTime desc limit #{page},10
 	</select>
@@ -123,9 +119,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findAuditOffer" resultType="AuditOffer" parameterType="Integer" ><!-- 查询offer审核 -->
 		select o.*,c.*,u.* from offer as o,company as c,user as u where o.companyId=c.id and o.userId=u.id order by o.offerStatus,o.offerSendTime limit #{page},10
 	</select>
-	
-	<select id="findAuditRecruitment" resultType="CompanyRecruit"><!-- 查询招聘信息审核 -->
-		select * from companyrecruit order by cmpRecStatus,cmpRecTime,companyId limit #{page},10
+	<!-- 查询招聘信息 -->
+	<select id="findAllRecruit" resultType="CompanyRecruit">
+		select cr.*,c.companyName,c.companySimpleName from companyrecruit cr,company c
+		where cr.companyId=c.id
+		order by companyId,cmpRecStatus,cmpRecTime desc
+		<if test="page!=null">
+		 limit #{page},20
+		 </if>
+	</select>
+	<select id="countfindAllRecruit" resultType="Integer">
+		select count(*) from companyrecruit
 	</select>
 	
 	<select id="findByAdminId" resultType="Admin" parameterType="String"><!-- 信息维护查询 -->
@@ -185,10 +189,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="findAuditOfferById" resultType="Offer" ><!-- 查询offer审核ById -->
 		select * from offer where offerType=1 and id=#{id}
-	</select>
-	
-	<select id="findAuditRecruitmentById" resultType="CompanyRecruit" parameterType="Integer"><!-- 查询招聘信息审核ById -->
-		select * from companyrecruit where id=#{id}
 	</select>
 	
 	<!-- 根据管理员登录名查找管理员 -->

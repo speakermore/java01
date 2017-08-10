@@ -730,11 +730,11 @@ public class ResumeController {
 		ModelAndView mv = new ModelAndView("company/info");
 		CompanyResume companyResume = new CompanyResume();
 		Resume oldResume = (Resume) session.getAttribute("resume");
-		User oldUser = (User) session.getAttribute("user");
-		companyResume.setCompanyId(companyId);
-		companyResume.setCompanyResumeId(oldUser.getId());
+		//User oldUser = (User) session.getAttribute("user");
+		//companyResume.setCompanyId(companyId);
+		//companyResume.setCompanyResumeId(oldUser.getId());
 		companyResume.setResumeId(oldResume.getId());
-		companyResume.setCompanyRecruitId(companyrecruitId);
+		//companyResume.setCompanyRecruitId(companyrecruitId);
 		companyResume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result = rService.sendResumeToCompany(companyResume);
 		if (result > 0) {

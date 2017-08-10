@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -492,7 +493,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/findAuditArticle/{page}")
 	public ModelAndView findAuditArticle(@PathVariable Integer page) {
-		List<AuditArticle> articles = adminService.findAuditArticle(page);
+		List<AuditArticle> articles = adminService.findAuditArticle(null);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("article", articles);
 		mv.addObject("page", page);
@@ -565,10 +566,10 @@ public class AdminController {
 	 * @author 周富强
 	 * @return
 	 */
-	@RequestMapping("/findAuditRecruitMent/{page}")
-	public ModelAndView findAuditRecruitment(@PathVariable Integer page) {
-		List<CompanyRecruit> companyRecruits = adminService.findAuditRecruitment(page);
-		ModelAndView mv = new ModelAndView("admin/audit/auditRecruit");
+	@RequestMapping("/recruit_find_all/{page}")
+	public ModelAndView findAllRecruit(@PathVariable Integer page) {
+		List<CompanyRecruit> companyRecruits = adminService.findAllRecruit(null);
+		ModelAndView mv = new ModelAndView("admin/audit/recruit_index");
 		mv.addObject("companyRecruits", companyRecruits);
 		return mv;
 	}
@@ -740,7 +741,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 审核招聘信息
+	 * 
 	 * 
 	 * @author 周富强
 	 * @param recruitmentId
@@ -748,15 +749,21 @@ public class AdminController {
 	 * @param cmpRecStatus
 	 * @return
 	 */
-	@RequestMapping("/auditRecruitment") // 审核招聘信息
-	@ResponseBody
-	public String auditRecruitment(Integer[] id, Integer recruitStatus) {
-		int result = adminService.auditRecruitment(id, recruitStatus);
-		if (result > 0) {
-			return "true";
-		} else {
-			return "false";
-		}
+	/**
+	 * 牟勇：审核招聘信息，支持批量审核<br />
+	 * 状态值：1."待审核",2."审核通过",3."审核不通过",4."已删除"，5."停止招聘"<br />
+	 * 如果是通过审核，则写入UserRecord表，标志开始招聘时间，开始扣费(由Service实现)
+	 * @param recruitId 招聘信息的主键
+	 * @param recruitStatus 要更改的状态值
+	 * @param toPage 要跳转的页面
+	 * @return 如果是recruit_index提交过来的，则返回recruit_index，如果是recruit_detail提交的就返回recruit_detail
+	 */
+	@RequestMapping("/recruit_audit") // 审核招聘信息
+	public ModelAndView auditRecruitment(Integer[] recruitId, Integer recruitStatus,String toPage,HttpSession session) {
+		ModelAndView mv=new ModelAndView(toPage);
+		Admin admin=(Admin)session.getAttribute("admin");
+		adminService.updateAuditRecruit(recruitId, recruitStatus,admin.getId());
+		return mv;
 	}
 
 	/**
@@ -1124,22 +1131,15 @@ public class AdminController {
 	}
 
 	/**
-	 * 查询审核招聘信息ById
-	 * 
+	 * 根据招聘信息的Id查询指定的招聘信息
 	 * @author 周富强
-	 * @param id
-	 *            招聘信息的id
+	 * @param id 招聘信息的id
 	 * @return
 	 */
-	@RequestMapping("/findAuditRecruitmentById/{id}")
-	public ModelAndView findAuditRecruitmentById(@PathVariable Integer id) {
-		CompanyRecruit companyRecruit = adminService.findAuditRecruitmentById(id);
-		Company company = new Company();
-		if (companyRecruit != null) {
-			company = adminService.findAuditCompanyById(companyRecruit.getCompanyId());
-		}
-		ModelAndView mv = new ModelAndView("admin/auditing/auditingRecruit");
-		mv.addObject("company", company);
+	@RequestMapping("/find_recruit/{id}")
+	public ModelAndView findCompanyRecruitById(@PathVariable Integer id) {
+		CompanyRecruit companyRecruit = adminService.findCompanyRecruitById(id);
+		ModelAndView mv = new ModelAndView("admin/auditing/recruit_detail");
 		mv.addObject("companyRecruit", companyRecruit);
 		return mv;
 	}

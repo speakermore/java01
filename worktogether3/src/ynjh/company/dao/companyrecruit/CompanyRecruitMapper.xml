@@ -6,22 +6,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="addCompanyRecruit" parameterType="CompanyRecruit">
 		insert into companyRecruit (cmpRecTitle,cmpRecWage,cmpRecEducation,cmpRecExperience,cmpRecPeople,cmpRecTime,cmpRecStatus,companyId,cmpRecCity) values(#{cmpRecTitle},#{cmpRecWage},#{cmpRecEducation},#{cmpRecExperience},#{cmpRecPeople},#{cmpRecTime},#{cmpRecStatus},#{companyId},#{cmpRecCity})
 </insert>
-<update id="updateCmpRecruit" parameterType="CompanyRecruit">
-		update companyRecruit set cmpRecWage=#{cmpRecWage},
+<!-- 根据主键修改招聘信息内容 -->
+<update id="updateRecruit" parameterType="CompanyRecruit">
+		update companyRecruit set cmpRecTitle=#{cmpRecTitle},cmpRecWage=#{cmpRecWage},
 		cmpRecEducation=#{cmpRecEducation},cmpRecExperience=#{cmpRecExperience},
-		cmpRecPeople=#{cmpRecPeople} where id=#{id}
+		cmpRecPeople=#{cmpRecPeople},cmpRecCity=#{cmpRecCity} where id=#{id}
 </update>
-<update id="updateCmpRecStatus" parameterType="Int" >
+<!-- 根据主键修改cmpRecStatus字段值 -->
+<update id="updateCmpRecStatus" parameterType="int" >
 		update companyRecruit set cmpRecStatus=#{cmpRecStatus} where id=#{id}
 </update>
-<select id="findAll"  resultType="CompanyRecruit">
-		select * from companyRecruit where companyId=#{companyId}
-	<if test="page!=null">
+<!-- 根据企业主键id查询招聘岗位(cmpRecTitle)，月薪(cmpRecWage)，招聘人数(cmpRecPeople)，招聘发布的时间(cmpRecTime)，状态(cmpRecStatus)及应聘的人数统计(resumeNumber) -->
+<select id="findRecruitInfoByCompanyId"  resultType="map">
+		select cre.id id,max(cmpRecTitle) cmpRecTitle,max(cmpRecWage) cmpRecWage,max(cmpRecPeople) cmpRecPeople,max(cmpRecTime) cmpRecTime,max(cmpRecStatus) cmpRecStatus,count(crs.id) resumeNumber 
+		from companyRecruit cre left join companyresume crs on cre.id=crs.cmpRecId 
+		where cre.companyId=#{companyId} 
+		group by cre.id 
+		<if test="page!=null">
 		limit #{page},20
-	</if>
+		</if>
 </select>
+<!-- 牟勇：根据companyrecruit表的主键查询招聘信息，除了companyrecruit表的全部信息外，还输出企业全称与简称 -->
 <select id="findById" parameterType="int" resultType="CompanyRecruit">
-	select * from companyRecruit where id=#{id}
+	select cr.*,c.companyName,c.companySimpleName from companyRecruit cr,company c
+	 where cr.companyId=c.id and cr.id=#{id}
 </select>
 <select id="getMaxRecordCount" resultType="int">
 	select count(*) from companyRecruit where cmpRecStatus != 3
@@ -40,5 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	and cmpRecStatus=2 
 	and TIMESTAMPDIFF(MONTH,cmpRecTime,now()) &lt;= 6 
 	order by cmpRecTime desc
+</select>
+<!-- 牟勇：查询指定企业是否还有招聘。查询CompanyRecruit表中指定companyId的cmpRecStatus是2(审核通过，正在招聘中)的记录条数 -->
+<select id="countRecruitByCompanyId" parameterType="Integer" resultType="Integer">
+	select count(*) from companyrecruit where cmpRecStatus=2 and companyId=#{companyId}
 </select>
 </mapper>

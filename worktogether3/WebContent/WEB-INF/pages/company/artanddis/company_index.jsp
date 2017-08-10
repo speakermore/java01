@@ -166,7 +166,7 @@ h2{
 		   							</c:if>
 		   							<c:forEach items="${companyRecruits}" var="rec">
 		   								<tr>
-		   									<td><a href="company/cmprs/companyRecruit/findById?id=${rec.id }&toPage=company/cmprs/companyRecruit_detail">${rec.cmpRecTitle}</a></td>
+		   									<td><a href="company/cmprs/find_recruit_detail?id=${rec.id }&toPage=company/cmprs/recruit_detail">${rec.cmpRecTitle}</a></td>
 		   									<td><fmt:formatDate value="${rec.cmpRecTime }" pattern="yyyy-MM-dd"/></td>
 		   									<td><a href="personal/resume/sendResumeToCompany?companyId=${company.id}&companyrecruitId=${rec.id}">我要应聘</a></td>
 		   								</tr>

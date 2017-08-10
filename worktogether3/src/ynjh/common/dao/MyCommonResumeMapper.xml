@@ -39,12 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cmpRecStatus =2 and cmpRecTitle like #{cmpRecTitle}
 	</select>
 	<!-- 根据发布者Id查询众筹信息:众筹名称，众筹项目价值，发布者 -->
-	<select id="findByPublisherIdType" parameterType="Integer"
-		resultType="map">
+	<select id="findByPublisherIdType" parameterType="Integer" resultType="map">
 		select crowdfundProjectName,crowdfundProjectMoney,
 		<choose>
 			<when test="publisherId lt 1234567890">
-				companyName from crowdfund c,company cmp where c.publisherId=cmp.id
+				companySimpleName from crowdfund c,company cmp where c.publisherId=cmp.id
 			</when>
 			<otherwise>
 				userName from crowdfund c,`user` u where c.publisherId=u.id
@@ -76,10 +75,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 * 个人文章：昵称，文章名称，点击数，点赞数
 	 * 按点赞数，点击数降序排序 -->
 	<select id="findByArticleType" resultType="Map">
-		select articleLikeNum,articleReadNum,articleTitle,
+		select articleType,articleLikeNum,articleReadNum,articleTitle,
 		<choose>
 			<when test="userIdType lt 1234567890">
-				companyName from article a,company c where a.usersId=c.id 
+				companySimpleName from article a,company c where a.usersId=c.id 
 			</when>
 			<otherwise>
 				userName from article a,user u where a.usersId=u.id 

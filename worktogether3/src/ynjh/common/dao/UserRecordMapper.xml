@@ -6,16 +6,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.common.dao.UserRecordMapper">
 	<!-- 添加用户记录 -->
 	<insert id="addUserRecord" parameterType="UserRecord">
-		INSERT INTO userrecord(userId,userrOperator,userrTime,userrOpType,userrMoney,userrMem)
-		VALUES(#{userId},#{userrOperator},#{userrTime},#{userrOpType},#{userrMoney},#{userrMem})
+		INSERT INTO userrecord(userId,userrOperator,userrTime,userrOpType,userrMoney,userrMem,recruitId)
+		VALUES(#{userId},#{userrOperator},#{userrTime},#{userrOpType},#{userrMoney},#{userrMem},#{recruitId})
 	</insert>
-	<!-- 根据用户id和操作，查找最近的一次开始（userrMoney=0）的时间 -->
+	<!-- 根据个人用户id和操作，查找最近的一次开始（userrMoney=0）的时间 -->
 	<select id="findUserrTimeByUserIdAndUserrOperator" resultType="java.sql.Timestamp">
 		select max(userrTime) from userrecord where 
 		userId=#{userId} and userrOperator=#{userrOperator} and userrMoney=0
 	</select>
-	<!--  -->
-	<select id="findUserRecordById" parameterType="Integer" resultType="UserRecord">
-		select * from userrecord where userid=#{id}
+	<!-- 根据用户id查询用户所做的各种操作历史记录,按操作时间降序排序 -->
+	<select id="findUserRecordByUserId" parameterType="Integer" resultType="UserRecord">
+		select * from userrecord where userid=#{id} 
+		order by userrTime desc
+	</select>
+	<!-- 根据企业用户id和操作，查找最近的一次开始（userrMoney=0）的时间 -->
+	<select id="findUserrTimeByUserIdAndUserrOperatorAndRecruitId" resultType="java.sql.Timestamp">
+		select max(userrTime) from userrecord where 
+		userId=#{companyId} and userrOperator=#{userrOperator} and userrMoney=0 and recruitId=#{recruitId}
 	</select>
 </mapper>

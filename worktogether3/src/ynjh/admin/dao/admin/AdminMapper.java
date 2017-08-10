@@ -98,7 +98,12 @@ public interface AdminMapper {
 	   * @Version: V1.00 （版本号）
 	   * @Create Date: 2017年4月21日上午10:48:30
 	 */
-	public List<AuditArticle> findAuditArticle(@Param("page") Integer page);// 查询审核文章
+	public List<AuditArticle> findAuditArticle(@Param("page") Integer page);
+	/**
+	 * 牟勇：为审核文章页面做分页作准备，统计文章的数量
+	 * @return 所有文章的数量
+	 */
+	public Integer countfindAuditArticle();
 	/**
 	 * 
 	 * 审核文章评论
@@ -109,7 +114,7 @@ public interface AdminMapper {
 	 */
 	public Integer auditCommentsArticle(@Param("id")Integer id,@Param("commentArticleStatus")Integer commentArticleStatus);//审核文章评论
 	/**
-	 * 
+	 *  查询评论
 	   * @Name: findAuditCommentsArticle // 查询审核文章评论
 	   * @Description: @param page 偏移量
 	   * @Description: @return
@@ -117,7 +122,7 @@ public interface AdminMapper {
 	   * @Version: V1.00 （版本号）
 	   * @Create Date: 2017年4月21日上午10:49:12
 	 */
-	public List<CommentArticle> findAuditCommentsArticle(Integer page);// 查询审核文章评论
+	public List<CommentArticle> findAuditCommentsArticle(Integer page);//
 	/**
 	 * 审核企业资质
 	 * @author 周富强
@@ -134,14 +139,13 @@ public interface AdminMapper {
 	 */
 	public List<Company> findAuditCompany(Integer page);// 查询审核企业资质
 	/**
-	 * 
+	 * 牟勇：修改企业审核状态
 	 * @author 周富强
-	 * @param companyId company表中的id
+	 * @param companyId 企业主键id
 	 * @param cmpIntStatus 企业审核状态
 	 * @return
 	 */
-	public Integer auditCompanyNo(@Param("companyId") Integer id,
-			@Param("cmpIntStatus") Integer cmpIntStatus);// 审核企业资质
+	public Integer auditCompanyNo(@Param("companyId") Integer id,@Param("cmpIntStatus") Integer cmpIntStatus);
 	/**
 	 * 审核个人企业互评
 	 * @author 周富强
@@ -189,28 +193,17 @@ public interface AdminMapper {
 	 */	
 	public List<AuditOffer> findAuditOffer(Integer page);// 查询审核offer
 	/**
-	 * 审核招聘信息
-	 * @author 周富强
-	 * @param recruitmentId 招聘信息id
-	 * @param cmpRecStatus 
-	 * @return
-	 */
-	public Integer auditRecruitment(@Param("id") Integer id,
-			@Param("cmpRecStatus") Integer cmpRecStatus);// 审核招聘信息
-	/**
-	 * 查询审核招聘信息
+	 * 查询招聘信息
 	 * @author 周富强
 	 * @param page 偏移量
 	 * @return
 	 */
-	public List<CompanyRecruit> findAuditRecruitment(Integer page);// 查询审核招聘信息
+	public List<CompanyRecruit> findAllRecruit(Integer page);
 	/**
-	 * 查询审核招聘信息ById
-	 * @author 周富强
-	 * @param id 招聘信息的id
-	 * @return
-	 */	
-	public CompanyRecruit findAuditRecruitmentById(Integer id);// 查询审核招聘信息依据Id
+	 * 牟勇 招聘信息统计
+	 * @return 招聘记录数
+	 */
+	public Integer countfindAllRecruit();
 	/**
 	 * 查询审核offer的id
 	 * @author 周富强

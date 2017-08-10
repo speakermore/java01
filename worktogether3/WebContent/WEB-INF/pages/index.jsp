@@ -17,6 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="keywords" content="相职网,云南相职网,招聘网,招聘,软件开发,软件人才,软件公司,Java,网络招聘" />
+    <meta name="referrer" content="always" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="description" content="相职网-专业提供软件人力资源解决方案"/>
     <title>相职网-首页</title>
 	<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" >
     <!-- Bootstrap -->
@@ -201,7 +204,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
 							<c:forEach items="${masterResume }" var="mr">
-								<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.userName }</span><span class="col-sm-2 work-together-cut-text">${mr.resumeEducation }</span><b class="col-sm-5 work-together-cut-text">${mr.resumeJor }</b><span class="col-sm-2 work-together-cut-text">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
 							</c:forEach>
 							</ul>
 						</div>
@@ -214,7 +217,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
 								<c:forEach items="${manageResume }" var="mr">
-									<li class="row"><a href=""><span class="col-sm-3">${mr.userName }</span><span class="col-sm-2">${mr.resumeEducation }</span><b class="col-sm-5">${mr.resumeJor }</b><span class="col-sm-2">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.userName }</span><span class="col-sm-2 work-together-cut-text">${mr.resumeEducation }</span><b class="col-sm-5 work-together-cut-text">${mr.resumeJor }</b><span class="col-sm-2 work-together-cut-text">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -238,7 +241,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 								<!-- 工作地点，公司名称，招聘岗位，人数 -->
 								<c:forEach items="${manageRecuite }" var="mr">
-									<li class="row"><a href=""><span class="col-sm-3">${mr.cmpRecCity }</span><b class="col-sm-7">${mr.cmpRecTitle }</b><span class="col-sm-2">${mr.cmpRecPeople }人</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.cmpRecCity }</span><b class="col-sm-7 work-together-cut-text">${mr.cmpRecTitle }</b><span class="col-sm-2 work-together-cut-text">${mr.cmpRecPeople }人</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -250,7 +253,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${masterRecuite }" var="mr">
-									<li class="row"><a href=""><span class="col-sm-3">${mr.cmpRecCity }</span><b class="col-sm-7">${mr.cmpRecTitle }</b><span class="col-sm-2">${mr.cmpRecPeople }人</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.cmpRecCity }</span><b class="col-sm-7 work-together-cut-text">${mr.cmpRecTitle }</b><span class="col-sm-2 work-together-cut-text">${mr.cmpRecPeople }人</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -274,7 +277,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 众筹名称，众筹项目价值，发布者 -->
 								<c:forEach items="${companyCrowdfund }" var="cc">
-									<li class="row"><a href=""><span class="col-sm-3">${cc.crowdfundProjectName }</span><b class="col-sm-5">${cc.companyName }</b><span class="col-sm-4"><fmt:formatNumber value="${cc.crowdfundProjectMoney/10000.0 }" pattern="##,###,###.00"/>万元</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${cc.crowdfundProjectName }</span><b class="col-sm-5 work-together-cut-text">${cc.companySimpleName }</b><span class="col-sm-4 work-together-cut-text"><fmt:formatNumber value="${cc.crowdfundProjectMoney/10000.0 }" pattern="##,###,###.00"/>万元</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -286,7 +289,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${personalCrowdfund }" var="cc">
-									<li class="row"><a href=""><span class="col-sm-3">${cc.crowdfundProjectName}</span><b class="col-sm-5">${cc.userName }</b><span class="col-sm-4"><fmt:formatNumber value="${cc.crowdfundProjectMoney/10000.0 }" pattern="##,###,###.00"/>万元</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${cc.crowdfundProjectName}</span><b class="col-sm-5 work-together-cut-text">${cc.userName }</b><span class="col-sm-4 work-together-cut-text"><fmt:formatNumber value="${cc.crowdfundProjectMoney/10000.0 }" pattern="##,###,###.00"/>万元</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -309,7 +312,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${companyArticle }" var="ca">
-									<li class="row"><a href=""><span class="col-sm-3">${ca.companyName }</span><b class="col-sm-5">${ca.articleTitle }</b><span class="col-sm-4"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${ca.companySimpleName }</span><b class="col-sm-7 work-together-cut-text">${ca.articleType}${ca.articleTitle }</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -321,7 +324,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${personalArticle }" var="pa">
-									<li class="row"><a href=""><span class="col-sm-3">${pa.userName }</span><b class="col-sm-5">${pa.articleTitle }</b><span class="col-sm-4"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${pa.userName }</span><b class="col-sm-7 work-together-cut-text">${pa.articleType}${pa.articleTitle }</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>

@@ -10,124 +10,117 @@ import ynjh.personal.entity.Resume;
  * @author 牟勇
  *
  */
-public class CompanyResume extends Resume implements Serializable{
+public class CompanyResume implements Serializable{
 	private static final long serialVersionUID = 2079298070187296489L;
 	private Integer id;//主键
-	private Integer companyId;//公司ID
-	private Integer resumeId;//简历ID
+	private Integer resumeId;//投递的简历ID
 	private Timestamp cmprTime;//时间
-	private Integer cmprStatus;//审核状态：1.等待审核 2.审核通过 3.审核不通过
-	private Integer companyResumeId;//投递简历的用户ID
-	private Integer cmprAction;//接收状态： 1.尚未阅读 2.接受简历 3.拒绝简历4.已阅读
-	private Integer companyRecruitId;//查询所需ID
-
-	public CompanyResume(){
+	private Integer cmprStatus=2;//审核状态：1.等待审核 2.审核通过 3.审核不通过 4.删除
+	private Integer cmprAction=1;//接收状态： 1.尚未阅读 2.接受简历 3.拒绝简历 4.已阅读
+	private Integer cmpRecId;//岗位ID
+	
+	public CompanyResume() {
 		
 	}
-
-
-
+	public CompanyResume(Integer resumeId, Timestamp cmprTime, Integer cmprStatus, Integer cmprAction,
+			Integer cmpRecId) {
+		this.resumeId = resumeId;
+		this.cmprTime = cmprTime;
+		this.cmprStatus = cmprStatus;
+		this.cmprAction = cmprAction;
+		this.cmpRecId = cmpRecId;
+	}
+	/**
+	 * 主键
+	 * @return
+	 */
 	public Integer getId() {
 		return id;
 	}
-
-
-
+	/**
+	 * 主键
+	 * @param id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
-
-	public Integer getCompanyId() {
-		return companyId;
-	}
-
-
-
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
-	}
-
-
-
+	/**
+	 * 简历Id
+	 * @return
+	 */
 	public Integer getResumeId() {
 		return resumeId;
 	}
-
-
-
+	/**
+	 *  简历Id
+	 * @param resumeId
+	 */
 	public void setResumeId(Integer resumeId) {
 		this.resumeId = resumeId;
 	}
-
-
-
+	/**
+	 * 投递时间
+	 * @return
+	 */
 	public Timestamp getCmprTime() {
 		return cmprTime;
 	}
-
-
-
+	/**
+	 * 投递时间
+	 * @param cmprTime
+	 */
 	public void setCmprTime(Timestamp cmprTime) {
 		this.cmprTime = cmprTime;
 	}
-
-
-
+	/**
+	 * 审核状态1.等待审核 2.审核通过 3.审核不通过 4.删除<br />
+	 * 目前默认值设置为2
+	 * @return
+	 */
 	public Integer getCmprStatus() {
 		return cmprStatus;
 	}
-
-
-
+	/**
+	 * 审核状态1.等待审核 2.审核通过 3.审核不通过 4.删除<br />
+	 * 目前默认值设置为2
+	 * @param cmprStatus
+	 */
 	public void setCmprStatus(Integer cmprStatus) {
 		this.cmprStatus = cmprStatus;
 	}
-
-
-
-	public Integer getCompanyResumeId() {
-		return companyResumeId;
-	}
-
-
-
-	public void setCompanyResumeId(Integer companyResumeId) {
-		this.companyResumeId = companyResumeId;
-	}
-
-
-
+	/**
+	 * 接收状态： 1.尚未阅读 2.接受简历 3.拒绝简历 4.已阅读<br />
+	 * 目前默认值设置为1
+	 * @return
+	 */
 	public Integer getCmprAction() {
 		return cmprAction;
 	}
-
-
-
+	/**
+	 * 接收状态： 1.尚未阅读 2.接受简历 3.拒绝简历 4.已阅读<br />
+	 * 目前默认值设置为1
+	 * @param cmprAction
+	 */
 	public void setCmprAction(Integer cmprAction) {
 		this.cmprAction = cmprAction;
 	}
-
-
-
-	public Integer getCompanyRecruitId() {
-		return companyRecruitId;
+	/**
+	 * 岗位id
+	 * @return
+	 */
+	public Integer getCmpRecId() {
+		return cmpRecId;
 	}
-
-
-
-	public void setCompanyRecruitId(Integer companyRecruitId) {
-		this.companyRecruitId = companyRecruitId;
+	/**
+	 * 岗位id
+	 * @param cmpRecId
+	 */
+	public void setCmpRecId(Integer cmpRecId) {
+		this.cmpRecId = cmpRecId;
 	}
-	
 	@Override
 	public String toString() {
-		return "CompanyResume [id=" + id + ", companyId=" + companyId
-				+ ", resumeId=" + resumeId + ", cmprTime=" + cmprTime
-				+ ", cmprStatus=" + cmprStatus + ", companyResumeId="
-				+ companyResumeId + ", cmprAction=" + cmprAction
-				+ ", companyRecruitId=" + companyRecruitId + "]";
+		return "CompanyResume [id=" + id + ", resumeId=" + resumeId + ", cmprTime=" + cmprTime + ", cmprStatus="
+				+ cmprStatus + ", cmprAction=" + cmprAction + ", cmpRecId=" + cmpRecId + "]";
 	}
-
 }

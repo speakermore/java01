@@ -4,6 +4,32 @@
 hr{
 	border-top:1px dotted #afafaf;
 }
+/* 牟勇：纠正后台h1标签字体太小的问题 */
+h1.work-together-big-font{
+	font-size:36px;
+}
+h2.work-together-big-font{
+	font-size:24px;
+}
+h3.work-together-big-font{
+	font-size:20px;
+}
+h4.work-together-big-font{
+	font-size:18px;
+}
+h5.work-together-big-font{
+	font-size:16px;
+}
+h6.work-together-big-font{
+	font-size:12px;
+}
+p.work-together-big-font{
+	font-size:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:5px;
+	font-weight: normal;
+}
 .work-together-background{
     	background-image: linear-gradient(to bottom,#fe6000,#fff);
 }
