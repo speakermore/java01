@@ -312,7 +312,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${companyArticle }" var="ca">
-									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${ca.companySimpleName }</span><b class="col-sm-7 work-together-cut-text">${ca.articleType}${ca.articleTitle }</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
+									<li class="row"><a href="common/article/findArticleById/${ca.id }/1"><span class="col-sm-3 work-together-cut-text">${ca.companySimpleName }</span><b class="col-sm-7 work-together-cut-text">${ca.articleType}${ca.articleTitle }</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -324,7 +324,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${personalArticle }" var="pa">
-									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${pa.userName }</span><b class="col-sm-7 work-together-cut-text">${pa.articleType}${pa.articleTitle }</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
+									<li class="row"><a href="common/article/findArticleById/${pa.id }"><span class="col-sm-3 work-together-cut-text">${pa.userName }</span><b class="col-sm-7 work-together-cut-text">${pa.articleType}${pa.articleTitle }</b><span class="col-sm-2"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>

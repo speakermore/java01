@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 * 个人文章：昵称，文章名称，点击数，点赞数
 	 * 按点赞数，点击数降序排序 -->
 	<select id="findByArticleType" resultType="Map">
-		select articleType,articleLikeNum,articleReadNum,articleTitle,
+		select a.id id,articleType,articleLikeNum,articleReadNum,articleTitle,
 		<choose>
 			<when test="userIdType lt 1234567890">
 				companySimpleName from article a,company c where a.usersId=c.id 

@@ -22,10 +22,10 @@
 							<pre>${moreInfoMood.moodContent }</pre>
 							</c:if>
 							<c:if test="${moreInfoIsFollow==null }">
-							<p class="text-center"><a title="点击添加关注" class="btn btn-primary btn-lg" role="button" href="javascript:addfollow(${userMoreInfo.id },${user.id })">关注<span class="glyphicon glyphicon-plus"></span></a></p>
+							<p class="text-center"><a title="点击添加关注" class="btn btn-primary btn-lg" role="button" href="javascript:addfollow(${userMoreInfo.id })">关注<span class="glyphicon glyphicon-plus"></span></a></p>
 							</c:if>
 							<c:if test="${moreInfoIsFollow!=null }">
-							<p class="text-center"><a title="点击取消关注" class="btn btn-default btn-lg" role="button" href="javascript:cancelfollow(${userMoreInfo.id },${user.id })">已关注<span class="glyphicon glyphicon-minus"></span></a></p>
+							<p class="text-center"><a title="点击取消关注" class="btn btn-default btn-lg" role="button" href="javascript:cancelfollow(${userMoreInfo.id })">已关注<span class="glyphicon glyphicon-minus"></span></a></p>
 							</c:if>
 						</div>
 						
@@ -91,7 +91,7 @@
 				<!-- 只有在查看自己的文章的情况下才能进行删除 -->
 				<tr>
 					<td>${art.articleType }</td>
-					<td><a href="javascript:ajaxPage('redirect:common/article/findArticleById/${art.id}')">${art.articleTitle }</a></td>
+					<td><a href="javascript:ajaxPage('redirect:common/article/findArticleById/${art.id}/2')">${art.articleTitle }</a></td>
 					<td><fmt:formatDate value="${art.articleTime }"/></td>
 					<td>${AUDIT_STATUS[art.articleStatus]}</td>
 					<td>${art.articleReadNum }</td>

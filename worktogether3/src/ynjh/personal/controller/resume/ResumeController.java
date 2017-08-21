@@ -144,7 +144,7 @@ public class ResumeController {
 	@RequestMapping("/ajaxFindAllResume")
 	@ResponseBody
 	public Object ajaxFindAllResume(Integer toPage, Integer userId) {
-		List<Resume> resumes = rService.findResumeUserId(toPage, userId);
+		List<Resume> resumes = rService.findResumeByUserId(userId);
 		int maxPage = rService.getMaxResumeById(userId);
 		StringBuffer sb = new StringBuffer();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -185,7 +185,7 @@ public class ResumeController {
 	@RequestMapping("/findAllResume")
 	public ModelAndView findAllResume(Integer toPage, Integer userId, HttpSession session) {
 		ModelAndView mv = new ModelAndView("personal/user/personal_index");
-		List<Resume> resumes = rService.findResumeUserId(toPage, userId);
+		List<Resume> resumes = rService.findResumeByUserId(userId);
 		int maxPage = rService.getMaxResumeById(userId);
 		mv.addObject("maxResumePage", maxPage);
 		mv.addObject("curResumePage", toPage);
@@ -738,10 +738,10 @@ public class ResumeController {
 		companyResume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result = rService.sendResumeToCompany(companyResume);
 		if (result > 0) {
-			mv.addObject("operatorInfo", "投递简称成功，请静候佳音！");
+			mv.addObject("operatorInfo", "投递简历成功，请静候佳音！");
 			mv.addObject("toPage", "company/artanddis/company_index");
 		} else {
-			mv.addObject("operatorInfo", "投递简称失败，请检查你的人品！");
+			mv.addObject("operatorInfo", "投递简历失败，请检查你的人品！");
 			mv.addObject("toPage", "company/artanddis/company_index");
 		}
 		return mv;

@@ -7,6 +7,9 @@
     <script type="text/javascript" src="thirdpart/dist/js/bootstrapValidator.min.js"></script>
     <script src="thirdpart/fileupload/js/fileinput.min.js"></script>
 	<script type="text/javascript" src="thirdpart/fileupload/language/zh.js"></script>
+	<script type="text/javascript" src="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="thirdpart/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script type="text/javascript" src=""></script>
 	<script type="text/javascript" src="company/js/magnifier.js"></script>
 	<script src="js/lrtk.js"></script>
 	<script type="text/javascript" src="js/jquery.raty.min.js"></script>

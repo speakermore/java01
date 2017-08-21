@@ -5,13 +5,14 @@ import java.sql.Timestamp;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import ynjh.common.dao.log.AccessLogMapper;
 import ynjh.common.entity.AccessLog;
 import ynjh.common.service.log.AccessLogService;
-
+/**
+ * 对用户访问进行记录的拦截器
+ * @author 牟勇
+ *
+ */
 public class AccessLogInterceptor extends HandlerInterceptorAdapter {
 	@Resource
 	private AccessLogService accessLogService;

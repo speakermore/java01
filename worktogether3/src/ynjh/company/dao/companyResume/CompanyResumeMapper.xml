@@ -3,13 +3,22 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ynjh.company.dao.companyResume.CompanyResumeMapper">
-<select id="findAllResume" resultType="CompanyResume" parameterType="Integer">
-	select * from companyResume c,resume r where c.companyRecruitId=#{companyRecruitId} and c.resumeId=r.id
+<!-- 添加应聘信息-->
+	<insert id="addCompanyResume">
+		insert into companyresume(resumeId,cmprTime,cmprStatus,cmprAction,cmpRecId)
+		values(#{resumeId},#{cmprTime},#{cmprStatus},#{cmprAction},#{cmpRecId})
+	</insert>
+	<!-- 应聘信息封装于Map中，有applyId,用户id,简历id,头像，登录账号，姓名，性别，毕业院校，专业，期望待遇，电话 -->
+<select id="findCompanyResumeBycmpRecId" resultType="map" parameterType="Integer">
+	select c.id applyId,r.id resumeId,userId,resumeName,resumeHeadImg,userLoginId,resumeGender,resumeGraduationSchool,resumeWages,resumeMajor,resumePhone 
+	from companyResume c,resume r,user u
+	where u.id=r.userId and c.cmpRecId=#{cmpRecId} and c.resumeId=r.id and cmprStatus=2
 </select>
 <select id="findById" resultType="CompanyResume" parameterType="Integer">
 	select * from companyResume c,resume r where r.id=#{id}
 </select>
-<update id="updateCmpResumeStatus" >
+<!-- 牟勇：根据id修改应聘信息的状态：1.尚未阅读 2.接受简历 3.拒绝简历 4.已阅读 -->
+<update id="updatecmprActionById" >
 	update companyResume set cmprAction=#{cmprAction} where id=#{id}
 </update>
 <!-- 查看教育经历 -->
@@ -24,5 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findProject" parameterType="Integer" resultType="Project">
 	select * from project where resumeId=#{resumeId} and not resumeType=4
 </select>
-
+<select id="countCompanyResumeByRecruitIdAndResumeId" resultType="int">
+	select count(*) from companyresume where cmpRecId=#{recruitId} and resumeId=#{resumeId}
+</select>
 </mapper>

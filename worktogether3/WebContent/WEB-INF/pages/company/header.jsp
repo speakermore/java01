@@ -20,6 +20,7 @@
 	<link href="css/login.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="thirdpart/dist/css/bootstrapValidator.min.css" />
 	<link href="thirdpart/fileupload/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" >
 	<link href="css/main.css" rel="stylesheet" />
 	<link href="css/lrtk.css" rel="stylesheet" type="text/css" />

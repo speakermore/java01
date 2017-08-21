@@ -18,8 +18,8 @@
         			<bean class="ynjh.common.convertor.StringToDateConvertor">
         				<constructor-arg>
         					<array>
-        						<value>yyyy-MM-dd</value>
         						<value>yyyy-MM-dd HH:mm:ss</value>
+        						<value>yyyy-MM-dd</value>
         						<value>yyyy-MM</value>
         					</array>
         				</constructor-arg>

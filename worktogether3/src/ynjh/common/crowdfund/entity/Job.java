@@ -1,6 +1,8 @@
 package ynjh.common.crowdfund.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 岗位实体类
@@ -12,20 +14,21 @@ public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String jobType;//岗位类型
 	private String jobName;//岗位名称
 	private Integer jobParantId;//技术方向
+	private List<Job> subJobs=new ArrayList<Job>();//牟勇：二级分类
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getJobType() {
-		return jobType;
+	
+	public List<Job> getSubJobs() {
+		return subJobs;
 	}
-	public void setJobType(String jobType) {
-		this.jobType = jobType;
+	public void setSubJobs(List<Job> subJobs) {
+		this.subJobs = subJobs;
 	}
 	public String getJobName() {
 		return jobName;
@@ -41,7 +44,7 @@ public class Job implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", jobType=" + jobType + ", jobName=" + jobName + ", jobParantId=" + jobParantId + "]";
+		return "Job [id=" + id + ", jobName=" + jobName + ", jobParantId=" + jobParantId +",subJobs="+subJobs+ "]";
 	}
 	
 	

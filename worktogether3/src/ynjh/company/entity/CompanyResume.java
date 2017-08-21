@@ -2,9 +2,6 @@ package ynjh.company.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-
-import ynjh.personal.entity.Resume;
 /**
  * 企业收到的简历
  * @author 牟勇

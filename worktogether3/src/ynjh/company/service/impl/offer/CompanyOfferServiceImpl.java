@@ -1,6 +1,7 @@
 package ynjh.company.service.impl.offer;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -59,7 +60,7 @@ public class CompanyOfferServiceImpl implements CompanyOfferService {
 	}
 	// 查找当前用户收到的所有offer
 	@Override
-	public List<Offer> findUserOffers(Integer userId) {
+	public List<Map<String, Object>> findUserOffers(Integer userId) {
 		return companyOfferMapper.findUserOffers(userId);
 	}
 	// 查找当前用户收到的某条offer（根据id查询）

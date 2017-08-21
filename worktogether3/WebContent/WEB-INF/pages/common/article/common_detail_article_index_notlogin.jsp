@@ -2,6 +2,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page autoFlush="true" buffer="1024kb"%>
+<!DOCTYPE html>
+<!--
+	作者：牟勇
+	时间：2017-05-21
+	描述：相职网首页
+-->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="keywords" content="相职网,云南相职网,招聘网,招聘,软件开发,软件人才,软件公司,Java,网络招聘,${article.articleTitle }" />
+    <meta name="referrer" content="always" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="description" content="相职网-专业提供软件人力资源解决方案"/>
+    <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
+    <title>相职网-${article.articleTitle}</title>
+	<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" >
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	
+  	<div><%@include file="/WEB-INF/pages/nav.jsp" %></div>
 <style>
 .media{
 	padding: 0 20px;
@@ -98,16 +130,16 @@
 				</c:if>
 				<c:forEach items="${commentArticles }" var="comArt">
 				<section class="media">
-					<a href="javascript:userMoreInfo(${comArt.usersId })" class="media-left">
-					<img onerror="javascript:this.src='img/head.gif'" id="headPhoto" src="img/upload/personal/${comArt.userLoginId }/${comArt.userHeadImgPath}" style="width:50px;height:50px;" class="media-object img-circle" />
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">${user.id==comArt.usersId?"我":comArt.userName }：</h4>
-						<blockquote> ${comArt.commentArticleContent }</blockquote>
-					</div>
-					<div>
-						<fmt:formatDate value="${comArt.commentArticleTime }" pattern="yyyy-MM-dd HH:mm" />
-					</div>
+						<a href="javascript:userMoreInfo(${comArt.usersId })" class="media-left">
+						<img onerror="javascript:this.src='img/head.gif'" id="headPhoto" src="img/upload/personal/${comArt.userLoginId }/${comArt.userHeadImgPath}" style="width:50px;height:50px;" class="media-object img-circle" />
+						</a>
+						<div class="media-body">
+							<h4 class="media-heading">${user.id==comArt.usersId?"我":comArt.userName }：</h4>
+							<blockquote> ${comArt.commentArticleContent }</blockquote>
+						</div>
+						<div>
+							<fmt:formatDate value="${comArt.commentArticleTime }" pattern="yyyy-MM-dd HH:mm" />
+						</div>
 				</section>
 				</c:forEach>
 			</div>
@@ -115,34 +147,6 @@
 		</div>
 	</div>
 	<!--评论列表结束-->
-	<c:if test="${user!=null }">
-	<!-- 牟勇：用户需要登录才能发表评论 -->
-	<div class="row">
-		<div class="col-sm-12">
-		<!--发表评论-->
-		<section class="panel">
-			<div class="panel-heading">评论</div>
-			<div class="panel-body">
-				<form id="add-comment" method="post">
-					<input type="hidden" name="articleId" value="${article.id }" />
-					<div class="form-group">
-						<textarea id="saytext" name="commentArticleContent" class="form-control" rows="5" placeholder="说点什么呗"></textarea>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-5">
-							<span class="emotion">表情</span>
-						</div>
-						<div class="col-sm-offset-8 col-sm-2">
-							<button type="button" id="sendCommentArticle" class="btn btn-success form-control" >发表评论</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</section>
-		<!--//发表状态结束 -->
-		</div>
-	</div>
-	</c:if>
 	</c:if>
 </article>
 
@@ -160,3 +164,12 @@
 		});
 	});
 </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <div class="row">
+    		<div class="col-sm-12"><%@include file="/WEB-INF/pages/copyright.jsp" %></div>
+    	</div>
+</body>
+</html>

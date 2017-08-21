@@ -90,7 +90,7 @@ public class CommonController {
 		List<MySendResume> mySendResumes = rService.findMySendResume(userId);
 		session.setAttribute("mySendResumes", mySendResumes);
 		// 牟勇：我收到的面试邀请（时间是6个月以内，必须通过审核）
-		List<Offer> offers = companyOfferService.findUserOffers(userId);
+		List<Map<String, Object>> offers = companyOfferService.findUserOffers(userId);
 		session.setAttribute("personal_offers_list", offers);
 		// 获取简历
 		Resume resume = rService.findResumeByOneUserId(userId);
@@ -110,8 +110,8 @@ public class CommonController {
 		List<ArticleByFollow> articleByFollows = nService.findNewlyArticleByFollow(userId);
 		session.setAttribute("articleByFollows", articleByFollows);
 		// 获取最新面试消息。牟勇：这里就是未阅读的面试消息
-		List<Offer> newlyOffers = nService.findNewlyFaceByUserId(userId);
-		session.setAttribute("personal_offer", newlyOffers);
+		//List<Offer> newlyOffers = nService.findNewlyFaceByUserId(userId);
+		//session.setAttribute("personal_offer", newlyOffers);
 		// 牟勇：查询个人用户对我的文章的评论
 		List<Map<String, Object>> articleByComments = nService.findNewlyCommentArticleByUserId(userId);
 		session.setAttribute("personal_comments", articleByComments);

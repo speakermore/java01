@@ -1,74 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
-<title>发送面试邀请</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
-<link href="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<script src="thirdpart/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-<script src="thirdpart/ckeditor/ckeditor.js"></script>
-</head>
-<body>
-
-<!-- 上边栏 -->
-<%@include file="/WEB-INF/pages/nav.jsp" %>
-<div class="container">
-	<div class="row clearfix">
-		
-		<!-- 左边栏 -->
-		<div class="col-sm-3"><%@include file="/WEB-INF/pages/company/menu.jsp" %></div>
-		
-		<!-- 填写offer -->
-		<div class="col-sm-9">
-			<div class="col-sm-10 col-sm-offset-0">
-				<form class="form-horizontal" action="offer/add_offer" method="post" name="addOffer" id="addOffer">
-					
-					<div class="form-group">
-				    	<label class="col-sm-2 control-label">招聘岗位</label>
-				    	<div class="col-sm-6">					    			
-				      		<input class="form-control" placeholder="请输入岗位" name="offerJob" id="offerJob" maxlength="20">
-				   		</div>
-					</div>
-					
-					<div class="form-group">
-						<label class="col-md-2 control-label">面试时间</label>
-						<div class="col-md-6">
-							<input class="form-control" placeholder="请选择时间" name="offerInvitationTime" id="offerInvitationTime" maxlength="10">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label class="col-sm-2 control-label">详细内容</label>
-						<div class="col-sm-6">
-							<textarea  class="form-control" name="offerContent" id="offerContent"></textarea>
-						</div>
-					</div>
-				
-					<!-- 发送和返回 -->
-					<div class="form-group">
-						<div class="col-sm-1 col-sm-offset-2">
-							<button class="btn btn-warning" type="submit" onClick="return check(this.form)">发送</button>
-						</div>
-						<div class="col-sm-1 col-sm-offset-8">
-							<a class="btn btn-warning" href="javascript:history.back()">返回</a>
-						</div>
-					</div>
-																		
-				</form>	
+<div class="col-sm-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title">发送Offer</div>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" action="offer/add_offer" method="post" id="addOffer">
+		<input name="cmpResId" type="hidden" value="${applyId }" />
+		<div class="form-group">
+			<label class="col-sm-3 control-label">面试时间：</label>
+			<div class="col-sm-6">
+				<input class="form-control" placeholder="请选择时间" name="offerInvitationTime" id="offerInvitationTime" maxlength="10">
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">注意事项：</label>
+			<div class="col-sm-6">
+				<textarea class="form-control" name="offerContent" id="offerContent"></textarea>
+			</div>
+		</div>
+		<!-- 发送和返回 -->
+		<div class="form-group">
+			<div class="col-sm-2 col-sm-offset-2">
+				<button class="btn btn-success form-control" type="submit" onClick="return check(this.form)">发送</button>
+			</div>
+			<div class="col-sm-2 col-sm-offset-4">
+				<a class="btn btn-default form-control" href="javascript:ajaxPage('redirect:company/cmprs/find_all/1')">返回</a>
+			</div>
+		</div>
+	</form>	
+		</div>
 	</div>
+	
 </div>
-
 <script>
 // 加载页面时焦点为招聘岗位
 window.onload=function(){
@@ -109,7 +75,7 @@ $(function(){
 });
 
 // CKEDITOR配置，提示当前字数
-$(function(){    
+/* $(function(){    
     var maxlength=500;
     editor=CKEDITOR.replace("offerContent",{height:'333px',width:'666px'});
     editor.on("key",function(event){
@@ -129,8 +95,5 @@ $(function(){
              label.html("还可输入"+words+"字");
          }
      });
-});
+}); */
 </script>
-
-</body>
-</html>

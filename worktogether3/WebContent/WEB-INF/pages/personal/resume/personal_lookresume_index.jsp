@@ -1,5 +1,4 @@
-<%@ page language="java" import="ynjh.common.util.*"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="ynjh.common.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="MARRY" value="${CommonStatus.MARRY }"></c:set>
@@ -70,17 +69,19 @@ a:focus {
 		<div class="media">
 			<!-- 头像 -->
 			<div class="resumeheadImg col-sm-offset-1" style="margin-top: 35px;">
-				<img  onerror="javascript:this.src='img/head.gif'" class="pull-left updateHeadImg media-object " src="img/upload/personal/${user.userLoginId }/${resume.resumeHeadImg}" alt='我的头像' width="100" height="120" />
+				<img  onerror="javascript:this.src='img/head.gif'" class="pull-left updateHeadImg media-object " src="img/upload/personal/${user.id>=1234567890?user.userLoginId:userLoginId }/${resume.resumeHeadImg}" alt='我的头像' width="100" height="120" />
 			</div>
 			<!-- 头像结束 -->
 			<!-- 简历基本信息 -->
 			<div class="media-body ">
+				<c:if test="${user.id>=1234567890 }">
 				<!-- 修改图标开始 -->
 				<a class="col-sm-offset-10" href="javascript:ajaxPageById('personal/resume/personal_updateresume_index',${resume.id})"><span class="glyphicon glyphicon-edit" id="personal_hidden_photo"></span></a>
 				<!-- 修改图标结束 -->
+				</c:if>
 				<h4 class="media-heading col-sm-offset-1" style="line-height: 35px; height: 35px; font-size: 20px;">
 					<label class="control-label">${resume.resumeName }</label>
-					<small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small>
+					<c:if test="${user.id>=1234567890 }"><small>(${AUDIT_STATUS[resume.resumeStatusThree]})</small></c:if>
 					<small class="col-sm-offset-3">${SEX[resume.resumeGender]}</small>
 				</h4>
 				<!-- 年龄和工作年限需要计算 -->
@@ -108,26 +109,26 @@ a:focus {
 			<div id="panel-element-more" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_margin">
 					<div class="panel-body col-sm-12 test personal_resume_defualt">
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">籍贯：</label>
 							<label class="control-label">${resume.resumePlace }</label>
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">婚姻状况：${MARRY[resume.resumeMarriage]}</label>
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">目前职位：</label>
 							<label class="control-label">${resume.resumeJor}</label>
 						</div>
-						<div class="col-sm-6 column">
-							<label class="control-label">期待月薪：</label> <label
-								class="control-label">${resume.resumeWages}</label>
+						<div class="col-sm-6">
+							<label class="control-label">期待月薪：</label> 
+							<label class="control-label">${resume.resumeWages}</label>
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">QQ或微信：</label>
 							<label class="control-label">${resume.resumeQQ}</label>
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">民族：</label>
 							<label class="control-label">${resume.resumeNation}</label>
 						</div>
@@ -140,7 +141,7 @@ a:focus {
 								<fmt:formatDate value="${resume.resumeGraduationTime}" pattern="yyyy/MM/dd" />
 							</label>
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">学历：</label>
 							<label class="control-label">${resume.resumeEducation } </label>
 						</div>
@@ -158,15 +159,15 @@ a:focus {
 								${FL_TYPE[resume.resumeFLType] } 
 							</label>
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">身高：</label>
 							<label class="control-label">${resume.resumeHeight }</label>厘米
 						</div>
-						<div class="col-sm-6 column">
+						<div class="col-sm-6">
 							<label class="control-label">体重：</label>
 							<label class="control-label">${resume.resumeWeight }</label>公斤
 						</div>
-						<div class="col-sm-12 column">
+						<div class="col-sm-12">
 							<label class="control-label">自我评价：${resume.resumeSelfEvaluation }</label>
 						</div>
 					</div>
@@ -184,11 +185,14 @@ a:focus {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-list-alt"></span>工作经验
+				<c:if test="${user.id>=1234567890 }">
 				<!-- 新增工作 -->
-				<a class="panel-title col-sm-offset-8" data-toggle="collapse"
-					data-parent="#panel-work-main" href="#panel-element-work"
-					id="hiddenWork"><span class="glyphicon glyphicon-plus"></span>新增工作</a>
+				<a class="panel-title col-sm-offset-8" data-toggle="collapse" data-parent="#panel-work-main" href="#panel-element-work" id="hiddenWork">
+				<span class="glyphicon glyphicon-plus"></span>新增工作
+				</a>
+				</c:if>
 			</div>
+			<c:if test="${user.id>=1234567890 }">
 			<!--新增工作表单-->
 			<div id="panel-element-work" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
@@ -200,8 +204,7 @@ a:focus {
 								<div class="form-group">
 									<label for="workFirmName" class="col-sm-3 control-label">企业名称：</label>
 									<div class="col-sm-8">
-										<input class="form-control" name="workFirmName"
-											id="workFirmName" />
+										<input class="form-control" name="workFirmName" id="workFirmName" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -213,35 +216,29 @@ a:focus {
 								<div class="form-group">
 									<label for="workDescription" class="col-sm-3 control-label">工作描述：</label>
 									<div class="col-sm-8">
-										<textarea class="form-control" name="workDescription"
-											id="workDescription" ></textarea>
+										<textarea class="form-control" name="workDescription" id="workDescription" ></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">日期：</label>
 									<div class="col-sm-4">
-										<input class="form-control form_datetime" name="workBeginTime" size="30"
-											type="text" id="workStart" readonly
-											class="form_datetime" placeholder="选择起始日期">
+										<input class="form-control form_datetime" name="workBeginTime" size="30" type="text" id="workStart" readonly class="form_datetime" placeholder="选择起始日期">
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control form_datetime" name="workEndTime" size="30"
-											type="text" id="workEnd" readonly
-											placeholder="选择结束日期">
+										<input class="form-control form_datetime" name="workEndTime" size="30" type="text" id="workEnd" readonly placeholder="选择结束日期">
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-offset-5">
 								<button  onclick="ajaxCreateWork()" class="btn btn-success">保存</button>
-								<a class="btn btn-default" data-toggle="collapse"
-									data-parent="#panel-work-main" href="#panel-element-work-show"
-									id="showWork">关闭</a>
+								<a class="btn btn-default" data-toggle="collapse" data-parent="#panel-work-main" href="#panel-element-work-show" id="showWork">关闭</a>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<!--mian-->
+			<!--新增工作表单结束-->
+			</c:if>
 		</div>
 		
 		<!--牟勇： 已有工作经验列表 -->
@@ -249,7 +246,6 @@ a:focus {
 			<%@include file="/WEB-INF/pages/personal/resume/personal_resume_work.jsp"%>
 		</div>
 		<!--牟勇： 已有工作经验列表结束 -->
-		
 	</div>
 	<!--
 		作者：18213026337@163.com
@@ -260,12 +256,15 @@ a:focus {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-signal"></span>项目经验
+				<c:if test="${user.id>=1234567890 }">
 				<!-- 添加项目 -->
-				<a class="panel-title col-sm-offset-8" data-toggle="collapse"
-					data-parent="#panel-project-main" href="#panel-element-project"
-					id="hiddenProject"><span class="glyphicon glyphicon-plus"></span>新增项目</a>
+				<a class="panel-title col-sm-offset-8" data-toggle="collapse" data-parent="#panel-project-main" href="#panel-element-project" id="hiddenProject">
+				<span class="glyphicon glyphicon-plus"></span>新增项目
+				</a>
+				</c:if>
 			</div>
-			<!--mian+-->
+			<c:if test="${user.id>=1234567890 }">
+			<!--新增项目表单-->
 			<div id="panel-element-project" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-sm-12">
@@ -276,8 +275,7 @@ a:focus {
 								<div class="form-group">
 									<label for="projectName" class="col-sm-3 control-label">项目名称：</label>
 									<div class="col-sm-8">
-										<input class="form-control" name="projectName"
-											id="projectName" />
+										<input class="form-control" name="projectName" id="projectName" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -289,41 +287,34 @@ a:focus {
 								<div class="form-group">
 									<label for="projectDescription" class="col-sm-3 control-label">项目描述：</label>
 									<div class="col-sm-8">
-										<textarea class="form-control" name="projectDescription"
-											id="projectDescription" /></textarea>
+										<textarea class="form-control" name="projectDescription" id="projectDescription" /></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">日期：</label>
 									<div class="col-sm-4">
-										<input class="form-control form_datetime" name="projectBeginTime" size="30"
-											type="text" id="projectStart" readonly
-											 placeholder="选择起始日期" />
+										<input class="form-control form_datetime" name="projectBeginTime" size="30" type="text" id="projectStart" readonly placeholder="选择起始日期" />
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control form_datetime" name="projectEndTime" size="30"
-											type="text" id="projectEnd" readonly
-											placeholder="选择结束日期" />
+										<input class="form-control form_datetime" name="projectEndTime" size="30" type="text" id="projectEnd" readonly placeholder="选择结束日期" />
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-offset-5">
 								<button onclick="ajaxCreateProject()" class="btn btn-success">保存</button>
-								<a class="btn btn-default" data-toggle="collapse"
-									data-parent="#panel-project-main"
-									href="#panel-element-project-show" id="showProject">关闭</a>
+								<a class="btn btn-default" data-toggle="collapse" data-parent="#panel-project-main" href="#panel-element-project-show" id="showProject">关闭</a>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<!--mian-->
+			<!--新增项目表单结束-->
+			</c:if>
 		</div>
 		
 		<!-- 项目经验开始 -->
 		<div class="panel panel-default" id="projectFresh">
-			<%@include
-				file="/WEB-INF/pages/personal/resume/personal_resume_project.jsp"%>
+			<%@include file="/WEB-INF/pages/personal/resume/personal_resume_project.jsp"%>
 		</div>
 		<!-- 项目经验结束 -->
 		
@@ -338,12 +329,15 @@ a:focus {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-book"></span>教育经历 
+				<c:if test="${user.id>=1234567890 }">
 				<!-- 添加教育 -->
-				<a class="panel-title col-sm-offset-8" data-toggle="collapse"
-					data-parent="#panel-education-main" href="#panel-element-education"
-					id="hiddenEducation"><span class="glyphicon glyphicon-plus"></span>新增教育</a>
+				<a class="panel-title col-sm-offset-8" data-toggle="collapse" data-parent="#panel-education-main" href="#panel-element-education" id="hiddenEducation">
+				<span class="glyphicon glyphicon-plus"></span>新增教育
+				</a>
+				</c:if>
 			</div>
-			<!--mian+-->
+			<c:if test="${user.id>=1234567890 }">
+			<!--新增教育表单-->
 			<div id="panel-element-education" class="panel-collapse collapse">
 				<div class="panel-body personal_resume_padding">
 					<div class="panel-body col-sm-12">
@@ -354,53 +348,57 @@ a:focus {
 								<div class="form-group">
 									<label for="educationSchool" class="col-sm-3 control-label">学校名称：</label>
 									<div class="col-sm-8">
-										<input class="form-control" name="educationSchool"
-											id="educationSchool" />
+										<input class="form-control" name="educationSchool" id="educationSchool" />
 									</div>
 								</div>
 								<br />
 								<div class="form-group">
 									<label for="educationContent" class="col-sm-3 control-label">专业：</label>
 									<div class="col-sm-8">
-										<input class="form-control" name="educationContent"
-											id="educationContent" />
+										<input class="form-control" name="educationContent" id="educationContent" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">日期：</label>
 									<div class="col-sm-4">
-										<input class="form-control form_datetime" name="educationBeginTime"
-											size="30" type="text" id="educationStart" readonly
-											 placeholder="选择起始日期">
+										<input class="form-control form_datetime" name="educationBeginTime" size="30" type="text" id="educationStart" readonly placeholder="选择起始日期">
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control form_datetime" name="educationEndTime" size="30"
-											type="text" id="educationEnd" readonly
-											placeholder="选择结束日期">
+										<input class="form-control form_datetime" name="educationEndTime" size="30" type="text" id="educationEnd" readonly placeholder="选择结束日期">
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-offset-5">
 								<button onclick="ajaxCreateEducation()" class="btn btn-success">保存</button>
-								<a class="btn btn-default" data-toggle="collapse"
-									data-parent="#panel-education-main"
-									href="#panel-element-education-show" id="showEducation">关闭</a>
+								<a class="btn btn-default" data-toggle="collapse" data-parent="#panel-education-main" href="#panel-element-education-show" id="showEducation">关闭</a>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<!--mian-->
+			<!--新增教育结束-->
+			</c:if>
 		</div>
-		<!--2+-->
-<!-- 局部刷新开始 -->
+		<!-- 教育经验开始 -->
 		<div class="panel panel-default" id="educationFresh">
-			<%@include
-				file="/WEB-INF/pages/personal/resume/personal_resume_education.jsp"%>
+			<%@include file="/WEB-INF/pages/personal/resume/personal_resume_education.jsp"%>
 		</div>
-		<!-- 局部刷新结束 -->			
-		<!--2-->
+		<!-- 教育经验结束 -->			
 	</div>
+	<c:if test="${user.id<1234567890 }">
+	<!-- 企业用户浏览简历时专用，提供返回和发送Offer -->
+	<div class="row">
+		<div class="col-sm-offset-8 col-sm-4">
+			<div class="btn-group btn-group-sm" role="group">
+			<a role="button" href="javascript:ajaxPage('offer/add_offer?applyId=${applyId }')" class="btn btn-default">
+			<span class="glyphicon glyphicon-send"></span>发送Offer
+			</a>
+			<!-- 牟勇：${sessionScope.cmpRecId }是在find_apply_list中存入session的 -->
+			<a role="button" href="javascript:ajaxPage('redirect:company/cmprs/find_apply_list/${sessionScope.cmpRecId }')" class="btn btn-default"><span class="glyphicon glyphicon-level-up"></span>返回</a>
+			</div>
+		</div>
+	</div>
+	</c:if>
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -427,45 +425,7 @@ a:focus {
 		});
 	});
 	$(function() {
-		/* 教育 */
-		/* $("#educationStart").datetimepicker({
-			format : 'yyyy-mm',
-			language : 'zh-CN',
-			startDate : '1900-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : 3,
-			startView:3
-		}).on(
-				"click",
-				function() {
-					$("#educationStart").datetimepicker("setEndDate",
-							$("#educationEnd").val())
-				}).on('hide',function(e) {  
-	                $('#educationForm').data('bootstrapValidator')  
-	                .updateStatus('educationBeginTime', 'NOT_VALIDATED',null)  
-	                .validateField('educationBeginTime');  
-	        });
-
-		$("#educationEnd").datetimepicker({
-			format : 'yyyy-mm',
-			language : 'zh-CN',
-			startDate : '1900-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : 3,
-			startView:3
-		}).on(
-				"click",
-				function() {
-					$("#educationEnd").datetimepicker("setStartDate",
-							$("#educationStart").val())
-				}).on('hide',function(e) {  
-	                $('#educationForm').data('bootstrapValidator')  
-	                .updateStatus('educationEndTime', 'NOT_VALIDATED',null)  
-	                .validateField('educationEndTime');  
-	        }); */
-		/* 工作 */
+		
 		$(".form_datetime").datetimepicker({
 			format : 'yyyy-mm',
 			language : 'zh-CN',
@@ -485,62 +445,9 @@ a:focus {
 	                .validateField('workStart');  
 	        });
 
-		/* $("#workEnd").datetimepicker({
-			format : 'yyyy-mm',
-			language : 'zh-CN',
-			startDate : '1900-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : 3,
-			startView:3
-		}).on(
-				"click",
-				function() {
-					$("#workEnd").datetimepicker("setStartDate",
-							$("#workStart").val())
-				}).on('hide',function(e) {  
-	                $('#resumeForm').data('bootstrapValidator')  
-	                .updateStatus('workEnd', 'NOT_VALIDATED',null)  
-	                .validateField('workEnd');  
-	        }); */
-		/* 项目 */
-		/* $("#projectStart").datetimepicker({
-			format : 'yyyy-mm',
-			language : 'zh-CN',
-			startDate : '1900-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : 3,
-			startView:3
-		}).on(
-				"click",
-				function() {
-					$("#projectStart").datetimepicker("setEndDate",
-							$("#projectEnd").val())
-				}).on('hide',function(e) {  
-	                $('#projectForm').data('bootstrapValidator')  
-	                .updateStatus('projectBeginTime', 'NOT_VALIDATED',null)  
-	                .validateField('projectBeginTime');  
-	        });
-
-		$("#projectEnd").datetimepicker({
-			format : 'yyyy-mm',
-			language : 'zh-CN',
-			startDate : '1900-01', //选择器的开始日期
-			autoclose : true,
-			todayHighlight : true,
-			minView : 3,
-			startView:3
-		}).on(
-				"click",
-				function() {
-					$("#projectEnd").datetimepicker("setStartDate",
-							$("#projectStart").val())
-				}).on('hide',function(e) {  
-	                $('#projectForm').data('bootstrapValidator')  
-	                .updateStatus('projectEndTime', 'NOT_VALIDATED',null)  
-	                .validateField('projectEndTime');  
-	        }); */
+		
+		
+		
 	});
 
 	$(function() {

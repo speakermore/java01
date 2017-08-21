@@ -9,23 +9,24 @@
 	<!-- 项目详细 -->
 	<c:forEach items="${projs}" var="pro">
 		<div class="panel-body test personal_resume_defualt">
-			<small class="col-md-offset-10">(${AUDIT_STATUS[pro.resumeType]})</small>
-			<div class="col-md-12 column">
+			<c:if test="${user.id>=1234567890 }"><small class="col-sm-offset-10">(${AUDIT_STATUS[pro.resumeType]})</small></c:if>
+			<div class="col-sm-12">
 				<label class="control-label">项目名称：</label>${pro.projectName}
 			</div>
-			<div class="col-md-12 column">
+			<div class="col-sm-12">
 				<label class="control-label">项目岗位：</label>${pro.projectJob}
 			</div>
-			<div class="col-md-12 column">
+			<div class="col-sm-12">
 				<label class="control-label">项目描述：</label>${pro.projectDescription}
 			</div>
-			<div class="col-md-12 column">
+			<div class="col-sm-12">
 				<label class="control-label">项目时间：</label>
 				<fmt:formatDate value="${pro.projectBeginTime}" pattern="yyyy-MM" />
 				到
 				<fmt:formatDate value="${pro.projectEndTime}" pattern="yyyy-MM" />
 			</div>
-			<div class="col-md-offset-10 column">
+			<c:if test="${user.id>=1234567890 }">
+			<div class="col-sm-offset-10">
 				<a id="modal-project${pro.id}"
 					href="#modal-container-project${pro.id}" role="button"
 					data-toggle="modal"><span class="glyphicon glyphicon-cog"></span></a>|<a
@@ -46,40 +47,40 @@
 							</div>
 							<div class="modal-footer">
 								<form id="updateProjectForm${pro.id}"
-									class="form-horizontal col-md-12 ">
+									class="form-horizontal col-sm-12 ">
 									<input type="hidden" name="id" value="${pro.id}" />
 									<input type="hidden" name="page" value="personal/resume/personal_resume_project" />
-									<div class="col-md-12 column margin_bottom_AND_margin_top">
-										<label class="col-md-3 control-label">项目名称：</label>
-										<div class="col-md-8 column">
+									<div class="col-sm-12 column margin_bottom_AND_margin_top">
+										<label class="col-sm-3 control-label">项目名称：</label>
+										<div class="col-sm-8 column">
 											<input class="form-control" type="text"
 												value="${pro.projectName}" name="projectName" />
 										</div>
 									</div>
-									<div class="col-md-12 column margin_bottom_AND_margin_top">
-										<label class="col-md-3 control-label">项目岗位：</label>
-										<div class="col-md-8 column">
+									<div class="col-sm-12 column margin_bottom_AND_margin_top">
+										<label class="col-sm-3 control-label">项目岗位：</label>
+										<div class="col-sm-8 column">
 											<input class="form-control" type="text"
 												value="${pro.projectJob}" name="projectJob" />
 										</div>
 									</div>
-									<div class="col-md-12 column margin_bottom_AND_margin_top">
-										<label class="col-md-3 control-label">项目描述： </label>
-										<div class="col-md-8 column">
+									<div class="col-sm-12 column margin_bottom_AND_margin_top">
+										<label class="col-sm-3 control-label">项目描述： </label>
+										<div class="col-sm-8 column">
 											<textarea style="resize: none;" class="form-control"
 												name="projectDescription">${pro.projectDescription}</textarea>
 										</div>
 									</div>
-									<div class="col-md-12 column margin_bottom_AND_margin_top">
-										<label class="col-md-3 control-label">项目时间：</label>
-										<div class="col-md-4 column">
+									<div class="col-sm-12 column margin_bottom_AND_margin_top">
+										<label class="col-sm-3 control-label">项目时间：</label>
+										<div class="col-sm-4 column">
 											<input name="projectBeginTime" size="30" type="text"
 												id="projectStart" readonly
 												value="<fmt:formatDate
 						value="${pro.projectBeginTime}" pattern="yyyy-MM" />"
 												class="form_datetime form-control" placeholder="请选择参与项目的开始时间">
 										</div>
-										<div class="col-md-4 column ">
+										<div class="col-sm-4 column ">
 											<input name="projectEndTime" size="30" type="text"
 												value="<fmt:formatDate
 						value="${pro.projectEndTime}" pattern="yyyy-MM" />"
@@ -99,6 +100,7 @@
 				</div>
 				<!-- 模态框关闭 -->
 			</div>
+			</c:if>
 		</div>
 		<!-- lzh：当在循环中使用模态框提交表单时，需要配置每个模态各自的id和表单的id 
 			当使用EL表达是传递int变量时，如果后面有空格则传递的数据会出错-->
@@ -107,7 +109,7 @@
 </c:if>
 <div id="panel-element-project-show" class="panel-collapse in">
 	<c:if test="${projs==null}">
-		<div class="panel-body col-md-offset-3 personal_resume_padding">
+		<div class="panel-body col-sm-offset-3 personal_resume_padding">
 			<span class="glyphicon glyphicon-signal"></span>
 			完善项目经验，展现社会工作能力，让HR更了解你！
 		</div>

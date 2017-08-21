@@ -4,16 +4,26 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 // 对应数据库offer表
+/**
+ * 对应数据库offer表的实体类
+ * 有几个显示企业名称及个人用户昵称的字段
+ * @author 牟勇
+ *
+ */
 public class Offer implements Serializable {
 	private static final long serialVersionUID = 8535725032528744867L;
 	private Integer id;
-	private Integer companyId;
-	private Integer userId;
-	private String offerJob;
+	//应聘信息主键id
+	private Integer cmpResId;
+	//offer需要补充的内容
 	private String offerContent;
+	//offer面试时间
 	private Timestamp offerInvitationTime;
+	//offer发送时间
 	private Timestamp offerSendTime;
-	private Integer offerStatus=1;
+	//offer状态：1.等待审核2.审核通过3.审核未过，默认是2，审核通过（这是后期才确定的，offer不再做审核了）
+	private Integer offerStatus=2;
+	//offer的接收状态：1.尚未阅读2.接受邀请3.拒绝邀请4.已阅读，默认是1，未阅读
 	private Integer offerAction=1;
 	private String companySimpleName;
 	private String companyName;
@@ -22,25 +32,15 @@ public class Offer implements Serializable {
 	public Offer() {
 
 	}
-
-	public Offer(Integer id, Integer companyId, Integer userId,
-			String offerJob, String offerContent,
-			Timestamp offerInvitationTime, Timestamp offerSendTime,
-			Integer offerStatus, Integer offerAction,
-			String companySimpleName, String companyName,String userName) {
-		super();
-		this.id = id;
-		this.companyId = companyId;
-		this.userId = userId;
-		this.offerJob = offerJob;
+	
+	public Offer(Integer cmpResId, String offerContent, Timestamp offerInvitationTime,
+			Timestamp offerSendTime, Integer offerStatus, Integer offerAction) {
+		this.cmpResId = cmpResId;
 		this.offerContent = offerContent;
 		this.offerInvitationTime = offerInvitationTime;
 		this.offerSendTime = offerSendTime;
-		this.offerStatus= offerStatus;
-		this.offerAction= offerAction;
-		this.companySimpleName= companySimpleName;
-		this.companyName=companyName;
-		this.userName= userName;
+		this.offerStatus = offerStatus;
+		this.offerAction = offerAction;
 	}
 
 	public Integer getId() {
@@ -51,28 +51,12 @@ public class Offer implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getCompanyId() {
-		return companyId;
+	public Integer getCmpResId() {
+		return cmpResId;
 	}
 
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getOfferJob() {
-		return offerJob;
-	}
-
-	public void setOfferJob(String offerJob) {
-		this.offerJob = offerJob;
+	public void setCmpResId(Integer cmpResId) {
+		this.cmpResId = cmpResId;
 	}
 
 	public String getOfferContent() {
@@ -141,18 +125,10 @@ public class Offer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Offer [id=" + id +
-				", companyId=" + companyId +
-				", userId=" + userId +
-				", offerJob=" + offerJob +
-				", offerContent=" + offerContent +
-				", offerInvitationTime=" + offerInvitationTime +
-				", offerSendTime=" + offerSendTime +
-				", offerStatus=" + offerStatus +
-				", offerAction=" + offerAction +
-				", companySimpleName=" + companySimpleName +
-				", companyName=" + companyName +
-				", userName=" + userName +
-				"]";
+		return "Offer [id=" + id + ", cmpResId=" + cmpResId + ", offerContent=" + offerContent
+				+ ", offerInvitationTime=" + offerInvitationTime + ", offerSendTime=" + offerSendTime + ", offerStatus="
+				+ offerStatus + ", offerAction=" + offerAction + ", companySimpleName=" + companySimpleName
+				+ ", companyName=" + companyName + ", userName=" + userName + "]";
 	}
+	
 }

@@ -121,4 +121,9 @@ public class CompanyServiceImpl implements CompanyService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<Company> findRecommentCompany() {
+		return companyMapper.find5CompanyAndRecruitGroupByArticleNumberAndLikeNumber();
+	}
 }

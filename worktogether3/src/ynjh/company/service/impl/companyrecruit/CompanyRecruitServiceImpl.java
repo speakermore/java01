@@ -2,6 +2,7 @@ package ynjh.company.service.impl.companyrecruit;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -148,13 +149,17 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 	public List<Job> findJobs1(){
 		return jobMapper.findJob1();
 	}
-	//模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
+	//
+	/**
+	 * 模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
+	 */
 	@Override
 	public List<CompanyRecruit> findMyIntrestRecruit(Integer userId) {
 		//查找用户拥有的全部简历集合
-		List<Resume> resumes=resumeMapper.findResumeByUserId(null,userId);
+		List<Resume> resumes=resumeMapper.findResumeByUserId(userId);
 		//提取出简历的岗位名称
-		List<String> resumeTitles=resumes.stream().map(r->r.getResumeTitle()).collect(Collectors.toList());
+		List<String> resumeTitles=resumes.stream().map(r->Arrays.stream(r.getResumeTitle().split(",")).map(title->"%"+title+"%").collect(Collectors.toList())).flatMap(childList->childList.stream()).collect(Collectors.toList());
+		
 		List<List<CompanyRecruit>> originCompanyRecruits=new ArrayList<List<CompanyRecruit>>();
 		//循环所有岗位名称，查出所有符合条件的集合
 		for(String resume:resumeTitles){

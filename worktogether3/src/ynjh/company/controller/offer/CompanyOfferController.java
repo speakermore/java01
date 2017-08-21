@@ -2,6 +2,7 @@ package ynjh.company.controller.offer;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ynjh.common.entity.MyUser;
 import ynjh.company.entity.Company;
 import ynjh.company.entity.Offer;
 import ynjh.company.service.CompanyOfferService;
@@ -23,38 +25,21 @@ public class CompanyOfferController {
 	@Resource
 	private CompanyOfferService companyOfferService;
 
-	// 调试用的offer总界面
-	@RequestMapping(value="/window_offer", method=RequestMethod.GET)
-	public String start(){
-		return "company/offer/window_offer";
-	}
-
 	// 发送offer
 	@RequestMapping(value="/add_offer", method=RequestMethod.GET)
-	public String addOffer(){
-		return "company/offer/add_offer";
+	public ModelAndView addOffer(Integer applyId){
+		ModelAndView mv=new ModelAndView("company/offer/add_offer");
+		mv.addObject("applyId",applyId);
+		return mv;
 	}
 	@RequestMapping(value="/add_offer", method=RequestMethod.POST)
 	public ModelAndView addOffer(Offer offer,HttpSession session){
-		/*Company company=(Company) session.getAttribute("company");
-		offer.setCompanyId(company.getId());*/
-		offer.setCompanyId(113);
-		/*User user=(User) session.getAttribute("user");
-		offer.setUserId(user.getId());*/
-		offer.setUserId(1234567896);
+		MyUser user=(MyUser)session.getAttribute("user");
 		offer.setOfferSendTime(new Timestamp(System.currentTimeMillis()));
-
-		int result=companyOfferService.addOffer(offer);
-		ModelAndView mv=new ModelAndView();
-		if(result>0){
-			mv.addObject("operatorInfo","发送成功");
-			mv.addObject("toPage", "company/company/company_index");
-			mv.setViewName("company/info");
-		}else{
-			mv.addObject("operatorInfo","发送失败");
-			mv.addObject("toPage", "offer/add_offer");
-			mv.setViewName("company/info");
-		}
+		offer.setOfferAction(1);
+		offer.setOfferStatus(2);
+		companyOfferService.addOffer(offer);
+		ModelAndView mv=new ModelAndView("redirect:company/company/findById/"+user.getId());
 		return mv;
 	}
 
@@ -106,7 +91,7 @@ public class CompanyOfferController {
 	public ModelAndView findUserOffers(@PathVariable Integer page,HttpSession session){
 		//userId是写死的，需要全部重新写。
 		int userId=1234567896;
-		List<Offer> offer=companyOfferService.findUserOffers(userId);
+		List<Map<String,Object>> offer=companyOfferService.findUserOffers(userId);
 		int maxPage=companyOfferService.findUserOffersPage(userId);
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("offer", offer);

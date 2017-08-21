@@ -44,7 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findByCmpRecTitle" resultType="CompanyRecruit">
 	select companyName,companySimpleName,cr.* 
 	from companyrecruit cr,company c 
-	where cmpRecTitle like #{cmpRecTitle} 
+	where cr.companyId=c.id 
+	and cmpRecTitle like #{cmpRecTitle} 
 	and cmpRecStatus=2 
 	and TIMESTAMPDIFF(MONTH,cmpRecTime,now()) &lt;= 6 
 	order by cmpRecTime desc

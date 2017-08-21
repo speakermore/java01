@@ -1,6 +1,7 @@
 package ynjh.company.service;
 
 import java.util.List;
+import java.util.Map;
 
 import ynjh.company.entity.Offer;
 
@@ -22,10 +23,12 @@ public interface CompanyOfferService {
 	/**
 	 * 牟勇：查找当前用户收到的所有offer
 	 * 取消原来的分页，现在不分页了
+	 * 现在改为Map集合
+	 * c.companySimpleName,o.offerInvitationTime,o.offerContent,crc.cmpRecTitle
 	 * @param userId 用户的id
-	 * @return 所有的offer
+	 * @return 符合条件的Map集合
 	 */
-	public List<Offer> findUserOffers(Integer userId);
+	public List<Map<String, Object>> findUserOffers(Integer userId);
 	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
 }

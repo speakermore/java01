@@ -31,7 +31,7 @@
 					<td><fmt:formatDate value="${cmpr.cmpRecTime}" pattern="yyyy-MM-dd" /></td>
 					<td>${AUDIT_STATUS[cmpr.cmpRecStatus] }</td>
 					<td>
-					<a href="javascript:ajaxPage('company/cmprs/companyResume/findAllResume?companyRecruitId=${cmpr.id }')">${cmpr.resumeNumber }人</a>
+					<a href="javascript:ajaxPage('redirect:company/cmprs/find_apply_list/${cmpr.id }')">${cmpr.resumeNumber }人</a>
 					</td>
 					<td><a href="javascript:ajaxPage('redirect:company/cmprs/find_recruit_detail/${cmpr.id}/1')">修改</a>
 						<c:if test="${cmpr.cmpRecStatus==2 }">

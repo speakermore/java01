@@ -26,13 +26,12 @@ public interface ResumeService {
 	public Integer updateResume(Resume resume);	
 	// 
 	/**
-	 * 根据useId查询简历（审查接口）(所有)
-	 * 牟勇：如果page为-1，则不进行分页查询
-	 * @param page 页码应该从1开始，如果为-1则不进行分页查询
+	 * 根据useId查询简历（审查接口）
+	 * 牟勇：不进行分页查询
 	 * @param userId
 	 * @return
 	 */
-	public List<Resume> findResumeUserId(Integer page,Integer userId);	
+	public List<Resume> findResumeByUserId(Integer userId);	
 	// 根据id查询简历（审查接口）详细
 	public Resume findResumeById(Integer id);
 	//根据userId查询最新简历（单个）

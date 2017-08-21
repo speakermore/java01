@@ -60,7 +60,7 @@ public interface CompanyRecruitService {
 	 */
 	public List<Job> findJobs1();
 	/**
-	 * 模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
+	 * 牟勇：模糊查找我感兴趣的招聘信息，用于个人用户首页的显示
 	 * 招聘信息必须是通过审核的
 	 * 按招聘信息的发表时间排序
 	 * @param userId 个人用户id

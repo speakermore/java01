@@ -49,7 +49,7 @@
 						<li>暂无新消息</li>
 					</c:if>
 					<c:forEach items="${comanyRecruits}" var="myIntrestCompany">
-						<li>${myIntrestCompany.companySimpleName }于<fmt:formatDate value="${myIntrestCompany.cmpRecTime }" pattern="yyyy年MM月dd日"/>发布${myIntrestCompany.cmpRecTitle}岗位的招聘信息，<a href="company/cmprs/findById/${myIntrestCompany.id }/0">快去看看吧</a>。</li>
+						<li>${myIntrestCompany.companyName }于<fmt:formatDate value="${myIntrestCompany.cmpRecTime }" pattern="yyyy年MM月dd日"/>发布${myIntrestCompany.cmpRecTitle}岗位的招聘信息，<a href="javascript:ajaxPage('redirect:company/cmprs/find_recruit_detail/${myIntrestCompany.id }/0')">快去看看吧</a>。</li>
 					</c:forEach>
 					</c:if>
 				</ul>
@@ -97,10 +97,10 @@
 			<c:if test="${personal_offer.size()==0 }">
 				<li>暂无消息</li>
 			</c:if>
-			<c:forEach items="${personal_offer}" var="myOffer">
+			<c:forEach items="${personal_offers_list}" var="myOffer">
 				<li>
-					收到@<a href="personal/common/gotoCompanyById?id=${myOffer.companyId}">${myOffer.companyName }</a>的职位邀请
-					<a href="#">${myOffer.offerJob }</a>
+					收到@<a href="personal/common/gotoCompanyById?id=${myOffer.companyId}">${myOffer.companySimpleName }</a>的职位邀请
+					<a href="#">${myOffer.cmpRecTitle }</a>
 					快去看看吧！
 				</li>
 			</c:forEach>
@@ -121,7 +121,7 @@
 					</c:if>
 					<c:forEach items="${articleByFollows}" var="abf">
 						<li>
-							@<a href="javascript:userMoreInfo(${abf.usersId })"  title="点击查看该用户更多信息">${abf.userName}</a>于<time><fmt:formatDate pattern="M月d日 EEEE H时m分" value="${abf.articleTime }"/></time>发表了&lt;&lt;<a href="javascript:ajaxPage('redirect:common/article/findArticleById/${abf.articleId}')">${abf.articleTitle}</a>&gt;&gt;
+							@<a href="javascript:userMoreInfo(${abf.usersId })"  title="点击查看该用户更多信息">${abf.userName}</a>于<time><fmt:formatDate pattern="M月d日 EEEE H时m分" value="${abf.articleTime }"/></time>发表了&lt;&lt;<a href="javascript:ajaxPage('redirect:common/article/findArticleById/${abf.articleId}/2')">${abf.articleTitle}</a>&gt;&gt;
 						</li>
 					</c:forEach>
 					</ul>
@@ -145,7 +145,7 @@
 					<blockquote>他说：“${articleByComment.commentContent }”</blockquote>
 					</c:if>
 					<c:if test="${user.id== articleByComment.cid}">
-					我于<time><fmt:formatDate pattern="M月d日 EEEE H时m分" value="${articleByComment.commentArticleTime }"/></time>评论了自己的文章&lt;&lt;<a href="javascript:ajaxPage('redirect:common/article/findArticleById/${articleByComment.artid}')">${articleByComment.articleTitle }</a>&gt;&gt;
+					我于<time><fmt:formatDate pattern="M月d日 EEEE H时m分" value="${articleByComment.commentArticleTime }"/></time>评论了自己的文章&lt;&lt;<a href="javascript:ajaxPage('redirect:common/article/findArticleById/${articleByComment.artid}/2')">${articleByComment.articleTitle }</a>&gt;&gt;
 					<blockquote>我说：“${articleByComment.commentContent }”</blockquote>
 					</c:if>
 				</li>

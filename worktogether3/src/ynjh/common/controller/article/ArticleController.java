@@ -78,9 +78,10 @@ public class ArticleController {
 	 * @param id 文章ID         
 	 * @return 跳转文章内容显示页面common/article/common_detail_article_index
 	 */
-	@RequestMapping(value = "/findArticleById/{articleId}", method = RequestMethod.GET)
-	public ModelAndView findArticleById(@PathVariable Integer articleId,HttpSession session) {
+	@RequestMapping(value = "/findArticleById/{articleId}/{position}", method = RequestMethod.GET)
+	public ModelAndView findArticleById(@PathVariable Integer articleId,@PathVariable Integer position,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		String[] path={"","common/article/common_detail_article_index_notlogin","common/article/common_detail_article_index"};
 		//牟勇：增加点击计数
 		articleService.updateReadNum(articleId);
 		//牟勇：查询文章
@@ -100,7 +101,7 @@ public class ArticleController {
 		List<CommentArticle> commentArticles = commentArticleService.findCommentByArticleId(articleId);
 		mv.addObject("article", article);
 		mv.addObject("commentArticles", commentArticles);
-		mv.setViewName("common/article/common_detail_article_index");
+		mv.setViewName(path[position]);
 		return mv;
 	}
 

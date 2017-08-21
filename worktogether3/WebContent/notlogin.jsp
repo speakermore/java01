@@ -23,7 +23,7 @@
 </head>
 <body>
 	<%@include file="WEB-INF/pages/nav.jsp" %>
-	<p style="text-align: center;"><img src="img/notlog_error.png" /></p>
+	<p style="text-align: center;"><img src="img/watchthis.png" width="200" height="50" /></p>
 	<h1><span  class="alert alert-warning">${errorInfo }</span></h1>
 </body>
 </html>

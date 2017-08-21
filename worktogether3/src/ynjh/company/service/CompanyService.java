@@ -71,4 +71,11 @@ public interface CompanyService {
 	 * @return 大于0表示成功，否则表示失败
 	 */
 	public Integer updateAdminCharging(Integer money,Integer companyId,Integer adminId);
+	/**
+	 * 牟勇：推荐企业
+	 * 根据文章总数降序，点赞数求和降序进行排列
+	 * 限制返回前5个企业
+	 * @return 返回Company实体集合。
+	 */
+	public List<Company> findRecommentCompany();
 }

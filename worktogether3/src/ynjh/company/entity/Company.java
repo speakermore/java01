@@ -1,6 +1,8 @@
 package ynjh.company.entity;
 
 
+import java.util.List;
+
 import ynjh.common.entity.MyUser;
 import ynjh.common.util.MD5Util;
 
@@ -23,7 +25,7 @@ public class Company extends MyUser {
 	private Integer companyIsRecruit;
 	//牟勇：企业是否在发布众筹（0结束招聘，1开始招聘）
 	private Integer userIsCrowdFund;
-	
+	private List<CompanyRecruit> reCruits;
 	
 	public Company(){
 		
@@ -63,7 +65,13 @@ public class Company extends MyUser {
 	public void setCompanyIsRecruit(Integer companyIsRecruit) {
 		this.companyIsRecruit = companyIsRecruit;
 	}
-
+	
+	public List<CompanyRecruit> getReCruits() {
+		return reCruits;
+	}
+	public void setReCruits(List<CompanyRecruit> reCruits) {
+		this.reCruits = reCruits;
+	}
 	public Integer getUserIsCrowdFund() {
 		return userIsCrowdFund;
 	}

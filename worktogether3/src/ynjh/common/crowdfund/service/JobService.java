@@ -9,13 +9,19 @@ import ynjh.common.crowdfund.entity.Job;
  */
 public interface JobService {
 	//添加岗位信息
-	int addJob(Job job);
+	public int addJob(Job job);
 	//修改岗位信息
-	int updateJob(Job job);
+	public int updateJob(Job job);
 	//删除岗位信息
-	int deleteJob(Integer id);
+	public int deleteJob(Integer id);
 	//查询一级岗位信息
-	List<Job> findJob1();
+	public List<Job> findJob1();
 	//根据一级岗位信息查询二级岗位
-	List<Job> findJob2(Integer jobParentId);
+	public List<Job> findJob2(Integer jobParentId);
+	/**
+	 * 牟勇：用于首页左侧的“职位分类”查询<br />
+	 * 每一个一级职位均包含所有的二级职位集合
+	 * @return 符合要求的Job实体集合
+	 */
+	public List<Job> findJob1IncludeJob2();
 }

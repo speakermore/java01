@@ -71,4 +71,9 @@ public interface CompanyMapper {
 	 * @return 企业用户的余额
 	 */
 	public Integer findCompanyMoneyById(@Param("companyId")Integer companyId);
+	/**
+	 * 牟勇：根据文章数与点赞数排序
+	 * @return
+	 */
+	public List<Company> find5CompanyAndRecruitGroupByArticleNumberAndLikeNumber();
 }

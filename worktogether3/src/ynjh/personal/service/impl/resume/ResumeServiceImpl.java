@@ -3,6 +3,8 @@ package ynjh.personal.service.impl.resume;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import ynjh.company.dao.companyResume.CompanyResumeMapper;
 import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
 import ynjh.personal.dao.resume.ResumeMapper;
@@ -24,6 +26,8 @@ import ynjh.personal.service.ResumeService;
 public class ResumeServiceImpl implements ResumeService {
 	@Resource
 	private ResumeMapper resumeMapper;
+	@Resource
+	private CompanyResumeMapper companyResumeMapper;
 
 	/**
 	 * 添加简历基本信息
@@ -50,32 +54,15 @@ public class ResumeServiceImpl implements ResumeService {
 	}
 
 	/**
-	 * 查询用户未删除的简历信息
+	 * 查询用户简历信息
 	 * 
 	 * @return List<Resume> 返回简历列表信息
-	 * @param page
-	 *            当前页码
 	 * @param userId
 	 *            用户id
 	 */
 	@Override
-	public List<Resume> findResumeUserId(Integer page, Integer userId) {
-		//牟勇：如果page为-1，则不进行分页查询
-		if(page==-1){
-			return resumeMapper.findResumeByUserId(null, userId);
-		}
-		if (page == null) {
-			page = 1;
-		}
-		if (page < 1) {
-			page = 1;
-		}
-		int maxPage = getMaxResumeById(userId);
-
-		if (page > maxPage) {
-			page = maxPage;
-		}
-		return resumeMapper.findResumeByUserId((page - 1) * 5, userId);
+	public List<Resume> findResumeByUserId(Integer userId) {
+		return resumeMapper.findResumeByUserId(userId);
 	}
 
 	/**
@@ -452,7 +439,7 @@ public class ResumeServiceImpl implements ResumeService {
 	 */
 	@Override
 	public Integer sendResumeToCompany(CompanyResume companyresume) {
-		return resumeMapper.sendResumeToCompany(companyresume);
+		return companyResumeMapper.addCompanyResume(companyresume);
 	}
 
 	@Override

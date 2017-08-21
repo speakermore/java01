@@ -5,7 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- namespace指定我们后面需要使用的接口的完全限定名 -->
 <mapper namespace="ynjh.company.dao.company.CompanyMapper">
-
+	<!-- 牟勇：为完成推荐企业而增加的映射 -->
+	<resultMap type="Company" id="CompanyMap">
+		<id property="id" column="id"></id>
+		<result property="companyLogo" column="companyLogo"/>
+		<result property="companyLoginId" column="companyLoginId"/>
+		<collection property="reCruits" column="id" select="getRecruits"></collection>
+	</resultMap>
+	
 	<!--
 		insert/update/delect标签没有resultType属性，返回值都是int  
 		OGNL表达式中，如果参数传入的是基本类型，则直接使用参数名
@@ -77,5 +84,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 牟勇：查询指定企业的余额 -->
 	<select id="findCompanyMoneyById" parameterType="Integer" resultType="Integer">
 		select companyMoney from company where id=#{companyId}
+	</select>
+	<select id="find5CompanyAndRecruitGroupByArticleNumberAndLikeNumber" resultMap="CompanyMap">
+		select c.id,max(c.companyLogo) companyLogo from company c,article a 
+		where c.id=a.usersId
+		group by c.id
+		order by count(a.id) desc,sum(a.articleLikeNum) desc
+		limit 0,5
+	</select>
+	<select id="getRecruits" resultType="CompanyRecruit">
+		select * from companyrecruit where companyId=#{id}
 	</select>
 </mapper>

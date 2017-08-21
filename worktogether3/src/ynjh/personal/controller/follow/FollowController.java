@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import ynjh.common.entity.MyUser;
 import ynjh.personal.entity.Follow;
-import ynjh.personal.entity.User;
 import ynjh.personal.service.FollowService;
 /**
  * @author 胡林飞
@@ -36,12 +35,15 @@ public class FollowController {
 	@ResponseBody
 	public Object addFollow(@PathVariable Integer byFollowId,HttpSession session){
 		Follow follow=new Follow();
+		HashMap<String, String> map=new HashMap<String, String>();
 		MyUser user=(MyUser)session.getAttribute("user");
 		//判断关注者是个人还是企业(大于1234567890是个人)
 		if(user.getId()>=1234567890){
 			follow.setFollowType(2);
+			map.put("href", "personal/common/initIndex?userId="+user.getId());
 		}else{
 			follow.setFollowType(1);
+			map.put("href", "company/company/findById/"+user.getId());
 		}
 		//判断被关注者是个人还是企业(大于1234567890是个人)
 		if(byFollowId>=1234567890){
@@ -55,38 +57,13 @@ public class FollowController {
 		follow.setFollowDate(new Timestamp(System.currentTimeMillis()));
 		
 		int result=followService.addUserFollow(follow);
-		HashMap<String, String> map=new HashMap<String, String>();
+		
 		if(result>0) {
 			map.put("info", "添加关注成功！");
 		}else{
 			map.put("info", "添加关注失败！");
 		}
 		return JSON.toJSON(map);
-	}
-	/**
-	 * 添加关注（企业）牟勇：这部分代码似乎可以删除了
-	 * @param follow 关注对象
-	 * @param session
-	 * @return 提示关注成功或失败
-	 */
-	@RequestMapping("/addCompanyFollow")
-	@ResponseBody
-	public HashMap<String, String> addCompanyFollow(Integer byFollowId,HttpSession session){
-		User user=(User) session.getAttribute("user");
-		Follow follow=new Follow();
-		follow.setFollowId(user.getId());
-		follow.setByFollowId(byFollowId);
-		follow.setFollowDate(new Timestamp(System.currentTimeMillis()));
-		follow.setFollowStartType(1);
-		follow.setFollowType(2);
-		int result=followService.addUserFollow(follow);
-		HashMap<String, String> map=new HashMap<String, String>();
-		if(result>0) {
-			map.put("operatorInfo", "添加关注成功！");
-		}else{
-			map.put("operatorInfo", "添加关注失败！");
-		}
-		return map;
 	}
 	
 	/**
@@ -97,14 +74,18 @@ public class FollowController {
 	@RequestMapping("/cancelFollow/{byFollowId}")
 	@ResponseBody
 	public Object cancelFollow(@PathVariable Integer byFollowId,HttpSession session){
-		MyUser user=(User) session.getAttribute("user");
+		MyUser user=(MyUser) session.getAttribute("user");
 		//取消关注
 		int result=followService.cancelFollow(byFollowId,user.getId());
-		//List<Follow> UserFollows = followService.selectUserFollow(user.getId());
 		HashMap<String, Object> map=new HashMap<String, Object>();
+		//判断取消关注的用户是哪种类型
+		if(user.getId()>=1234567890){
+			map.put("href", "personal/common/initIndex?userId="+user.getId());
+		}else{
+			map.put("href", "company/company/findById/"+user.getId());
+		}
 		if (result > 0) {
 			map.put("info", "取消关注成功！");
-			//map.put("UserFollows", UserFollows);
 		} else {
 			map.put("info", "取消关注失败！");
 		}

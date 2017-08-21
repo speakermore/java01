@@ -22,87 +22,37 @@
 				<div class="work-together-title">
 					<span>职位分类</span>
 				</div>
+				<c:forEach items="${myJobs }" var="myJob1">
 				<div class="panel">
 					<div class="panel-title">
-						<h4>软件开发类</h4>
+						<h4>${myJob1.jobName }</h4>
 					</div>
 					<ul class="panel-body list-inline">
-						<li><a href="#">技术总监</a></li>
-						<li><a href="#">项目经理</a></li>
-						<li><a href="#">工程师</a></li>
-						<li><a href="#">程序员</a></li>
+						<c:forEach items="${myJob1.subJobs }" var="myJob2">
+						<li><a href="#">${myJob2.jobName }</a></li>
+						</c:forEach>
 					</ul>
 				</div>
-				<div class="panel">
-					<div class="panel-title">
-						<h4>软件测试类</h4>
-					</div>
-					<ul class="panel-body list-inline">
-						<li><a href="#">测试工程师</a></li>
-						<li><a href="#">测试员</a></li>
-					</ul>
-				</div>
-				<div class="panel">
-					<div class="panel-title">
-						<h4>页面设计类</h4>
-					</div>
-					<ul class="panel-body list-inline">
-						<li><a href="#">美工</a></li>
-						<li><a href="#">UI设计师</a></li>
-						<li><a href="#">Web前端工程师</a></li>
-					</ul>
-				</div>
+				</c:forEach>
 				<!--职位分类结束-->
 				<!--明星企业展示-->
 				<div class="work-together-title">
-					<span>明星企业</span>
+					<span>推荐企业</span>
 				</div>
+				<c:forEach items="${recommendCompanys}" var="cmp">
 				<div class="panel">
 					<div class="panel-title text-right">
-						<div class="work-together-company-img"><img width="160" height="40" src="img/zgyt_logo.png" /></div>
+						<div class="work-together-company-img"><img width="160" height="40" src="company/img/${cmp.companyLoginId }/${cmp.companyLogo}" /></div>
 						<a class="work-together-more" href="">更多>></a>
 					</div>
 					<ul type="square" class="panel-body list-unstyled" style="clear:both">
+						<c:forEach items="${cmp.reCruits }" var="recruit">
 						<li class="text-right"><a href="">
-							<span style="float:left;">Java软件工程师</span>
-							<span>昆明</span>
+							<span style="float:left;">${recruit.cmpRecTitle}</span>
+							<span>${recruit.cmpRecCity }</span>
 						</a></li>
-						<li class="text-right"><a href="">
-							<span style="float:left;">UI设计师/美工</span>
-							<span>昆明</span>
-						</a></li>
+						</c:forEach>
 					</ul>
 				</div>
-				<div class="panel">
-					<div class="panel-title text-right">
-						<div class="work-together-company-img"><img width="160" height="40" src="img/jdy_logo.png" /></div>
-						<a class="work-together-more" href="">更多>></a>
-					</div>
-					<ul type="square" class="panel-body list-unstyled" style="clear:both">
-						<li class="text-right"><a href="">
-							<span style="float:left;">Java技术总监/Java前端开发</span>
-							<span>昆明</span>
-						</a></li>
-						<li class="text-right"><a href="">
-							<span style="float:left;">测试项目经理/测试工程师</span>
-							<span>昆明</span>
-						</a></li>
-					</ul>
-				</div>
-				<div class="panel">
-					<div class="panel-title text-right">
-						<div class="work-together-company-img"><img width="160" height="40" src="img/nskj_logo.png" /></div>
-						<a class="work-together-more" href="">更多>></a>
-					</div>
-					<ul type="square" class="panel-body list-unstyled" style="clear:both">
-						<li class="text-right"><a href="">
-							<span style="float:left;">销售总监/销售经理/销售助理</span>
-							<span>昆明</span>
-						</a></li>
-						<li class="text-right"><a href="">
-							<span style="float:left;">大客户经理/培训工程师/培训师</span>
-							<span>昆明</span>
-						</a></li>
-					</ul>
-				</div>
+				</c:forEach>
 				<!--明星企业展示结束-->

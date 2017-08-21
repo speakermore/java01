@@ -3,8 +3,6 @@ package ynjh.personal.dao.resume;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
-import ynjh.company.entity.CompanyResume;
 import ynjh.company.entity.Offer;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.ForeignKeyEducation;
@@ -27,12 +25,11 @@ public interface ResumeMapper {
 	public Integer updateResume(Resume resume);	
 	/**
 	 * 牟勇：根据userId查询简历(多个)
-	 * 简历必须是审核通过的
-	 * @param page 页码，如果为null，则不进行分页查询
+	 * 简历必须是审核通过的，不分页
 	 * @param userId
 	 * @return 
 	 */
-	public List<Resume> findResumeByUserId(@Param("page")Integer page,@Param("userId")Integer userId);
+	public List<Resume> findResumeByUserId(@Param("userId")Integer userId);
 	/**
 	 * 根据id查询简历（单个）
 	 */
@@ -159,11 +156,6 @@ public interface ResumeMapper {
 	 * 更换头像
 	 */
 	public Integer changeResumeHeadImg(@Param("resumeId")Integer resumeId,@Param("resumeHeadImg")String resumeHeadImg);
-	
-	/**
-	 * 投递简历
-	 */
-	public Integer sendResumeToCompany(CompanyResume companyresume);
 	
 	/**
 	 * 牟勇：我投递过的简历，时间在6个月以内,必须通过审核

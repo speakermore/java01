@@ -57,9 +57,6 @@ var ajaxStatus=function(btn,column,value,baseMoney,emId,userId){
 			success:function(data){
 				if(data.success){
 					$(btn).html(data.status);
-					//更换触发函数的值,不知道什么原因，不能成功
-//					$(btn).unbind('click');//先移除原先的click事件
-//					$(btn).bind('click',function(){ajaxStatus(btn,column,value==1?0:1,baseMoney,emId);});
 					$(btn).removeClass(data.btnRemoveClass);
 					$(btn).addClass(data.btnAddClass);
 					//更新用户头像下方的状态信息
@@ -98,14 +95,14 @@ var ajaxPage = function(page) {
  * byFollowId 被关注者的主键id
  * userId 登录用户的主键id
  */
-var addfollow=function(byFollowId,userId){
+var addfollow=function(byFollowId){
 	$.ajax({
 		url:'personal/follow/addFollow/'+byFollowId,
 		type:'GET',
 		dataType:'json',
 		success:function(data){
 			alert(data.info);
-			location.href='personal/common/initIndex?userId='+userId;
+			location.href=data.href;
 		}
 	});
 };
@@ -115,14 +112,14 @@ var addfollow=function(byFollowId,userId){
  * byFollowId 被关注者的主键id
  * userId 登录用户的主键id
  */
-var cancelfollow=function(byFollowId,userId){
+var cancelfollow=function(byFollowId){
 	$.ajax({
 		url:'personal/follow/cancelFollow/'+byFollowId,
 		type:'GET',
 		dataType:'json',
 		success:function(data){
 			alert(data.info);
-			location.href='personal/common/initIndex?userId='+userId;
+			location.href=data.href;
 		}
 	});
 }

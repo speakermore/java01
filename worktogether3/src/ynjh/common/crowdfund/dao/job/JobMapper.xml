@@ -4,6 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ynjh.common.crowdfund.dao.job.JobMapper">
+<!-- 牟勇：为了完成首页上的分级职位分类的循环显示而添加的映射 -->
+	<resultMap type="Job" id="JobMap">
+		<id property="id" column="id"/>
+		<result property="jobName" column="jobName"/>
+		<collection property="subJobs" column="id" select="findSubJob">
+		</collection>
+	</resultMap>
 <!-- 何爽 岗位操作 -->
 <!-- 增加岗位 -->
 <insert id="addJob" parameterType="Job">
@@ -35,5 +42,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 根据一级岗位查二级岗位 -->
 <select id="findJob2" resultType="Job">
 		SELECT * FROM job WHERE jobParentId=#{jobParentId}
+</select>
+<select id="findSubJob" parameterType="int" resultMap="JobMap" >
+	select * from job where jobParentId=#{id}
+</select>
+<!-- 牟勇：查询所有的岗位，每个1级岗位包含所有二级岗位的集合 -->
+<select id="findAllJobIncludeJob2" resultMap="JobMap">
+	SELECT * FROM job WHERE jobParentId IS NULL
 </select>
 </mapper>

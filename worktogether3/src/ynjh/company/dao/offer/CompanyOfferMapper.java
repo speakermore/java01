@@ -1,6 +1,7 @@
 package ynjh.company.dao.offer;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -24,11 +25,13 @@ public interface CompanyOfferMapper {
 	/**
 	 * 牟勇：查找当前用户收到的所有offer
 	 * 收到的offer必须是已经通过审核的
+	 * 查询的结果包括公司简称，面试时间，Offer内容，岗位
+	 * 对应的字段名：c.companySimpleName,o.offerInvitationTime,o.offerContent,crc.cmpRecTitle
 	 * offer必须是6个月内发出的
 	 * @param userId 用户的id
 	 * @return 所有收到的offer
 	 */
-	public List<Offer> findUserOffers(@Param("userId")Integer userId);
+	public List<Map<String, Object>> findUserOffers(@Param("userId")Integer userId);
 	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
 }
