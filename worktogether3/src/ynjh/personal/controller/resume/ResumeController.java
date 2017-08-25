@@ -114,9 +114,7 @@ public class ResumeController {
 			}
 			int result = rService.addResume(resume);
 			if (result > 0) {
-				mv.addObject("resume", resume);
-				mv.addObject("operatorInfo", "创建简历成功");
-				mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
+				mv.setViewName("redirect:/personal/common/initIndex?userId=" + user.getId());
 			} else {
 				mv.addObject("operatorInfo", "创建简历失败");
 				mv.setViewName("personal/resume/personal_createresume");
@@ -283,12 +281,10 @@ public class ResumeController {
 		User user = (User) session.getAttribute("user");
 		if (result > 0) {
 			mv.addObject("operatorInfo", "删除简历成功！");
-			// mv.addObject("toPage","personal/user/personal_index");
 			mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
 		} else {
 			mv.addObject("operatorInfo", "删除简历失败！");
 			mv.setViewName("personal/user/personal_index");
-			// mv.addObject("toPage","personal/user/personal_index");
 		}
 		return mv;
 	}
@@ -368,7 +364,7 @@ public class ResumeController {
 		int result = rService.addEducation(education);
 		if (result > 0) {
 			Resume resume = rService.findResumeById(education.getResumeId());
-			List<Education> edus = rService.findEducation(resume.getId());
+			List<Education> edus = rService.findEducations(resume.getId());
 			session.setAttribute("edus", edus);
 			mv.setViewName(createEducationpage);
 		} else {
@@ -396,7 +392,7 @@ public class ResumeController {
 		int result = rService.addWork(work);
 		if (result > 0) {
 			Resume resume = rService.findResumeById(work.getResumeId());
-			List<Work> works = rService.findWork(resume.getId());
+			List<Work> works = rService.findWorks(resume.getId());
 			session.setAttribute("works", works);
 			session.setAttribute("resume", resume);
 			mv.setViewName(createWorkpage);
@@ -425,7 +421,7 @@ public class ResumeController {
 		int result = rService.addProject(project);
 		if (result > 0) {
 			Resume resume = rService.findResumeById(project.getResumeId());
-			List<Project> projs = rService.findProject(resume.getId());
+			List<Project> projs = rService.findProjects(resume.getId());
 			session.setAttribute("projs", projs);
 			mv.addObject("resume", resume);
 			mv.setViewName(createProjectpage);
@@ -445,7 +441,7 @@ public class ResumeController {
 	 */
 	@RequestMapping("/lookResumeEdus")
 	public String lookResumeEducation(Integer resumeId, HttpSession session) {
-		List<Education> edus = rService.findEducation(resumeId);
+		List<Education> edus = rService.findEducations(resumeId);
 		session.setAttribute("edus", edus);
 		return "personal/resume/personal_lookresume";
 
@@ -463,7 +459,7 @@ public class ResumeController {
 	 */
 	@RequestMapping("/lookResumeWork")
 	public String lookResumeWork(Integer resumeId, HttpSession session) {
-		List<Work> works = rService.findWork(resumeId);
+		List<Work> works = rService.findWorks(resumeId);
 		session.setAttribute("works", works);
 		return "personal/resume/personal_lookresume";
 	}
@@ -478,7 +474,7 @@ public class ResumeController {
 	 */
 	@RequestMapping("/lookResumeProjs")
 	public String lookResumeProject(Integer resumeId, HttpSession session) {
-		List<Project> projs = rService.findProject(resumeId);
+		List<Project> projs = rService.findProjects(resumeId);
 		session.setAttribute("projs", projs);
 		return "personal/resume/personal_lookresume";
 	}
@@ -498,7 +494,7 @@ public class ResumeController {
 		String callBackString="删除教育经历失败";
 		if (result > 0) {
 			Resume resume = (Resume) session.getAttribute("resume");
-			List<Education> edus = rService.findEducation(resume.getId());
+			List<Education> edus = rService.findEducations(resume.getId());
 			session.setAttribute("edus", edus);
 			callBackString="删除教育经历成功";
 		}
@@ -520,7 +516,7 @@ public class ResumeController {
 		int result = rService.deleteWork(id);
 		if (result > 0) {
 			Resume resume = (Resume) session.getAttribute("resume");
-			List<Work> works = rService.findWork(resume.getId());
+			List<Work> works = rService.findWorks(resume.getId());
 			session.setAttribute("works", works);
 			callBackString="删除工作经验成功";
 		}
@@ -543,7 +539,7 @@ public class ResumeController {
 		int result = rService.deleteProject(id);
 		if (result > 0) {
 			Resume resume = (Resume) session.getAttribute("resume");
-			List<Project> projs = rService.findProject(resume.getId());
+			List<Project> projs = rService.findProjects(resume.getId());
 			session.setAttribute("projs", projs);
 			callBackString="删除项目经验成功";
 		}
@@ -590,7 +586,7 @@ public class ResumeController {
 		User user = (User) session.getAttribute("user");
 		if (result > 0) {
 			mv.addObject("operatorInfo", "恢复成功！");
-			mv.setViewName("redirect:../common/initIndex?toPage=1&userId=" + user.getId());
+			mv.setViewName("redirect:../common/initIndex?userId=" + user.getId());
 		} else {
 			mv.addObject("operatorInfo", "恢复失败，请联系管理员！");
 			mv.setViewName("personal/user/personal_index");
@@ -730,11 +726,7 @@ public class ResumeController {
 		ModelAndView mv = new ModelAndView("company/info");
 		CompanyResume companyResume = new CompanyResume();
 		Resume oldResume = (Resume) session.getAttribute("resume");
-		//User oldUser = (User) session.getAttribute("user");
-		//companyResume.setCompanyId(companyId);
-		//companyResume.setCompanyResumeId(oldUser.getId());
 		companyResume.setResumeId(oldResume.getId());
-		//companyResume.setCompanyRecruitId(companyrecruitId);
 		companyResume.setCmprTime(new Timestamp(System.currentTimeMillis()));
 		int result = rService.sendResumeToCompany(companyResume);
 		if (result > 0) {
@@ -768,12 +760,8 @@ public class ResumeController {
 		int result = rService.updateEducation(education, id);
 		if (result > 0) {
 			// 获取教育
-			List<Education> edus = rService.findEducation(oldResume.getId());
-			if (edus.size() > 0) {
-				session.setAttribute("edus", edus);
-			} else {
-				session.setAttribute("edus", null);
-			}
+			List<Education> edus = rService.findEducations(oldResume.getId());
+			session.setAttribute("edus", edus);
 		}
 		return mv;
 	}
@@ -797,12 +785,8 @@ public class ResumeController {
 		work.setResumeType(1);//设置审核状态为未审核
 		int result=rService.updateWork(work, id);
 		if (result>=0) {
-			List<Work> works = rService.findWork(oldResume.getId());
-			if (works.size() > 0) {
-				session.setAttribute("works", works);
-			} else {
-				session.setAttribute("works", null);
-			}
+			List<Work> works = rService.findWorks(oldResume.getId());
+			session.setAttribute("works", works);
 		}
 		return "修改工作经验成功！";
 	}
@@ -828,7 +812,7 @@ public class ResumeController {
 		int result = rService.updateProject(project, id);
 		if (result > 0) {
 			// 获取项目
-			List<Project> projs = rService.findProject(oldResume.getId());
+			List<Project> projs = rService.findProjects(oldResume.getId());
 			if (projs.size() > 0) {
 				session.setAttribute("projs", projs);
 			} else {

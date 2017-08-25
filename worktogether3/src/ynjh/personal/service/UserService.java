@@ -1,6 +1,7 @@
 package ynjh.personal.service;
 
 import java.util.List;
+import java.util.Map;
 
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
@@ -24,7 +25,13 @@ public interface UserService {
 	// 添加用户（注册）
 	public Integer addUser(User user);
 
-	// 完善用户信息
+	// 
+	/**
+	 * 完善用户信息
+	 * 性别、email、出生日期、昵称
+	 * @param user 包含需要修改的信息的实体对象
+	 * @return 大于0表示修改成功，否则表示失败
+	 */
 	public Integer updateUserOther(User user);
 
 	// 实名认证
@@ -88,4 +95,10 @@ public interface UserService {
 	 * 匹配用户名是否重复
 	 */
 	public User verificationUserLoginId(String userLoginId);
+	/**
+	 * 牟勇：根据用户的文章总数与点赞总数降序排序，获得前10名用户的<br />
+	 * id，昵称（userName），文章总数（articleNumber），点赞总数（likeNum），被关注总数（byFollowNumber）
+	 * @return 排名前10的用户Map对象集合，一个用户的信息由一个Map组成
+	 */
+	public List<Map<String, Object>> recommendUsers();
 }

@@ -135,8 +135,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            简历id
 	 */
 	@Override
-	public List<Education> findEducation(Integer resumeId) {
-		return resumeMapper.findEducation(resumeId);
+	public List<Education> findEducations(Integer resumeId) {
+		return resumeMapper.findEducations(resumeId);
 	}
 
 	/**
@@ -183,8 +183,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            简历id
 	 */
 	@Override
-	public List<Work> findWork(Integer resumeId) {
-		return resumeMapper.findWork(resumeId);
+	public List<Work> findWorks(Integer resumeId) {
+		return resumeMapper.findWorks(resumeId);
 	}
 
 	/**
@@ -231,8 +231,8 @@ public class ResumeServiceImpl implements ResumeService {
 	 *            简历id
 	 */
 	@Override
-	public List<Project> findProject(Integer resumeId) {
-		return resumeMapper.findProject(resumeId);
+	public List<Project> findProjects(Integer resumeId) {
+		return resumeMapper.findProjects(resumeId);
 	}
 
 	/**

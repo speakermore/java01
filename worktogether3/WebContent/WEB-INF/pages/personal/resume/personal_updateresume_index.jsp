@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -471,7 +470,7 @@ var ajaxUploadHeadImg=function(){
 						stringLength : {
 							min : 0,
 							max : 50,
-							message : '标题不能超过50个字符'
+							message : '岗位不能超过50个字符'
 						},
 						regexp : {
 							regexp : (/[\u4e00-\u9fa5]/),

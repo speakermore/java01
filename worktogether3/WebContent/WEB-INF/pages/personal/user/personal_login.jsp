@@ -1,6 +1,5 @@
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -9,8 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>首页</title>
-<base
-	href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
+<base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/login.css" rel="stylesheet" />
@@ -240,7 +238,7 @@
 								message : '用户名不能为空'
 							},
 							regexp : {
-								regexp : '^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$',
+								regexp : '^((13[0-9])|(14[0-9])|(15([0-9]))|(18[0-9]))\\d{8}$',
 								message : '用户名应该是一个手机号码'
 							}/* ,
 							remote : {

@@ -85,12 +85,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findCompanyMoneyById" parameterType="Integer" resultType="Integer">
 		select companyMoney from company where id=#{companyId}
 	</select>
-	<select id="find5CompanyAndRecruitGroupByArticleNumberAndLikeNumber" resultMap="CompanyMap">
-		select c.id,max(c.companyLogo) companyLogo from company c,article a 
-		where c.id=a.usersId
-		group by c.id
-		order by count(a.id) desc,sum(a.articleLikeNum) desc
-		limit 0,5
+	<!-- 牟勇：根据企业发表文章总数，点击数降序，获得id,companySimpleName,文章总数，文章点赞之和，取前10 -->
+	<select id="find10CompanyAndRecruitGroupByArticleNumberAndLikeNumber" resultType="map">
+		select a.id,count(f.byFollowId) byFollowNumber,max(a.companySimpleName) companySimpleName,max(a.articleNumber) articleNumber,max(a.likeNum) likeNum,max(a.companyLogo) companyLogo,max(a.companyLoginId) companyLoginId 
+		from (select  c.id,max(c.companySimpleName) companySimpleName,count(a.id) articleNumber,sum(a.articleLikeNum) likeNum,max(c.companyLogo) companyLogo,max(c.companyLoginId) companyLoginId from company c,article a 
+				where c.id=a.usersId
+				group by c.id
+				limit 0,10) a left join follow f on a.id=f.byFollowId
+		group by a.id
+		order by a.articleNumber desc,a.likeNum desc
 	</select>
 	<select id="getRecruits" resultType="CompanyRecruit">
 		select * from companyrecruit where companyId=#{id}

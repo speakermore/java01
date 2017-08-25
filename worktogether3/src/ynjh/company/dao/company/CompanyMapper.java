@@ -1,6 +1,7 @@
 package ynjh.company.dao.company;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import ynjh.company.entity.Company;
@@ -75,5 +76,5 @@ public interface CompanyMapper {
 	 * 牟勇：根据文章数与点赞数排序
 	 * @return
 	 */
-	public List<Company> find5CompanyAndRecruitGroupByArticleNumberAndLikeNumber();
+	public List<Map<String, Object>> find10CompanyAndRecruitGroupByArticleNumberAndLikeNumber();
 }

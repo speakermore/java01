@@ -51,6 +51,7 @@ import ynjh.personal.entity.Project;
 import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.Work;
+import ynjh.personal.service.ResumeService;
 
 /**
  * admin功能Controller
@@ -69,6 +70,8 @@ public class AdminController {
 	private int lineCount = 7;
 	@Resource
 	private AdminService adminService;
+	@Resource
+	private ResumeService resumeService;
 
 	/**
 	 * 密码重置
@@ -1013,13 +1016,22 @@ public class AdminController {
 	@RequestMapping("/findAuditResumeById")
 	public ModelAndView findAuditResumeById(int id) {
 		Resume resume = adminService.findAuditResumeById(id);
-		User user = new User();
+		List<Work> works=null;
+		List<Project> projects=null;
+		List<Education> edus=null;
+		User user = null;
 		if (resume != null) {
 			user = adminService.findUserById(resume.getUserId());
+			works=resumeService.findWorks(resume.getId());
+			projects=resumeService.findProjects(resume.getId());
+			edus=resumeService.findEducations(resume.getId());
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("resumeOwner", user);
 		mv.addObject("resume", resume);
+		mv.addObject("works",works);
+		mv.addObject("projects",projects);
+		mv.addObject("edus",edus);
 		mv.setViewName("admin/auditing/auditingResume");
 		return mv;
 	}

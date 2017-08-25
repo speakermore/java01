@@ -104,7 +104,8 @@ public class MyCommonController {
 		//职位分类
 		List<Job> myJobs=jobService.findJob1IncludeJob2();
 		//推荐企业
-		List<Company> recommendCompanys=companyService.findRecommentCompany();
+		List<Map<String, Object>> recommendCompanys=companyService.findRecommentCompany();
+		List<Map<String, Object>> recommendUsers=userService.recommendUsers();
 		session.setAttribute("countMangeResume", countMangeResume);
 		session.setAttribute("manageResume", manageResume);
 		session.setAttribute("countMasterResume", countMasterResume);
@@ -124,6 +125,7 @@ public class MyCommonController {
 		session.setAttribute("newses10", newses10);
 		session.setAttribute("myJobs", myJobs);
 		session.setAttribute("recommendCompanys", recommendCompanys);
+		session.setAttribute("recommendUsers", recommendUsers);
 		return "index";
 	}
 	

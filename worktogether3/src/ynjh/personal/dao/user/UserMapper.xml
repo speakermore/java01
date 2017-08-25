@@ -16,13 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateUserProperty">
 		update `user` set ${column}=#{value} where id=#{id}
 	</update>
-    <!-- 完善用户信息（修改user表）：头像、性别、email、出生日期、昵称 -->
+    <!-- 完善用户信息（修改user表）：性别、email、出生日期、昵称 -->
     <update id="updateUserOther" parameterType="Integer">
-        update `user` set userHeadImgPath=#{userHeadImgPath},userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where id=#{id}
+        update `user` set userGender=#{userGender},userEmail=#{userEmail},userBirthday=#{userBirthday},userName=#{userName} where id=#{id}
     </update>
     <!-- 实名认证（修改user表）：真实姓名、身份证号码、身份证图片(正反面) -->
     <update id="updateUserIDCord" parameterType="User">
-        update `user` set userRealName=#{userRealName},userIDCard=#{userIDCard},userIDImgFace=#{userIDImgFace},userIDImgCon=#{userIDImgCon} where userLoginId=#{userLoginId}
+        update `user` set userRealName=#{userRealName},userIDCard=#{userIDCard},userIDImgFace=#{userIDImgFace},userIDImgCon=#{userIDImgCon} where id=#{id}
     </update>
     <!-- 修改用户信息：头像、性别、email、出生日期、昵称 -->
 	<update id="updateUser" parameterType="User">
@@ -41,16 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateMoney" >
 	    update `user` set userMoney=#{userMoney} where id=#{id}
 	</update>
-    <!-- 登录 :邮箱或手机号 -->
+    <!-- 登录 :邮箱或手机号。牟勇：用户状态不能是禁用状态 -->
     <select id="findByUserIdAndUserPassword"  resultType="User">
-        select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword}
+        select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword} and userStatus!=3
     </select>
 	<!-- 根据id查询用户（显示用户信息） -->
 	<select id="findUserById" resultType="User" parameterType="Integer">
 	    select * from `user` where id=#{id}
-	</select>
-	
-	<select id="Search" resultType="String">	    
 	</select>
 	
 	<!-- 人才信息列表(牟勇：不包含登录人自己) -->
@@ -91,5 +88,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 牟勇：根据用户id查询用户的余额 -->
 	<select id="findUserMoneyById" parameterType="Integer" resultType="Integer">
 		select userMoney from `user` where id=#{id}
+	</select>
+	<!-- 牟勇：按文章总数，点赞总数降序排序，取前10，加被关注数 -->
+	<select id="findUser10ByArticleCountAndLikeNum" resultType="map">
+		select a.id,count(byFollowId) byFollowNumber,max(a.userHeadImgPath) userHeadImgPath,max(a.userLoginId) userLoginId,max(a.userName) userName,max(a.articleNumber) articleNumber,max(a.articleLikeNum) likeNum 
+		from (select u.id,max(u.userHeadImgPath) userHeadImgPath,max(u.userLoginId) userLoginId,max(u.userName) userName,count(a.id) articleNumber,sum(a.articleLikeNum) articleLikeNum 
+				from user u,article a 
+				where u.id=a.usersId group by u.id 
+				limit 0,10) a left join follow f on a.id=f.byFollowId 
+		group by a.id
+		order by a.articleNumber desc,a.articleLikeNum desc
 	</select>
 </mapper>

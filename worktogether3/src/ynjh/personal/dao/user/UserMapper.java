@@ -1,6 +1,7 @@
 package ynjh.personal.dao.user;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +23,7 @@ public interface UserMapper {
 	public Integer addUser(User user);
 
 	/**
-	 * 完善用户信息
+	 * 完善用户信息：性别、email、出生日期、昵称
 	 */
 	public Integer updateUserOther(User user);
 
@@ -122,4 +123,10 @@ public interface UserMapper {
 	 * @return 用户余额
 	 */
 	public Integer findUserMoneyById(Integer id);
+	/**
+	 * 牟勇：根据用户的文章总数与点赞总数降序排序，获得前10名用户的<br />
+	 * id，昵称（userName），文章总数（articleNumber），点赞总数（articleLikeNum),关注总数<br />
+	 * @return 排名前10的用户Map对象集合，一个用户的信息由一个Map组成
+	 */
+	public List<Map<String, Object>> findUser10ByArticleCountAndLikeNum();
 }

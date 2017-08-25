@@ -97,15 +97,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 	</update>
 	<!-- 查看教育经历 -->
-	<select id="findEducation" parameterType="Integer" resultType="Education">
+	<select id="findEducations" parameterType="Integer" resultType="Education">
 		select * from education where resumeId=#{resumeId} and  resumeType!=4
 	</select>
 	<!-- 查看工作经历 -->
-	<select id="findWork" parameterType="Integer" resultType="Work">
+	<select id="findWorks" parameterType="Integer" resultType="Work">
 		select * from work where resumeId=#{resumeId} and resumeType!=4
 	</select>
 	<!-- 查看项目经历 -->
-	<select id="findProject" parameterType="Integer" resultType="Project">
+	<select id="findProjects" parameterType="Integer" resultType="Project">
 		select * from project where resumeId=#{resumeId} and resumeType!=4
 	</select>
 
@@ -208,8 +208,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by cmprTime desc
 	</select>
 	<!-- 我收到的面试邀请 -->
-	<select id="findMyReceiveOffer" resultType="Offer"
-		parameterType="Integer">
+	<select id="findMyReceiveOffer" resultType="Offer" parameterType="Integer">
 		select * from offer o,company c where o.companyId=c.id
 		and o.userId=#{userId}
 	</select>

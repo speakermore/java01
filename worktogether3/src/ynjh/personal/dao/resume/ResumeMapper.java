@@ -65,7 +65,7 @@ public interface ResumeMapper {
 	/**
 	 * 教育记录查询
 	 */
-	public List<Education> findEducation(Integer resumeId);
+	public List<Education> findEducations(Integer resumeId);
 	/**
 	 * 教育记录删除
 	 */
@@ -82,7 +82,7 @@ public interface ResumeMapper {
 	/**
 	 * 工作记录查询
 	 */
-	public List<Work> findWork(Integer resumeId);
+	public List<Work> findWorks(Integer resumeId);
 	/**
 	 * 工作记录删除
 	 */
@@ -98,7 +98,7 @@ public interface ResumeMapper {
 	/**
 	 * 项目记录查询
 	 */
-	public List<Project> findProject(Integer resumeId);
+	public List<Project> findProjects(Integer resumeId);
 	/**
 	 * 项目记录删除
 	 */

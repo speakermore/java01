@@ -48,7 +48,7 @@ public interface ResumeService {
 	//教育记录修改
 	public Integer updateEducation(Education education,Integer id);
 	// 教育记录查询
-	public List<Education> findEducation(Integer resumeId);
+	public List<Education> findEducations(Integer resumeId);
 	// 教育记录删除
 	public Integer deleteEducation(Integer id);
 	//工作记录添加
@@ -56,7 +56,7 @@ public interface ResumeService {
 	// 工作记录修改
 	public Integer updateWork(Work work,Integer id);
 	// 工作记录查询
-	public List<Work> findWork(Integer resumeId);
+	public List<Work> findWorks(Integer resumeId);
 	// 工作记录删除
 	public Integer deleteWork(Integer id);
 	// 项目记录添加
@@ -64,7 +64,7 @@ public interface ResumeService {
 	// 项目记录修改
 	public Integer updateProject(Project project,Integer id);
 	// 项目记录查询
-	public List<Project> findProject(Integer resumeId);
+	public List<Project> findProjects(Integer resumeId);
 	// 项目记录删除
 	public Integer deleteProject(Integer id);
 	//////////////////////////////////////////

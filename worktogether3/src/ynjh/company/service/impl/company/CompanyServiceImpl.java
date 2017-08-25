@@ -2,6 +2,7 @@ package ynjh.company.service.impl.company;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -123,7 +124,7 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 
 	@Override
-	public List<Company> findRecommentCompany() {
-		return companyMapper.find5CompanyAndRecruitGroupByArticleNumberAndLikeNumber();
+	public List<Map<String, Object>> findRecommentCompany() {
+		return companyMapper.find10CompanyAndRecruitGroupByArticleNumberAndLikeNumber();
 	}
 }

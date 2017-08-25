@@ -10,6 +10,10 @@ import java.util.Map;
  */
 public class CommonStatus {
 	/**
+	 * 用户的状态样式：1：未认证，2：已认证，3：禁用
+	 */
+	public static final String[] USER_STATUS_STYLE={"","alert-success","alert-warning","alert-danger"};
+	/**
 	 * 0：企业基本信息激活，用于页面手风琴切换时，哪一栏设置active的标志
 	 */
 	public static final Integer EDIT_COMPANY_BASE_INFO=0;

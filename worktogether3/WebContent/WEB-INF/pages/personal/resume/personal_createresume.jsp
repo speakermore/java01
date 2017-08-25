@@ -16,8 +16,7 @@
 						<button type="button" class="close" data-dismiss="alert"
 							aria-hidden="true">×</button>
 						<h4>注意!</h4>
-						简历写完需要审核通过后才能投递. <a href="personal/user/gotoIndex"
-							class="alert-link">返回首页</a>
+						简历写完需要审核通过后才能投递. <a href="personal/user/gotoIndex" class="alert-link">返回首页</a>
 					</div>
 					<%@include file="/WEB-INF/pages/personal/resume/personal_createresume_index.jsp"%>
 			</div>

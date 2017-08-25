@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import ynjh.common.entity.MyUser;
 import ynjh.common.util.MD5Util;
+import ynjh.common.util.MyStringUtil;
 /**
  * 
  * @author 刘志浩
@@ -42,11 +43,11 @@ public class User extends MyUser{
 	// 用户等级
 	private Integer userLevel;
 	//是否应聘中，0.在职中，1.应聘中
-	private Integer userIsRecruit;
+	private Integer userIsRecruit=0;
 	//是否众筹中，0.未众筹，2.发布众筹中
-	private Integer userIsCrowdFund;
+	private Integer userIsCrowdFund=0;
 	//是否合伙创业中，0.未合伙创业，2.发布合伙创业中
-	private Integer userIsPartner;
+	private Integer userIsPartner=0;
 	public User() {
 	}
 
@@ -150,7 +151,21 @@ public class User extends MyUser{
 	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
 	}
-
+	/**
+	 * 牟勇：将真实姓名进行掩码处理
+	 * 如果是两个字的姓名，掩去名字
+	 * 如果是两个及以上的姓名，只留下第一个字和最后一个字
+	 * @return 进行了掩码处理之后的真实姓名
+	 */
+	public String getUserRealNameMasked(){
+		String masked="";
+		if (userRealName.length()==2) {
+			masked=MyStringUtil.replaceStart(userRealName, 1, 1);
+		}else{
+			masked=MyStringUtil.replaceStart(userRealName, 1, userRealName.length()-2);
+		}
+		return masked;
+	}
 	public String getUserRealName() {
 		return userRealName;
 	}
@@ -158,7 +173,9 @@ public class User extends MyUser{
 	public void setUserRealName(String userRealName) {
 		this.userRealName = userRealName;
 	}
-
+	public String getUserIDCardMasked(){
+		return MyStringUtil.replaceStart(userIDCard, 2, userIDCard.length()-2);
+	}
 	public String getUserIDCard() {
 		return userIDCard;
 	}

@@ -10,15 +10,15 @@
 			 action="personal/user/updateUser"
 			method="post" id="updateUserForm">
 			<div class="form-group">
-				<label for="userName" class="col-md-3 control-label">昵称：</label>
-				<div class="col-md-8">
+				<label for="userName" class="col-sm-3 control-label">昵称：</label>
+				<div class="col-sm-8">
 					<input class="form-control" name="userName" id="userName"
 						value="${user.userName }" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="time" class="col-md-3 control-label">出生日期：</label>
-				<div class="col-md-8">
+				<label for="time" class="col-sm-3 control-label">出生日期：</label>
+				<div class="col-sm-8">
 					<input class="form_datetime form-control" placeholder="请选择日期"
 						name="userBirthday" id="time" readonly type="text"
 						value="<fmt:formatDate
@@ -27,24 +27,24 @@
 				</div>
 			</div>
 			<div class="form-group has-success">
-				<label for="userGender" class="col-md-3 control-label">性别：</label>
-				<div class="col-md-8">
+				<label for="userGender" class="col-sm-3 control-label">性别：</label>
+				<div class="col-sm-8">
 					<c:if test="${user.userGender==1 }">
-						<div class="col-md-6 radio">
+						<div class="col-sm-6 radio">
 							<input type="radio" name="userGender" id="userGender" value="1"
 								checked="checked"> <label>男</label>
 						</div>
-						<div class="col-md-6 radio">
+						<div class="col-sm-6 radio">
 							<input type="radio" name="userGender" id="userGender" value="0">
 							<label>女</label>
 						</div>
 					</c:if>
 					<c:if test="${user.userGender==0 }">
-						<div class="col-md-6 radio">
+						<div class="col-sm-6 radio">
 							<input type="radio" name="userGender" id="userGender" value="1">
 							<label>男</label>
 						</div>
-						<div class="col-md-6 radio">
+						<div class="col-sm-6 radio">
 							<input type="radio" name="userGender" id="userGender" value="0"
 								checked="checked"> <label>女</label>
 						</div>
@@ -52,16 +52,16 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userEmail" class="col-md-3 control-label">邮箱：</label>
-				<div class="col-md-8">
+				<label for="userEmail" class="col-sm-3 control-label">邮箱：</label>
+				<div class="col-sm-8">
 					<input class="form-control" name="userEmail" id="userEmail"
 						value="${user.userEmail }" />
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-md-offset-9">
-					<input class="btn btn-success" type="submit" value="完成" /> <input
-						class="btn btn-success" type="reset" value="重置" />
+				<div class="col-sm-offset-9">
+					<input class="btn btn-success" type="submit" value="完成" />
+					<input class="btn btn-success" type="reset" value="重置" />
 				</div>
 			</div>
 		</form>

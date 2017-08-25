@@ -238,7 +238,7 @@ h2{
 							</ul>
 						</div>
 			  		</div>
-				</div>
+			  	</div>
 		 		<div class="panel panel-default">
 			  		<div class="panel-heading">
 			   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseFour">评价企业内容</a></h4>
@@ -317,7 +317,7 @@ h2{
 		    <div class="col-sm-12">
 		    	<input type="submit" value="评论企业" class="btn btn-warning" />
 		    	<div class="col-sm-2"></div>
-		    	<div id="wordstip" class="col-sm-8 column"></div>
+		    	<div id="wordstip" class="col-sm-8"></div>
 		    </div>
  				</form>
  			</c:if>

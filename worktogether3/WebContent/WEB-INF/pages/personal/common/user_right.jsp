@@ -79,7 +79,7 @@
 					<c:if test="${user.userRealName=='无' }">
 						<div class="row">
 							<p class="col-sm-12">
-								请<a href="javascript:ajaxTest('personal/user/personal_register_real')">实名认证</a>
+								请<a href="javascript:ajaxPage('personal/user/personal_register_real')">实名认证</a>
 							</p>
 						</div>
 					</c:if>
@@ -93,7 +93,7 @@
 					<c:if test="${user.userName=='无' }">
 						<div class="row">
 							<p class="col-sm-12">
-								请<a href="javascript:ajaxTest('personal/user/personal_register_other')">完善信息</a>
+								请<a href="javascript:ajaxPage('personal/user/personal_register_other')">完善信息</a>
 							</p>
 						</div>
 					</c:if>
@@ -103,6 +103,7 @@
 								<em>职位：${resume.resumeJor }</em>
 							</p>
 						</div>
+					
 						<c:set var="RECRUIT_STATUS" value="${CommonStatus.USER_RECRUIT_STATUS }"></c:set>
 						<c:set var="CROWDFUND_STATUS" value="${CommonStatus.USER_CROWDFUND_STATUS }"></c:set>
 						<c:set var="PARTNER_STATUS" value="${CommonStatus.USER_PARTNER_STATUS }"></c:set>

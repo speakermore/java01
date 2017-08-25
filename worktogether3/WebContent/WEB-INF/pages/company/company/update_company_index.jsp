@@ -307,7 +307,7 @@ $(document).ready(function() {
 					},
 					StringLength : {
 						min : 2,
-						max : 20,
+						max : 6,
 						message : '长度不符规定'
 					}
 				}

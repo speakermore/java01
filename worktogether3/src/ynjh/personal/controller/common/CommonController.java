@@ -16,7 +16,6 @@ import ynjh.company.entity.Company;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.entity.CompanyRecruit;
 import ynjh.company.entity.CompanyResume;
-import ynjh.company.entity.Offer;
 import ynjh.company.service.CompanyIntService;
 import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyRecruitService;
@@ -97,13 +96,13 @@ public class CommonController {
 		if (resume != null) {
 			session.setAttribute("resume", resume);
 			// 获取教育
-			List<Education> edus = rService.findEducation(resume.getId());
+			List<Education> edus = rService.findEducations(resume.getId());
 			session.setAttribute("edus", edus);
 			// 获取工作
-			List<Work> works = rService.findWork(resume.getId());
+			List<Work> works = rService.findWorks(resume.getId());
 			session.setAttribute("works", works);
 			// 获取项目
-			List<Project> projs = rService.findProject(resume.getId());
+			List<Project> projs = rService.findProjects(resume.getId());
 			session.setAttribute("projs", projs);
 		}
 		// 牟勇：获取最新关注者的文章发表日期不超过二周的文章消息,必须通过审核

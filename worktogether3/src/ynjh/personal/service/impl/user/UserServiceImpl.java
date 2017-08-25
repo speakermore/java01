@@ -1,6 +1,8 @@
 package ynjh.personal.service.impl.user;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import ynjh.personal.dao.user.UserMapper;
@@ -217,5 +219,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User verificationUserLoginId(String userLoginId) {
 		return userMapper.verificationUserLoginId(userLoginId);
+	}
+	@Override
+	public List<Map<String, Object>> recommendUsers() {
+		return userMapper.findUser10ByArticleCountAndLikeNum();
 	}
 }

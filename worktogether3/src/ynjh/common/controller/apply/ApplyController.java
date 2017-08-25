@@ -80,11 +80,11 @@ public class ApplyController {
 		//准备resume
 		Resume resume=resumeService.findResumeById(resumeId);
 		//准备工作经验
-		List<Work> works=resumeService.findWork(resumeId);
+		List<Work> works=resumeService.findWorks(resumeId);
 		//准备教育经验
-		List<Education> educations=resumeService.findEducation(resumeId);
+		List<Education> educations=resumeService.findEducations(resumeId);
 		//准备项目经验
-		List<Project> projects=resumeService.findProject(resumeId);
+		List<Project> projects=resumeService.findProjects(resumeId);
 		//修改应聘的状态为已阅读简历,4表示已阅读
 		companyResumeService.updateCmpResumeStatus(applyId, 4);
 		mv.addObject("resume", resume);

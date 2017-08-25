@@ -103,7 +103,7 @@ public class UserController {
 					response.addCookie(userCookie);
 				}
 				session.setAttribute("user", user);
-				mv.setViewName("redirect:../common/initIndex?userId=" + user.getId());
+				mv.setViewName("redirect:/personal/common/initIndex?userId=" + user.getId());
 			}
 		}
 		return mv;
@@ -297,9 +297,7 @@ public class UserController {
 	/**
 	 * 跳转实名认证信息页面
 	 * 
-	 * @return
-	 * 
-	 * 		String
+	 * @return String
 	 */
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.GET)
 	public String gotoAddUserReal() {
@@ -309,50 +307,33 @@ public class UserController {
 	/**
 	 * 处理完善用户信息 跳转主页
 	 * 
-	 * @param user
-	 *            用户信息对象
-	 * @return
-	 * 
-	 * 		ModelAndView
+	 * @param user 用户信息对象
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/addUserOther", method = RequestMethod.POST)
-	public ModelAndView addUserOther(User user, MultipartFile files, HttpSession session) {
+	public ModelAndView addUserOther(User user, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User sUser = (User) session.getAttribute("user");
-		User oldUser = uService.findUserById(sUser.getId());
-		user.setId(oldUser.getId());
-		user.setUserRealName(oldUser.getUserRealName());
-		user.setUserHeadImgPath(UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
-				new MultipartFile[] { files }, session)[0]);
 		int result = uService.updateUserOther(user);
+		user = uService.findUserById(user.getId());
 		if (result > 0) {
 			session.setAttribute("user", user);
 			mv.addObject("operatorInfo", "完善资料成功！");
-			mv.setViewName("personal/user/personal_index");
 		} else {
-			mv.addObject("operatorInfo", "完善资料失败");
-			mv.setViewName("personal/user/personal_register_other");
+			mv.addObject("operatorInfo", "完善资料失败,请联系管理员！");
 		}
+		mv.addObject("toPage", "personal/common/initIndex?userId="+user.getId());
+		mv.setViewName("common/info");
 		return mv;
 	}
 
 	/**
 	 * 处理实名用户信息 跳转主页
-	 * 
-	 * @param user
-	 *            用户信息对象
-	 * @return
-	 * 
-	 * 		ModelAndView
+	 * @param user 用户信息对象
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.POST)
 	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		User sessionUser = (User) session.getAttribute("user");
-		User oldUser = uService.findUserById(sessionUser.getId());
-		user.setUserName(oldUser.getUserName());
-		user.setId(oldUser.getId());
 		user.setUserIDImgFace(UploadFile.uploadFile(
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { fileface }, session)[0]);
@@ -360,14 +341,16 @@ public class UserController {
 				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
 				new MultipartFile[] { filecon }, session)[0]);
 		int result = uService.updateUserIDCord(user);
+		user=uService.findUserById(user.getId());
 		if (result > 0) {
 			session.setAttribute("user", user);
-			mv.addObject("operatorInfo", "实名认证成功！");
-			mv.setViewName("personal/user/personal_index");
+			mv.addObject("operatorInfo", "信息上传成功！请耐心等待！");
 		} else {
-			mv.addObject("operatorInfo", "实名认证失败");
-			mv.setViewName("personal/user/personal_register_real");
+			mv.addObject("operatorInfo", "信息上传失败！请联系管理员！");
+			mv.addObject("toPage","personal/user/personal_register_real");
 		}
+		mv.addObject("toPage","personal/common/initIndex?userId="+user.getId());
+		mv.setViewName("common/info");
 		return mv;
 	}
 
