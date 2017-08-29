@@ -5,6 +5,12 @@
 	<c:set var="RECRUIT_STATUS" value="${CommonStatus.USER_RECRUIT_STATUS }"></c:set>
 	<c:set var="CROWDFUND_STATUS" value="${CommonStatus.USER_CROWDFUND_STATUS }"></c:set>
 	<c:set var="PARTNER_STATUS" value="${CommonStatus.USER_PARTNER_STATUS }"></c:set>
+<!-- 
+	作者：牟勇
+	已登录的用户跳转的用户更多信息简介。
+	用于查看别的用户的更多信息，文章列表，
+	用户可以是个人用户，也可以是企业用户
+ -->
 	<article class="col-sm-12">
 		<c:if test="${userMoreInfo!=null }">
 			<div class="row">
@@ -76,10 +82,11 @@
 				<c:forEach items="${articles}" var="art">
 				<c:if test="${userMoreInfo!=null }">
 				<c:if test="${art.articleStatus==2 }">
-				<!-- 别的用户通过审核的文章显示出来给用户看 -->
+				<!-- 别的用户登录只能查看通过审核的文章 -->
 				<tr>
 					<td>${art.articleType }</td>
-					<td ><a title="${art.articleTitle }" href="javascript:ajaxPage('redirect:common/article/findArticleById/${art.id}')">${art.articleTitle }</a></td>
+					<!-- 最后传的2表示用户处于登录的情况下，跳转的页面 -->
+					<td ><a title="${art.articleTitle }" href="javascript:ajaxPage('redirect:common/article/findArticleById/${art.id}/2')">${art.articleTitle }</a></td>
 					<td><fmt:formatDate value="${art.articleTime }"/></td>
 					<td>${AUDIT_STATUS[art.articleStatus]}</td>
 					<td>${art.articleReadNum }</td>
@@ -96,10 +103,12 @@
 					<td>${AUDIT_STATUS[art.articleStatus]}</td>
 					<td>${art.articleReadNum }</td>
 					<td>${art.articleLikeNum }</td>
-					<td><c:if test="${art.articleStatus==4}">
+					<td>
+						<c:if test="${art.articleStatus==4}">
 						<a href="javascript:ajaxPage('redirect:common/article/gotoUpdateArticle?id=${art.id }')">修改</a>|
 						<a href="javascript:if(confirm('你确定真的要恢复这篇文章吗？')){ajaxPage('redirect:common/article/renewArticle/${art.id }')}">恢复</a>
-						</c:if> <c:if test="${art.articleStatus==1||art.articleStatus==2||art.articleStatus==3}">
+						</c:if> 
+						<c:if test="${art.articleStatus==1||art.articleStatus==2||art.articleStatus==3}">
 						<a href="javascript:ajaxPage('redirect:common/article/gotoUpdateArticle?id=${art.id }')">修改</a>|
 						<a href="javascript:if(confirm('你确定真的要删除这篇文章吗？')){ajaxPage('redirect:common/article/deleteAricle/${art.id }')}">删除</a>
 						</c:if>

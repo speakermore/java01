@@ -23,12 +23,14 @@ public class MyCommonResumeServiceImpl implements MyCommonResumeService {
 		String[] reTitles=Arrays.stream(resumeTitle.split(",")).map(title->"%"+title+"%").toArray(size -> new String[size]);
 		List<Map<String, Object>> list= myCommonResumeMapper.findByResumeTitle((String[])reTitles, 0, 5);
 		//将Timestamp的工作时间转换为工作的年限
+		//将求职意向岗位只保留第一项
 		list.stream().forEach(m->{
 			try {
 				m.put("resumeWorks",LiuZhiHaoDateTimeUtil.getAgeTools((Timestamp)m.get("resumeWorks")));
 			} catch (AgeOverFlowException e) {
 				e.printStackTrace();
 			}
+			m.put("resumeTitle", ((String)m.get("resumeTitle")).split(",")[0]);
 		});
 		return list;
 	}

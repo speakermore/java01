@@ -140,13 +140,13 @@ public class CommonController {
 	 * @return
 	 * @author 刘志浩 ModelAndView
 	 */
-	@RequestMapping(value = "gotoCompanyById", method = RequestMethod.GET)
+	@RequestMapping(value = "gotoCompanyById")
 	public ModelAndView gotoCompanyById(Integer id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Company company = companyService.findCompanyById(id);
 		CompanyIntroduction companyInt = companyIntService.findById(company.getId());
-		session.setAttribute("company", company);
-		session.setAttribute("companyInt", companyInt);
+		mv.addObject("company", company);
+		mv.addObject("companyInt", companyInt);
 		mv.setViewName("company/artanddis/company_index");
 		return mv;
 	}

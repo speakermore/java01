@@ -204,7 +204,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
 							<c:forEach items="${masterResume }" var="mr">
-								<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.userName }</span><span class="col-sm-2 work-together-cut-text">${mr.resumeEducation }</span><b class="col-sm-5 work-together-cut-text">${mr.resumeJor }</b><span class="col-sm-2 work-together-cut-text">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
+								<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.userName }</span><span class="col-sm-2 work-together-cut-text">${mr.resumeEducation }</span><b class="col-sm-5 work-together-cut-text">${mr.resumeTitle }</b><span class="col-sm-2 work-together-cut-text">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
 							</c:forEach>
 							</ul>
 						</div>
@@ -217,7 +217,7 @@
 							<ul type="square" class="work-together-list list-unstyled">
 							<!-- 昵称，学历，岗位，工作年限 -->
 								<c:forEach items="${manageResume }" var="mr">
-									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.userName }</span><span class="col-sm-2 work-together-cut-text">${mr.resumeEducation }</span><b class="col-sm-5 work-together-cut-text">${mr.resumeJor }</b><span class="col-sm-2 work-together-cut-text">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
+									<li class="row"><a href=""><span class="col-sm-3 work-together-cut-text">${mr.userName }</span><span class="col-sm-2 work-together-cut-text">${mr.resumeEducation }</span><b class="col-sm-5 work-together-cut-text">${mr.resumeTitle }</b><span class="col-sm-2 work-together-cut-text">${mr.resumeWorks==0?1:mr.resumeWorks}年</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -312,7 +312,7 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${companyArticle }" var="ca">
-									<li class="row"><a href="common/article/findArticleById/${ca.id }/1"><span class="col-sm-3 work-together-cut-text">${ca.companySimpleName }</span><b class="col-sm-6 work-together-cut-text">${ca.articleType}${ca.articleTitle }</b><span class="col-sm-3"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
+									<li class="row"><a target="_blank" href="common/article/findArticleById/${ca.id }/1"><span class="col-sm-3 work-together-cut-text">${ca.companySimpleName }</span><b class="col-sm-6 work-together-cut-text">${ca.articleType}${ca.articleTitle }</b><span class="col-sm-3"><i class="glyphicon glyphicon-thumbs-up"></i>${ca.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${ca.articleReadNum }</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -324,7 +324,8 @@
 							</div>
 							<ul type="square" class="work-together-list list-unstyled">
 								<c:forEach items="${personalArticle }" var="pa">
-									<li class="row"><a href="common/article/findArticleById/${pa.id }/1"><span class="col-sm-3 work-together-cut-text">${pa.userName }</span><b class="col-sm-6 work-together-cut-text">${pa.articleType}${pa.articleTitle }</b><span class="col-sm-3"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
+								<%-- 最后的1表示未登录用户跳转未登录的专用显示页面。 --%>
+									<li class="row"><a target="_blank" href="common/article/findArticleById/${pa.id }/1"><span class="col-sm-3 work-together-cut-text">${pa.userName }</span><b class="col-sm-6 work-together-cut-text">${pa.articleType}${pa.articleTitle }</b><span class="col-sm-3"><i class="glyphicon glyphicon-thumbs-up"></i>${pa.articleLikeNum }<i class="glyphicon glyphicon-user"></i>${pa.articleReadNum }</span></a></li>
 								</c:forEach>
 							</ul>
 						</div>

@@ -7,25 +7,35 @@
 	<c:if test='${user.userRealName == "无" }'>
 		实名认证通过后可以提升你的信用度哦，亲.
 	</c:if>
-	<c:if test='${user.userRealName!="无" }'>
+	<c:if test='${user.userRealName!="无"&&user.userStatus==1 }'>
 		请耐心等待实名审核通过呀，如果不通过，会有通知滴！
 	</c:if>
-	 <a href="personal/common/initIndex?userId=${user.id }" class="alert-link">点我返回首页</a>
+	<c:if test='${user.userStatus==2 }'>
+		恭喜恭喜！你已通过实名认证！
+	</c:if>
+	<c:if test='${user.userStatus==3 }'>
+		很可惜，你的实名认证未通过，请重新提交相关信息（照片需要分辨率高一些哦！）
+	</c:if>
+	<a href="personal/common/initIndex?userId=${user.id }" class="alert-link">点我返回首页</a>
 </div>
 <section class="panel panel-default">
 	<div class="panel-heading">
 		<div class="panel-title">实名认证</div>
 	</div>
 	<div class="panel-body">
+	<c:if test="${user.userStatus==2 }">
+		<h2 class="alert alert-success">实名认证已通过！</h2>
+	</c:if>
+	<c:if test="${user.userStatus!=2}">
 	<form role="form" class="form-horizontal" action="personal/user/addUserReal" method="post" enctype="multipart/form-data" id="realForm">
 		<input type="hidden" name="id" value="${user.id }" /><br />
 		<div class="form-group">
 			<label for="userRealName" class="col-md-3 control-label">真实姓名：</label>
 			<div class="col-md-8">
-				<c:if test='${user.userRealName=="无" }'>
+				<c:if test='${user.userRealName=="无" || user.userStatus==3 }'>
 				<input class="form-control" name="userRealName" id="userRealName" />
 				</c:if>
-				<c:if test='${user.userRealName!="无" }'>
+				<c:if test='${user.userRealName!="无" && user.userStatus!=3 }'>
 				<input class="form-control" readonly="readonly" name="userRealName" id="userRealName" value="${user.userRealNameMasked }" />
 				</c:if>
 			</div>
@@ -33,10 +43,10 @@
 		<div class="form-group">
 			<label for="userIDCard" class="col-md-3 control-label">身份证号码：</label>
 			<div class="col-md-8">
-				<c:if test='${user.userIDCard=="无" }'>
+				<c:if test='${user.userIDCard=="无" || user.userStatus==3 }'>
 				<input class="form-control" name="userIDCard" id="userIDCard" />
 				</c:if>
-				<c:if test='${user.userIDCard!="无" }'>
+				<c:if test='${user.userIDCard!="无" && user.userStatus!=3 }'>
 				<input class="form-control" readonly="readonly" value="${user.userIDCardMasked }" name="userIDCard" id="userIDCard" />
 				</c:if>
 			</div>
@@ -44,10 +54,10 @@
 		<div class="form-group">
 			<label for="userIDImgFace" class="col-md-3 control-label">身份证正面图片：</label>
 			<div class="col-md-8">
-				<c:if test='${user.userIDImgFace=="无" }'>
+				<c:if test='${user.userIDImgFace=="无" || user.userStatus==3 }'>
 				<input class="form-control file" name="fileface" type="file" id="userIDImgFace" multiple data-min-file-count="1" />
 				</c:if>
-				<c:if test='${user.userIDImgFace!="无" }'>
+				<c:if test='${user.userIDImgFace!="无" && user.userStatus!=3 }'>
 				<input class="form-control" readonly="readonly" value="图片已上传" />
 				</c:if>
 			</div>
@@ -55,26 +65,27 @@
 		<div class="form-group">
 			<label for="userIDImgCon" class="col-md-3 control-label">身份证反面图片：</label>
 			<div class="col-md-8">
-				<c:if test='${user.userIDImgCon=="无" }'>
+				<c:if test='${user.userIDImgCon=="无" || user.userStatus==3 }'>
 				<input class="form-control file" name="filecon" type="file" id="userIDImgCon" multiple data-min-file-count="1" />
 				</c:if>
-				<c:if test='${user.userIDImgCon!="无" }'>
+				<c:if test='${user.userIDImgCon!="无" && user.userStatus!=3 }'>
 				<input class="form-control" readonly="readonly" value="图片已上传" />
 				</c:if>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-md-offset-9">
-			<c:if test='${user.userRealName=="无" }'>
+			<c:if test='${user.userRealName=="无" || user.userStatus==3 }'>
 				<input class="btn btn-success" type="submit" value="保存" />
 				<input class="btn btn-success" type="reset" value="重置" />
 			</c:if>
-			<c:if test='${user.userRealName!="无" }'>
+			<c:if test='${user.userRealName!="无" && user.userStatus!=3 }'>
 				<input class="btn btn-default" type="button" onclick="location.href='personal/common/initIndex?userId=${user.id}'" value="返回" />
 			</c:if>
 			</div>
 		</div>
 	</form>
+	</c:if>
 	</div>
 </section>
 <script type="text/javascript">

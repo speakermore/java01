@@ -2,6 +2,7 @@ package ynjh.admin.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 管理员的扩展控制器
@@ -19,5 +20,13 @@ public class AdminExController {
 	@RequestMapping("/index")
 	public String index(){
 		return "admin/index";
+	}
+	/**
+	 * 跳转审核简历的页面
+	 * @return
+	 */
+	@RequestMapping(value="/audit/auditResume",method=RequestMethod.GET)
+	public String auditResume(){
+		return "admin/audit/auditResume";
 	}
 }

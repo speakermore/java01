@@ -224,4 +224,9 @@ public class UserServiceImpl implements UserService {
 	public List<Map<String, Object>> recommendUsers() {
 		return userMapper.findUser10ByArticleCountAndLikeNum();
 	}
+	@Override
+	public Integer updateUserStatus(Integer id, Integer userStatus) {
+		
+		return userMapper.updateUserProperty("userStatus", ""+userStatus, id);
+	}
 }

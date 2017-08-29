@@ -38,7 +38,7 @@ h2{
 				<div class="col-sm-7">
 					<div class="col-sm-3">
 						<br />
-						<img class="logo" src="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/company/img/${user.companyLoginId }/${user.companyLogo}" />
+						<img class="logo" src="company/img/${user.companyLoginId }/${user.companyLogo}" />
 					</div>
 					<h2 class="col-sm-9">${user.companySimpleName }</h2>
 				</div>

@@ -38,7 +38,6 @@ public class DiscussController {
 		discuss.setDiscussTime(new Timestamp(System.currentTimeMillis()));
 		discuss.setDiscussUsersId(oldUser.getId());
 		discuss.setDiscussBySendId(companyId);
-		discuss.setDiscussBySendType(1);
 		discuss.setDiscussSendType(2);
 		discuss.setDiscussStatus(1);
 		int result=dService.addDiscuss(discuss);

@@ -20,7 +20,7 @@ public interface ArticleService {
 	/**
 	 * 牟勇：个人文章列表
 	 * @param page 页数,如果不分页可以设置为null
-	 * @param userId 用户ID 
+	 * @param userId 用户ID，可以是个人用户和企业用户
 	 * @return 符合条件的Article实体集合
 	 */
 	public List<Article> findUserArticle(Integer page,Integer id);

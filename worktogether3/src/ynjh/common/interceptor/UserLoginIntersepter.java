@@ -20,11 +20,14 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 	Logger logger=Logger.getLogger(UserLoginIntersepter.class);
 	private static StringBuffer basePath=null;
 	//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
-	private static String[] ignorePathes={"common/article","userMoreInfo","crowdfundAllList","admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+	private static String[] ignorePathes={"common/recommendCompanyDetail","common/article","userMoreInfo","crowdfundAllList","admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
 	//登录之后，不作处理的公共路径
 	private static String[] commonPathes={"common","ajax","expenses","findJobs2","ckeditor/upload","findAllNationName"};
+	//个人用户登录后，不作处理的公共路径
 	private static String[] userIgnorePathes={"company/cmprs/find_recruit_detail"};
+	//企业用户登录后，不作处理的公共路径
 	private static String[] companyIgnorePathes={"offer","personal/follow/addFollow/","personal/follow/cancelFollow/"};
+	//针对未登录用户直接访问首页地址被拦截的情况
 	private static String[] basePathes={"http://www.phasejob.com","http://www.phasejob.cn","http://www.phasejob.cn/#","http://www.phasejob.com/#","http://www.phasejob.cn/","http://www.phasejob.com/"};
 			
 	@Override
@@ -51,6 +54,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 		}
 		//根路径的判断，根路径是所有人都可以访问的。
 		for(String base:basePathes){
+			//必须是仅仅只输入的根路径，不带别的路径的情况
 			if(path.toString().equals(base)){
 				logger.debug("该路径属于根路径，放行");
 				return true;
@@ -112,6 +116,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 			logger.debug("管理员不能访问，限行");
 			request.setAttribute("errorInfo", "您是管理员，不能访问别的页面");
 		}
+		logger.warn("有问题，不能访问："+path);
 		request.getRequestDispatcher("/notlogin.jsp").forward(request, response);
 		return false;
 	}

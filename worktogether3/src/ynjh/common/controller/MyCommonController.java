@@ -2,6 +2,7 @@ package ynjh.common.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -27,8 +28,14 @@ import ynjh.common.service.MyCommonResumeService;
 import ynjh.common.service.NationService;
 import ynjh.common.service.ProvinceService;
 import ynjh.company.entity.Company;
+import ynjh.company.entity.CompanyDetailImg;
+import ynjh.company.entity.CompanyIntroduction;
+import ynjh.company.service.CompanyDiscussService;
+import ynjh.company.service.CompanyIntService;
+import ynjh.company.service.CompanyRecruitService;
 import ynjh.company.service.CompanyService;
 import ynjh.personal.entity.Article;
+import ynjh.personal.entity.Discuss;
 import ynjh.personal.entity.Follow;
 import ynjh.personal.entity.Mood;
 import ynjh.personal.entity.User;
@@ -69,13 +76,19 @@ public class MyCommonController {
 	private MoodService moodService;
 	@Resource
 	private FollowService followService;
+	@Resource
+	private CompanyRecruitService companyRecruitService;
+	@Resource
+	private CompanyDiscussService companyDiscussService;
+	@Resource
+	private CompanyIntService companyIntService;
 	/**
 	 * 首页的跳转
 	 * @return
 	 */
 	@RequestMapping(value={"/","/index","/index.html"})
-	public String index(HttpSession session){
-		
+	public ModelAndView index(HttpSession session){
+		ModelAndView mv=new ModelAndView("index");
 		List<News> newses10=newsService.findTop10ByCreateDate();
 		//软件人才---管理人才
 		List<Map<String, Object>> manageResume=myCommonResumeService.findByResumeTitle5("经理");
@@ -126,7 +139,8 @@ public class MyCommonController {
 		session.setAttribute("myJobs", myJobs);
 		session.setAttribute("recommendCompanys", recommendCompanys);
 		session.setAttribute("recommendUsers", recommendUsers);
-		return "index";
+		
+		return mv;
 	}
 	
 	/**
@@ -249,6 +263,36 @@ public class MyCommonController {
 		Follow follow=followService.findIsFollowByFollowIdAndFollowId(user.getId(), userId);
 		mv.addObject("moreInfoIsFollow", follow);
 		mv.addObject("articles", articles);
+		return mv;
+	}
+	@RequestMapping("/common/recommendCompanyDetail/{companyId}")
+	public ModelAndView recommendCompanyDetail(@PathVariable Integer companyId,HttpSession session){
+		ModelAndView mv=new ModelAndView("common/index/company");
+		//公司信息
+		Company company=companyService.findCompanyById(companyId);
+		CompanyIntroduction companyInt=companyIntService.findById(companyId);
+		//图片详情
+		List<CompanyDetailImg>  detailImgs=companyService.findDetailImg(companyId);
+		//文章列表（未过滤没有通过审核的文章）
+		List<Article> articles=articleService.findUserArticle(null, companyId);
+		articles=articles.stream().filter(a->a.getArticleStatus()==2).collect(Collectors.toList());
+		//招聘基本信息（未过滤没有通过审核的招聘）：招聘岗位(cmpRecTitle)，月薪(cmpRecWage)，招聘人数(cmpRecPeople)，招聘发布的时间(cmpRecTime)，状态(cmpRecStatus)及应聘的人数统计(resumeNumber)
+		List<Map<String, Object>> companyRecruits=companyRecruitService.findRecruitBaseInfo(null, companyId);
+		companyRecruits=companyRecruits.stream().filter(r->((Integer)r.get("cmpRecStatus")).intValue()==2).collect(Collectors.toList());
+		//对企业的评价
+		List<Discuss> discusses=companyDiscussService.findDiscussByCompanyId(companyId);
+		//如果用户登录了，就检查他有没有关注过这个企业
+		if(session.getAttribute("user")!=null){
+			MyUser user=(MyUser)session.getAttribute("user");
+			Follow follow=followService.findIsFollowByFollowIdAndFollowId(user.getId(), companyId);
+			mv.addObject("follow",follow);
+		}
+		mv.addObject("company",company);
+		mv.addObject("detailImgs",detailImgs); 
+		mv.addObject("articles",articles);
+		mv.addObject("companyRecruits",companyRecruits);
+		mv.addObject("discusses",discusses);
+		mv.addObject("companyInt",companyInt);
 		return mv;
 	}
 }

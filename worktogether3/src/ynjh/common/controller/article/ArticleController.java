@@ -75,7 +75,8 @@ public class ArticleController {
 	 * 根据文章id查找指定文章，并跳转到显示页面<br />
 	 * 牟勇：对点击数据进行了计数，<br />
 	 * 对点赞也进行了判断,isLike如果为-1则表示用户没有登录，0表示用户没点赞，1表示用户点过赞
-	 * @param id 文章ID         
+	 * @param id 文章ID
+	 * @param position 决定用户跳转哪个页面的编号，1是跳转
 	 * @return 跳转文章内容显示页面common/article/common_detail_article_index
 	 */
 	@RequestMapping(value = "/findArticleById/{articleId}/{position}", method = RequestMethod.GET)

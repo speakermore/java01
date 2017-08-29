@@ -35,6 +35,7 @@ import ynjh.admin.entity.CompanyVisitCount;
 import ynjh.admin.entity.SystemMessage;
 import ynjh.admin.entity.UserVisitCount;
 import ynjh.admin.service.AdminService;
+import ynjh.common.util.CommonStatus;
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.ValidateCode;
 import ynjh.company.entity.Company;
@@ -52,6 +53,7 @@ import ynjh.personal.entity.Resume;
 import ynjh.personal.entity.User;
 import ynjh.personal.entity.Work;
 import ynjh.personal.service.ResumeService;
+import ynjh.personal.service.UserService;
 
 /**
  * admin功能Controller
@@ -72,6 +74,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Resource
 	private ResumeService resumeService;
+	@Resource
+	private UserService userService;
 
 	/**
 	 * 密码重置
@@ -579,24 +583,25 @@ public class AdminController {
 	/**
 	 * 
 	 * @Name: auditResume //审核简历
-	 * @Description: @param id 简历ID
-	 * @Description: @param resumeStatusThree 简历待审核状态
-	 * @Description: @return
+	 * 牟勇：跳转到消息对话弹，显示成功与失败信息，然后再返回原来的审核页面。
+	 * @param id 简历ID
+	 * @param resumeStatusThree 简历待审核状态
+	 * 
 	 * @Author: 曾瑞（作者）
 	 * @Version: V1.00 （版本号）
-	 * @Create Date: 2017年4月21日上午11:34:54
-	 * @Parameters: AdminController
-	 * @Return: ModelAndView
+	 * @CreateDate: 2017年4月21日上午11:34:54
+	 * 
+	 * @Return: ModelAndView 跳转到common/info，消息对话框
 	 */
 	@RequestMapping("/auditResume/{id}/{resumeStatusThree}")
 	public ModelAndView auditResume(@PathVariable Integer id, @PathVariable Integer resumeStatusThree) {
 		int result = adminService.auditResume(id, resumeStatusThree);
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("common/info");
+		mv.addObject("toPage","admin/findAuditResumeById?id="+id);
 		if (result > 0) {
-			mv.addObject("result", result);
-			mv.setViewName("admin/audit/auditResume");
+			mv.addObject("operatorInfo",CommonStatus.AUDIT_STATUS[resumeStatusThree]+"成功！");
 		} else {
-			mv.setViewName("admin/audit/auditResume");
+			mv.addObject("operatorInfo",CommonStatus.AUDIT_STATUS[resumeStatusThree]+"失败！");
 		}
 		return mv;
 	}
@@ -1021,7 +1026,7 @@ public class AdminController {
 		List<Education> edus=null;
 		User user = null;
 		if (resume != null) {
-			user = adminService.findUserById(resume.getUserId());
+			user = userService.findUserById(resume.getUserId());
 			works=resumeService.findWorks(resume.getId());
 			projects=resumeService.findProjects(resume.getId());
 			edus=resumeService.findEducations(resume.getId());

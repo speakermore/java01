@@ -10,7 +10,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>管理员后台-添加资讯</title>
+<meta name="keywords" content="相职网,云南相职网,招聘网,招聘,软件开发,软件人才,软件公司,Java,网络招聘" />
+<meta name="keywords" content="最新资讯,${news.newsTitle }">
+<meta name="referrer" content="always" />
+<meta name="robots" content="noindex,follow" />
+<meta name="description" content="相职网-专业提供软件人力资源解决方案"/>
+<title>相职网-最新资讯-${news.newsTitle }</title> 
 
 <%@include file="../header.jsp"%>
 <%@include file="../footer.jsp"%>

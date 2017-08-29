@@ -17,4 +17,11 @@ public interface CompanyDiscussService {
 	public Discuss findById(Integer id);
 	//根据id查询更改评论状态
 	public int updateStatus(Integer id,Integer discussStatus);
+	/**
+	 * 牟勇：根据企业的Id查找对企业的评价
+	 * 评价必须是通过审核的
+	 * @param companyId
+	 * @return
+	 */
+	public List<Discuss> findDiscussByCompanyId(Integer companyId);
 }

@@ -35,7 +35,7 @@ public class CommonStatus {
 	 * 审核状态
 	 * 0."",1."待审核",2."审核通过",3."审核不通过",4."已删除"，5."停止招聘"
 	 */
-	public static final String[] AUDIT_STATUS={"","待审核","审核通过","审核不通过","已删除/隐藏","停止招聘"};
+	public static final String[] AUDIT_STATUS={"","待审核","审核通过","审核不通过","已删除/隐藏/禁用","停止招聘"};
 	
 	/**
 	 * 用户类型
@@ -69,8 +69,12 @@ public class CommonStatus {
 	public static final String[] ENGLISH_GRADE={"","国家英语考试3级","国家英语考试4级","国家英语考试6级","专业4级","专业8级","未参加","未通过"};
 	//计算机水平
 	public static final String[] COMPUTER_ABILITY={"","入门","一般","熟练","精通"};
-	//账号状态
-	public static final String[] USER_STATUS={"","正常","禁用"};
+	
+	/**
+	 * 账号状态（可用于管理员与个人用户）
+	 * 1.未认证，2.已认证，3.认证未通过，4.禁用
+	 */
+	public static final String[] USER_STATUS={"","未认证","已认证","认证未通过","禁用"};
 	//管理员帐号状态
 	public static final String[] ADMIN_STATUS={"已禁用","正常"};
 	//管理员在线状态

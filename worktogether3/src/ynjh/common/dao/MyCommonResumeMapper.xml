@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ynjh.common.dao.MyCommonResumeMapper">
 	<!-- 根据岗位名称查简历，获得符合条件的简历集合 -->
 	<select id="findByResumeTitle" resultType="map">
-		select u.userName,r.resumeEducation,r.resumeJor,r.resumeWorks from
+		select u.userName,r.resumeEducation,r.resumeJor,r.resumeWorks,r.resumeTitle from
 		resume r,user u
 		where u.id=r.userid and (
 		<foreach collection="resumeTitle" item="item" separator="or">

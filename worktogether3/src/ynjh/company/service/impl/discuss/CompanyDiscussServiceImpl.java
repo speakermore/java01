@@ -40,4 +40,10 @@ public class CompanyDiscussServiceImpl implements CompanyDiscussService{
 		return cDiscussMapper.updateDiscussStatus(id, discussStatus);
 	}
 
+	@Override
+	public List<Discuss> findDiscussByCompanyId(Integer companyId) {
+		
+		return cDiscussMapper.findDiscussByCompanyId(companyId);
+	}
+
 }

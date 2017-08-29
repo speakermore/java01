@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
 public interface MyCommonResumeMapper {
 	/**
 	 * 根据简历的标题或目前职位进行多个岗位的模糊查询，可用于分页或限制查询结果的条数
-	 * 显示用户昵称，学历，目前岗位，工作时间
+	 * 显示用户昵称，学历，目前岗位，工作时间，求职意向岗位
 	 * 简历必须通过审核的简历
 	 * @param ResumeTitle 岗位名称的模糊查询条件，多个职位条件以数组方式传入，每个值均应该带有模糊匹配的字符（%或_之类）
 	 * @param startRecord 开始的记录下标，小于0表示不分页

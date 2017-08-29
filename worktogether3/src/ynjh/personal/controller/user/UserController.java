@@ -334,12 +334,14 @@ public class UserController {
 	@RequestMapping(value = "/addUserReal", method = RequestMethod.POST)
 	public ModelAndView addUserReal(User user, MultipartFile fileface, MultipartFile filecon, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		User onlineUser=(User)session.getAttribute("user");
 		user.setUserIDImgFace(UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", onlineUser.getUserLoginId()),
 				new MultipartFile[] { fileface }, session)[0]);
 		user.setUserIDImgCon(UploadFile.uploadFile(
-				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", user.getUserLoginId()),
+				UploadFile.getUserImgPath("/WEB-INF/resources/img/upload/personal", onlineUser.getUserLoginId()),
 				new MultipartFile[] { filecon }, session)[0]);
+		user.setUserStatus(1);
 		int result = uService.updateUserIDCord(user);
 		user=uService.findUserById(user.getId());
 		if (result > 0) {
@@ -347,7 +349,6 @@ public class UserController {
 			mv.addObject("operatorInfo", "信息上传成功！请耐心等待！");
 		} else {
 			mv.addObject("operatorInfo", "信息上传失败！请联系管理员！");
-			mv.addObject("toPage","personal/user/personal_register_real");
 		}
 		mv.addObject("toPage","personal/common/initIndex?userId="+user.getId());
 		mv.setViewName("common/info");

@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     <!-- 实名认证（修改user表）：真实姓名、身份证号码、身份证图片(正反面) -->
     <update id="updateUserIDCord" parameterType="User">
-        update `user` set userRealName=#{userRealName},userIDCard=#{userIDCard},userIDImgFace=#{userIDImgFace},userIDImgCon=#{userIDImgCon} where id=#{id}
+        update `user` set userRealName=#{userRealName},userIDCard=#{userIDCard},userIDImgFace=#{userIDImgFace},userIDImgCon=#{userIDImgCon},userStatus=#{userStatus} where id=#{id}
     </update>
     <!-- 修改用户信息：头像、性别、email、出生日期、昵称 -->
 	<update id="updateUser" parameterType="User">
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
     <!-- 登录 :邮箱或手机号。牟勇：用户状态不能是禁用状态 -->
     <select id="findByUserIdAndUserPassword"  resultType="User">
-        select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword} and userStatus!=3
+        select * from  `user` where (userLoginId=#{userLoginId} or userEmail=#{userLoginId}) and userPassword=#{userPassword} and userStatus!=4
     </select>
 	<!-- 根据id查询用户（显示用户信息） -->
 	<select id="findUserById" resultType="User" parameterType="Integer">

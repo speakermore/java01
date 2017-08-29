@@ -39,6 +39,14 @@ public interface UserService {
 
 	// 修改用户信息
 	public Integer updateUser(User user);
+	/**
+	 * 牟勇：修改用户状态
+	 * 1.未认证，2.已认证，3.认证未通过，4.禁用
+	 * @param id 用户的主键
+	 * @param userStatus 用户的状态值，整数
+	 * @return 大于0表示成功，否则表示失败
+	 */
+	public Integer updateUserStatus(Integer id,Integer userStatus);
 
 	/**
 	 * 修改用户密码

@@ -36,7 +36,7 @@ public interface AdminService {
 	//审核简历
 	public Integer auditResume(Integer id,Integer status);
 	//查询审核简历
-	public List<Resume> findAuditResume(@Param("page") Integer page);
+	public List<Resume> findAuditResume(Integer page);
 	//审核文章
 	public Integer auditArticle(Integer articleId,Integer articleStatus);
 	//

@@ -16,4 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findAll" resultType="Discuss">
 		select * from discuss where discussStatus!=4 and discussStatus!=3 and discussStatus!=1 and discussBySendId=#{discussBySendId}
 	</select>
+	<!-- 根据企业的Id查找针对这个企业的所有评价信息 -->
+	<select id="findDiscussByCompanyId" parameterType="Integer" resultType="Discuss">
+		select * from discuss where discussBySendId=#{companyId} and discussStatus=2
+	</select>
 </mapper>

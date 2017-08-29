@@ -110,7 +110,6 @@ var addfollow=function(byFollowId){
  * 牟勇：取消关注
  * 取消之后，跳转个人用户中心页面
  * byFollowId 被关注者的主键id
- * userId 登录用户的主键id
  */
 var cancelfollow=function(byFollowId){
 	$.ajax({
