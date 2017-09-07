@@ -1,10 +1,14 @@
 package ynjh.personal.service.impl.user;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import ynjh.common.exception.AgeOverFlowException;
+import ynjh.common.util.LiuZhiHaoDateTimeUtil;
 import ynjh.personal.dao.user.UserMapper;
 import ynjh.personal.entity.CompanyList;
 import ynjh.personal.entity.User;
@@ -228,5 +232,15 @@ public class UserServiceImpl implements UserService {
 	public Integer updateUserStatus(Integer id, Integer userStatus) {
 		
 		return userMapper.updateUserProperty("userStatus", ""+userStatus, id);
+	}
+	@Override
+	public Map<String, Object> recommentPersonalDetail(Integer userId) {
+		Map<String, Object> personalDetail=userMapper.findUserBaseInfoById(userId);
+		try {
+			personalDetail.put("resumeWorks", LiuZhiHaoDateTimeUtil.getAgeTools((Date)personalDetail.get("resumeWorks")));
+		} catch (AgeOverFlowException e) {
+			e.printStackTrace();
+		}
+		return personalDetail;
 	}
 }

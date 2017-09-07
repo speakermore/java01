@@ -145,13 +145,8 @@
 						notEmpty : {
 							message : '手机号不能为空！'
 						},
-						StringLength : {
-							min : 13,
-							max : 13,
-							message : '公司电话不能为空'
-						},
 						regexp : { //匹配规则
-							regexp : /^0?(13[0-9]|15[012356789]|18[0-9]|17[0-9])[0-9]{8}$/,
+							regexp : /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])[0-9]{8}$/,
 							message : '请输入有效的手机号码'
 						}
 					}
@@ -198,27 +193,25 @@
 							},
 							fields : { /*验证*/
 								 companyLoginId : { /* 键名username和input name值对应 */
-									validators : {
+									 threshold :  11 , //大于11个字符才进行验证
+									 validators : {
 										notEmpty : { /* 非空提示 */
 											message : '手机号码不能为空'
 										},
-										stringLength : { /* 长度提示 */
-											min : 6,
-											max : 30,
-											message : '用户名长度必须在6到30之间'
-										} /* 最后一个没有逗号 */
-										
-										 /* remote: {
-											url:"company/company/verificationCompanyLoginId",
-											message: '用户名已被注册',
-											delay: 5000,
-											type : 'post'
-										} */ 
+										regexp : { //匹配规则
+											regexp : /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])[0-9]{8}$/,
+											message : '请输入有效的手机号码'
+										},
+										 remote : {
+											url : 'company/company/verificationCompanyLoginId',
+											message : '手机号已被注册，请更换新的手机号'
+										}
 									}
 								}, 
 
 								companyPassword : {
 									validators : {
+										verbose : false,
 										notEmpty : {
 											message : '密码不能为空'
 										},
@@ -230,10 +223,6 @@
 										regexp : {
 											regexp : /^[a-zA-Z0-9_]+$/,
 											message : '密码只能包含大写、小写、数字和下划线'
-										},
-										identical : {
-											field : 'realCompanyPassword',
-											message : '两次密码不一致'
 										},
 										different : {
 											field : 'companyLoginId',

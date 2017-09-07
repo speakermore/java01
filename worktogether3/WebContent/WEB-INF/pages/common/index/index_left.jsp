@@ -20,7 +20,7 @@
 </div>
 <ul class="work-together-list list-unstyled">
 <c:forEach items="${recommendCompanys}" var="cmp">
-<li class="row"><a href="common/recommendCompanyDetail/${cmp.id}"><span class="col-sm-8 work-together-cut-text">${cmp.companySimpleName }</span><span class="col-sm-1"><i class="glyphicon glyphicon-duplicate" title="发表文章${cmp.articleNumber }篇"></i>${cmp.articleNumber }</span><span class="col-sm-1"><i class="glyphicon glyphicon-thumbs-up" title="文章总点赞${cmp.likeNum }人次"></i>${cmp.likeNum }</span><span class="col-sm-1"><i class="glyphicon glyphicon-eye-open" title="被${cmp.byFollowNumber }人关注"></i>${cmp.byFollowNumber }</span></a></li>
+<li class="row"><a target="_blank" href="common/recommendCompanyDetail/${cmp.id}"><span class="col-sm-8 work-together-cut-text">${cmp.companySimpleName }</span><span class="col-sm-1"><i class="glyphicon glyphicon-duplicate" title="发表文章${cmp.articleNumber }篇"></i>${cmp.articleNumber }</span><span class="col-sm-1"><i class="glyphicon glyphicon-thumbs-up" title="文章总点赞${cmp.likeNum }人次"></i>${cmp.likeNum }</span><span class="col-sm-1"><i class="glyphicon glyphicon-eye-open" title="被${cmp.byFollowNumber }人关注"></i>${cmp.byFollowNumber }</span></a></li>
 </c:forEach>
 </ul>
 <!--推荐企业展示结束-->
@@ -29,8 +29,8 @@
 	<span>推荐个人</span>
 </div>
 <ul class="work-together-list list-unstyled">
-<c:forEach items="${recommendUsers}" var="user">
-<li class="row"><a href=""><span class="col-sm-8 work-together-cut-text">${user.userName }</span><span class="col-sm-1"><i class="glyphicon glyphicon-duplicate" title="发表文章${user.articleNumber }篇"></i>${user.articleNumber }</span><span class="col-sm-1"><i class="glyphicon glyphicon-thumbs-up" title="文章总点赞${user.likeNum }人次"></i>${user.likeNum }</span><span class="col-sm-1"><i class="glyphicon glyphicon-eye-open" title="被${user.byFollowNumber }人关注"></i>${user.byFollowNumber }</span></a></li>
+<c:forEach items="${recommendUsers}" var="ru">
+<li class="row"><a target="_blank" href="common/recommendPersonalDetail/${ru.id}"><span class="col-sm-8 work-together-cut-text">${ru.userName }</span><span class="col-sm-1"><i class="glyphicon glyphicon-duplicate" title="发表文章${ru.articleNumber }篇"></i>${ru.articleNumber }</span><span class="col-sm-1"><i class="glyphicon glyphicon-thumbs-up" title="文章总点赞${ru.likeNum }人次"></i>${ru.likeNum }</span><span class="col-sm-1"><i class="glyphicon glyphicon-eye-open" title="被${ru.byFollowNumber }人关注"></i>${ru.byFollowNumber }</span></a></li>
 </c:forEach>
 </ul>
 <!--推荐个人展示结束-->

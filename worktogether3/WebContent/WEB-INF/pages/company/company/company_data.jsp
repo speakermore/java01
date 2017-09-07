@@ -53,7 +53,7 @@
 		<%@include file="/WEB-INF/pages/company/menu.jsp" %>
 		</div>
 		<div class="col-sm-9 wt-hby-top" id="my-content">
-			<%@include file="/WEB-INF/pages/company/company/company_data_index.jsp" %>
+			<%@include file="/WEB-INF/pages/company/artanddis/company_index.jsp" %>
 		</div>
 	</div>
 </div>

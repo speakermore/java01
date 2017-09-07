@@ -58,5 +58,10 @@ public class JobServiceImpl implements JobService {
 		
 		return jobMapper.findAllJobIncludeJob2();
 	}
+	@Override
+	public List<Job> findJob2NotIncludeParentId(Integer parentId) {
+		
+		return jobMapper.findJob2NotIncludeParentId(parentId);
+	}
 
 }

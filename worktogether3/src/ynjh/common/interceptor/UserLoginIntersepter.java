@@ -20,7 +20,7 @@ public class UserLoginIntersepter extends HandlerInterceptorAdapter {
 	Logger logger=Logger.getLogger(UserLoginIntersepter.class);
 	private static StringBuffer basePath=null;
 	//不作任何处理的拦截路径(只要含有这个路径，就不做处理)
-	private static String[] ignorePathes={"common/recommendCompanyDetail","common/article","userMoreInfo","crowdfundAllList","admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
+	private static String[] ignorePathes={"company/company/verificationCompanyLoginId","personal/user/verificationUserLoginId","common/recommendPersonalDetail","common/recommendCompanyDetail","common/article","userMoreInfo","crowdfundAllList","admin/news/news","find_news_10","thirdpart","findAllProvinceName","fonts","gotoSoft","codeValidate","logout","company_login","addUser","company/add","login","nologin","error","img","css","js"};
 	//登录之后，不作处理的公共路径
 	private static String[] commonPathes={"common","ajax","expenses","findJobs2","ckeditor/upload","findAllNationName"};
 	//个人用户登录后，不作处理的公共路径

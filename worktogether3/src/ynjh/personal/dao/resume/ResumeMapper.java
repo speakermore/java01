@@ -128,11 +128,7 @@ public interface ResumeMapper {
 	 */
 	public Integer renewProjectByDelete(Integer id);
 	
-	/**
-	 * 分页
-	 * @param userId
-	 * @return
-	 */
+	
 	/**
 	 * 查询此ID的简历数量
 	 */

@@ -129,4 +129,11 @@ public interface UserMapper {
 	 * @return 排名前10的用户Map对象集合，一个用户的信息由一个Map组成
 	 */
 	public List<Map<String, Object>> findUser10ByArticleCountAndLikeNum();
+	/**
+	 * 牟勇：根据用户主键查询用户的基本信息<br />
+	 * 包括：工作时间(resumeWorks)，性别(userGender)，生日(userBirthday),主键(id),登录帐号（userLoginId）,头像（userHeadImgPath）,昵称(userName),心情(moodContent)<br />
+	 * @param userId 用户主键
+	 * @return 一个用户的基本信息
+	 */
+	public Map<String, Object> findUserBaseInfoById(Integer userId);
 }

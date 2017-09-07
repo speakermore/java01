@@ -99,4 +99,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by a.id
 		order by a.articleNumber desc,a.articleLikeNum desc
 	</select>
+	<!-- 牟勇：根据主键查询用户的工作时间，性别，生日，id，账号，头像，昵称，心情（用于首页推荐个人及人才部分的链接） -->
+	<select id="findUserBaseInfoById" parameterType="Integer" resultType="map">
+		select resumeWorks,userGender,userBirthday,u.id,userLoginId,userHeadImgPath,userName,(select moodContent from mood where userId=#{userId} order by moodTime desc limit 0,1) moodContent 
+		from user u left join mood m on u.id=m.userId,resume r
+		where u.id=r.userId and u.id=#{userId}
+		limit 0,1
+	</select> 
 </mapper>

@@ -10,7 +10,6 @@
 	<script type="text/javascript" src="thirdpart/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="thirdpart/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script type="text/javascript" src=""></script>
-	<script type="text/javascript" src="company/js/magnifier.js"></script>
 	<script src="js/lrtk.js"></script>
 	<script type="text/javascript" src="js/jquery.raty.min.js"></script>
 	<script type="text/javascript" src="thirdpart/ckeditor/ckeditor.js"></script>

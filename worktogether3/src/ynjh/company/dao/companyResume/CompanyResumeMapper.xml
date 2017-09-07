@@ -36,4 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="countCompanyResumeByRecruitIdAndResumeId" resultType="int">
 	select count(*) from companyresume where cmpRecId=#{recruitId} and resumeId=#{resumeId}
 </select>
+<!-- 牟勇：查询已投递简历Id，简历的用户姓名，职位名称,按时间排序，查询最近6个月 -->
+<select id="findCompanyResumeByCompanyId" parameterType="Integer" resultType="Integer" >
+	select cr.cmprTime,cr.resumeId,r.resumeName,cre.cmpRecTitle from companyresume cr,resume r,companyrecruit cre
+	where cr.resumeId=r.id and cre.id=cr.cmpRecId and cr.companyId=#{companyId} and TIMESTAMPDIFF(MONTH,cr.cmprTime,now())&lt;=6 
+	order by cr.cmprTime desc
+</select>
 </mapper>

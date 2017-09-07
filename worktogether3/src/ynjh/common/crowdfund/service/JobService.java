@@ -16,7 +16,11 @@ public interface JobService {
 	public int deleteJob(Integer id);
 	//查询一级岗位信息
 	public List<Job> findJob1();
-	//根据一级岗位信息查询二级岗位
+	/**
+	 * 根据一级岗位信息查询二级岗位
+	 * @param jobParentId  一级岗位主键
+	 * @return 属于该一级岗位的二级岗位
+	 */
 	public List<Job> findJob2(Integer jobParentId);
 	/**
 	 * 牟勇：用于首页左侧的“职位分类”查询<br />
@@ -24,4 +28,11 @@ public interface JobService {
 	 * @return 符合要求的Job实体集合
 	 */
 	public List<Job> findJob1IncludeJob2();
+	
+	/**
+	 * 牟勇：查询不包含该一级岗位的二级岗位
+	 * @param jobParentId 一级岗位主键
+	 * @return 不属于该一级岗位的所有二级岗位Job对象集合
+	 */
+	public List<Job> findJob2NotIncludeParentId(Integer parentId);
 }

@@ -19,8 +19,18 @@ public interface JobMapper {
 	public int deleteJob(@Param("id") Integer id);
 	//查询一级岗位信息
 	public List<Job> findJob1();
-	//根据一级岗位信息查询二级岗位
+	/**
+	 * 根据一级岗位信息查询二级岗位
+	 * @param jobParentId 一级岗位主键
+	 * @return 属于该一级岗位的所有二级岗位Job对象集合
+	 */
 	public List<Job> findJob2(@Param("jobParentId") Integer jobParentId);
+	/**
+	 * 牟勇：查询不包含该一级岗位的二级岗位
+	 * @param jobParentId 一级岗位主键
+	 * @return 不属于该一级岗位的所有二级岗位Job对象集合
+	 */
+	public List<Job> findJob2NotIncludeParentId(@Param("jobParentId") Integer jobParentId);
 	/**
 	 * 牟勇：查询所有的岗位类型，每个一级岗位均包含一个二级岗位的集合
 	 * @return 符合要求的Job实体类集合

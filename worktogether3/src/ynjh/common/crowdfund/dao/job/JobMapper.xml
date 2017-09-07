@@ -50,4 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findAllJobIncludeJob2" resultMap="JobMap">
 	SELECT * FROM job WHERE jobParentId IS NULL
 </select>
+<select id="findJob2NotIncludeParentId" parameterType="Integer" resultType="Job">
+	SELECT * FROM job WHERE jobParentId != #{jobParentId}
+</select>
 </mapper>

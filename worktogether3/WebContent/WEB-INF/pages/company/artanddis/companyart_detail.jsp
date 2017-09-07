@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    							<th>
 	   							<a href="company/artanddis/article/like?id=${art.id }"><i class="glyphicon glyphicon-thumbs-up"></i></a>&nbsp; ${art.articleLikeNum }
 	   						</th>
-   							<th><i class="glyphicon glyphicon-user"></i>&nbsp; ${art.articleReadNum }</th>
+   							<th><i class="glyphicon glyphicon-eye-open"></i>&nbsp; ${art.articleReadNum }</th>
 						</tr>
 					</table>
 					<br />

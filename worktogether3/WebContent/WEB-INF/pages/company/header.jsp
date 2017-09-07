@@ -16,7 +16,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="company/css/magnifier.css" />
+    <link rel="stylesheet" type="text/css" href="css/magnifier.css" />
 	<link href="css/login.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="thirdpart/dist/css/bootstrapValidator.min.css" />
 	<link href="thirdpart/fileupload/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />

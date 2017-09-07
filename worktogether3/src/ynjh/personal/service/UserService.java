@@ -109,4 +109,11 @@ public interface UserService {
 	 * @return 排名前10的用户Map对象集合，一个用户的信息由一个Map组成
 	 */
 	public List<Map<String, Object>> recommendUsers();
+	/**
+	 * 牟勇：推荐用户的基本信息<br />
+	 * 包括：工作时间(resumeWorks)，性别(userGender)，生日(userBirthday),主键(id),登录帐号（userLoginId）,头像（userHeadImgPath）,昵称(userName),心情(moodContent)<br />
+	 * @param userId 用户主键
+	 * @return 唯一指定的一个用户Map
+	 */
+	public Map<String, Object> recommentPersonalDetail(Integer userId);
 }

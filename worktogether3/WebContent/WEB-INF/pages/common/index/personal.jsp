@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="ynjh.common.util.CommonStatus" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page autoFlush="true" buffer="1024kb"%>
@@ -6,7 +6,7 @@
 <!-- 
 	作者：牟勇
 	时间：2017-08-28
-	描述：公司的简介页面，用于首页的链接跳转（用户尚未登录）
+	描述：个人的简介页面，用于首页的链接跳转（用户尚未登录）
  -->
 <html lang="zh-CN">
 <head>
@@ -19,7 +19,7 @@
     <meta name="robots" content="noindex,follow" />
     <meta name="description" content="相职网-专业提供软件人力资源解决方案"/>
     <base href="${pageContext.request.scheme }://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-	<title>相职网-企业简介-${company.companyName }</title>
+	<title>相职网-个人简介-${personal.userName }</title>
 	<link rel="shortcut icon" href="img/21495074072_.pic.png" mce_href="img/21495074072_.pic.png" type="image/x-icon" >
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -69,100 +69,38 @@ h2{
 <body>
 	<!-- 导航条 -->
 	<div><%@include file="/WEB-INF/pages/nav.jsp" %></div>
+	<c:set  value="${CommonStatus.SEX }" var="SEX"></c:set>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
-				<img width="100" height="100" class="thumbnail" src="company/img/${company.companyLoginId }/${company.companyLogo}" />
+				<img onerror="this.src='img/head.gif'" width="100" height="100" class="img-thumbnail" src="img/upload/personal/${personal.userLoginId }/${personal.userHeadImgPath}" />
 			</div>
-			<h2 class="col-sm-9">
-				${company.companyName}<small>(${company.companySimpleName })</small>
+			<h2 class="col-sm-9" style="background-color:rgba(255,255,255,1)">
+				${personal.userName}<small>（${SEX[personal.userGender]},工作年限:${personal.resumeWorks==0?1:personal.resumeWorks }年）</small>
 				<c:if test="${user!=null&&follow==null }">
-				<a class="btn btn-default" role="button" href="javascript:addfollow(${company.id })">
+				<a class="btn btn-default" role="button" href="javascript:addfollow(${personal.id })">
 				<span class="glyphicon glyphicon-plus"></span>关注
 				</a>
 				</c:if>
 				<c:if test="${user!=null&&follow!=null }">
-				<a class="btn btn-default" role="button" href="javascript:cancelfollow(${company.id })">
+				<a class="btn btn-default" role="button" href="javascript:cancelfollow(${personal.id })">
 				<span class="glyphicon glyphicon-minus"></span>取消关注
 				</a>
 				</c:if>
 			</h2>
-			
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
 				<p class="wt-hby-companyInt">
-					${companyInt.cmpIntroduction }
+					${personal.moodContent==null?"该用户尚未发表任何心情":personal.moodContent }
 				</p>
 			</div>
 		</div>
-		<!-- 企业环境展示 -->	
-		<div class="row">
-			<div class="magnifier" id="magnifier1">
-				<div class="magnifier-container">
-					<div class="images-cover"></div>
-					<!--当前图片显示容器-->
-					<div class="move-view"></div>
-					<!--跟随鼠标移动的盒子-->
-				</div>
-				<div class="magnifier-assembly">
-					<div class="magnifier-btn">
-						<span class="magnifier-btn-left">&lt;</span>
-						<span class="magnifier-btn-right">&gt;</span>
-					</div>
-					<!--按钮组-->
-					<div class="magnifier-line">
-						<ul class="clearfix animation03">
-							 <c:forEach items="${detailImgs }" var="imgs">
-								<li>
-									<div class="small-img">
-										<img src="company/img/${company.companyLoginId }/${imgs.companyDetailImg}" />
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
-					<!--缩略图-->
-				</div>
-				<!-- <div class="magnifier-view"></div> -->
-				<!--经过放大的图片显示容器-->
-			</div>	
-		</div>
-		<!-- 企业环境展示结束 -->	
 		<div class="panel-group" id="accordion">
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 			  		<div class="panel-heading">
-			   			<h4 class="panel-title"><a data-toggle="collapse" href="#recruit">招聘岗位</a></h4>
-			  		</div>
-			  		<div id="recruit" class="panel-collapse collapse">
-			   			<div class="panel-body">
-							<table class="table wt-hby-article">
-								<thead>
-									<tr>
-										<th>招聘岗位</th>
-										<th>发表日期</th>
-										<th>招聘人数</th>
-										<th>应聘人数</th>
-									</tr>
-								</thead>
-								<tbody>
-		   							<c:forEach items="${companyRecruits}" var="rec">
-		   								<tr>
-		   									<td>${rec.cmpRecTitle}</td>
-		   									<td><fmt:formatDate value="${rec.cmpRecTime }" pattern="yyyy-MM-dd"/></td>
-		   									<td>${rec.cmpRecPeople }</td>
-		   									<td>${rec.resumeNumber }</td>
-		   								</tr>
-		   							</c:forEach>
-								</tbody>
-							</table>
-						</div>
-			  		</div>
-				</div>
-				<div class="panel panel-default">
-			  		<div class="panel-heading">
-			   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">企业文章</a></h4>
+			   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">个人文章</a></h4>
 			  		</div>
 			  		<div id="collapseThree" class="panel-collapse collapse in">
 			   			<div class="panel-body">
@@ -176,6 +114,11 @@ h2{
 									</tr>
 								</thead>
 								<tbody>
+									<c:if test="${articles.size()==0 }">
+										<tr>
+											<td colspan="4" >该用户尚无文章发表</td>
+										</tr>
+									</c:if>
 		   							<c:forEach items="${articles }" var="art">
 		   								<tr>
 		   									<td><a target="_blank" href="common/article/findArticleById/${art.id }/1">${art.articleTitle }</a></td>

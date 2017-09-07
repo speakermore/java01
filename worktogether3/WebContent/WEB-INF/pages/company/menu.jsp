@@ -35,8 +35,8 @@
 				<div id="my-center" class="panel-collapse collapse">
 					<div class="panel-body">
 						<ul class="nav">
-							<li><a href="javascript:ajaxPage('company/company/company_data_index')">企业信息</a></li>
 							<li><a href="javascript:ajaxPage('company/artanddis/company_index')">企业首页</a></li>
+							<li><a href="javascript:ajaxPage('company/company/company_data_index')">企业信息</a></li>
 							<li><a href="javascript:ajaxPage('company/charge/company_charge')">企业余额</a></li>
 						</ul>
 					</div>

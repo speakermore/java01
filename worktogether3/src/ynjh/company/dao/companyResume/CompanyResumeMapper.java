@@ -45,4 +45,13 @@ public interface CompanyResumeMapper {
 	 * @return 符合条件的记录数量
 	 */
 	public Integer countCompanyResumeByRecruitIdAndResumeId(@Param("recruitId")Integer recruitId,@Param("resumeId")Integer resumeId);
+	/**
+	 * 牟勇：根据企业id查询有哪些人投递了哪些岗位的简历<br />
+	 * 查询已投递简历Id，简历的用户姓名，职位名称<br />
+	 * 按时间降序排序<br />
+	 * 查询最近6个月<br />
+	 * @param companyId 企业id
+	 * @return 指定企业6个月内收到的相关简历。Map对象的List集合
+	 */
+	public List<Map<String, Object>> findCompanyResumeByCompanyId(@Param("companyId")Integer companyId);
 }

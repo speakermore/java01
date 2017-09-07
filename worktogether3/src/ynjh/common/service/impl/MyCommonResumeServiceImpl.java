@@ -14,23 +14,28 @@ import ynjh.common.util.LiuZhiHaoDateTimeUtil;
 
 @Service
 public class MyCommonResumeServiceImpl implements MyCommonResumeService {
-	
 	@Resource
 	MyCommonResumeMapper myCommonResumeMapper;
 	
 	@Override
 	public List<Map<String, Object>> findByResumeTitle5(String resumeTitle) {
 		String[] reTitles=Arrays.stream(resumeTitle.split(",")).map(title->"%"+title+"%").toArray(size -> new String[size]);
+		String[] reTitlesWithOutPercent=resumeTitle.split(",");
 		List<Map<String, Object>> list= myCommonResumeMapper.findByResumeTitle((String[])reTitles, 0, 5);
 		//将Timestamp的工作时间转换为工作的年限
-		//将求职意向岗位只保留第一项
+		//将求职意向岗位保留匹配的一项
 		list.stream().forEach(m->{
 			try {
 				m.put("resumeWorks",LiuZhiHaoDateTimeUtil.getAgeTools((Timestamp)m.get("resumeWorks")));
 			} catch (AgeOverFlowException e) {
 				e.printStackTrace();
 			}
-			m.put("resumeTitle", ((String)m.get("resumeTitle")).split(",")[0]);
+			for(String rTitle:reTitlesWithOutPercent){
+				if(((String)m.get("resumeTitle")).contains(rTitle)){
+					m.put("resumeTitle", rTitle);
+					break;
+				}
+			}
 		});
 		return list;
 	}

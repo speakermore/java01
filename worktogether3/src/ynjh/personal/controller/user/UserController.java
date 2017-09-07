@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+
 import ynjh.common.crowdfund.service.JobService;
 import ynjh.common.exception.AgeOverFlowException;
 import ynjh.common.util.LiuZhiHaoDateTimeUtil;
@@ -500,18 +502,21 @@ public class UserController {
 	}
 	/**
 	 * 验证用户名是否重复
+	 * @param userLoginId 注册账号，应该是一个手机号
+	 * @return {"valid",false}验证未通过，{"valid",true}验证通过
 	 */
-	@RequestMapping("/verificationUserLoginId")
+	@RequestMapping(value="/verificationUserLoginId")
 	@ResponseBody
-	public Map<String, Boolean> verificationUserLoginId(String userLoginId){
+	public String verificationUserLoginId(String userLoginId){
 		Map<String, Boolean> map=new HashMap<String, Boolean>();
 		User user =uService.verificationUserLoginId(userLoginId);
 		if (user!=null) {//(重复)
 			map.put("valid",false);
 		}else {//(不重复)
-			map.put("valid", true);
-		}	
-		return map;
+			map.put("valid",true);
+		}
+		//BootstrapValidator要求必须返回JSON格式，
+		return JSON.toJSONString(map);
 	}
 
 }

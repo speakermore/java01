@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+
 import ynjh.common.util.MD5Util;
 import ynjh.common.util.UploadFile;
 import ynjh.common.util.ValidateCode;
@@ -26,6 +28,7 @@ import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
+import ynjh.company.service.CompanyResumeService;
 import ynjh.company.service.CompanyService;
 
 @Controller
@@ -36,6 +39,8 @@ public class CompanyController {
 	private CompanyService companyService;
 	@Resource
 	CompanyIntService companyIntService;
+	@Resource
+	CompanyResumeService creService;
 	
 	/**
 	 * 登陆验证
@@ -90,6 +95,7 @@ public class CompanyController {
 	             userCookie.setPath("/");
 	             response.addCookie(userCookie); 
 	         }
+	         
 				session.setAttribute("user",company);
 				mv.setViewName("redirect:findById/"+company.getId());
 		}
@@ -117,6 +123,9 @@ public class CompanyController {
 		//企业环境图片
 		List<CompanyDetailImg> detailImgs=companyService.findDetailImg(company.getId());
 		session.setAttribute("detailImgs", detailImgs);
+		//最近6个月企业收到的简历
+		List<Map<String, Object>> newlyApplys=creService.findNewlyApply(companyId);
+		session.setAttribute("newlyApplys", newlyApplys);
 		mv.setViewName("company/company/company_data");
 		return mv;
 	}
@@ -330,7 +339,7 @@ public class CompanyController {
 	 */
 	@RequestMapping("/verificationCompanyLoginId")
 	@ResponseBody
-	public Map<String, Boolean> verificationUserLoginId(String companyLoginId){
+	public String verificationUserLoginId(String companyLoginId){
 		Map<String, Boolean> map=new HashMap<String, Boolean>();
 		Company company =companyService.verificationCompanyLoginId(companyLoginId);
 		if (company!=null) {//(重复)
@@ -338,6 +347,6 @@ public class CompanyController {
 		}else {//(不重复)
 			map.put("valid", true);
 		}	
-		return map;
+		return JSON.toJSONString(map);
 	}
 }

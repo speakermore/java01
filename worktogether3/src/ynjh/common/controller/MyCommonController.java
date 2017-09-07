@@ -90,18 +90,26 @@ public class MyCommonController {
 	public ModelAndView index(HttpSession session){
 		ModelAndView mv=new ModelAndView("index");
 		List<News> newses10=newsService.findTop10ByCreateDate();
+		//为管理人才准备查询条件
+		List<Job> manageJob=jobService.findJob2(4);
+		String[] manageNames=manageJob.stream().map(j->j.getJobName()).toArray(size->new String[size]);
+		String manageCondition=String.join(",", manageNames);
 		//软件人才---管理人才
-		List<Map<String, Object>> manageResume=myCommonResumeService.findByResumeTitle5("经理");
-		Integer countMangeResume=myCommonResumeService.countByResumeTitle("经理");
+		List<Map<String, Object>> manageResume=myCommonResumeService.findByResumeTitle5(manageCondition);
+		Integer countMangeResume=myCommonResumeService.countByResumeTitle(manageCondition);
+		//为技术人才准备查询条件
+		List<Job> masterJob=jobService.findJob2NotIncludeParentId(4);
+		String[] masterNames=masterJob.stream().map(j->j.getJobName()).toArray(size->new String[size]);
+		String masterCondition=String.join(",", masterNames);
 		//软件人才---技术人才
-		List<Map<String, Object>> masterResume=myCommonResumeService.findByResumeTitle5("师");
-		Integer countMasterResume=myCommonResumeService.countByResumeTitle("师");
+		List<Map<String, Object>> masterResume=myCommonResumeService.findByResumeTitle5(masterCondition);
+		Integer countMasterResume=myCommonResumeService.countByResumeTitle(masterCondition);
 		//名企招聘----管理人才
-		List<Map<String, Object>> manageRecuite=myCommonResumeService.findBycmpRecTitle5("经理");
-		Integer countManageRecuite=myCommonResumeService.countBycmpRecTitle("经理");
+		List<Map<String, Object>> manageRecuite=myCommonResumeService.findBycmpRecTitle5(manageCondition);
+		Integer countManageRecuite=myCommonResumeService.countBycmpRecTitle(manageCondition);
 		//名企招聘----技术人才
-		List<Map<String, Object>> masterRecuite=myCommonResumeService.findBycmpRecTitle5("师");
-		Integer countMasterReciute=myCommonResumeService.countBycmpRecTitle("师");
+		List<Map<String, Object>> masterRecuite=myCommonResumeService.findBycmpRecTitle5(masterCondition);
+		Integer countMasterReciute=myCommonResumeService.countBycmpRecTitle(masterCondition);
 		//技术众筹---个人众筹
 		List<Map<String, Object>> personalCrowdfund=myCommonResumeService.findByCrowdfundPerson5();
 		Integer countPersonalCrowdfund=myCommonResumeService.countCrowdfundPersonal();
@@ -265,6 +273,14 @@ public class MyCommonController {
 		mv.addObject("articles", articles);
 		return mv;
 	}
+	/**
+	 * 为首页“推荐企业”链接跳转的目标，准备好数据，以便在common/index/company.jsp上展示<br />
+	 * 包括公司信息（company）,公司环境图片（detailImgs），文章列表（articles），招聘基本信息（companyRecruits）
+	 * 对企业的评价（discusses，页面上未显示），关注（follow）
+	 * @param companyId 公司主键
+	 * @param session
+	 * @return common/index/company.jsp
+	 */
 	@RequestMapping("/common/recommendCompanyDetail/{companyId}")
 	public ModelAndView recommendCompanyDetail(@PathVariable Integer companyId,HttpSession session){
 		ModelAndView mv=new ModelAndView("common/index/company");
@@ -293,6 +309,29 @@ public class MyCommonController {
 		mv.addObject("companyRecruits",companyRecruits);
 		mv.addObject("discusses",discusses);
 		mv.addObject("companyInt",companyInt);
+		return mv;
+	}
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/common/recommendPersonalDetail/{userId}")
+	public ModelAndView recommendPersonalDetail(@PathVariable Integer userId,HttpSession session){
+		ModelAndView mv=new ModelAndView("common/index/personal");
+		//用户基本信息
+		Map<String, Object> personal=userService.recommentPersonalDetail(userId);
+		//文章列表（未过滤没有通过审核的文章）
+		List<Article> articles=articleService.findUserArticle(null, userId);
+		articles=articles.stream().filter(a->a.getArticleStatus()==2).collect(Collectors.toList());
+		//如果用户登录了，就检查他有没有关注过这个用户
+		if(session.getAttribute("user")!=null){
+			MyUser user=(MyUser)session.getAttribute("user");
+			Follow follow=followService.findIsFollowByFollowIdAndFollowId(user.getId(), userId);
+			mv.addObject("follow",follow);
+		}
+		mv.addObject("personal",personal);
+		mv.addObject("articles",articles);
 		return mv;
 	}
 }

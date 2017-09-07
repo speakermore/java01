@@ -44,7 +44,7 @@
 						<!-- 用户登录 -->
 						<div class="tab-pane active" id="panel-login">
 							<form autocomplete="off" class="form-horizontal" method="post"
-								action="personal/user/login" id="loginForm">
+								action="personal/user/login" id="loginForm" data-toggle="validator">
 								<h3 class="form-signin-heading">欢迎个人用户登录</h3>
 								<div class="form-group">
 									<input autocomplete="off" type="text" id="userLoginId" class="form-control"
@@ -85,7 +85,7 @@
 						<!-- 用户注册 -->
 						<div class="tab-pane" id="panel-register">
 							<form autocomplete="off" class="form-horizontal" method="post"
-								action="personal/user/addUser" id="registerForm">
+								action="personal/user/addUser" id="registerForm" data-toggle="validator">
 								<h3 class="form-signin-heading">欢迎个人用户注册</h3>
 								<div class="form-group">
 									<input autocomplete="off" type="text" id="userLoginId" class="form-control"
@@ -196,7 +196,7 @@
 							stringLength : {
 								min : 6,
 								max : 50,
-								message : '用户名长度必须在{min}到{max}位之间'
+								message : '用户名长度必须在6到50位之间'
 							}
 						}
 					},
@@ -224,29 +224,28 @@
 			});
 			$("#registerForm").bootstrapValidator({
 				message : '这个值不能通过验证！',
+				
 				feedbackIcons : {
 					valid : 'glyphicon glyphicon-ok',
 					invalid : 'glyphicon glyphicon-remove',
 					validating : 'glyphicon glyphicon-refresh'
 				},
+				verbose : false,//在一个验证未通过时终止后续验证继续进行
 				fields : {
 					userLoginId : {
-						//有6字符以上才发送ajax请求，（input中输入一个字符，插件会向服务器发送一次，设置限制，11字符以上才开始）
-						threshold : 11,
+						threshold :  11 , 
 						validators : {
 							notEmpty : {
 								message : '用户名不能为空'
 							},
 							regexp : {
-								regexp : '^((13[0-9])|(14[0-9])|(15([0-9]))|(18[0-9]))\\d{8}$',
+								regexp : '^((13[0-9])|(14[0-9])|(15([0-9]))|(17[0-9])|(18[0-9]))\\d{8}$',
 								message : '用户名应该是一个手机号码'
-							}/* ,
-							remote : {
-								url : "personal/user/verificationUserLoginId",
-								message : '用户名已被注册',
-								delay : 5000,
-								type : 'post'
-							} */
+							},
+							 remote : {
+								url : 'personal/user/verificationUserLoginId',
+								message : '手机号已被注册，请更换新的手机号'
+							}
 						}
 					},
 					userPassword : {

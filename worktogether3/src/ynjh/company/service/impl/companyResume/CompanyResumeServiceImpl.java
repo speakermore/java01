@@ -52,4 +52,8 @@ public class CompanyResumeServiceImpl implements CompanyResumeService {
 		
 		return companyResumeMapper.countCompanyResumeByRecruitIdAndResumeId(recruitId,resumeId);
 	}
+	@Override
+	public List<Map<String, Object>> findNewlyApply(Integer companyId) {
+		return companyResumeMapper.findCompanyResumeByCompanyId(companyId);
+	}
 }
