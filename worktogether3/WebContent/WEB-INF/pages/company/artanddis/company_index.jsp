@@ -96,16 +96,11 @@ h2{
 						</tr>
 					</thead>
 					<tbody>
-  							<c:forEach items="${articles }" var="art">
+  							<c:forEach items="${newlyApplys }" var="apply">
   								<tr>
-  									<td><a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_detail">${art.articleTitle }</a></td>
-  									<td>
-  									</td>
-  									<td>${art.articleLikeNum }</td>
-  									<td>${art.articleReadNum }</td>
-  									<c:if test="${art.usersId==company.id }">
- 											<td><a href="company/artanddis/article/delete/${art.id}" ><i class="glyphicon glyphicon-trash"></i></a></td>
- 										</c:if>
+  									<td><a href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId }/${apply.userLoginId }/${apply.applyId}')">${apply.resumeName }</a></td>
+  									<td>${apply.cmprTime }</td>
+  									<td>${apply.cmpRecTitle }</td>
   								</tr>
   							</c:forEach>
 					</tbody>

@@ -147,7 +147,6 @@ public class CompanyController {
 		return "company/company/company_login";
 	}
 	
-	
 	/**
 	 * @author 李胤
 	 * @return
