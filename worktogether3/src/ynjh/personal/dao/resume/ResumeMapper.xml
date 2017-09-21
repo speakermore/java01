@@ -215,4 +215,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from offer o,company c where o.companyId=c.id
 		and o.userId=#{userId}
 	</select>
+	<!-- 牟勇：根据岗位名称进行简历匹配，投递简历id，简历时间，输出简历id，用户姓名，账号，简历必须通过审核 -->
+	<select id="findResumeInfoByResumeTitle" resultType="map" parameterType="String">
+		select r.id resumeId,userLoginId,resumeName,r.resumeCreateDate, (case when cr.id is null then -1 else cr.id end) applyId,(case when o.id is null then '尚未邀请' else '已邀请' end) isOffered
+		from resume r left join companyresume cr on cr.resumeId=r.id left join offer o on o.cmpResId=cr.id left join companyrecruit cre on cr.cmpRecId=cre.id,user u 
+		where r.userId=u.id and resumeTitle like #{resumeTitle} and r.resumeStatusThree=2
+		order by r.resumeCreateDate desc
+	</select>
 </mapper>

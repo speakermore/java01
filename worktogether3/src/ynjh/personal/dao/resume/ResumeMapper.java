@@ -1,6 +1,7 @@
 package ynjh.personal.dao.resume;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import ynjh.company.entity.Offer;
@@ -163,5 +164,13 @@ public interface ResumeMapper {
 	 * 我收到的面试邀请
 	 */
 	public List<Offer> findMyReceiveOffer(Integer userId);
+	/**
+	 * 牟勇：根据简历岗位意向查询符合该意向的简历信息<br />
+	 * Map集合输出简历id，姓名，用户账号，意向岗位<br />
+	 * 根据简历创建日期进行降序排序
+	 * @param resumeTitle 求职岗位
+	 * @return 符合条件的简历信息
+	 */
+	public List<Map<String, Object>> findResumeInfoByResumeTitle(String resumeTitle);
 	
 }

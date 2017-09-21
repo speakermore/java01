@@ -67,4 +67,14 @@ public interface CompanyRecruitService {
 	 * @return 符合个人用户简历岗位信息的招聘信息集合
 	 */
 	public List<CompanyRecruit> findMyIntrestRecruit(Integer userId);
+	/**
+	 * 牟勇：用于企业用户登录后的首页显示数据，“您需要的人”<br />
+	 * 查询匹配简历Id，简历的用户姓名，职位名称<br />
+	 * 按时间降序排序<br />
+	 * 简历必须已审核通过<br />
+	 * 招聘信息必须已审核通过<br />
+	 * @param companyId 企业用户主键
+	 * @return 符合条件的简历集合
+	 */
+	public List<Map<String, Object>> findMatchResumes(Integer companyId);
 }

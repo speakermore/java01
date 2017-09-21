@@ -26,7 +26,7 @@ public class CompanyOfferController {
 	private CompanyOfferService companyOfferService;
 
 	// 发送offer
-	@RequestMapping(value="/add_offer", method=RequestMethod.GET)
+	@RequestMapping(value="/add_offer",method=RequestMethod.GET)
 	public ModelAndView addOffer(Integer applyId){
 		ModelAndView mv=new ModelAndView("company/offer/add_offer");
 		mv.addObject("applyId",applyId);
@@ -39,7 +39,7 @@ public class CompanyOfferController {
 		offer.setOfferAction(1);
 		offer.setOfferStatus(2);
 		companyOfferService.addOffer(offer);
-		ModelAndView mv=new ModelAndView("redirect:company/company/findById/"+user.getId());
+		ModelAndView mv=new ModelAndView("redirect:/company/company/findById/"+user.getId());
 		return mv;
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ynjh.company.entity.CompanyResume;
+import ynjh.company.service.CompanyOfferService;
 import ynjh.company.service.CompanyResumeService;
 import ynjh.personal.entity.Education;
 import ynjh.personal.entity.Project;
@@ -35,6 +36,8 @@ public class ApplyController {
 	ResumeService resumeService;
 	@Resource
 	CompanyResumeService companyResumeService;
+	@Resource
+	CompanyOfferService companyOfferService;
 	/**
 	 * 我要应聘<br />
 	 * 添加到companyResume表
@@ -72,10 +75,13 @@ public class ApplyController {
 	 * 为简历准备相关数据，包括resume,work,education,project
 	 * 修改应聘信息的状态
 	 * @param resumeId 简历id，简历的主键
+	 * @param userLoginId 投递简历的用户帐号
+	 * @param applyId 投递简历的主键(companyresume的id)
+	 * @param backNumber 返回页面的编号：0.返回企业首页，1.返回某岗位投递简历的用户名片列表
 	 * @return 跳转简历内容显示页面personal/resume/personal_lookresume_index
 	 */
-	@RequestMapping("/check_resume/{resumeId}/{userLoginId}/{applyId}")
-	public ModelAndView checkResume(@PathVariable Integer resumeId,@PathVariable String userLoginId,@PathVariable Integer applyId){
+	@RequestMapping("/check_resume/{resumeId}/{userLoginId}/{applyId}/{backNumber}")
+	public ModelAndView checkResume(@PathVariable Integer resumeId,@PathVariable String userLoginId,@PathVariable Integer applyId,@PathVariable Integer backNumber){
 		ModelAndView mv=new ModelAndView("personal/resume/personal_lookresume_index");
 		//准备resume
 		Resume resume=resumeService.findResumeById(resumeId);
@@ -85,6 +91,8 @@ public class ApplyController {
 		List<Education> educations=resumeService.findEducations(resumeId);
 		//准备项目经验
 		List<Project> projects=resumeService.findProjects(resumeId);
+		//判断是否已经发过offer
+		boolean isOffered=companyOfferService.isBeenOffered(applyId);
 		//修改应聘的状态为已阅读简历,4表示已阅读
 		companyResumeService.updateCmpResumeStatus(applyId, 4);
 		mv.addObject("resume", resume);
@@ -93,6 +101,9 @@ public class ApplyController {
 		mv.addObject("edus",educations);
 		mv.addObject("userLoginId",userLoginId);
 		mv.addObject("applyId",applyId);
+		//将返回数字传到页面，以确定返回哪个页面
+		mv.addObject("backNumber",backNumber);
+		mv.addObject("isOffered",isOffered);
 		return mv;
 	}
 }

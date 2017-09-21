@@ -170,4 +170,23 @@ public class CompanyRecruitServiceImpl implements CompanyRecruitService {
 		List<CompanyRecruit> companyRecruits=originCompanyRecruits.stream().flatMap(childList->childList.stream()).distinct().collect(Collectors.toList());
 		return companyRecruits;
 	}
+
+	@Override
+	public List<Map<String, Object>> findMatchResumes(Integer companyId) {
+		//获得企业已通过审核的招聘岗位
+		List<Map<String, Object>> cmpResTitles=companyRecruitMapper.findcmpRecTitleByCompanyId(companyId);
+		List<List<Map<String, Object>>> resumeInfos=new ArrayList<List<Map<String, Object>>>();
+		//遍历所有的岗位，把对应简历查出来
+		for(Map<String, Object> cmpResTitle:cmpResTitles){
+			List<Map<String, Object>> resumes=resumeMapper.findResumeInfoByResumeTitle("%"+cmpResTitle.get("cmpRecTitle")+"%");
+			if(resumes!=null&resumes.size()>0){
+				resumes.stream().forEach(r->r.put("resumeTitle", cmpResTitle.get("cmpRecTitle")));
+				resumeInfos.add(resumes);
+			}
+			
+		}
+		//扁平化简历
+		List<Map<String, Object>> finalInfos=resumeInfos.stream().flatMap(child->child.stream()).collect(Collectors.toList());
+		return finalInfos;
+	}
 }

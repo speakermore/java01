@@ -54,4 +54,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="countRecruitByCompanyId" parameterType="Integer" resultType="Integer">
 	select count(*) from companyrecruit where cmpRecStatus=2 and companyId=#{companyId}
 </select>
+<!-- 牟勇：根据公司主键查询招聘岗位，招聘必须通过审核 -->
+<select id="findcmpRecTitleByCompanyId" parameterType="Integer" resultType="map">
+	  select cmpRecTitle from companyrecruit 
+	  where companyId=#{companyId} and cmpRecStatus=2
+</select>
 </mapper>

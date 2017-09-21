@@ -31,4 +31,10 @@ public interface CompanyOfferService {
 	public List<Map<String, Object>> findUserOffers(Integer userId);
 	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
+	/**
+	 * 牟勇：根据companyResume表的主键查找该简历是否已经发放了offer
+	 * @param cmpResId companyResume表的主键
+	 * @return 如果已经发过Offer返回true，否则返回false
+	 */
+	public boolean isBeenOffered(Integer cmpResId);
 }

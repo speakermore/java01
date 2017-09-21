@@ -10,8 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!-- 应聘信息封装于Map中，有applyId,用户id,简历id,头像，登录账号，姓名，性别，毕业院校，专业，期望待遇，电话 -->
 <select id="findCompanyResumeBycmpRecId" resultType="map" parameterType="Integer">
-	select c.id applyId,r.id resumeId,userId,resumeName,resumeHeadImg,userLoginId,resumeGender,resumeGraduationSchool,resumeWages,resumeMajor,resumePhone 
-	from companyResume c,resume r,user u
+	select (case when o.id is null then 'false' else 'true' end) isOffered, c.id applyId,r.id resumeId,userId,resumeName,resumeHeadImg,userLoginId,resumeGender,resumeGraduationSchool,resumeWages,resumeMajor,resumePhone 
+	from companyResume c left join offer o on c.id=o.cmpResId,resume r,user u
 	where u.id=r.userId and c.cmpRecId=#{cmpRecId} and c.resumeId=r.id and cmprStatus=2
 </select>
 <select id="findById" resultType="CompanyResume" parameterType="Integer">
@@ -36,10 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="countCompanyResumeByRecruitIdAndResumeId" resultType="int">
 	select count(*) from companyresume where cmpRecId=#{recruitId} and resumeId=#{resumeId}
 </select>
-<!-- 牟勇：查询已投递简历Id，简历的用户姓名，职位名称,按时间排序，查询最近6个月 -->
+<!-- 牟勇：查询已投递简历Id，简历的用户姓名，职位名称,按时间排序，查询最近6个月,简历必须通过审核 -->
 <select id="findCompanyResumeByCompanyId" parameterType="Integer" resultType="map" >
-	select u.userLoginId,cr.id applyId,cr.cmprTime,cr.resumeId,r.resumeName,cre.cmpRecTitle from user u,companyresume cr,resume r,companyrecruit cre 
-	where r.userId=u.id and cr.resumeId=r.id and cre.id=cr.cmpRecId and cre.companyId=#{companyId} and TIMESTAMPDIFF(MONTH,cr.cmprTime,now())&lt;=6 
+	select (case when o.id is null then '尚未邀请' else '已邀请' end) isOffered,u.userLoginId,cr.id applyId,cr.cmprTime,cr.resumeId,r.resumeName,cre.cmpRecTitle 
+	from user u,companyresume cr left join offer o on o.cmpResId=cr.id,resume r,companyrecruit cre 
+	where r.userId=u.id and cr.resumeId=r.id and cre.id=cr.cmpRecId 
+	and cre.companyId=#{companyId} 
+	and TIMESTAMPDIFF(MONTH,cr.cmprTime,now())&lt;=6 
+	and r.resumeStatusThree=2 
 	order by cr.cmprTime desc
 </select>
 </mapper>

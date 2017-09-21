@@ -61,4 +61,11 @@ public interface CompanyRecruitMapper {
 	 * @return 审核状态为2的记录条数。返回0表示所有招聘信息的审核状态均不是2，没有处于招聘状态
 	 */
 	public Integer countRecruitByCompanyId(Integer companyId);
+	/**
+	 * 牟勇：根据企业主键查询需要的岗位名称<br />
+	 * 招聘信息必须已审核通过<br />
+	 * @param companyId 企业用户主键
+	 * @return 符合条件的岗位名称集合
+	 */
+	public List<Map<String, Object>> findcmpRecTitleByCompanyId(Integer companyId);
 }

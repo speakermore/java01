@@ -68,4 +68,13 @@ public class CompanyOfferServiceImpl implements CompanyOfferService {
 	public Offer findUserOffer(Integer id) {
 		return companyOfferMapper.findUserOffer(id);
 	}
+	@Override
+	public boolean isBeenOffered(Integer cmpResId) {
+		boolean isOffered=false;
+		List<Offer> offers=companyOfferMapper.findOfferByCmpResId(cmpResId);
+		if(offers!=null&&offers.size()>0){
+			isOffered=true;
+		}
+		return isOffered;
+	}
 }

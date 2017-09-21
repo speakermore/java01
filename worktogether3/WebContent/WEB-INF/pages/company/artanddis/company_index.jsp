@@ -31,117 +31,102 @@ h2{
 	padding-top:7px;
 }
 </style>
-	<!-- 牟勇：企业logo及简介 -->
-<div class="row">
-	<div class="col-sm-3">
-		<br />
-		<img width="100" height="100" class="thumbnail" src="company/img/${user.companyLoginId }/${user.companyLogo}" />
-	</div>
-	<h2 class="col-sm-9">${user.companyName}<small>(${user.companySimpleName })</small></h2>
-</div>
-<div class="row">
-	<p class="col-sm-12 wt-hby-companyInt">
-		${companyInt.cmpIntroduction }
-	</p>
-</div>
-<!-- 牟勇：企业logo及简介结束 -->
-<!-- 牟勇：环境图片 -->
-<div class="row">
-	<div class="magnifier" id="magnifier1">
-		<div class="magnifier-container">
-			<div class="images-cover"></div>
-			<!--当前图片显示容器-->
-			<!-- <div class="move-view"></div> -->
-			<!--跟随鼠标移动的盒子-->
-		</div>
-		<div class="magnifier-assembly">
-			<div class="magnifier-btn">
-				<span class="magnifier-btn-left">&lt;</span>
-				<span class="magnifier-btn-right">&gt;</span>
-			</div>
-			<!--按钮组-->
-			<div class="magnifier-line">
-				<ul class="clearfix animation03">
-					 <c:forEach items="${detailImgs }" var="imgs">
-						<li>
-							<div class="small-img">
-								<img src="company/img/${user.companyLoginId }/${imgs.companyDetailImg}" />
-							</div>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-			<!--缩略图-->
-		</div>
-		<!-- <div class="magnifier-view"></div> -->
-		<!--经过放大的图片显示容器-->
-	</div>	
-</div>
-<!-- 牟勇：环境图片结束 -->
+
 <div class="row">
 <div class="panel-group" id="accordion">
+	<!-- 招聘匹配 -->
 	<div class="panel panel-default">
   		<div class="panel-heading">
-   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">最新投递的简历</a></h4>
+   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#yourNeed">您需要的人</a></h4>
   		</div>
-  		<div id="collapseOne" class="panel-collapse collapse in">
+  		<div id="yourNeed" class="panel-collapse collapse in">
    			<div class="panel-body">
-				<table class="table wt-hby-article">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>向您推荐</th>
+							<th>简历日期</th>
+							<th>匹配职位</th>
+							<th>邀请</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${postMatchs }" var="postMatch">
+						<tr><!-- 0表示从企业首页跳转 -->
+							<td><a target="_blank" title="查看简历，发送offer" href="javascript:ajaxPage('redirect:/common/apply/check_resume/${postMatch.resumeId}/${postMatch.userLoginId }/${postMatch.applyId}/0')">${postMatch.resumeName }${postMatch.applyId!=-1?"(简历已投)":"（向您推荐）"}</a></td>
+							<td><fmt:formatDate value="${postMatch.resumeCreateDate }" pattern="yyyy年MM月dd日" /></td>
+							<td>${postMatch.resumeTitle }</td>
+							<td><a target="_blank" title="查看简历，发送offer" href="javascript:ajaxPage('redirect:/common/apply/check_resume/${postMatch.resumeId}/${postMatch.userLoginId }/${postMatch.applyId}/0')">${postMatch.isOffered }</a></td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+  		</div>
+	</div>
+	<!-- 招聘匹配结束 -->
+	<!-- 最新简历 -->
+	<div class="panel panel-default">
+  		<div class="panel-heading">
+   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#newlyResume">最新投递的简历</a></h4>
+  		</div>
+  		<div id="newlyResume" class="panel-collapse collapse in">
+   			<div class="panel-body">
+				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th>投递人</th>
 							<th>投递日期</th>
 							<th>投递职位</th>
-							<th></th>
+							<th>邀请</th>
 						</tr>
 					</thead>
 					<tbody>
-  							<c:forEach items="${newlyApplys }" var="apply">
-  								<tr>
-  									<td><a href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId }/${apply.userLoginId }/${apply.applyId}')">${apply.resumeName }</a></td>
-  									<td>${apply.cmprTime }</td>
-  									<td>${apply.cmpRecTitle }</td>
-  								</tr>
-  							</c:forEach>
+						<c:forEach items="${newlyApplys }" var="apply">
+						<tr><!-- 0表示从企业首页跳转 -->
+							<td><a target="_blank" title="查看简历，发送offer" href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId}/${apply.userLoginId }/${apply.applyId}/0')">${apply.resumeName }</a></td>
+							<td><fmt:formatDate value="${apply.cmprTime }" pattern="yyyy年MM月dd日" /></td>
+							<td>${apply.cmpRecTitle }</td>
+							<td><a target="_blank" title="查看简历，发送offer" href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId}/${apply.userLoginId }/${apply.applyId}/0')">${apply.isOffered }</a></td>
+						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
-				
 			</div>
   		</div>
 	</div>
-	<div class="panel-group" id="accordion">
-		<div class="panel panel-default">
-	  		<div class="panel-heading">
-	   			<h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree">企业文章</a></h4>
-	  		</div>
-	  		<div id="collapseThree" class="panel-collapse collapse in">
-	   			<div class="panel-body">
-					<table class="table wt-hby-article">
-						<thead>
-							<tr>
-								<th>企业文章</th>
-								<th>发表日期</th>
-								<th><i class="glyphicon glyphicon-thumbs-up"></i></th>
-								<th><i class="glyphicon glyphicon-eye-open"></i></th>
-							</tr>
-						</thead>
-						<tbody>
-   							<c:forEach items="${articles }" var="art">
-   								<tr>
-   									<td><a href="company/artanddis/article/findid?id=${art.id }&toPage=company/artanddis/companyart_detail">${art.articleTitle }</a></td>
-   									<td>
-   										<fmt:formatDate value="${art.articleTime }" pattern="yyyy-MM-dd"/>
-   									</td>
-   									<td>${art.articleLikeNum }</td>
-   									<td>${art.articleReadNum }</td>
-   								</tr>
-   							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-	  		</div>
-	  	</div>
-		</div>
+	<!-- 最新简历结束 -->
+	<!-- Offer状态 -->
+	<div class="panel panel-default">
+  		<div class="panel-heading">
+   			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#newlyOffer">最新Offer状态</a></h4>
+  		</div>
+  		<div id="newlyOffer" class="panel-collapse collapse in">
+   			<div class="panel-body">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Offer接收人</th>
+							<th>Offer发出日期</th>
+							<th>Offer对应岗位</th>
+							<th>Offer状态</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${Offers }" var="offer">
+						<tr><!-- 0表示从企业首页跳转 -->
+							<td><a href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId}/${apply.userLoginId }/${apply.applyId}/0')">${apply.resumeName }</a></td>
+							<td><fmt:formatDate value="${apply.cmprTime }" pattern="yyyy年MM月dd日" /></td>
+							<td>${apply.cmpRecTitle }</td>
+							<td>${apply.isOffered }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+  		</div>
+	</div>
+	<!-- Offer状态结束 -->
 	</div>
 </div>
 <div>

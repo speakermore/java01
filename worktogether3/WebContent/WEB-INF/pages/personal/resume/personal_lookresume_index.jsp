@@ -388,13 +388,25 @@ a:focus {
 	<c:if test="${user.id<1234567890 }">
 	<!-- 企业用户浏览简历时专用，提供返回和发送Offer -->
 	<div class="row">
+		
 		<div class="col-sm-offset-8 col-sm-4">
+			
 			<div class="btn-group btn-group-sm" role="group">
-			<a role="button" href="javascript:ajaxPage('offer/add_offer?applyId=${applyId }')" class="btn btn-default">
+			<c:if test="${applyId!=-1 }">
+			<c:if test="${isOffered}">
+			<a role="button" href="javascript:void(0)" class="btn btn-default">
+			<span class="glyphicon glyphicon-send"></span>Offer已发送过了
+			</a>
+			</c:if>
+			<c:if test="${!isOffered }">
+			<a role="button" href="javascript:ajaxPage('redirect:offer/add_offer?applyId=${applyId }')" class="btn btn-success">
 			<span class="glyphicon glyphicon-send"></span>发送Offer
 			</a>
-			<!-- 牟勇：${sessionScope.cmpRecId }是在find_apply_list中存入session的 -->
-			<a role="button" href="javascript:ajaxPage('redirect:company/cmprs/find_apply_list/${sessionScope.cmpRecId }')" class="btn btn-default"><span class="glyphicon glyphicon-level-up"></span>返回</a>
+			</c:if>
+			</c:if>
+			<c:if test="${applyId==-1 }"><span role="button" class="btn btn-default">该用户没有投递简历，请直接电话联系</span></c:if>
+			<c:set value="${CommonStatus.APPLY_BACK_PAGE }" var="APPLY_BACK_PAGE" ></c:set>
+			<a role="button" href="${APPLY_BACK_PAGE[backNumber]}" class="btn btn-default"><span class="glyphicon glyphicon-level-up"></span>返回</a>
 			</div>
 		</div>
 	</div>

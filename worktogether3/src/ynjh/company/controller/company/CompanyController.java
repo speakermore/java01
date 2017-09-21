@@ -28,6 +28,8 @@ import ynjh.company.entity.CompanyConnection;
 import ynjh.company.entity.CompanyDetailImg;
 import ynjh.company.entity.CompanyIntroduction;
 import ynjh.company.service.CompanyIntService;
+import ynjh.company.service.CompanyOfferService;
+import ynjh.company.service.CompanyRecruitService;
 import ynjh.company.service.CompanyResumeService;
 import ynjh.company.service.CompanyService;
 
@@ -41,7 +43,10 @@ public class CompanyController {
 	CompanyIntService companyIntService;
 	@Resource
 	CompanyResumeService creService;
-	
+	@Resource
+	CompanyRecruitService companyRecruitService;
+	@Resource
+	CompanyOfferService companyOfferService;
 	/**
 	 * 登陆验证
 	 * @author 李胤
@@ -126,6 +131,11 @@ public class CompanyController {
 		//最近6个月企业收到的简历
 		List<Map<String, Object>> newlyApplys=creService.findNewlyApply(companyId);
 		session.setAttribute("newlyApplys", newlyApplys);
+		//与企业招聘简历匹配的
+		List<Map<String, Object>> postMatchs=companyRecruitService.findMatchResumes(companyId);
+		session.setAttribute("postMatchs", postMatchs);
+		//企业发出的Offer的状态
+		//List<Map<String, Object>> Offers=
 		mv.setViewName("company/company/company_data");
 		return mv;
 	}

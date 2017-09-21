@@ -46,13 +46,13 @@ public interface CompanyResumeService {
 	 */
 	public Integer isCompanyResumeExist(Integer recruitId,Integer resumeId);
 	/**
-	 * 牟勇：用户于企业用户登录后的首页显示数据，最近已投递的简历<br />
+	 * 牟勇：用于企业用户登录后的首页显示数据，最近已投递的简历<br />
 	 * 查询已投递简历Id，简历的用户姓名，职位名称<br />
 	 * 按时间降序排序<br />
 	 * 查询最近6个月<br />
+	 * 简历已审核通过<br />
 	 * @param companyId 企业主键
-	 * @return 指定企业的
+	 * @return 符合条件的已投简历集合
 	 */
 	public List<Map<String, Object>> findNewlyApply(Integer companyId);
-	
 }

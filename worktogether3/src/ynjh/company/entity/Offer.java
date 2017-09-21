@@ -3,7 +3,6 @@ package ynjh.company.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-// 对应数据库offer表
 /**
  * 对应数据库offer表的实体类
  * 有几个显示企业名称及个人用户昵称的字段

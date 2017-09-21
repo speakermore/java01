@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 根据发送时间倒序排列 -->
 		order by offerSendTime DESC
 		<!-- 从start开始算本页的第一条，每页10条 -->
-		limit #{start},5
+		limit #{start},10
 	</select>
 	<!-- 查找当前公司发出的某条offer（根据id查询） -->
 	<select id="findCompanyOffer" parameterType="int" resultType="Offer">
@@ -53,5 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 查询offer表和company表中的companyName字段 -->
 		select o.*,c.companyName from offer as o,company as c
 		where o.Id=#{Id} and o.companyId=c.id
+	</select>
+	<select id="findOfferByCmpResId" parameterType="Integer" resultType="Offer">
+		select * from offer where cmpResId=#{cmpResId}
 	</select>	
 </mapper>

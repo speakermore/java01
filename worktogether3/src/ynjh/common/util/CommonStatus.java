@@ -10,6 +10,10 @@ import java.util.Map;
  */
 public class CommonStatus {
 	/**
+	 * 企业招聘部分，返回按钮涉及两个返回页面。0.首页，1.已投递某个岗位的人员名片页
+	 */
+	public static final String[] APPLY_BACK_PAGE={"javascript:ajaxPage('company/artanddis/company_index')","javascript:ajaxPage('company/cmprs/apply_index')"};
+	/**
 	 * 用户的状态样式：1：未认证，2：已认证，3：禁用
 	 */
 	public static final String[] USER_STATUS_STYLE={"","alert-success","alert-warning","alert-danger"};

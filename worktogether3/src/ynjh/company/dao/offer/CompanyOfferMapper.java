@@ -34,4 +34,10 @@ public interface CompanyOfferMapper {
 	public List<Map<String, Object>> findUserOffers(@Param("userId")Integer userId);
 	// 查找当前用户收到的某条offer（根据id查询）
 	public Offer findUserOffer(Integer id);
+	/**
+	 * 牟勇：根据应聘信息主键查询Offer的列表
+	 * @param cmpResId companyResume表的主键
+	 * @return 符合查询条件的Offer实体对象集合
+	 */
+	public List<Offer> findOfferByCmpResId(@Param("cmpResId")Integer cmpResId); 
 }

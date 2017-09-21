@@ -14,13 +14,20 @@
 					<p>${SEX[apply.resumeGender] },${apply.resumeMajor }</p>
 					<p>期望月薪：${apply.resumeWages }</p>
 					<p>联系电话：${apply.resumePhone }</p>
-					<div class="btn-group btn-group-sm" role="group">
-						<a role="button" href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId }/${apply.userLoginId }/${apply.applyId}')" class="btn btn-default" type="button">
+					<div class="btn-group btn-group-sm" role="group"><!-- 1表示简历信息返回到名片页 -->
+						<a role="button" href="javascript:ajaxPage('redirect:/common/apply/check_resume/${apply.resumeId }/${apply.userLoginId }/${apply.applyId}/1')" class="btn btn-default" type="button">
 						<span class="glyphicon glyphicon-search"></span>查看简历
 						</a>
-						<a role="button" href="javascript:ajaxPage('redirect:offer/add_offer?applyId=${apply.applyId }')" class="btn btn-default">
+						<c:if test="${apply.isOffered }">
+						<a role="button" href="javascript:void(0)" class="btn btn-default">
+						<span class="glyphicon glyphicon-send"></span>已发送Offer
+						</a>
+						</c:if>
+						<c:if test="${!apply.isOffered }">
+						<a role="button" href="javascript:ajaxPage('redirect:offer/add_offer?applyId=${apply.applyId }')" class="btn btn-success">
 						<span class="glyphicon glyphicon-send"></span>发送Offer
 						</a>
+						</c:if>
 						<c:if test="${apply.isFollowed==1 }">
 						<a class="btn btn-default" role="button" href="javascript:cancelfollow(${apply.userId })">
 						<span class="glyphicon glyphicon-minus"></span>取消关注
